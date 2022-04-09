@@ -75,7 +75,8 @@
               "browserTarget": "legendsbrowser:build:production"
             },
             "development": {
-              "browserTarget": "legendsbrowser:build:development"
+              "browserTarget": "legendsbrowser:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

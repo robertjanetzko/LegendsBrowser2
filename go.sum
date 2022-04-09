@@ -1,4 +1,6 @@
 github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=
 github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
+github.com/iancoleman/strcase v0.2.0 h1:05I4QRnGpI0m37iZQRuskXh+w77mr6Z41lwQzuHLwW0=
+github.com/iancoleman/strcase v0.2.0/go.mod h1:iwCmte+B7n89clKwxIoIXy/HfoL7AsD47ZCWhYzw7ho=
 github.com/sa-/slicefunk v0.1.2 h1:uTQiyKCTwc0RKNxXmG6NNlm3J1LF2hKmLgtf9kRAld4=
 github.com/sa-/slicefunk v0.1.2/go.mod h1:k0abNpV9EW8LIPl2+Hc9RiKsojKmsUhNNGFyMpjMTCI=
