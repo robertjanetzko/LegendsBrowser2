@@ -3,7 +3,7 @@ package model
 import (
 	"encoding/xml"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 	"reflect"
 )
@@ -36,6 +36,10 @@ type World struct {
 	EntityMap                    map[int]*Entity
 }
 
+var cp437 = []byte("         \t\n  \r                   !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ CueaaaaceeeiiiAAEaAooouuyOU    faiounN                                                                                                ")
+
+// var cp437 = []byte("         \t\n  \r                   !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒáíóúñÑ                                                                                                ")
+
 func (w *World) Load(file string) {
 	xmlFile, err := os.Open(file)
 	if err != nil {
@@ -45,8 +49,13 @@ func (w *World) Load(file string) {
 	fmt.Println("Successfully Opened users.xml")
 	defer xmlFile.Close()
 
-	byteValue, _ := ioutil.ReadAll(xmlFile)
+	byteValue, _ := io.ReadAll(xmlFile)
 	fmt.Println(len(byteValue))
+
+	copy(byteValue[30:35], []byte("UTF-8"))
+	for i := range byteValue {
+		byteValue[i] = cp437[byteValue[i]]
+	}
 
 	err = xml.Unmarshal(byteValue, w)
 	if err != nil {

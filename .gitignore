@@ -1,2 +1,4 @@
 region*.xml
 legendsbrowser
+*.pprof
+*.png

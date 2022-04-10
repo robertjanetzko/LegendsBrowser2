@@ -5,16 +5,26 @@ import (
 	"legendsbrowser/model"
 	"legendsbrowser/server"
 	"net/http"
+	_ "net/http/pprof"
+	"runtime"
 
 	"github.com/gorilla/mux"
+	"github.com/pkg/profile"
 )
 
 var world model.World
 
 func main() {
+	defer profile.Start(profile.MemProfile).Stop()
+	go func() {
+		http.ListenAndServe(":8081", nil)
+	}()
+
 	fmt.Println("Hallo Welt!")
 
-	world.Load("region1-00152-01-01-legends.xml")
+	// world.Load("region1-00152-01-01-legends.xml")
+	world.Load("region2-00195-01-01-legends.xml")
+	runtime.GC()
 	world.Process()
 
 	model.ListOtherElements(&world.HistoricalEvents)
