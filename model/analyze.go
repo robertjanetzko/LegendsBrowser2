@@ -10,7 +10,10 @@ import (
 	"github.com/iancoleman/strcase"
 )
 
-func ListOtherElements[T TypedOthers](items *[]T) {
+func ListOtherElements[T Others](name string, items *[]T) {
+	fmt.Println()
+	fmt.Println(name)
+	fmt.Println()
 	m := make(map[string]map[string]bool)
 	cantInt := make(map[string]bool)
 	isObj := make(map[string]bool)
@@ -18,11 +21,12 @@ func ListOtherElements[T TypedOthers](items *[]T) {
 	for _, item := range *items {
 		found := make(map[string]bool)
 		for _, el := range item.Others() {
-			if !m[el.XMLName.Local][item.Type()] {
+			t := name // item.Type()
+			if !m[el.XMLName.Local][t] {
 				if m[el.XMLName.Local] == nil {
 					m[el.XMLName.Local] = map[string]bool{}
 				}
-				m[el.XMLName.Local][item.Type()] = true
+				m[el.XMLName.Local][t] = true
 			}
 			_, err := strconv.Atoi(el.Value)
 			if err != nil {

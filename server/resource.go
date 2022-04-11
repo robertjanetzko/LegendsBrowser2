@@ -31,11 +31,7 @@ func RegisterResource[T model.Named](router *mux.Router, resourceName string, re
 			fmt.Println(err)
 		}
 
-		for _, item := range resources {
-			if item.Id() == id {
-				json.NewEncoder(w).Encode(item)
-			}
-		}
+		json.NewEncoder(w).Encode(resources[id])
 	}
 
 	router.HandleFunc(fmt.Sprintf("/api/%s", resourceName), list).Methods("GET")
