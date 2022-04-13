@@ -1,12 +1,9 @@
 package model
 
-import "encoding/xml"
-
 type HistoricalEvent struct {
-	XMLName xml.Name `xml:"historical_event" json:"-"`
-	Id_     int      `xml:"id" json:"id"`
-	Year    int      `xml:"year" json:"year"`
-	Seconds int      `xml:"seconds72" json:"seconds72"`
+	Id_     int `xml:"id" json:"id"`
+	Year    int `xml:"year" json:"year"`
+	Seconds int `xml:"seconds72" json:"seconds72"`
 	TypedObject
 
 	ASupportMercEnid               *int    `xml:"a_support_merc_enid" json:"aSupportMercEnid,omitempty" legend:"entity"`
@@ -226,7 +223,7 @@ type HistoricalEvent struct {
 	WounderHfid                    *int    `xml:"wounder_hfid" json:"wounderHfid,omitempty" legend:"hf"`
 	WrongfulConviction             *string `xml:"wrongful_conviction" json:"wrongfulConviction,omitempty"`
 
-	OtherElements
+	//OtherElements
 }
 
 func (r *HistoricalEvent) Id() int      { return r.Id_ }

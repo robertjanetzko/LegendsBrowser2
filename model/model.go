@@ -1,40 +1,34 @@
 package model
 
-import "encoding/xml"
-
 type Region struct {
-	XMLName xml.Name `xml:"region" json:"-"`
 	NamedObject
 	Type string `xml:"type" json:"type"`
-	OtherElements
+	// OtherElements
 	EventObject
 }
 
 type UndergroundRegion struct {
-	XMLName xml.Name `xml:"underground_region" json:"-"`
 	NamedObject
 	Type  string `xml:"type" json:"type"`
 	Depth *int   `xml:"depth" json:"depth,omitempty"`
-	OtherElements
+	// OtherElements
 	EventObject
 }
 
 type Landmass struct {
-	XMLName xml.Name `xml:"landmass" json:"-"`
 	NamedObject
-	OtherElements
+	// OtherElements
 	EventObject
 }
 
 type Site struct {
-	XMLName xml.Name `xml:"site" json:"-"`
 	NamedObject
 	Type       string      `xml:"type" json:"type"`
 	Coords     string      `xml:"coords" json:"coords"`
 	Rectangle  string      `xml:"rectangle" json:"rectangle"`
 	Structures []Structure `xml:"structures>structure" json:"structures"`
 
-	OtherElements
+	// OtherElements
 	EventObject
 }
 
@@ -42,23 +36,20 @@ type Site struct {
 // func (obj Site) name() string { return obj.Name }
 
 type Structure struct {
-	XMLName xml.Name `xml:"structure" json:"-"`
-	LocalId int      `xml:"local_id" json:"localId"`
-	Name    string   `xml:"name" json:"name"`
-	Type    string   `xml:"type" json:"type"`
-	OtherElements
+	LocalId int    `xml:"local_id" json:"localId"`
+	Name    string `xml:"name" json:"name"`
+	Type    string `xml:"type" json:"type"`
+	// OtherElements
 	EventObject
 }
 
 type WorldConstruction struct {
-	XMLName xml.Name `xml:"world_construction" json:"-"`
 	NamedObject
-	OtherElements
+	// OtherElements
 	EventObject
 }
 
 type Artifact struct {
-	XMLName xml.Name `xml:"artifact" json:"-"`
 	NamedObject
 	SiteId     int  `xml:"site_id" json:"siteId"`
 	AbsTileX   *int `xml:"abs_tile_x" json:"absTileX,omitempty"`
@@ -69,13 +60,12 @@ type Artifact struct {
 	StructureLocalId *int `xml:"structure_local_id" json:"structureLocalId,omitempty"`
 	SubregionId      *int `xml:"subregion_id" json:"subregionId,omitempty"`
 
-	OtherElements
+	// OtherElements
 
 	EventObject
 }
 
 type HistoricalFigure struct {
-	XMLName xml.Name `xml:"historical_figure" json:"-"`
 	NamedObject
 
 	Race *string `xml:"race" json:"race"`
@@ -115,7 +105,7 @@ type HistoricalFigure struct {
 	// UsedIdentityId *[]int    `xml:"used_identity_id" json:"usedIdentityId,omitempty" legend:"entity"`
 	// // vague_relationship object
 
-	OtherElements
+	// OtherElements
 
 	EventObject
 }
@@ -123,7 +113,6 @@ type HistoricalFigure struct {
 func (r *HistoricalFigure) Type() string { return "hf" }
 
 type HistoricalEventCollection struct {
-	XMLName xml.Name `xml:"historical_event_collection" json:"-"`
 	NamedObject
 	Year       int    `xml:"year"`
 	Seconds    int    `xml:"seconds72"`
@@ -175,45 +164,38 @@ type HistoricalEventCollection struct {
 	DefendingSquadAnimated  *[]string `xml:"defending_squad_animated" json:"defendingSquadAnimated,omitempty"`
 	TargetEntityId          *int      `xml:"target_entity_id" json:"targetEntityId,omitempty" legend:"entity"`
 
-	OtherElements
+	// OtherElements
 }
 
 type Entity struct {
-	XMLName xml.Name `xml:"entity" json:"-"`
 	NamedObject
-	OtherElements
+	// OtherElements
 	EventObject
 }
 
 type EntityPopulation struct {
-	XMLName xml.Name `xml:"entity_population" json:"-"`
-	OtherElements
+	// OtherElements
 }
 
 type HistoricalEra struct {
-	XMLName xml.Name `xml:"historical_era" json:"-"`
 	NamedObject
 	StartYear *int `xml:"start_year" json:"startYear,omitempty"`
-	OtherElements
+	// OtherElements
 }
 
 type DanceForm struct {
-	XMLName xml.Name `xml:"dance_form" json:"-"`
 	ArtForm
 }
 
 type MusicalForm struct {
-	XMLName xml.Name `xml:"musical_form" json:"-"`
 	ArtForm
 }
 
 type PoeticForm struct {
-	XMLName xml.Name `xml:"poetic_form" json:"-"`
 	ArtForm
 }
 
 type WrittenContent struct {
-	XMLName xml.Name `xml:"written_content" json:"-"`
 	NamedObject
 
 	AuthorHfid *int      `xml:"author_hfid" json:"authorHfid,omitempty" legend:"hf"`
@@ -223,7 +205,7 @@ type WrittenContent struct {
 	Style      *[]string `xml:"style" json:"style,omitempty"`
 	Title      *string   `xml:"title" json:"title,omitempty"`
 
-	OtherElements
+	// OtherElements
 	EventObject
 }
 
@@ -232,6 +214,6 @@ type ArtForm struct {
 
 	Description *string `xml:"description" json:"description,omitempty"`
 
-	OtherElements
+	// OtherElements
 	EventObject
 }

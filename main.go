@@ -1,23 +1,40 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"legendsbrowser/analyze"
 	"legendsbrowser/model"
 	"legendsbrowser/server"
 	"net/http"
 	_ "net/http/pprof"
+	"os"
 	"runtime"
 
 	"github.com/gorilla/mux"
+	"github.com/pkg/profile"
 )
 
 var world model.World
 
 func main() {
-	// defer profile.Start(profile.MemProfile).Stop()
-	// go func() {
-	// 	http.ListenAndServe(":8081", nil)
-	// }()
+	var a string
+	flag.StringVar(&a, "a", "", "analyze a file")
+	flag.Parse()
+
+	if len(a) == 0 {
+		fmt.Println("Usage: defaults.go -a")
+		flag.PrintDefaults()
+		os.Exit(1)
+	} else {
+		analyze.Analyze(a)
+		os.Exit(1)
+	}
+
+	defer profile.Start(profile.MemProfile).Stop()
+	go func() {
+		http.ListenAndServe(":8081", nil)
+	}()
 
 	fmt.Println("Hallo Welt!")
 

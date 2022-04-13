@@ -4,7 +4,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
-	"io"
+	"legendsbrowser/util"
 	"os"
 	"reflect"
 	"strings"
@@ -15,22 +15,6 @@ type World struct {
 	Name    string   `xml:"name"`
 	AltName string   `xml:"altname"`
 
-	// Regions                    []*Region                    `xml:"regions>region"`
-	// UndergroundRegions         []*UndergroundRegion         `xml:"underground_regions>underground_region"`
-	// Landmasses                 []*Landmass                  `xml:"landmasses>landmass"`
-	// Sites                      []*Site                      `xml:"sites>site"`
-	// WorldConstructions         []*WorldConstruction         `xml:"world_constructions>world_construction"`
-	// Artifacts                  []*Artifact                  `xml:"artifacts>artifact"`
-	// HistoricalFigures          []*HistoricalFigure          //`xml:"historical_figures>historical_figure"`
-	// HistoricalEvents           []*HistoricalEvent           //`xml:"historical_events>historical_event"`
-	// HistoricalEventCollections []*HistoricalEventCollection `xml:"historical_event_collections>historical_event_collection"`
-	// HistoricalEras             []*HistoricalEra             `xml:"historical_eras>historical_era"`
-	// Entities                   []*Entity                    `xml:"entities>entity"`
-	// EntityPopulations          []*EntityPopulation          `xml:"entity_populations>entity_population"`
-	// DanceForms                 []*DanceForm                 `xml:"dance_forms>dance_form"`
-	// MusicalForms               []*MusicalForm               `xml:"musical_forms>musical_form"`
-	// PoeticForms                []*PoeticForm                `xml:"poetic_forms>poetic_form"`
-	// WrittenContents            []*WrittenContent            `xml:"written_contents>written_content"`
 	OtherElements
 
 	RegionMap                    map[int]*Region                    `xml:"regions>region"`
@@ -45,30 +29,9 @@ type World struct {
 	HistoricalEraMap             map[int]*HistoricalEra             `xml:"historical_eras>historical_era"`
 	EntityMap                    map[int]*Entity                    `xml:"entities>entity"`
 	DanceFormMap                 map[int]*DanceForm                 `xml:"dance_forms>dance_form"`
-	MusicalFormMap               map[int]*MusicalForm               //`xml:"musical_forms>musical_form"`
-	PoeticFormMap                map[int]*PoeticForm                // `xml:"poetic_forms>poetic_form"`
+	MusicalFormMap               map[int]*MusicalForm               `xml:"musical_forms>musical_form"`
+	PoeticFormMap                map[int]*PoeticForm                `xml:"poetic_forms>poetic_form"`
 	WrittenContentMap            map[int]*WrittenContent            `xml:"written_contents>written_content"`
-}
-
-var cp437 = []byte("         \t\n  \r                   !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ CueaaaaceeeiiiAAEaAooouuyOU    faiounN                                                                                                ")
-
-// var cp437 = []byte("         \t\n  \r                   !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒáíóúñÑ                                                                                                ")
-
-type ConvertReader struct {
-	r    io.Reader
-	read int
-}
-
-func (c *ConvertReader) Read(b []byte) (n int, err error) {
-	n, err = c.r.Read(b)
-	if c.read == 0 && n > 35 {
-		copy(b[30:35], []byte("UTF-8"))
-	}
-	c.read += n
-	for i := range b {
-		b[i] = cp437[b[i]]
-	}
-	return n, err
 }
 
 func (w *World) Load(file string) {
@@ -80,7 +43,7 @@ func (w *World) Load(file string) {
 	fmt.Println("Successfully Opened users.xml")
 	defer xmlFile.Close()
 
-	converter := &ConvertReader{r: xmlFile}
+	converter := util.NewConvertReader(xmlFile)
 
 	// byteValue, _ := io.ReadAll(converter)
 	// fmt.Println(len(byteValue))
@@ -182,7 +145,6 @@ Loop:
 						f.Set(reflect.MakeMapWithSize(ty.Type, 0))
 					}
 					parseMap(d, ty, f)
-					val.Field(ty.Index[0]).SetMapIndex(reflect.ValueOf(6), reflect.New(ty.Type.Elem().Elem()))
 				}
 			} else {
 				d.Skip()
