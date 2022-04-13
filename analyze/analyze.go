@@ -19,59 +19,83 @@ import (
 )
 
 func Analyze(filex string) {
-	files, err := filepath.Glob("*.xml")
+	fmt.Println("Search...", filex)
+	files, err := filepath.Glob(filex + "/*.xml")
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println(files)
 
-	files = []string{filex}
-
 	a := NewAnalyzeData()
 
 	for _, file := range files {
-		xmlFile, err := os.Open(file)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		fmt.Println("Successfully Opened", file)
-		defer xmlFile.Close()
-
-		converter := util.NewConvertReader(xmlFile)
-		analyze(converter, a)
+		analyze(file, a)
 	}
+
+	file, _ := json.MarshalIndent(a, "", "  ")
+	_ = ioutil.WriteFile("analyze.json", file, 0644)
 
 	createMetadata(a)
 }
 
-type analyzeData struct {
-	path     []string
-	types    *map[string]bool
-	fields   *map[string]bool
-	isString *map[string]bool
-	multiple *map[string]bool
+func Generate() {
+	data, err := ioutil.ReadFile("analyze.json")
+	if err != nil {
+		return
+	}
+
+	a := NewAnalyzeData()
+	json.Unmarshal(data, a)
+	createMetadata(a)
 }
 
-func NewAnalyzeData() analyzeData {
-	path := make([]string, 0)
-	types := make(map[string]bool, 0)
-	fields := make(map[string]bool, 0)
-	isString := make(map[string]bool, 0)
-	multiple := make(map[string]bool, 0)
+type AnalyzeData struct {
+	Types    map[string]bool
+	Fields   map[string]bool
+	IsString map[string]bool
+	Multiple map[string]bool
+	Base     map[string]bool
+	Plus     map[string]bool
+}
 
-	return analyzeData{
-		path:     path,
-		types:    &types,
-		fields:   &fields,
-		isString: &isString,
-		multiple: &multiple,
+func NewAnalyzeData() *AnalyzeData {
+	return &AnalyzeData{
+		Types:    make(map[string]bool, 0),
+		Fields:   make(map[string]bool, 0),
+		IsString: make(map[string]bool, 0),
+		Multiple: make(map[string]bool, 0),
+		Base:     make(map[string]bool, 0),
+		Plus:     make(map[string]bool, 0),
 	}
 }
 
-func analyzeElement(d *xml.Decoder, a analyzeData) error {
-	if len(a.path) > 1 {
-		(*a.fields)[strings.Join(a.path, ">")] = true
+func analyze(file string, a *AnalyzeData) error {
+	xmlFile, err := os.Open(file)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	plus := strings.HasSuffix(file, "_plus.xml")
+
+	fmt.Println("Successfully Opened", file)
+	defer xmlFile.Close()
+
+	converter := util.NewConvertReader(xmlFile)
+
+	return analyzeElement(xml.NewDecoder(converter), a, make([]string, 0), plus)
+}
+
+const PATH_SEPARATOR = "|"
+
+func analyzeElement(d *xml.Decoder, a *AnalyzeData, path []string, plus bool) error {
+	if len(path) > 1 {
+		s := strings.Join(path, PATH_SEPARATOR)
+		a.Fields[s] = true
+		if plus {
+			a.Plus[s] = true
+		} else {
+			a.Base[s] = true
+		}
 	}
 
 	var (
@@ -93,17 +117,16 @@ Loop:
 		case xml.StartElement:
 			value = false
 
-			(*a.types)[strings.Join(a.path, ">")] = true
+			a.Types[strings.Join(path, PATH_SEPARATOR)] = true
 
-			a2 := a
-			a2.path = append(a.path, t.Name.Local)
+			newPath := append(path, t.Name.Local)
 
 			if _, ok := fields[t.Name.Local]; ok {
-				(*a.multiple)[strings.Join(a2.path, ">")] = true
+				a.Multiple[strings.Join(newPath, PATH_SEPARATOR)] = true
 			}
 			fields[t.Name.Local] = true
 
-			analyzeElement(d, a2)
+			analyzeElement(d, a, newPath, plus)
 
 		case xml.CharData:
 			data = append(data, t...)
@@ -111,14 +134,13 @@ Loop:
 		case xml.EndElement:
 			if value {
 				if _, err := strconv.Atoi(string(data)); err != nil {
-					(*a.isString)[strings.Join(a.path, ">")] = true
+					a.IsString[strings.Join(path, PATH_SEPARATOR)] = true
 				}
 			}
 
-			if t.Name.Local == "type" {
-				a.path[len(a.path)-2] = a.path[len(a.path)-2] + strcase.ToCamel(string(data))
-				fmt.Println(a.path)
-			}
+			// if t.Name.Local == "type" {
+			// 	path[len(path)-2] = path[len(path)-2] + "+" + strcase.ToCamel(string(data))
+			// }
 
 			return nil
 		}
@@ -126,25 +148,49 @@ Loop:
 	return nil
 }
 
-func analyze(r io.Reader, a analyzeData) error {
-	d := xml.NewDecoder(r)
-	return analyzeElement(d, a)
+func filterSubtypes(data map[string]bool) []string {
+	allowed := map[string]bool{
+		"df_world|historical_events|historical_event":                       true,
+		"df_world|historical_event_collections|historical_event_collection": true,
+	}
+
+	filtered := make(map[string]bool)
+	for k, v := range data {
+		if !v {
+			continue
+		}
+		path := strings.Split(k, PATH_SEPARATOR)
+		for index, seg := range path {
+			if strings.Contains(seg, "+") {
+				base := seg[:strings.Index(seg, "+")]
+				basePath := strings.Join(append(path[:index], base), PATH_SEPARATOR)
+				if allowed[basePath] {
+					path[index] = seg
+				}
+			}
+		}
+		filtered[strings.Join(path, PATH_SEPARATOR)] = true
+	}
+	list := util.Keys(filtered)
+	sort.Strings(list)
+	return list
 }
 
-func createMetadata(a analyzeData) {
-	ts := util.Keys(*a.types)
-	sort.Strings(ts)
+func createMetadata(a *AnalyzeData) {
+	ts := filterSubtypes(a.Types)
+	fs := filterSubtypes(a.Fields)
 
-	fs := util.Keys(*a.fields)
-	sort.Strings(fs)
+	// for _, s := range fs {
+	// 	fmt.Println(s)
+	// }
 
 	objects := make(map[string]Object, 0)
 
 	for _, k := range ts {
 		if ok, _ := isArray(k, fs); !ok {
 			n := k
-			if strings.Contains(k, ">") {
-				n = k[strings.LastIndex(k, ">")+1:]
+			if strings.Contains(k, PATH_SEPARATOR) {
+				n = k[strings.LastIndex(k, PATH_SEPARATOR)+1:]
 			}
 
 			if n == "" {
@@ -153,48 +199,49 @@ func createMetadata(a analyzeData) {
 
 			objFields := make(map[string]Field, 0)
 
-			fmt.Println("\n", n)
 			for _, f := range fs {
-				if strings.HasPrefix(f, k+">") {
+				if strings.HasPrefix(f, k+PATH_SEPARATOR) {
 					fn := f[len(k)+1:]
-					if !strings.Contains(fn, ">") {
-						fmt.Println("     ", fn)
-
-						if ok, elements := isArray(f, fs); ok {
-							el := elements[strings.LastIndex(elements, ">")+1:]
-							objFields[fn] = Field{
-								Name:        strcase.ToCamel(fn),
-								Type:        "array",
-								ElementType: &(el),
-							}
-						} else if ok, _ := isObject(f, fs); ok {
-							objFields[fn] = Field{
-								Name:     strcase.ToCamel(fn),
-								Type:     "object",
-								Multiple: (*a.multiple)[f],
-							}
-						} else if (*a.isString)[f] {
-							objFields[fn] = Field{
-								Name:     strcase.ToCamel(fn),
-								Type:     "string",
-								Multiple: (*a.multiple)[f],
-							}
-						} else {
-							objFields[fn] = Field{
-								Name:     strcase.ToCamel(fn),
-								Type:     "int",
-								Multiple: (*a.multiple)[f],
-							}
+					if !strings.Contains(fn, PATH_SEPARATOR) {
+						legend := ""
+						if a.Base[f] && a.Plus[f] {
+							legend = "both"
+						} else if a.Base[f] {
+							legend = "base"
+						} else if a.Plus[f] {
+							legend = "plus"
 						}
+
+						field := Field{
+							Name:     strcase.ToCamel(fn),
+							Type:     "int",
+							Multiple: a.Multiple[f],
+							Legend:   legend,
+						}
+						if ok, elements := isArray(f, fs); ok {
+							el := elements[strings.LastIndex(elements, PATH_SEPARATOR)+1:]
+							fmt.Println(f + PATH_SEPARATOR + elements + PATH_SEPARATOR + "id")
+							if a.Fields[elements+PATH_SEPARATOR+"id"] {
+								field.Type = "map"
+							} else {
+								field.Type = "array"
+							}
+							field.ElementType = &(el)
+						} else if ok, _ := isObject(f, fs); ok {
+							field.Type = "object"
+						} else if a.IsString[f] {
+							field.Type = "string"
+						}
+						objFields[fn] = field
 					}
 				}
 			}
 
 			objects[n] = Object{
 				Name:   strcase.ToCamel(n),
-				Id:     (*a.fields)[k+">id"],
-				Named:  (*a.fields)[k+">name"],
-				Typed:  (*a.fields)[k+">type"],
+				Id:     a.Fields[k+PATH_SEPARATOR+"id"],
+				Named:  a.Fields[k+PATH_SEPARATOR+"name"],
+				Typed:  a.Fields[k+PATH_SEPARATOR+"type"],
 				Fields: objFields,
 			}
 		}
@@ -203,7 +250,7 @@ func createMetadata(a analyzeData) {
 	file, _ := json.MarshalIndent(objects, "", "  ")
 	_ = ioutil.WriteFile("model.json", file, 0644)
 
-	f, err := os.Create("contributors.go")
+	f, err := os.Create("df/model.go")
 	defer f.Close()
 
 	err = packageTemplate.Execute(f, struct {
@@ -221,11 +268,11 @@ func isArray(typ string, types []string) (bool, string) {
 	elements := ""
 
 	for _, t := range types {
-		if !strings.HasPrefix(t, typ+">") {
+		if !strings.HasPrefix(t, typ+PATH_SEPARATOR) {
 			continue
 		}
 		f := t[len(typ)+1:]
-		if strings.Contains(f, ">") {
+		if strings.Contains(f, PATH_SEPARATOR) {
 			continue
 		}
 		fc++
@@ -238,7 +285,7 @@ func isObject(typ string, types []string) (bool, string) {
 	fc := 0
 
 	for _, t := range types {
-		if !strings.HasPrefix(t, typ+">") {
+		if !strings.HasPrefix(t, typ+PATH_SEPARATOR) {
 			continue
 		}
 		fc++
@@ -259,6 +306,7 @@ type Field struct {
 	Type        string  `json:"type"`
 	Multiple    bool    `json:"multiple,omitempty"`
 	ElementType *string `json:"elements,omitempty"`
+	Legend      string  `json:"legend"`
 }
 
 func (f Field) TypeLine(objects map[string]Object) string {
@@ -274,17 +322,85 @@ func (f Field) TypeLine(objects map[string]Object) string {
 	}
 	t := f.Type
 	if f.Type == "array" {
+		t = "[]*" + objects[*f.ElementType].Name
+	}
+	if f.Type == "map" {
 		t = "map[int]*" + objects[*f.ElementType].Name
 	}
 	if f.Type == "object" {
 		t = f.Name
 	}
-	j := "`json:\"" + strcase.ToLowerCamel(f.Name) + "\"`"
+	j := fmt.Sprintf("`json:\"%s\" legend:\"%s\"`", strcase.ToLowerCamel(f.Name), f.Legend)
 	return fmt.Sprintf("%s %s%s %s", n, m, t, j)
 }
 
+func (f Field) StartAction() string {
+	n := f.Name
+
+	if n == "Id" || n == "Name" {
+		n = n + "_"
+	}
+
+	if f.Type == "object" {
+		p := fmt.Sprintf("v := %s{}\nv.Parse(d, &t)", f.Name)
+		if !f.Multiple {
+			return fmt.Sprintf("%s\nobj.%s = v", p, n)
+		} else {
+			return fmt.Sprintf("%s\nobj.%s = append(obj.%s, v)", p, n, n)
+		}
+	}
+
+	if f.Type == "array" || f.Type == "map" {
+		el := strcase.ToCamel(*f.ElementType)
+		gen := fmt.Sprintf("New%s", el)
+
+		if f.Type == "array" {
+			return fmt.Sprintf("parseArray(d, &obj.%s, %s)", f.Name, gen)
+		}
+
+		if f.Type == "map" {
+			return fmt.Sprintf("obj.%s = make(map[int]*%s)\nparseMap(d, &obj.%s, %s)", f.Name, el, f.Name, gen)
+		}
+	}
+
+	if f.Type == "int" || f.Type == "string" {
+		return "data = nil"
+	}
+
+	return ""
+}
+
+func (f Field) EndAction() string {
+	n := f.Name
+
+	if n == "Id" || n == "Name" {
+		n = n + "_"
+	}
+
+	if !f.Multiple {
+		if f.Type == "int" {
+			return fmt.Sprintf("obj.%s = n(data)", n)
+		} else if f.Type == "string" {
+			return fmt.Sprintf("obj.%s = string(data)", n)
+		}
+	} else {
+		if f.Type == "int" {
+			return fmt.Sprintf("obj.%s = append(obj.%s, n(data))", n, n)
+		} else if f.Type == "string" {
+			return fmt.Sprintf("obj.%s = append(obj.%s, string(data))", n, n)
+		}
+	}
+
+	return ""
+}
+
 var packageTemplate = template.Must(template.New("").Parse(`// Code generated by go generate; DO NOT EDIT.
-package generate
+package df
+
+import (
+	"encoding/xml"
+	"strconv"
+)
 
 {{- range $name, $obj := .Objects }}
 type {{ $obj.Name }} struct {
@@ -293,12 +409,65 @@ type {{ $obj.Name }} struct {
 	{{- end }}
 }
 
+func New{{ $obj.Name }}() *{{ $obj.Name }} { return &{{ $obj.Name }}{} }
 {{- if $obj.Id }}
 func (x *{{ $obj.Name }}) Id() int { return x.Id_ }
 {{- end }}
 {{- if $obj.Named }}
 func (x *{{ $obj.Name }}) Name() string { return x.Name_ }
 {{- end }}
+
+
+
+{{- end }}
+
+// Parser
+
+func n(d []byte) int {
+	v, _ := strconv.Atoi(string(d))
+	return v
+}
+
+{{- range $name, $obj := .Objects }}
+func (obj *{{ $obj.Name }}) Parse(d *xml.Decoder, start *xml.StartElement) error {
+	var data []byte
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			{{- range $fname, $field := $obj.Fields }}
+			case "{{ $fname }}":
+				{{ $field.StartAction }}
+			{{- end }}
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return nil
+			}
+
+			switch t.Name.Local {
+			{{- range $fname, $field := $obj.Fields }}
+			case "{{ $fname }}":
+				{{ $field.EndAction }}
+			{{- end }}
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
 
 {{- end }}
 `))
