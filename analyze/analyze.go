@@ -49,23 +49,32 @@ func Generate() {
 	createMetadata(a)
 }
 
+type FieldData struct {
+	IsString bool
+	Multiple bool
+	Base     bool
+	Plus     bool
+}
+
 type AnalyzeData struct {
-	Types    map[string]bool
-	Fields   map[string]bool
-	IsString map[string]bool
-	Multiple map[string]bool
-	Base     map[string]bool
-	Plus     map[string]bool
+	// Types  map[string]bool
+	Fields map[string]*FieldData
 }
 
 func NewAnalyzeData() *AnalyzeData {
 	return &AnalyzeData{
-		Types:    make(map[string]bool, 0),
-		Fields:   make(map[string]bool, 0),
-		IsString: make(map[string]bool, 0),
-		Multiple: make(map[string]bool, 0),
-		Base:     make(map[string]bool, 0),
-		Plus:     make(map[string]bool, 0),
+		// Types:  make(map[string]bool, 0),
+		Fields: make(map[string]*FieldData, 0),
+	}
+}
+
+func (a *AnalyzeData) GetField(s string) *FieldData {
+	if f, ok := a.Fields[s]; ok {
+		return f
+	} else {
+		f := &FieldData{}
+		a.Fields[s] = f
+		return f
 	}
 }
 
@@ -138,9 +147,9 @@ Loop:
 				}
 			}
 
-			// if t.Name.Local == "type" {
-			// 	path[len(path)-2] = path[len(path)-2] + "+" + strcase.ToCamel(string(data))
-			// }
+			if t.Name.Local == "type" {
+				path[len(path)-2] = path[len(path)-2] + "+" + strcase.ToCamel(string(data))
+			}
 
 			return nil
 		}
