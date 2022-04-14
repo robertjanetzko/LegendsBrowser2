@@ -1,13 +1,6 @@
 package df
 
 import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-	"go/format"
-	"io/ioutil"
-	"os"
-	"path/filepath"
 	"sort"
 	"strings"
 
@@ -15,29 +8,18 @@ import (
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
 
-func Analyze(filex string) error {
-	fmt.Println("Search...", filex)
-	files, err := filepath.Glob(filex + "/*.xml")
-	if err != nil {
-		return err
-	}
-	fmt.Println(files)
-
-	a := NewAnalyzeData()
-
-	for _, file := range files {
-		analyze(file, a)
-	}
-
-	return a.Save()
-}
-
 func Generate() error {
 	a, err := LoadAnalyzeData()
 	if err != nil {
 		return err
 	}
-	return createMetadata(a)
+
+	m, err := createMetadata(a)
+	if err != nil {
+		return err
+	}
+
+	return generateCode(m)
 }
 
 var allowedTyped = map[string]bool{
@@ -45,58 +27,9 @@ var allowedTyped = map[string]bool{
 	"df_world|historical_event_collections|historical_event_collection": true,
 }
 
-func filterSubtypes(data *map[string]*FieldData) []string {
-	filtered := make(map[string]*FieldData)
-	for k, v := range *data {
-		path := strings.Split(k, PATH_SEPARATOR)
-		for index, seg := range path {
-			if strings.Contains(seg, "+") {
-				base := seg[:strings.Index(seg, "+")]
-				basePath := strings.Join(append(path[:index], base), PATH_SEPARATOR)
-				if allowedTyped[basePath] {
-					path[index] = seg
-				}
-			}
-		}
-		filtered[strings.Join(path, PATH_SEPARATOR)] = v
-	}
-	*data = filtered
-	list := util.Keys(filtered)
-	sort.Strings(list)
-	return list
-}
+type Metadata map[string]Object
 
-func getSubtypes(objectTypes []string, k string) *[]string {
-	subtypes := make(map[string]bool)
-
-	for _, t := range objectTypes {
-		if strings.HasPrefix(t, k+"+") && !strings.Contains(t[len(k):], PATH_SEPARATOR) {
-			subtypes[t[strings.LastIndex(t, "+")+1:]] = true
-		}
-	}
-
-	keys := util.Keys(subtypes)
-	sort.Strings(keys)
-
-	if len(keys) > 0 {
-		return &keys
-	}
-
-	return nil
-}
-
-func getSubtypeOf(k string) *string {
-	if strings.Contains(k, PATH_SEPARATOR) {
-		last := k[strings.LastIndex(k, PATH_SEPARATOR)+1:]
-		if strings.Contains(last, "+") {
-			base := strcase.ToCamel(last[:strings.Index(last, "+")])
-			return &base
-		}
-	}
-	return nil
-}
-
-func createMetadata(a *AnalyzeData) error {
+func createMetadata(a *AnalyzeData) (*Metadata, error) {
 	fs := filterSubtypes(&a.Fields)
 
 	var objectTypes []string
@@ -107,7 +40,7 @@ func createMetadata(a *AnalyzeData) error {
 		}
 	}
 
-	objects := make(map[string]Object, 0)
+	objects := make(Metadata, 0)
 
 	for _, k := range objectTypes {
 		if ok, _ := isArray(k, fs); !ok {
@@ -171,34 +104,58 @@ func createMetadata(a *AnalyzeData) error {
 		}
 	}
 
-	return generateCode(&objects)
+	return &objects, nil
 }
 
-func generateCode(objects *map[string]Object) error {
-	file, _ := json.MarshalIndent(objects, "", "  ")
-	_ = ioutil.WriteFile("model.json", file, 0644)
+func filterSubtypes(data *map[string]*FieldData) []string {
+	filtered := make(map[string]*FieldData)
+	for k, v := range *data {
+		path := strings.Split(k, PATH_SEPARATOR)
+		for index, seg := range path {
+			if strings.Contains(seg, "+") {
+				base := seg[:strings.Index(seg, "+")]
+				basePath := strings.Join(append(path[:index], base), PATH_SEPARATOR)
+				if allowedTyped[basePath] {
+					path[index] = seg
+				}
+			}
+		}
+		filtered[strings.Join(path, PATH_SEPARATOR)] = v
+	}
+	*data = filtered
+	list := util.Keys(filtered)
+	sort.Strings(list)
+	return list
+}
 
-	f, err := os.Create("../backend/model/model.go")
-	if err != nil {
-		return err
-	}
-	defer f.Close()
+func getSubtypes(objectTypes []string, k string) *[]string {
+	subtypes := make(map[string]bool)
 
-	var buf bytes.Buffer
-	err = packageTemplate.Execute(&buf, struct {
-		Objects *map[string]Object
-	}{
-		Objects: objects,
-	})
-	if err != nil {
-		return err
+	for _, t := range objectTypes {
+		if strings.HasPrefix(t, k+"+") && !strings.Contains(t[len(k):], PATH_SEPARATOR) {
+			subtypes[t[strings.LastIndex(t, "+")+1:]] = true
+		}
 	}
-	p, err := format.Source(buf.Bytes())
-	if err != nil {
-		return err
+
+	keys := util.Keys(subtypes)
+	sort.Strings(keys)
+
+	if len(keys) > 0 {
+		return &keys
 	}
-	_, err = f.Write(p)
-	return err
+
+	return nil
+}
+
+func getSubtypeOf(k string) *string {
+	if strings.Contains(k, PATH_SEPARATOR) {
+		last := k[strings.LastIndex(k, PATH_SEPARATOR)+1:]
+		if strings.Contains(last, "+") {
+			base := strcase.ToCamel(last[:strings.Index(last, "+")])
+			return &base
+		}
+	}
+	return nil
 }
 
 func isArray(typ string, types []string) (bool, string) {

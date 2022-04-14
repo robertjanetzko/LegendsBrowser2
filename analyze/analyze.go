@@ -12,7 +12,7 @@ func main() {
 	flag.Parse()
 
 	if len(*a) > 0 {
-		df.Analyze(*a)
+		df.AnalyzeStructure(*a)
 	}
 
 	if *g {

@@ -12,7 +12,7 @@ type Artifact struct {
 	AbsTileY         int    `json:"absTileY" legend:"base"`
 	AbsTileZ         int    `json:"absTileZ" legend:"base"`
 	HolderHfid       int    `json:"holderHfid" legend:"base"`
-	Id_              int    `json:"id" legend:"plus"`
+	Id_              int    `json:"id" legend:"both"`
 	Item             *Item  `json:"item" legend:"base"`
 	ItemDescription  string `json:"itemDescription" legend:"plus"`
 	ItemSubtype      string `json:"itemSubtype" legend:"plus"`
@@ -30,10 +30,8 @@ func (x *Artifact) Id() int      { return x.Id_ }
 func (x *Artifact) Name() string { return x.Name_ }
 
 type Circumstance struct {
-	Defeated            int    `json:"defeated" legend:"plus"`
-	HistEventCollection int    `json:"histEventCollection" legend:"plus"`
-	Murdered            int    `json:"murdered" legend:"plus"`
-	Type                string `json:"type" legend:"plus"`
+	Defeated int    `json:"defeated" legend:"plus"`
+	Type     string `json:"type" legend:"plus"`
 }
 type Creature struct {
 	AllCastesAlive                    string `json:"allCastesAlive" legend:"plus"`
@@ -158,7 +156,7 @@ type Creature struct {
 }
 type DanceForm struct {
 	Description string `json:"description" legend:"base"`
-	Id_         int    `json:"id" legend:"plus"`
+	Id_         int    `json:"id" legend:"both"`
 	Name_       string `json:"name" legend:"plus"`
 }
 
@@ -167,29 +165,29 @@ func (x *DanceForm) Name() string { return x.Name_ }
 
 type DfWorld struct {
 	Altname                                string                                   `json:"altname" legend:"plus"`
-	Artifacts                              map[int]*Artifact                        `json:"artifacts" legend:"plus"`
+	Artifacts                              map[int]*Artifact                        `json:"artifacts" legend:"both"`
 	CreatureRaw                            []*Creature                              `json:"creatureRaw" legend:"plus"`
-	DanceForms                             map[int]*DanceForm                       `json:"danceForms" legend:"plus"`
-	Entities                               map[int]*Entity                          `json:"entities" legend:"plus"`
-	EntityPopulations                      map[int]*EntityPopulation                `json:"entityPopulations" legend:"plus"`
-	HistoricalEras                         []*HistoricalEra                         `json:"historicalEras" legend:"plus"`
-	HistoricalEventCollections             map[int]*HistoricalEventCollection       `json:"historicalEventCollections" legend:"plus"`
+	DanceForms                             map[int]*DanceForm                       `json:"danceForms" legend:"both"`
+	Entities                               map[int]*Entity                          `json:"entities" legend:"both"`
+	EntityPopulations                      map[int]*EntityPopulation                `json:"entityPopulations" legend:"both"`
+	HistoricalEras                         []*HistoricalEra                         `json:"historicalEras" legend:"both"`
+	HistoricalEventCollections             map[int]*HistoricalEventCollection       `json:"historicalEventCollections" legend:"both"`
 	HistoricalEventRelationshipSupplements []*HistoricalEventRelationshipSupplement `json:"historicalEventRelationshipSupplements" legend:"plus"`
 	HistoricalEventRelationships           []*HistoricalEventRelationship           `json:"historicalEventRelationships" legend:"plus"`
-	HistoricalEvents                       map[int]*HistoricalEvent                 `json:"historicalEvents" legend:"plus"`
-	HistoricalFigures                      map[int]*HistoricalFigure                `json:"historicalFigures" legend:"plus"`
+	HistoricalEvents                       map[int]*HistoricalEvent                 `json:"historicalEvents" legend:"both"`
+	HistoricalFigures                      map[int]*HistoricalFigure                `json:"historicalFigures" legend:"both"`
 	Identities                             map[int]*Identity                        `json:"identities" legend:"plus"`
 	Landmasses                             map[int]*Landmass                        `json:"landmasses" legend:"plus"`
 	MountainPeaks                          map[int]*MountainPeak                    `json:"mountainPeaks" legend:"plus"`
-	MusicalForms                           map[int]*MusicalForm                     `json:"musicalForms" legend:"plus"`
+	MusicalForms                           map[int]*MusicalForm                     `json:"musicalForms" legend:"both"`
 	Name_                                  string                                   `json:"name" legend:"plus"`
-	PoeticForms                            map[int]*PoeticForm                      `json:"poeticForms" legend:"plus"`
-	Regions                                map[int]*Region                          `json:"regions" legend:"plus"`
+	PoeticForms                            map[int]*PoeticForm                      `json:"poeticForms" legend:"both"`
+	Regions                                map[int]*Region                          `json:"regions" legend:"both"`
 	Rivers                                 []*River                                 `json:"rivers" legend:"plus"`
-	Sites                                  map[int]*Site                            `json:"sites" legend:"plus"`
-	UndergroundRegions                     map[int]*UndergroundRegion               `json:"undergroundRegions" legend:"plus"`
-	WorldConstructions                     map[int]*WorldConstruction               `json:"worldConstructions" legend:"plus"`
-	WrittenContents                        map[int]*WrittenContent                  `json:"writtenContents" legend:"plus"`
+	Sites                                  map[int]*Site                            `json:"sites" legend:"both"`
+	UndergroundRegions                     map[int]*UndergroundRegion               `json:"undergroundRegions" legend:"both"`
+	WorldConstructions                     map[int]*WorldConstruction               `json:"worldConstructions" legend:"both"`
+	WrittenContents                        map[int]*WrittenContent                  `json:"writtenContents" legend:"both"`
 }
 
 func (x *DfWorld) Name() string { return x.Name_ }
@@ -197,19 +195,19 @@ func (x *DfWorld) Name() string { return x.Name_ }
 type Entity struct {
 	Child                    int                       `json:"child" legend:"plus"`
 	Claims                   string                    `json:"claims" legend:"plus"`
-	EntityLink               *EntityLink               `json:"entityLink" legend:"plus"`
-	EntityPosition           *EntityPosition           `json:"entityPosition" legend:"plus"`
+	EntityLink               []*EntityLink             `json:"entityLink" legend:"plus"`
+	EntityPosition           []*EntityPosition         `json:"entityPosition" legend:"plus"`
 	EntityPositionAssignment *EntityPositionAssignment `json:"entityPositionAssignment" legend:"plus"`
-	HistfigId                int                       `json:"histfigId" legend:"plus"`
-	Honor                    *Honor                    `json:"honor" legend:"base"`
-	Id_                      int                       `json:"id" legend:"plus"`
+	HistfigId                []int                     `json:"histfigId" legend:"plus"`
+	Honor                    []*Honor                  `json:"honor" legend:"base"`
+	Id_                      int                       `json:"id" legend:"both"`
 	Name_                    string                    `json:"name" legend:"base"`
-	Occasion                 *Occasion                 `json:"occasion" legend:"plus"`
+	Occasion                 []*Occasion               `json:"occasion" legend:"plus"`
 	Profession               string                    `json:"profession" legend:"plus"`
 	Race                     string                    `json:"race" legend:"plus"`
 	Type                     string                    `json:"type" legend:"plus"`
-	Weapon                   string                    `json:"weapon" legend:"plus"`
-	WorshipId                int                       `json:"worshipId" legend:"plus"`
+	Weapon                   []string                  `json:"weapon" legend:"plus"`
+	WorshipId                []int                     `json:"worshipId" legend:"plus"`
 }
 
 func (x *Entity) Id() int      { return x.Id_ }
@@ -222,13 +220,13 @@ type EntityFormerPositionLink struct {
 	StartYear         int `json:"startYear" legend:"base"`
 }
 type EntityLink struct {
-	Strength int    `json:"strength" legend:"plus"`
-	Target   int    `json:"target" legend:"plus"`
-	Type     string `json:"type" legend:"plus"`
+	EntityId     int    `json:"entityId" legend:"base"`
+	LinkStrength int    `json:"linkStrength" legend:"base"`
+	LinkType     string `json:"linkType" legend:"base"`
 }
 type EntityPopulation struct {
 	CivId int    `json:"civId" legend:"plus"`
-	Id_   int    `json:"id" legend:"plus"`
+	Id_   int    `json:"id" legend:"both"`
 	Race  string `json:"race" legend:"plus"`
 }
 
@@ -294,7 +292,7 @@ type HistoricalEra struct {
 func (x *HistoricalEra) Name() string { return x.Name_ }
 
 type HistoricalEvent struct {
-	Id_       int `json:"id" legend:"plus"`
+	Id_       int `json:"id" legend:"both"`
 	Seconds72 int `json:"seconds72" legend:"base"`
 	Year      int `json:"year" legend:"base"`
 	Details   any
@@ -308,7 +306,7 @@ type HistoricalEventAddHfEntityHonor struct {
 	HonorId  int `json:"honorId" legend:"base"`
 }
 type HistoricalEventAddHfEntityLink struct {
-	AppointerHfid int    `json:"appointerHfid" legend:"plus"`
+	AppointerHfid int    `json:"appointerHfid" legend:"both"`
 	Civ           int    `json:"civ" legend:"plus"`
 	CivId         int    `json:"civId" legend:"base"`
 	Hfid          int    `json:"hfid" legend:"base"`
@@ -317,7 +315,7 @@ type HistoricalEventAddHfEntityLink struct {
 	LinkType      string `json:"linkType" legend:"plus"`
 	Position      string `json:"position" legend:"plus"`
 	PositionId    int    `json:"positionId" legend:"base"`
-	PromiseToHfid int    `json:"promiseToHfid" legend:"plus"`
+	PromiseToHfid int    `json:"promiseToHfid" legend:"both"`
 }
 type HistoricalEventAddHfHfLink struct {
 	Hf         int    `json:"hf" legend:"plus"`
@@ -375,7 +373,7 @@ type HistoricalEventArtifactCopied struct {
 	SourceStructureId int    `json:"sourceStructureId" legend:"base"`
 }
 type HistoricalEventArtifactCreated struct {
-	ArtifactId    int           `json:"artifactId" legend:"plus"`
+	ArtifactId    int           `json:"artifactId" legend:"both"`
 	Circumstance  *Circumstance `json:"circumstance" legend:"plus"`
 	CreatorHfid   int           `json:"creatorHfid" legend:"plus"`
 	CreatorUnitId int           `json:"creatorUnitId" legend:"plus"`
@@ -464,7 +462,7 @@ type HistoricalEventAttackedSite struct {
 }
 type HistoricalEventBodyAbused struct {
 	AbuseType      string `json:"abuseType" legend:"plus"`
-	Bodies         int    `json:"bodies" legend:"plus"`
+	Bodies         []int  `json:"bodies" legend:"plus"`
 	Civ            int    `json:"civ" legend:"plus"`
 	Coords         string `json:"coords" legend:"base"`
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
@@ -518,7 +516,7 @@ type HistoricalEventChangeHfBodyState struct {
 }
 type HistoricalEventChangeHfJob struct {
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
-	Hfid           int    `json:"hfid" legend:"plus"`
+	Hfid           int    `json:"hfid" legend:"both"`
 	NewJob         string `json:"newJob" legend:"plus"`
 	OldJob         string `json:"oldJob" legend:"plus"`
 	Site           int    `json:"site" legend:"plus"`
@@ -528,12 +526,12 @@ type HistoricalEventChangeHfJob struct {
 type HistoricalEventChangeHfState struct {
 	Coords         string `json:"coords" legend:"base"`
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
-	Hfid           int    `json:"hfid" legend:"plus"`
+	Hfid           int    `json:"hfid" legend:"both"`
 	Mood           string `json:"mood" legend:"base"`
-	Reason         string `json:"reason" legend:"plus"`
+	Reason         string `json:"reason" legend:"both"`
 	Site           int    `json:"site" legend:"plus"`
 	SiteId         int    `json:"siteId" legend:"base"`
-	State          string `json:"state" legend:"plus"`
+	State          string `json:"state" legend:"both"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
 type HistoricalEventChangedCreatureType struct {
@@ -545,14 +543,14 @@ type HistoricalEventChangedCreatureType struct {
 	OldRace     string `json:"oldRace" legend:"base"`
 }
 type HistoricalEventCompetition struct {
-	CivId          int `json:"civId" legend:"base"`
-	CompetitorHfid int `json:"competitorHfid" legend:"base"`
-	FeatureLayerId int `json:"featureLayerId" legend:"base"`
-	OccasionId     int `json:"occasionId" legend:"base"`
-	ScheduleId     int `json:"scheduleId" legend:"base"`
-	SiteId         int `json:"siteId" legend:"base"`
-	SubregionId    int `json:"subregionId" legend:"base"`
-	WinnerHfid     int `json:"winnerHfid" legend:"base"`
+	CivId          int   `json:"civId" legend:"base"`
+	CompetitorHfid []int `json:"competitorHfid" legend:"base"`
+	FeatureLayerId int   `json:"featureLayerId" legend:"base"`
+	OccasionId     int   `json:"occasionId" legend:"base"`
+	ScheduleId     int   `json:"scheduleId" legend:"base"`
+	SiteId         int   `json:"siteId" legend:"base"`
+	SubregionId    int   `json:"subregionId" legend:"base"`
+	WinnerHfid     int   `json:"winnerHfid" legend:"base"`
 }
 type HistoricalEventCreateEntityPosition struct {
 	Civ      int    `json:"civ" legend:"plus"`
@@ -625,8 +623,8 @@ type HistoricalEventEntityAction struct {
 	Structure int    `json:"structure" legend:"plus"`
 }
 type HistoricalEventEntityAllianceFormed struct {
-	InitiatingEnid int `json:"initiatingEnid" legend:"base"`
-	JoiningEnid    int `json:"joiningEnid" legend:"base"`
+	InitiatingEnid int   `json:"initiatingEnid" legend:"base"`
+	JoiningEnid    []int `json:"joiningEnid" legend:"base"`
 }
 type HistoricalEventEntityBreachFeatureLayer struct {
 	CivEntityId    int `json:"civEntityId" legend:"base"`
@@ -645,9 +643,9 @@ type HistoricalEventEntityDissolved struct {
 	Reason   string `json:"reason" legend:"base"`
 }
 type HistoricalEventEntityEquipmentPurchase struct {
-	EntityId          int `json:"entityId" legend:"base"`
-	Hfid              int `json:"hfid" legend:"base"`
-	NewEquipmentLevel int `json:"newEquipmentLevel" legend:"base"`
+	EntityId          int   `json:"entityId" legend:"base"`
+	Hfid              []int `json:"hfid" legend:"base"`
+	NewEquipmentLevel int   `json:"newEquipmentLevel" legend:"base"`
 }
 type HistoricalEventEntityIncorporated struct {
 	JoinedEntityId       int    `json:"joinedEntityId" legend:"base"`
@@ -663,26 +661,26 @@ type HistoricalEventEntityLaw struct {
 	LawRemove    string `json:"lawRemove" legend:"base"`
 }
 type HistoricalEventEntityOverthrown struct {
-	ConspiratorHfid   int `json:"conspiratorHfid" legend:"base"`
-	EntityId          int `json:"entityId" legend:"base"`
-	InstigatorHfid    int `json:"instigatorHfid" legend:"base"`
-	OverthrownHfid    int `json:"overthrownHfid" legend:"base"`
-	PosTakerHfid      int `json:"posTakerHfid" legend:"base"`
-	PositionProfileId int `json:"positionProfileId" legend:"base"`
-	SiteId            int `json:"siteId" legend:"base"`
+	ConspiratorHfid   []int `json:"conspiratorHfid" legend:"base"`
+	EntityId          int   `json:"entityId" legend:"base"`
+	InstigatorHfid    int   `json:"instigatorHfid" legend:"base"`
+	OverthrownHfid    int   `json:"overthrownHfid" legend:"base"`
+	PosTakerHfid      int   `json:"posTakerHfid" legend:"base"`
+	PositionProfileId int   `json:"positionProfileId" legend:"base"`
+	SiteId            int   `json:"siteId" legend:"base"`
 }
 type HistoricalEventEntityPersecuted struct {
-	DestroyedStructureId        int `json:"destroyedStructureId" legend:"base"`
-	ExpelledCreature            int `json:"expelledCreature" legend:"base"`
-	ExpelledHfid                int `json:"expelledHfid" legend:"base"`
-	ExpelledNumber              int `json:"expelledNumber" legend:"base"`
-	ExpelledPopId               int `json:"expelledPopId" legend:"base"`
-	PersecutorEnid              int `json:"persecutorEnid" legend:"base"`
-	PersecutorHfid              int `json:"persecutorHfid" legend:"base"`
-	PropertyConfiscatedFromHfid int `json:"propertyConfiscatedFromHfid" legend:"base"`
-	ShrineAmountDestroyed       int `json:"shrineAmountDestroyed" legend:"base"`
-	SiteId                      int `json:"siteId" legend:"base"`
-	TargetEnid                  int `json:"targetEnid" legend:"base"`
+	DestroyedStructureId        int   `json:"destroyedStructureId" legend:"base"`
+	ExpelledCreature            []int `json:"expelledCreature" legend:"base"`
+	ExpelledHfid                []int `json:"expelledHfid" legend:"base"`
+	ExpelledNumber              []int `json:"expelledNumber" legend:"base"`
+	ExpelledPopId               []int `json:"expelledPopId" legend:"base"`
+	PersecutorEnid              int   `json:"persecutorEnid" legend:"base"`
+	PersecutorHfid              int   `json:"persecutorHfid" legend:"base"`
+	PropertyConfiscatedFromHfid []int `json:"propertyConfiscatedFromHfid" legend:"base"`
+	ShrineAmountDestroyed       int   `json:"shrineAmountDestroyed" legend:"base"`
+	SiteId                      int   `json:"siteId" legend:"base"`
+	TargetEnid                  int   `json:"targetEnid" legend:"base"`
 }
 type HistoricalEventEntityPrimaryCriminals struct {
 	EntityId    int `json:"entityId" legend:"base"`
@@ -769,13 +767,13 @@ type HistoricalEventHfAttackedSite struct {
 	SiteId        int `json:"siteId" legend:"base"`
 }
 type HistoricalEventHfConfronted struct {
-	Coords         string `json:"coords" legend:"base"`
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
-	Hfid           int    `json:"hfid" legend:"base"`
-	Reason         string `json:"reason" legend:"base"`
-	SiteId         int    `json:"siteId" legend:"base"`
-	Situation      string `json:"situation" legend:"base"`
-	SubregionId    int    `json:"subregionId" legend:"base"`
+	Coords         string   `json:"coords" legend:"base"`
+	FeatureLayerId int      `json:"featureLayerId" legend:"base"`
+	Hfid           int      `json:"hfid" legend:"base"`
+	Reason         []string `json:"reason" legend:"base"`
+	SiteId         int      `json:"siteId" legend:"base"`
+	Situation      string   `json:"situation" legend:"base"`
+	SubregionId    int      `json:"subregionId" legend:"base"`
 }
 type HistoricalEventHfConvicted struct {
 	CoconspiratorHfid              int    `json:"coconspiratorHfid" legend:"base"`
@@ -792,7 +790,7 @@ type HistoricalEventHfConvicted struct {
 	FooledHfid                     int    `json:"fooledHfid" legend:"base"`
 	FramerHfid                     int    `json:"framerHfid" legend:"base"`
 	HeldFirmInInterrogation        string `json:"heldFirmInInterrogation" legend:"base"`
-	ImplicatedHfid                 int    `json:"implicatedHfid" legend:"base"`
+	ImplicatedHfid                 []int  `json:"implicatedHfid" legend:"base"`
 	InterrogatorHfid               int    `json:"interrogatorHfid" legend:"base"`
 	PlotterHfid                    int    `json:"plotterHfid" legend:"base"`
 	PrisonMonths                   int    `json:"prisonMonths" legend:"base"`
@@ -922,11 +920,11 @@ type HistoricalEventHfRelationshipDenied struct {
 	TargetHfid     int    `json:"targetHfid" legend:"base"`
 }
 type HistoricalEventHfReunion struct {
-	FeatureLayerId int `json:"featureLayerId" legend:"base"`
-	Group1Hfid     int `json:"group1Hfid" legend:"base"`
-	Group2Hfid     int `json:"group2Hfid" legend:"base"`
-	SiteId         int `json:"siteId" legend:"base"`
-	SubregionId    int `json:"subregionId" legend:"base"`
+	FeatureLayerId int   `json:"featureLayerId" legend:"base"`
+	Group1Hfid     int   `json:"group1Hfid" legend:"base"`
+	Group2Hfid     []int `json:"group2Hfid" legend:"base"`
+	SiteId         int   `json:"siteId" legend:"base"`
+	SubregionId    int   `json:"subregionId" legend:"base"`
 }
 type HistoricalEventHfRevived struct {
 	ActorHfid      int    `json:"actorHfid" legend:"base"`
@@ -947,7 +945,7 @@ type HistoricalEventHfSimpleBattleEvent struct {
 type HistoricalEventHfTravel struct {
 	Coords         string `json:"coords" legend:"base"`
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
-	GroupHfid      int    `json:"groupHfid" legend:"base"`
+	GroupHfid      []int  `json:"groupHfid" legend:"base"`
 	Return         string `json:"return" legend:"base"`
 	SiteId         int    `json:"siteId" legend:"base"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
@@ -1039,7 +1037,7 @@ type HistoricalEventHolyCityDeclaration struct {
 	SiteId     int `json:"siteId" legend:"base"`
 }
 type HistoricalEventItemStolen struct {
-	Circumstance   *Circumstance `json:"circumstance" legend:"plus"`
+	Circumstance   *Circumstance `json:"circumstance" legend:"both"`
 	CircumstanceId int           `json:"circumstanceId" legend:"base"`
 	Entity         int           `json:"entity" legend:"plus"`
 	Histfig        int           `json:"histfig" legend:"plus"`
@@ -1142,7 +1140,7 @@ type HistoricalEventRemoveHfEntityLink struct {
 	Histfig    int    `json:"histfig" legend:"plus"`
 	Link       string `json:"link" legend:"base"`
 	LinkType   string `json:"linkType" legend:"plus"`
-	Position   int    `json:"position" legend:"plus"`
+	Position   string `json:"position" legend:"plus"`
 	PositionId int    `json:"positionId" legend:"base"`
 }
 type HistoricalEventRemoveHfHfLink struct {
@@ -1218,13 +1216,13 @@ type HistoricalEventWrittenContentComposed struct {
 	WcId           int    `json:"wcId" legend:"base"`
 }
 type HistoricalEventCollection struct {
-	EndSeconds72   int `json:"endSeconds72" legend:"base"`
-	EndYear        int `json:"endYear" legend:"base"`
-	Event          int `json:"event" legend:"base"`
-	Eventcol       int `json:"eventcol" legend:"base"`
-	Id_            int `json:"id" legend:"base"`
-	StartSeconds72 int `json:"startSeconds72" legend:"base"`
-	StartYear      int `json:"startYear" legend:"base"`
+	EndSeconds72   int   `json:"endSeconds72" legend:"base"`
+	EndYear        int   `json:"endYear" legend:"base"`
+	Event          []int `json:"event" legend:"base"`
+	Eventcol       []int `json:"eventcol" legend:"base"`
+	Id_            int   `json:"id" legend:"base"`
+	StartSeconds72 int   `json:"startSeconds72" legend:"base"`
+	StartYear      int   `json:"startYear" legend:"base"`
 	Details        any
 }
 
@@ -1241,36 +1239,36 @@ type HistoricalEventCollectionAbduction struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
 type HistoricalEventCollectionBattle struct {
-	ASupportMercEnid        int    `json:"aSupportMercEnid" legend:"base"`
-	ASupportMercHfid        int    `json:"aSupportMercHfid" legend:"base"`
-	AttackingHfid           int    `json:"attackingHfid" legend:"base"`
-	AttackingMercEnid       int    `json:"attackingMercEnid" legend:"base"`
-	AttackingSquadAnimated  string `json:"attackingSquadAnimated" legend:"base"`
-	AttackingSquadDeaths    int    `json:"attackingSquadDeaths" legend:"base"`
-	AttackingSquadEntityPop int    `json:"attackingSquadEntityPop" legend:"base"`
-	AttackingSquadNumber    int    `json:"attackingSquadNumber" legend:"base"`
-	AttackingSquadRace      string `json:"attackingSquadRace" legend:"base"`
-	AttackingSquadSite      int    `json:"attackingSquadSite" legend:"base"`
-	CompanyMerc             string `json:"companyMerc" legend:"base"`
-	Coords                  string `json:"coords" legend:"base"`
-	DSupportMercEnid        int    `json:"dSupportMercEnid" legend:"base"`
-	DSupportMercHfid        int    `json:"dSupportMercHfid" legend:"base"`
-	DefendingHfid           int    `json:"defendingHfid" legend:"base"`
-	DefendingMercEnid       int    `json:"defendingMercEnid" legend:"base"`
-	DefendingSquadAnimated  string `json:"defendingSquadAnimated" legend:"base"`
-	DefendingSquadDeaths    int    `json:"defendingSquadDeaths" legend:"base"`
-	DefendingSquadEntityPop int    `json:"defendingSquadEntityPop" legend:"base"`
-	DefendingSquadNumber    int    `json:"defendingSquadNumber" legend:"base"`
-	DefendingSquadRace      string `json:"defendingSquadRace" legend:"base"`
-	DefendingSquadSite      int    `json:"defendingSquadSite" legend:"base"`
-	FeatureLayerId          int    `json:"featureLayerId" legend:"base"`
-	IndividualMerc          string `json:"individualMerc" legend:"base"`
-	Name_                   string `json:"name" legend:"base"`
-	NoncomHfid              int    `json:"noncomHfid" legend:"base"`
-	Outcome                 string `json:"outcome" legend:"base"`
-	SiteId                  int    `json:"siteId" legend:"base"`
-	SubregionId             int    `json:"subregionId" legend:"base"`
-	WarEventcol             int    `json:"warEventcol" legend:"base"`
+	ASupportMercEnid        int      `json:"aSupportMercEnid" legend:"base"`
+	ASupportMercHfid        []int    `json:"aSupportMercHfid" legend:"base"`
+	AttackingHfid           []int    `json:"attackingHfid" legend:"base"`
+	AttackingMercEnid       int      `json:"attackingMercEnid" legend:"base"`
+	AttackingSquadAnimated  []string `json:"attackingSquadAnimated" legend:"base"`
+	AttackingSquadDeaths    []int    `json:"attackingSquadDeaths" legend:"base"`
+	AttackingSquadEntityPop []int    `json:"attackingSquadEntityPop" legend:"base"`
+	AttackingSquadNumber    []int    `json:"attackingSquadNumber" legend:"base"`
+	AttackingSquadRace      []string `json:"attackingSquadRace" legend:"base"`
+	AttackingSquadSite      []int    `json:"attackingSquadSite" legend:"base"`
+	CompanyMerc             []string `json:"companyMerc" legend:"base"`
+	Coords                  string   `json:"coords" legend:"base"`
+	DSupportMercEnid        int      `json:"dSupportMercEnid" legend:"base"`
+	DSupportMercHfid        []int    `json:"dSupportMercHfid" legend:"base"`
+	DefendingHfid           []int    `json:"defendingHfid" legend:"base"`
+	DefendingMercEnid       int      `json:"defendingMercEnid" legend:"base"`
+	DefendingSquadAnimated  []string `json:"defendingSquadAnimated" legend:"base"`
+	DefendingSquadDeaths    []int    `json:"defendingSquadDeaths" legend:"base"`
+	DefendingSquadEntityPop []int    `json:"defendingSquadEntityPop" legend:"base"`
+	DefendingSquadNumber    []int    `json:"defendingSquadNumber" legend:"base"`
+	DefendingSquadRace      []string `json:"defendingSquadRace" legend:"base"`
+	DefendingSquadSite      []int    `json:"defendingSquadSite" legend:"base"`
+	FeatureLayerId          int      `json:"featureLayerId" legend:"base"`
+	IndividualMerc          []string `json:"individualMerc" legend:"base"`
+	Name_                   string   `json:"name" legend:"base"`
+	NoncomHfid              []int    `json:"noncomHfid" legend:"base"`
+	Outcome                 string   `json:"outcome" legend:"base"`
+	SiteId                  int      `json:"siteId" legend:"base"`
+	SubregionId             int      `json:"subregionId" legend:"base"`
+	WarEventcol             int      `json:"warEventcol" legend:"base"`
 }
 
 func (x *HistoricalEventCollectionBattle) Name() string { return x.Name_ }
@@ -1368,45 +1366,45 @@ type HistoricalEventRelationshipSupplement struct {
 	Unk1         int `json:"unk1" legend:"plus"`
 }
 type HistoricalFigure struct {
-	ActiveInteraction               string                           `json:"activeInteraction" legend:"base"`
-	Animated                        string                           `json:"animated" legend:"base"`
-	AnimatedString                  string                           `json:"animatedString" legend:"base"`
-	Appeared                        int                              `json:"appeared" legend:"base"`
-	AssociatedType                  string                           `json:"associatedType" legend:"base"`
-	BirthSeconds72                  int                              `json:"birthSeconds72" legend:"base"`
-	BirthYear                       int                              `json:"birthYear" legend:"base"`
-	Caste                           string                           `json:"caste" legend:"base"`
-	CurrentIdentityId               int                              `json:"currentIdentityId" legend:"base"`
-	DeathSeconds72                  int                              `json:"deathSeconds72" legend:"base"`
-	DeathYear                       int                              `json:"deathYear" legend:"base"`
-	Deity                           string                           `json:"deity" legend:"base"`
-	EntPopId                        int                              `json:"entPopId" legend:"base"`
-	EntityFormerPositionLink        *EntityFormerPositionLink        `json:"entityFormerPositionLink" legend:"base"`
-	EntityLink                      *EntityLink                      `json:"entityLink" legend:"base"`
-	EntityPositionLink              *EntityPositionLink              `json:"entityPositionLink" legend:"base"`
-	EntityReputation                *EntityReputation                `json:"entityReputation" legend:"base"`
-	EntitySquadLink                 *EntitySquadLink                 `json:"entitySquadLink" legend:"base"`
-	Force                           string                           `json:"force" legend:"base"`
-	Goal                            string                           `json:"goal" legend:"base"`
-	HfLink                          *HfLink                          `json:"hfLink" legend:"base"`
-	HfSkill                         *HfSkill                         `json:"hfSkill" legend:"base"`
-	HoldsArtifact                   int                              `json:"holdsArtifact" legend:"base"`
-	HonorEntity                     *HonorEntity                     `json:"honorEntity" legend:"base"`
-	Id_                             int                              `json:"id" legend:"plus"`
-	InteractionKnowledge            string                           `json:"interactionKnowledge" legend:"base"`
-	IntrigueActor                   *IntrigueActor                   `json:"intrigueActor" legend:"base"`
-	IntriguePlot                    *IntriguePlot                    `json:"intriguePlot" legend:"base"`
-	JourneyPet                      string                           `json:"journeyPet" legend:"base"`
-	Name_                           string                           `json:"name" legend:"base"`
-	Race                            string                           `json:"race" legend:"plus"`
-	RelationshipProfileHfHistorical *RelationshipProfileHfHistorical `json:"relationshipProfileHfHistorical" legend:"base"`
-	RelationshipProfileHfVisual     *RelationshipProfileHfVisual     `json:"relationshipProfileHfVisual" legend:"base"`
-	Sex                             int                              `json:"sex" legend:"plus"`
-	SiteLink                        *SiteLink                        `json:"siteLink" legend:"base"`
-	SiteProperty                    *SiteProperty                    `json:"siteProperty" legend:"base"`
-	Sphere                          string                           `json:"sphere" legend:"base"`
-	UsedIdentityId                  int                              `json:"usedIdentityId" legend:"base"`
-	VagueRelationship               *VagueRelationship               `json:"vagueRelationship" legend:"base"`
+	ActiveInteraction               []string                           `json:"activeInteraction" legend:"base"`
+	Animated                        string                             `json:"animated" legend:"base"`
+	AnimatedString                  string                             `json:"animatedString" legend:"base"`
+	Appeared                        int                                `json:"appeared" legend:"base"`
+	AssociatedType                  string                             `json:"associatedType" legend:"base"`
+	BirthSeconds72                  int                                `json:"birthSeconds72" legend:"base"`
+	BirthYear                       int                                `json:"birthYear" legend:"base"`
+	Caste                           string                             `json:"caste" legend:"base"`
+	CurrentIdentityId               int                                `json:"currentIdentityId" legend:"base"`
+	DeathSeconds72                  int                                `json:"deathSeconds72" legend:"base"`
+	DeathYear                       int                                `json:"deathYear" legend:"base"`
+	Deity                           string                             `json:"deity" legend:"base"`
+	EntPopId                        int                                `json:"entPopId" legend:"base"`
+	EntityFormerPositionLink        []*EntityFormerPositionLink        `json:"entityFormerPositionLink" legend:"base"`
+	EntityLink                      []*EntityLink                      `json:"entityLink" legend:"base"`
+	EntityPositionLink              []*EntityPositionLink              `json:"entityPositionLink" legend:"base"`
+	EntityReputation                []*EntityReputation                `json:"entityReputation" legend:"base"`
+	EntitySquadLink                 *EntitySquadLink                   `json:"entitySquadLink" legend:"base"`
+	Force                           string                             `json:"force" legend:"base"`
+	Goal                            []string                           `json:"goal" legend:"base"`
+	HfLink                          []*HfLink                          `json:"hfLink" legend:"base"`
+	HfSkill                         []*HfSkill                         `json:"hfSkill" legend:"base"`
+	HoldsArtifact                   []int                              `json:"holdsArtifact" legend:"base"`
+	HonorEntity                     []*HonorEntity                     `json:"honorEntity" legend:"base"`
+	Id_                             int                                `json:"id" legend:"both"`
+	InteractionKnowledge            []string                           `json:"interactionKnowledge" legend:"base"`
+	IntrigueActor                   []*IntrigueActor                   `json:"intrigueActor" legend:"base"`
+	IntriguePlot                    []*IntriguePlot                    `json:"intriguePlot" legend:"base"`
+	JourneyPet                      []string                           `json:"journeyPet" legend:"base"`
+	Name_                           string                             `json:"name" legend:"base"`
+	Race                            string                             `json:"race" legend:"both"`
+	RelationshipProfileHfHistorical []*RelationshipProfileHfHistorical `json:"relationshipProfileHfHistorical" legend:"base"`
+	RelationshipProfileHfVisual     []*RelationshipProfileHfVisual     `json:"relationshipProfileHfVisual" legend:"base"`
+	Sex                             int                                `json:"sex" legend:"plus"`
+	SiteLink                        []*SiteLink                        `json:"siteLink" legend:"base"`
+	SiteProperty                    []*SiteProperty                    `json:"siteProperty" legend:"base"`
+	Sphere                          []string                           `json:"sphere" legend:"base"`
+	UsedIdentityId                  []int                              `json:"usedIdentityId" legend:"base"`
+	VagueRelationship               []*VagueRelationship               `json:"vagueRelationship" legend:"base"`
 }
 
 func (x *HistoricalFigure) Id() int      { return x.Id_ }
@@ -1431,10 +1429,10 @@ func (x *Honor) Id() int      { return x.Id_ }
 func (x *Honor) Name() string { return x.Name_ }
 
 type HonorEntity struct {
-	Battles int `json:"battles" legend:"base"`
-	Entity  int `json:"entity" legend:"base"`
-	HonorId int `json:"honorId" legend:"base"`
-	Kills   int `json:"kills" legend:"base"`
+	Battles int   `json:"battles" legend:"base"`
+	Entity  int   `json:"entity" legend:"base"`
+	HonorId []int `json:"honorId" legend:"base"`
+	Kills   int   `json:"kills" legend:"base"`
 }
 type Identity struct {
 	BirthSecond int    `json:"birthSecond" legend:"plus"`
@@ -1465,17 +1463,17 @@ type IntrigueActor struct {
 	StrategyEppid            int    `json:"strategyEppid" legend:"base"`
 }
 type IntriguePlot struct {
-	ActorId           int        `json:"actorId" legend:"base"`
-	ArtifactId        int        `json:"artifactId" legend:"base"`
-	DelegatedPlotHfid int        `json:"delegatedPlotHfid" legend:"base"`
-	DelegatedPlotId   int        `json:"delegatedPlotId" legend:"base"`
-	EntityId          int        `json:"entityId" legend:"base"`
-	LocalId           int        `json:"localId" legend:"base"`
-	OnHold            string     `json:"onHold" legend:"base"`
-	ParentPlotHfid    int        `json:"parentPlotHfid" legend:"base"`
-	ParentPlotId      int        `json:"parentPlotId" legend:"base"`
-	PlotActor         *PlotActor `json:"plotActor" legend:"base"`
-	Type              string     `json:"type" legend:"base"`
+	ActorId           int          `json:"actorId" legend:"base"`
+	ArtifactId        int          `json:"artifactId" legend:"base"`
+	DelegatedPlotHfid int          `json:"delegatedPlotHfid" legend:"base"`
+	DelegatedPlotId   int          `json:"delegatedPlotId" legend:"base"`
+	EntityId          int          `json:"entityId" legend:"base"`
+	LocalId           int          `json:"localId" legend:"base"`
+	OnHold            string       `json:"onHold" legend:"base"`
+	ParentPlotHfid    int          `json:"parentPlotHfid" legend:"base"`
+	ParentPlotId      int          `json:"parentPlotId" legend:"base"`
+	PlotActor         []*PlotActor `json:"plotActor" legend:"base"`
+	Type              string       `json:"type" legend:"base"`
 }
 type Item struct {
 	NameString              string `json:"nameString" legend:"base"`
@@ -1506,7 +1504,7 @@ func (x *MountainPeak) Name() string { return x.Name_ }
 
 type MusicalForm struct {
 	Description string `json:"description" legend:"base"`
-	Id_         int    `json:"id" legend:"plus"`
+	Id_         int    `json:"id" legend:"both"`
 	Name_       string `json:"name" legend:"plus"`
 }
 
@@ -1514,10 +1512,10 @@ func (x *MusicalForm) Id() int      { return x.Id_ }
 func (x *MusicalForm) Name() string { return x.Name_ }
 
 type Occasion struct {
-	Event    int       `json:"event" legend:"plus"`
-	Id_      int       `json:"id" legend:"plus"`
-	Name_    string    `json:"name" legend:"plus"`
-	Schedule *Schedule `json:"schedule" legend:"plus"`
+	Event    int         `json:"event" legend:"plus"`
+	Id_      int         `json:"id" legend:"plus"`
+	Name_    string      `json:"name" legend:"plus"`
+	Schedule []*Schedule `json:"schedule" legend:"plus"`
 }
 
 func (x *Occasion) Id() int      { return x.Id_ }
@@ -1531,7 +1529,7 @@ type PlotActor struct {
 }
 type PoeticForm struct {
 	Description string `json:"description" legend:"base"`
-	Id_         int    `json:"id" legend:"plus"`
+	Id_         int    `json:"id" legend:"both"`
 	Name_       string `json:"name" legend:"plus"`
 }
 
@@ -1549,7 +1547,7 @@ type Region struct {
 	Coords   string `json:"coords" legend:"plus"`
 	Evilness string `json:"evilness" legend:"plus"`
 	ForceId  int    `json:"forceId" legend:"plus"`
-	Id_      int    `json:"id" legend:"plus"`
+	Id_      int    `json:"id" legend:"both"`
 	Name_    string `json:"name" legend:"base"`
 	Type     string `json:"type" legend:"base"`
 }
@@ -1588,13 +1586,13 @@ type River struct {
 func (x *River) Name() string { return x.Name_ }
 
 type Schedule struct {
-	Feature     *Feature `json:"feature" legend:"plus"`
-	Id_         int      `json:"id" legend:"plus"`
-	ItemSubtype string   `json:"itemSubtype" legend:"plus"`
-	ItemType    string   `json:"itemType" legend:"plus"`
-	Reference   int      `json:"reference" legend:"plus"`
-	Reference2  int      `json:"reference2" legend:"plus"`
-	Type        string   `json:"type" legend:"plus"`
+	Feature     []*Feature `json:"feature" legend:"plus"`
+	Id_         int        `json:"id" legend:"plus"`
+	ItemSubtype string     `json:"itemSubtype" legend:"plus"`
+	ItemType    string     `json:"itemType" legend:"plus"`
+	Reference   int        `json:"reference" legend:"plus"`
+	Reference2  int        `json:"reference2" legend:"plus"`
+	Type        string     `json:"type" legend:"plus"`
 }
 
 func (x *Schedule) Id() int { return x.Id_ }
@@ -1603,7 +1601,7 @@ type Site struct {
 	CivId          int                   `json:"civId" legend:"plus"`
 	Coords         string                `json:"coords" legend:"base"`
 	CurOwnerId     int                   `json:"curOwnerId" legend:"plus"`
-	Id_            int                   `json:"id" legend:"plus"`
+	Id_            int                   `json:"id" legend:"both"`
 	Name_          string                `json:"name" legend:"base"`
 	Rectangle      string                `json:"rectangle" legend:"base"`
 	SiteProperties map[int]*SiteProperty `json:"siteProperties" legend:"base"`
@@ -1631,19 +1629,19 @@ type SiteProperty struct {
 func (x *SiteProperty) Id() int { return x.Id_ }
 
 type Structure struct {
-	CopiedArtifactId int    `json:"copiedArtifactId" legend:"base"`
+	CopiedArtifactId []int  `json:"copiedArtifactId" legend:"base"`
 	Deity            int    `json:"deity" legend:"plus"`
 	DeityType        int    `json:"deityType" legend:"plus"`
 	DungeonType      int    `json:"dungeonType" legend:"plus"`
 	EntityId         int    `json:"entityId" legend:"base"`
 	Id_              int    `json:"id" legend:"plus"`
-	Inhabitant       int    `json:"inhabitant" legend:"plus"`
+	Inhabitant       []int  `json:"inhabitant" legend:"plus"`
 	LocalId          int    `json:"localId" legend:"base"`
 	Name_            string `json:"name" legend:"base"`
 	Name2            string `json:"name2" legend:"plus"`
 	Religion         int    `json:"religion" legend:"plus"`
 	Subtype          string `json:"subtype" legend:"base"`
-	Type             string `json:"type" legend:"base"`
+	Type             string `json:"type" legend:"plus"`
 	WorshipHfid      int    `json:"worshipHfid" legend:"base"`
 }
 
@@ -1653,7 +1651,7 @@ func (x *Structure) Name() string { return x.Name_ }
 type UndergroundRegion struct {
 	Coords string `json:"coords" legend:"plus"`
 	Depth  int    `json:"depth" legend:"base"`
-	Id_    int    `json:"id" legend:"plus"`
+	Id_    int    `json:"id" legend:"both"`
 	Type   string `json:"type" legend:"base"`
 }
 
@@ -1686,18 +1684,18 @@ func (x *WorldConstruction) Id() int      { return x.Id_ }
 func (x *WorldConstruction) Name() string { return x.Name_ }
 
 type WrittenContent struct {
-	Author     int        `json:"author" legend:"plus"`
-	AuthorHfid int        `json:"authorHfid" legend:"base"`
-	AuthorRoll int        `json:"authorRoll" legend:"base"`
-	Form       string     `json:"form" legend:"base"`
-	FormId     int        `json:"formId" legend:"base"`
-	Id_        int        `json:"id" legend:"plus"`
-	PageEnd    int        `json:"pageEnd" legend:"plus"`
-	PageStart  int        `json:"pageStart" legend:"plus"`
-	Reference  *Reference `json:"reference" legend:"plus"`
-	Style      string     `json:"style" legend:"plus"`
-	Title      string     `json:"title" legend:"plus"`
-	Type       string     `json:"type" legend:"plus"`
+	Author     int          `json:"author" legend:"plus"`
+	AuthorHfid int          `json:"authorHfid" legend:"base"`
+	AuthorRoll int          `json:"authorRoll" legend:"base"`
+	Form       string       `json:"form" legend:"base"`
+	FormId     int          `json:"formId" legend:"base"`
+	Id_        int          `json:"id" legend:"both"`
+	PageEnd    int          `json:"pageEnd" legend:"plus"`
+	PageStart  int          `json:"pageStart" legend:"plus"`
+	Reference  []*Reference `json:"reference" legend:"plus"`
+	Style      []string     `json:"style" legend:"plus"`
+	Title      string       `json:"title" legend:"both"`
+	Type       string       `json:"type" legend:"plus"`
 }
 
 func (x *WrittenContent) Id() int { return x.Id_ }
@@ -1821,10 +1819,6 @@ func parseCircumstance(d *xml.Decoder, start *xml.StartElement) (*Circumstance, 
 			switch t.Name.Local {
 			case "defeated":
 				data = nil
-			case "hist_event_collection":
-				data = nil
-			case "murdered":
-				data = nil
 			case "type":
 				data = nil
 			default:
@@ -1843,10 +1837,6 @@ func parseCircumstance(d *xml.Decoder, start *xml.StartElement) (*Circumstance, 
 			switch t.Name.Local {
 			case "defeated":
 				obj.Defeated = n(data)
-			case "hist_event_collection":
-				obj.HistEventCollection = n(data)
-			case "murdered":
-				obj.Murdered = n(data)
 			case "type":
 				obj.Type = string(data)
 			default:
@@ -2574,10 +2564,10 @@ func parseEntity(d *xml.Decoder, start *xml.StartElement) (*Entity, error) {
 				data = nil
 			case "entity_link":
 				v, _ := parseEntityLink(d, &t)
-				obj.EntityLink = v
+				obj.EntityLink = append(obj.EntityLink, v)
 			case "entity_position":
 				v, _ := parseEntityPosition(d, &t)
-				obj.EntityPosition = v
+				obj.EntityPosition = append(obj.EntityPosition, v)
 			case "entity_position_assignment":
 				v, _ := parseEntityPositionAssignment(d, &t)
 				obj.EntityPositionAssignment = v
@@ -2585,14 +2575,14 @@ func parseEntity(d *xml.Decoder, start *xml.StartElement) (*Entity, error) {
 				data = nil
 			case "honor":
 				v, _ := parseHonor(d, &t)
-				obj.Honor = v
+				obj.Honor = append(obj.Honor, v)
 			case "id":
 				data = nil
 			case "name":
 				data = nil
 			case "occasion":
 				v, _ := parseOccasion(d, &t)
-				obj.Occasion = v
+				obj.Occasion = append(obj.Occasion, v)
 			case "profession":
 				data = nil
 			case "race":
@@ -2628,7 +2618,7 @@ func parseEntity(d *xml.Decoder, start *xml.StartElement) (*Entity, error) {
 			case "entity_position_assignment":
 
 			case "histfig_id":
-				obj.HistfigId = n(data)
+				obj.HistfigId = append(obj.HistfigId, n(data))
 			case "honor":
 
 			case "id":
@@ -2644,9 +2634,9 @@ func parseEntity(d *xml.Decoder, start *xml.StartElement) (*Entity, error) {
 			case "type":
 				obj.Type = string(data)
 			case "weapon":
-				obj.Weapon = string(data)
+				obj.Weapon = append(obj.Weapon, string(data))
 			case "worship_id":
-				obj.WorshipId = n(data)
+				obj.WorshipId = append(obj.WorshipId, n(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -2715,11 +2705,11 @@ func parseEntityLink(d *xml.Decoder, start *xml.StartElement) (*EntityLink, erro
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "strength":
+			case "entity_id":
 				data = nil
-			case "target":
+			case "link_strength":
 				data = nil
-			case "type":
+			case "link_type":
 				data = nil
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
@@ -2735,12 +2725,12 @@ func parseEntityLink(d *xml.Decoder, start *xml.StartElement) (*EntityLink, erro
 			}
 
 			switch t.Name.Local {
-			case "strength":
-				obj.Strength = n(data)
-			case "target":
-				obj.Target = n(data)
-			case "type":
-				obj.Type = string(data)
+			case "entity_id":
+				obj.EntityId = n(data)
+			case "link_strength":
+				obj.LinkStrength = n(data)
+			case "link_type":
+				obj.LinkType = string(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -4616,7 +4606,7 @@ func parseHistoricalEventBodyAbused(d *xml.Decoder, start *xml.StartElement) (*H
 			case "abuse_type":
 				obj.AbuseType = string(data)
 			case "bodies":
-				obj.Bodies = n(data)
+				obj.Bodies = append(obj.Bodies, n(data))
 			case "civ":
 				obj.Civ = n(data)
 			case "coords":
@@ -5126,7 +5116,7 @@ func parseHistoricalEventCompetition(d *xml.Decoder, start *xml.StartElement) (*
 			case "civ_id":
 				obj.CivId = n(data)
 			case "competitor_hfid":
-				obj.CompetitorHfid = n(data)
+				obj.CompetitorHfid = append(obj.CompetitorHfid, n(data))
 			case "feature_layer_id":
 				obj.FeatureLayerId = n(data)
 			case "occasion_id":
@@ -5684,7 +5674,7 @@ func parseHistoricalEventEntityAllianceFormed(d *xml.Decoder, start *xml.StartEl
 			case "initiating_enid":
 				obj.InitiatingEnid = n(data)
 			case "joining_enid":
-				obj.JoiningEnid = n(data)
+				obj.JoiningEnid = append(obj.JoiningEnid, n(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -5866,7 +5856,7 @@ func parseHistoricalEventEntityEquipmentPurchase(d *xml.Decoder, start *xml.Star
 			case "entity_id":
 				obj.EntityId = n(data)
 			case "hfid":
-				obj.Hfid = n(data)
+				obj.Hfid = append(obj.Hfid, n(data))
 			case "new_equipment_level":
 				obj.NewEquipmentLevel = n(data)
 			default:
@@ -6019,7 +6009,7 @@ func parseHistoricalEventEntityOverthrown(d *xml.Decoder, start *xml.StartElemen
 
 			switch t.Name.Local {
 			case "conspirator_hfid":
-				obj.ConspiratorHfid = n(data)
+				obj.ConspiratorHfid = append(obj.ConspiratorHfid, n(data))
 			case "entity_id":
 				obj.EntityId = n(data)
 			case "instigator_hfid":
@@ -6090,19 +6080,19 @@ func parseHistoricalEventEntityPersecuted(d *xml.Decoder, start *xml.StartElemen
 			case "destroyed_structure_id":
 				obj.DestroyedStructureId = n(data)
 			case "expelled_creature":
-				obj.ExpelledCreature = n(data)
+				obj.ExpelledCreature = append(obj.ExpelledCreature, n(data))
 			case "expelled_hfid":
-				obj.ExpelledHfid = n(data)
+				obj.ExpelledHfid = append(obj.ExpelledHfid, n(data))
 			case "expelled_number":
-				obj.ExpelledNumber = n(data)
+				obj.ExpelledNumber = append(obj.ExpelledNumber, n(data))
 			case "expelled_pop_id":
-				obj.ExpelledPopId = n(data)
+				obj.ExpelledPopId = append(obj.ExpelledPopId, n(data))
 			case "persecutor_enid":
 				obj.PersecutorEnid = n(data)
 			case "persecutor_hfid":
 				obj.PersecutorHfid = n(data)
 			case "property_confiscated_from_hfid":
-				obj.PropertyConfiscatedFromHfid = n(data)
+				obj.PropertyConfiscatedFromHfid = append(obj.PropertyConfiscatedFromHfid, n(data))
 			case "shrine_amount_destroyed":
 				obj.ShrineAmountDestroyed = n(data)
 			case "site_id":
@@ -6724,7 +6714,7 @@ func parseHistoricalEventHfConfronted(d *xml.Decoder, start *xml.StartElement) (
 			case "hfid":
 				obj.Hfid = n(data)
 			case "reason":
-				obj.Reason = string(data)
+				obj.Reason = append(obj.Reason, string(data))
 			case "site_id":
 				obj.SiteId = n(data)
 			case "situation":
@@ -6841,7 +6831,7 @@ func parseHistoricalEventHfConvicted(d *xml.Decoder, start *xml.StartElement) (*
 			case "held_firm_in_interrogation":
 				obj.HeldFirmInInterrogation = string(data)
 			case "implicated_hfid":
-				obj.ImplicatedHfid = n(data)
+				obj.ImplicatedHfid = append(obj.ImplicatedHfid, n(data))
 			case "interrogator_hfid":
 				obj.InterrogatorHfid = n(data)
 			case "plotter_hfid":
@@ -7780,7 +7770,7 @@ func parseHistoricalEventHfReunion(d *xml.Decoder, start *xml.StartElement) (*Hi
 			case "group_1_hfid":
 				obj.Group1Hfid = n(data)
 			case "group_2_hfid":
-				obj.Group2Hfid = n(data)
+				obj.Group2Hfid = append(obj.Group2Hfid, n(data))
 			case "site_id":
 				obj.SiteId = n(data)
 			case "subregion_id":
@@ -7949,7 +7939,7 @@ func parseHistoricalEventHfTravel(d *xml.Decoder, start *xml.StartElement) (*His
 			case "feature_layer_id":
 				obj.FeatureLayerId = n(data)
 			case "group_hfid":
-				obj.GroupHfid = n(data)
+				obj.GroupHfid = append(obj.GroupHfid, n(data))
 			case "return":
 				obj.Return = string(data)
 			case "site_id":
@@ -9301,7 +9291,7 @@ func parseHistoricalEventRemoveHfEntityLink(d *xml.Decoder, start *xml.StartElem
 			case "link_type":
 				obj.LinkType = string(data)
 			case "position":
-				obj.Position = n(data)
+				obj.Position = string(data)
 			case "position_id":
 				obj.PositionId = n(data)
 			default:
@@ -9896,9 +9886,9 @@ func parseHistoricalEventCollection(d *xml.Decoder, start *xml.StartElement) (*H
 			case "end_year":
 				obj.EndYear = n(data)
 			case "event":
-				obj.Event = n(data)
+				obj.Event = append(obj.Event, n(data))
 			case "eventcol":
-				obj.Eventcol = n(data)
+				obj.Eventcol = append(obj.Eventcol, n(data))
 			case "id":
 				obj.Id_ = n(data)
 			case "start_seconds72":
@@ -10108,55 +10098,55 @@ func parseHistoricalEventCollectionBattle(d *xml.Decoder, start *xml.StartElemen
 			case "a_support_merc_enid":
 				obj.ASupportMercEnid = n(data)
 			case "a_support_merc_hfid":
-				obj.ASupportMercHfid = n(data)
+				obj.ASupportMercHfid = append(obj.ASupportMercHfid, n(data))
 			case "attacking_hfid":
-				obj.AttackingHfid = n(data)
+				obj.AttackingHfid = append(obj.AttackingHfid, n(data))
 			case "attacking_merc_enid":
 				obj.AttackingMercEnid = n(data)
 			case "attacking_squad_animated":
-				obj.AttackingSquadAnimated = string(data)
+				obj.AttackingSquadAnimated = append(obj.AttackingSquadAnimated, string(data))
 			case "attacking_squad_deaths":
-				obj.AttackingSquadDeaths = n(data)
+				obj.AttackingSquadDeaths = append(obj.AttackingSquadDeaths, n(data))
 			case "attacking_squad_entity_pop":
-				obj.AttackingSquadEntityPop = n(data)
+				obj.AttackingSquadEntityPop = append(obj.AttackingSquadEntityPop, n(data))
 			case "attacking_squad_number":
-				obj.AttackingSquadNumber = n(data)
+				obj.AttackingSquadNumber = append(obj.AttackingSquadNumber, n(data))
 			case "attacking_squad_race":
-				obj.AttackingSquadRace = string(data)
+				obj.AttackingSquadRace = append(obj.AttackingSquadRace, string(data))
 			case "attacking_squad_site":
-				obj.AttackingSquadSite = n(data)
+				obj.AttackingSquadSite = append(obj.AttackingSquadSite, n(data))
 			case "company_merc":
-				obj.CompanyMerc = string(data)
+				obj.CompanyMerc = append(obj.CompanyMerc, string(data))
 			case "coords":
 				obj.Coords = string(data)
 			case "d_support_merc_enid":
 				obj.DSupportMercEnid = n(data)
 			case "d_support_merc_hfid":
-				obj.DSupportMercHfid = n(data)
+				obj.DSupportMercHfid = append(obj.DSupportMercHfid, n(data))
 			case "defending_hfid":
-				obj.DefendingHfid = n(data)
+				obj.DefendingHfid = append(obj.DefendingHfid, n(data))
 			case "defending_merc_enid":
 				obj.DefendingMercEnid = n(data)
 			case "defending_squad_animated":
-				obj.DefendingSquadAnimated = string(data)
+				obj.DefendingSquadAnimated = append(obj.DefendingSquadAnimated, string(data))
 			case "defending_squad_deaths":
-				obj.DefendingSquadDeaths = n(data)
+				obj.DefendingSquadDeaths = append(obj.DefendingSquadDeaths, n(data))
 			case "defending_squad_entity_pop":
-				obj.DefendingSquadEntityPop = n(data)
+				obj.DefendingSquadEntityPop = append(obj.DefendingSquadEntityPop, n(data))
 			case "defending_squad_number":
-				obj.DefendingSquadNumber = n(data)
+				obj.DefendingSquadNumber = append(obj.DefendingSquadNumber, n(data))
 			case "defending_squad_race":
-				obj.DefendingSquadRace = string(data)
+				obj.DefendingSquadRace = append(obj.DefendingSquadRace, string(data))
 			case "defending_squad_site":
-				obj.DefendingSquadSite = n(data)
+				obj.DefendingSquadSite = append(obj.DefendingSquadSite, n(data))
 			case "feature_layer_id":
 				obj.FeatureLayerId = n(data)
 			case "individual_merc":
-				obj.IndividualMerc = string(data)
+				obj.IndividualMerc = append(obj.IndividualMerc, string(data))
 			case "name":
 				obj.Name_ = string(data)
 			case "noncom_hfid":
-				obj.NoncomHfid = n(data)
+				obj.NoncomHfid = append(obj.NoncomHfid, n(data))
 			case "outcome":
 				obj.Outcome = string(data)
 			case "site_id":
@@ -10968,16 +10958,16 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 				data = nil
 			case "entity_former_position_link":
 				v, _ := parseEntityFormerPositionLink(d, &t)
-				obj.EntityFormerPositionLink = v
+				obj.EntityFormerPositionLink = append(obj.EntityFormerPositionLink, v)
 			case "entity_link":
 				v, _ := parseEntityLink(d, &t)
-				obj.EntityLink = v
+				obj.EntityLink = append(obj.EntityLink, v)
 			case "entity_position_link":
 				v, _ := parseEntityPositionLink(d, &t)
-				obj.EntityPositionLink = v
+				obj.EntityPositionLink = append(obj.EntityPositionLink, v)
 			case "entity_reputation":
 				v, _ := parseEntityReputation(d, &t)
-				obj.EntityReputation = v
+				obj.EntityReputation = append(obj.EntityReputation, v)
 			case "entity_squad_link":
 				v, _ := parseEntitySquadLink(d, &t)
 				obj.EntitySquadLink = v
@@ -10987,25 +10977,25 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 				data = nil
 			case "hf_link":
 				v, _ := parseHfLink(d, &t)
-				obj.HfLink = v
+				obj.HfLink = append(obj.HfLink, v)
 			case "hf_skill":
 				v, _ := parseHfSkill(d, &t)
-				obj.HfSkill = v
+				obj.HfSkill = append(obj.HfSkill, v)
 			case "holds_artifact":
 				data = nil
 			case "honor_entity":
 				v, _ := parseHonorEntity(d, &t)
-				obj.HonorEntity = v
+				obj.HonorEntity = append(obj.HonorEntity, v)
 			case "id":
 				data = nil
 			case "interaction_knowledge":
 				data = nil
 			case "intrigue_actor":
 				v, _ := parseIntrigueActor(d, &t)
-				obj.IntrigueActor = v
+				obj.IntrigueActor = append(obj.IntrigueActor, v)
 			case "intrigue_plot":
 				v, _ := parseIntriguePlot(d, &t)
-				obj.IntriguePlot = v
+				obj.IntriguePlot = append(obj.IntriguePlot, v)
 			case "journey_pet":
 				data = nil
 			case "name":
@@ -11014,25 +11004,25 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 				data = nil
 			case "relationship_profile_hf_historical":
 				v, _ := parseRelationshipProfileHfHistorical(d, &t)
-				obj.RelationshipProfileHfHistorical = v
+				obj.RelationshipProfileHfHistorical = append(obj.RelationshipProfileHfHistorical, v)
 			case "relationship_profile_hf_visual":
 				v, _ := parseRelationshipProfileHfVisual(d, &t)
-				obj.RelationshipProfileHfVisual = v
+				obj.RelationshipProfileHfVisual = append(obj.RelationshipProfileHfVisual, v)
 			case "sex":
 				data = nil
 			case "site_link":
 				v, _ := parseSiteLink(d, &t)
-				obj.SiteLink = v
+				obj.SiteLink = append(obj.SiteLink, v)
 			case "site_property":
 				v, _ := parseSiteProperty(d, &t)
-				obj.SiteProperty = v
+				obj.SiteProperty = append(obj.SiteProperty, v)
 			case "sphere":
 				data = nil
 			case "used_identity_id":
 				data = nil
 			case "vague_relationship":
 				v, _ := parseVagueRelationship(d, &t)
-				obj.VagueRelationship = v
+				obj.VagueRelationship = append(obj.VagueRelationship, v)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 				d.Skip()
@@ -11048,7 +11038,7 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 
 			switch t.Name.Local {
 			case "active_interaction":
-				obj.ActiveInteraction = string(data)
+				obj.ActiveInteraction = append(obj.ActiveInteraction, string(data))
 			case "animated":
 				obj.Animated = string(data)
 			case "animated_string":
@@ -11086,25 +11076,25 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 			case "force":
 				obj.Force = string(data)
 			case "goal":
-				obj.Goal = string(data)
+				obj.Goal = append(obj.Goal, string(data))
 			case "hf_link":
 
 			case "hf_skill":
 
 			case "holds_artifact":
-				obj.HoldsArtifact = n(data)
+				obj.HoldsArtifact = append(obj.HoldsArtifact, n(data))
 			case "honor_entity":
 
 			case "id":
 				obj.Id_ = n(data)
 			case "interaction_knowledge":
-				obj.InteractionKnowledge = string(data)
+				obj.InteractionKnowledge = append(obj.InteractionKnowledge, string(data))
 			case "intrigue_actor":
 
 			case "intrigue_plot":
 
 			case "journey_pet":
-				obj.JourneyPet = string(data)
+				obj.JourneyPet = append(obj.JourneyPet, string(data))
 			case "name":
 				obj.Name_ = string(data)
 			case "race":
@@ -11120,9 +11110,9 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 			case "site_property":
 
 			case "sphere":
-				obj.Sphere = string(data)
+				obj.Sphere = append(obj.Sphere, string(data))
 			case "used_identity_id":
-				obj.UsedIdentityId = n(data)
+				obj.UsedIdentityId = append(obj.UsedIdentityId, n(data))
 			case "vague_relationship":
 
 			default:
@@ -11252,7 +11242,7 @@ func parseHonorEntity(d *xml.Decoder, start *xml.StartElement) (*HonorEntity, er
 			case "entity":
 				obj.Entity = n(data)
 			case "honor_id":
-				obj.HonorId = n(data)
+				obj.HonorId = append(obj.HonorId, n(data))
 			case "kills":
 				obj.Kills = n(data)
 			default:
@@ -11440,7 +11430,7 @@ func parseIntriguePlot(d *xml.Decoder, start *xml.StartElement) (*IntriguePlot, 
 				data = nil
 			case "plot_actor":
 				v, _ := parsePlotActor(d, &t)
-				obj.PlotActor = v
+				obj.PlotActor = append(obj.PlotActor, v)
 			case "type":
 				data = nil
 			default:
@@ -11702,7 +11692,7 @@ func parseOccasion(d *xml.Decoder, start *xml.StartElement) (*Occasion, error) {
 				data = nil
 			case "schedule":
 				v, _ := parseSchedule(d, &t)
-				obj.Schedule = v
+				obj.Schedule = append(obj.Schedule, v)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 				d.Skip()
@@ -12121,7 +12111,7 @@ func parseSchedule(d *xml.Decoder, start *xml.StartElement) (*Schedule, error) {
 			switch t.Name.Local {
 			case "feature":
 				v, _ := parseFeature(d, &t)
-				obj.Feature = v
+				obj.Feature = append(obj.Feature, v)
 			case "id":
 				data = nil
 			case "item_subtype":
@@ -12397,7 +12387,7 @@ func parseStructure(d *xml.Decoder, start *xml.StartElement) (*Structure, error)
 
 			switch t.Name.Local {
 			case "copied_artifact_id":
-				obj.CopiedArtifactId = n(data)
+				obj.CopiedArtifactId = append(obj.CopiedArtifactId, n(data))
 			case "deity":
 				obj.Deity = n(data)
 			case "deity_type":
@@ -12409,7 +12399,7 @@ func parseStructure(d *xml.Decoder, start *xml.StartElement) (*Structure, error)
 			case "id":
 				obj.Id_ = n(data)
 			case "inhabitant":
-				obj.Inhabitant = n(data)
+				obj.Inhabitant = append(obj.Inhabitant, n(data))
 			case "local_id":
 				obj.LocalId = n(data)
 			case "name":
@@ -12648,7 +12638,7 @@ func parseWrittenContent(d *xml.Decoder, start *xml.StartElement) (*WrittenConte
 				data = nil
 			case "reference":
 				v, _ := parseReference(d, &t)
-				obj.Reference = v
+				obj.Reference = append(obj.Reference, v)
 			case "style":
 				data = nil
 			case "title":
@@ -12688,7 +12678,7 @@ func parseWrittenContent(d *xml.Decoder, start *xml.StartElement) (*WrittenConte
 			case "reference":
 
 			case "style":
-				obj.Style = string(data)
+				obj.Style = append(obj.Style, string(data))
 			case "title":
 				obj.Title = string(data)
 			case "type":

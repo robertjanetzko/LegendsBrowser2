@@ -7,12 +7,30 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 
 	"github.com/iancoleman/strcase"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
+
+func AnalyzeStructure(filex string) error {
+	fmt.Println("Search...", filex)
+	files, err := filepath.Glob(filex + "/*.xml")
+	if err != nil {
+		return err
+	}
+	fmt.Println(files)
+
+	a := NewAnalyzeData()
+
+	for _, file := range files {
+		analyze(file, a)
+	}
+
+	return a.Save()
+}
 
 type FieldData struct {
 	IsString bool
@@ -85,8 +103,7 @@ const PATH_SEPARATOR = "|"
 func analyzeElement(d *xml.Decoder, a *AnalyzeData, path []string, plus bool) error {
 	if len(path) > 1 {
 		s := strings.Join(path, PATH_SEPARATOR)
-		fd := NewFieldData()
-		a.Fields[s] = fd
+		fd := a.GetField(s)
 		if plus {
 			fd.Plus = true
 		} else {
@@ -116,7 +133,7 @@ Loop:
 			newPath := append(path, t.Name.Local)
 
 			if _, ok := fields[t.Name.Local]; ok {
-				a.Fields[strings.Join(newPath, PATH_SEPARATOR)].Multiple = true
+				a.GetField(strings.Join(newPath, PATH_SEPARATOR)).Multiple = true
 			}
 			fields[t.Name.Local] = true
 
@@ -128,7 +145,7 @@ Loop:
 		case xml.EndElement:
 			if value {
 				if _, err := strconv.Atoi(string(data)); err != nil {
-					a.Fields[strings.Join(path, PATH_SEPARATOR)].IsString = true
+					a.GetField(strings.Join(path, PATH_SEPARATOR)).IsString = true
 				}
 			}
 

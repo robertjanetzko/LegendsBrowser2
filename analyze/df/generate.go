@@ -1,7 +1,12 @@
 package df
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"go/format"
+	"io/ioutil"
+	"os"
 	"text/template"
 
 	"github.com/iancoleman/strcase"
@@ -206,3 +211,30 @@ func parse{{ $obj.Name }}(d *xml.Decoder, start *xml.StartElement) (*{{ $obj.Nam
 }
 {{- end }}
 `))
+
+func generateCode(objects *Metadata) error {
+	file, _ := json.MarshalIndent(objects, "", "  ")
+	_ = ioutil.WriteFile("model.json", file, 0644)
+
+	f, err := os.Create("../backend/model/model.go")
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	var buf bytes.Buffer
+	err = packageTemplate.Execute(&buf, struct {
+		Objects *Metadata
+	}{
+		Objects: objects,
+	})
+	if err != nil {
+		return err
+	}
+	p, err := format.Source(buf.Bytes())
+	if err != nil {
+		return err
+	}
+	_, err = f.Write(p)
+	return err
+}
