@@ -1,4 +1,4 @@
-package analyze
+package main
 
 import (
 	"encoding/json"
@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"legendsbrowser/util"
 	"log"
 	"os"
 	"path/filepath"
@@ -16,6 +15,7 @@ import (
 	"text/template"
 
 	"github.com/iancoleman/strcase"
+	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
 
 func Analyze(filex string) {

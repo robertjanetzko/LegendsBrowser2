@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"legendsbrowser/analyze"
 	"legendsbrowser/df"
 	"legendsbrowser/server"
 	"net/http"
@@ -18,18 +17,18 @@ import (
 var world *df.DfWorld
 
 func main() {
-	a := flag.String("a", "", "analyze a file")
-	g := flag.Bool("g", false, "generate model")
+	// a := flag.String("a", "", "analyze a file")
+	// g := flag.Bool("g", false, "generate model")
 	f := flag.String("f", "", "open a file")
 	flag.Parse()
 
-	if len(*a) > 0 {
-		analyze.Analyze(*a)
-	}
-	if *g {
-		fmt.Println("Generating")
-		analyze.Generate()
-	}
+	// if len(*a) > 0 {
+	// 	analyze.Analyze(*a)
+	// }
+	// if *g {
+	// 	fmt.Println("Generating")
+	// 	analyze.Generate()
+	// }
 
 	if len(*f) > 0 {
 		defer profile.Start(profile.MemProfile).Stop()

@@ -1,4 +1,4 @@
-module legendsbrowser
+module github.com/robertjanetzko/LegendsBrowser2/backend
 
 go 1.18
 
