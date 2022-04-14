@@ -9,7 +9,10 @@ import (
 
 // type DfWorld struct{}
 
-// func (x *DfWorld) Parse(d *xml.Decoder, start *xml.StartElement) {}
+// func parseDfWorld(d *xml.Decoder, start *xml.StartElement) (*DfWorld, error) { return nil, nil }
+
+func (e *HistoricalEvent) Name() string           { return "" }
+func (e *HistoricalEventCollection) Name() string { return "" }
 
 func Parse(file string) (*DfWorld, error) {
 	xmlFile, err := os.Open(file)
@@ -31,9 +34,7 @@ func Parse(file string) (*DfWorld, error) {
 		switch t := tok.(type) {
 		case xml.StartElement:
 			if t.Name.Local == "df_world" {
-				w := DfWorld{}
-				w.Parse(d, &t)
-				return &w, nil
+				return parseDfWorld(d, &t)
 			}
 		}
 	}
@@ -53,7 +54,7 @@ type IdentifiableParsable interface {
 	Parsable
 }
 
-func parseArray[T Parsable](d *xml.Decoder, dest *[]T, creator func() T) {
+func parseArray[T any](d *xml.Decoder, dest *[]T, creator func(*xml.Decoder, *xml.StartElement) (T, error)) {
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -61,8 +62,7 @@ func parseArray[T Parsable](d *xml.Decoder, dest *[]T, creator func() T) {
 		}
 		switch t := tok.(type) {
 		case xml.StartElement:
-			x := creator()
-			x.Parse(d, &t)
+			x, _ := creator(d, &t)
 			*dest = append(*dest, x)
 
 		case xml.EndElement:
@@ -71,7 +71,7 @@ func parseArray[T Parsable](d *xml.Decoder, dest *[]T, creator func() T) {
 	}
 }
 
-func parseMap[T IdentifiableParsable](d *xml.Decoder, dest *map[int]T, creator func() T) {
+func parseMap[T Identifiable](d *xml.Decoder, dest *map[int]T, creator func(*xml.Decoder, *xml.StartElement) (T, error)) {
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -79,8 +79,7 @@ func parseMap[T IdentifiableParsable](d *xml.Decoder, dest *map[int]T, creator f
 		}
 		switch t := tok.(type) {
 		case xml.StartElement:
-			x := creator()
-			x.Parse(d, &t)
+			x, _ := creator(d, &t)
 			(*dest)[x.Id()] = x
 
 		case xml.EndElement:

@@ -8,6 +8,7 @@ import (
 	"legendsbrowser/server"
 	"net/http"
 	_ "net/http/pprof"
+	"os"
 	"runtime"
 
 	"github.com/gorilla/mux"
@@ -17,12 +18,6 @@ import (
 var world *df.DfWorld
 
 func main() {
-
-	defer profile.Start(profile.MemProfile).Stop()
-	go func() {
-		http.ListenAndServe(":8081", nil)
-	}()
-
 	a := flag.String("a", "", "analyze a file")
 	g := flag.Bool("g", false, "generate model")
 	f := flag.String("f", "", "open a file")
@@ -37,63 +32,63 @@ func main() {
 	}
 
 	if len(*f) > 0 {
+		defer profile.Start(profile.MemProfile).Stop()
+		go func() {
+			http.ListenAndServe(":8081", nil)
+		}()
+
 		w, err := df.Parse(*f)
 		if err != nil {
 			fmt.Println(err)
+			os.Exit(1)
 		}
 
-		// file, _ := json.MarshalIndent(w, "", "  ")
-		// _ = ioutil.WriteFile("world.json", file, 0644)
-
 		world = w
+
+		fmt.Println("Hallo Welt!")
+		runtime.GC()
+		// world.Process()
+
+		// model.ListOtherElements("world", &[]*model.World{&world})
+		// model.ListOtherElements("region", &world.Regions)
+		// model.ListOtherElements("underground regions", &world.UndergroundRegions)
+		// model.ListOtherElements("landmasses", &world.Landmasses)
+		// model.ListOtherElements("sites", &world.Sites)
+		// model.ListOtherElements("world constructions", &world.WorldConstructions)
+		// model.ListOtherElements("artifacts", &world.Artifacts)
+		// model.ListOtherElements("entities", &world.Entities)
+		// model.ListOtherElements("hf", &world.HistoricalFigures)
+		// model.ListOtherElements("events", &world.HistoricalEvents)
+		// model.ListOtherElements("collections", &world.HistoricalEventCollections)
+		// model.ListOtherElements("era", &world.HistoricalEras)
+		// model.ListOtherElements("danceForm", &world.DanceForms)
+		// model.ListOtherElements("musicalForm", &world.MusicalForms)
+		// model.ListOtherElements("poeticForm", &world.PoeticForms)
+		// model.ListOtherElements("written", &world.WrittenContents)
+
+		router := mux.NewRouter().StrictSlash(true)
+
+		server.RegisterResource(router, "region", world.Regions)
+		// server.RegisterResource(router, "undergroundRegion", world.UndergroundRegions)
+		server.RegisterResource(router, "landmass", world.Landmasses)
+		server.RegisterResource(router, "site", world.Sites)
+		server.RegisterResource(router, "worldConstruction", world.WorldConstructions)
+		server.RegisterResource(router, "artifact", world.Artifacts)
+		server.RegisterResource(router, "hf", world.HistoricalFigures)
+		server.RegisterResource(router, "collection", world.HistoricalEventCollections)
+		server.RegisterResource(router, "entity", world.Entities)
+		server.RegisterResource(router, "event", world.HistoricalEvents)
+		// server.RegisterResource(router, "era", world.HistoricalEras)
+		server.RegisterResource(router, "danceForm", world.DanceForms)
+		server.RegisterResource(router, "musicalForm", world.MusicalForms)
+		server.RegisterResource(router, "poeticForm", world.PoeticForms)
+		// server.RegisterResource(router, "written", world.WrittenContents)
+
+		spa := server.SpaHandler{StaticPath: "frontend/dist/legendsbrowser", IndexPath: "index.html"}
+		router.PathPrefix("/").Handler(spa)
+
+		fmt.Println("Serving at :8080")
+		http.ListenAndServe(":8080", router)
 	}
 
-	fmt.Println("Hallo Welt!")
-
-	// world.Load("region1-00152-01-01-legends_plus.xml")
-	// world.Load("region2-00195-01-01-legends.xml")
-	// world.Load("Agora-00033-01-01-legends_plus.xml")
-	runtime.GC()
-	// world.Process()
-
-	// model.ListOtherElements("world", &[]*model.World{&world})
-	// model.ListOtherElements("region", &world.Regions)
-	// model.ListOtherElements("underground regions", &world.UndergroundRegions)
-	// model.ListOtherElements("landmasses", &world.Landmasses)
-	// model.ListOtherElements("sites", &world.Sites)
-	// model.ListOtherElements("world constructions", &world.WorldConstructions)
-	// model.ListOtherElements("artifacts", &world.Artifacts)
-	// model.ListOtherElements("entities", &world.Entities)
-	// model.ListOtherElements("hf", &world.HistoricalFigures)
-	// model.ListOtherElements("events", &world.HistoricalEvents)
-	// model.ListOtherElements("collections", &world.HistoricalEventCollections)
-	// model.ListOtherElements("era", &world.HistoricalEras)
-	// model.ListOtherElements("danceForm", &world.DanceForms)
-	// model.ListOtherElements("musicalForm", &world.MusicalForms)
-	// model.ListOtherElements("poeticForm", &world.PoeticForms)
-	// model.ListOtherElements("written", &world.WrittenContents)
-
-	router := mux.NewRouter().StrictSlash(true)
-
-	// server.RegisterResource(router, "region", world.RegionMap)
-	// server.RegisterResource(router, "undergroundRegion", world.UndergroundRegionMap)
-	// server.RegisterResource(router, "landmass", world.LandmassMap)
-	// server.RegisterResource(router, "site", world.SiteMap)
-	// server.RegisterResource(router, "worldConstruction", world.WorldConstructionMap)
-	// server.RegisterResource(router, "artifact", world.ArtifactMap)
-	// server.RegisterResource(router, "hf", world.HistoricalFigureMap)
-	// server.RegisterResource(router, "collection", world.HistoricalEventCollectionMap)
-	// server.RegisterResource(router, "entity", world.EntityMap)
-	// server.RegisterResource(router, "event", world.HistoricalEventMap)
-	// server.RegisterResource(router, "era", world.HistoricalEraMap)
-	// server.RegisterResource(router, "danceForm", world.DanceFormMap)
-	// server.RegisterResource(router, "musicalForm", world.MusicalFormMap)
-	// server.RegisterResource(router, "poeticForm", world.PoeticFormMap)
-	// server.RegisterResource(router, "written", world.WrittenContentMap)
-
-	spa := server.SpaHandler{StaticPath: "frontend/dist/legendsbrowser", IndexPath: "index.html"}
-	router.PathPrefix("/").Handler(spa)
-
-	fmt.Println("Serving at :8080")
-	http.ListenAndServe(":8080", router)
 }

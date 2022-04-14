@@ -56,6 +56,10 @@ type FieldData struct {
 	Plus     bool
 }
 
+func NewFieldData() *FieldData {
+	return &FieldData{}
+}
+
 type AnalyzeData struct {
 	// Types  map[string]bool
 	Fields map[string]*FieldData
@@ -99,11 +103,12 @@ const PATH_SEPARATOR = "|"
 func analyzeElement(d *xml.Decoder, a *AnalyzeData, path []string, plus bool) error {
 	if len(path) > 1 {
 		s := strings.Join(path, PATH_SEPARATOR)
-		a.Fields[s] = true
+		fd := NewFieldData()
+		a.Fields[s] = fd
 		if plus {
-			a.Plus[s] = true
+			fd.Plus = true
 		} else {
-			a.Base[s] = true
+			fd.Base = true
 		}
 	}
 
@@ -126,12 +131,12 @@ Loop:
 		case xml.StartElement:
 			value = false
 
-			a.Types[strings.Join(path, PATH_SEPARATOR)] = true
+			// a.Types[strings.Join(path, PATH_SEPARATOR)] = true
 
 			newPath := append(path, t.Name.Local)
 
 			if _, ok := fields[t.Name.Local]; ok {
-				a.Multiple[strings.Join(newPath, PATH_SEPARATOR)] = true
+				a.Fields[strings.Join(newPath, PATH_SEPARATOR)].Multiple = true
 			}
 			fields[t.Name.Local] = true
 
@@ -143,7 +148,7 @@ Loop:
 		case xml.EndElement:
 			if value {
 				if _, err := strconv.Atoi(string(data)); err != nil {
-					a.IsString[strings.Join(path, PATH_SEPARATOR)] = true
+					a.Fields[strings.Join(path, PATH_SEPARATOR)].IsString = true
 				}
 			}
 
@@ -157,37 +162,74 @@ Loop:
 	return nil
 }
 
-func filterSubtypes(data map[string]bool) []string {
-	allowed := map[string]bool{
-		"df_world|historical_events|historical_event":                       true,
-		"df_world|historical_event_collections|historical_event_collection": true,
-	}
+var allowedTyped = map[string]bool{
+	"df_world|historical_events|historical_event":                       true,
+	"df_world|historical_event_collections|historical_event_collection": true,
+}
 
-	filtered := make(map[string]bool)
-	for k, v := range data {
-		if !v {
-			continue
-		}
+func filterSubtypes(data *map[string]*FieldData) []string {
+	filtered := make(map[string]*FieldData)
+	for k, v := range *data {
 		path := strings.Split(k, PATH_SEPARATOR)
 		for index, seg := range path {
 			if strings.Contains(seg, "+") {
 				base := seg[:strings.Index(seg, "+")]
 				basePath := strings.Join(append(path[:index], base), PATH_SEPARATOR)
-				if allowed[basePath] {
+				if allowedTyped[basePath] {
 					path[index] = seg
 				}
 			}
 		}
-		filtered[strings.Join(path, PATH_SEPARATOR)] = true
+		filtered[strings.Join(path, PATH_SEPARATOR)] = v
 	}
+	*data = filtered
 	list := util.Keys(filtered)
 	sort.Strings(list)
 	return list
 }
 
+func getSubtypes(objectTypes []string, k string) *[]string {
+	subtypes := make(map[string]bool)
+
+	for _, t := range objectTypes {
+		if strings.HasPrefix(t, k+"+") && !strings.Contains(t[len(k):], PATH_SEPARATOR) {
+			subtypes[t[strings.LastIndex(t, "+")+1:]] = true
+		}
+	}
+
+	keys := util.Keys(subtypes)
+	sort.Strings(keys)
+
+	if len(keys) > 0 {
+		return &keys
+	}
+
+	return nil
+}
+
+func getSubtypeOf(k string) *string {
+	if strings.Contains(k, PATH_SEPARATOR) {
+		last := k[strings.LastIndex(k, PATH_SEPARATOR)+1:]
+		if strings.Contains(last, "+") {
+			base := strcase.ToCamel(last[:strings.Index(last, "+")])
+			return &base
+		}
+	}
+	return nil
+}
+
 func createMetadata(a *AnalyzeData) {
-	ts := filterSubtypes(a.Types)
-	fs := filterSubtypes(a.Fields)
+
+	// ts := filterSubtypes(a.Types)
+	fs := filterSubtypes(&a.Fields)
+
+	var objectTypes []string
+	for k := range a.Fields {
+		path := strings.Split(k, PATH_SEPARATOR)
+		if len(path) >= 2 {
+			objectTypes = append(objectTypes, strings.Join(path[:len(path)-1], PATH_SEPARATOR))
+		}
+	}
 
 	// for _, s := range fs {
 	// 	fmt.Println(s)
@@ -195,7 +237,7 @@ func createMetadata(a *AnalyzeData) {
 
 	objects := make(map[string]Object, 0)
 
-	for _, k := range ts {
+	for _, k := range objectTypes {
 		if ok, _ := isArray(k, fs); !ok {
 			n := k
 			if strings.Contains(k, PATH_SEPARATOR) {
@@ -213,24 +255,23 @@ func createMetadata(a *AnalyzeData) {
 					fn := f[len(k)+1:]
 					if !strings.Contains(fn, PATH_SEPARATOR) {
 						legend := ""
-						if a.Base[f] && a.Plus[f] {
+						if a.Fields[f].Base && a.Fields[f].Plus {
 							legend = "both"
-						} else if a.Base[f] {
+						} else if a.Fields[f].Base {
 							legend = "base"
-						} else if a.Plus[f] {
+						} else if a.Fields[f].Plus {
 							legend = "plus"
 						}
 
 						field := Field{
 							Name:     strcase.ToCamel(fn),
 							Type:     "int",
-							Multiple: a.Multiple[f],
+							Multiple: a.Fields[f].Multiple,
 							Legend:   legend,
 						}
 						if ok, elements := isArray(f, fs); ok {
 							el := elements[strings.LastIndex(elements, PATH_SEPARATOR)+1:]
-							fmt.Println(f + PATH_SEPARATOR + elements + PATH_SEPARATOR + "id")
-							if a.Fields[elements+PATH_SEPARATOR+"id"] {
+							if _, ok := a.Fields[elements+PATH_SEPARATOR+"id"]; ok {
 								field.Type = "map"
 							} else {
 								field.Type = "array"
@@ -238,7 +279,7 @@ func createMetadata(a *AnalyzeData) {
 							field.ElementType = &(el)
 						} else if ok, _ := isObject(f, fs); ok {
 							field.Type = "object"
-						} else if a.IsString[f] {
+						} else if a.Fields[f].IsString {
 							field.Type = "string"
 						}
 						objFields[fn] = field
@@ -247,11 +288,13 @@ func createMetadata(a *AnalyzeData) {
 			}
 
 			objects[n] = Object{
-				Name:   strcase.ToCamel(n),
-				Id:     a.Fields[k+PATH_SEPARATOR+"id"],
-				Named:  a.Fields[k+PATH_SEPARATOR+"name"],
-				Typed:  a.Fields[k+PATH_SEPARATOR+"type"],
-				Fields: objFields,
+				Name:      strcase.ToCamel(n),
+				Id:        a.Fields[k+PATH_SEPARATOR+"id"] != nil,
+				Named:     a.Fields[k+PATH_SEPARATOR+"name"] != nil,
+				Typed:     a.Fields[k+PATH_SEPARATOR+"type"] != nil,
+				SubTypes:  getSubtypes(objectTypes, k),
+				SubTypeOf: getSubtypeOf(k),
+				Fields:    objFields,
 			}
 		}
 	}
@@ -276,12 +319,15 @@ func isArray(typ string, types []string) (bool, string) {
 	fc := 0
 	elements := ""
 
+	if !strings.Contains(typ, PATH_SEPARATOR) || strings.Contains(typ[strings.LastIndex(typ, PATH_SEPARATOR):], "+") {
+		return false, ""
+	}
+
 	for _, t := range types {
 		if !strings.HasPrefix(t, typ+PATH_SEPARATOR) {
 			continue
 		}
-		f := t[len(typ)+1:]
-		if strings.Contains(f, PATH_SEPARATOR) {
+		if strings.Contains(t[len(typ)+1:], PATH_SEPARATOR) {
 			continue
 		}
 		fc++
@@ -303,11 +349,13 @@ func isObject(typ string, types []string) (bool, string) {
 }
 
 type Object struct {
-	Name   string           `json:"name"`
-	Id     bool             `json:"id,omitempty"`
-	Named  bool             `json:"named,omitempty"`
-	Typed  bool             `json:"typed,omitempty"`
-	Fields map[string]Field `json:"fields"`
+	Name      string           `json:"name"`
+	Id        bool             `json:"id,omitempty"`
+	Named     bool             `json:"named,omitempty"`
+	Typed     bool             `json:"typed,omitempty"`
+	SubTypes  *[]string        `json:"subtypes,omitempty"`
+	SubTypeOf *string          `json:"subtypeof,omitempty"`
+	Fields    map[string]Field `json:"fields"`
 }
 
 type Field struct {
@@ -337,7 +385,7 @@ func (f Field) TypeLine(objects map[string]Object) string {
 		t = "map[int]*" + objects[*f.ElementType].Name
 	}
 	if f.Type == "object" {
-		t = f.Name
+		t = "*" + f.Name
 	}
 	j := fmt.Sprintf("`json:\"%s\" legend:\"%s\"`", strcase.ToLowerCamel(f.Name), f.Legend)
 	return fmt.Sprintf("%s %s%s %s", n, m, t, j)
@@ -351,7 +399,7 @@ func (f Field) StartAction() string {
 	}
 
 	if f.Type == "object" {
-		p := fmt.Sprintf("v := %s{}\nv.Parse(d, &t)", f.Name)
+		p := fmt.Sprintf("v, _ := parse%s(d, &t)", f.Name)
 		if !f.Multiple {
 			return fmt.Sprintf("%s\nobj.%s = v", p, n)
 		} else {
@@ -361,7 +409,7 @@ func (f Field) StartAction() string {
 
 	if f.Type == "array" || f.Type == "map" {
 		el := strcase.ToCamel(*f.ElementType)
-		gen := fmt.Sprintf("New%s", el)
+		gen := fmt.Sprintf("parse%s", el)
 
 		if f.Type == "array" {
 			return fmt.Sprintf("parseArray(d, &obj.%s, %s)", f.Name, gen)
@@ -409,25 +457,27 @@ package df
 import (
 	"encoding/xml"
 	"strconv"
+	"github.com/iancoleman/strcase"
 )
 
 {{- range $name, $obj := .Objects }}
 type {{ $obj.Name }} struct {
 	{{- range $fname, $field := $obj.Fields }}
+	{{- if not (and (eq $fname "type") (not (not $obj.SubTypes))) }}
 	{{ $field.TypeLine $.Objects }}
+	{{- end }}
+	{{- end }}
+	{{- if not (not $obj.SubTypes) }}
+	Details any
 	{{- end }}
 }
 
-func New{{ $obj.Name }}() *{{ $obj.Name }} { return &{{ $obj.Name }}{} }
 {{- if $obj.Id }}
 func (x *{{ $obj.Name }}) Id() int { return x.Id_ }
 {{- end }}
 {{- if $obj.Named }}
 func (x *{{ $obj.Name }}) Name() string { return x.Name_ }
 {{- end }}
-
-
-
 {{- end }}
 
 // Parser
@@ -438,13 +488,15 @@ func n(d []byte) int {
 }
 
 {{- range $name, $obj := .Objects }}
-func (obj *{{ $obj.Name }}) Parse(d *xml.Decoder, start *xml.StartElement) error {
-	var data []byte
-
+func parse{{ $obj.Name }}(d *xml.Decoder, start *xml.StartElement) (*{{ $obj.Name }}, error) {
+	var (
+		obj = {{ $obj.Name }}{}
+		data []byte
+	)
 	for {
 		tok, err := d.Token()
 		if err != nil {
-			return err
+			return nil, err
 		}
 		switch t := tok.(type) {
 		case xml.StartElement:
@@ -463,13 +515,29 @@ func (obj *{{ $obj.Name }}) Parse(d *xml.Decoder, start *xml.StartElement) error
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return nil
+				return &obj, nil
 			}
 
 			switch t.Name.Local {
 			{{- range $fname, $field := $obj.Fields }}
 			case "{{ $fname }}":
+				{{- if and (eq $fname "type") (not (not $obj.SubTypes)) }}
+				var err error
+				switch strcase.ToCamel(string(data)) {
+				{{- range $sub := $obj.SubTypes }}
+				case "{{ $sub }}":
+					obj.Details, err = parse{{ $obj.Name }}{{ $sub }}(d, start)
+				{{- end }}
+				default:
+					d.Skip()
+				}
+				if err != nil {
+					return nil, err
+				}
+				return &obj, nil
+				{{- else }}
 				{{ $field.EndAction }}
+				{{- end }}
 			{{- end }}
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
@@ -477,6 +545,5 @@ func (obj *{{ $obj.Name }}) Parse(d *xml.Decoder, start *xml.StartElement) error
 		}
 	}
 }
-
 {{- end }}
 `))
