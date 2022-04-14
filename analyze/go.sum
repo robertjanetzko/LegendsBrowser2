@@ -1,0 +1,4 @@
+github.com/iancoleman/strcase v0.2.0 h1:05I4QRnGpI0m37iZQRuskXh+w77mr6Z41lwQzuHLwW0=
+github.com/iancoleman/strcase v0.2.0/go.mod h1:iwCmte+B7n89clKwxIoIXy/HfoL7AsD47ZCWhYzw7ho=
+github.com/robertjanetzko/LegendsBrowser2/backend v0.0.0-20220414135947-77b720f8d215 h1:i23QGS93i7zoDyarU2dQLYDYxSo8MkatzhISsRQuljM=
+github.com/robertjanetzko/LegendsBrowser2/backend v0.0.0-20220414135947-77b720f8d215/go.mod h1:b6NU94RVWS7nz92lGiifeWN1cLV2EeNSzx0Oop+Ma54=

@@ -3,8 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"legendsbrowser/df"
-	"legendsbrowser/server"
 	"net/http"
 	_ "net/http/pprof"
 	"os"
@@ -12,9 +10,11 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/pkg/profile"
+	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
+	"github.com/robertjanetzko/LegendsBrowser2/backend/server"
 )
 
-var world *df.DfWorld
+var world *model.DfWorld
 
 func main() {
 	f := flag.String("f", "", "open a file")
@@ -26,7 +26,7 @@ func main() {
 			http.ListenAndServe(":8081", nil)
 		}()
 
-		w, err := df.Parse(*f)
+		w, err := model.Parse(*f)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)

@@ -3,11 +3,11 @@ package server
 import (
 	"encoding/json"
 	"fmt"
-	"legendsbrowser/model"
 	"net/http"
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
 )
 
 type Info struct {

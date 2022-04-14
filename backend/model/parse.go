@@ -1,15 +1,12 @@
-package df
+package model
 
 import (
 	"encoding/xml"
 	"fmt"
-	"legendsbrowser/util"
 	"os"
+
+	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
-
-// type DfWorld struct{}
-
-// func parseDfWorld(d *xml.Decoder, start *xml.StartElement) (*DfWorld, error) { return nil, nil }
 
 func (e *HistoricalEvent) Name() string           { return "" }
 func (e *HistoricalEventCollection) Name() string { return "" }
@@ -38,20 +35,6 @@ func Parse(file string) (*DfWorld, error) {
 			}
 		}
 	}
-	// return nil, errors.New("Fehler!")
-}
-
-type Identifiable interface {
-	Id() int
-}
-
-type Parsable interface {
-	Parse(d *xml.Decoder, start *xml.StartElement) error
-}
-
-type IdentifiableParsable interface {
-	Identifiable
-	Parsable
 }
 
 func parseArray[T any](d *xml.Decoder, dest *[]T, creator func(*xml.Decoder, *xml.StartElement) (T, error)) {
