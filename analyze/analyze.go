@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"encoding/xml"
+	"flag"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -17,6 +18,21 @@ import (
 	"github.com/iancoleman/strcase"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
+
+func main() {
+	a := flag.String("a", "", "analyze a file")
+	g := flag.Bool("g", false, "generate model")
+	flag.Parse()
+
+	if len(*a) > 0 {
+		Analyze(*a)
+	}
+
+	if *g {
+		fmt.Println("Generating")
+		Generate()
+	}
+}
 
 func Analyze(filex string) {
 	fmt.Println("Search...", filex)
