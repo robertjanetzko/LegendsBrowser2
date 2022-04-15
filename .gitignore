@@ -4,3 +4,4 @@ legendsbrowser
 *.pprof
 *.png
 /*.json
+.DS_Store
