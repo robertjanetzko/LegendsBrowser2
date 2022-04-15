@@ -4,11 +4,14 @@
 			"path": "."
 		},
 		{
+			"path": "analyze"
+		},
+		{
 			"path": "backend"
 		},
 		{
-			"path": "analyze"
-		}
+			"path": "frontend"
+		},
 	],
 	"settings": {}
 }

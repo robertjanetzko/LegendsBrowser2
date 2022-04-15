@@ -1,6 +1,7 @@
 package df
 
 import (
+	"fmt"
 	"sort"
 	"strings"
 
@@ -27,27 +28,68 @@ var allowedTyped = map[string]bool{
 	"df_world|historical_event_collections|historical_event_collection": true,
 }
 
+func typeName(k string) string {
+	if strings.Contains(k, PATH_SEPARATOR) {
+		return k[strings.LastIndex(k, PATH_SEPARATOR)+1:]
+	}
+	return k
+}
+
 type Metadata map[string]Object
 
 func createMetadata(a *AnalyzeData) (*Metadata, error) {
 	fs := filterSubtypes(&a.Fields)
 
-	var objectTypes []string
+	// unique type names
+	names := make(map[string]bool)
 	for k := range a.Fields {
 		path := strings.Split(k, PATH_SEPARATOR)
 		if len(path) >= 2 {
-			objectTypes = append(objectTypes, strings.Join(path[:len(path)-1], PATH_SEPARATOR))
+			names[strings.Join(path[:len(path)-1], PATH_SEPARATOR)] = true
+		}
+	}
+	objectTypes := util.Keys(names)
+
+	objects := make(Metadata, 0)
+	names = make(map[string]bool)
+	double := make(map[string]bool)
+	typeNames := make(map[string]string)
+
+	// check object type names
+	for _, k := range objectTypes {
+		n := typeName(k)
+		if _, ok := names[n]; ok {
+			double[n] = true
+		}
+		names[n] = true
+	}
+
+	for _, k := range objectTypes {
+		typeNames[k] = strcase.ToCamel(typeName(k))
+	}
+	for _, n := range util.Keys(double) {
+		fmt.Println(n)
+		for _, k := range objectTypes {
+			if strings.HasSuffix(k, PATH_SEPARATOR+n) {
+				fmt.Println("  ", k)
+				path := strings.Split(k, PATH_SEPARATOR)
+				for i := len(path) - 1; i > 0; i-- {
+					sub := strings.Join(path[:i], PATH_SEPARATOR)
+					if ok, _ := isArray(sub, fs); !ok {
+						typeNames[k] = strcase.ToCamel(typeName(sub) + "_" + typeName(k))
+						fmt.Println("    ", typeNames[k])
+						break
+					}
+				}
+
+			}
 		}
 	}
 
-	objects := make(Metadata, 0)
-
+	// build metadata
 	for _, k := range objectTypes {
 		if ok, _ := isArray(k, fs); !ok {
-			n := k
-			if strings.Contains(k, PATH_SEPARATOR) {
-				n = k[strings.LastIndex(k, PATH_SEPARATOR)+1:]
-			}
+			n := typeName(k)
 
 			if n == "" {
 				continue
@@ -75,7 +117,7 @@ func createMetadata(a *AnalyzeData) (*Metadata, error) {
 							Legend:   legend,
 						}
 						if ok, elements := isArray(f, fs); ok {
-							el := elements[strings.LastIndex(elements, PATH_SEPARATOR)+1:]
+							el := typeNames[elements]
 							if _, ok := a.Fields[elements+PATH_SEPARATOR+"id"]; ok {
 								field.Type = "map"
 							} else {
@@ -84,6 +126,8 @@ func createMetadata(a *AnalyzeData) (*Metadata, error) {
 							field.ElementType = &(el)
 						} else if ok, _ := isObject(f, fs); ok {
 							field.Type = "object"
+							el := typeNames[f]
+							field.ElementType = &el
 						} else if a.Fields[f].IsString {
 							field.Type = "string"
 						}
@@ -92,8 +136,8 @@ func createMetadata(a *AnalyzeData) (*Metadata, error) {
 				}
 			}
 
-			objects[n] = Object{
-				Name:      strcase.ToCamel(n),
+			objects[typeNames[k]] = Object{
+				Name:      typeNames[k],
 				Id:        a.Fields[k+PATH_SEPARATOR+"id"] != nil,
 				Named:     a.Fields[k+PATH_SEPARATOR+"name"] != nil,
 				Typed:     a.Fields[k+PATH_SEPARATOR+"type"] != nil,

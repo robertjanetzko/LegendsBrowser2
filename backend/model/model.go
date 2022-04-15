@@ -29,10 +29,6 @@ type Artifact struct {
 func (x *Artifact) Id() int      { return x.Id_ }
 func (x *Artifact) Name() string { return x.Name_ }
 
-type Circumstance struct {
-	Defeated int    `json:"defeated" legend:"plus"`
-	Type     string `json:"type" legend:"plus"`
-}
 type Creature struct {
 	AllCastesAlive                    string `json:"allCastesAlive" legend:"plus"`
 	ArtificialHiveable                string `json:"artificialHiveable" legend:"plus"`
@@ -193,36 +189,36 @@ type DfWorld struct {
 func (x *DfWorld) Name() string { return x.Name_ }
 
 type Entity struct {
-	Child                    int                       `json:"child" legend:"plus"`
-	Claims                   string                    `json:"claims" legend:"plus"`
-	EntityLink               []*EntityLink             `json:"entityLink" legend:"plus"`
-	EntityPosition           []*EntityPosition         `json:"entityPosition" legend:"plus"`
-	EntityPositionAssignment *EntityPositionAssignment `json:"entityPositionAssignment" legend:"plus"`
-	HistfigId                []int                     `json:"histfigId" legend:"plus"`
-	Honor                    []*Honor                  `json:"honor" legend:"base"`
-	Id_                      int                       `json:"id" legend:"both"`
-	Name_                    string                    `json:"name" legend:"base"`
-	Occasion                 []*Occasion               `json:"occasion" legend:"plus"`
-	Profession               string                    `json:"profession" legend:"plus"`
-	Race                     string                    `json:"race" legend:"plus"`
-	Type                     string                    `json:"type" legend:"plus"`
-	Weapon                   []string                  `json:"weapon" legend:"plus"`
-	WorshipId                []int                     `json:"worshipId" legend:"plus"`
+	Child                    []int                       `json:"child" legend:"plus"`
+	Claims                   string                      `json:"claims" legend:"plus"`
+	EntityLink               *EntityEntityLink           `json:"entityLink" legend:"plus"`
+	EntityPosition           []*EntityPosition           `json:"entityPosition" legend:"plus"`
+	EntityPositionAssignment []*EntityPositionAssignment `json:"entityPositionAssignment" legend:"plus"`
+	HistfigId                []int                       `json:"histfigId" legend:"plus"`
+	Honor                    []*Honor                    `json:"honor" legend:"base"`
+	Id_                      int                         `json:"id" legend:"both"`
+	Name_                    string                      `json:"name" legend:"base"`
+	Occasion                 []*Occasion                 `json:"occasion" legend:"plus"`
+	Profession               string                      `json:"profession" legend:"plus"`
+	Race                     string                      `json:"race" legend:"plus"`
+	Type                     string                      `json:"type" legend:"plus"`
+	Weapon                   []string                    `json:"weapon" legend:"plus"`
+	WorshipId                []int                       `json:"worshipId" legend:"plus"`
 }
 
 func (x *Entity) Id() int      { return x.Id_ }
 func (x *Entity) Name() string { return x.Name_ }
 
+type EntityEntityLink struct {
+	Strength int    `json:"strength" legend:"plus"`
+	Target   int    `json:"target" legend:"plus"`
+	Type     string `json:"type" legend:"plus"`
+}
 type EntityFormerPositionLink struct {
 	EndYear           int `json:"endYear" legend:"base"`
 	EntityId          int `json:"entityId" legend:"base"`
 	PositionProfileId int `json:"positionProfileId" legend:"base"`
 	StartYear         int `json:"startYear" legend:"base"`
-}
-type EntityLink struct {
-	EntityId     int    `json:"entityId" legend:"base"`
-	LinkStrength int    `json:"linkStrength" legend:"base"`
-	LinkType     string `json:"linkType" legend:"base"`
 }
 type EntityPopulation struct {
 	CivId int    `json:"civId" legend:"plus"`
@@ -373,17 +369,21 @@ type HistoricalEventArtifactCopied struct {
 	SourceStructureId int    `json:"sourceStructureId" legend:"base"`
 }
 type HistoricalEventArtifactCreated struct {
-	ArtifactId    int           `json:"artifactId" legend:"both"`
-	Circumstance  *Circumstance `json:"circumstance" legend:"plus"`
-	CreatorHfid   int           `json:"creatorHfid" legend:"plus"`
-	CreatorUnitId int           `json:"creatorUnitId" legend:"plus"`
-	HistFigureId  int           `json:"histFigureId" legend:"base"`
-	NameOnly      string        `json:"nameOnly" legend:"base"`
-	Reason        string        `json:"reason" legend:"plus"`
-	SanctifyHf    int           `json:"sanctifyHf" legend:"plus"`
-	Site          int           `json:"site" legend:"plus"`
-	SiteId        int           `json:"siteId" legend:"base"`
-	UnitId        int           `json:"unitId" legend:"base"`
+	ArtifactId    int                                         `json:"artifactId" legend:"both"`
+	Circumstance  *HistoricalEventArtifactCreatedCircumstance `json:"circumstance" legend:"plus"`
+	CreatorHfid   int                                         `json:"creatorHfid" legend:"plus"`
+	CreatorUnitId int                                         `json:"creatorUnitId" legend:"plus"`
+	HistFigureId  int                                         `json:"histFigureId" legend:"base"`
+	NameOnly      string                                      `json:"nameOnly" legend:"base"`
+	Reason        string                                      `json:"reason" legend:"plus"`
+	SanctifyHf    int                                         `json:"sanctifyHf" legend:"plus"`
+	Site          int                                         `json:"site" legend:"plus"`
+	SiteId        int                                         `json:"siteId" legend:"base"`
+	UnitId        int                                         `json:"unitId" legend:"base"`
+}
+type HistoricalEventArtifactCreatedCircumstance struct {
+	Defeated int    `json:"defeated" legend:"plus"`
+	Type     string `json:"type" legend:"plus"`
 }
 type HistoricalEventArtifactDestroyed struct {
 	ArtifactId    int `json:"artifactId" legend:"base"`
@@ -542,6 +542,143 @@ type HistoricalEventChangedCreatureType struct {
 	OldCaste    string `json:"oldCaste" legend:"base"`
 	OldRace     string `json:"oldRace" legend:"base"`
 }
+type HistoricalEventCollection struct {
+	EndSeconds72   int   `json:"endSeconds72" legend:"base"`
+	EndYear        int   `json:"endYear" legend:"base"`
+	Event          []int `json:"event" legend:"base"`
+	Eventcol       []int `json:"eventcol" legend:"base"`
+	Id_            int   `json:"id" legend:"base"`
+	StartSeconds72 int   `json:"startSeconds72" legend:"base"`
+	StartYear      int   `json:"startYear" legend:"base"`
+	Details        any
+}
+
+func (x *HistoricalEventCollection) Id() int { return x.Id_ }
+
+type HistoricalEventCollectionAbduction struct {
+	AttackingEnid  int    `json:"attackingEnid" legend:"base"`
+	Coords         string `json:"coords" legend:"base"`
+	DefendingEnid  int    `json:"defendingEnid" legend:"base"`
+	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
+	Ordinal        int    `json:"ordinal" legend:"base"`
+	ParentEventcol int    `json:"parentEventcol" legend:"base"`
+	SiteId         int    `json:"siteId" legend:"base"`
+	SubregionId    int    `json:"subregionId" legend:"base"`
+}
+type HistoricalEventCollectionBattle struct {
+	ASupportMercEnid        int      `json:"aSupportMercEnid" legend:"base"`
+	ASupportMercHfid        []int    `json:"aSupportMercHfid" legend:"base"`
+	AttackingHfid           []int    `json:"attackingHfid" legend:"base"`
+	AttackingMercEnid       int      `json:"attackingMercEnid" legend:"base"`
+	AttackingSquadAnimated  []string `json:"attackingSquadAnimated" legend:"base"`
+	AttackingSquadDeaths    []int    `json:"attackingSquadDeaths" legend:"base"`
+	AttackingSquadEntityPop []int    `json:"attackingSquadEntityPop" legend:"base"`
+	AttackingSquadNumber    []int    `json:"attackingSquadNumber" legend:"base"`
+	AttackingSquadRace      []string `json:"attackingSquadRace" legend:"base"`
+	AttackingSquadSite      []int    `json:"attackingSquadSite" legend:"base"`
+	CompanyMerc             []string `json:"companyMerc" legend:"base"`
+	Coords                  string   `json:"coords" legend:"base"`
+	DSupportMercEnid        int      `json:"dSupportMercEnid" legend:"base"`
+	DSupportMercHfid        []int    `json:"dSupportMercHfid" legend:"base"`
+	DefendingHfid           []int    `json:"defendingHfid" legend:"base"`
+	DefendingMercEnid       int      `json:"defendingMercEnid" legend:"base"`
+	DefendingSquadAnimated  []string `json:"defendingSquadAnimated" legend:"base"`
+	DefendingSquadDeaths    []int    `json:"defendingSquadDeaths" legend:"base"`
+	DefendingSquadEntityPop []int    `json:"defendingSquadEntityPop" legend:"base"`
+	DefendingSquadNumber    []int    `json:"defendingSquadNumber" legend:"base"`
+	DefendingSquadRace      []string `json:"defendingSquadRace" legend:"base"`
+	DefendingSquadSite      []int    `json:"defendingSquadSite" legend:"base"`
+	FeatureLayerId          int      `json:"featureLayerId" legend:"base"`
+	IndividualMerc          []string `json:"individualMerc" legend:"base"`
+	Name_                   string   `json:"name" legend:"base"`
+	NoncomHfid              []int    `json:"noncomHfid" legend:"base"`
+	Outcome                 string   `json:"outcome" legend:"base"`
+	SiteId                  int      `json:"siteId" legend:"base"`
+	SubregionId             int      `json:"subregionId" legend:"base"`
+	WarEventcol             int      `json:"warEventcol" legend:"base"`
+}
+
+func (x *HistoricalEventCollectionBattle) Name() string { return x.Name_ }
+
+type HistoricalEventCollectionBeastAttack struct {
+	Coords         string `json:"coords" legend:"base"`
+	DefendingEnid  int    `json:"defendingEnid" legend:"base"`
+	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
+	Ordinal        int    `json:"ordinal" legend:"base"`
+	ParentEventcol int    `json:"parentEventcol" legend:"base"`
+	SiteId         int    `json:"siteId" legend:"base"`
+	SubregionId    int    `json:"subregionId" legend:"base"`
+}
+type HistoricalEventCollectionCeremony struct {
+	Ordinal int `json:"ordinal" legend:"base"`
+}
+type HistoricalEventCollectionCompetition struct {
+	Ordinal int `json:"ordinal" legend:"base"`
+}
+type HistoricalEventCollectionDuel struct {
+	AttackingHfid  int    `json:"attackingHfid" legend:"base"`
+	Coords         string `json:"coords" legend:"base"`
+	DefendingHfid  int    `json:"defendingHfid" legend:"base"`
+	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
+	Ordinal        int    `json:"ordinal" legend:"base"`
+	ParentEventcol int    `json:"parentEventcol" legend:"base"`
+	SiteId         int    `json:"siteId" legend:"base"`
+	SubregionId    int    `json:"subregionId" legend:"base"`
+}
+type HistoricalEventCollectionEntityOverthrown struct {
+	Ordinal        int `json:"ordinal" legend:"base"`
+	SiteId         int `json:"siteId" legend:"base"`
+	TargetEntityId int `json:"targetEntityId" legend:"base"`
+}
+type HistoricalEventCollectionJourney struct {
+	Ordinal int `json:"ordinal" legend:"base"`
+}
+type HistoricalEventCollectionOccasion struct {
+	CivId      int `json:"civId" legend:"base"`
+	OccasionId int `json:"occasionId" legend:"base"`
+	Ordinal    int `json:"ordinal" legend:"base"`
+}
+type HistoricalEventCollectionPerformance struct {
+	Ordinal int `json:"ordinal" legend:"base"`
+}
+type HistoricalEventCollectionPersecution struct {
+	Ordinal        int `json:"ordinal" legend:"base"`
+	SiteId         int `json:"siteId" legend:"base"`
+	TargetEntityId int `json:"targetEntityId" legend:"base"`
+}
+type HistoricalEventCollectionProcession struct {
+	Ordinal int `json:"ordinal" legend:"base"`
+}
+type HistoricalEventCollectionPurge struct {
+	Adjective string `json:"adjective" legend:"base"`
+	Ordinal   int    `json:"ordinal" legend:"base"`
+	SiteId    int    `json:"siteId" legend:"base"`
+}
+type HistoricalEventCollectionSiteConquered struct {
+	AttackingEnid int `json:"attackingEnid" legend:"base"`
+	DefendingEnid int `json:"defendingEnid" legend:"base"`
+	Ordinal       int `json:"ordinal" legend:"base"`
+	SiteId        int `json:"siteId" legend:"base"`
+	WarEventcol   int `json:"warEventcol" legend:"base"`
+}
+type HistoricalEventCollectionTheft struct {
+	AttackingEnid  int    `json:"attackingEnid" legend:"base"`
+	Coords         string `json:"coords" legend:"base"`
+	DefendingEnid  int    `json:"defendingEnid" legend:"base"`
+	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
+	Ordinal        int    `json:"ordinal" legend:"base"`
+	ParentEventcol int    `json:"parentEventcol" legend:"base"`
+	SiteId         int    `json:"siteId" legend:"base"`
+	SubregionId    int    `json:"subregionId" legend:"base"`
+}
+type HistoricalEventCollectionWar struct {
+	AggressorEntId int    `json:"aggressorEntId" legend:"base"`
+	DefenderEntId  int    `json:"defenderEntId" legend:"base"`
+	Name_          string `json:"name" legend:"base"`
+}
+
+func (x *HistoricalEventCollectionWar) Name() string { return x.Name_ }
+
 type HistoricalEventCompetition struct {
 	CivId          int   `json:"civId" legend:"base"`
 	CompetitorHfid []int `json:"competitorHfid" legend:"base"`
@@ -1037,25 +1174,47 @@ type HistoricalEventHolyCityDeclaration struct {
 	SiteId     int `json:"siteId" legend:"base"`
 }
 type HistoricalEventItemStolen struct {
-	Circumstance   *Circumstance `json:"circumstance" legend:"both"`
-	CircumstanceId int           `json:"circumstanceId" legend:"base"`
-	Entity         int           `json:"entity" legend:"plus"`
-	Histfig        int           `json:"histfig" legend:"plus"`
-	Item           int           `json:"item" legend:"plus"`
-	ItemSubtype    string        `json:"itemSubtype" legend:"plus"`
-	ItemType       string        `json:"itemType" legend:"plus"`
-	Mat            string        `json:"mat" legend:"plus"`
-	Matindex       int           `json:"matindex" legend:"plus"`
-	Mattype        int           `json:"mattype" legend:"plus"`
-	Site           int           `json:"site" legend:"plus"`
-	StashSite      int           `json:"stashSite" legend:"plus"`
-	Structure      int           `json:"structure" legend:"plus"`
-	TheftMethod    string        `json:"theftMethod" legend:"plus"`
+	Circumstance   *HistoricalEventItemStolenCircumstance `json:"circumstance" legend:"both"`
+	CircumstanceId int                                    `json:"circumstanceId" legend:"base"`
+	Entity         int                                    `json:"entity" legend:"plus"`
+	Histfig        int                                    `json:"histfig" legend:"plus"`
+	Item           int                                    `json:"item" legend:"plus"`
+	ItemSubtype    string                                 `json:"itemSubtype" legend:"plus"`
+	ItemType       string                                 `json:"itemType" legend:"plus"`
+	Mat            string                                 `json:"mat" legend:"plus"`
+	Matindex       int                                    `json:"matindex" legend:"plus"`
+	Mattype        int                                    `json:"mattype" legend:"plus"`
+	Site           int                                    `json:"site" legend:"plus"`
+	StashSite      int                                    `json:"stashSite" legend:"plus"`
+	Structure      int                                    `json:"structure" legend:"plus"`
+	TheftMethod    string                                 `json:"theftMethod" legend:"plus"`
+}
+type HistoricalEventItemStolenCircumstance struct {
+	Defeated            int    `json:"defeated" legend:"plus"`
+	HistEventCollection int    `json:"histEventCollection" legend:"plus"`
+	Murdered            int    `json:"murdered" legend:"plus"`
+	Type                string `json:"type" legend:"plus"`
 }
 type HistoricalEventKnowledgeDiscovered struct {
 	First     string `json:"first" legend:"base"`
 	Hfid      int    `json:"hfid" legend:"base"`
 	Knowledge string `json:"knowledge" legend:"base"`
+}
+type HistoricalEventMasterpieceCreatedItem struct {
+	ItemId      int    `json:"itemId" legend:"plus"`
+	ItemSubtype string `json:"itemSubtype" legend:"plus"`
+	ItemType    string `json:"itemType" legend:"plus"`
+	Maker       int    `json:"maker" legend:"plus"`
+	MakerEntity int    `json:"makerEntity" legend:"plus"`
+	Mat         string `json:"mat" legend:"plus"`
+	MatIndex    int    `json:"matIndex" legend:"plus"`
+	MatType     int    `json:"matType" legend:"plus"`
+	Site        int    `json:"site" legend:"plus"`
+}
+type HistoricalEventMerchant struct {
+	Destination int `json:"destination" legend:"plus"`
+	Site        int `json:"site" legend:"plus"`
+	Source      int `json:"source" legend:"plus"`
 }
 type HistoricalEventModifiedBuilding struct {
 	Modification string `json:"modification" legend:"base"`
@@ -1132,6 +1291,19 @@ type HistoricalEventRegionpopIncorporatedIntoEntity struct {
 	PopRace        int `json:"popRace" legend:"base"`
 	PopSrid        int `json:"popSrid" legend:"base"`
 	SiteId         int `json:"siteId" legend:"base"`
+}
+type HistoricalEventRelationship struct {
+	Event        int    `json:"event" legend:"plus"`
+	Relationship string `json:"relationship" legend:"plus"`
+	SourceHf     int    `json:"sourceHf" legend:"plus"`
+	TargetHf     int    `json:"targetHf" legend:"plus"`
+	Year         int    `json:"year" legend:"plus"`
+}
+type HistoricalEventRelationshipSupplement struct {
+	Event        int `json:"event" legend:"plus"`
+	OccasionType int `json:"occasionType" legend:"plus"`
+	Site         int `json:"site" legend:"plus"`
+	Unk1         int `json:"unk1" legend:"plus"`
 }
 type HistoricalEventRemoveHfEntityLink struct {
 	Civ        int    `json:"civ" legend:"plus"`
@@ -1215,156 +1387,6 @@ type HistoricalEventWrittenContentComposed struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`
 	WcId           int    `json:"wcId" legend:"base"`
 }
-type HistoricalEventCollection struct {
-	EndSeconds72   int   `json:"endSeconds72" legend:"base"`
-	EndYear        int   `json:"endYear" legend:"base"`
-	Event          []int `json:"event" legend:"base"`
-	Eventcol       []int `json:"eventcol" legend:"base"`
-	Id_            int   `json:"id" legend:"base"`
-	StartSeconds72 int   `json:"startSeconds72" legend:"base"`
-	StartYear      int   `json:"startYear" legend:"base"`
-	Details        any
-}
-
-func (x *HistoricalEventCollection) Id() int { return x.Id_ }
-
-type HistoricalEventCollectionAbduction struct {
-	AttackingEnid  int    `json:"attackingEnid" legend:"base"`
-	Coords         string `json:"coords" legend:"base"`
-	DefendingEnid  int    `json:"defendingEnid" legend:"base"`
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
-	Ordinal        int    `json:"ordinal" legend:"base"`
-	ParentEventcol int    `json:"parentEventcol" legend:"base"`
-	SiteId         int    `json:"siteId" legend:"base"`
-	SubregionId    int    `json:"subregionId" legend:"base"`
-}
-type HistoricalEventCollectionBattle struct {
-	ASupportMercEnid        int      `json:"aSupportMercEnid" legend:"base"`
-	ASupportMercHfid        []int    `json:"aSupportMercHfid" legend:"base"`
-	AttackingHfid           []int    `json:"attackingHfid" legend:"base"`
-	AttackingMercEnid       int      `json:"attackingMercEnid" legend:"base"`
-	AttackingSquadAnimated  []string `json:"attackingSquadAnimated" legend:"base"`
-	AttackingSquadDeaths    []int    `json:"attackingSquadDeaths" legend:"base"`
-	AttackingSquadEntityPop []int    `json:"attackingSquadEntityPop" legend:"base"`
-	AttackingSquadNumber    []int    `json:"attackingSquadNumber" legend:"base"`
-	AttackingSquadRace      []string `json:"attackingSquadRace" legend:"base"`
-	AttackingSquadSite      []int    `json:"attackingSquadSite" legend:"base"`
-	CompanyMerc             []string `json:"companyMerc" legend:"base"`
-	Coords                  string   `json:"coords" legend:"base"`
-	DSupportMercEnid        int      `json:"dSupportMercEnid" legend:"base"`
-	DSupportMercHfid        []int    `json:"dSupportMercHfid" legend:"base"`
-	DefendingHfid           []int    `json:"defendingHfid" legend:"base"`
-	DefendingMercEnid       int      `json:"defendingMercEnid" legend:"base"`
-	DefendingSquadAnimated  []string `json:"defendingSquadAnimated" legend:"base"`
-	DefendingSquadDeaths    []int    `json:"defendingSquadDeaths" legend:"base"`
-	DefendingSquadEntityPop []int    `json:"defendingSquadEntityPop" legend:"base"`
-	DefendingSquadNumber    []int    `json:"defendingSquadNumber" legend:"base"`
-	DefendingSquadRace      []string `json:"defendingSquadRace" legend:"base"`
-	DefendingSquadSite      []int    `json:"defendingSquadSite" legend:"base"`
-	FeatureLayerId          int      `json:"featureLayerId" legend:"base"`
-	IndividualMerc          []string `json:"individualMerc" legend:"base"`
-	Name_                   string   `json:"name" legend:"base"`
-	NoncomHfid              []int    `json:"noncomHfid" legend:"base"`
-	Outcome                 string   `json:"outcome" legend:"base"`
-	SiteId                  int      `json:"siteId" legend:"base"`
-	SubregionId             int      `json:"subregionId" legend:"base"`
-	WarEventcol             int      `json:"warEventcol" legend:"base"`
-}
-
-func (x *HistoricalEventCollectionBattle) Name() string { return x.Name_ }
-
-type HistoricalEventCollectionBeastAttack struct {
-	Coords         string `json:"coords" legend:"base"`
-	DefendingEnid  int    `json:"defendingEnid" legend:"base"`
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
-	Ordinal        int    `json:"ordinal" legend:"base"`
-	ParentEventcol int    `json:"parentEventcol" legend:"base"`
-	SiteId         int    `json:"siteId" legend:"base"`
-	SubregionId    int    `json:"subregionId" legend:"base"`
-}
-type HistoricalEventCollectionCeremony struct {
-	Ordinal int `json:"ordinal" legend:"base"`
-}
-type HistoricalEventCollectionCompetition struct {
-	Ordinal int `json:"ordinal" legend:"base"`
-}
-type HistoricalEventCollectionDuel struct {
-	AttackingHfid  int    `json:"attackingHfid" legend:"base"`
-	Coords         string `json:"coords" legend:"base"`
-	DefendingHfid  int    `json:"defendingHfid" legend:"base"`
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
-	Ordinal        int    `json:"ordinal" legend:"base"`
-	ParentEventcol int    `json:"parentEventcol" legend:"base"`
-	SiteId         int    `json:"siteId" legend:"base"`
-	SubregionId    int    `json:"subregionId" legend:"base"`
-}
-type HistoricalEventCollectionEntityOverthrown struct {
-	Ordinal        int `json:"ordinal" legend:"base"`
-	SiteId         int `json:"siteId" legend:"base"`
-	TargetEntityId int `json:"targetEntityId" legend:"base"`
-}
-type HistoricalEventCollectionJourney struct {
-	Ordinal int `json:"ordinal" legend:"base"`
-}
-type HistoricalEventCollectionOccasion struct {
-	CivId      int `json:"civId" legend:"base"`
-	OccasionId int `json:"occasionId" legend:"base"`
-	Ordinal    int `json:"ordinal" legend:"base"`
-}
-type HistoricalEventCollectionPerformance struct {
-	Ordinal int `json:"ordinal" legend:"base"`
-}
-type HistoricalEventCollectionPersecution struct {
-	Ordinal        int `json:"ordinal" legend:"base"`
-	SiteId         int `json:"siteId" legend:"base"`
-	TargetEntityId int `json:"targetEntityId" legend:"base"`
-}
-type HistoricalEventCollectionProcession struct {
-	Ordinal int `json:"ordinal" legend:"base"`
-}
-type HistoricalEventCollectionPurge struct {
-	Adjective string `json:"adjective" legend:"base"`
-	Ordinal   int    `json:"ordinal" legend:"base"`
-	SiteId    int    `json:"siteId" legend:"base"`
-}
-type HistoricalEventCollectionSiteConquered struct {
-	AttackingEnid int `json:"attackingEnid" legend:"base"`
-	DefendingEnid int `json:"defendingEnid" legend:"base"`
-	Ordinal       int `json:"ordinal" legend:"base"`
-	SiteId        int `json:"siteId" legend:"base"`
-	WarEventcol   int `json:"warEventcol" legend:"base"`
-}
-type HistoricalEventCollectionTheft struct {
-	AttackingEnid  int    `json:"attackingEnid" legend:"base"`
-	Coords         string `json:"coords" legend:"base"`
-	DefendingEnid  int    `json:"defendingEnid" legend:"base"`
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
-	Ordinal        int    `json:"ordinal" legend:"base"`
-	ParentEventcol int    `json:"parentEventcol" legend:"base"`
-	SiteId         int    `json:"siteId" legend:"base"`
-	SubregionId    int    `json:"subregionId" legend:"base"`
-}
-type HistoricalEventCollectionWar struct {
-	AggressorEntId int    `json:"aggressorEntId" legend:"base"`
-	DefenderEntId  int    `json:"defenderEntId" legend:"base"`
-	Name_          string `json:"name" legend:"base"`
-}
-
-func (x *HistoricalEventCollectionWar) Name() string { return x.Name_ }
-
-type HistoricalEventRelationship struct {
-	Event        int    `json:"event" legend:"plus"`
-	Relationship string `json:"relationship" legend:"plus"`
-	SourceHf     int    `json:"sourceHf" legend:"plus"`
-	TargetHf     int    `json:"targetHf" legend:"plus"`
-	Year         int    `json:"year" legend:"plus"`
-}
-type HistoricalEventRelationshipSupplement struct {
-	Event        int `json:"event" legend:"plus"`
-	OccasionType int `json:"occasionType" legend:"plus"`
-	Site         int `json:"site" legend:"plus"`
-	Unk1         int `json:"unk1" legend:"plus"`
-}
 type HistoricalFigure struct {
 	ActiveInteraction               []string                           `json:"activeInteraction" legend:"base"`
 	Animated                        string                             `json:"animated" legend:"base"`
@@ -1380,7 +1402,7 @@ type HistoricalFigure struct {
 	Deity                           string                             `json:"deity" legend:"base"`
 	EntPopId                        int                                `json:"entPopId" legend:"base"`
 	EntityFormerPositionLink        []*EntityFormerPositionLink        `json:"entityFormerPositionLink" legend:"base"`
-	EntityLink                      []*EntityLink                      `json:"entityLink" legend:"base"`
+	EntityLink                      []*HistoricalFigureEntityLink      `json:"entityLink" legend:"base"`
 	EntityPositionLink              []*EntityPositionLink              `json:"entityPositionLink" legend:"base"`
 	EntityReputation                []*EntityReputation                `json:"entityReputation" legend:"base"`
 	EntitySquadLink                 *EntitySquadLink                   `json:"entitySquadLink" legend:"base"`
@@ -1401,7 +1423,7 @@ type HistoricalFigure struct {
 	RelationshipProfileHfVisual     []*RelationshipProfileHfVisual     `json:"relationshipProfileHfVisual" legend:"base"`
 	Sex                             int                                `json:"sex" legend:"plus"`
 	SiteLink                        []*SiteLink                        `json:"siteLink" legend:"base"`
-	SiteProperty                    []*SiteProperty                    `json:"siteProperty" legend:"base"`
+	SiteProperty                    []*HistoricalFigureSiteProperty    `json:"siteProperty" legend:"base"`
 	Sphere                          []string                           `json:"sphere" legend:"base"`
 	UsedIdentityId                  []int                              `json:"usedIdentityId" legend:"base"`
 	VagueRelationship               []*VagueRelationship               `json:"vagueRelationship" legend:"base"`
@@ -1410,6 +1432,15 @@ type HistoricalFigure struct {
 func (x *HistoricalFigure) Id() int      { return x.Id_ }
 func (x *HistoricalFigure) Name() string { return x.Name_ }
 
+type HistoricalFigureEntityLink struct {
+	EntityId     int    `json:"entityId" legend:"base"`
+	LinkStrength int    `json:"linkStrength" legend:"base"`
+	LinkType     string `json:"linkType" legend:"base"`
+}
+type HistoricalFigureSiteProperty struct {
+	PropertyId int `json:"propertyId" legend:"base"`
+	SiteId     int `json:"siteId" legend:"base"`
+}
 type Honor struct {
 	ExemptEpid                    int    `json:"exemptEpid" legend:"base"`
 	ExemptFormerEpid              int    `json:"exemptFormerEpid" legend:"base"`
@@ -1598,15 +1629,15 @@ type Schedule struct {
 func (x *Schedule) Id() int { return x.Id_ }
 
 type Site struct {
-	CivId          int                   `json:"civId" legend:"plus"`
-	Coords         string                `json:"coords" legend:"base"`
-	CurOwnerId     int                   `json:"curOwnerId" legend:"plus"`
-	Id_            int                   `json:"id" legend:"both"`
-	Name_          string                `json:"name" legend:"base"`
-	Rectangle      string                `json:"rectangle" legend:"base"`
-	SiteProperties map[int]*SiteProperty `json:"siteProperties" legend:"base"`
-	Structures     map[int]*Structure    `json:"structures" legend:"base"`
-	Type           string                `json:"type" legend:"base"`
+	CivId          int                       `json:"civId" legend:"plus"`
+	Coords         string                    `json:"coords" legend:"base"`
+	CurOwnerId     int                       `json:"curOwnerId" legend:"plus"`
+	Id_            int                       `json:"id" legend:"both"`
+	Name_          string                    `json:"name" legend:"base"`
+	Rectangle      string                    `json:"rectangle" legend:"base"`
+	SiteProperties map[int]*SiteSiteProperty `json:"siteProperties" legend:"base"`
+	Structures     map[int]*Structure        `json:"structures" legend:"base"`
+	Type           string                    `json:"type" legend:"base"`
 }
 
 func (x *Site) Id() int      { return x.Id_ }
@@ -1619,14 +1650,14 @@ type SiteLink struct {
 	SiteId       int    `json:"siteId" legend:"base"`
 	SubId        int    `json:"subId" legend:"base"`
 }
-type SiteProperty struct {
+type SiteSiteProperty struct {
 	Id_         int    `json:"id" legend:"base"`
 	OwnerHfid   int    `json:"ownerHfid" legend:"base"`
 	StructureId int    `json:"structureId" legend:"base"`
 	Type        string `json:"type" legend:"base"`
 }
 
-func (x *SiteProperty) Id() int { return x.Id_ }
+func (x *SiteSiteProperty) Id() int { return x.Id_ }
 
 type Structure struct {
 	CopiedArtifactId []int  `json:"copiedArtifactId" legend:"base"`
@@ -1637,11 +1668,11 @@ type Structure struct {
 	Id_              int    `json:"id" legend:"plus"`
 	Inhabitant       []int  `json:"inhabitant" legend:"plus"`
 	LocalId          int    `json:"localId" legend:"base"`
-	Name_            string `json:"name" legend:"base"`
+	Name_            string `json:"name" legend:"plus"`
 	Name2            string `json:"name2" legend:"plus"`
 	Religion         int    `json:"religion" legend:"plus"`
 	Subtype          string `json:"subtype" legend:"base"`
-	Type             string `json:"type" legend:"plus"`
+	Type             string `json:"type" legend:"base"`
 	WorshipHfid      int    `json:"worshipHfid" legend:"base"`
 }
 
@@ -1798,47 +1829,6 @@ func parseArtifact(d *xml.Decoder, start *xml.StartElement) (*Artifact, error) {
 				obj.SubregionId = n(data)
 			case "writing":
 				obj.Writing = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseCircumstance(d *xml.Decoder, start *xml.StartElement) (*Circumstance, error) {
-	var (
-		obj  = Circumstance{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "defeated":
-				data = nil
-			case "type":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "defeated":
-				obj.Defeated = n(data)
-			case "type":
-				obj.Type = string(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -2564,13 +2554,13 @@ func parseEntity(d *xml.Decoder, start *xml.StartElement) (*Entity, error) {
 				data = nil
 			case "entity_link":
 				v, _ := parseEntityLink(d, &t)
-				obj.EntityLink = append(obj.EntityLink, v)
+				obj.EntityLink = v
 			case "entity_position":
 				v, _ := parseEntityPosition(d, &t)
 				obj.EntityPosition = append(obj.EntityPosition, v)
 			case "entity_position_assignment":
 				v, _ := parseEntityPositionAssignment(d, &t)
-				obj.EntityPositionAssignment = v
+				obj.EntityPositionAssignment = append(obj.EntityPositionAssignment, v)
 			case "histfig_id":
 				data = nil
 			case "honor":
@@ -2608,7 +2598,7 @@ func parseEntity(d *xml.Decoder, start *xml.StartElement) (*Entity, error) {
 
 			switch t.Name.Local {
 			case "child":
-				obj.Child = n(data)
+				obj.Child = append(obj.Child, n(data))
 			case "claims":
 				obj.Claims = string(data)
 			case "entity_link":
@@ -2637,6 +2627,51 @@ func parseEntity(d *xml.Decoder, start *xml.StartElement) (*Entity, error) {
 				obj.Weapon = append(obj.Weapon, string(data))
 			case "worship_id":
 				obj.WorshipId = append(obj.WorshipId, n(data))
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseEntityEntityLink(d *xml.Decoder, start *xml.StartElement) (*EntityEntityLink, error) {
+	var (
+		obj  = EntityEntityLink{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "strength":
+				data = nil
+			case "target":
+				data = nil
+			case "type":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "strength":
+				obj.Strength = n(data)
+			case "target":
+				obj.Target = n(data)
+			case "type":
+				obj.Type = string(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -2686,51 +2721,6 @@ func parseEntityFormerPositionLink(d *xml.Decoder, start *xml.StartElement) (*En
 				obj.PositionProfileId = n(data)
 			case "start_year":
 				obj.StartYear = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseEntityLink(d *xml.Decoder, start *xml.StartElement) (*EntityLink, error) {
-	var (
-		obj  = EntityLink{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "entity_id":
-				data = nil
-			case "link_strength":
-				data = nil
-			case "link_type":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "entity_id":
-				obj.EntityId = n(data)
-			case "link_strength":
-				obj.LinkStrength = n(data)
-			case "link_type":
-				obj.LinkType = string(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -3415,6 +3405,10 @@ func parseHistoricalEvent(d *xml.Decoder, start *xml.StartElement) (*HistoricalE
 					obj.Details, err = parseHistoricalEventItemStolen(d, start)
 				case "KnowledgeDiscovered":
 					obj.Details, err = parseHistoricalEventKnowledgeDiscovered(d, start)
+				case "MasterpieceCreatedItem":
+					obj.Details, err = parseHistoricalEventMasterpieceCreatedItem(d, start)
+				case "Merchant":
+					obj.Details, err = parseHistoricalEventMerchant(d, start)
 				case "ModifiedBuilding":
 					obj.Details, err = parseHistoricalEventModifiedBuilding(d, start)
 				case "MusicalFormCreated":
@@ -4011,6 +4005,47 @@ func parseHistoricalEventArtifactCreated(d *xml.Decoder, start *xml.StartElement
 				obj.SiteId = n(data)
 			case "unit_id":
 				obj.UnitId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventArtifactCreatedCircumstance(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactCreatedCircumstance, error) {
+	var (
+		obj  = HistoricalEventArtifactCreatedCircumstance{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "defeated":
+				data = nil
+			case "type":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "defeated":
+				obj.Defeated = n(data)
+			case "type":
+				obj.Type = string(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -5064,6 +5099,983 @@ func parseHistoricalEventChangedCreatureType(d *xml.Decoder, start *xml.StartEle
 				obj.OldCaste = string(data)
 			case "old_race":
 				obj.OldRace = string(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollection(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollection, error) {
+	var (
+		obj  = HistoricalEventCollection{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "end_seconds72":
+				data = nil
+			case "end_year":
+				data = nil
+			case "event":
+				data = nil
+			case "eventcol":
+				data = nil
+			case "id":
+				data = nil
+			case "start_seconds72":
+				data = nil
+			case "start_year":
+				data = nil
+			case "type":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "end_seconds72":
+				obj.EndSeconds72 = n(data)
+			case "end_year":
+				obj.EndYear = n(data)
+			case "event":
+				obj.Event = append(obj.Event, n(data))
+			case "eventcol":
+				obj.Eventcol = append(obj.Eventcol, n(data))
+			case "id":
+				obj.Id_ = n(data)
+			case "start_seconds72":
+				obj.StartSeconds72 = n(data)
+			case "start_year":
+				obj.StartYear = n(data)
+			case "type":
+				var err error
+				switch strcase.ToCamel(string(data)) {
+				case "Abduction":
+					obj.Details, err = parseHistoricalEventCollectionAbduction(d, start)
+				case "Battle":
+					obj.Details, err = parseHistoricalEventCollectionBattle(d, start)
+				case "BeastAttack":
+					obj.Details, err = parseHistoricalEventCollectionBeastAttack(d, start)
+				case "Ceremony":
+					obj.Details, err = parseHistoricalEventCollectionCeremony(d, start)
+				case "Competition":
+					obj.Details, err = parseHistoricalEventCollectionCompetition(d, start)
+				case "Duel":
+					obj.Details, err = parseHistoricalEventCollectionDuel(d, start)
+				case "EntityOverthrown":
+					obj.Details, err = parseHistoricalEventCollectionEntityOverthrown(d, start)
+				case "Journey":
+					obj.Details, err = parseHistoricalEventCollectionJourney(d, start)
+				case "Occasion":
+					obj.Details, err = parseHistoricalEventCollectionOccasion(d, start)
+				case "Performance":
+					obj.Details, err = parseHistoricalEventCollectionPerformance(d, start)
+				case "Persecution":
+					obj.Details, err = parseHistoricalEventCollectionPersecution(d, start)
+				case "Procession":
+					obj.Details, err = parseHistoricalEventCollectionProcession(d, start)
+				case "Purge":
+					obj.Details, err = parseHistoricalEventCollectionPurge(d, start)
+				case "SiteConquered":
+					obj.Details, err = parseHistoricalEventCollectionSiteConquered(d, start)
+				case "Theft":
+					obj.Details, err = parseHistoricalEventCollectionTheft(d, start)
+				case "War":
+					obj.Details, err = parseHistoricalEventCollectionWar(d, start)
+				default:
+					d.Skip()
+				}
+				if err != nil {
+					return nil, err
+				}
+				return &obj, nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionAbduction(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionAbduction, error) {
+	var (
+		obj  = HistoricalEventCollectionAbduction{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "attacking_enid":
+				data = nil
+			case "coords":
+				data = nil
+			case "defending_enid":
+				data = nil
+			case "feature_layer_id":
+				data = nil
+			case "ordinal":
+				data = nil
+			case "parent_eventcol":
+				data = nil
+			case "site_id":
+				data = nil
+			case "subregion_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "attacking_enid":
+				obj.AttackingEnid = n(data)
+			case "coords":
+				obj.Coords = string(data)
+			case "defending_enid":
+				obj.DefendingEnid = n(data)
+			case "feature_layer_id":
+				obj.FeatureLayerId = n(data)
+			case "ordinal":
+				obj.Ordinal = n(data)
+			case "parent_eventcol":
+				obj.ParentEventcol = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "subregion_id":
+				obj.SubregionId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionBattle(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionBattle, error) {
+	var (
+		obj  = HistoricalEventCollectionBattle{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "a_support_merc_enid":
+				data = nil
+			case "a_support_merc_hfid":
+				data = nil
+			case "attacking_hfid":
+				data = nil
+			case "attacking_merc_enid":
+				data = nil
+			case "attacking_squad_animated":
+				data = nil
+			case "attacking_squad_deaths":
+				data = nil
+			case "attacking_squad_entity_pop":
+				data = nil
+			case "attacking_squad_number":
+				data = nil
+			case "attacking_squad_race":
+				data = nil
+			case "attacking_squad_site":
+				data = nil
+			case "company_merc":
+				data = nil
+			case "coords":
+				data = nil
+			case "d_support_merc_enid":
+				data = nil
+			case "d_support_merc_hfid":
+				data = nil
+			case "defending_hfid":
+				data = nil
+			case "defending_merc_enid":
+				data = nil
+			case "defending_squad_animated":
+				data = nil
+			case "defending_squad_deaths":
+				data = nil
+			case "defending_squad_entity_pop":
+				data = nil
+			case "defending_squad_number":
+				data = nil
+			case "defending_squad_race":
+				data = nil
+			case "defending_squad_site":
+				data = nil
+			case "feature_layer_id":
+				data = nil
+			case "individual_merc":
+				data = nil
+			case "name":
+				data = nil
+			case "noncom_hfid":
+				data = nil
+			case "outcome":
+				data = nil
+			case "site_id":
+				data = nil
+			case "subregion_id":
+				data = nil
+			case "war_eventcol":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "a_support_merc_enid":
+				obj.ASupportMercEnid = n(data)
+			case "a_support_merc_hfid":
+				obj.ASupportMercHfid = append(obj.ASupportMercHfid, n(data))
+			case "attacking_hfid":
+				obj.AttackingHfid = append(obj.AttackingHfid, n(data))
+			case "attacking_merc_enid":
+				obj.AttackingMercEnid = n(data)
+			case "attacking_squad_animated":
+				obj.AttackingSquadAnimated = append(obj.AttackingSquadAnimated, string(data))
+			case "attacking_squad_deaths":
+				obj.AttackingSquadDeaths = append(obj.AttackingSquadDeaths, n(data))
+			case "attacking_squad_entity_pop":
+				obj.AttackingSquadEntityPop = append(obj.AttackingSquadEntityPop, n(data))
+			case "attacking_squad_number":
+				obj.AttackingSquadNumber = append(obj.AttackingSquadNumber, n(data))
+			case "attacking_squad_race":
+				obj.AttackingSquadRace = append(obj.AttackingSquadRace, string(data))
+			case "attacking_squad_site":
+				obj.AttackingSquadSite = append(obj.AttackingSquadSite, n(data))
+			case "company_merc":
+				obj.CompanyMerc = append(obj.CompanyMerc, string(data))
+			case "coords":
+				obj.Coords = string(data)
+			case "d_support_merc_enid":
+				obj.DSupportMercEnid = n(data)
+			case "d_support_merc_hfid":
+				obj.DSupportMercHfid = append(obj.DSupportMercHfid, n(data))
+			case "defending_hfid":
+				obj.DefendingHfid = append(obj.DefendingHfid, n(data))
+			case "defending_merc_enid":
+				obj.DefendingMercEnid = n(data)
+			case "defending_squad_animated":
+				obj.DefendingSquadAnimated = append(obj.DefendingSquadAnimated, string(data))
+			case "defending_squad_deaths":
+				obj.DefendingSquadDeaths = append(obj.DefendingSquadDeaths, n(data))
+			case "defending_squad_entity_pop":
+				obj.DefendingSquadEntityPop = append(obj.DefendingSquadEntityPop, n(data))
+			case "defending_squad_number":
+				obj.DefendingSquadNumber = append(obj.DefendingSquadNumber, n(data))
+			case "defending_squad_race":
+				obj.DefendingSquadRace = append(obj.DefendingSquadRace, string(data))
+			case "defending_squad_site":
+				obj.DefendingSquadSite = append(obj.DefendingSquadSite, n(data))
+			case "feature_layer_id":
+				obj.FeatureLayerId = n(data)
+			case "individual_merc":
+				obj.IndividualMerc = append(obj.IndividualMerc, string(data))
+			case "name":
+				obj.Name_ = string(data)
+			case "noncom_hfid":
+				obj.NoncomHfid = append(obj.NoncomHfid, n(data))
+			case "outcome":
+				obj.Outcome = string(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "subregion_id":
+				obj.SubregionId = n(data)
+			case "war_eventcol":
+				obj.WarEventcol = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionBeastAttack(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionBeastAttack, error) {
+	var (
+		obj  = HistoricalEventCollectionBeastAttack{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "coords":
+				data = nil
+			case "defending_enid":
+				data = nil
+			case "feature_layer_id":
+				data = nil
+			case "ordinal":
+				data = nil
+			case "parent_eventcol":
+				data = nil
+			case "site_id":
+				data = nil
+			case "subregion_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "coords":
+				obj.Coords = string(data)
+			case "defending_enid":
+				obj.DefendingEnid = n(data)
+			case "feature_layer_id":
+				obj.FeatureLayerId = n(data)
+			case "ordinal":
+				obj.Ordinal = n(data)
+			case "parent_eventcol":
+				obj.ParentEventcol = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "subregion_id":
+				obj.SubregionId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionCeremony(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionCeremony, error) {
+	var (
+		obj  = HistoricalEventCollectionCeremony{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "ordinal":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "ordinal":
+				obj.Ordinal = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionCompetition(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionCompetition, error) {
+	var (
+		obj  = HistoricalEventCollectionCompetition{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "ordinal":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "ordinal":
+				obj.Ordinal = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionDuel(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionDuel, error) {
+	var (
+		obj  = HistoricalEventCollectionDuel{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "attacking_hfid":
+				data = nil
+			case "coords":
+				data = nil
+			case "defending_hfid":
+				data = nil
+			case "feature_layer_id":
+				data = nil
+			case "ordinal":
+				data = nil
+			case "parent_eventcol":
+				data = nil
+			case "site_id":
+				data = nil
+			case "subregion_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "attacking_hfid":
+				obj.AttackingHfid = n(data)
+			case "coords":
+				obj.Coords = string(data)
+			case "defending_hfid":
+				obj.DefendingHfid = n(data)
+			case "feature_layer_id":
+				obj.FeatureLayerId = n(data)
+			case "ordinal":
+				obj.Ordinal = n(data)
+			case "parent_eventcol":
+				obj.ParentEventcol = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "subregion_id":
+				obj.SubregionId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionEntityOverthrown(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionEntityOverthrown, error) {
+	var (
+		obj  = HistoricalEventCollectionEntityOverthrown{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "ordinal":
+				data = nil
+			case "site_id":
+				data = nil
+			case "target_entity_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "ordinal":
+				obj.Ordinal = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "target_entity_id":
+				obj.TargetEntityId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionJourney(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionJourney, error) {
+	var (
+		obj  = HistoricalEventCollectionJourney{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "ordinal":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "ordinal":
+				obj.Ordinal = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionOccasion(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionOccasion, error) {
+	var (
+		obj  = HistoricalEventCollectionOccasion{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "civ_id":
+				data = nil
+			case "occasion_id":
+				data = nil
+			case "ordinal":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "civ_id":
+				obj.CivId = n(data)
+			case "occasion_id":
+				obj.OccasionId = n(data)
+			case "ordinal":
+				obj.Ordinal = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionPerformance(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionPerformance, error) {
+	var (
+		obj  = HistoricalEventCollectionPerformance{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "ordinal":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "ordinal":
+				obj.Ordinal = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionPersecution(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionPersecution, error) {
+	var (
+		obj  = HistoricalEventCollectionPersecution{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "ordinal":
+				data = nil
+			case "site_id":
+				data = nil
+			case "target_entity_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "ordinal":
+				obj.Ordinal = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "target_entity_id":
+				obj.TargetEntityId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionProcession(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionProcession, error) {
+	var (
+		obj  = HistoricalEventCollectionProcession{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "ordinal":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "ordinal":
+				obj.Ordinal = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionPurge(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionPurge, error) {
+	var (
+		obj  = HistoricalEventCollectionPurge{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "adjective":
+				data = nil
+			case "ordinal":
+				data = nil
+			case "site_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "adjective":
+				obj.Adjective = string(data)
+			case "ordinal":
+				obj.Ordinal = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionSiteConquered(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionSiteConquered, error) {
+	var (
+		obj  = HistoricalEventCollectionSiteConquered{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "attacking_enid":
+				data = nil
+			case "defending_enid":
+				data = nil
+			case "ordinal":
+				data = nil
+			case "site_id":
+				data = nil
+			case "war_eventcol":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "attacking_enid":
+				obj.AttackingEnid = n(data)
+			case "defending_enid":
+				obj.DefendingEnid = n(data)
+			case "ordinal":
+				obj.Ordinal = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "war_eventcol":
+				obj.WarEventcol = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionTheft(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionTheft, error) {
+	var (
+		obj  = HistoricalEventCollectionTheft{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "attacking_enid":
+				data = nil
+			case "coords":
+				data = nil
+			case "defending_enid":
+				data = nil
+			case "feature_layer_id":
+				data = nil
+			case "ordinal":
+				data = nil
+			case "parent_eventcol":
+				data = nil
+			case "site_id":
+				data = nil
+			case "subregion_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "attacking_enid":
+				obj.AttackingEnid = n(data)
+			case "coords":
+				obj.Coords = string(data)
+			case "defending_enid":
+				obj.DefendingEnid = n(data)
+			case "feature_layer_id":
+				obj.FeatureLayerId = n(data)
+			case "ordinal":
+				obj.Ordinal = n(data)
+			case "parent_eventcol":
+				obj.ParentEventcol = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "subregion_id":
+				obj.SubregionId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionWar(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionWar, error) {
+	var (
+		obj  = HistoricalEventCollectionWar{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "aggressor_ent_id":
+				data = nil
+			case "defender_ent_id":
+				data = nil
+			case "name":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "aggressor_ent_id":
+				obj.AggressorEntId = n(data)
+			case "defender_ent_id":
+				obj.DefenderEntId = n(data)
+			case "name":
+				obj.Name_ = string(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -8586,6 +9598,55 @@ func parseHistoricalEventItemStolen(d *xml.Decoder, start *xml.StartElement) (*H
 		}
 	}
 }
+func parseHistoricalEventItemStolenCircumstance(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventItemStolenCircumstance, error) {
+	var (
+		obj  = HistoricalEventItemStolenCircumstance{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "defeated":
+				data = nil
+			case "hist_event_collection":
+				data = nil
+			case "murdered":
+				data = nil
+			case "type":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "defeated":
+				obj.Defeated = n(data)
+			case "hist_event_collection":
+				obj.HistEventCollection = n(data)
+			case "murdered":
+				obj.Murdered = n(data)
+			case "type":
+				obj.Type = string(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
 func parseHistoricalEventKnowledgeDiscovered(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventKnowledgeDiscovered, error) {
 	var (
 		obj  = HistoricalEventKnowledgeDiscovered{}
@@ -8625,6 +9686,120 @@ func parseHistoricalEventKnowledgeDiscovered(d *xml.Decoder, start *xml.StartEle
 				obj.Hfid = n(data)
 			case "knowledge":
 				obj.Knowledge = string(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventMasterpieceCreatedItem(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventMasterpieceCreatedItem, error) {
+	var (
+		obj  = HistoricalEventMasterpieceCreatedItem{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "item_id":
+				data = nil
+			case "item_subtype":
+				data = nil
+			case "item_type":
+				data = nil
+			case "maker":
+				data = nil
+			case "maker_entity":
+				data = nil
+			case "mat":
+				data = nil
+			case "mat_index":
+				data = nil
+			case "mat_type":
+				data = nil
+			case "site":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "item_id":
+				obj.ItemId = n(data)
+			case "item_subtype":
+				obj.ItemSubtype = string(data)
+			case "item_type":
+				obj.ItemType = string(data)
+			case "maker":
+				obj.Maker = n(data)
+			case "maker_entity":
+				obj.MakerEntity = n(data)
+			case "mat":
+				obj.Mat = string(data)
+			case "mat_index":
+				obj.MatIndex = n(data)
+			case "mat_type":
+				obj.MatType = n(data)
+			case "site":
+				obj.Site = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventMerchant(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventMerchant, error) {
+	var (
+		obj  = HistoricalEventMerchant{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "destination":
+				data = nil
+			case "site":
+				data = nil
+			case "source":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "destination":
+				obj.Destination = n(data)
+			case "site":
+				obj.Site = n(data)
+			case "source":
+				obj.Source = n(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -9235,6 +10410,108 @@ func parseHistoricalEventRegionpopIncorporatedIntoEntity(d *xml.Decoder, start *
 		}
 	}
 }
+func parseHistoricalEventRelationship(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRelationship, error) {
+	var (
+		obj  = HistoricalEventRelationship{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "event":
+				data = nil
+			case "relationship":
+				data = nil
+			case "source_hf":
+				data = nil
+			case "target_hf":
+				data = nil
+			case "year":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "event":
+				obj.Event = n(data)
+			case "relationship":
+				obj.Relationship = string(data)
+			case "source_hf":
+				obj.SourceHf = n(data)
+			case "target_hf":
+				obj.TargetHf = n(data)
+			case "year":
+				obj.Year = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventRelationshipSupplement(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRelationshipSupplement, error) {
+	var (
+		obj  = HistoricalEventRelationshipSupplement{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "event":
+				data = nil
+			case "occasion_type":
+				data = nil
+			case "site":
+				data = nil
+			case "unk_1":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "event":
+				obj.Event = n(data)
+			case "occasion_type":
+				obj.OccasionType = n(data)
+			case "site":
+				obj.Site = n(data)
+			case "unk_1":
+				obj.Unk1 = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
 func parseHistoricalEventRemoveHfEntityLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRemoveHfEntityLink, error) {
 	var (
 		obj  = HistoricalEventRemoveHfEntityLink{}
@@ -9838,1085 +11115,6 @@ func parseHistoricalEventWrittenContentComposed(d *xml.Decoder, start *xml.Start
 		}
 	}
 }
-func parseHistoricalEventCollection(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollection, error) {
-	var (
-		obj  = HistoricalEventCollection{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "end_seconds72":
-				data = nil
-			case "end_year":
-				data = nil
-			case "event":
-				data = nil
-			case "eventcol":
-				data = nil
-			case "id":
-				data = nil
-			case "start_seconds72":
-				data = nil
-			case "start_year":
-				data = nil
-			case "type":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "end_seconds72":
-				obj.EndSeconds72 = n(data)
-			case "end_year":
-				obj.EndYear = n(data)
-			case "event":
-				obj.Event = append(obj.Event, n(data))
-			case "eventcol":
-				obj.Eventcol = append(obj.Eventcol, n(data))
-			case "id":
-				obj.Id_ = n(data)
-			case "start_seconds72":
-				obj.StartSeconds72 = n(data)
-			case "start_year":
-				obj.StartYear = n(data)
-			case "type":
-				var err error
-				switch strcase.ToCamel(string(data)) {
-				case "Abduction":
-					obj.Details, err = parseHistoricalEventCollectionAbduction(d, start)
-				case "Battle":
-					obj.Details, err = parseHistoricalEventCollectionBattle(d, start)
-				case "BeastAttack":
-					obj.Details, err = parseHistoricalEventCollectionBeastAttack(d, start)
-				case "Ceremony":
-					obj.Details, err = parseHistoricalEventCollectionCeremony(d, start)
-				case "Competition":
-					obj.Details, err = parseHistoricalEventCollectionCompetition(d, start)
-				case "Duel":
-					obj.Details, err = parseHistoricalEventCollectionDuel(d, start)
-				case "EntityOverthrown":
-					obj.Details, err = parseHistoricalEventCollectionEntityOverthrown(d, start)
-				case "Journey":
-					obj.Details, err = parseHistoricalEventCollectionJourney(d, start)
-				case "Occasion":
-					obj.Details, err = parseHistoricalEventCollectionOccasion(d, start)
-				case "Performance":
-					obj.Details, err = parseHistoricalEventCollectionPerformance(d, start)
-				case "Persecution":
-					obj.Details, err = parseHistoricalEventCollectionPersecution(d, start)
-				case "Procession":
-					obj.Details, err = parseHistoricalEventCollectionProcession(d, start)
-				case "Purge":
-					obj.Details, err = parseHistoricalEventCollectionPurge(d, start)
-				case "SiteConquered":
-					obj.Details, err = parseHistoricalEventCollectionSiteConquered(d, start)
-				case "Theft":
-					obj.Details, err = parseHistoricalEventCollectionTheft(d, start)
-				case "War":
-					obj.Details, err = parseHistoricalEventCollectionWar(d, start)
-				default:
-					d.Skip()
-				}
-				if err != nil {
-					return nil, err
-				}
-				return &obj, nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionAbduction(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionAbduction, error) {
-	var (
-		obj  = HistoricalEventCollectionAbduction{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "attacking_enid":
-				data = nil
-			case "coords":
-				data = nil
-			case "defending_enid":
-				data = nil
-			case "feature_layer_id":
-				data = nil
-			case "ordinal":
-				data = nil
-			case "parent_eventcol":
-				data = nil
-			case "site_id":
-				data = nil
-			case "subregion_id":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "attacking_enid":
-				obj.AttackingEnid = n(data)
-			case "coords":
-				obj.Coords = string(data)
-			case "defending_enid":
-				obj.DefendingEnid = n(data)
-			case "feature_layer_id":
-				obj.FeatureLayerId = n(data)
-			case "ordinal":
-				obj.Ordinal = n(data)
-			case "parent_eventcol":
-				obj.ParentEventcol = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
-			case "subregion_id":
-				obj.SubregionId = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionBattle(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionBattle, error) {
-	var (
-		obj  = HistoricalEventCollectionBattle{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "a_support_merc_enid":
-				data = nil
-			case "a_support_merc_hfid":
-				data = nil
-			case "attacking_hfid":
-				data = nil
-			case "attacking_merc_enid":
-				data = nil
-			case "attacking_squad_animated":
-				data = nil
-			case "attacking_squad_deaths":
-				data = nil
-			case "attacking_squad_entity_pop":
-				data = nil
-			case "attacking_squad_number":
-				data = nil
-			case "attacking_squad_race":
-				data = nil
-			case "attacking_squad_site":
-				data = nil
-			case "company_merc":
-				data = nil
-			case "coords":
-				data = nil
-			case "d_support_merc_enid":
-				data = nil
-			case "d_support_merc_hfid":
-				data = nil
-			case "defending_hfid":
-				data = nil
-			case "defending_merc_enid":
-				data = nil
-			case "defending_squad_animated":
-				data = nil
-			case "defending_squad_deaths":
-				data = nil
-			case "defending_squad_entity_pop":
-				data = nil
-			case "defending_squad_number":
-				data = nil
-			case "defending_squad_race":
-				data = nil
-			case "defending_squad_site":
-				data = nil
-			case "feature_layer_id":
-				data = nil
-			case "individual_merc":
-				data = nil
-			case "name":
-				data = nil
-			case "noncom_hfid":
-				data = nil
-			case "outcome":
-				data = nil
-			case "site_id":
-				data = nil
-			case "subregion_id":
-				data = nil
-			case "war_eventcol":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "a_support_merc_enid":
-				obj.ASupportMercEnid = n(data)
-			case "a_support_merc_hfid":
-				obj.ASupportMercHfid = append(obj.ASupportMercHfid, n(data))
-			case "attacking_hfid":
-				obj.AttackingHfid = append(obj.AttackingHfid, n(data))
-			case "attacking_merc_enid":
-				obj.AttackingMercEnid = n(data)
-			case "attacking_squad_animated":
-				obj.AttackingSquadAnimated = append(obj.AttackingSquadAnimated, string(data))
-			case "attacking_squad_deaths":
-				obj.AttackingSquadDeaths = append(obj.AttackingSquadDeaths, n(data))
-			case "attacking_squad_entity_pop":
-				obj.AttackingSquadEntityPop = append(obj.AttackingSquadEntityPop, n(data))
-			case "attacking_squad_number":
-				obj.AttackingSquadNumber = append(obj.AttackingSquadNumber, n(data))
-			case "attacking_squad_race":
-				obj.AttackingSquadRace = append(obj.AttackingSquadRace, string(data))
-			case "attacking_squad_site":
-				obj.AttackingSquadSite = append(obj.AttackingSquadSite, n(data))
-			case "company_merc":
-				obj.CompanyMerc = append(obj.CompanyMerc, string(data))
-			case "coords":
-				obj.Coords = string(data)
-			case "d_support_merc_enid":
-				obj.DSupportMercEnid = n(data)
-			case "d_support_merc_hfid":
-				obj.DSupportMercHfid = append(obj.DSupportMercHfid, n(data))
-			case "defending_hfid":
-				obj.DefendingHfid = append(obj.DefendingHfid, n(data))
-			case "defending_merc_enid":
-				obj.DefendingMercEnid = n(data)
-			case "defending_squad_animated":
-				obj.DefendingSquadAnimated = append(obj.DefendingSquadAnimated, string(data))
-			case "defending_squad_deaths":
-				obj.DefendingSquadDeaths = append(obj.DefendingSquadDeaths, n(data))
-			case "defending_squad_entity_pop":
-				obj.DefendingSquadEntityPop = append(obj.DefendingSquadEntityPop, n(data))
-			case "defending_squad_number":
-				obj.DefendingSquadNumber = append(obj.DefendingSquadNumber, n(data))
-			case "defending_squad_race":
-				obj.DefendingSquadRace = append(obj.DefendingSquadRace, string(data))
-			case "defending_squad_site":
-				obj.DefendingSquadSite = append(obj.DefendingSquadSite, n(data))
-			case "feature_layer_id":
-				obj.FeatureLayerId = n(data)
-			case "individual_merc":
-				obj.IndividualMerc = append(obj.IndividualMerc, string(data))
-			case "name":
-				obj.Name_ = string(data)
-			case "noncom_hfid":
-				obj.NoncomHfid = append(obj.NoncomHfid, n(data))
-			case "outcome":
-				obj.Outcome = string(data)
-			case "site_id":
-				obj.SiteId = n(data)
-			case "subregion_id":
-				obj.SubregionId = n(data)
-			case "war_eventcol":
-				obj.WarEventcol = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionBeastAttack(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionBeastAttack, error) {
-	var (
-		obj  = HistoricalEventCollectionBeastAttack{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "coords":
-				data = nil
-			case "defending_enid":
-				data = nil
-			case "feature_layer_id":
-				data = nil
-			case "ordinal":
-				data = nil
-			case "parent_eventcol":
-				data = nil
-			case "site_id":
-				data = nil
-			case "subregion_id":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "coords":
-				obj.Coords = string(data)
-			case "defending_enid":
-				obj.DefendingEnid = n(data)
-			case "feature_layer_id":
-				obj.FeatureLayerId = n(data)
-			case "ordinal":
-				obj.Ordinal = n(data)
-			case "parent_eventcol":
-				obj.ParentEventcol = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
-			case "subregion_id":
-				obj.SubregionId = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionCeremony(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionCeremony, error) {
-	var (
-		obj  = HistoricalEventCollectionCeremony{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "ordinal":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "ordinal":
-				obj.Ordinal = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionCompetition(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionCompetition, error) {
-	var (
-		obj  = HistoricalEventCollectionCompetition{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "ordinal":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "ordinal":
-				obj.Ordinal = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionDuel(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionDuel, error) {
-	var (
-		obj  = HistoricalEventCollectionDuel{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "attacking_hfid":
-				data = nil
-			case "coords":
-				data = nil
-			case "defending_hfid":
-				data = nil
-			case "feature_layer_id":
-				data = nil
-			case "ordinal":
-				data = nil
-			case "parent_eventcol":
-				data = nil
-			case "site_id":
-				data = nil
-			case "subregion_id":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "attacking_hfid":
-				obj.AttackingHfid = n(data)
-			case "coords":
-				obj.Coords = string(data)
-			case "defending_hfid":
-				obj.DefendingHfid = n(data)
-			case "feature_layer_id":
-				obj.FeatureLayerId = n(data)
-			case "ordinal":
-				obj.Ordinal = n(data)
-			case "parent_eventcol":
-				obj.ParentEventcol = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
-			case "subregion_id":
-				obj.SubregionId = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionEntityOverthrown(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionEntityOverthrown, error) {
-	var (
-		obj  = HistoricalEventCollectionEntityOverthrown{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "ordinal":
-				data = nil
-			case "site_id":
-				data = nil
-			case "target_entity_id":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "ordinal":
-				obj.Ordinal = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
-			case "target_entity_id":
-				obj.TargetEntityId = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionJourney(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionJourney, error) {
-	var (
-		obj  = HistoricalEventCollectionJourney{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "ordinal":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "ordinal":
-				obj.Ordinal = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionOccasion(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionOccasion, error) {
-	var (
-		obj  = HistoricalEventCollectionOccasion{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "civ_id":
-				data = nil
-			case "occasion_id":
-				data = nil
-			case "ordinal":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "civ_id":
-				obj.CivId = n(data)
-			case "occasion_id":
-				obj.OccasionId = n(data)
-			case "ordinal":
-				obj.Ordinal = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionPerformance(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionPerformance, error) {
-	var (
-		obj  = HistoricalEventCollectionPerformance{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "ordinal":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "ordinal":
-				obj.Ordinal = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionPersecution(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionPersecution, error) {
-	var (
-		obj  = HistoricalEventCollectionPersecution{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "ordinal":
-				data = nil
-			case "site_id":
-				data = nil
-			case "target_entity_id":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "ordinal":
-				obj.Ordinal = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
-			case "target_entity_id":
-				obj.TargetEntityId = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionProcession(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionProcession, error) {
-	var (
-		obj  = HistoricalEventCollectionProcession{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "ordinal":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "ordinal":
-				obj.Ordinal = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionPurge(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionPurge, error) {
-	var (
-		obj  = HistoricalEventCollectionPurge{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "adjective":
-				data = nil
-			case "ordinal":
-				data = nil
-			case "site_id":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "adjective":
-				obj.Adjective = string(data)
-			case "ordinal":
-				obj.Ordinal = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionSiteConquered(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionSiteConquered, error) {
-	var (
-		obj  = HistoricalEventCollectionSiteConquered{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "attacking_enid":
-				data = nil
-			case "defending_enid":
-				data = nil
-			case "ordinal":
-				data = nil
-			case "site_id":
-				data = nil
-			case "war_eventcol":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "attacking_enid":
-				obj.AttackingEnid = n(data)
-			case "defending_enid":
-				obj.DefendingEnid = n(data)
-			case "ordinal":
-				obj.Ordinal = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
-			case "war_eventcol":
-				obj.WarEventcol = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionTheft(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionTheft, error) {
-	var (
-		obj  = HistoricalEventCollectionTheft{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "attacking_enid":
-				data = nil
-			case "coords":
-				data = nil
-			case "defending_enid":
-				data = nil
-			case "feature_layer_id":
-				data = nil
-			case "ordinal":
-				data = nil
-			case "parent_eventcol":
-				data = nil
-			case "site_id":
-				data = nil
-			case "subregion_id":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "attacking_enid":
-				obj.AttackingEnid = n(data)
-			case "coords":
-				obj.Coords = string(data)
-			case "defending_enid":
-				obj.DefendingEnid = n(data)
-			case "feature_layer_id":
-				obj.FeatureLayerId = n(data)
-			case "ordinal":
-				obj.Ordinal = n(data)
-			case "parent_eventcol":
-				obj.ParentEventcol = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
-			case "subregion_id":
-				obj.SubregionId = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventCollectionWar(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionWar, error) {
-	var (
-		obj  = HistoricalEventCollectionWar{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "aggressor_ent_id":
-				data = nil
-			case "defender_ent_id":
-				data = nil
-			case "name":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "aggressor_ent_id":
-				obj.AggressorEntId = n(data)
-			case "defender_ent_id":
-				obj.DefenderEntId = n(data)
-			case "name":
-				obj.Name_ = string(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventRelationship(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRelationship, error) {
-	var (
-		obj  = HistoricalEventRelationship{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "event":
-				data = nil
-			case "relationship":
-				data = nil
-			case "source_hf":
-				data = nil
-			case "target_hf":
-				data = nil
-			case "year":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "event":
-				obj.Event = n(data)
-			case "relationship":
-				obj.Relationship = string(data)
-			case "source_hf":
-				obj.SourceHf = n(data)
-			case "target_hf":
-				obj.TargetHf = n(data)
-			case "year":
-				obj.Year = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventRelationshipSupplement(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRelationshipSupplement, error) {
-	var (
-		obj  = HistoricalEventRelationshipSupplement{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "event":
-				data = nil
-			case "occasion_type":
-				data = nil
-			case "site":
-				data = nil
-			case "unk_1":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "event":
-				obj.Event = n(data)
-			case "occasion_type":
-				obj.OccasionType = n(data)
-			case "site":
-				obj.Site = n(data)
-			case "unk_1":
-				obj.Unk1 = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
 func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*HistoricalFigure, error) {
 	var (
 		obj  = HistoricalFigure{}
@@ -11115,6 +11313,92 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 				obj.UsedIdentityId = append(obj.UsedIdentityId, n(data))
 			case "vague_relationship":
 
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalFigureEntityLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalFigureEntityLink, error) {
+	var (
+		obj  = HistoricalFigureEntityLink{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "entity_id":
+				data = nil
+			case "link_strength":
+				data = nil
+			case "link_type":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "entity_id":
+				obj.EntityId = n(data)
+			case "link_strength":
+				obj.LinkStrength = n(data)
+			case "link_type":
+				obj.LinkType = string(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalFigureSiteProperty(d *xml.Decoder, start *xml.StartElement) (*HistoricalFigureSiteProperty, error) {
+	var (
+		obj  = HistoricalFigureSiteProperty{}
+		data []byte
+	)
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "property_id":
+				data = nil
+			case "site_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return &obj, nil
+			}
+
+			switch t.Name.Local {
+			case "property_id":
+				obj.PropertyId = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -12184,8 +12468,8 @@ func parseSite(d *xml.Decoder, start *xml.StartElement) (*Site, error) {
 			case "rectangle":
 				data = nil
 			case "site_properties":
-				obj.SiteProperties = make(map[int]*SiteProperty)
-				parseMap(d, &obj.SiteProperties, parseSiteProperty)
+				obj.SiteProperties = make(map[int]*SiteSiteProperty)
+				parseMap(d, &obj.SiteProperties, parseSiteSiteProperty)
 			case "structures":
 				obj.Structures = make(map[int]*Structure)
 				parseMap(d, &obj.Structures, parseStructure)
@@ -12282,9 +12566,9 @@ func parseSiteLink(d *xml.Decoder, start *xml.StartElement) (*SiteLink, error) {
 		}
 	}
 }
-func parseSiteProperty(d *xml.Decoder, start *xml.StartElement) (*SiteProperty, error) {
+func parseSiteSiteProperty(d *xml.Decoder, start *xml.StartElement) (*SiteSiteProperty, error) {
 	var (
-		obj  = SiteProperty{}
+		obj  = SiteSiteProperty{}
 		data []byte
 	)
 	for {

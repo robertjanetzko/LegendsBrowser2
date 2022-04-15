@@ -30,7 +30,7 @@ type Field struct {
 	Legend      string  `json:"legend"`
 }
 
-func (f Field) TypeLine(objects map[string]Object) string {
+func (f Field) TypeLine() string {
 	n := f.Name
 
 	if n == "Id" || n == "Name" {
@@ -43,13 +43,13 @@ func (f Field) TypeLine(objects map[string]Object) string {
 	}
 	t := f.Type
 	if f.Type == "array" {
-		t = "[]*" + objects[*f.ElementType].Name
+		t = "[]*" + *f.ElementType
 	}
 	if f.Type == "map" {
-		t = "map[int]*" + objects[*f.ElementType].Name
+		t = "map[int]*" + *f.ElementType
 	}
 	if f.Type == "object" {
-		t = "*" + f.Name
+		t = "*" + *f.ElementType
 	}
 	j := fmt.Sprintf("`json:\"%s\" legend:\"%s\"`", strcase.ToLowerCamel(f.Name), f.Legend)
 	return fmt.Sprintf("%s %s%s %s", n, m, t, j)
@@ -72,15 +72,14 @@ func (f Field) StartAction() string {
 	}
 
 	if f.Type == "array" || f.Type == "map" {
-		el := strcase.ToCamel(*f.ElementType)
-		gen := fmt.Sprintf("parse%s", el)
+		gen := fmt.Sprintf("parse%s", *f.ElementType)
 
 		if f.Type == "array" {
 			return fmt.Sprintf("parseArray(d, &obj.%s, %s)", f.Name, gen)
 		}
 
 		if f.Type == "map" {
-			return fmt.Sprintf("obj.%s = make(map[int]*%s)\nparseMap(d, &obj.%s, %s)", f.Name, el, f.Name, gen)
+			return fmt.Sprintf("obj.%s = make(map[int]*%s)\nparseMap(d, &obj.%s, %s)", f.Name, *f.ElementType, f.Name, gen)
 		}
 	}
 
@@ -128,7 +127,7 @@ import (
 type {{ $obj.Name }} struct {
 	{{- range $fname, $field := $obj.Fields }}
 	{{- if not (and (eq $fname "type") (not (not $obj.SubTypes))) }}
-	{{ $field.TypeLine $.Objects }}
+	{{ $field.TypeLine }}
 	{{- end }}
 	{{- end }}
 	{{- if not (not $obj.SubTypes) }}
