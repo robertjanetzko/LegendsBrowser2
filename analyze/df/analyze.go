@@ -115,6 +115,8 @@ func createMetadata(a *AnalyzeData) (*Metadata, error) {
 							Type:     "int",
 							Multiple: a.Fields[f].Multiple,
 							Legend:   legend,
+							Base:     a.Fields[f].Base,
+							Plus:     a.Fields[f].Plus,
 						}
 						if ok, elements := isArray(f, fs); ok {
 							el := typeNames[elements]
@@ -141,7 +143,7 @@ func createMetadata(a *AnalyzeData) (*Metadata, error) {
 				Id:        a.Fields[k+PATH_SEPARATOR+"id"] != nil,
 				Named:     a.Fields[k+PATH_SEPARATOR+"name"] != nil,
 				Typed:     a.Fields[k+PATH_SEPARATOR+"type"] != nil,
-				SubTypes:  getSubtypes(objectTypes, k),
+				SubTypes:  getSubtypes(a, k),
 				SubTypeOf: getSubtypeOf(k),
 				Fields:    objFields,
 			}
@@ -172,20 +174,15 @@ func filterSubtypes(data *map[string]*FieldData) []string {
 	return list
 }
 
-func getSubtypes(objectTypes []string, k string) *[]string {
-	subtypes := make(map[string]bool)
-
-	for _, t := range objectTypes {
-		if strings.HasPrefix(t, k+"+") && !strings.Contains(t[len(k):], PATH_SEPARATOR) {
-			subtypes[t[strings.LastIndex(t, "+")+1:]] = true
+func getSubtypes(a *AnalyzeData, k string) *[]Subtype {
+	if allowedTyped[k] {
+		if st, ok := a.SubTypes[k]; ok {
+			var list []Subtype
+			for _, v := range *st {
+				list = append(list, *v)
+			}
+			return &list
 		}
-	}
-
-	keys := util.Keys(subtypes)
-	sort.Strings(keys)
-
-	if len(keys) > 0 {
-		return &keys
 	}
 
 	return nil

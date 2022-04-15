@@ -3,7 +3,7 @@ package model
 
 import (
 	"encoding/xml"
-	"github.com/iancoleman/strcase"
+	"fmt"
 	"strconv"
 )
 
@@ -191,7 +191,7 @@ func (x *DfWorld) Name() string { return x.Name_ }
 type Entity struct {
 	Child                    []int                       `json:"child" legend:"plus"`
 	Claims                   string                      `json:"claims" legend:"plus"`
-	EntityLink               *EntityEntityLink           `json:"entityLink" legend:"plus"`
+	EntityLink               []*EntityEntityLink         `json:"entityLink" legend:"plus"`
 	EntityPosition           []*EntityPosition           `json:"entityPosition" legend:"plus"`
 	EntityPositionAssignment []*EntityPositionAssignment `json:"entityPositionAssignment" legend:"plus"`
 	HistfigId                []int                       `json:"histfigId" legend:"plus"`
@@ -497,14 +497,6 @@ type HistoricalEventCeremony struct {
 	SiteId         int `json:"siteId" legend:"base"`
 	SubregionId    int `json:"subregionId" legend:"base"`
 }
-type HistoricalEventChangeCreatureType struct {
-	Changee  int    `json:"changee" legend:"plus"`
-	Changer  int    `json:"changer" legend:"plus"`
-	NewCaste int    `json:"newCaste" legend:"plus"`
-	NewRace  string `json:"newRace" legend:"plus"`
-	OldCaste int    `json:"oldCaste" legend:"plus"`
-	OldRace  string `json:"oldRace" legend:"plus"`
-}
 type HistoricalEventChangeHfBodyState struct {
 	BodyState      string `json:"bodyState" legend:"base"`
 	Coords         string `json:"coords" legend:"base"`
@@ -535,12 +527,14 @@ type HistoricalEventChangeHfState struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
 type HistoricalEventChangedCreatureType struct {
+	Changee     int    `json:"changee" legend:"plus"`
 	ChangeeHfid int    `json:"changeeHfid" legend:"base"`
+	Changer     int    `json:"changer" legend:"plus"`
 	ChangerHfid int    `json:"changerHfid" legend:"base"`
-	NewCaste    string `json:"newCaste" legend:"base"`
-	NewRace     string `json:"newRace" legend:"base"`
-	OldCaste    string `json:"oldCaste" legend:"base"`
-	OldRace     string `json:"oldRace" legend:"base"`
+	NewCaste    string `json:"newCaste" legend:"both"`
+	NewRace     string `json:"newRace" legend:"both"`
+	OldCaste    string `json:"oldCaste" legend:"both"`
+	OldRace     string `json:"oldRace" legend:"both"`
 }
 type HistoricalEventCollection struct {
 	EndSeconds72   int   `json:"endSeconds72" legend:"base"`
@@ -696,14 +690,6 @@ type HistoricalEventCreateEntityPosition struct {
 	Reason   string `json:"reason" legend:"plus"`
 	SiteCiv  int    `json:"siteCiv" legend:"plus"`
 }
-type HistoricalEventCreatedBuilding struct {
-	BuilderHf int    `json:"builderHf" legend:"plus"`
-	Civ       int    `json:"civ" legend:"plus"`
-	Rebuild   string `json:"rebuild" legend:"plus"`
-	Site      int    `json:"site" legend:"plus"`
-	SiteCiv   int    `json:"siteCiv" legend:"plus"`
-	Structure int    `json:"structure" legend:"plus"`
-}
 type HistoricalEventCreatedSite struct {
 	BuilderHfid   int `json:"builderHfid" legend:"base"`
 	CivId         int `json:"civId" legend:"base"`
@@ -712,11 +698,17 @@ type HistoricalEventCreatedSite struct {
 	SiteId        int `json:"siteId" legend:"base"`
 }
 type HistoricalEventCreatedStructure struct {
+	BuilderHf   int    `json:"builderHf" legend:"plus"`
 	BuilderHfid int    `json:"builderHfid" legend:"base"`
+	Civ         int    `json:"civ" legend:"plus"`
 	CivId       int    `json:"civId" legend:"base"`
+	Rebuild     string `json:"rebuild" legend:"plus"`
 	Rebuilt     string `json:"rebuilt" legend:"base"`
+	Site        int    `json:"site" legend:"plus"`
+	SiteCiv     int    `json:"siteCiv" legend:"plus"`
 	SiteCivId   int    `json:"siteCivId" legend:"base"`
 	SiteId      int    `json:"siteId" legend:"base"`
+	Structure   int    `json:"structure" legend:"plus"`
 	StructureId int    `json:"structureId" legend:"base"`
 }
 type HistoricalEventCreatedWorldConstruction struct {
@@ -752,12 +744,6 @@ type HistoricalEventDestroyedSite struct {
 	DefenderCivId int `json:"defenderCivId" legend:"base"`
 	SiteCivId     int `json:"siteCivId" legend:"base"`
 	SiteId        int `json:"siteId" legend:"base"`
-}
-type HistoricalEventEntityAction struct {
-	Action    string `json:"action" legend:"plus"`
-	Entity    int    `json:"entity" legend:"plus"`
-	Site      int    `json:"site" legend:"plus"`
-	Structure int    `json:"structure" legend:"plus"`
 }
 type HistoricalEventEntityAllianceFormed struct {
 	InitiatingEnid int   `json:"initiatingEnid" legend:"base"`
@@ -820,14 +806,22 @@ type HistoricalEventEntityPersecuted struct {
 	TargetEnid                  int   `json:"targetEnid" legend:"base"`
 }
 type HistoricalEventEntityPrimaryCriminals struct {
-	EntityId    int `json:"entityId" legend:"base"`
-	SiteId      int `json:"siteId" legend:"base"`
-	StructureId int `json:"structureId" legend:"base"`
+	Action      string `json:"action" legend:"plus"`
+	Entity      int    `json:"entity" legend:"plus"`
+	EntityId    int    `json:"entityId" legend:"base"`
+	Site        int    `json:"site" legend:"plus"`
+	SiteId      int    `json:"siteId" legend:"base"`
+	Structure   int    `json:"structure" legend:"plus"`
+	StructureId int    `json:"structureId" legend:"base"`
 }
 type HistoricalEventEntityRelocate struct {
-	EntityId    int `json:"entityId" legend:"base"`
-	SiteId      int `json:"siteId" legend:"base"`
-	StructureId int `json:"structureId" legend:"base"`
+	Action      string `json:"action" legend:"plus"`
+	Entity      int    `json:"entity" legend:"plus"`
+	EntityId    int    `json:"entityId" legend:"base"`
+	Site        int    `json:"site" legend:"plus"`
+	SiteId      int    `json:"siteId" legend:"base"`
+	Structure   int    `json:"structure" legend:"plus"`
+	StructureId int    `json:"structureId" legend:"base"`
 }
 type HistoricalEventFailedFrameAttempt struct {
 	ConvicterEnid int    `json:"convicterEnid" legend:"base"`
@@ -891,12 +885,6 @@ type HistoricalEventHfAbducted struct {
 	SubregionId    int `json:"subregionId" legend:"base"`
 	TargetHfid     int `json:"targetHfid" legend:"base"`
 }
-type HistoricalEventHfActOnBuilding struct {
-	Action    string `json:"action" legend:"plus"`
-	Histfig   int    `json:"histfig" legend:"plus"`
-	Site      int    `json:"site" legend:"plus"`
-	Structure int    `json:"structure" legend:"plus"`
-}
 type HistoricalEventHfAttackedSite struct {
 	AttackerHfid  int `json:"attackerHfid" legend:"base"`
 	DefenderCivId int `json:"defenderCivId" legend:"base"`
@@ -945,21 +933,32 @@ type HistoricalEventHfDestroyedSite struct {
 	SiteId        int `json:"siteId" legend:"base"`
 }
 type HistoricalEventHfDied struct {
+	ArtifactId          int    `json:"artifactId" legend:"plus"`
 	Cause               string `json:"cause" legend:"base"`
+	DeathCause          string `json:"deathCause" legend:"plus"`
 	FeatureLayerId      int    `json:"featureLayerId" legend:"base"`
 	Hfid                int    `json:"hfid" legend:"base"`
+	Item                int    `json:"item" legend:"plus"`
+	ItemType            string `json:"itemType" legend:"plus"`
+	Site                int    `json:"site" legend:"plus"`
 	SiteId              int    `json:"siteId" legend:"base"`
-	SlayerCaste         string `json:"slayerCaste" legend:"base"`
+	SlayerCaste         string `json:"slayerCaste" legend:"both"`
+	SlayerHf            int    `json:"slayerHf" legend:"plus"`
 	SlayerHfid          int    `json:"slayerHfid" legend:"base"`
 	SlayerItemId        int    `json:"slayerItemId" legend:"base"`
-	SlayerRace          string `json:"slayerRace" legend:"base"`
+	SlayerRace          string `json:"slayerRace" legend:"both"`
 	SlayerShooterItemId int    `json:"slayerShooterItemId" legend:"base"`
 	SubregionId         int    `json:"subregionId" legend:"base"`
+	VictimHf            int    `json:"victimHf" legend:"plus"`
 }
 type HistoricalEventHfDisturbedStructure struct {
-	HistFigId   int `json:"histFigId" legend:"base"`
-	SiteId      int `json:"siteId" legend:"base"`
-	StructureId int `json:"structureId" legend:"base"`
+	Action      string `json:"action" legend:"plus"`
+	HistFigId   int    `json:"histFigId" legend:"base"`
+	Histfig     int    `json:"histfig" legend:"plus"`
+	Site        int    `json:"site" legend:"plus"`
+	SiteId      int    `json:"siteId" legend:"base"`
+	Structure   int    `json:"structure" legend:"plus"`
+	StructureId int    `json:"structureId" legend:"base"`
 }
 type HistoricalEventHfDoesInteraction struct {
 	Doer              int    `json:"doer" legend:"plus"`
@@ -1010,7 +1009,10 @@ type HistoricalEventHfLearnsSecret struct {
 type HistoricalEventHfNewPet struct {
 	Coords         string `json:"coords" legend:"base"`
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
+	Group          int    `json:"group" legend:"plus"`
 	GroupHfid      int    `json:"groupHfid" legend:"base"`
+	Pets           string `json:"pets" legend:"plus"`
+	Site           int    `json:"site" legend:"plus"`
 	SiteId         int    `json:"siteId" legend:"base"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
@@ -1022,9 +1024,13 @@ type HistoricalEventHfPerformedHorribleExperiments struct {
 	SubregionId    int `json:"subregionId" legend:"base"`
 }
 type HistoricalEventHfPrayedInsideStructure struct {
-	HistFigId   int `json:"histFigId" legend:"base"`
-	SiteId      int `json:"siteId" legend:"base"`
-	StructureId int `json:"structureId" legend:"base"`
+	Action      string `json:"action" legend:"plus"`
+	HistFigId   int    `json:"histFigId" legend:"base"`
+	Histfig     int    `json:"histfig" legend:"plus"`
+	Site        int    `json:"site" legend:"plus"`
+	SiteId      int    `json:"siteId" legend:"base"`
+	Structure   int    `json:"structure" legend:"plus"`
+	StructureId int    `json:"structureId" legend:"base"`
 }
 type HistoricalEventHfPreach struct {
 	Entity1     int    `json:"entity1" legend:"base"`
@@ -1034,9 +1040,13 @@ type HistoricalEventHfPreach struct {
 	Topic       string `json:"topic" legend:"base"`
 }
 type HistoricalEventHfProfanedStructure struct {
-	HistFigId   int `json:"histFigId" legend:"base"`
-	SiteId      int `json:"siteId" legend:"base"`
-	StructureId int `json:"structureId" legend:"base"`
+	Action      string `json:"action" legend:"plus"`
+	HistFigId   int    `json:"histFigId" legend:"base"`
+	Histfig     int    `json:"histfig" legend:"plus"`
+	Site        int    `json:"site" legend:"plus"`
+	SiteId      int    `json:"siteId" legend:"base"`
+	Structure   int    `json:"structure" legend:"plus"`
+	StructureId int    `json:"structureId" legend:"base"`
 }
 type HistoricalEventHfRecruitedUnitTypeForEntity struct {
 	EntityId       int    `json:"entityId" legend:"base"`
@@ -1094,11 +1104,19 @@ type HistoricalEventHfViewedArtifact struct {
 	StructureId int `json:"structureId" legend:"base"`
 }
 type HistoricalEventHfWounded struct {
-	FeatureLayerId int `json:"featureLayerId" legend:"base"`
-	SiteId         int `json:"siteId" legend:"base"`
-	SubregionId    int `json:"subregionId" legend:"base"`
-	WoundeeHfid    int `json:"woundeeHfid" legend:"base"`
-	WounderHfid    int `json:"wounderHfid" legend:"base"`
+	BodyPart       int    `json:"bodyPart" legend:"plus"`
+	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
+	InjuryType     string `json:"injuryType" legend:"plus"`
+	PartLost       string `json:"partLost" legend:"plus"`
+	Site           int    `json:"site" legend:"plus"`
+	SiteId         int    `json:"siteId" legend:"base"`
+	SubregionId    int    `json:"subregionId" legend:"base"`
+	Woundee        int    `json:"woundee" legend:"plus"`
+	WoundeeCaste   int    `json:"woundeeCaste" legend:"plus"`
+	WoundeeHfid    int    `json:"woundeeHfid" legend:"base"`
+	WoundeeRace    int    `json:"woundeeRace" legend:"plus"`
+	Wounder        int    `json:"wounder" legend:"plus"`
+	WounderHfid    int    `json:"wounderHfid" legend:"base"`
 }
 type HistoricalEventHfsFormedIntrigueRelationship struct {
 	Action                    string `json:"action" legend:"base"`
@@ -1143,32 +1161,6 @@ type HistoricalEventHfsFormedReputationRelationship struct {
 	SiteId         int    `json:"siteId" legend:"base"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
-type HistoricalEventHistFigureDied struct {
-	ArtifactId  int    `json:"artifactId" legend:"plus"`
-	DeathCause  string `json:"deathCause" legend:"plus"`
-	Item        int    `json:"item" legend:"plus"`
-	ItemType    string `json:"itemType" legend:"plus"`
-	Site        int    `json:"site" legend:"plus"`
-	SlayerCaste int    `json:"slayerCaste" legend:"plus"`
-	SlayerHf    int    `json:"slayerHf" legend:"plus"`
-	SlayerRace  int    `json:"slayerRace" legend:"plus"`
-	VictimHf    int    `json:"victimHf" legend:"plus"`
-}
-type HistoricalEventHistFigureNewPet struct {
-	Group int    `json:"group" legend:"plus"`
-	Pets  string `json:"pets" legend:"plus"`
-	Site  int    `json:"site" legend:"plus"`
-}
-type HistoricalEventHistFigureWounded struct {
-	BodyPart     int    `json:"bodyPart" legend:"plus"`
-	InjuryType   string `json:"injuryType" legend:"plus"`
-	PartLost     string `json:"partLost" legend:"plus"`
-	Site         int    `json:"site" legend:"plus"`
-	Woundee      int    `json:"woundee" legend:"plus"`
-	WoundeeCaste int    `json:"woundeeCaste" legend:"plus"`
-	WoundeeRace  int    `json:"woundeeRace" legend:"plus"`
-	Wounder      int    `json:"wounder" legend:"plus"`
-}
 type HistoricalEventHolyCityDeclaration struct {
 	ReligionId int `json:"religionId" legend:"base"`
 	SiteId     int `json:"siteId" legend:"base"`
@@ -1200,22 +1192,6 @@ type HistoricalEventKnowledgeDiscovered struct {
 	Hfid      int    `json:"hfid" legend:"base"`
 	Knowledge string `json:"knowledge" legend:"base"`
 }
-type HistoricalEventMasterpieceCreatedItem struct {
-	ItemId      int    `json:"itemId" legend:"plus"`
-	ItemSubtype string `json:"itemSubtype" legend:"plus"`
-	ItemType    string `json:"itemType" legend:"plus"`
-	Maker       int    `json:"maker" legend:"plus"`
-	MakerEntity int    `json:"makerEntity" legend:"plus"`
-	Mat         string `json:"mat" legend:"plus"`
-	MatIndex    int    `json:"matIndex" legend:"plus"`
-	MatType     int    `json:"matType" legend:"plus"`
-	Site        int    `json:"site" legend:"plus"`
-}
-type HistoricalEventMerchant struct {
-	Destination int `json:"destination" legend:"plus"`
-	Site        int `json:"site" legend:"plus"`
-	Source      int `json:"source" legend:"plus"`
-}
 type HistoricalEventModifiedBuilding struct {
 	Modification string `json:"modification" legend:"base"`
 	ModifierHfid int    `json:"modifierHfid" legend:"base"`
@@ -1240,10 +1216,18 @@ type HistoricalEventNewSiteLeader struct {
 	SiteId        int `json:"siteId" legend:"base"`
 }
 type HistoricalEventPeaceAccepted struct {
-	SiteId int `json:"siteId" legend:"base"`
+	Destination int    `json:"destination" legend:"plus"`
+	Site        int    `json:"site" legend:"plus"`
+	SiteId      int    `json:"siteId" legend:"base"`
+	Source      int    `json:"source" legend:"plus"`
+	Topic       string `json:"topic" legend:"plus"`
 }
 type HistoricalEventPeaceRejected struct {
-	SiteId int `json:"siteId" legend:"base"`
+	Destination int    `json:"destination" legend:"plus"`
+	Site        int    `json:"site" legend:"plus"`
+	SiteId      int    `json:"siteId" legend:"base"`
+	Source      int    `json:"source" legend:"plus"`
+	Topic       string `json:"topic" legend:"plus"`
 }
 type HistoricalEventPerformance struct {
 	CivId          int `json:"civId" legend:"base"`
@@ -1327,19 +1311,17 @@ type HistoricalEventRemoveHfSiteLink struct {
 	SiteId    int    `json:"siteId" legend:"base"`
 	Structure int    `json:"structure" legend:"plus"`
 }
-type HistoricalEventReplacedBuilding struct {
+type HistoricalEventReplacedStructure struct {
 	Civ          int `json:"civ" legend:"plus"`
+	CivId        int `json:"civId" legend:"base"`
+	NewAbId      int `json:"newAbId" legend:"base"`
 	NewStructure int `json:"newStructure" legend:"plus"`
+	OldAbId      int `json:"oldAbId" legend:"base"`
 	OldStructure int `json:"oldStructure" legend:"plus"`
 	Site         int `json:"site" legend:"plus"`
 	SiteCiv      int `json:"siteCiv" legend:"plus"`
-}
-type HistoricalEventReplacedStructure struct {
-	CivId     int `json:"civId" legend:"base"`
-	NewAbId   int `json:"newAbId" legend:"base"`
-	OldAbId   int `json:"oldAbId" legend:"base"`
-	SiteCivId int `json:"siteCivId" legend:"base"`
-	SiteId    int `json:"siteId" legend:"base"`
+	SiteCivId    int `json:"siteCivId" legend:"base"`
+	SiteId       int `json:"siteId" legend:"base"`
 }
 type HistoricalEventSiteDispute struct {
 	Dispute   string `json:"dispute" legend:"base"`
@@ -1364,18 +1346,6 @@ type HistoricalEventTrade struct {
 	SourceSiteId     int `json:"sourceSiteId" legend:"base"`
 	TraderEntityId   int `json:"traderEntityId" legend:"base"`
 	TraderHfid       int `json:"traderHfid" legend:"base"`
-}
-type HistoricalEventWarPeaceAccepted struct {
-	Destination int    `json:"destination" legend:"plus"`
-	Site        int    `json:"site" legend:"plus"`
-	Source      int    `json:"source" legend:"plus"`
-	Topic       string `json:"topic" legend:"plus"`
-}
-type HistoricalEventWarPeaceRejected struct {
-	Destination int    `json:"destination" legend:"plus"`
-	Site        int    `json:"site" legend:"plus"`
-	Source      int    `json:"source" legend:"plus"`
-	Topic       string `json:"topic" legend:"plus"`
 }
 type HistoricalEventWrittenContentComposed struct {
 	Circumstance   string `json:"circumstance" legend:"base"`
@@ -1494,17 +1464,17 @@ type IntrigueActor struct {
 	StrategyEppid            int    `json:"strategyEppid" legend:"base"`
 }
 type IntriguePlot struct {
-	ActorId           int          `json:"actorId" legend:"base"`
-	ArtifactId        int          `json:"artifactId" legend:"base"`
-	DelegatedPlotHfid int          `json:"delegatedPlotHfid" legend:"base"`
-	DelegatedPlotId   int          `json:"delegatedPlotId" legend:"base"`
-	EntityId          int          `json:"entityId" legend:"base"`
-	LocalId           int          `json:"localId" legend:"base"`
-	OnHold            string       `json:"onHold" legend:"base"`
-	ParentPlotHfid    int          `json:"parentPlotHfid" legend:"base"`
-	ParentPlotId      int          `json:"parentPlotId" legend:"base"`
-	PlotActor         []*PlotActor `json:"plotActor" legend:"base"`
-	Type              string       `json:"type" legend:"base"`
+	ActorId           int        `json:"actorId" legend:"base"`
+	ArtifactId        int        `json:"artifactId" legend:"base"`
+	DelegatedPlotHfid int        `json:"delegatedPlotHfid" legend:"base"`
+	DelegatedPlotId   int        `json:"delegatedPlotId" legend:"base"`
+	EntityId          int        `json:"entityId" legend:"base"`
+	LocalId           int        `json:"localId" legend:"base"`
+	OnHold            string     `json:"onHold" legend:"base"`
+	ParentPlotHfid    int        `json:"parentPlotHfid" legend:"base"`
+	ParentPlotId      int        `json:"parentPlotId" legend:"base"`
+	PlotActor         *PlotActor `json:"plotActor" legend:"base"`
+	Type              string     `json:"type" legend:"base"`
 }
 type Item struct {
 	NameString              string `json:"nameString" legend:"base"`
@@ -1668,7 +1638,7 @@ type Structure struct {
 	Id_              int    `json:"id" legend:"plus"`
 	Inhabitant       []int  `json:"inhabitant" legend:"plus"`
 	LocalId          int    `json:"localId" legend:"base"`
-	Name_            string `json:"name" legend:"plus"`
+	Name_            string `json:"name" legend:"base"`
 	Name2            string `json:"name2" legend:"plus"`
 	Religion         int    `json:"religion" legend:"plus"`
 	Subtype          string `json:"subtype" legend:"base"`
@@ -1739,9 +1709,10 @@ func n(d []byte) int {
 }
 func parseArtifact(d *xml.Decoder, start *xml.StartElement) (*Artifact, error) {
 	var (
-		obj  = Artifact{}
+		obj  = &Artifact{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -1763,25 +1734,13 @@ func parseArtifact(d *xml.Decoder, start *xml.StartElement) (*Artifact, error) {
 			case "item":
 				v, _ := parseItem(d, &t)
 				obj.Item = v
-			case "item_description":
-				data = nil
-			case "item_subtype":
-				data = nil
-			case "item_type":
-				data = nil
-			case "mat":
-				data = nil
 			case "name":
-				data = nil
-			case "page_count":
 				data = nil
 			case "site_id":
 				data = nil
 			case "structure_local_id":
 				data = nil
 			case "subregion_id":
-				data = nil
-			case "writing":
 				data = nil
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
@@ -1793,7 +1752,7 @@ func parseArtifact(d *xml.Decoder, start *xml.StartElement) (*Artifact, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -1809,6 +1768,66 @@ func parseArtifact(d *xml.Decoder, start *xml.StartElement) (*Artifact, error) {
 				obj.Id_ = n(data)
 			case "item":
 
+			case "name":
+				obj.Name_ = string(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "structure_local_id":
+				obj.StructureLocalId = n(data)
+			case "subregion_id":
+				obj.SubregionId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseArtifactPlus(d *xml.Decoder, start *xml.StartElement, obj *Artifact) (*Artifact, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &Artifact{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "id":
+				data = nil
+			case "item_description":
+				data = nil
+			case "item_subtype":
+				data = nil
+			case "item_type":
+				data = nil
+			case "mat":
+				data = nil
+			case "page_count":
+				data = nil
+			case "writing":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "id":
+				obj.Id_ = n(data)
 			case "item_description":
 				obj.ItemDescription = string(data)
 			case "item_subtype":
@@ -1817,16 +1836,8 @@ func parseArtifact(d *xml.Decoder, start *xml.StartElement) (*Artifact, error) {
 				obj.ItemType = string(data)
 			case "mat":
 				obj.Mat = string(data)
-			case "name":
-				obj.Name_ = string(data)
 			case "page_count":
 				obj.PageCount = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
-			case "structure_local_id":
-				obj.StructureLocalId = n(data)
-			case "subregion_id":
-				obj.SubregionId = n(data)
 			case "writing":
 				obj.Writing = n(data)
 			default:
@@ -1837,9 +1848,46 @@ func parseArtifact(d *xml.Decoder, start *xml.StartElement) (*Artifact, error) {
 }
 func parseCreature(d *xml.Decoder, start *xml.StartElement) (*Creature, error) {
 	var (
-		obj  = Creature{}
+		obj  = &Creature{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseCreaturePlus(d *xml.Decoder, start *xml.StartElement, obj *Creature) (*Creature, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &Creature{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -2096,7 +2144,7 @@ func parseCreature(d *xml.Decoder, start *xml.StartElement) (*Creature, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -2346,9 +2394,10 @@ func parseCreature(d *xml.Decoder, start *xml.StartElement) (*Creature, error) {
 }
 func parseDanceForm(d *xml.Decoder, start *xml.StartElement) (*DanceForm, error) {
 	var (
-		obj  = DanceForm{}
+		obj  = &DanceForm{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -2359,6 +2408,48 @@ func parseDanceForm(d *xml.Decoder, start *xml.StartElement) (*DanceForm, error)
 			switch t.Name.Local {
 			case "description":
 				data = nil
+			case "id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "description":
+				obj.Description = string(data)
+			case "id":
+				obj.Id_ = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseDanceFormPlus(d *xml.Decoder, start *xml.StartElement, obj *DanceForm) (*DanceForm, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &DanceForm{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
 			case "id":
 				data = nil
 			case "name":
@@ -2373,12 +2464,10 @@ func parseDanceForm(d *xml.Decoder, start *xml.StartElement) (*DanceForm, error)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "description":
-				obj.Description = string(data)
 			case "id":
 				obj.Id_ = n(data)
 			case "name":
@@ -2391,9 +2480,33 @@ func parseDanceForm(d *xml.Decoder, start *xml.StartElement) (*DanceForm, error)
 }
 func parseDfWorld(d *xml.Decoder, start *xml.StartElement) (*DfWorld, error) {
 	var (
-		obj  = DfWorld{}
+		obj  = &DfWorld{}
 		data []byte
 	)
+
+	obj.Artifacts = make(map[int]*Artifact)
+
+	obj.DanceForms = make(map[int]*DanceForm)
+	obj.Entities = make(map[int]*Entity)
+	obj.EntityPopulations = make(map[int]*EntityPopulation)
+
+	obj.HistoricalEventCollections = make(map[int]*HistoricalEventCollection)
+
+	obj.HistoricalEvents = make(map[int]*HistoricalEvent)
+	obj.HistoricalFigures = make(map[int]*HistoricalFigure)
+	obj.Identities = make(map[int]*Identity)
+	obj.Landmasses = make(map[int]*Landmass)
+	obj.MountainPeaks = make(map[int]*MountainPeak)
+	obj.MusicalForms = make(map[int]*MusicalForm)
+
+	obj.PoeticForms = make(map[int]*PoeticForm)
+	obj.Regions = make(map[int]*Region)
+
+	obj.Sites = make(map[int]*Site)
+	obj.UndergroundRegions = make(map[int]*UndergroundRegion)
+	obj.WorldConstructions = make(map[int]*WorldConstruction)
+	obj.WrittenContents = make(map[int]*WrittenContent)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -2402,70 +2515,35 @@ func parseDfWorld(d *xml.Decoder, start *xml.StartElement) (*DfWorld, error) {
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "altname":
-				data = nil
 			case "artifacts":
-				obj.Artifacts = make(map[int]*Artifact)
 				parseMap(d, &obj.Artifacts, parseArtifact)
-			case "creature_raw":
-				parseArray(d, &obj.CreatureRaw, parseCreature)
 			case "dance_forms":
-				obj.DanceForms = make(map[int]*DanceForm)
 				parseMap(d, &obj.DanceForms, parseDanceForm)
 			case "entities":
-				obj.Entities = make(map[int]*Entity)
 				parseMap(d, &obj.Entities, parseEntity)
 			case "entity_populations":
-				obj.EntityPopulations = make(map[int]*EntityPopulation)
 				parseMap(d, &obj.EntityPopulations, parseEntityPopulation)
 			case "historical_eras":
 				parseArray(d, &obj.HistoricalEras, parseHistoricalEra)
 			case "historical_event_collections":
-				obj.HistoricalEventCollections = make(map[int]*HistoricalEventCollection)
 				parseMap(d, &obj.HistoricalEventCollections, parseHistoricalEventCollection)
-			case "historical_event_relationship_supplements":
-				parseArray(d, &obj.HistoricalEventRelationshipSupplements, parseHistoricalEventRelationshipSupplement)
-			case "historical_event_relationships":
-				parseArray(d, &obj.HistoricalEventRelationships, parseHistoricalEventRelationship)
 			case "historical_events":
-				obj.HistoricalEvents = make(map[int]*HistoricalEvent)
 				parseMap(d, &obj.HistoricalEvents, parseHistoricalEvent)
 			case "historical_figures":
-				obj.HistoricalFigures = make(map[int]*HistoricalFigure)
 				parseMap(d, &obj.HistoricalFigures, parseHistoricalFigure)
-			case "identities":
-				obj.Identities = make(map[int]*Identity)
-				parseMap(d, &obj.Identities, parseIdentity)
-			case "landmasses":
-				obj.Landmasses = make(map[int]*Landmass)
-				parseMap(d, &obj.Landmasses, parseLandmass)
-			case "mountain_peaks":
-				obj.MountainPeaks = make(map[int]*MountainPeak)
-				parseMap(d, &obj.MountainPeaks, parseMountainPeak)
 			case "musical_forms":
-				obj.MusicalForms = make(map[int]*MusicalForm)
 				parseMap(d, &obj.MusicalForms, parseMusicalForm)
-			case "name":
-				data = nil
 			case "poetic_forms":
-				obj.PoeticForms = make(map[int]*PoeticForm)
 				parseMap(d, &obj.PoeticForms, parsePoeticForm)
 			case "regions":
-				obj.Regions = make(map[int]*Region)
 				parseMap(d, &obj.Regions, parseRegion)
-			case "rivers":
-				parseArray(d, &obj.Rivers, parseRiver)
 			case "sites":
-				obj.Sites = make(map[int]*Site)
 				parseMap(d, &obj.Sites, parseSite)
 			case "underground_regions":
-				obj.UndergroundRegions = make(map[int]*UndergroundRegion)
 				parseMap(d, &obj.UndergroundRegions, parseUndergroundRegion)
 			case "world_constructions":
-				obj.WorldConstructions = make(map[int]*WorldConstruction)
 				parseMap(d, &obj.WorldConstructions, parseWorldConstruction)
 			case "written_contents":
-				obj.WrittenContents = make(map[int]*WrittenContent)
 				parseMap(d, &obj.WrittenContents, parseWrittenContent)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
@@ -2477,7 +2555,121 @@ func parseDfWorld(d *xml.Decoder, start *xml.StartElement) (*DfWorld, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "artifacts":
+
+			case "dance_forms":
+
+			case "entities":
+
+			case "entity_populations":
+
+			case "historical_eras":
+
+			case "historical_event_collections":
+
+			case "historical_events":
+
+			case "historical_figures":
+
+			case "musical_forms":
+
+			case "poetic_forms":
+
+			case "regions":
+
+			case "sites":
+
+			case "underground_regions":
+
+			case "world_constructions":
+
+			case "written_contents":
+
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseDfWorldPlus(d *xml.Decoder, start *xml.StartElement, obj *DfWorld) (*DfWorld, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &DfWorld{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "altname":
+				data = nil
+			case "artifacts":
+				parseMapPlus(d, &obj.Artifacts, parseArtifactPlus)
+			case "creature_raw":
+				parseArray(d, &obj.CreatureRaw, parseCreature)
+			case "dance_forms":
+				parseMapPlus(d, &obj.DanceForms, parseDanceFormPlus)
+			case "entities":
+				parseMapPlus(d, &obj.Entities, parseEntityPlus)
+			case "entity_populations":
+				parseMapPlus(d, &obj.EntityPopulations, parseEntityPopulationPlus)
+			case "historical_eras":
+				parseArray(d, &obj.HistoricalEras, parseHistoricalEra)
+			case "historical_event_collections":
+				parseMapPlus(d, &obj.HistoricalEventCollections, parseHistoricalEventCollectionPlus)
+			case "historical_event_relationship_supplements":
+				parseArray(d, &obj.HistoricalEventRelationshipSupplements, parseHistoricalEventRelationshipSupplement)
+			case "historical_event_relationships":
+				parseArray(d, &obj.HistoricalEventRelationships, parseHistoricalEventRelationship)
+			case "historical_events":
+				parseMapPlus(d, &obj.HistoricalEvents, parseHistoricalEventPlus)
+			case "historical_figures":
+				parseMapPlus(d, &obj.HistoricalFigures, parseHistoricalFigurePlus)
+			case "identities":
+				parseMapPlus(d, &obj.Identities, parseIdentityPlus)
+			case "landmasses":
+				parseMapPlus(d, &obj.Landmasses, parseLandmassPlus)
+			case "mountain_peaks":
+				parseMapPlus(d, &obj.MountainPeaks, parseMountainPeakPlus)
+			case "musical_forms":
+				parseMapPlus(d, &obj.MusicalForms, parseMusicalFormPlus)
+			case "name":
+				data = nil
+			case "poetic_forms":
+				parseMapPlus(d, &obj.PoeticForms, parsePoeticFormPlus)
+			case "regions":
+				parseMapPlus(d, &obj.Regions, parseRegionPlus)
+			case "rivers":
+				parseArray(d, &obj.Rivers, parseRiver)
+			case "sites":
+				parseMapPlus(d, &obj.Sites, parseSitePlus)
+			case "underground_regions":
+				parseMapPlus(d, &obj.UndergroundRegions, parseUndergroundRegionPlus)
+			case "world_constructions":
+				parseMapPlus(d, &obj.WorldConstructions, parseWorldConstructionPlus)
+			case "written_contents":
+				parseMapPlus(d, &obj.WrittenContents, parseWrittenContentPlus)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -2537,9 +2729,59 @@ func parseDfWorld(d *xml.Decoder, start *xml.StartElement) (*DfWorld, error) {
 }
 func parseEntity(d *xml.Decoder, start *xml.StartElement) (*Entity, error) {
 	var (
-		obj  = Entity{}
+		obj  = &Entity{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "honor":
+				v, _ := parseHonor(d, &t)
+				obj.Honor = append(obj.Honor, v)
+			case "id":
+				data = nil
+			case "name":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "honor":
+
+			case "id":
+				obj.Id_ = n(data)
+			case "name":
+				obj.Name_ = string(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseEntityPlus(d *xml.Decoder, start *xml.StartElement, obj *Entity) (*Entity, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &Entity{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -2553,8 +2795,8 @@ func parseEntity(d *xml.Decoder, start *xml.StartElement) (*Entity, error) {
 			case "claims":
 				data = nil
 			case "entity_link":
-				v, _ := parseEntityLink(d, &t)
-				obj.EntityLink = v
+				v, _ := parseEntityEntityLink(d, &t)
+				obj.EntityLink = append(obj.EntityLink, v)
 			case "entity_position":
 				v, _ := parseEntityPosition(d, &t)
 				obj.EntityPosition = append(obj.EntityPosition, v)
@@ -2563,12 +2805,7 @@ func parseEntity(d *xml.Decoder, start *xml.StartElement) (*Entity, error) {
 				obj.EntityPositionAssignment = append(obj.EntityPositionAssignment, v)
 			case "histfig_id":
 				data = nil
-			case "honor":
-				v, _ := parseHonor(d, &t)
-				obj.Honor = append(obj.Honor, v)
 			case "id":
-				data = nil
-			case "name":
 				data = nil
 			case "occasion":
 				v, _ := parseOccasion(d, &t)
@@ -2593,7 +2830,7 @@ func parseEntity(d *xml.Decoder, start *xml.StartElement) (*Entity, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -2609,12 +2846,8 @@ func parseEntity(d *xml.Decoder, start *xml.StartElement) (*Entity, error) {
 
 			case "histfig_id":
 				obj.HistfigId = append(obj.HistfigId, n(data))
-			case "honor":
-
 			case "id":
 				obj.Id_ = n(data)
-			case "name":
-				obj.Name_ = string(data)
 			case "occasion":
 
 			case "profession":
@@ -2635,9 +2868,46 @@ func parseEntity(d *xml.Decoder, start *xml.StartElement) (*Entity, error) {
 }
 func parseEntityEntityLink(d *xml.Decoder, start *xml.StartElement) (*EntityEntityLink, error) {
 	var (
-		obj  = EntityEntityLink{}
+		obj  = &EntityEntityLink{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseEntityEntityLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *EntityEntityLink) (*EntityEntityLink, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &EntityEntityLink{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -2662,7 +2932,7 @@ func parseEntityEntityLink(d *xml.Decoder, start *xml.StartElement) (*EntityEnti
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -2680,9 +2950,10 @@ func parseEntityEntityLink(d *xml.Decoder, start *xml.StartElement) (*EntityEnti
 }
 func parseEntityFormerPositionLink(d *xml.Decoder, start *xml.StartElement) (*EntityFormerPositionLink, error) {
 	var (
-		obj  = EntityFormerPositionLink{}
+		obj  = &EntityFormerPositionLink{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -2709,7 +2980,7 @@ func parseEntityFormerPositionLink(d *xml.Decoder, start *xml.StartElement) (*En
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -2727,11 +2998,88 @@ func parseEntityFormerPositionLink(d *xml.Decoder, start *xml.StartElement) (*En
 		}
 	}
 }
-func parseEntityPopulation(d *xml.Decoder, start *xml.StartElement) (*EntityPopulation, error) {
+func parseEntityFormerPositionLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *EntityFormerPositionLink) (*EntityFormerPositionLink, error) {
 	var (
-		obj  = EntityPopulation{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &EntityFormerPositionLink{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseEntityPopulation(d *xml.Decoder, start *xml.StartElement) (*EntityPopulation, error) {
+	var (
+		obj  = &EntityPopulation{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "id":
+				obj.Id_ = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseEntityPopulationPlus(d *xml.Decoder, start *xml.StartElement, obj *EntityPopulation) (*EntityPopulation, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &EntityPopulation{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -2756,7 +3104,7 @@ func parseEntityPopulation(d *xml.Decoder, start *xml.StartElement) (*EntityPopu
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -2774,9 +3122,46 @@ func parseEntityPopulation(d *xml.Decoder, start *xml.StartElement) (*EntityPopu
 }
 func parseEntityPosition(d *xml.Decoder, start *xml.StartElement) (*EntityPosition, error) {
 	var (
-		obj  = EntityPosition{}
+		obj  = &EntityPosition{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseEntityPositionPlus(d *xml.Decoder, start *xml.StartElement, obj *EntityPosition) (*EntityPosition, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &EntityPosition{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -2809,7 +3194,7 @@ func parseEntityPosition(d *xml.Decoder, start *xml.StartElement) (*EntityPositi
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -2835,9 +3220,46 @@ func parseEntityPosition(d *xml.Decoder, start *xml.StartElement) (*EntityPositi
 }
 func parseEntityPositionAssignment(d *xml.Decoder, start *xml.StartElement) (*EntityPositionAssignment, error) {
 	var (
-		obj  = EntityPositionAssignment{}
+		obj  = &EntityPositionAssignment{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseEntityPositionAssignmentPlus(d *xml.Decoder, start *xml.StartElement, obj *EntityPositionAssignment) (*EntityPositionAssignment, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &EntityPositionAssignment{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -2864,7 +3286,7 @@ func parseEntityPositionAssignment(d *xml.Decoder, start *xml.StartElement) (*En
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -2884,9 +3306,10 @@ func parseEntityPositionAssignment(d *xml.Decoder, start *xml.StartElement) (*En
 }
 func parseEntityPositionLink(d *xml.Decoder, start *xml.StartElement) (*EntityPositionLink, error) {
 	var (
-		obj  = EntityPositionLink{}
+		obj  = &EntityPositionLink{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -2911,7 +3334,7 @@ func parseEntityPositionLink(d *xml.Decoder, start *xml.StartElement) (*EntityPo
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -2927,11 +3350,48 @@ func parseEntityPositionLink(d *xml.Decoder, start *xml.StartElement) (*EntityPo
 		}
 	}
 }
-func parseEntityReputation(d *xml.Decoder, start *xml.StartElement) (*EntityReputation, error) {
+func parseEntityPositionLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *EntityPositionLink) (*EntityPositionLink, error) {
 	var (
-		obj  = EntityReputation{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &EntityPositionLink{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseEntityReputation(d *xml.Decoder, start *xml.StartElement) (*EntityReputation, error) {
+	var (
+		obj  = &EntityReputation{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -2958,7 +3418,7 @@ func parseEntityReputation(d *xml.Decoder, start *xml.StartElement) (*EntityRepu
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -2976,11 +3436,48 @@ func parseEntityReputation(d *xml.Decoder, start *xml.StartElement) (*EntityRepu
 		}
 	}
 }
-func parseEntitySquadLink(d *xml.Decoder, start *xml.StartElement) (*EntitySquadLink, error) {
+func parseEntityReputationPlus(d *xml.Decoder, start *xml.StartElement, obj *EntityReputation) (*EntityReputation, error) {
 	var (
-		obj  = EntitySquadLink{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &EntityReputation{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseEntitySquadLink(d *xml.Decoder, start *xml.StartElement) (*EntitySquadLink, error) {
+	var (
+		obj  = &EntitySquadLink{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3007,7 +3504,7 @@ func parseEntitySquadLink(d *xml.Decoder, start *xml.StartElement) (*EntitySquad
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -3025,11 +3522,84 @@ func parseEntitySquadLink(d *xml.Decoder, start *xml.StartElement) (*EntitySquad
 		}
 	}
 }
-func parseFeature(d *xml.Decoder, start *xml.StartElement) (*Feature, error) {
+func parseEntitySquadLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *EntitySquadLink) (*EntitySquadLink, error) {
 	var (
-		obj  = Feature{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &EntitySquadLink{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseFeature(d *xml.Decoder, start *xml.StartElement) (*Feature, error) {
+	var (
+		obj  = &Feature{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseFeaturePlus(d *xml.Decoder, start *xml.StartElement, obj *Feature) (*Feature, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &Feature{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3052,7 +3622,7 @@ func parseFeature(d *xml.Decoder, start *xml.StartElement) (*Feature, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -3068,9 +3638,10 @@ func parseFeature(d *xml.Decoder, start *xml.StartElement) (*Feature, error) {
 }
 func parseHfLink(d *xml.Decoder, start *xml.StartElement) (*HfLink, error) {
 	var (
-		obj  = HfLink{}
+		obj  = &HfLink{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3095,7 +3666,7 @@ func parseHfLink(d *xml.Decoder, start *xml.StartElement) (*HfLink, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -3111,11 +3682,48 @@ func parseHfLink(d *xml.Decoder, start *xml.StartElement) (*HfLink, error) {
 		}
 	}
 }
-func parseHfSkill(d *xml.Decoder, start *xml.StartElement) (*HfSkill, error) {
+func parseHfLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *HfLink) (*HfLink, error) {
 	var (
-		obj  = HfSkill{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HfLink{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHfSkill(d *xml.Decoder, start *xml.StartElement) (*HfSkill, error) {
+	var (
+		obj  = &HfSkill{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3138,7 +3746,7 @@ func parseHfSkill(d *xml.Decoder, start *xml.StartElement) (*HfSkill, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -3152,11 +3760,48 @@ func parseHfSkill(d *xml.Decoder, start *xml.StartElement) (*HfSkill, error) {
 		}
 	}
 }
-func parseHistoricalEra(d *xml.Decoder, start *xml.StartElement) (*HistoricalEra, error) {
+func parseHfSkillPlus(d *xml.Decoder, start *xml.StartElement, obj *HfSkill) (*HfSkill, error) {
 	var (
-		obj  = HistoricalEra{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HfSkill{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEra(d *xml.Decoder, start *xml.StartElement) (*HistoricalEra, error) {
+	var (
+		obj  = &HistoricalEra{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3179,7 +3824,7 @@ func parseHistoricalEra(d *xml.Decoder, start *xml.StartElement) (*HistoricalEra
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -3193,11 +3838,48 @@ func parseHistoricalEra(d *xml.Decoder, start *xml.StartElement) (*HistoricalEra
 		}
 	}
 }
-func parseHistoricalEvent(d *xml.Decoder, start *xml.StartElement) (*HistoricalEvent, error) {
+func parseHistoricalEraPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEra) (*HistoricalEra, error) {
 	var (
-		obj  = HistoricalEvent{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEra{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEvent(d *xml.Decoder, start *xml.StartElement) (*HistoricalEvent, error) {
+	var (
+		obj  = &HistoricalEvent{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3224,7 +3906,7 @@ func parseHistoricalEvent(d *xml.Decoder, start *xml.StartElement) (*HistoricalE
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -3233,227 +3915,204 @@ func parseHistoricalEvent(d *xml.Decoder, start *xml.StartElement) (*HistoricalE
 			case "seconds72":
 				obj.Seconds72 = n(data)
 			case "type":
+
 				var err error
-				switch strcase.ToCamel(string(data)) {
-				case "AddHfEntityHonor":
+				switch string(data) {
+				case "add hf entity honor":
 					obj.Details, err = parseHistoricalEventAddHfEntityHonor(d, start)
-				case "AddHfEntityLink":
+				case "add hf entity link":
 					obj.Details, err = parseHistoricalEventAddHfEntityLink(d, start)
-				case "AddHfHfLink":
+				case "add hf hf link":
 					obj.Details, err = parseHistoricalEventAddHfHfLink(d, start)
-				case "AddHfSiteLink":
+				case "add hf site link":
 					obj.Details, err = parseHistoricalEventAddHfSiteLink(d, start)
-				case "AgreementFormed":
+				case "agreement formed":
 					obj.Details, err = parseHistoricalEventAgreementFormed(d, start)
-				case "ArtifactClaimFormed":
+				case "artifact claim formed":
 					obj.Details, err = parseHistoricalEventArtifactClaimFormed(d, start)
-				case "ArtifactCopied":
+				case "artifact copied":
 					obj.Details, err = parseHistoricalEventArtifactCopied(d, start)
-				case "ArtifactCreated":
+				case "artifact created":
 					obj.Details, err = parseHistoricalEventArtifactCreated(d, start)
-				case "ArtifactDestroyed":
+				case "artifact destroyed":
 					obj.Details, err = parseHistoricalEventArtifactDestroyed(d, start)
-				case "ArtifactFound":
+				case "artifact found":
 					obj.Details, err = parseHistoricalEventArtifactFound(d, start)
-				case "ArtifactGiven":
+				case "artifact given":
 					obj.Details, err = parseHistoricalEventArtifactGiven(d, start)
-				case "ArtifactLost":
+				case "artifact lost":
 					obj.Details, err = parseHistoricalEventArtifactLost(d, start)
-				case "ArtifactPossessed":
+				case "artifact possessed":
 					obj.Details, err = parseHistoricalEventArtifactPossessed(d, start)
-				case "ArtifactRecovered":
+				case "artifact recovered":
 					obj.Details, err = parseHistoricalEventArtifactRecovered(d, start)
-				case "ArtifactStored":
+				case "artifact stored":
 					obj.Details, err = parseHistoricalEventArtifactStored(d, start)
-				case "AssumeIdentity":
+				case "assume identity":
 					obj.Details, err = parseHistoricalEventAssumeIdentity(d, start)
-				case "AttackedSite":
+				case "attacked site":
 					obj.Details, err = parseHistoricalEventAttackedSite(d, start)
-				case "BodyAbused":
+				case "body abused":
 					obj.Details, err = parseHistoricalEventBodyAbused(d, start)
-				case "BuildingProfileAcquired":
+				case "building profile acquired":
 					obj.Details, err = parseHistoricalEventBuildingProfileAcquired(d, start)
-				case "Ceremony":
+				case "ceremony":
 					obj.Details, err = parseHistoricalEventCeremony(d, start)
-				case "ChangeCreatureType":
-					obj.Details, err = parseHistoricalEventChangeCreatureType(d, start)
-				case "ChangeHfBodyState":
+				case "change hf body state":
 					obj.Details, err = parseHistoricalEventChangeHfBodyState(d, start)
-				case "ChangeHfJob":
+				case "change hf job":
 					obj.Details, err = parseHistoricalEventChangeHfJob(d, start)
-				case "ChangeHfState":
+				case "change hf state":
 					obj.Details, err = parseHistoricalEventChangeHfState(d, start)
-				case "ChangedCreatureType":
+				case "changed creature type":
 					obj.Details, err = parseHistoricalEventChangedCreatureType(d, start)
-				case "Competition":
+				case "competition":
 					obj.Details, err = parseHistoricalEventCompetition(d, start)
-				case "CreateEntityPosition":
+				case "create entity position":
 					obj.Details, err = parseHistoricalEventCreateEntityPosition(d, start)
-				case "CreatedBuilding":
-					obj.Details, err = parseHistoricalEventCreatedBuilding(d, start)
-				case "CreatedSite":
+				case "created site":
 					obj.Details, err = parseHistoricalEventCreatedSite(d, start)
-				case "CreatedStructure":
+				case "created structure":
 					obj.Details, err = parseHistoricalEventCreatedStructure(d, start)
-				case "CreatedWorldConstruction":
+				case "created world construction":
 					obj.Details, err = parseHistoricalEventCreatedWorldConstruction(d, start)
-				case "CreatureDevoured":
+				case "creature devoured":
 					obj.Details, err = parseHistoricalEventCreatureDevoured(d, start)
-				case "DanceFormCreated":
+				case "dance form created":
 					obj.Details, err = parseHistoricalEventDanceFormCreated(d, start)
-				case "DestroyedSite":
+				case "destroyed site":
 					obj.Details, err = parseHistoricalEventDestroyedSite(d, start)
-				case "EntityAction":
-					obj.Details, err = parseHistoricalEventEntityAction(d, start)
-				case "EntityAllianceFormed":
+				case "entity alliance formed":
 					obj.Details, err = parseHistoricalEventEntityAllianceFormed(d, start)
-				case "EntityBreachFeatureLayer":
+				case "entity breach feature layer":
 					obj.Details, err = parseHistoricalEventEntityBreachFeatureLayer(d, start)
-				case "EntityCreated":
+				case "entity created":
 					obj.Details, err = parseHistoricalEventEntityCreated(d, start)
-				case "EntityDissolved":
+				case "entity dissolved":
 					obj.Details, err = parseHistoricalEventEntityDissolved(d, start)
-				case "EntityEquipmentPurchase":
+				case "entity equipment purchase":
 					obj.Details, err = parseHistoricalEventEntityEquipmentPurchase(d, start)
-				case "EntityIncorporated":
+				case "entity incorporated":
 					obj.Details, err = parseHistoricalEventEntityIncorporated(d, start)
-				case "EntityLaw":
+				case "entity law":
 					obj.Details, err = parseHistoricalEventEntityLaw(d, start)
-				case "EntityOverthrown":
+				case "entity overthrown":
 					obj.Details, err = parseHistoricalEventEntityOverthrown(d, start)
-				case "EntityPersecuted":
+				case "entity persecuted":
 					obj.Details, err = parseHistoricalEventEntityPersecuted(d, start)
-				case "EntityPrimaryCriminals":
+				case "entity primary criminals":
 					obj.Details, err = parseHistoricalEventEntityPrimaryCriminals(d, start)
-				case "EntityRelocate":
+				case "entity relocate":
 					obj.Details, err = parseHistoricalEventEntityRelocate(d, start)
-				case "FailedFrameAttempt":
+				case "failed frame attempt":
 					obj.Details, err = parseHistoricalEventFailedFrameAttempt(d, start)
-				case "FailedIntrigueCorruption":
+				case "failed intrigue corruption":
 					obj.Details, err = parseHistoricalEventFailedIntrigueCorruption(d, start)
-				case "FieldBattle":
+				case "field battle":
 					obj.Details, err = parseHistoricalEventFieldBattle(d, start)
-				case "Gamble":
+				case "gamble":
 					obj.Details, err = parseHistoricalEventGamble(d, start)
-				case "HfAbducted":
+				case "hf abducted":
 					obj.Details, err = parseHistoricalEventHfAbducted(d, start)
-				case "HfActOnBuilding":
-					obj.Details, err = parseHistoricalEventHfActOnBuilding(d, start)
-				case "HfAttackedSite":
+				case "hf attacked site":
 					obj.Details, err = parseHistoricalEventHfAttackedSite(d, start)
-				case "HfConfronted":
+				case "hf confronted":
 					obj.Details, err = parseHistoricalEventHfConfronted(d, start)
-				case "HfConvicted":
+				case "hf convicted":
 					obj.Details, err = parseHistoricalEventHfConvicted(d, start)
-				case "HfDestroyedSite":
+				case "hf destroyed site":
 					obj.Details, err = parseHistoricalEventHfDestroyedSite(d, start)
-				case "HfDied":
+				case "hf died":
 					obj.Details, err = parseHistoricalEventHfDied(d, start)
-				case "HfDisturbedStructure":
+				case "hf disturbed structure":
 					obj.Details, err = parseHistoricalEventHfDisturbedStructure(d, start)
-				case "HfDoesInteraction":
+				case "hf does interaction":
 					obj.Details, err = parseHistoricalEventHfDoesInteraction(d, start)
-				case "HfEnslaved":
+				case "hf enslaved":
 					obj.Details, err = parseHistoricalEventHfEnslaved(d, start)
-				case "HfEquipmentPurchase":
+				case "hf equipment purchase":
 					obj.Details, err = parseHistoricalEventHfEquipmentPurchase(d, start)
-				case "HfGainsSecretGoal":
+				case "hf gains secret goal":
 					obj.Details, err = parseHistoricalEventHfGainsSecretGoal(d, start)
-				case "HfInterrogated":
+				case "hf interrogated":
 					obj.Details, err = parseHistoricalEventHfInterrogated(d, start)
-				case "HfLearnsSecret":
+				case "hf learns secret":
 					obj.Details, err = parseHistoricalEventHfLearnsSecret(d, start)
-				case "HfNewPet":
+				case "hf new pet":
 					obj.Details, err = parseHistoricalEventHfNewPet(d, start)
-				case "HfPerformedHorribleExperiments":
+				case "hf performed horrible experiments":
 					obj.Details, err = parseHistoricalEventHfPerformedHorribleExperiments(d, start)
-				case "HfPrayedInsideStructure":
+				case "hf prayed inside structure":
 					obj.Details, err = parseHistoricalEventHfPrayedInsideStructure(d, start)
-				case "HfPreach":
+				case "hf preach":
 					obj.Details, err = parseHistoricalEventHfPreach(d, start)
-				case "HfProfanedStructure":
+				case "hf profaned structure":
 					obj.Details, err = parseHistoricalEventHfProfanedStructure(d, start)
-				case "HfRecruitedUnitTypeForEntity":
+				case "hf recruited unit type for entity":
 					obj.Details, err = parseHistoricalEventHfRecruitedUnitTypeForEntity(d, start)
-				case "HfRelationshipDenied":
+				case "hf relationship denied":
 					obj.Details, err = parseHistoricalEventHfRelationshipDenied(d, start)
-				case "HfReunion":
+				case "hf reunion":
 					obj.Details, err = parseHistoricalEventHfReunion(d, start)
-				case "HfRevived":
+				case "hf revived":
 					obj.Details, err = parseHistoricalEventHfRevived(d, start)
-				case "HfSimpleBattleEvent":
+				case "hf simple battle event":
 					obj.Details, err = parseHistoricalEventHfSimpleBattleEvent(d, start)
-				case "HfTravel":
+				case "hf travel":
 					obj.Details, err = parseHistoricalEventHfTravel(d, start)
-				case "HfViewedArtifact":
+				case "hf viewed artifact":
 					obj.Details, err = parseHistoricalEventHfViewedArtifact(d, start)
-				case "HfWounded":
+				case "hf wounded":
 					obj.Details, err = parseHistoricalEventHfWounded(d, start)
-				case "HfsFormedIntrigueRelationship":
+				case "hfs formed intrigue relationship":
 					obj.Details, err = parseHistoricalEventHfsFormedIntrigueRelationship(d, start)
-				case "HfsFormedReputationRelationship":
+				case "hfs formed reputation relationship":
 					obj.Details, err = parseHistoricalEventHfsFormedReputationRelationship(d, start)
-				case "HistFigureDied":
-					obj.Details, err = parseHistoricalEventHistFigureDied(d, start)
-				case "HistFigureNewPet":
-					obj.Details, err = parseHistoricalEventHistFigureNewPet(d, start)
-				case "HistFigureWounded":
-					obj.Details, err = parseHistoricalEventHistFigureWounded(d, start)
-				case "HolyCityDeclaration":
+				case "holy city declaration":
 					obj.Details, err = parseHistoricalEventHolyCityDeclaration(d, start)
-				case "ItemStolen":
+				case "item stolen":
 					obj.Details, err = parseHistoricalEventItemStolen(d, start)
-				case "KnowledgeDiscovered":
+				case "knowledge discovered":
 					obj.Details, err = parseHistoricalEventKnowledgeDiscovered(d, start)
-				case "MasterpieceCreatedItem":
-					obj.Details, err = parseHistoricalEventMasterpieceCreatedItem(d, start)
-				case "Merchant":
-					obj.Details, err = parseHistoricalEventMerchant(d, start)
-				case "ModifiedBuilding":
+				case "modified building":
 					obj.Details, err = parseHistoricalEventModifiedBuilding(d, start)
-				case "MusicalFormCreated":
+				case "musical form created":
 					obj.Details, err = parseHistoricalEventMusicalFormCreated(d, start)
-				case "NewSiteLeader":
+				case "new site leader":
 					obj.Details, err = parseHistoricalEventNewSiteLeader(d, start)
-				case "PeaceAccepted":
+				case "peace accepted":
 					obj.Details, err = parseHistoricalEventPeaceAccepted(d, start)
-				case "PeaceRejected":
+				case "peace rejected":
 					obj.Details, err = parseHistoricalEventPeaceRejected(d, start)
-				case "Performance":
+				case "performance":
 					obj.Details, err = parseHistoricalEventPerformance(d, start)
-				case "PlunderedSite":
+				case "plundered site":
 					obj.Details, err = parseHistoricalEventPlunderedSite(d, start)
-				case "PoeticFormCreated":
+				case "poetic form created":
 					obj.Details, err = parseHistoricalEventPoeticFormCreated(d, start)
-				case "Procession":
+				case "procession":
 					obj.Details, err = parseHistoricalEventProcession(d, start)
-				case "RazedStructure":
+				case "razed structure":
 					obj.Details, err = parseHistoricalEventRazedStructure(d, start)
-				case "ReclaimSite":
+				case "reclaim site":
 					obj.Details, err = parseHistoricalEventReclaimSite(d, start)
-				case "RegionpopIncorporatedIntoEntity":
+				case "regionpop incorporated into entity":
 					obj.Details, err = parseHistoricalEventRegionpopIncorporatedIntoEntity(d, start)
-				case "RemoveHfEntityLink":
+				case "remove hf entity link":
 					obj.Details, err = parseHistoricalEventRemoveHfEntityLink(d, start)
-				case "RemoveHfHfLink":
+				case "remove hf hf link":
 					obj.Details, err = parseHistoricalEventRemoveHfHfLink(d, start)
-				case "RemoveHfSiteLink":
+				case "remove hf site link":
 					obj.Details, err = parseHistoricalEventRemoveHfSiteLink(d, start)
-				case "ReplacedBuilding":
-					obj.Details, err = parseHistoricalEventReplacedBuilding(d, start)
-				case "ReplacedStructure":
+				case "replaced structure":
 					obj.Details, err = parseHistoricalEventReplacedStructure(d, start)
-				case "SiteDispute":
+				case "site dispute":
 					obj.Details, err = parseHistoricalEventSiteDispute(d, start)
-				case "SiteTakenOver":
+				case "site taken over":
 					obj.Details, err = parseHistoricalEventSiteTakenOver(d, start)
-				case "Trade":
+				case "trade":
 					obj.Details, err = parseHistoricalEventTrade(d, start)
-				case "WarPeaceAccepted":
-					obj.Details, err = parseHistoricalEventWarPeaceAccepted(d, start)
-				case "WarPeaceRejected":
-					obj.Details, err = parseHistoricalEventWarPeaceRejected(d, start)
-				case "WrittenContentComposed":
+				case "written content composed":
 					obj.Details, err = parseHistoricalEventWrittenContentComposed(d, start)
 				default:
 					d.Skip()
@@ -3461,7 +4120,7 @@ func parseHistoricalEvent(d *xml.Decoder, start *xml.StartElement) (*HistoricalE
 				if err != nil {
 					return nil, err
 				}
-				return &obj, nil
+				return obj, nil
 			case "year":
 				obj.Year = n(data)
 			default:
@@ -3470,11 +4129,133 @@ func parseHistoricalEvent(d *xml.Decoder, start *xml.StartElement) (*HistoricalE
 		}
 	}
 }
-func parseHistoricalEventAddHfEntityHonor(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventAddHfEntityHonor, error) {
+func parseHistoricalEventPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEvent) (*HistoricalEvent, error) {
 	var (
-		obj  = HistoricalEventAddHfEntityHonor{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEvent{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "id":
+				data = nil
+			case "type":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "id":
+				obj.Id_ = n(data)
+			case "type":
+
+				var err error
+				switch string(data) {
+				case "add_hf_entity_link":
+					obj.Details, err = parseHistoricalEventAddHfEntityLinkPlus(d, start, obj.Details.(*HistoricalEventAddHfEntityLink))
+				case "add_hf_hf_link":
+					obj.Details, err = parseHistoricalEventAddHfHfLinkPlus(d, start, obj.Details.(*HistoricalEventAddHfHfLink))
+				case "add_hf_site_link":
+					obj.Details, err = parseHistoricalEventAddHfSiteLinkPlus(d, start, obj.Details.(*HistoricalEventAddHfSiteLink))
+				case "artifact_created":
+					obj.Details, err = parseHistoricalEventArtifactCreatedPlus(d, start, obj.Details.(*HistoricalEventArtifactCreated))
+				case "assume_identity":
+					obj.Details, err = parseHistoricalEventAssumeIdentityPlus(d, start, obj.Details.(*HistoricalEventAssumeIdentity))
+				case "body_abused":
+					obj.Details, err = parseHistoricalEventBodyAbusedPlus(d, start, obj.Details.(*HistoricalEventBodyAbused))
+				case "change_creature_type":
+					obj.Details, err = parseHistoricalEventChangedCreatureTypePlus(d, start, obj.Details.(*HistoricalEventChangedCreatureType))
+				case "change_hf_job":
+					obj.Details, err = parseHistoricalEventChangeHfJobPlus(d, start, obj.Details.(*HistoricalEventChangeHfJob))
+				case "change_hf_state":
+					obj.Details, err = parseHistoricalEventChangeHfStatePlus(d, start, obj.Details.(*HistoricalEventChangeHfState))
+				case "create_entity_position":
+					obj.Details, err = parseHistoricalEventCreateEntityPositionPlus(d, start, obj.Details.(*HistoricalEventCreateEntityPosition))
+				case "created_building":
+					obj.Details, err = parseHistoricalEventCreatedStructurePlus(d, start, obj.Details.(*HistoricalEventCreatedStructure))
+				case "creature_devoured":
+					obj.Details, err = parseHistoricalEventCreatureDevouredPlus(d, start, obj.Details.(*HistoricalEventCreatureDevoured))
+				case "entity_action":
+					switch details := obj.Details.(type) {
+					case *HistoricalEventEntityRelocate:
+						obj.Details, err = parseHistoricalEventEntityRelocatePlus(d, start, details)
+					case *HistoricalEventEntityPrimaryCriminals:
+						obj.Details, err = parseHistoricalEventEntityPrimaryCriminalsPlus(d, start, details)
+					default:
+						fmt.Println("unknown subtype option", obj.Details)
+						d.Skip()
+					}
+				case "hf_act_on_building":
+					switch details := obj.Details.(type) {
+					case *HistoricalEventHfProfanedStructure:
+						obj.Details, err = parseHistoricalEventHfProfanedStructurePlus(d, start, details)
+					case *HistoricalEventHfDisturbedStructure:
+						obj.Details, err = parseHistoricalEventHfDisturbedStructurePlus(d, start, details)
+					case *HistoricalEventHfPrayedInsideStructure:
+						obj.Details, err = parseHistoricalEventHfPrayedInsideStructurePlus(d, start, details)
+					default:
+						fmt.Println("unknown subtype option", obj.Details)
+						d.Skip()
+					}
+				case "hf_does_interaction":
+					obj.Details, err = parseHistoricalEventHfDoesInteractionPlus(d, start, obj.Details.(*HistoricalEventHfDoesInteraction))
+				case "hf_learns_secret":
+					obj.Details, err = parseHistoricalEventHfLearnsSecretPlus(d, start, obj.Details.(*HistoricalEventHfLearnsSecret))
+				case "hist_figure_died":
+					obj.Details, err = parseHistoricalEventHfDiedPlus(d, start, obj.Details.(*HistoricalEventHfDied))
+				case "hist_figure_new_pet":
+					obj.Details, err = parseHistoricalEventHfNewPetPlus(d, start, obj.Details.(*HistoricalEventHfNewPet))
+				case "hist_figure_wounded":
+					obj.Details, err = parseHistoricalEventHfWoundedPlus(d, start, obj.Details.(*HistoricalEventHfWounded))
+				case "item_stolen":
+					obj.Details, err = parseHistoricalEventItemStolenPlus(d, start, obj.Details.(*HistoricalEventItemStolen))
+				case "remove_hf_entity_link":
+					obj.Details, err = parseHistoricalEventRemoveHfEntityLinkPlus(d, start, obj.Details.(*HistoricalEventRemoveHfEntityLink))
+				case "remove_hf_site_link":
+					obj.Details, err = parseHistoricalEventRemoveHfSiteLinkPlus(d, start, obj.Details.(*HistoricalEventRemoveHfSiteLink))
+				case "replaced_building":
+					obj.Details, err = parseHistoricalEventReplacedStructurePlus(d, start, obj.Details.(*HistoricalEventReplacedStructure))
+				case "war_peace_accepted":
+					obj.Details, err = parseHistoricalEventPeaceAcceptedPlus(d, start, obj.Details.(*HistoricalEventPeaceAccepted))
+				case "war_peace_rejected":
+					obj.Details, err = parseHistoricalEventPeaceRejectedPlus(d, start, obj.Details.(*HistoricalEventPeaceRejected))
+				default:
+					d.Skip()
+				}
+				if err != nil {
+					return nil, err
+				}
+				return obj, nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventAddHfEntityHonor(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventAddHfEntityHonor, error) {
+	var (
+		obj  = &HistoricalEventAddHfEntityHonor{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3499,7 +4280,7 @@ func parseHistoricalEventAddHfEntityHonor(d *xml.Decoder, start *xml.StartElemen
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -3515,11 +4296,48 @@ func parseHistoricalEventAddHfEntityHonor(d *xml.Decoder, start *xml.StartElemen
 		}
 	}
 }
-func parseHistoricalEventAddHfEntityLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventAddHfEntityLink, error) {
+func parseHistoricalEventAddHfEntityHonorPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventAddHfEntityHonor) (*HistoricalEventAddHfEntityHonor, error) {
 	var (
-		obj  = HistoricalEventAddHfEntityLink{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventAddHfEntityHonor{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventAddHfEntityLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventAddHfEntityLink, error) {
+	var (
+		obj  = &HistoricalEventAddHfEntityLink{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3530,19 +4348,11 @@ func parseHistoricalEventAddHfEntityLink(d *xml.Decoder, start *xml.StartElement
 			switch t.Name.Local {
 			case "appointer_hfid":
 				data = nil
-			case "civ":
-				data = nil
 			case "civ_id":
 				data = nil
 			case "hfid":
 				data = nil
-			case "histfig":
-				data = nil
 			case "link":
-				data = nil
-			case "link_type":
-				data = nil
-			case "position":
 				data = nil
 			case "position_id":
 				data = nil
@@ -3558,26 +4368,18 @@ func parseHistoricalEventAddHfEntityLink(d *xml.Decoder, start *xml.StartElement
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
 			case "appointer_hfid":
 				obj.AppointerHfid = n(data)
-			case "civ":
-				obj.Civ = n(data)
 			case "civ_id":
 				obj.CivId = n(data)
 			case "hfid":
 				obj.Hfid = n(data)
-			case "histfig":
-				obj.Histfig = n(data)
 			case "link":
 				obj.Link = string(data)
-			case "link_type":
-				obj.LinkType = string(data)
-			case "position":
-				obj.Position = string(data)
 			case "position_id":
 				obj.PositionId = n(data)
 			case "promise_to_hfid":
@@ -3588,11 +4390,116 @@ func parseHistoricalEventAddHfEntityLink(d *xml.Decoder, start *xml.StartElement
 		}
 	}
 }
-func parseHistoricalEventAddHfHfLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventAddHfHfLink, error) {
+func parseHistoricalEventAddHfEntityLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventAddHfEntityLink) (*HistoricalEventAddHfEntityLink, error) {
 	var (
-		obj  = HistoricalEventAddHfHfLink{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventAddHfEntityLink{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "appointer_hfid":
+				data = nil
+			case "civ":
+				data = nil
+			case "histfig":
+				data = nil
+			case "link_type":
+				data = nil
+			case "position":
+				data = nil
+			case "promise_to_hfid":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "appointer_hfid":
+				obj.AppointerHfid = n(data)
+			case "civ":
+				obj.Civ = n(data)
+			case "histfig":
+				obj.Histfig = n(data)
+			case "link_type":
+				obj.LinkType = string(data)
+			case "position":
+				obj.Position = string(data)
+			case "promise_to_hfid":
+				obj.PromiseToHfid = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventAddHfHfLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventAddHfHfLink, error) {
+	var (
+		obj  = &HistoricalEventAddHfHfLink{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "hfid":
+				data = nil
+			case "hfid_target":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "hfid":
+				obj.Hfid = n(data)
+			case "hfid_target":
+				obj.HfidTarget = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventAddHfHfLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventAddHfHfLink) (*HistoricalEventAddHfHfLink, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventAddHfHfLink{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3604,10 +4511,6 @@ func parseHistoricalEventAddHfHfLink(d *xml.Decoder, start *xml.StartElement) (*
 			case "hf":
 				data = nil
 			case "hf_target":
-				data = nil
-			case "hfid":
-				data = nil
-			case "hfid_target":
 				data = nil
 			case "link_type":
 				data = nil
@@ -3621,7 +4524,7 @@ func parseHistoricalEventAddHfHfLink(d *xml.Decoder, start *xml.StartElement) (*
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -3629,10 +4532,6 @@ func parseHistoricalEventAddHfHfLink(d *xml.Decoder, start *xml.StartElement) (*
 				obj.Hf = n(data)
 			case "hf_target":
 				obj.HfTarget = n(data)
-			case "hfid":
-				obj.Hfid = n(data)
-			case "hfid_target":
-				obj.HfidTarget = n(data)
 			case "link_type":
 				obj.LinkType = string(data)
 			default:
@@ -3643,9 +4542,50 @@ func parseHistoricalEventAddHfHfLink(d *xml.Decoder, start *xml.StartElement) (*
 }
 func parseHistoricalEventAddHfSiteLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventAddHfSiteLink, error) {
 	var (
-		obj  = HistoricalEventAddHfSiteLink{}
+		obj  = &HistoricalEventAddHfSiteLink{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "site_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "site_id":
+				obj.SiteId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventAddHfSiteLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventAddHfSiteLink) (*HistoricalEventAddHfSiteLink, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventAddHfSiteLink{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3662,8 +4602,6 @@ func parseHistoricalEventAddHfSiteLink(d *xml.Decoder, start *xml.StartElement) 
 				data = nil
 			case "site":
 				data = nil
-			case "site_id":
-				data = nil
 			case "structure":
 				data = nil
 			default:
@@ -3676,7 +4614,7 @@ func parseHistoricalEventAddHfSiteLink(d *xml.Decoder, start *xml.StartElement) 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -3688,8 +4626,6 @@ func parseHistoricalEventAddHfSiteLink(d *xml.Decoder, start *xml.StartElement) 
 				obj.LinkType = string(data)
 			case "site":
 				obj.Site = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
 			case "structure":
 				obj.Structure = n(data)
 			default:
@@ -3700,9 +4636,10 @@ func parseHistoricalEventAddHfSiteLink(d *xml.Decoder, start *xml.StartElement) 
 }
 func parseHistoricalEventAgreementFormed(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventAgreementFormed, error) {
 	var (
-		obj  = HistoricalEventAgreementFormed{}
+		obj  = &HistoricalEventAgreementFormed{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3761,7 +4698,7 @@ func parseHistoricalEventAgreementFormed(d *xml.Decoder, start *xml.StartElement
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -3811,11 +4748,48 @@ func parseHistoricalEventAgreementFormed(d *xml.Decoder, start *xml.StartElement
 		}
 	}
 }
-func parseHistoricalEventArtifactClaimFormed(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactClaimFormed, error) {
+func parseHistoricalEventAgreementFormedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventAgreementFormed) (*HistoricalEventAgreementFormed, error) {
 	var (
-		obj  = HistoricalEventArtifactClaimFormed{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventAgreementFormed{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventArtifactClaimFormed(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactClaimFormed, error) {
+	var (
+		obj  = &HistoricalEventArtifactClaimFormed{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3846,7 +4820,7 @@ func parseHistoricalEventArtifactClaimFormed(d *xml.Decoder, start *xml.StartEle
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -3868,11 +4842,48 @@ func parseHistoricalEventArtifactClaimFormed(d *xml.Decoder, start *xml.StartEle
 		}
 	}
 }
-func parseHistoricalEventArtifactCopied(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactCopied, error) {
+func parseHistoricalEventArtifactClaimFormedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventArtifactClaimFormed) (*HistoricalEventArtifactClaimFormed, error) {
 	var (
-		obj  = HistoricalEventArtifactCopied{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventArtifactClaimFormed{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventArtifactCopied(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactCopied, error) {
+	var (
+		obj  = &HistoricalEventArtifactCopied{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3907,7 +4918,7 @@ func parseHistoricalEventArtifactCopied(d *xml.Decoder, start *xml.StartElement)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -3933,11 +4944,48 @@ func parseHistoricalEventArtifactCopied(d *xml.Decoder, start *xml.StartElement)
 		}
 	}
 }
-func parseHistoricalEventArtifactCreated(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactCreated, error) {
+func parseHistoricalEventArtifactCopiedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventArtifactCopied) (*HistoricalEventArtifactCopied, error) {
 	var (
-		obj  = HistoricalEventArtifactCreated{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventArtifactCopied{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventArtifactCreated(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactCreated, error) {
+	var (
+		obj  = &HistoricalEventArtifactCreated{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -3948,22 +4996,9 @@ func parseHistoricalEventArtifactCreated(d *xml.Decoder, start *xml.StartElement
 			switch t.Name.Local {
 			case "artifact_id":
 				data = nil
-			case "circumstance":
-				v, _ := parseCircumstance(d, &t)
-				obj.Circumstance = v
-			case "creator_hfid":
-				data = nil
-			case "creator_unit_id":
-				data = nil
 			case "hist_figure_id":
 				data = nil
 			case "name_only":
-				data = nil
-			case "reason":
-				data = nil
-			case "sanctify_hf":
-				data = nil
-			case "site":
 				data = nil
 			case "site_id":
 				data = nil
@@ -3979,7 +5014,68 @@ func parseHistoricalEventArtifactCreated(d *xml.Decoder, start *xml.StartElement
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "artifact_id":
+				obj.ArtifactId = n(data)
+			case "hist_figure_id":
+				obj.HistFigureId = n(data)
+			case "name_only":
+				obj.NameOnly = string(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "unit_id":
+				obj.UnitId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventArtifactCreatedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventArtifactCreated) (*HistoricalEventArtifactCreated, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventArtifactCreated{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "artifact_id":
+				data = nil
+			case "circumstance":
+				v, _ := parseHistoricalEventArtifactCreatedCircumstance(d, &t)
+				obj.Circumstance = v
+			case "creator_hfid":
+				data = nil
+			case "creator_unit_id":
+				data = nil
+			case "reason":
+				data = nil
+			case "sanctify_hf":
+				data = nil
+			case "site":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -3991,20 +5087,12 @@ func parseHistoricalEventArtifactCreated(d *xml.Decoder, start *xml.StartElement
 				obj.CreatorHfid = n(data)
 			case "creator_unit_id":
 				obj.CreatorUnitId = n(data)
-			case "hist_figure_id":
-				obj.HistFigureId = n(data)
-			case "name_only":
-				obj.NameOnly = string(data)
 			case "reason":
 				obj.Reason = string(data)
 			case "sanctify_hf":
 				obj.SanctifyHf = n(data)
 			case "site":
 				obj.Site = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
-			case "unit_id":
-				obj.UnitId = n(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -4013,9 +5101,46 @@ func parseHistoricalEventArtifactCreated(d *xml.Decoder, start *xml.StartElement
 }
 func parseHistoricalEventArtifactCreatedCircumstance(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactCreatedCircumstance, error) {
 	var (
-		obj  = HistoricalEventArtifactCreatedCircumstance{}
+		obj  = &HistoricalEventArtifactCreatedCircumstance{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventArtifactCreatedCircumstancePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventArtifactCreatedCircumstance) (*HistoricalEventArtifactCreatedCircumstance, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventArtifactCreatedCircumstance{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4038,7 +5163,7 @@ func parseHistoricalEventArtifactCreatedCircumstance(d *xml.Decoder, start *xml.
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4054,9 +5179,10 @@ func parseHistoricalEventArtifactCreatedCircumstance(d *xml.Decoder, start *xml.
 }
 func parseHistoricalEventArtifactDestroyed(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactDestroyed, error) {
 	var (
-		obj  = HistoricalEventArtifactDestroyed{}
+		obj  = &HistoricalEventArtifactDestroyed{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4081,7 +5207,7 @@ func parseHistoricalEventArtifactDestroyed(d *xml.Decoder, start *xml.StartEleme
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4097,11 +5223,48 @@ func parseHistoricalEventArtifactDestroyed(d *xml.Decoder, start *xml.StartEleme
 		}
 	}
 }
-func parseHistoricalEventArtifactFound(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactFound, error) {
+func parseHistoricalEventArtifactDestroyedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventArtifactDestroyed) (*HistoricalEventArtifactDestroyed, error) {
 	var (
-		obj  = HistoricalEventArtifactFound{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventArtifactDestroyed{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventArtifactFound(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactFound, error) {
+	var (
+		obj  = &HistoricalEventArtifactFound{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4128,7 +5291,7 @@ func parseHistoricalEventArtifactFound(d *xml.Decoder, start *xml.StartElement) 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4146,11 +5309,48 @@ func parseHistoricalEventArtifactFound(d *xml.Decoder, start *xml.StartElement) 
 		}
 	}
 }
-func parseHistoricalEventArtifactGiven(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactGiven, error) {
+func parseHistoricalEventArtifactFoundPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventArtifactFound) (*HistoricalEventArtifactFound, error) {
 	var (
-		obj  = HistoricalEventArtifactGiven{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventArtifactFound{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventArtifactGiven(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactGiven, error) {
+	var (
+		obj  = &HistoricalEventArtifactGiven{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4179,7 +5379,7 @@ func parseHistoricalEventArtifactGiven(d *xml.Decoder, start *xml.StartElement) 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4199,11 +5399,48 @@ func parseHistoricalEventArtifactGiven(d *xml.Decoder, start *xml.StartElement) 
 		}
 	}
 }
-func parseHistoricalEventArtifactLost(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactLost, error) {
+func parseHistoricalEventArtifactGivenPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventArtifactGiven) (*HistoricalEventArtifactGiven, error) {
 	var (
-		obj  = HistoricalEventArtifactLost{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventArtifactGiven{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventArtifactLost(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactLost, error) {
+	var (
+		obj  = &HistoricalEventArtifactLost{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4230,7 +5467,7 @@ func parseHistoricalEventArtifactLost(d *xml.Decoder, start *xml.StartElement) (
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4248,11 +5485,48 @@ func parseHistoricalEventArtifactLost(d *xml.Decoder, start *xml.StartElement) (
 		}
 	}
 }
-func parseHistoricalEventArtifactPossessed(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactPossessed, error) {
+func parseHistoricalEventArtifactLostPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventArtifactLost) (*HistoricalEventArtifactLost, error) {
 	var (
-		obj  = HistoricalEventArtifactPossessed{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventArtifactLost{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventArtifactPossessed(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactPossessed, error) {
+	var (
+		obj  = &HistoricalEventArtifactPossessed{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4291,7 +5565,7 @@ func parseHistoricalEventArtifactPossessed(d *xml.Decoder, start *xml.StartEleme
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4321,11 +5595,48 @@ func parseHistoricalEventArtifactPossessed(d *xml.Decoder, start *xml.StartEleme
 		}
 	}
 }
-func parseHistoricalEventArtifactRecovered(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactRecovered, error) {
+func parseHistoricalEventArtifactPossessedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventArtifactPossessed) (*HistoricalEventArtifactPossessed, error) {
 	var (
-		obj  = HistoricalEventArtifactRecovered{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventArtifactPossessed{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventArtifactRecovered(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactRecovered, error) {
+	var (
+		obj  = &HistoricalEventArtifactRecovered{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4358,7 +5669,7 @@ func parseHistoricalEventArtifactRecovered(d *xml.Decoder, start *xml.StartEleme
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4382,11 +5693,48 @@ func parseHistoricalEventArtifactRecovered(d *xml.Decoder, start *xml.StartEleme
 		}
 	}
 }
-func parseHistoricalEventArtifactStored(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactStored, error) {
+func parseHistoricalEventArtifactRecoveredPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventArtifactRecovered) (*HistoricalEventArtifactRecovered, error) {
 	var (
-		obj  = HistoricalEventArtifactStored{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventArtifactRecovered{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventArtifactStored(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventArtifactStored, error) {
+	var (
+		obj  = &HistoricalEventArtifactStored{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4413,7 +5761,7 @@ func parseHistoricalEventArtifactStored(d *xml.Decoder, start *xml.StartElement)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4431,11 +5779,14 @@ func parseHistoricalEventArtifactStored(d *xml.Decoder, start *xml.StartElement)
 		}
 	}
 }
-func parseHistoricalEventAssumeIdentity(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventAssumeIdentity, error) {
+func parseHistoricalEventArtifactStoredPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventArtifactStored) (*HistoricalEventArtifactStored, error) {
 	var (
-		obj  = HistoricalEventAssumeIdentity{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventArtifactStored{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4444,23 +5795,43 @@ func parseHistoricalEventAssumeIdentity(d *xml.Decoder, start *xml.StartElement)
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "identity_caste":
-				data = nil
-			case "identity_histfig_id":
-				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventAssumeIdentity(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventAssumeIdentity, error) {
+	var (
+		obj  = &HistoricalEventAssumeIdentity{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
 			case "identity_id":
 				data = nil
-			case "identity_name":
-				data = nil
-			case "identity_nemesis_id":
-				data = nil
-			case "identity_race":
-				data = nil
-			case "target":
-				data = nil
 			case "target_enid":
-				data = nil
-			case "trickster":
 				data = nil
 			case "trickster_hfid":
 				data = nil
@@ -4474,28 +5845,14 @@ func parseHistoricalEventAssumeIdentity(d *xml.Decoder, start *xml.StartElement)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "identity_caste":
-				obj.IdentityCaste = string(data)
-			case "identity_histfig_id":
-				obj.IdentityHistfigId = n(data)
 			case "identity_id":
 				obj.IdentityId = n(data)
-			case "identity_name":
-				obj.IdentityName = string(data)
-			case "identity_nemesis_id":
-				obj.IdentityNemesisId = n(data)
-			case "identity_race":
-				obj.IdentityRace = string(data)
-			case "target":
-				obj.Target = n(data)
 			case "target_enid":
 				obj.TargetEnid = n(data)
-			case "trickster":
-				obj.Trickster = n(data)
 			case "trickster_hfid":
 				obj.TricksterHfid = n(data)
 			default:
@@ -4504,11 +5861,76 @@ func parseHistoricalEventAssumeIdentity(d *xml.Decoder, start *xml.StartElement)
 		}
 	}
 }
-func parseHistoricalEventAttackedSite(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventAttackedSite, error) {
+func parseHistoricalEventAssumeIdentityPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventAssumeIdentity) (*HistoricalEventAssumeIdentity, error) {
 	var (
-		obj  = HistoricalEventAttackedSite{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventAssumeIdentity{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "identity_caste":
+				data = nil
+			case "identity_histfig_id":
+				data = nil
+			case "identity_name":
+				data = nil
+			case "identity_nemesis_id":
+				data = nil
+			case "identity_race":
+				data = nil
+			case "target":
+				data = nil
+			case "trickster":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "identity_caste":
+				obj.IdentityCaste = string(data)
+			case "identity_histfig_id":
+				obj.IdentityHistfigId = n(data)
+			case "identity_name":
+				obj.IdentityName = string(data)
+			case "identity_nemesis_id":
+				obj.IdentityNemesisId = n(data)
+			case "identity_race":
+				obj.IdentityRace = string(data)
+			case "target":
+				obj.Target = n(data)
+			case "trickster":
+				obj.Trickster = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventAttackedSite(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventAttackedSite, error) {
+	var (
+		obj  = &HistoricalEventAttackedSite{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4547,7 +5969,7 @@ func parseHistoricalEventAttackedSite(d *xml.Decoder, start *xml.StartElement) (
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4577,11 +5999,100 @@ func parseHistoricalEventAttackedSite(d *xml.Decoder, start *xml.StartElement) (
 		}
 	}
 }
-func parseHistoricalEventBodyAbused(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventBodyAbused, error) {
+func parseHistoricalEventAttackedSitePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventAttackedSite) (*HistoricalEventAttackedSite, error) {
 	var (
-		obj  = HistoricalEventBodyAbused{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventAttackedSite{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventBodyAbused(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventBodyAbused, error) {
+	var (
+		obj  = &HistoricalEventBodyAbused{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "coords":
+				data = nil
+			case "feature_layer_id":
+				data = nil
+			case "site_id":
+				data = nil
+			case "subregion_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "coords":
+				obj.Coords = string(data)
+			case "feature_layer_id":
+				obj.FeatureLayerId = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "subregion_id":
+				obj.SubregionId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventBodyAbusedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventBodyAbused) (*HistoricalEventBodyAbused, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventBodyAbused{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4595,10 +6106,6 @@ func parseHistoricalEventBodyAbused(d *xml.Decoder, start *xml.StartElement) (*H
 			case "bodies":
 				data = nil
 			case "civ":
-				data = nil
-			case "coords":
-				data = nil
-			case "feature_layer_id":
 				data = nil
 			case "histfig":
 				data = nil
@@ -4614,11 +6121,7 @@ func parseHistoricalEventBodyAbused(d *xml.Decoder, start *xml.StartElement) (*H
 				data = nil
 			case "site":
 				data = nil
-			case "site_id":
-				data = nil
 			case "structure":
-				data = nil
-			case "subregion_id":
 				data = nil
 			case "tree":
 				data = nil
@@ -4634,7 +6137,7 @@ func parseHistoricalEventBodyAbused(d *xml.Decoder, start *xml.StartElement) (*H
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4644,10 +6147,6 @@ func parseHistoricalEventBodyAbused(d *xml.Decoder, start *xml.StartElement) (*H
 				obj.Bodies = append(obj.Bodies, n(data))
 			case "civ":
 				obj.Civ = n(data)
-			case "coords":
-				obj.Coords = string(data)
-			case "feature_layer_id":
-				obj.FeatureLayerId = n(data)
 			case "histfig":
 				obj.Histfig = n(data)
 			case "interaction":
@@ -4662,12 +6161,8 @@ func parseHistoricalEventBodyAbused(d *xml.Decoder, start *xml.StartElement) (*H
 				obj.PileType = string(data)
 			case "site":
 				obj.Site = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
 			case "structure":
 				obj.Structure = n(data)
-			case "subregion_id":
-				obj.SubregionId = n(data)
 			case "tree":
 				obj.Tree = n(data)
 			case "victim_entity":
@@ -4680,9 +6175,10 @@ func parseHistoricalEventBodyAbused(d *xml.Decoder, start *xml.StartElement) (*H
 }
 func parseHistoricalEventBuildingProfileAcquired(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventBuildingProfileAcquired, error) {
 	var (
-		obj  = HistoricalEventBuildingProfileAcquired{}
+		obj  = &HistoricalEventBuildingProfileAcquired{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4717,7 +6213,7 @@ func parseHistoricalEventBuildingProfileAcquired(d *xml.Decoder, start *xml.Star
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4743,11 +6239,48 @@ func parseHistoricalEventBuildingProfileAcquired(d *xml.Decoder, start *xml.Star
 		}
 	}
 }
-func parseHistoricalEventCeremony(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCeremony, error) {
+func parseHistoricalEventBuildingProfileAcquiredPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventBuildingProfileAcquired) (*HistoricalEventBuildingProfileAcquired, error) {
 	var (
-		obj  = HistoricalEventCeremony{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventBuildingProfileAcquired{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCeremony(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCeremony, error) {
+	var (
+		obj  = &HistoricalEventCeremony{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4778,7 +6311,7 @@ func parseHistoricalEventCeremony(d *xml.Decoder, start *xml.StartElement) (*His
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4800,11 +6333,14 @@ func parseHistoricalEventCeremony(d *xml.Decoder, start *xml.StartElement) (*His
 		}
 	}
 }
-func parseHistoricalEventChangeCreatureType(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventChangeCreatureType, error) {
+func parseHistoricalEventCeremonyPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCeremony) (*HistoricalEventCeremony, error) {
 	var (
-		obj  = HistoricalEventChangeCreatureType{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCeremony{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4813,18 +6349,6 @@ func parseHistoricalEventChangeCreatureType(d *xml.Decoder, start *xml.StartElem
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "changee":
-				data = nil
-			case "changer":
-				data = nil
-			case "new_caste":
-				data = nil
-			case "new_race":
-				data = nil
-			case "old_caste":
-				data = nil
-			case "old_race":
-				data = nil
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 				d.Skip()
@@ -4835,22 +6359,10 @@ func parseHistoricalEventChangeCreatureType(d *xml.Decoder, start *xml.StartElem
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "changee":
-				obj.Changee = n(data)
-			case "changer":
-				obj.Changer = n(data)
-			case "new_caste":
-				obj.NewCaste = n(data)
-			case "new_race":
-				obj.NewRace = string(data)
-			case "old_caste":
-				obj.OldCaste = n(data)
-			case "old_race":
-				obj.OldRace = string(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -4859,9 +6371,10 @@ func parseHistoricalEventChangeCreatureType(d *xml.Decoder, start *xml.StartElem
 }
 func parseHistoricalEventChangeHfBodyState(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventChangeHfBodyState, error) {
 	var (
-		obj  = HistoricalEventChangeHfBodyState{}
+		obj  = &HistoricalEventChangeHfBodyState{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4894,7 +6407,7 @@ func parseHistoricalEventChangeHfBodyState(d *xml.Decoder, start *xml.StartEleme
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4918,11 +6431,48 @@ func parseHistoricalEventChangeHfBodyState(d *xml.Decoder, start *xml.StartEleme
 		}
 	}
 }
-func parseHistoricalEventChangeHfJob(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventChangeHfJob, error) {
+func parseHistoricalEventChangeHfBodyStatePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventChangeHfBodyState) (*HistoricalEventChangeHfBodyState, error) {
 	var (
-		obj  = HistoricalEventChangeHfJob{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventChangeHfBodyState{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventChangeHfJob(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventChangeHfJob, error) {
+	var (
+		obj  = &HistoricalEventChangeHfJob{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -4934,12 +6484,6 @@ func parseHistoricalEventChangeHfJob(d *xml.Decoder, start *xml.StartElement) (*
 			case "feature_layer_id":
 				data = nil
 			case "hfid":
-				data = nil
-			case "new_job":
-				data = nil
-			case "old_job":
-				data = nil
-			case "site":
 				data = nil
 			case "site_id":
 				data = nil
@@ -4955,7 +6499,7 @@ func parseHistoricalEventChangeHfJob(d *xml.Decoder, start *xml.StartElement) (*
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -4963,12 +6507,6 @@ func parseHistoricalEventChangeHfJob(d *xml.Decoder, start *xml.StartElement) (*
 				obj.FeatureLayerId = n(data)
 			case "hfid":
 				obj.Hfid = n(data)
-			case "new_job":
-				obj.NewJob = string(data)
-			case "old_job":
-				obj.OldJob = string(data)
-			case "site":
-				obj.Site = n(data)
 			case "site_id":
 				obj.SiteId = n(data)
 			case "subregion_id":
@@ -4979,11 +6517,64 @@ func parseHistoricalEventChangeHfJob(d *xml.Decoder, start *xml.StartElement) (*
 		}
 	}
 }
-func parseHistoricalEventChangeHfState(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventChangeHfState, error) {
+func parseHistoricalEventChangeHfJobPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventChangeHfJob) (*HistoricalEventChangeHfJob, error) {
 	var (
-		obj  = HistoricalEventChangeHfState{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventChangeHfJob{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "hfid":
+				data = nil
+			case "new_job":
+				data = nil
+			case "old_job":
+				data = nil
+			case "site":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "hfid":
+				obj.Hfid = n(data)
+			case "new_job":
+				obj.NewJob = string(data)
+			case "old_job":
+				obj.OldJob = string(data)
+			case "site":
+				obj.Site = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventChangeHfState(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventChangeHfState, error) {
+	var (
+		obj  = &HistoricalEventChangeHfState{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5002,8 +6593,6 @@ func parseHistoricalEventChangeHfState(d *xml.Decoder, start *xml.StartElement) 
 				data = nil
 			case "reason":
 				data = nil
-			case "site":
-				data = nil
 			case "site_id":
 				data = nil
 			case "state":
@@ -5020,7 +6609,7 @@ func parseHistoricalEventChangeHfState(d *xml.Decoder, start *xml.StartElement) 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5034,8 +6623,6 @@ func parseHistoricalEventChangeHfState(d *xml.Decoder, start *xml.StartElement) 
 				obj.Mood = string(data)
 			case "reason":
 				obj.Reason = string(data)
-			case "site":
-				obj.Site = n(data)
 			case "site_id":
 				obj.SiteId = n(data)
 			case "state":
@@ -5048,11 +6635,64 @@ func parseHistoricalEventChangeHfState(d *xml.Decoder, start *xml.StartElement) 
 		}
 	}
 }
-func parseHistoricalEventChangedCreatureType(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventChangedCreatureType, error) {
+func parseHistoricalEventChangeHfStatePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventChangeHfState) (*HistoricalEventChangeHfState, error) {
 	var (
-		obj  = HistoricalEventChangedCreatureType{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventChangeHfState{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "hfid":
+				data = nil
+			case "reason":
+				data = nil
+			case "site":
+				data = nil
+			case "state":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "hfid":
+				obj.Hfid = n(data)
+			case "reason":
+				obj.Reason = string(data)
+			case "site":
+				obj.Site = n(data)
+			case "state":
+				obj.State = string(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventChangedCreatureType(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventChangedCreatureType, error) {
+	var (
+		obj  = &HistoricalEventChangedCreatureType{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5083,7 +6723,7 @@ func parseHistoricalEventChangedCreatureType(d *xml.Decoder, start *xml.StartEle
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5105,11 +6745,72 @@ func parseHistoricalEventChangedCreatureType(d *xml.Decoder, start *xml.StartEle
 		}
 	}
 }
-func parseHistoricalEventCollection(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollection, error) {
+func parseHistoricalEventChangedCreatureTypePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventChangedCreatureType) (*HistoricalEventChangedCreatureType, error) {
 	var (
-		obj  = HistoricalEventCollection{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventChangedCreatureType{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "changee":
+				data = nil
+			case "changer":
+				data = nil
+			case "new_caste":
+				data = nil
+			case "new_race":
+				data = nil
+			case "old_caste":
+				data = nil
+			case "old_race":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "changee":
+				obj.Changee = n(data)
+			case "changer":
+				obj.Changer = n(data)
+			case "new_caste":
+				obj.NewCaste = string(data)
+			case "new_race":
+				obj.NewRace = string(data)
+			case "old_caste":
+				obj.OldCaste = string(data)
+			case "old_race":
+				obj.OldRace = string(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollection(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollection, error) {
+	var (
+		obj  = &HistoricalEventCollection{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5144,7 +6845,7 @@ func parseHistoricalEventCollection(d *xml.Decoder, start *xml.StartElement) (*H
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5163,39 +6864,40 @@ func parseHistoricalEventCollection(d *xml.Decoder, start *xml.StartElement) (*H
 			case "start_year":
 				obj.StartYear = n(data)
 			case "type":
+
 				var err error
-				switch strcase.ToCamel(string(data)) {
-				case "Abduction":
+				switch string(data) {
+				case "abduction":
 					obj.Details, err = parseHistoricalEventCollectionAbduction(d, start)
-				case "Battle":
+				case "battle":
 					obj.Details, err = parseHistoricalEventCollectionBattle(d, start)
-				case "BeastAttack":
+				case "beast attack":
 					obj.Details, err = parseHistoricalEventCollectionBeastAttack(d, start)
-				case "Ceremony":
+				case "ceremony":
 					obj.Details, err = parseHistoricalEventCollectionCeremony(d, start)
-				case "Competition":
+				case "competition":
 					obj.Details, err = parseHistoricalEventCollectionCompetition(d, start)
-				case "Duel":
+				case "duel":
 					obj.Details, err = parseHistoricalEventCollectionDuel(d, start)
-				case "EntityOverthrown":
+				case "entity overthrown":
 					obj.Details, err = parseHistoricalEventCollectionEntityOverthrown(d, start)
-				case "Journey":
+				case "journey":
 					obj.Details, err = parseHistoricalEventCollectionJourney(d, start)
-				case "Occasion":
+				case "occasion":
 					obj.Details, err = parseHistoricalEventCollectionOccasion(d, start)
-				case "Performance":
+				case "performance":
 					obj.Details, err = parseHistoricalEventCollectionPerformance(d, start)
-				case "Persecution":
+				case "persecution":
 					obj.Details, err = parseHistoricalEventCollectionPersecution(d, start)
-				case "Procession":
+				case "procession":
 					obj.Details, err = parseHistoricalEventCollectionProcession(d, start)
-				case "Purge":
+				case "purge":
 					obj.Details, err = parseHistoricalEventCollectionPurge(d, start)
-				case "SiteConquered":
+				case "site conquered":
 					obj.Details, err = parseHistoricalEventCollectionSiteConquered(d, start)
-				case "Theft":
+				case "theft":
 					obj.Details, err = parseHistoricalEventCollectionTheft(d, start)
-				case "War":
+				case "war":
 					obj.Details, err = parseHistoricalEventCollectionWar(d, start)
 				default:
 					d.Skip()
@@ -5203,7 +6905,43 @@ func parseHistoricalEventCollection(d *xml.Decoder, start *xml.StartElement) (*H
 				if err != nil {
 					return nil, err
 				}
-				return &obj, nil
+				return obj, nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollection) (*HistoricalEventCollection, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventCollection{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -5212,9 +6950,10 @@ func parseHistoricalEventCollection(d *xml.Decoder, start *xml.StartElement) (*H
 }
 func parseHistoricalEventCollectionAbduction(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionAbduction, error) {
 	var (
-		obj  = HistoricalEventCollectionAbduction{}
+		obj  = &HistoricalEventCollectionAbduction{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5249,7 +6988,7 @@ func parseHistoricalEventCollectionAbduction(d *xml.Decoder, start *xml.StartEle
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5275,11 +7014,48 @@ func parseHistoricalEventCollectionAbduction(d *xml.Decoder, start *xml.StartEle
 		}
 	}
 }
-func parseHistoricalEventCollectionBattle(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionBattle, error) {
+func parseHistoricalEventCollectionAbductionPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionAbduction) (*HistoricalEventCollectionAbduction, error) {
 	var (
-		obj  = HistoricalEventCollectionBattle{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionAbduction{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionBattle(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionBattle, error) {
+	var (
+		obj  = &HistoricalEventCollectionBattle{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5358,7 +7134,7 @@ func parseHistoricalEventCollectionBattle(d *xml.Decoder, start *xml.StartElemen
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5428,11 +7204,48 @@ func parseHistoricalEventCollectionBattle(d *xml.Decoder, start *xml.StartElemen
 		}
 	}
 }
-func parseHistoricalEventCollectionBeastAttack(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionBeastAttack, error) {
+func parseHistoricalEventCollectionBattlePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionBattle) (*HistoricalEventCollectionBattle, error) {
 	var (
-		obj  = HistoricalEventCollectionBeastAttack{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionBattle{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionBeastAttack(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionBeastAttack, error) {
+	var (
+		obj  = &HistoricalEventCollectionBeastAttack{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5465,7 +7278,7 @@ func parseHistoricalEventCollectionBeastAttack(d *xml.Decoder, start *xml.StartE
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5489,11 +7302,48 @@ func parseHistoricalEventCollectionBeastAttack(d *xml.Decoder, start *xml.StartE
 		}
 	}
 }
-func parseHistoricalEventCollectionCeremony(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionCeremony, error) {
+func parseHistoricalEventCollectionBeastAttackPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionBeastAttack) (*HistoricalEventCollectionBeastAttack, error) {
 	var (
-		obj  = HistoricalEventCollectionCeremony{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionBeastAttack{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionCeremony(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionCeremony, error) {
+	var (
+		obj  = &HistoricalEventCollectionCeremony{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5514,12 +7364,48 @@ func parseHistoricalEventCollectionCeremony(d *xml.Decoder, start *xml.StartElem
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
 			case "ordinal":
 				obj.Ordinal = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionCeremonyPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionCeremony) (*HistoricalEventCollectionCeremony, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionCeremony{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -5528,9 +7414,10 @@ func parseHistoricalEventCollectionCeremony(d *xml.Decoder, start *xml.StartElem
 }
 func parseHistoricalEventCollectionCompetition(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionCompetition, error) {
 	var (
-		obj  = HistoricalEventCollectionCompetition{}
+		obj  = &HistoricalEventCollectionCompetition{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5551,7 +7438,7 @@ func parseHistoricalEventCollectionCompetition(d *xml.Decoder, start *xml.StartE
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5563,11 +7450,48 @@ func parseHistoricalEventCollectionCompetition(d *xml.Decoder, start *xml.StartE
 		}
 	}
 }
-func parseHistoricalEventCollectionDuel(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionDuel, error) {
+func parseHistoricalEventCollectionCompetitionPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionCompetition) (*HistoricalEventCollectionCompetition, error) {
 	var (
-		obj  = HistoricalEventCollectionDuel{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionCompetition{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionDuel(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionDuel, error) {
+	var (
+		obj  = &HistoricalEventCollectionDuel{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5602,7 +7526,7 @@ func parseHistoricalEventCollectionDuel(d *xml.Decoder, start *xml.StartElement)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5628,11 +7552,48 @@ func parseHistoricalEventCollectionDuel(d *xml.Decoder, start *xml.StartElement)
 		}
 	}
 }
-func parseHistoricalEventCollectionEntityOverthrown(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionEntityOverthrown, error) {
+func parseHistoricalEventCollectionDuelPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionDuel) (*HistoricalEventCollectionDuel, error) {
 	var (
-		obj  = HistoricalEventCollectionEntityOverthrown{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionDuel{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionEntityOverthrown(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionEntityOverthrown, error) {
+	var (
+		obj  = &HistoricalEventCollectionEntityOverthrown{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5657,7 +7618,7 @@ func parseHistoricalEventCollectionEntityOverthrown(d *xml.Decoder, start *xml.S
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5673,11 +7634,48 @@ func parseHistoricalEventCollectionEntityOverthrown(d *xml.Decoder, start *xml.S
 		}
 	}
 }
-func parseHistoricalEventCollectionJourney(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionJourney, error) {
+func parseHistoricalEventCollectionEntityOverthrownPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionEntityOverthrown) (*HistoricalEventCollectionEntityOverthrown, error) {
 	var (
-		obj  = HistoricalEventCollectionJourney{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionEntityOverthrown{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionJourney(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionJourney, error) {
+	var (
+		obj  = &HistoricalEventCollectionJourney{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5698,7 +7696,7 @@ func parseHistoricalEventCollectionJourney(d *xml.Decoder, start *xml.StartEleme
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5710,11 +7708,48 @@ func parseHistoricalEventCollectionJourney(d *xml.Decoder, start *xml.StartEleme
 		}
 	}
 }
-func parseHistoricalEventCollectionOccasion(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionOccasion, error) {
+func parseHistoricalEventCollectionJourneyPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionJourney) (*HistoricalEventCollectionJourney, error) {
 	var (
-		obj  = HistoricalEventCollectionOccasion{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionJourney{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionOccasion(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionOccasion, error) {
+	var (
+		obj  = &HistoricalEventCollectionOccasion{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5739,7 +7774,7 @@ func parseHistoricalEventCollectionOccasion(d *xml.Decoder, start *xml.StartElem
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5755,11 +7790,48 @@ func parseHistoricalEventCollectionOccasion(d *xml.Decoder, start *xml.StartElem
 		}
 	}
 }
-func parseHistoricalEventCollectionPerformance(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionPerformance, error) {
+func parseHistoricalEventCollectionOccasionPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionOccasion) (*HistoricalEventCollectionOccasion, error) {
 	var (
-		obj  = HistoricalEventCollectionPerformance{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionOccasion{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionPerformance(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionPerformance, error) {
+	var (
+		obj  = &HistoricalEventCollectionPerformance{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5780,7 +7852,7 @@ func parseHistoricalEventCollectionPerformance(d *xml.Decoder, start *xml.StartE
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5792,11 +7864,48 @@ func parseHistoricalEventCollectionPerformance(d *xml.Decoder, start *xml.StartE
 		}
 	}
 }
-func parseHistoricalEventCollectionPersecution(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionPersecution, error) {
+func parseHistoricalEventCollectionPerformancePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionPerformance) (*HistoricalEventCollectionPerformance, error) {
 	var (
-		obj  = HistoricalEventCollectionPersecution{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionPerformance{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionPersecution(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionPersecution, error) {
+	var (
+		obj  = &HistoricalEventCollectionPersecution{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5821,7 +7930,7 @@ func parseHistoricalEventCollectionPersecution(d *xml.Decoder, start *xml.StartE
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5837,11 +7946,48 @@ func parseHistoricalEventCollectionPersecution(d *xml.Decoder, start *xml.StartE
 		}
 	}
 }
-func parseHistoricalEventCollectionProcession(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionProcession, error) {
+func parseHistoricalEventCollectionPersecutionPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionPersecution) (*HistoricalEventCollectionPersecution, error) {
 	var (
-		obj  = HistoricalEventCollectionProcession{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionPersecution{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionProcession(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionProcession, error) {
+	var (
+		obj  = &HistoricalEventCollectionProcession{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5862,7 +8008,7 @@ func parseHistoricalEventCollectionProcession(d *xml.Decoder, start *xml.StartEl
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5874,11 +8020,48 @@ func parseHistoricalEventCollectionProcession(d *xml.Decoder, start *xml.StartEl
 		}
 	}
 }
-func parseHistoricalEventCollectionPurge(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionPurge, error) {
+func parseHistoricalEventCollectionProcessionPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionProcession) (*HistoricalEventCollectionProcession, error) {
 	var (
-		obj  = HistoricalEventCollectionPurge{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionProcession{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionPurge(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionPurge, error) {
+	var (
+		obj  = &HistoricalEventCollectionPurge{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5903,7 +8086,7 @@ func parseHistoricalEventCollectionPurge(d *xml.Decoder, start *xml.StartElement
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5919,11 +8102,48 @@ func parseHistoricalEventCollectionPurge(d *xml.Decoder, start *xml.StartElement
 		}
 	}
 }
-func parseHistoricalEventCollectionSiteConquered(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionSiteConquered, error) {
+func parseHistoricalEventCollectionPurgePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionPurge) (*HistoricalEventCollectionPurge, error) {
 	var (
-		obj  = HistoricalEventCollectionSiteConquered{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionPurge{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionSiteConquered(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionSiteConquered, error) {
+	var (
+		obj  = &HistoricalEventCollectionSiteConquered{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -5952,7 +8172,7 @@ func parseHistoricalEventCollectionSiteConquered(d *xml.Decoder, start *xml.Star
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -5972,11 +8192,48 @@ func parseHistoricalEventCollectionSiteConquered(d *xml.Decoder, start *xml.Star
 		}
 	}
 }
-func parseHistoricalEventCollectionTheft(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionTheft, error) {
+func parseHistoricalEventCollectionSiteConqueredPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionSiteConquered) (*HistoricalEventCollectionSiteConquered, error) {
 	var (
-		obj  = HistoricalEventCollectionTheft{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionSiteConquered{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionTheft(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionTheft, error) {
+	var (
+		obj  = &HistoricalEventCollectionTheft{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6011,7 +8268,7 @@ func parseHistoricalEventCollectionTheft(d *xml.Decoder, start *xml.StartElement
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6037,11 +8294,48 @@ func parseHistoricalEventCollectionTheft(d *xml.Decoder, start *xml.StartElement
 		}
 	}
 }
-func parseHistoricalEventCollectionWar(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionWar, error) {
+func parseHistoricalEventCollectionTheftPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionTheft) (*HistoricalEventCollectionTheft, error) {
 	var (
-		obj  = HistoricalEventCollectionWar{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionTheft{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCollectionWar(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCollectionWar, error) {
+	var (
+		obj  = &HistoricalEventCollectionWar{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6066,7 +8360,7 @@ func parseHistoricalEventCollectionWar(d *xml.Decoder, start *xml.StartElement) 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6082,11 +8376,48 @@ func parseHistoricalEventCollectionWar(d *xml.Decoder, start *xml.StartElement) 
 		}
 	}
 }
-func parseHistoricalEventCompetition(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCompetition, error) {
+func parseHistoricalEventCollectionWarPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCollectionWar) (*HistoricalEventCollectionWar, error) {
 	var (
-		obj  = HistoricalEventCompetition{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCollectionWar{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCompetition(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCompetition, error) {
+	var (
+		obj  = &HistoricalEventCompetition{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6121,7 +8452,7 @@ func parseHistoricalEventCompetition(d *xml.Decoder, start *xml.StartElement) (*
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6147,11 +8478,84 @@ func parseHistoricalEventCompetition(d *xml.Decoder, start *xml.StartElement) (*
 		}
 	}
 }
-func parseHistoricalEventCreateEntityPosition(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCreateEntityPosition, error) {
+func parseHistoricalEventCompetitionPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCompetition) (*HistoricalEventCompetition, error) {
 	var (
-		obj  = HistoricalEventCreateEntityPosition{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCompetition{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCreateEntityPosition(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCreateEntityPosition, error) {
+	var (
+		obj  = &HistoricalEventCreateEntityPosition{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCreateEntityPositionPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCreateEntityPosition) (*HistoricalEventCreateEntityPosition, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventCreateEntityPosition{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6180,7 +8584,7 @@ func parseHistoricalEventCreateEntityPosition(d *xml.Decoder, start *xml.StartEl
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6200,68 +8604,12 @@ func parseHistoricalEventCreateEntityPosition(d *xml.Decoder, start *xml.StartEl
 		}
 	}
 }
-func parseHistoricalEventCreatedBuilding(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCreatedBuilding, error) {
-	var (
-		obj  = HistoricalEventCreatedBuilding{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "builder_hf":
-				data = nil
-			case "civ":
-				data = nil
-			case "rebuild":
-				data = nil
-			case "site":
-				data = nil
-			case "site_civ":
-				data = nil
-			case "structure":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "builder_hf":
-				obj.BuilderHf = n(data)
-			case "civ":
-				obj.Civ = n(data)
-			case "rebuild":
-				obj.Rebuild = string(data)
-			case "site":
-				obj.Site = n(data)
-			case "site_civ":
-				obj.SiteCiv = n(data)
-			case "structure":
-				obj.Structure = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
 func parseHistoricalEventCreatedSite(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCreatedSite, error) {
 	var (
-		obj  = HistoricalEventCreatedSite{}
+		obj  = &HistoricalEventCreatedSite{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6290,7 +8638,7 @@ func parseHistoricalEventCreatedSite(d *xml.Decoder, start *xml.StartElement) (*
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6310,11 +8658,48 @@ func parseHistoricalEventCreatedSite(d *xml.Decoder, start *xml.StartElement) (*
 		}
 	}
 }
-func parseHistoricalEventCreatedStructure(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCreatedStructure, error) {
+func parseHistoricalEventCreatedSitePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCreatedSite) (*HistoricalEventCreatedSite, error) {
 	var (
-		obj  = HistoricalEventCreatedStructure{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCreatedSite{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCreatedStructure(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCreatedStructure, error) {
+	var (
+		obj  = &HistoricalEventCreatedStructure{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6345,7 +8730,7 @@ func parseHistoricalEventCreatedStructure(d *xml.Decoder, start *xml.StartElemen
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6367,11 +8752,72 @@ func parseHistoricalEventCreatedStructure(d *xml.Decoder, start *xml.StartElemen
 		}
 	}
 }
-func parseHistoricalEventCreatedWorldConstruction(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCreatedWorldConstruction, error) {
+func parseHistoricalEventCreatedStructurePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCreatedStructure) (*HistoricalEventCreatedStructure, error) {
 	var (
-		obj  = HistoricalEventCreatedWorldConstruction{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCreatedStructure{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "builder_hf":
+				data = nil
+			case "civ":
+				data = nil
+			case "rebuild":
+				data = nil
+			case "site":
+				data = nil
+			case "site_civ":
+				data = nil
+			case "structure":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "builder_hf":
+				obj.BuilderHf = n(data)
+			case "civ":
+				obj.Civ = n(data)
+			case "rebuild":
+				obj.Rebuild = string(data)
+			case "site":
+				obj.Site = n(data)
+			case "site_civ":
+				obj.SiteCiv = n(data)
+			case "structure":
+				obj.Structure = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCreatedWorldConstruction(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCreatedWorldConstruction, error) {
+	var (
+		obj  = &HistoricalEventCreatedWorldConstruction{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6402,7 +8848,7 @@ func parseHistoricalEventCreatedWorldConstruction(d *xml.Decoder, start *xml.Sta
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6424,11 +8870,96 @@ func parseHistoricalEventCreatedWorldConstruction(d *xml.Decoder, start *xml.Sta
 		}
 	}
 }
-func parseHistoricalEventCreatureDevoured(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCreatureDevoured, error) {
+func parseHistoricalEventCreatedWorldConstructionPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCreatedWorldConstruction) (*HistoricalEventCreatedWorldConstruction, error) {
 	var (
-		obj  = HistoricalEventCreatureDevoured{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventCreatedWorldConstruction{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCreatureDevoured(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventCreatureDevoured, error) {
+	var (
+		obj  = &HistoricalEventCreatureDevoured{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "feature_layer_id":
+				data = nil
+			case "site_id":
+				data = nil
+			case "subregion_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "feature_layer_id":
+				obj.FeatureLayerId = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "subregion_id":
+				obj.SubregionId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventCreatureDevouredPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventCreatureDevoured) (*HistoricalEventCreatureDevoured, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventCreatureDevoured{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6443,15 +8974,9 @@ func parseHistoricalEventCreatureDevoured(d *xml.Decoder, start *xml.StartElemen
 				data = nil
 			case "entity":
 				data = nil
-			case "feature_layer_id":
-				data = nil
 			case "race":
 				data = nil
 			case "site":
-				data = nil
-			case "site_id":
-				data = nil
-			case "subregion_id":
 				data = nil
 			case "victim":
 				data = nil
@@ -6465,7 +8990,7 @@ func parseHistoricalEventCreatureDevoured(d *xml.Decoder, start *xml.StartElemen
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6475,16 +9000,10 @@ func parseHistoricalEventCreatureDevoured(d *xml.Decoder, start *xml.StartElemen
 				obj.Eater = n(data)
 			case "entity":
 				obj.Entity = n(data)
-			case "feature_layer_id":
-				obj.FeatureLayerId = n(data)
 			case "race":
 				obj.Race = string(data)
 			case "site":
 				obj.Site = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
-			case "subregion_id":
-				obj.SubregionId = n(data)
 			case "victim":
 				obj.Victim = n(data)
 			default:
@@ -6495,9 +9014,10 @@ func parseHistoricalEventCreatureDevoured(d *xml.Decoder, start *xml.StartElemen
 }
 func parseHistoricalEventDanceFormCreated(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventDanceFormCreated, error) {
 	var (
-		obj  = HistoricalEventDanceFormCreated{}
+		obj  = &HistoricalEventDanceFormCreated{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6530,7 +9050,7 @@ func parseHistoricalEventDanceFormCreated(d *xml.Decoder, start *xml.StartElemen
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6554,11 +9074,48 @@ func parseHistoricalEventDanceFormCreated(d *xml.Decoder, start *xml.StartElemen
 		}
 	}
 }
-func parseHistoricalEventDestroyedSite(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventDestroyedSite, error) {
+func parseHistoricalEventDanceFormCreatedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventDanceFormCreated) (*HistoricalEventDanceFormCreated, error) {
 	var (
-		obj  = HistoricalEventDestroyedSite{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventDanceFormCreated{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventDestroyedSite(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventDestroyedSite, error) {
+	var (
+		obj  = &HistoricalEventDestroyedSite{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6585,7 +9142,7 @@ func parseHistoricalEventDestroyedSite(d *xml.Decoder, start *xml.StartElement) 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6603,11 +9160,14 @@ func parseHistoricalEventDestroyedSite(d *xml.Decoder, start *xml.StartElement) 
 		}
 	}
 }
-func parseHistoricalEventEntityAction(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityAction, error) {
+func parseHistoricalEventDestroyedSitePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventDestroyedSite) (*HistoricalEventDestroyedSite, error) {
 	var (
-		obj  = HistoricalEventEntityAction{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventDestroyedSite{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6616,14 +9176,6 @@ func parseHistoricalEventEntityAction(d *xml.Decoder, start *xml.StartElement) (
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "action":
-				data = nil
-			case "entity":
-				data = nil
-			case "site":
-				data = nil
-			case "structure":
-				data = nil
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 				d.Skip()
@@ -6634,18 +9186,10 @@ func parseHistoricalEventEntityAction(d *xml.Decoder, start *xml.StartElement) (
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "action":
-				obj.Action = string(data)
-			case "entity":
-				obj.Entity = n(data)
-			case "site":
-				obj.Site = n(data)
-			case "structure":
-				obj.Structure = n(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -6654,9 +9198,10 @@ func parseHistoricalEventEntityAction(d *xml.Decoder, start *xml.StartElement) (
 }
 func parseHistoricalEventEntityAllianceFormed(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityAllianceFormed, error) {
 	var (
-		obj  = HistoricalEventEntityAllianceFormed{}
+		obj  = &HistoricalEventEntityAllianceFormed{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6679,7 +9224,7 @@ func parseHistoricalEventEntityAllianceFormed(d *xml.Decoder, start *xml.StartEl
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6693,11 +9238,48 @@ func parseHistoricalEventEntityAllianceFormed(d *xml.Decoder, start *xml.StartEl
 		}
 	}
 }
-func parseHistoricalEventEntityBreachFeatureLayer(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityBreachFeatureLayer, error) {
+func parseHistoricalEventEntityAllianceFormedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventEntityAllianceFormed) (*HistoricalEventEntityAllianceFormed, error) {
 	var (
-		obj  = HistoricalEventEntityBreachFeatureLayer{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventEntityAllianceFormed{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventEntityBreachFeatureLayer(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityBreachFeatureLayer, error) {
+	var (
+		obj  = &HistoricalEventEntityBreachFeatureLayer{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6724,7 +9306,7 @@ func parseHistoricalEventEntityBreachFeatureLayer(d *xml.Decoder, start *xml.Sta
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6742,11 +9324,48 @@ func parseHistoricalEventEntityBreachFeatureLayer(d *xml.Decoder, start *xml.Sta
 		}
 	}
 }
-func parseHistoricalEventEntityCreated(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityCreated, error) {
+func parseHistoricalEventEntityBreachFeatureLayerPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventEntityBreachFeatureLayer) (*HistoricalEventEntityBreachFeatureLayer, error) {
 	var (
-		obj  = HistoricalEventEntityCreated{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventEntityBreachFeatureLayer{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventEntityCreated(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityCreated, error) {
+	var (
+		obj  = &HistoricalEventEntityCreated{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6773,7 +9392,7 @@ func parseHistoricalEventEntityCreated(d *xml.Decoder, start *xml.StartElement) 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6791,11 +9410,48 @@ func parseHistoricalEventEntityCreated(d *xml.Decoder, start *xml.StartElement) 
 		}
 	}
 }
-func parseHistoricalEventEntityDissolved(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityDissolved, error) {
+func parseHistoricalEventEntityCreatedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventEntityCreated) (*HistoricalEventEntityCreated, error) {
 	var (
-		obj  = HistoricalEventEntityDissolved{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventEntityCreated{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventEntityDissolved(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityDissolved, error) {
+	var (
+		obj  = &HistoricalEventEntityDissolved{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6818,7 +9474,7 @@ func parseHistoricalEventEntityDissolved(d *xml.Decoder, start *xml.StartElement
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6832,11 +9488,48 @@ func parseHistoricalEventEntityDissolved(d *xml.Decoder, start *xml.StartElement
 		}
 	}
 }
-func parseHistoricalEventEntityEquipmentPurchase(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityEquipmentPurchase, error) {
+func parseHistoricalEventEntityDissolvedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventEntityDissolved) (*HistoricalEventEntityDissolved, error) {
 	var (
-		obj  = HistoricalEventEntityEquipmentPurchase{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventEntityDissolved{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventEntityEquipmentPurchase(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityEquipmentPurchase, error) {
+	var (
+		obj  = &HistoricalEventEntityEquipmentPurchase{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6861,7 +9554,7 @@ func parseHistoricalEventEntityEquipmentPurchase(d *xml.Decoder, start *xml.Star
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6877,11 +9570,48 @@ func parseHistoricalEventEntityEquipmentPurchase(d *xml.Decoder, start *xml.Star
 		}
 	}
 }
-func parseHistoricalEventEntityIncorporated(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityIncorporated, error) {
+func parseHistoricalEventEntityEquipmentPurchasePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventEntityEquipmentPurchase) (*HistoricalEventEntityEquipmentPurchase, error) {
 	var (
-		obj  = HistoricalEventEntityIncorporated{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventEntityEquipmentPurchase{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventEntityIncorporated(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityIncorporated, error) {
+	var (
+		obj  = &HistoricalEventEntityIncorporated{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6910,7 +9640,7 @@ func parseHistoricalEventEntityIncorporated(d *xml.Decoder, start *xml.StartElem
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6930,11 +9660,48 @@ func parseHistoricalEventEntityIncorporated(d *xml.Decoder, start *xml.StartElem
 		}
 	}
 }
-func parseHistoricalEventEntityLaw(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityLaw, error) {
+func parseHistoricalEventEntityIncorporatedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventEntityIncorporated) (*HistoricalEventEntityIncorporated, error) {
 	var (
-		obj  = HistoricalEventEntityLaw{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventEntityIncorporated{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventEntityLaw(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityLaw, error) {
+	var (
+		obj  = &HistoricalEventEntityLaw{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -6961,7 +9728,7 @@ func parseHistoricalEventEntityLaw(d *xml.Decoder, start *xml.StartElement) (*Hi
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -6979,11 +9746,48 @@ func parseHistoricalEventEntityLaw(d *xml.Decoder, start *xml.StartElement) (*Hi
 		}
 	}
 }
-func parseHistoricalEventEntityOverthrown(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityOverthrown, error) {
+func parseHistoricalEventEntityLawPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventEntityLaw) (*HistoricalEventEntityLaw, error) {
 	var (
-		obj  = HistoricalEventEntityOverthrown{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventEntityLaw{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventEntityOverthrown(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityOverthrown, error) {
+	var (
+		obj  = &HistoricalEventEntityOverthrown{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7016,7 +9820,7 @@ func parseHistoricalEventEntityOverthrown(d *xml.Decoder, start *xml.StartElemen
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7040,11 +9844,48 @@ func parseHistoricalEventEntityOverthrown(d *xml.Decoder, start *xml.StartElemen
 		}
 	}
 }
-func parseHistoricalEventEntityPersecuted(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityPersecuted, error) {
+func parseHistoricalEventEntityOverthrownPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventEntityOverthrown) (*HistoricalEventEntityOverthrown, error) {
 	var (
-		obj  = HistoricalEventEntityPersecuted{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventEntityOverthrown{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventEntityPersecuted(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityPersecuted, error) {
+	var (
+		obj  = &HistoricalEventEntityPersecuted{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7085,7 +9926,7 @@ func parseHistoricalEventEntityPersecuted(d *xml.Decoder, start *xml.StartElemen
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7117,11 +9958,48 @@ func parseHistoricalEventEntityPersecuted(d *xml.Decoder, start *xml.StartElemen
 		}
 	}
 }
-func parseHistoricalEventEntityPrimaryCriminals(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityPrimaryCriminals, error) {
+func parseHistoricalEventEntityPersecutedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventEntityPersecuted) (*HistoricalEventEntityPersecuted, error) {
 	var (
-		obj  = HistoricalEventEntityPrimaryCriminals{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventEntityPersecuted{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventEntityPrimaryCriminals(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityPrimaryCriminals, error) {
+	var (
+		obj  = &HistoricalEventEntityPrimaryCriminals{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7146,7 +10024,7 @@ func parseHistoricalEventEntityPrimaryCriminals(d *xml.Decoder, start *xml.Start
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7156,6 +10034,58 @@ func parseHistoricalEventEntityPrimaryCriminals(d *xml.Decoder, start *xml.Start
 				obj.SiteId = n(data)
 			case "structure_id":
 				obj.StructureId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventEntityPrimaryCriminalsPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventEntityPrimaryCriminals) (*HistoricalEventEntityPrimaryCriminals, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventEntityPrimaryCriminals{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "action":
+				data = nil
+			case "entity":
+				data = nil
+			case "site":
+				data = nil
+			case "structure":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "action":
+				obj.Action = string(data)
+			case "entity":
+				obj.Entity = n(data)
+			case "site":
+				obj.Site = n(data)
+			case "structure":
+				obj.Structure = n(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -7164,9 +10094,10 @@ func parseHistoricalEventEntityPrimaryCriminals(d *xml.Decoder, start *xml.Start
 }
 func parseHistoricalEventEntityRelocate(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventEntityRelocate, error) {
 	var (
-		obj  = HistoricalEventEntityRelocate{}
+		obj  = &HistoricalEventEntityRelocate{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7191,7 +10122,7 @@ func parseHistoricalEventEntityRelocate(d *xml.Decoder, start *xml.StartElement)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7207,11 +10138,64 @@ func parseHistoricalEventEntityRelocate(d *xml.Decoder, start *xml.StartElement)
 		}
 	}
 }
-func parseHistoricalEventFailedFrameAttempt(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventFailedFrameAttempt, error) {
+func parseHistoricalEventEntityRelocatePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventEntityRelocate) (*HistoricalEventEntityRelocate, error) {
 	var (
-		obj  = HistoricalEventFailedFrameAttempt{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventEntityRelocate{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "action":
+				data = nil
+			case "entity":
+				data = nil
+			case "site":
+				data = nil
+			case "structure":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "action":
+				obj.Action = string(data)
+			case "entity":
+				obj.Entity = n(data)
+			case "site":
+				obj.Site = n(data)
+			case "structure":
+				obj.Structure = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventFailedFrameAttempt(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventFailedFrameAttempt, error) {
+	var (
+		obj  = &HistoricalEventFailedFrameAttempt{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7242,7 +10226,7 @@ func parseHistoricalEventFailedFrameAttempt(d *xml.Decoder, start *xml.StartElem
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7264,11 +10248,48 @@ func parseHistoricalEventFailedFrameAttempt(d *xml.Decoder, start *xml.StartElem
 		}
 	}
 }
-func parseHistoricalEventFailedIntrigueCorruption(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventFailedIntrigueCorruption, error) {
+func parseHistoricalEventFailedFrameAttemptPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventFailedFrameAttempt) (*HistoricalEventFailedFrameAttempt, error) {
 	var (
-		obj  = HistoricalEventFailedIntrigueCorruption{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventFailedFrameAttempt{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventFailedIntrigueCorruption(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventFailedIntrigueCorruption, error) {
+	var (
+		obj  = &HistoricalEventFailedIntrigueCorruption{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7337,7 +10358,7 @@ func parseHistoricalEventFailedIntrigueCorruption(d *xml.Decoder, start *xml.Sta
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7397,11 +10418,48 @@ func parseHistoricalEventFailedIntrigueCorruption(d *xml.Decoder, start *xml.Sta
 		}
 	}
 }
-func parseHistoricalEventFieldBattle(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventFieldBattle, error) {
+func parseHistoricalEventFailedIntrigueCorruptionPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventFailedIntrigueCorruption) (*HistoricalEventFailedIntrigueCorruption, error) {
 	var (
-		obj  = HistoricalEventFieldBattle{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventFailedIntrigueCorruption{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventFieldBattle(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventFieldBattle, error) {
+	var (
+		obj  = &HistoricalEventFieldBattle{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7442,7 +10500,7 @@ func parseHistoricalEventFieldBattle(d *xml.Decoder, start *xml.StartElement) (*
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7474,11 +10532,48 @@ func parseHistoricalEventFieldBattle(d *xml.Decoder, start *xml.StartElement) (*
 		}
 	}
 }
-func parseHistoricalEventGamble(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventGamble, error) {
+func parseHistoricalEventFieldBattlePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventFieldBattle) (*HistoricalEventFieldBattle, error) {
 	var (
-		obj  = HistoricalEventGamble{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventFieldBattle{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventGamble(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventGamble, error) {
+	var (
+		obj  = &HistoricalEventGamble{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7507,7 +10602,7 @@ func parseHistoricalEventGamble(d *xml.Decoder, start *xml.StartElement) (*Histo
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7527,11 +10622,48 @@ func parseHistoricalEventGamble(d *xml.Decoder, start *xml.StartElement) (*Histo
 		}
 	}
 }
-func parseHistoricalEventHfAbducted(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfAbducted, error) {
+func parseHistoricalEventGamblePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventGamble) (*HistoricalEventGamble, error) {
 	var (
-		obj  = HistoricalEventHfAbducted{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventGamble{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfAbducted(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfAbducted, error) {
+	var (
+		obj  = &HistoricalEventHfAbducted{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7560,7 +10692,7 @@ func parseHistoricalEventHfAbducted(d *xml.Decoder, start *xml.StartElement) (*H
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7580,11 +10712,14 @@ func parseHistoricalEventHfAbducted(d *xml.Decoder, start *xml.StartElement) (*H
 		}
 	}
 }
-func parseHistoricalEventHfActOnBuilding(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfActOnBuilding, error) {
+func parseHistoricalEventHfAbductedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfAbducted) (*HistoricalEventHfAbducted, error) {
 	var (
-		obj  = HistoricalEventHfActOnBuilding{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfAbducted{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7593,14 +10728,6 @@ func parseHistoricalEventHfActOnBuilding(d *xml.Decoder, start *xml.StartElement
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "action":
-				data = nil
-			case "histfig":
-				data = nil
-			case "site":
-				data = nil
-			case "structure":
-				data = nil
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 				d.Skip()
@@ -7611,18 +10738,10 @@ func parseHistoricalEventHfActOnBuilding(d *xml.Decoder, start *xml.StartElement
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "action":
-				obj.Action = string(data)
-			case "histfig":
-				obj.Histfig = n(data)
-			case "site":
-				obj.Site = n(data)
-			case "structure":
-				obj.Structure = n(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -7631,9 +10750,10 @@ func parseHistoricalEventHfActOnBuilding(d *xml.Decoder, start *xml.StartElement
 }
 func parseHistoricalEventHfAttackedSite(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfAttackedSite, error) {
 	var (
-		obj  = HistoricalEventHfAttackedSite{}
+		obj  = &HistoricalEventHfAttackedSite{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7660,7 +10780,7 @@ func parseHistoricalEventHfAttackedSite(d *xml.Decoder, start *xml.StartElement)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7678,11 +10798,48 @@ func parseHistoricalEventHfAttackedSite(d *xml.Decoder, start *xml.StartElement)
 		}
 	}
 }
-func parseHistoricalEventHfConfronted(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfConfronted, error) {
+func parseHistoricalEventHfAttackedSitePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfAttackedSite) (*HistoricalEventHfAttackedSite, error) {
 	var (
-		obj  = HistoricalEventHfConfronted{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfAttackedSite{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfConfronted(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfConfronted, error) {
+	var (
+		obj  = &HistoricalEventHfConfronted{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7715,7 +10872,7 @@ func parseHistoricalEventHfConfronted(d *xml.Decoder, start *xml.StartElement) (
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7739,11 +10896,48 @@ func parseHistoricalEventHfConfronted(d *xml.Decoder, start *xml.StartElement) (
 		}
 	}
 }
-func parseHistoricalEventHfConvicted(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfConvicted, error) {
+func parseHistoricalEventHfConfrontedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfConfronted) (*HistoricalEventHfConfronted, error) {
 	var (
-		obj  = HistoricalEventHfConvicted{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfConfronted{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfConvicted(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfConvicted, error) {
+	var (
+		obj  = &HistoricalEventHfConvicted{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7810,7 +11004,7 @@ func parseHistoricalEventHfConvicted(d *xml.Decoder, start *xml.StartElement) (*
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7868,11 +11062,48 @@ func parseHistoricalEventHfConvicted(d *xml.Decoder, start *xml.StartElement) (*
 		}
 	}
 }
-func parseHistoricalEventHfDestroyedSite(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfDestroyedSite, error) {
+func parseHistoricalEventHfConvictedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfConvicted) (*HistoricalEventHfConvicted, error) {
 	var (
-		obj  = HistoricalEventHfDestroyedSite{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfConvicted{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfDestroyedSite(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfDestroyedSite, error) {
+	var (
+		obj  = &HistoricalEventHfDestroyedSite{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7899,7 +11130,7 @@ func parseHistoricalEventHfDestroyedSite(d *xml.Decoder, start *xml.StartElement
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7917,11 +11148,48 @@ func parseHistoricalEventHfDestroyedSite(d *xml.Decoder, start *xml.StartElement
 		}
 	}
 }
-func parseHistoricalEventHfDied(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfDied, error) {
+func parseHistoricalEventHfDestroyedSitePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfDestroyedSite) (*HistoricalEventHfDestroyedSite, error) {
 	var (
-		obj  = HistoricalEventHfDied{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfDestroyedSite{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfDied(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfDied, error) {
+	var (
+		obj  = &HistoricalEventHfDied{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -7960,7 +11228,7 @@ func parseHistoricalEventHfDied(d *xml.Decoder, start *xml.StartElement) (*Histo
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -7990,11 +11258,84 @@ func parseHistoricalEventHfDied(d *xml.Decoder, start *xml.StartElement) (*Histo
 		}
 	}
 }
-func parseHistoricalEventHfDisturbedStructure(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfDisturbedStructure, error) {
+func parseHistoricalEventHfDiedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfDied) (*HistoricalEventHfDied, error) {
 	var (
-		obj  = HistoricalEventHfDisturbedStructure{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfDied{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "artifact_id":
+				data = nil
+			case "death_cause":
+				data = nil
+			case "item":
+				data = nil
+			case "item_type":
+				data = nil
+			case "site":
+				data = nil
+			case "slayer_caste":
+				data = nil
+			case "slayer_hf":
+				data = nil
+			case "slayer_race":
+				data = nil
+			case "victim_hf":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "artifact_id":
+				obj.ArtifactId = n(data)
+			case "death_cause":
+				obj.DeathCause = string(data)
+			case "item":
+				obj.Item = n(data)
+			case "item_type":
+				obj.ItemType = string(data)
+			case "site":
+				obj.Site = n(data)
+			case "slayer_caste":
+				obj.SlayerCaste = string(data)
+			case "slayer_hf":
+				obj.SlayerHf = n(data)
+			case "slayer_race":
+				obj.SlayerRace = string(data)
+			case "victim_hf":
+				obj.VictimHf = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfDisturbedStructure(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfDisturbedStructure, error) {
+	var (
+		obj  = &HistoricalEventHfDisturbedStructure{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8019,7 +11360,7 @@ func parseHistoricalEventHfDisturbedStructure(d *xml.Decoder, start *xml.StartEl
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8035,11 +11376,14 @@ func parseHistoricalEventHfDisturbedStructure(d *xml.Decoder, start *xml.StartEl
 		}
 	}
 }
-func parseHistoricalEventHfDoesInteraction(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfDoesInteraction, error) {
+func parseHistoricalEventHfDisturbedStructurePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfDisturbedStructure) (*HistoricalEventHfDisturbedStructure, error) {
 	var (
-		obj  = HistoricalEventHfDoesInteraction{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfDisturbedStructure{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8048,21 +11392,59 @@ func parseHistoricalEventHfDoesInteraction(d *xml.Decoder, start *xml.StartEleme
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "doer":
+			case "action":
 				data = nil
-			case "doer_hfid":
-				data = nil
-			case "interaction":
-				data = nil
-			case "interaction_action":
-				data = nil
-			case "region":
+			case "histfig":
 				data = nil
 			case "site":
 				data = nil
-			case "source":
+			case "structure":
 				data = nil
-			case "target":
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "action":
+				obj.Action = string(data)
+			case "histfig":
+				obj.Histfig = n(data)
+			case "site":
+				obj.Site = n(data)
+			case "structure":
+				obj.Structure = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfDoesInteraction(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfDoesInteraction, error) {
+	var (
+		obj  = &HistoricalEventHfDoesInteraction{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "doer_hfid":
+				data = nil
+			case "interaction":
 				data = nil
 			case "target_hfid":
 				data = nil
@@ -8076,16 +11458,66 @@ func parseHistoricalEventHfDoesInteraction(d *xml.Decoder, start *xml.StartEleme
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "doer_hfid":
+				obj.DoerHfid = n(data)
+			case "interaction":
+				obj.Interaction = string(data)
+			case "target_hfid":
+				obj.TargetHfid = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfDoesInteractionPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfDoesInteraction) (*HistoricalEventHfDoesInteraction, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventHfDoesInteraction{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "doer":
+				data = nil
+			case "interaction_action":
+				data = nil
+			case "region":
+				data = nil
+			case "site":
+				data = nil
+			case "source":
+				data = nil
+			case "target":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
 			}
 
 			switch t.Name.Local {
 			case "doer":
 				obj.Doer = n(data)
-			case "doer_hfid":
-				obj.DoerHfid = n(data)
-			case "interaction":
-				obj.Interaction = string(data)
 			case "interaction_action":
 				obj.InteractionAction = string(data)
 			case "region":
@@ -8096,8 +11528,6 @@ func parseHistoricalEventHfDoesInteraction(d *xml.Decoder, start *xml.StartEleme
 				obj.Source = n(data)
 			case "target":
 				obj.Target = n(data)
-			case "target_hfid":
-				obj.TargetHfid = n(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -8106,9 +11536,10 @@ func parseHistoricalEventHfDoesInteraction(d *xml.Decoder, start *xml.StartEleme
 }
 func parseHistoricalEventHfEnslaved(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfEnslaved, error) {
 	var (
-		obj  = HistoricalEventHfEnslaved{}
+		obj  = &HistoricalEventHfEnslaved{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8135,7 +11566,7 @@ func parseHistoricalEventHfEnslaved(d *xml.Decoder, start *xml.StartElement) (*H
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8153,11 +11584,48 @@ func parseHistoricalEventHfEnslaved(d *xml.Decoder, start *xml.StartElement) (*H
 		}
 	}
 }
-func parseHistoricalEventHfEquipmentPurchase(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfEquipmentPurchase, error) {
+func parseHistoricalEventHfEnslavedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfEnslaved) (*HistoricalEventHfEnslaved, error) {
 	var (
-		obj  = HistoricalEventHfEquipmentPurchase{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfEnslaved{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfEquipmentPurchase(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfEquipmentPurchase, error) {
+	var (
+		obj  = &HistoricalEventHfEquipmentPurchase{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8188,7 +11656,7 @@ func parseHistoricalEventHfEquipmentPurchase(d *xml.Decoder, start *xml.StartEle
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8210,11 +11678,48 @@ func parseHistoricalEventHfEquipmentPurchase(d *xml.Decoder, start *xml.StartEle
 		}
 	}
 }
-func parseHistoricalEventHfGainsSecretGoal(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfGainsSecretGoal, error) {
+func parseHistoricalEventHfEquipmentPurchasePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfEquipmentPurchase) (*HistoricalEventHfEquipmentPurchase, error) {
 	var (
-		obj  = HistoricalEventHfGainsSecretGoal{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfEquipmentPurchase{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfGainsSecretGoal(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfGainsSecretGoal, error) {
+	var (
+		obj  = &HistoricalEventHfGainsSecretGoal{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8237,7 +11742,7 @@ func parseHistoricalEventHfGainsSecretGoal(d *xml.Decoder, start *xml.StartEleme
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8251,11 +11756,48 @@ func parseHistoricalEventHfGainsSecretGoal(d *xml.Decoder, start *xml.StartEleme
 		}
 	}
 }
-func parseHistoricalEventHfInterrogated(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfInterrogated, error) {
+func parseHistoricalEventHfGainsSecretGoalPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfGainsSecretGoal) (*HistoricalEventHfGainsSecretGoal, error) {
 	var (
-		obj  = HistoricalEventHfInterrogated{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfGainsSecretGoal{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfInterrogated(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfInterrogated, error) {
+	var (
+		obj  = &HistoricalEventHfInterrogated{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8284,7 +11826,7 @@ func parseHistoricalEventHfInterrogated(d *xml.Decoder, start *xml.StartElement)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8304,11 +11846,14 @@ func parseHistoricalEventHfInterrogated(d *xml.Decoder, start *xml.StartElement)
 		}
 	}
 }
-func parseHistoricalEventHfLearnsSecret(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfLearnsSecret, error) {
+func parseHistoricalEventHfInterrogatedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfInterrogated) (*HistoricalEventHfInterrogated, error) {
 	var (
-		obj  = HistoricalEventHfLearnsSecret{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfInterrogated{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8317,19 +11862,45 @@ func parseHistoricalEventHfLearnsSecret(d *xml.Decoder, start *xml.StartElement)
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "artifact":
-				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfLearnsSecret(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfLearnsSecret, error) {
+	var (
+		obj  = &HistoricalEventHfLearnsSecret{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
 			case "artifact_id":
 				data = nil
 			case "interaction":
 				data = nil
-			case "secret_text":
-				data = nil
-			case "student":
-				data = nil
 			case "student_hfid":
-				data = nil
-			case "teacher":
 				data = nil
 			case "teacher_hfid":
 				data = nil
@@ -8343,24 +11914,16 @@ func parseHistoricalEventHfLearnsSecret(d *xml.Decoder, start *xml.StartElement)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "artifact":
-				obj.Artifact = n(data)
 			case "artifact_id":
 				obj.ArtifactId = n(data)
 			case "interaction":
 				obj.Interaction = string(data)
-			case "secret_text":
-				obj.SecretText = string(data)
-			case "student":
-				obj.Student = n(data)
 			case "student_hfid":
 				obj.StudentHfid = n(data)
-			case "teacher":
-				obj.Teacher = n(data)
 			case "teacher_hfid":
 				obj.TeacherHfid = n(data)
 			default:
@@ -8369,11 +11932,64 @@ func parseHistoricalEventHfLearnsSecret(d *xml.Decoder, start *xml.StartElement)
 		}
 	}
 }
-func parseHistoricalEventHfNewPet(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfNewPet, error) {
+func parseHistoricalEventHfLearnsSecretPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfLearnsSecret) (*HistoricalEventHfLearnsSecret, error) {
 	var (
-		obj  = HistoricalEventHfNewPet{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfLearnsSecret{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "artifact":
+				data = nil
+			case "secret_text":
+				data = nil
+			case "student":
+				data = nil
+			case "teacher":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "artifact":
+				obj.Artifact = n(data)
+			case "secret_text":
+				obj.SecretText = string(data)
+			case "student":
+				obj.Student = n(data)
+			case "teacher":
+				obj.Teacher = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfNewPet(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfNewPet, error) {
+	var (
+		obj  = &HistoricalEventHfNewPet{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8402,7 +12018,7 @@ func parseHistoricalEventHfNewPet(d *xml.Decoder, start *xml.StartElement) (*His
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8422,11 +12038,60 @@ func parseHistoricalEventHfNewPet(d *xml.Decoder, start *xml.StartElement) (*His
 		}
 	}
 }
-func parseHistoricalEventHfPerformedHorribleExperiments(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfPerformedHorribleExperiments, error) {
+func parseHistoricalEventHfNewPetPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfNewPet) (*HistoricalEventHfNewPet, error) {
 	var (
-		obj  = HistoricalEventHfPerformedHorribleExperiments{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfNewPet{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "group":
+				data = nil
+			case "pets":
+				data = nil
+			case "site":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "group":
+				obj.Group = n(data)
+			case "pets":
+				obj.Pets = string(data)
+			case "site":
+				obj.Site = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfPerformedHorribleExperiments(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfPerformedHorribleExperiments, error) {
+	var (
+		obj  = &HistoricalEventHfPerformedHorribleExperiments{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8455,7 +12120,7 @@ func parseHistoricalEventHfPerformedHorribleExperiments(d *xml.Decoder, start *x
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8475,11 +12140,48 @@ func parseHistoricalEventHfPerformedHorribleExperiments(d *xml.Decoder, start *x
 		}
 	}
 }
-func parseHistoricalEventHfPrayedInsideStructure(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfPrayedInsideStructure, error) {
+func parseHistoricalEventHfPerformedHorribleExperimentsPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfPerformedHorribleExperiments) (*HistoricalEventHfPerformedHorribleExperiments, error) {
 	var (
-		obj  = HistoricalEventHfPrayedInsideStructure{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfPerformedHorribleExperiments{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfPrayedInsideStructure(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfPrayedInsideStructure, error) {
+	var (
+		obj  = &HistoricalEventHfPrayedInsideStructure{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8504,7 +12206,7 @@ func parseHistoricalEventHfPrayedInsideStructure(d *xml.Decoder, start *xml.Star
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8520,11 +12222,64 @@ func parseHistoricalEventHfPrayedInsideStructure(d *xml.Decoder, start *xml.Star
 		}
 	}
 }
-func parseHistoricalEventHfPreach(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfPreach, error) {
+func parseHistoricalEventHfPrayedInsideStructurePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfPrayedInsideStructure) (*HistoricalEventHfPrayedInsideStructure, error) {
 	var (
-		obj  = HistoricalEventHfPreach{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfPrayedInsideStructure{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "action":
+				data = nil
+			case "histfig":
+				data = nil
+			case "site":
+				data = nil
+			case "structure":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "action":
+				obj.Action = string(data)
+			case "histfig":
+				obj.Histfig = n(data)
+			case "site":
+				obj.Site = n(data)
+			case "structure":
+				obj.Structure = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfPreach(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfPreach, error) {
+	var (
+		obj  = &HistoricalEventHfPreach{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8553,7 +12308,7 @@ func parseHistoricalEventHfPreach(d *xml.Decoder, start *xml.StartElement) (*His
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8573,11 +12328,48 @@ func parseHistoricalEventHfPreach(d *xml.Decoder, start *xml.StartElement) (*His
 		}
 	}
 }
-func parseHistoricalEventHfProfanedStructure(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfProfanedStructure, error) {
+func parseHistoricalEventHfPreachPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfPreach) (*HistoricalEventHfPreach, error) {
 	var (
-		obj  = HistoricalEventHfProfanedStructure{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfPreach{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfProfanedStructure(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfProfanedStructure, error) {
+	var (
+		obj  = &HistoricalEventHfProfanedStructure{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8602,7 +12394,7 @@ func parseHistoricalEventHfProfanedStructure(d *xml.Decoder, start *xml.StartEle
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8618,11 +12410,64 @@ func parseHistoricalEventHfProfanedStructure(d *xml.Decoder, start *xml.StartEle
 		}
 	}
 }
-func parseHistoricalEventHfRecruitedUnitTypeForEntity(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfRecruitedUnitTypeForEntity, error) {
+func parseHistoricalEventHfProfanedStructurePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfProfanedStructure) (*HistoricalEventHfProfanedStructure, error) {
 	var (
-		obj  = HistoricalEventHfRecruitedUnitTypeForEntity{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfProfanedStructure{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "action":
+				data = nil
+			case "histfig":
+				data = nil
+			case "site":
+				data = nil
+			case "structure":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "action":
+				obj.Action = string(data)
+			case "histfig":
+				obj.Histfig = n(data)
+			case "site":
+				obj.Site = n(data)
+			case "structure":
+				obj.Structure = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfRecruitedUnitTypeForEntity(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfRecruitedUnitTypeForEntity, error) {
+	var (
+		obj  = &HistoricalEventHfRecruitedUnitTypeForEntity{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8653,7 +12498,7 @@ func parseHistoricalEventHfRecruitedUnitTypeForEntity(d *xml.Decoder, start *xml
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8675,11 +12520,48 @@ func parseHistoricalEventHfRecruitedUnitTypeForEntity(d *xml.Decoder, start *xml
 		}
 	}
 }
-func parseHistoricalEventHfRelationshipDenied(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfRelationshipDenied, error) {
+func parseHistoricalEventHfRecruitedUnitTypeForEntityPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfRecruitedUnitTypeForEntity) (*HistoricalEventHfRecruitedUnitTypeForEntity, error) {
 	var (
-		obj  = HistoricalEventHfRelationshipDenied{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfRecruitedUnitTypeForEntity{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfRelationshipDenied(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfRelationshipDenied, error) {
+	var (
+		obj  = &HistoricalEventHfRelationshipDenied{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8714,7 +12596,7 @@ func parseHistoricalEventHfRelationshipDenied(d *xml.Decoder, start *xml.StartEl
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8740,11 +12622,48 @@ func parseHistoricalEventHfRelationshipDenied(d *xml.Decoder, start *xml.StartEl
 		}
 	}
 }
-func parseHistoricalEventHfReunion(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfReunion, error) {
+func parseHistoricalEventHfRelationshipDeniedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfRelationshipDenied) (*HistoricalEventHfRelationshipDenied, error) {
 	var (
-		obj  = HistoricalEventHfReunion{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfRelationshipDenied{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfReunion(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfReunion, error) {
+	var (
+		obj  = &HistoricalEventHfReunion{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8773,7 +12692,7 @@ func parseHistoricalEventHfReunion(d *xml.Decoder, start *xml.StartElement) (*Hi
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8793,11 +12712,48 @@ func parseHistoricalEventHfReunion(d *xml.Decoder, start *xml.StartElement) (*Hi
 		}
 	}
 }
-func parseHistoricalEventHfRevived(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfRevived, error) {
+func parseHistoricalEventHfReunionPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfReunion) (*HistoricalEventHfReunion, error) {
 	var (
-		obj  = HistoricalEventHfRevived{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfReunion{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfRevived(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfRevived, error) {
+	var (
+		obj  = &HistoricalEventHfRevived{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8828,7 +12784,7 @@ func parseHistoricalEventHfRevived(d *xml.Decoder, start *xml.StartElement) (*Hi
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8850,11 +12806,48 @@ func parseHistoricalEventHfRevived(d *xml.Decoder, start *xml.StartElement) (*Hi
 		}
 	}
 }
-func parseHistoricalEventHfSimpleBattleEvent(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfSimpleBattleEvent, error) {
+func parseHistoricalEventHfRevivedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfRevived) (*HistoricalEventHfRevived, error) {
 	var (
-		obj  = HistoricalEventHfSimpleBattleEvent{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfRevived{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfSimpleBattleEvent(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfSimpleBattleEvent, error) {
+	var (
+		obj  = &HistoricalEventHfSimpleBattleEvent{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8885,7 +12878,7 @@ func parseHistoricalEventHfSimpleBattleEvent(d *xml.Decoder, start *xml.StartEle
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8907,11 +12900,48 @@ func parseHistoricalEventHfSimpleBattleEvent(d *xml.Decoder, start *xml.StartEle
 		}
 	}
 }
-func parseHistoricalEventHfTravel(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfTravel, error) {
+func parseHistoricalEventHfSimpleBattleEventPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfSimpleBattleEvent) (*HistoricalEventHfSimpleBattleEvent, error) {
 	var (
-		obj  = HistoricalEventHfTravel{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfSimpleBattleEvent{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfTravel(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfTravel, error) {
+	var (
+		obj  = &HistoricalEventHfTravel{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8942,7 +12972,7 @@ func parseHistoricalEventHfTravel(d *xml.Decoder, start *xml.StartElement) (*His
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -8964,11 +12994,48 @@ func parseHistoricalEventHfTravel(d *xml.Decoder, start *xml.StartElement) (*His
 		}
 	}
 }
-func parseHistoricalEventHfViewedArtifact(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfViewedArtifact, error) {
+func parseHistoricalEventHfTravelPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfTravel) (*HistoricalEventHfTravel, error) {
 	var (
-		obj  = HistoricalEventHfViewedArtifact{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfTravel{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfViewedArtifact(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfViewedArtifact, error) {
+	var (
+		obj  = &HistoricalEventHfViewedArtifact{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -8995,7 +13062,7 @@ func parseHistoricalEventHfViewedArtifact(d *xml.Decoder, start *xml.StartElemen
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -9013,11 +13080,48 @@ func parseHistoricalEventHfViewedArtifact(d *xml.Decoder, start *xml.StartElemen
 		}
 	}
 }
-func parseHistoricalEventHfWounded(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfWounded, error) {
+func parseHistoricalEventHfViewedArtifactPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfViewedArtifact) (*HistoricalEventHfViewedArtifact, error) {
 	var (
-		obj  = HistoricalEventHfWounded{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfViewedArtifact{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfWounded(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfWounded, error) {
+	var (
+		obj  = &HistoricalEventHfWounded{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -9046,7 +13150,7 @@ func parseHistoricalEventHfWounded(d *xml.Decoder, start *xml.StartElement) (*Hi
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -9066,11 +13170,80 @@ func parseHistoricalEventHfWounded(d *xml.Decoder, start *xml.StartElement) (*Hi
 		}
 	}
 }
-func parseHistoricalEventHfsFormedIntrigueRelationship(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfsFormedIntrigueRelationship, error) {
+func parseHistoricalEventHfWoundedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfWounded) (*HistoricalEventHfWounded, error) {
 	var (
-		obj  = HistoricalEventHfsFormedIntrigueRelationship{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfWounded{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "body_part":
+				data = nil
+			case "injury_type":
+				data = nil
+			case "part_lost":
+				data = nil
+			case "site":
+				data = nil
+			case "woundee":
+				data = nil
+			case "woundee_caste":
+				data = nil
+			case "woundee_race":
+				data = nil
+			case "wounder":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "body_part":
+				obj.BodyPart = n(data)
+			case "injury_type":
+				obj.InjuryType = string(data)
+			case "part_lost":
+				obj.PartLost = string(data)
+			case "site":
+				obj.Site = n(data)
+			case "woundee":
+				obj.Woundee = n(data)
+			case "woundee_caste":
+				obj.WoundeeCaste = n(data)
+			case "woundee_race":
+				obj.WoundeeRace = n(data)
+			case "wounder":
+				obj.Wounder = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfsFormedIntrigueRelationship(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfsFormedIntrigueRelationship, error) {
+	var (
+		obj  = &HistoricalEventHfsFormedIntrigueRelationship{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -9149,7 +13322,7 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(d *xml.Decoder, start *xm
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -9219,11 +13392,48 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(d *xml.Decoder, start *xm
 		}
 	}
 }
-func parseHistoricalEventHfsFormedReputationRelationship(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfsFormedReputationRelationship, error) {
+func parseHistoricalEventHfsFormedIntrigueRelationshipPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfsFormedIntrigueRelationship) (*HistoricalEventHfsFormedIntrigueRelationship, error) {
 	var (
-		obj  = HistoricalEventHfsFormedReputationRelationship{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHfsFormedIntrigueRelationship{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventHfsFormedReputationRelationship(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHfsFormedReputationRelationship, error) {
+	var (
+		obj  = &HistoricalEventHfsFormedReputationRelationship{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -9260,7 +13470,7 @@ func parseHistoricalEventHfsFormedReputationRelationship(d *xml.Decoder, start *
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -9288,80 +13498,14 @@ func parseHistoricalEventHfsFormedReputationRelationship(d *xml.Decoder, start *
 		}
 	}
 }
-func parseHistoricalEventHistFigureDied(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHistFigureDied, error) {
+func parseHistoricalEventHfsFormedReputationRelationshipPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHfsFormedReputationRelationship) (*HistoricalEventHfsFormedReputationRelationship, error) {
 	var (
-		obj  = HistoricalEventHistFigureDied{}
 		data []byte
 	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "artifact_id":
-				data = nil
-			case "death_cause":
-				data = nil
-			case "item":
-				data = nil
-			case "item_type":
-				data = nil
-			case "site":
-				data = nil
-			case "slayer_caste":
-				data = nil
-			case "slayer_hf":
-				data = nil
-			case "slayer_race":
-				data = nil
-			case "victim_hf":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "artifact_id":
-				obj.ArtifactId = n(data)
-			case "death_cause":
-				obj.DeathCause = string(data)
-			case "item":
-				obj.Item = n(data)
-			case "item_type":
-				obj.ItemType = string(data)
-			case "site":
-				obj.Site = n(data)
-			case "slayer_caste":
-				obj.SlayerCaste = n(data)
-			case "slayer_hf":
-				obj.SlayerHf = n(data)
-			case "slayer_race":
-				obj.SlayerRace = n(data)
-			case "victim_hf":
-				obj.VictimHf = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
+	if obj == nil {
+		obj = &HistoricalEventHfsFormedReputationRelationship{}
 	}
-}
-func parseHistoricalEventHistFigureNewPet(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHistFigureNewPet, error) {
-	var (
-		obj  = HistoricalEventHistFigureNewPet{}
-		data []byte
-	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -9370,12 +13514,6 @@ func parseHistoricalEventHistFigureNewPet(d *xml.Decoder, start *xml.StartElemen
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "group":
-				data = nil
-			case "pets":
-				data = nil
-			case "site":
-				data = nil
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 				d.Skip()
@@ -9386,81 +13524,10 @@ func parseHistoricalEventHistFigureNewPet(d *xml.Decoder, start *xml.StartElemen
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "group":
-				obj.Group = n(data)
-			case "pets":
-				obj.Pets = string(data)
-			case "site":
-				obj.Site = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
-func parseHistoricalEventHistFigureWounded(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHistFigureWounded, error) {
-	var (
-		obj  = HistoricalEventHistFigureWounded{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "body_part":
-				data = nil
-			case "injury_type":
-				data = nil
-			case "part_lost":
-				data = nil
-			case "site":
-				data = nil
-			case "woundee":
-				data = nil
-			case "woundee_caste":
-				data = nil
-			case "woundee_race":
-				data = nil
-			case "wounder":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "body_part":
-				obj.BodyPart = n(data)
-			case "injury_type":
-				obj.InjuryType = string(data)
-			case "part_lost":
-				obj.PartLost = string(data)
-			case "site":
-				obj.Site = n(data)
-			case "woundee":
-				obj.Woundee = n(data)
-			case "woundee_caste":
-				obj.WoundeeCaste = n(data)
-			case "woundee_race":
-				obj.WoundeeRace = n(data)
-			case "wounder":
-				obj.Wounder = n(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -9469,9 +13536,10 @@ func parseHistoricalEventHistFigureWounded(d *xml.Decoder, start *xml.StartEleme
 }
 func parseHistoricalEventHolyCityDeclaration(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventHolyCityDeclaration, error) {
 	var (
-		obj  = HistoricalEventHolyCityDeclaration{}
+		obj  = &HistoricalEventHolyCityDeclaration{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -9494,7 +13562,7 @@ func parseHistoricalEventHolyCityDeclaration(d *xml.Decoder, start *xml.StartEle
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -9508,11 +13576,48 @@ func parseHistoricalEventHolyCityDeclaration(d *xml.Decoder, start *xml.StartEle
 		}
 	}
 }
-func parseHistoricalEventItemStolen(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventItemStolen, error) {
+func parseHistoricalEventHolyCityDeclarationPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventHolyCityDeclaration) (*HistoricalEventHolyCityDeclaration, error) {
 	var (
-		obj  = HistoricalEventItemStolen{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventHolyCityDeclaration{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventItemStolen(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventItemStolen, error) {
+	var (
+		obj  = &HistoricalEventItemStolen{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -9522,10 +13627,53 @@ func parseHistoricalEventItemStolen(d *xml.Decoder, start *xml.StartElement) (*H
 		case xml.StartElement:
 			switch t.Name.Local {
 			case "circumstance":
-				v, _ := parseCircumstance(d, &t)
+				v, _ := parseHistoricalEventItemStolenCircumstance(d, &t)
 				obj.Circumstance = v
 			case "circumstance_id":
 				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "circumstance":
+
+			case "circumstance_id":
+				obj.CircumstanceId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventItemStolenPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventItemStolen) (*HistoricalEventItemStolen, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventItemStolen{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "circumstance":
+				v, _ := parseHistoricalEventItemStolenCircumstance(d, &t)
+				obj.Circumstance = v
 			case "entity":
 				data = nil
 			case "histfig":
@@ -9560,14 +13708,12 @@ func parseHistoricalEventItemStolen(d *xml.Decoder, start *xml.StartElement) (*H
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
 			case "circumstance":
 
-			case "circumstance_id":
-				obj.CircumstanceId = n(data)
 			case "entity":
 				obj.Entity = n(data)
 			case "histfig":
@@ -9600,9 +13746,46 @@ func parseHistoricalEventItemStolen(d *xml.Decoder, start *xml.StartElement) (*H
 }
 func parseHistoricalEventItemStolenCircumstance(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventItemStolenCircumstance, error) {
 	var (
-		obj  = HistoricalEventItemStolenCircumstance{}
+		obj  = &HistoricalEventItemStolenCircumstance{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventItemStolenCircumstancePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventItemStolenCircumstance) (*HistoricalEventItemStolenCircumstance, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventItemStolenCircumstance{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -9629,7 +13812,7 @@ func parseHistoricalEventItemStolenCircumstance(d *xml.Decoder, start *xml.Start
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -9649,9 +13832,10 @@ func parseHistoricalEventItemStolenCircumstance(d *xml.Decoder, start *xml.Start
 }
 func parseHistoricalEventKnowledgeDiscovered(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventKnowledgeDiscovered, error) {
 	var (
-		obj  = HistoricalEventKnowledgeDiscovered{}
+		obj  = &HistoricalEventKnowledgeDiscovered{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -9676,7 +13860,7 @@ func parseHistoricalEventKnowledgeDiscovered(d *xml.Decoder, start *xml.StartEle
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -9692,80 +13876,14 @@ func parseHistoricalEventKnowledgeDiscovered(d *xml.Decoder, start *xml.StartEle
 		}
 	}
 }
-func parseHistoricalEventMasterpieceCreatedItem(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventMasterpieceCreatedItem, error) {
+func parseHistoricalEventKnowledgeDiscoveredPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventKnowledgeDiscovered) (*HistoricalEventKnowledgeDiscovered, error) {
 	var (
-		obj  = HistoricalEventMasterpieceCreatedItem{}
 		data []byte
 	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "item_id":
-				data = nil
-			case "item_subtype":
-				data = nil
-			case "item_type":
-				data = nil
-			case "maker":
-				data = nil
-			case "maker_entity":
-				data = nil
-			case "mat":
-				data = nil
-			case "mat_index":
-				data = nil
-			case "mat_type":
-				data = nil
-			case "site":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "item_id":
-				obj.ItemId = n(data)
-			case "item_subtype":
-				obj.ItemSubtype = string(data)
-			case "item_type":
-				obj.ItemType = string(data)
-			case "maker":
-				obj.Maker = n(data)
-			case "maker_entity":
-				obj.MakerEntity = n(data)
-			case "mat":
-				obj.Mat = string(data)
-			case "mat_index":
-				obj.MatIndex = n(data)
-			case "mat_type":
-				obj.MatType = n(data)
-			case "site":
-				obj.Site = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
+	if obj == nil {
+		obj = &HistoricalEventKnowledgeDiscovered{}
 	}
-}
-func parseHistoricalEventMerchant(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventMerchant, error) {
-	var (
-		obj  = HistoricalEventMerchant{}
-		data []byte
-	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -9774,12 +13892,6 @@ func parseHistoricalEventMerchant(d *xml.Decoder, start *xml.StartElement) (*His
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "destination":
-				data = nil
-			case "site":
-				data = nil
-			case "source":
-				data = nil
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 				d.Skip()
@@ -9790,16 +13902,10 @@ func parseHistoricalEventMerchant(d *xml.Decoder, start *xml.StartElement) (*His
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "destination":
-				obj.Destination = n(data)
-			case "site":
-				obj.Site = n(data)
-			case "source":
-				obj.Source = n(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -9808,9 +13914,10 @@ func parseHistoricalEventMerchant(d *xml.Decoder, start *xml.StartElement) (*His
 }
 func parseHistoricalEventModifiedBuilding(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventModifiedBuilding, error) {
 	var (
-		obj  = HistoricalEventModifiedBuilding{}
+		obj  = &HistoricalEventModifiedBuilding{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -9837,7 +13944,7 @@ func parseHistoricalEventModifiedBuilding(d *xml.Decoder, start *xml.StartElemen
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -9855,11 +13962,48 @@ func parseHistoricalEventModifiedBuilding(d *xml.Decoder, start *xml.StartElemen
 		}
 	}
 }
-func parseHistoricalEventMusicalFormCreated(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventMusicalFormCreated, error) {
+func parseHistoricalEventModifiedBuildingPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventModifiedBuilding) (*HistoricalEventModifiedBuilding, error) {
 	var (
-		obj  = HistoricalEventMusicalFormCreated{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventModifiedBuilding{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventMusicalFormCreated(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventMusicalFormCreated, error) {
+	var (
+		obj  = &HistoricalEventMusicalFormCreated{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -9892,7 +14036,7 @@ func parseHistoricalEventMusicalFormCreated(d *xml.Decoder, start *xml.StartElem
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -9916,11 +14060,48 @@ func parseHistoricalEventMusicalFormCreated(d *xml.Decoder, start *xml.StartElem
 		}
 	}
 }
-func parseHistoricalEventNewSiteLeader(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventNewSiteLeader, error) {
+func parseHistoricalEventMusicalFormCreatedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventMusicalFormCreated) (*HistoricalEventMusicalFormCreated, error) {
 	var (
-		obj  = HistoricalEventNewSiteLeader{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventMusicalFormCreated{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventNewSiteLeader(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventNewSiteLeader, error) {
+	var (
+		obj  = &HistoricalEventNewSiteLeader{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -9951,7 +14132,7 @@ func parseHistoricalEventNewSiteLeader(d *xml.Decoder, start *xml.StartElement) 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -9973,11 +14154,48 @@ func parseHistoricalEventNewSiteLeader(d *xml.Decoder, start *xml.StartElement) 
 		}
 	}
 }
-func parseHistoricalEventPeaceAccepted(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventPeaceAccepted, error) {
+func parseHistoricalEventNewSiteLeaderPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventNewSiteLeader) (*HistoricalEventNewSiteLeader, error) {
 	var (
-		obj  = HistoricalEventPeaceAccepted{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventNewSiteLeader{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventPeaceAccepted(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventPeaceAccepted, error) {
+	var (
+		obj  = &HistoricalEventPeaceAccepted{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -9998,12 +14216,64 @@ func parseHistoricalEventPeaceAccepted(d *xml.Decoder, start *xml.StartElement) 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
 			case "site_id":
 				obj.SiteId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventPeaceAcceptedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventPeaceAccepted) (*HistoricalEventPeaceAccepted, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventPeaceAccepted{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "destination":
+				data = nil
+			case "site":
+				data = nil
+			case "source":
+				data = nil
+			case "topic":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "destination":
+				obj.Destination = n(data)
+			case "site":
+				obj.Site = n(data)
+			case "source":
+				obj.Source = n(data)
+			case "topic":
+				obj.Topic = string(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -10012,9 +14282,10 @@ func parseHistoricalEventPeaceAccepted(d *xml.Decoder, start *xml.StartElement) 
 }
 func parseHistoricalEventPeaceRejected(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventPeaceRejected, error) {
 	var (
-		obj  = HistoricalEventPeaceRejected{}
+		obj  = &HistoricalEventPeaceRejected{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10035,7 +14306,7 @@ func parseHistoricalEventPeaceRejected(d *xml.Decoder, start *xml.StartElement) 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10047,11 +14318,64 @@ func parseHistoricalEventPeaceRejected(d *xml.Decoder, start *xml.StartElement) 
 		}
 	}
 }
-func parseHistoricalEventPerformance(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventPerformance, error) {
+func parseHistoricalEventPeaceRejectedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventPeaceRejected) (*HistoricalEventPeaceRejected, error) {
 	var (
-		obj  = HistoricalEventPerformance{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventPeaceRejected{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "destination":
+				data = nil
+			case "site":
+				data = nil
+			case "source":
+				data = nil
+			case "topic":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "destination":
+				obj.Destination = n(data)
+			case "site":
+				obj.Site = n(data)
+			case "source":
+				obj.Source = n(data)
+			case "topic":
+				obj.Topic = string(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventPerformance(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventPerformance, error) {
+	var (
+		obj  = &HistoricalEventPerformance{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10082,7 +14406,7 @@ func parseHistoricalEventPerformance(d *xml.Decoder, start *xml.StartElement) (*
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10104,11 +14428,48 @@ func parseHistoricalEventPerformance(d *xml.Decoder, start *xml.StartElement) (*
 		}
 	}
 }
-func parseHistoricalEventPlunderedSite(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventPlunderedSite, error) {
+func parseHistoricalEventPerformancePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventPerformance) (*HistoricalEventPerformance, error) {
 	var (
-		obj  = HistoricalEventPlunderedSite{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventPerformance{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventPlunderedSite(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventPlunderedSite, error) {
+	var (
+		obj  = &HistoricalEventPlunderedSite{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10137,7 +14498,7 @@ func parseHistoricalEventPlunderedSite(d *xml.Decoder, start *xml.StartElement) 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10157,11 +14518,48 @@ func parseHistoricalEventPlunderedSite(d *xml.Decoder, start *xml.StartElement) 
 		}
 	}
 }
-func parseHistoricalEventPoeticFormCreated(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventPoeticFormCreated, error) {
+func parseHistoricalEventPlunderedSitePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventPlunderedSite) (*HistoricalEventPlunderedSite, error) {
 	var (
-		obj  = HistoricalEventPoeticFormCreated{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventPlunderedSite{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventPoeticFormCreated(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventPoeticFormCreated, error) {
+	var (
+		obj  = &HistoricalEventPoeticFormCreated{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10188,7 +14586,7 @@ func parseHistoricalEventPoeticFormCreated(d *xml.Decoder, start *xml.StartEleme
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10206,11 +14604,48 @@ func parseHistoricalEventPoeticFormCreated(d *xml.Decoder, start *xml.StartEleme
 		}
 	}
 }
-func parseHistoricalEventProcession(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventProcession, error) {
+func parseHistoricalEventPoeticFormCreatedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventPoeticFormCreated) (*HistoricalEventPoeticFormCreated, error) {
 	var (
-		obj  = HistoricalEventProcession{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventPoeticFormCreated{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventProcession(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventProcession, error) {
+	var (
+		obj  = &HistoricalEventProcession{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10241,7 +14676,7 @@ func parseHistoricalEventProcession(d *xml.Decoder, start *xml.StartElement) (*H
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10263,11 +14698,48 @@ func parseHistoricalEventProcession(d *xml.Decoder, start *xml.StartElement) (*H
 		}
 	}
 }
-func parseHistoricalEventRazedStructure(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRazedStructure, error) {
+func parseHistoricalEventProcessionPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventProcession) (*HistoricalEventProcession, error) {
 	var (
-		obj  = HistoricalEventRazedStructure{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventProcession{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventRazedStructure(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRazedStructure, error) {
+	var (
+		obj  = &HistoricalEventRazedStructure{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10292,7 +14764,7 @@ func parseHistoricalEventRazedStructure(d *xml.Decoder, start *xml.StartElement)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10308,11 +14780,48 @@ func parseHistoricalEventRazedStructure(d *xml.Decoder, start *xml.StartElement)
 		}
 	}
 }
-func parseHistoricalEventReclaimSite(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventReclaimSite, error) {
+func parseHistoricalEventRazedStructurePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventRazedStructure) (*HistoricalEventRazedStructure, error) {
 	var (
-		obj  = HistoricalEventReclaimSite{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventRazedStructure{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventReclaimSite(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventReclaimSite, error) {
+	var (
+		obj  = &HistoricalEventReclaimSite{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10337,7 +14846,7 @@ func parseHistoricalEventReclaimSite(d *xml.Decoder, start *xml.StartElement) (*
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10353,11 +14862,48 @@ func parseHistoricalEventReclaimSite(d *xml.Decoder, start *xml.StartElement) (*
 		}
 	}
 }
-func parseHistoricalEventRegionpopIncorporatedIntoEntity(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRegionpopIncorporatedIntoEntity, error) {
+func parseHistoricalEventReclaimSitePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventReclaimSite) (*HistoricalEventReclaimSite, error) {
 	var (
-		obj  = HistoricalEventRegionpopIncorporatedIntoEntity{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventReclaimSite{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventRegionpopIncorporatedIntoEntity(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRegionpopIncorporatedIntoEntity, error) {
+	var (
+		obj  = &HistoricalEventRegionpopIncorporatedIntoEntity{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10388,7 +14934,7 @@ func parseHistoricalEventRegionpopIncorporatedIntoEntity(d *xml.Decoder, start *
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10410,11 +14956,84 @@ func parseHistoricalEventRegionpopIncorporatedIntoEntity(d *xml.Decoder, start *
 		}
 	}
 }
-func parseHistoricalEventRelationship(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRelationship, error) {
+func parseHistoricalEventRegionpopIncorporatedIntoEntityPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventRegionpopIncorporatedIntoEntity) (*HistoricalEventRegionpopIncorporatedIntoEntity, error) {
 	var (
-		obj  = HistoricalEventRelationship{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventRegionpopIncorporatedIntoEntity{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventRelationship(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRelationship, error) {
+	var (
+		obj  = &HistoricalEventRelationship{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventRelationshipPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventRelationship) (*HistoricalEventRelationship, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventRelationship{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10443,7 +15062,7 @@ func parseHistoricalEventRelationship(d *xml.Decoder, start *xml.StartElement) (
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10465,9 +15084,46 @@ func parseHistoricalEventRelationship(d *xml.Decoder, start *xml.StartElement) (
 }
 func parseHistoricalEventRelationshipSupplement(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRelationshipSupplement, error) {
 	var (
-		obj  = HistoricalEventRelationshipSupplement{}
+		obj  = &HistoricalEventRelationshipSupplement{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventRelationshipSupplementPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventRelationshipSupplement) (*HistoricalEventRelationshipSupplement, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventRelationshipSupplement{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10494,7 +15150,7 @@ func parseHistoricalEventRelationshipSupplement(d *xml.Decoder, start *xml.Start
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10514,9 +15170,10 @@ func parseHistoricalEventRelationshipSupplement(d *xml.Decoder, start *xml.Start
 }
 func parseHistoricalEventRemoveHfEntityLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRemoveHfEntityLink, error) {
 	var (
-		obj  = HistoricalEventRemoveHfEntityLink{}
+		obj  = &HistoricalEventRemoveHfEntityLink{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10525,19 +15182,11 @@ func parseHistoricalEventRemoveHfEntityLink(d *xml.Decoder, start *xml.StartElem
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "civ":
-				data = nil
 			case "civ_id":
 				data = nil
 			case "hfid":
 				data = nil
-			case "histfig":
-				data = nil
 			case "link":
-				data = nil
-			case "link_type":
-				data = nil
-			case "position":
 				data = nil
 			case "position_id":
 				data = nil
@@ -10551,24 +15200,16 @@ func parseHistoricalEventRemoveHfEntityLink(d *xml.Decoder, start *xml.StartElem
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "civ":
-				obj.Civ = n(data)
 			case "civ_id":
 				obj.CivId = n(data)
 			case "hfid":
 				obj.Hfid = n(data)
-			case "histfig":
-				obj.Histfig = n(data)
 			case "link":
 				obj.Link = string(data)
-			case "link_type":
-				obj.LinkType = string(data)
-			case "position":
-				obj.Position = string(data)
 			case "position_id":
 				obj.PositionId = n(data)
 			default:
@@ -10577,11 +15218,64 @@ func parseHistoricalEventRemoveHfEntityLink(d *xml.Decoder, start *xml.StartElem
 		}
 	}
 }
-func parseHistoricalEventRemoveHfHfLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRemoveHfHfLink, error) {
+func parseHistoricalEventRemoveHfEntityLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventRemoveHfEntityLink) (*HistoricalEventRemoveHfEntityLink, error) {
 	var (
-		obj  = HistoricalEventRemoveHfHfLink{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventRemoveHfEntityLink{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "civ":
+				data = nil
+			case "histfig":
+				data = nil
+			case "link_type":
+				data = nil
+			case "position":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "civ":
+				obj.Civ = n(data)
+			case "histfig":
+				obj.Histfig = n(data)
+			case "link_type":
+				obj.LinkType = string(data)
+			case "position":
+				obj.Position = string(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventRemoveHfHfLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRemoveHfHfLink, error) {
+	var (
+		obj  = &HistoricalEventRemoveHfHfLink{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10604,7 +15298,7 @@ func parseHistoricalEventRemoveHfHfLink(d *xml.Decoder, start *xml.StartElement)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10618,11 +15312,88 @@ func parseHistoricalEventRemoveHfHfLink(d *xml.Decoder, start *xml.StartElement)
 		}
 	}
 }
-func parseHistoricalEventRemoveHfSiteLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRemoveHfSiteLink, error) {
+func parseHistoricalEventRemoveHfHfLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventRemoveHfHfLink) (*HistoricalEventRemoveHfHfLink, error) {
 	var (
-		obj  = HistoricalEventRemoveHfSiteLink{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventRemoveHfHfLink{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventRemoveHfSiteLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventRemoveHfSiteLink, error) {
+	var (
+		obj  = &HistoricalEventRemoveHfSiteLink{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "site_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "site_id":
+				obj.SiteId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventRemoveHfSiteLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventRemoveHfSiteLink) (*HistoricalEventRemoveHfSiteLink, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventRemoveHfSiteLink{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10639,8 +15410,6 @@ func parseHistoricalEventRemoveHfSiteLink(d *xml.Decoder, start *xml.StartElemen
 				data = nil
 			case "site":
 				data = nil
-			case "site_id":
-				data = nil
 			case "structure":
 				data = nil
 			default:
@@ -10653,7 +15422,7 @@ func parseHistoricalEventRemoveHfSiteLink(d *xml.Decoder, start *xml.StartElemen
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10665,8 +15434,6 @@ func parseHistoricalEventRemoveHfSiteLink(d *xml.Decoder, start *xml.StartElemen
 				obj.LinkType = string(data)
 			case "site":
 				obj.Site = n(data)
-			case "site_id":
-				obj.SiteId = n(data)
 			case "structure":
 				obj.Structure = n(data)
 			default:
@@ -10675,64 +15442,12 @@ func parseHistoricalEventRemoveHfSiteLink(d *xml.Decoder, start *xml.StartElemen
 		}
 	}
 }
-func parseHistoricalEventReplacedBuilding(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventReplacedBuilding, error) {
-	var (
-		obj  = HistoricalEventReplacedBuilding{}
-		data []byte
-	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "civ":
-				data = nil
-			case "new_structure":
-				data = nil
-			case "old_structure":
-				data = nil
-			case "site":
-				data = nil
-			case "site_civ":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "civ":
-				obj.Civ = n(data)
-			case "new_structure":
-				obj.NewStructure = n(data)
-			case "old_structure":
-				obj.OldStructure = n(data)
-			case "site":
-				obj.Site = n(data)
-			case "site_civ":
-				obj.SiteCiv = n(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
-	}
-}
 func parseHistoricalEventReplacedStructure(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventReplacedStructure, error) {
 	var (
-		obj  = HistoricalEventReplacedStructure{}
+		obj  = &HistoricalEventReplacedStructure{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10761,7 +15476,7 @@ func parseHistoricalEventReplacedStructure(d *xml.Decoder, start *xml.StartEleme
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10781,11 +15496,68 @@ func parseHistoricalEventReplacedStructure(d *xml.Decoder, start *xml.StartEleme
 		}
 	}
 }
-func parseHistoricalEventSiteDispute(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventSiteDispute, error) {
+func parseHistoricalEventReplacedStructurePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventReplacedStructure) (*HistoricalEventReplacedStructure, error) {
 	var (
-		obj  = HistoricalEventSiteDispute{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventReplacedStructure{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "civ":
+				data = nil
+			case "new_structure":
+				data = nil
+			case "old_structure":
+				data = nil
+			case "site":
+				data = nil
+			case "site_civ":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "civ":
+				obj.Civ = n(data)
+			case "new_structure":
+				obj.NewStructure = n(data)
+			case "old_structure":
+				obj.OldStructure = n(data)
+			case "site":
+				obj.Site = n(data)
+			case "site_civ":
+				obj.SiteCiv = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventSiteDispute(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventSiteDispute, error) {
+	var (
+		obj  = &HistoricalEventSiteDispute{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10814,7 +15586,7 @@ func parseHistoricalEventSiteDispute(d *xml.Decoder, start *xml.StartElement) (*
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10834,11 +15606,48 @@ func parseHistoricalEventSiteDispute(d *xml.Decoder, start *xml.StartElement) (*
 		}
 	}
 }
-func parseHistoricalEventSiteTakenOver(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventSiteTakenOver, error) {
+func parseHistoricalEventSiteDisputePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventSiteDispute) (*HistoricalEventSiteDispute, error) {
 	var (
-		obj  = HistoricalEventSiteTakenOver{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventSiteDispute{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventSiteTakenOver(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventSiteTakenOver, error) {
+	var (
+		obj  = &HistoricalEventSiteTakenOver{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10867,7 +15676,7 @@ func parseHistoricalEventSiteTakenOver(d *xml.Decoder, start *xml.StartElement) 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10887,11 +15696,48 @@ func parseHistoricalEventSiteTakenOver(d *xml.Decoder, start *xml.StartElement) 
 		}
 	}
 }
-func parseHistoricalEventTrade(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventTrade, error) {
+func parseHistoricalEventSiteTakenOverPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventSiteTakenOver) (*HistoricalEventSiteTakenOver, error) {
 	var (
-		obj  = HistoricalEventTrade{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventSiteTakenOver{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventTrade(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventTrade, error) {
+	var (
+		obj  = &HistoricalEventTrade{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -10926,7 +15772,7 @@ func parseHistoricalEventTrade(d *xml.Decoder, start *xml.StartElement) (*Histor
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -10952,60 +15798,14 @@ func parseHistoricalEventTrade(d *xml.Decoder, start *xml.StartElement) (*Histor
 		}
 	}
 }
-func parseHistoricalEventWarPeaceAccepted(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventWarPeaceAccepted, error) {
+func parseHistoricalEventTradePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventTrade) (*HistoricalEventTrade, error) {
 	var (
-		obj  = HistoricalEventWarPeaceAccepted{}
 		data []byte
 	)
-	for {
-		tok, err := d.Token()
-		if err != nil {
-			return nil, err
-		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
-			case "destination":
-				data = nil
-			case "site":
-				data = nil
-			case "source":
-				data = nil
-			case "topic":
-				data = nil
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
-				return &obj, nil
-			}
-
-			switch t.Name.Local {
-			case "destination":
-				obj.Destination = n(data)
-			case "site":
-				obj.Site = n(data)
-			case "source":
-				obj.Source = n(data)
-			case "topic":
-				obj.Topic = string(data)
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
-		}
+	if obj == nil {
+		obj = &HistoricalEventTrade{}
 	}
-}
-func parseHistoricalEventWarPeaceRejected(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventWarPeaceRejected, error) {
-	var (
-		obj  = HistoricalEventWarPeaceRejected{}
-		data []byte
-	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11014,14 +15814,6 @@ func parseHistoricalEventWarPeaceRejected(d *xml.Decoder, start *xml.StartElemen
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "destination":
-				data = nil
-			case "site":
-				data = nil
-			case "source":
-				data = nil
-			case "topic":
-				data = nil
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 				d.Skip()
@@ -11032,18 +15824,10 @@ func parseHistoricalEventWarPeaceRejected(d *xml.Decoder, start *xml.StartElemen
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "destination":
-				obj.Destination = n(data)
-			case "site":
-				obj.Site = n(data)
-			case "source":
-				obj.Source = n(data)
-			case "topic":
-				obj.Topic = string(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -11052,9 +15836,10 @@ func parseHistoricalEventWarPeaceRejected(d *xml.Decoder, start *xml.StartElemen
 }
 func parseHistoricalEventWrittenContentComposed(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventWrittenContentComposed, error) {
 	var (
-		obj  = HistoricalEventWrittenContentComposed{}
+		obj  = &HistoricalEventWrittenContentComposed{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11089,7 +15874,7 @@ func parseHistoricalEventWrittenContentComposed(d *xml.Decoder, start *xml.Start
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -11115,11 +15900,48 @@ func parseHistoricalEventWrittenContentComposed(d *xml.Decoder, start *xml.Start
 		}
 	}
 }
-func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*HistoricalFigure, error) {
+func parseHistoricalEventWrittenContentComposedPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventWrittenContentComposed) (*HistoricalEventWrittenContentComposed, error) {
 	var (
-		obj  = HistoricalFigure{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalEventWrittenContentComposed{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*HistoricalFigure, error) {
+	var (
+		obj  = &HistoricalFigure{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11158,7 +15980,7 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 				v, _ := parseEntityFormerPositionLink(d, &t)
 				obj.EntityFormerPositionLink = append(obj.EntityFormerPositionLink, v)
 			case "entity_link":
-				v, _ := parseEntityLink(d, &t)
+				v, _ := parseHistoricalFigureEntityLink(d, &t)
 				obj.EntityLink = append(obj.EntityLink, v)
 			case "entity_position_link":
 				v, _ := parseEntityPositionLink(d, &t)
@@ -11206,13 +16028,11 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 			case "relationship_profile_hf_visual":
 				v, _ := parseRelationshipProfileHfVisual(d, &t)
 				obj.RelationshipProfileHfVisual = append(obj.RelationshipProfileHfVisual, v)
-			case "sex":
-				data = nil
 			case "site_link":
 				v, _ := parseSiteLink(d, &t)
 				obj.SiteLink = append(obj.SiteLink, v)
 			case "site_property":
-				v, _ := parseSiteProperty(d, &t)
+				v, _ := parseHistoricalFigureSiteProperty(d, &t)
 				obj.SiteProperty = append(obj.SiteProperty, v)
 			case "sphere":
 				data = nil
@@ -11231,7 +16051,7 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -11301,8 +16121,6 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 
 			case "relationship_profile_hf_visual":
 
-			case "sex":
-				obj.Sex = n(data)
 			case "site_link":
 
 			case "site_property":
@@ -11319,11 +16137,60 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 		}
 	}
 }
-func parseHistoricalFigureEntityLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalFigureEntityLink, error) {
+func parseHistoricalFigurePlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalFigure) (*HistoricalFigure, error) {
 	var (
-		obj  = HistoricalFigureEntityLink{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalFigure{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "id":
+				data = nil
+			case "race":
+				data = nil
+			case "sex":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "id":
+				obj.Id_ = n(data)
+			case "race":
+				obj.Race = string(data)
+			case "sex":
+				obj.Sex = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalFigureEntityLink(d *xml.Decoder, start *xml.StartElement) (*HistoricalFigureEntityLink, error) {
+	var (
+		obj  = &HistoricalFigureEntityLink{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11348,7 +16215,7 @@ func parseHistoricalFigureEntityLink(d *xml.Decoder, start *xml.StartElement) (*
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -11364,11 +16231,48 @@ func parseHistoricalFigureEntityLink(d *xml.Decoder, start *xml.StartElement) (*
 		}
 	}
 }
-func parseHistoricalFigureSiteProperty(d *xml.Decoder, start *xml.StartElement) (*HistoricalFigureSiteProperty, error) {
+func parseHistoricalFigureEntityLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalFigureEntityLink) (*HistoricalFigureEntityLink, error) {
 	var (
-		obj  = HistoricalFigureSiteProperty{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalFigureEntityLink{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalFigureSiteProperty(d *xml.Decoder, start *xml.StartElement) (*HistoricalFigureSiteProperty, error) {
+	var (
+		obj  = &HistoricalFigureSiteProperty{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11391,7 +16295,7 @@ func parseHistoricalFigureSiteProperty(d *xml.Decoder, start *xml.StartElement) 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -11405,11 +16309,48 @@ func parseHistoricalFigureSiteProperty(d *xml.Decoder, start *xml.StartElement) 
 		}
 	}
 }
-func parseHonor(d *xml.Decoder, start *xml.StartElement) (*Honor, error) {
+func parseHistoricalFigureSitePropertyPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalFigureSiteProperty) (*HistoricalFigureSiteProperty, error) {
 	var (
-		obj  = Honor{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HistoricalFigureSiteProperty{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHonor(d *xml.Decoder, start *xml.StartElement) (*Honor, error) {
+	var (
+		obj  = &Honor{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11452,7 +16393,7 @@ func parseHonor(d *xml.Decoder, start *xml.StartElement) (*Honor, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -11486,11 +16427,48 @@ func parseHonor(d *xml.Decoder, start *xml.StartElement) (*Honor, error) {
 		}
 	}
 }
-func parseHonorEntity(d *xml.Decoder, start *xml.StartElement) (*HonorEntity, error) {
+func parseHonorPlus(d *xml.Decoder, start *xml.StartElement, obj *Honor) (*Honor, error) {
 	var (
-		obj  = HonorEntity{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &Honor{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHonorEntity(d *xml.Decoder, start *xml.StartElement) (*HonorEntity, error) {
+	var (
+		obj  = &HonorEntity{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11517,7 +16495,7 @@ func parseHonorEntity(d *xml.Decoder, start *xml.StartElement) (*HonorEntity, er
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -11535,11 +16513,84 @@ func parseHonorEntity(d *xml.Decoder, start *xml.StartElement) (*HonorEntity, er
 		}
 	}
 }
-func parseIdentity(d *xml.Decoder, start *xml.StartElement) (*Identity, error) {
+func parseHonorEntityPlus(d *xml.Decoder, start *xml.StartElement, obj *HonorEntity) (*HonorEntity, error) {
 	var (
-		obj  = Identity{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &HonorEntity{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseIdentity(d *xml.Decoder, start *xml.StartElement) (*Identity, error) {
+	var (
+		obj  = &Identity{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseIdentityPlus(d *xml.Decoder, start *xml.StartElement, obj *Identity) (*Identity, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &Identity{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11578,7 +16629,7 @@ func parseIdentity(d *xml.Decoder, start *xml.StartElement) (*Identity, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -11610,9 +16661,10 @@ func parseIdentity(d *xml.Decoder, start *xml.StartElement) (*Identity, error) {
 }
 func parseIntrigueActor(d *xml.Decoder, start *xml.StartElement) (*IntrigueActor, error) {
 	var (
-		obj  = IntrigueActor{}
+		obj  = &IntrigueActor{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11651,7 +16703,7 @@ func parseIntrigueActor(d *xml.Decoder, start *xml.StartElement) (*IntrigueActor
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -11681,11 +16733,48 @@ func parseIntrigueActor(d *xml.Decoder, start *xml.StartElement) (*IntrigueActor
 		}
 	}
 }
-func parseIntriguePlot(d *xml.Decoder, start *xml.StartElement) (*IntriguePlot, error) {
+func parseIntrigueActorPlus(d *xml.Decoder, start *xml.StartElement, obj *IntrigueActor) (*IntrigueActor, error) {
 	var (
-		obj  = IntriguePlot{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &IntrigueActor{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseIntriguePlot(d *xml.Decoder, start *xml.StartElement) (*IntriguePlot, error) {
+	var (
+		obj  = &IntriguePlot{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11714,7 +16803,7 @@ func parseIntriguePlot(d *xml.Decoder, start *xml.StartElement) (*IntriguePlot, 
 				data = nil
 			case "plot_actor":
 				v, _ := parsePlotActor(d, &t)
-				obj.PlotActor = append(obj.PlotActor, v)
+				obj.PlotActor = v
 			case "type":
 				data = nil
 			default:
@@ -11727,7 +16816,7 @@ func parseIntriguePlot(d *xml.Decoder, start *xml.StartElement) (*IntriguePlot, 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -11759,11 +16848,48 @@ func parseIntriguePlot(d *xml.Decoder, start *xml.StartElement) (*IntriguePlot, 
 		}
 	}
 }
-func parseItem(d *xml.Decoder, start *xml.StartElement) (*Item, error) {
+func parseIntriguePlotPlus(d *xml.Decoder, start *xml.StartElement, obj *IntriguePlot) (*IntriguePlot, error) {
 	var (
-		obj  = Item{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &IntriguePlot{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseItem(d *xml.Decoder, start *xml.StartElement) (*Item, error) {
+	var (
+		obj  = &Item{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11790,7 +16916,7 @@ func parseItem(d *xml.Decoder, start *xml.StartElement) (*Item, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -11808,11 +16934,84 @@ func parseItem(d *xml.Decoder, start *xml.StartElement) (*Item, error) {
 		}
 	}
 }
-func parseLandmass(d *xml.Decoder, start *xml.StartElement) (*Landmass, error) {
+func parseItemPlus(d *xml.Decoder, start *xml.StartElement, obj *Item) (*Item, error) {
 	var (
-		obj  = Landmass{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &Item{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseLandmass(d *xml.Decoder, start *xml.StartElement) (*Landmass, error) {
+	var (
+		obj  = &Landmass{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseLandmassPlus(d *xml.Decoder, start *xml.StartElement, obj *Landmass) (*Landmass, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &Landmass{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11839,7 +17038,7 @@ func parseLandmass(d *xml.Decoder, start *xml.StartElement) (*Landmass, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -11859,9 +17058,46 @@ func parseLandmass(d *xml.Decoder, start *xml.StartElement) (*Landmass, error) {
 }
 func parseMountainPeak(d *xml.Decoder, start *xml.StartElement) (*MountainPeak, error) {
 	var (
-		obj  = MountainPeak{}
+		obj  = &MountainPeak{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseMountainPeakPlus(d *xml.Decoder, start *xml.StartElement, obj *MountainPeak) (*MountainPeak, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &MountainPeak{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11890,7 +17126,7 @@ func parseMountainPeak(d *xml.Decoder, start *xml.StartElement) (*MountainPeak, 
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -11912,9 +17148,10 @@ func parseMountainPeak(d *xml.Decoder, start *xml.StartElement) (*MountainPeak, 
 }
 func parseMusicalForm(d *xml.Decoder, start *xml.StartElement) (*MusicalForm, error) {
 	var (
-		obj  = MusicalForm{}
+		obj  = &MusicalForm{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11925,6 +17162,48 @@ func parseMusicalForm(d *xml.Decoder, start *xml.StartElement) (*MusicalForm, er
 			switch t.Name.Local {
 			case "description":
 				data = nil
+			case "id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "description":
+				obj.Description = string(data)
+			case "id":
+				obj.Id_ = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseMusicalFormPlus(d *xml.Decoder, start *xml.StartElement, obj *MusicalForm) (*MusicalForm, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &MusicalForm{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
 			case "id":
 				data = nil
 			case "name":
@@ -11939,12 +17218,10 @@ func parseMusicalForm(d *xml.Decoder, start *xml.StartElement) (*MusicalForm, er
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "description":
-				obj.Description = string(data)
 			case "id":
 				obj.Id_ = n(data)
 			case "name":
@@ -11957,9 +17234,46 @@ func parseMusicalForm(d *xml.Decoder, start *xml.StartElement) (*MusicalForm, er
 }
 func parseOccasion(d *xml.Decoder, start *xml.StartElement) (*Occasion, error) {
 	var (
-		obj  = Occasion{}
+		obj  = &Occasion{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseOccasionPlus(d *xml.Decoder, start *xml.StartElement, obj *Occasion) (*Occasion, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &Occasion{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -11987,7 +17301,7 @@ func parseOccasion(d *xml.Decoder, start *xml.StartElement) (*Occasion, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -12007,9 +17321,10 @@ func parseOccasion(d *xml.Decoder, start *xml.StartElement) (*Occasion, error) {
 }
 func parsePlotActor(d *xml.Decoder, start *xml.StartElement) (*PlotActor, error) {
 	var (
-		obj  = PlotActor{}
+		obj  = &PlotActor{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12036,7 +17351,7 @@ func parsePlotActor(d *xml.Decoder, start *xml.StartElement) (*PlotActor, error)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -12054,11 +17369,48 @@ func parsePlotActor(d *xml.Decoder, start *xml.StartElement) (*PlotActor, error)
 		}
 	}
 }
-func parsePoeticForm(d *xml.Decoder, start *xml.StartElement) (*PoeticForm, error) {
+func parsePlotActorPlus(d *xml.Decoder, start *xml.StartElement, obj *PlotActor) (*PlotActor, error) {
 	var (
-		obj  = PoeticForm{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &PlotActor{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parsePoeticForm(d *xml.Decoder, start *xml.StartElement) (*PoeticForm, error) {
+	var (
+		obj  = &PoeticForm{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12069,6 +17421,48 @@ func parsePoeticForm(d *xml.Decoder, start *xml.StartElement) (*PoeticForm, erro
 			switch t.Name.Local {
 			case "description":
 				data = nil
+			case "id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "description":
+				obj.Description = string(data)
+			case "id":
+				obj.Id_ = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parsePoeticFormPlus(d *xml.Decoder, start *xml.StartElement, obj *PoeticForm) (*PoeticForm, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &PoeticForm{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
 			case "id":
 				data = nil
 			case "name":
@@ -12083,12 +17477,10 @@ func parsePoeticForm(d *xml.Decoder, start *xml.StartElement) (*PoeticForm, erro
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "description":
-				obj.Description = string(data)
 			case "id":
 				obj.Id_ = n(data)
 			case "name":
@@ -12101,9 +17493,46 @@ func parsePoeticForm(d *xml.Decoder, start *xml.StartElement) (*PoeticForm, erro
 }
 func parseReference(d *xml.Decoder, start *xml.StartElement) (*Reference, error) {
 	var (
-		obj  = Reference{}
+		obj  = &Reference{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseReferencePlus(d *xml.Decoder, start *xml.StartElement, obj *Reference) (*Reference, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &Reference{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12126,7 +17555,7 @@ func parseReference(d *xml.Decoder, start *xml.StartElement) (*Reference, error)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -12142,9 +17571,10 @@ func parseReference(d *xml.Decoder, start *xml.StartElement) (*Reference, error)
 }
 func parseRegion(d *xml.Decoder, start *xml.StartElement) (*Region, error) {
 	var (
-		obj  = Region{}
+		obj  = &Region{}
 		data []byte
 	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12153,12 +17583,6 @@ func parseRegion(d *xml.Decoder, start *xml.StartElement) (*Region, error) {
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "coords":
-				data = nil
-			case "evilness":
-				data = nil
-			case "force_id":
-				data = nil
 			case "id":
 				data = nil
 			case "name":
@@ -12175,16 +17599,10 @@ func parseRegion(d *xml.Decoder, start *xml.StartElement) (*Region, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "coords":
-				obj.Coords = string(data)
-			case "evilness":
-				obj.Evilness = string(data)
-			case "force_id":
-				obj.ForceId = n(data)
 			case "id":
 				obj.Id_ = n(data)
 			case "name":
@@ -12197,11 +17615,64 @@ func parseRegion(d *xml.Decoder, start *xml.StartElement) (*Region, error) {
 		}
 	}
 }
-func parseRelationshipProfileHfHistorical(d *xml.Decoder, start *xml.StartElement) (*RelationshipProfileHfHistorical, error) {
+func parseRegionPlus(d *xml.Decoder, start *xml.StartElement, obj *Region) (*Region, error) {
 	var (
-		obj  = RelationshipProfileHfHistorical{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &Region{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "coords":
+				data = nil
+			case "evilness":
+				data = nil
+			case "force_id":
+				data = nil
+			case "id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "coords":
+				obj.Coords = string(data)
+			case "evilness":
+				obj.Evilness = string(data)
+			case "force_id":
+				obj.ForceId = n(data)
+			case "id":
+				obj.Id_ = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseRelationshipProfileHfHistorical(d *xml.Decoder, start *xml.StartElement) (*RelationshipProfileHfHistorical, error) {
+	var (
+		obj  = &RelationshipProfileHfHistorical{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12232,7 +17703,7 @@ func parseRelationshipProfileHfHistorical(d *xml.Decoder, start *xml.StartElemen
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -12254,11 +17725,48 @@ func parseRelationshipProfileHfHistorical(d *xml.Decoder, start *xml.StartElemen
 		}
 	}
 }
-func parseRelationshipProfileHfVisual(d *xml.Decoder, start *xml.StartElement) (*RelationshipProfileHfVisual, error) {
+func parseRelationshipProfileHfHistoricalPlus(d *xml.Decoder, start *xml.StartElement, obj *RelationshipProfileHfHistorical) (*RelationshipProfileHfHistorical, error) {
 	var (
-		obj  = RelationshipProfileHfVisual{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &RelationshipProfileHfHistorical{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseRelationshipProfileHfVisual(d *xml.Decoder, start *xml.StartElement) (*RelationshipProfileHfVisual, error) {
+	var (
+		obj  = &RelationshipProfileHfVisual{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12301,7 +17809,7 @@ func parseRelationshipProfileHfVisual(d *xml.Decoder, start *xml.StartElement) (
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -12335,11 +17843,84 @@ func parseRelationshipProfileHfVisual(d *xml.Decoder, start *xml.StartElement) (
 		}
 	}
 }
-func parseRiver(d *xml.Decoder, start *xml.StartElement) (*River, error) {
+func parseRelationshipProfileHfVisualPlus(d *xml.Decoder, start *xml.StartElement, obj *RelationshipProfileHfVisual) (*RelationshipProfileHfVisual, error) {
 	var (
-		obj  = River{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &RelationshipProfileHfVisual{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseRiver(d *xml.Decoder, start *xml.StartElement) (*River, error) {
+	var (
+		obj  = &River{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseRiverPlus(d *xml.Decoder, start *xml.StartElement, obj *River) (*River, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &River{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12364,7 +17945,7 @@ func parseRiver(d *xml.Decoder, start *xml.StartElement) (*River, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -12382,9 +17963,46 @@ func parseRiver(d *xml.Decoder, start *xml.StartElement) (*River, error) {
 }
 func parseSchedule(d *xml.Decoder, start *xml.StartElement) (*Schedule, error) {
 	var (
-		obj  = Schedule{}
+		obj  = &Schedule{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseSchedulePlus(d *xml.Decoder, start *xml.StartElement, obj *Schedule) (*Schedule, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &Schedule{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12418,7 +18036,7 @@ func parseSchedule(d *xml.Decoder, start *xml.StartElement) (*Schedule, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -12444,9 +18062,13 @@ func parseSchedule(d *xml.Decoder, start *xml.StartElement) (*Schedule, error) {
 }
 func parseSite(d *xml.Decoder, start *xml.StartElement) (*Site, error) {
 	var (
-		obj  = Site{}
+		obj  = &Site{}
 		data []byte
 	)
+
+	obj.SiteProperties = make(map[int]*SiteSiteProperty)
+	obj.Structures = make(map[int]*Structure)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12455,11 +18077,7 @@ func parseSite(d *xml.Decoder, start *xml.StartElement) (*Site, error) {
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "civ_id":
-				data = nil
 			case "coords":
-				data = nil
-			case "cur_owner_id":
 				data = nil
 			case "id":
 				data = nil
@@ -12468,10 +18086,8 @@ func parseSite(d *xml.Decoder, start *xml.StartElement) (*Site, error) {
 			case "rectangle":
 				data = nil
 			case "site_properties":
-				obj.SiteProperties = make(map[int]*SiteSiteProperty)
 				parseMap(d, &obj.SiteProperties, parseSiteSiteProperty)
 			case "structures":
-				obj.Structures = make(map[int]*Structure)
 				parseMap(d, &obj.Structures, parseStructure)
 			case "type":
 				data = nil
@@ -12485,16 +18101,12 @@ func parseSite(d *xml.Decoder, start *xml.StartElement) (*Site, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "civ_id":
-				obj.CivId = n(data)
 			case "coords":
 				obj.Coords = string(data)
-			case "cur_owner_id":
-				obj.CurOwnerId = n(data)
 			case "id":
 				obj.Id_ = n(data)
 			case "name":
@@ -12513,11 +18125,60 @@ func parseSite(d *xml.Decoder, start *xml.StartElement) (*Site, error) {
 		}
 	}
 }
-func parseSiteLink(d *xml.Decoder, start *xml.StartElement) (*SiteLink, error) {
+func parseSitePlus(d *xml.Decoder, start *xml.StartElement, obj *Site) (*Site, error) {
 	var (
-		obj  = SiteLink{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &Site{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "civ_id":
+				data = nil
+			case "cur_owner_id":
+				data = nil
+			case "id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "civ_id":
+				obj.CivId = n(data)
+			case "cur_owner_id":
+				obj.CurOwnerId = n(data)
+			case "id":
+				obj.Id_ = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseSiteLink(d *xml.Decoder, start *xml.StartElement) (*SiteLink, error) {
+	var (
+		obj  = &SiteLink{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12546,7 +18207,7 @@ func parseSiteLink(d *xml.Decoder, start *xml.StartElement) (*SiteLink, error) {
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -12566,11 +18227,48 @@ func parseSiteLink(d *xml.Decoder, start *xml.StartElement) (*SiteLink, error) {
 		}
 	}
 }
-func parseSiteSiteProperty(d *xml.Decoder, start *xml.StartElement) (*SiteSiteProperty, error) {
+func parseSiteLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *SiteLink) (*SiteLink, error) {
 	var (
-		obj  = SiteSiteProperty{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &SiteLink{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseSiteSiteProperty(d *xml.Decoder, start *xml.StartElement) (*SiteSiteProperty, error) {
+	var (
+		obj  = &SiteSiteProperty{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12597,7 +18295,7 @@ func parseSiteSiteProperty(d *xml.Decoder, start *xml.StartElement) (*SiteSitePr
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -12615,11 +18313,48 @@ func parseSiteSiteProperty(d *xml.Decoder, start *xml.StartElement) (*SiteSitePr
 		}
 	}
 }
-func parseStructure(d *xml.Decoder, start *xml.StartElement) (*Structure, error) {
+func parseSiteSitePropertyPlus(d *xml.Decoder, start *xml.StartElement, obj *SiteSiteProperty) (*SiteSiteProperty, error) {
 	var (
-		obj  = Structure{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &SiteSiteProperty{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseStructure(d *xml.Decoder, start *xml.StartElement) (*Structure, error) {
+	var (
+		obj  = &Structure{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12630,25 +18365,11 @@ func parseStructure(d *xml.Decoder, start *xml.StartElement) (*Structure, error)
 			switch t.Name.Local {
 			case "copied_artifact_id":
 				data = nil
-			case "deity":
-				data = nil
-			case "deity_type":
-				data = nil
-			case "dungeon_type":
-				data = nil
 			case "entity_id":
-				data = nil
-			case "id":
-				data = nil
-			case "inhabitant":
 				data = nil
 			case "local_id":
 				data = nil
 			case "name":
-				data = nil
-			case "name2":
-				data = nil
-			case "religion":
 				data = nil
 			case "subtype":
 				data = nil
@@ -12666,32 +18387,18 @@ func parseStructure(d *xml.Decoder, start *xml.StartElement) (*Structure, error)
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
 			case "copied_artifact_id":
 				obj.CopiedArtifactId = append(obj.CopiedArtifactId, n(data))
-			case "deity":
-				obj.Deity = n(data)
-			case "deity_type":
-				obj.DeityType = n(data)
-			case "dungeon_type":
-				obj.DungeonType = n(data)
 			case "entity_id":
 				obj.EntityId = n(data)
-			case "id":
-				obj.Id_ = n(data)
-			case "inhabitant":
-				obj.Inhabitant = append(obj.Inhabitant, n(data))
 			case "local_id":
 				obj.LocalId = n(data)
 			case "name":
 				obj.Name_ = string(data)
-			case "name2":
-				obj.Name2 = string(data)
-			case "religion":
-				obj.Religion = n(data)
 			case "subtype":
 				obj.Subtype = string(data)
 			case "type":
@@ -12704,11 +18411,14 @@ func parseStructure(d *xml.Decoder, start *xml.StartElement) (*Structure, error)
 		}
 	}
 }
-func parseUndergroundRegion(d *xml.Decoder, start *xml.StartElement) (*UndergroundRegion, error) {
+func parseStructurePlus(d *xml.Decoder, start *xml.StartElement, obj *Structure) (*Structure, error) {
 	var (
-		obj  = UndergroundRegion{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &Structure{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12717,8 +18427,68 @@ func parseUndergroundRegion(d *xml.Decoder, start *xml.StartElement) (*Undergrou
 		switch t := tok.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
-			case "coords":
+			case "deity":
 				data = nil
+			case "deity_type":
+				data = nil
+			case "dungeon_type":
+				data = nil
+			case "id":
+				data = nil
+			case "inhabitant":
+				data = nil
+			case "name2":
+				data = nil
+			case "religion":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "deity":
+				obj.Deity = n(data)
+			case "deity_type":
+				obj.DeityType = n(data)
+			case "dungeon_type":
+				obj.DungeonType = n(data)
+			case "id":
+				obj.Id_ = n(data)
+			case "inhabitant":
+				obj.Inhabitant = append(obj.Inhabitant, n(data))
+			case "name2":
+				obj.Name2 = string(data)
+			case "religion":
+				obj.Religion = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseUndergroundRegion(d *xml.Decoder, start *xml.StartElement) (*UndergroundRegion, error) {
+	var (
+		obj  = &UndergroundRegion{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
 			case "depth":
 				data = nil
 			case "id":
@@ -12735,12 +18505,10 @@ func parseUndergroundRegion(d *xml.Decoder, start *xml.StartElement) (*Undergrou
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
-			case "coords":
-				obj.Coords = string(data)
 			case "depth":
 				obj.Depth = n(data)
 			case "id":
@@ -12753,11 +18521,56 @@ func parseUndergroundRegion(d *xml.Decoder, start *xml.StartElement) (*Undergrou
 		}
 	}
 }
-func parseVagueRelationship(d *xml.Decoder, start *xml.StartElement) (*VagueRelationship, error) {
+func parseUndergroundRegionPlus(d *xml.Decoder, start *xml.StartElement, obj *UndergroundRegion) (*UndergroundRegion, error) {
 	var (
-		obj  = VagueRelationship{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &UndergroundRegion{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "coords":
+				data = nil
+			case "id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "coords":
+				obj.Coords = string(data)
+			case "id":
+				obj.Id_ = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseVagueRelationship(d *xml.Decoder, start *xml.StartElement) (*VagueRelationship, error) {
+	var (
+		obj  = &VagueRelationship{}
+		data []byte
+	)
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12804,7 +18617,7 @@ func parseVagueRelationship(d *xml.Decoder, start *xml.StartElement) (*VagueRela
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -12842,11 +18655,84 @@ func parseVagueRelationship(d *xml.Decoder, start *xml.StartElement) (*VagueRela
 		}
 	}
 }
-func parseWorldConstruction(d *xml.Decoder, start *xml.StartElement) (*WorldConstruction, error) {
+func parseVagueRelationshipPlus(d *xml.Decoder, start *xml.StartElement, obj *VagueRelationship) (*VagueRelationship, error) {
 	var (
-		obj  = WorldConstruction{}
 		data []byte
 	)
+	if obj == nil {
+		obj = &VagueRelationship{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseWorldConstruction(d *xml.Decoder, start *xml.StartElement) (*WorldConstruction, error) {
+	var (
+		obj  = &WorldConstruction{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseWorldConstructionPlus(d *xml.Decoder, start *xml.StartElement, obj *WorldConstruction) (*WorldConstruction, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &WorldConstruction{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12873,7 +18759,7 @@ func parseWorldConstruction(d *xml.Decoder, start *xml.StartElement) (*WorldCons
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
@@ -12893,9 +18779,70 @@ func parseWorldConstruction(d *xml.Decoder, start *xml.StartElement) (*WorldCons
 }
 func parseWrittenContent(d *xml.Decoder, start *xml.StartElement) (*WrittenContent, error) {
 	var (
-		obj  = WrittenContent{}
+		obj  = &WrittenContent{}
 		data []byte
 	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "author_hfid":
+				data = nil
+			case "author_roll":
+				data = nil
+			case "form":
+				data = nil
+			case "form_id":
+				data = nil
+			case "id":
+				data = nil
+			case "title":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "author_hfid":
+				obj.AuthorHfid = n(data)
+			case "author_roll":
+				obj.AuthorRoll = n(data)
+			case "form":
+				obj.Form = string(data)
+			case "form_id":
+				obj.FormId = n(data)
+			case "id":
+				obj.Id_ = n(data)
+			case "title":
+				obj.Title = string(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseWrittenContentPlus(d *xml.Decoder, start *xml.StartElement, obj *WrittenContent) (*WrittenContent, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &WrittenContent{}
+	}
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -12905,14 +18852,6 @@ func parseWrittenContent(d *xml.Decoder, start *xml.StartElement) (*WrittenConte
 		case xml.StartElement:
 			switch t.Name.Local {
 			case "author":
-				data = nil
-			case "author_hfid":
-				data = nil
-			case "author_roll":
-				data = nil
-			case "form":
-				data = nil
-			case "form_id":
 				data = nil
 			case "id":
 				data = nil
@@ -12939,20 +18878,12 @@ func parseWrittenContent(d *xml.Decoder, start *xml.StartElement) (*WrittenConte
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
-				return &obj, nil
+				return obj, nil
 			}
 
 			switch t.Name.Local {
 			case "author":
 				obj.Author = n(data)
-			case "author_hfid":
-				obj.AuthorHfid = n(data)
-			case "author_roll":
-				obj.AuthorRoll = n(data)
-			case "form":
-				obj.Form = string(data)
-			case "form_id":
-				obj.FormId = n(data)
 			case "id":
 				obj.Id_ = n(data)
 			case "page_end":

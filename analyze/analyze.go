@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"log"
 
 	"github.com/robertjanetzko/LegendsBrowser2/analyze/df"
 )
@@ -16,6 +17,9 @@ func main() {
 	}
 
 	if *g {
-		df.Generate()
+		err := df.Generate()
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
