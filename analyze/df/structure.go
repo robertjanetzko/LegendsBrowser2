@@ -34,6 +34,7 @@ func AnalyzeStructure(filex string) error {
 
 type FieldData struct {
 	IsString bool
+	NoBool   bool
 	Multiple bool
 	Base     bool
 	Plus     bool
@@ -252,6 +253,9 @@ Loop:
 				s := string(data)
 				if _, err := strconv.Atoi(s); err != nil {
 					a.GetField(strings.Join(path, PATH_SEPARATOR)).IsString = true
+				}
+				if len(s) > 0 {
+					a.GetField(strings.Join(path, PATH_SEPARATOR)).NoBool = true
 				}
 				return &Value{Name: t.Name.Local, Value: s}, nil
 			}

@@ -1,0 +1,30 @@
+{{template "layout.html" .}}
+
+{{define "title"}}{{ title .Name }}{{end}}
+
+{{define "content"}}
+<h1>{{ title .Name }}</h1>
+{{ .Race }} (*{{ .BirthYear }}{{ if ge .DeathYear 0 }} †{{ .DeathYear }}{{ end }})
+{{end}}
+
+{{- if ne 0 (len .HfLink) }}
+<h3>Related Figures</h3>
+<ul>
+    {{- range $i := .HfLink }}
+    <li>
+        {{ template "hfLink.html" (getHf $i.Hfid) }} ({{ $i.LinkType }})
+    </li>
+    {{- end }}
+</ul>
+{{- end }}
+
+{{- if ne 0 (len .EntityLink) }}
+<h3>Related Entities</h3>
+<ul>
+    {{- range $i := .EntityLink }}
+    <li>
+        {{ template "entityLink.html" (getEntity $i.EntityId) }} ({{ $i.LinkType }})
+    </li>
+    {{- end }}
+</ul>
+{{- end }}

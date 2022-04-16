@@ -30,125 +30,125 @@ func (x *Artifact) Id() int      { return x.Id_ }
 func (x *Artifact) Name() string { return x.Name_ }
 
 type Creature struct {
-	AllCastesAlive                    string `json:"allCastesAlive" legend:"plus"`
-	ArtificialHiveable                string `json:"artificialHiveable" legend:"plus"`
-	BiomeDesertBadland                string `json:"biomeDesertBadland" legend:"plus"`
-	BiomeDesertRock                   string `json:"biomeDesertRock" legend:"plus"`
-	BiomeDesertSand                   string `json:"biomeDesertSand" legend:"plus"`
-	BiomeForestTaiga                  string `json:"biomeForestTaiga" legend:"plus"`
-	BiomeForestTemperateBroadleaf     string `json:"biomeForestTemperateBroadleaf" legend:"plus"`
-	BiomeForestTemperateConifer       string `json:"biomeForestTemperateConifer" legend:"plus"`
-	BiomeForestTropicalConifer        string `json:"biomeForestTropicalConifer" legend:"plus"`
-	BiomeForestTropicalDryBroadleaf   string `json:"biomeForestTropicalDryBroadleaf" legend:"plus"`
-	BiomeForestTropicalMoistBroadleaf string `json:"biomeForestTropicalMoistBroadleaf" legend:"plus"`
-	BiomeGlacier                      string `json:"biomeGlacier" legend:"plus"`
-	BiomeGrasslandTemperate           string `json:"biomeGrasslandTemperate" legend:"plus"`
-	BiomeGrasslandTropical            string `json:"biomeGrasslandTropical" legend:"plus"`
-	BiomeLakeTemperateBrackishwater   string `json:"biomeLakeTemperateBrackishwater" legend:"plus"`
-	BiomeLakeTemperateFreshwater      string `json:"biomeLakeTemperateFreshwater" legend:"plus"`
-	BiomeLakeTemperateSaltwater       string `json:"biomeLakeTemperateSaltwater" legend:"plus"`
-	BiomeLakeTropicalBrackishwater    string `json:"biomeLakeTropicalBrackishwater" legend:"plus"`
-	BiomeLakeTropicalFreshwater       string `json:"biomeLakeTropicalFreshwater" legend:"plus"`
-	BiomeLakeTropicalSaltwater        string `json:"biomeLakeTropicalSaltwater" legend:"plus"`
-	BiomeMarshTemperateFreshwater     string `json:"biomeMarshTemperateFreshwater" legend:"plus"`
-	BiomeMarshTemperateSaltwater      string `json:"biomeMarshTemperateSaltwater" legend:"plus"`
-	BiomeMarshTropicalFreshwater      string `json:"biomeMarshTropicalFreshwater" legend:"plus"`
-	BiomeMarshTropicalSaltwater       string `json:"biomeMarshTropicalSaltwater" legend:"plus"`
-	BiomeMountain                     string `json:"biomeMountain" legend:"plus"`
-	BiomeOceanArctic                  string `json:"biomeOceanArctic" legend:"plus"`
-	BiomeOceanTemperate               string `json:"biomeOceanTemperate" legend:"plus"`
-	BiomeOceanTropical                string `json:"biomeOceanTropical" legend:"plus"`
-	BiomePoolTemperateBrackishwater   string `json:"biomePoolTemperateBrackishwater" legend:"plus"`
-	BiomePoolTemperateFreshwater      string `json:"biomePoolTemperateFreshwater" legend:"plus"`
-	BiomePoolTemperateSaltwater       string `json:"biomePoolTemperateSaltwater" legend:"plus"`
-	BiomePoolTropicalBrackishwater    string `json:"biomePoolTropicalBrackishwater" legend:"plus"`
-	BiomePoolTropicalFreshwater       string `json:"biomePoolTropicalFreshwater" legend:"plus"`
-	BiomePoolTropicalSaltwater        string `json:"biomePoolTropicalSaltwater" legend:"plus"`
-	BiomeRiverTemperateBrackishwater  string `json:"biomeRiverTemperateBrackishwater" legend:"plus"`
-	BiomeRiverTemperateFreshwater     string `json:"biomeRiverTemperateFreshwater" legend:"plus"`
-	BiomeRiverTemperateSaltwater      string `json:"biomeRiverTemperateSaltwater" legend:"plus"`
-	BiomeRiverTropicalBrackishwater   string `json:"biomeRiverTropicalBrackishwater" legend:"plus"`
-	BiomeRiverTropicalFreshwater      string `json:"biomeRiverTropicalFreshwater" legend:"plus"`
-	BiomeRiverTropicalSaltwater       string `json:"biomeRiverTropicalSaltwater" legend:"plus"`
-	BiomeSavannaTemperate             string `json:"biomeSavannaTemperate" legend:"plus"`
-	BiomeSavannaTropical              string `json:"biomeSavannaTropical" legend:"plus"`
-	BiomeShrublandTemperate           string `json:"biomeShrublandTemperate" legend:"plus"`
-	BiomeShrublandTropical            string `json:"biomeShrublandTropical" legend:"plus"`
-	BiomeSubterraneanChasm            string `json:"biomeSubterraneanChasm" legend:"plus"`
-	BiomeSubterraneanLava             string `json:"biomeSubterraneanLava" legend:"plus"`
-	BiomeSubterraneanWater            string `json:"biomeSubterraneanWater" legend:"plus"`
-	BiomeSwampMangrove                string `json:"biomeSwampMangrove" legend:"plus"`
-	BiomeSwampTemperateFreshwater     string `json:"biomeSwampTemperateFreshwater" legend:"plus"`
-	BiomeSwampTemperateSaltwater      string `json:"biomeSwampTemperateSaltwater" legend:"plus"`
-	BiomeSwampTropicalFreshwater      string `json:"biomeSwampTropicalFreshwater" legend:"plus"`
-	BiomeSwampTropicalSaltwater       string `json:"biomeSwampTropicalSaltwater" legend:"plus"`
-	BiomeTundra                       string `json:"biomeTundra" legend:"plus"`
+	AllCastesAlive                    bool   `json:"allCastesAlive" legend:"plus"`
+	ArtificialHiveable                bool   `json:"artificialHiveable" legend:"plus"`
+	BiomeDesertBadland                bool   `json:"biomeDesertBadland" legend:"plus"`
+	BiomeDesertRock                   bool   `json:"biomeDesertRock" legend:"plus"`
+	BiomeDesertSand                   bool   `json:"biomeDesertSand" legend:"plus"`
+	BiomeForestTaiga                  bool   `json:"biomeForestTaiga" legend:"plus"`
+	BiomeForestTemperateBroadleaf     bool   `json:"biomeForestTemperateBroadleaf" legend:"plus"`
+	BiomeForestTemperateConifer       bool   `json:"biomeForestTemperateConifer" legend:"plus"`
+	BiomeForestTropicalConifer        bool   `json:"biomeForestTropicalConifer" legend:"plus"`
+	BiomeForestTropicalDryBroadleaf   bool   `json:"biomeForestTropicalDryBroadleaf" legend:"plus"`
+	BiomeForestTropicalMoistBroadleaf bool   `json:"biomeForestTropicalMoistBroadleaf" legend:"plus"`
+	BiomeGlacier                      bool   `json:"biomeGlacier" legend:"plus"`
+	BiomeGrasslandTemperate           bool   `json:"biomeGrasslandTemperate" legend:"plus"`
+	BiomeGrasslandTropical            bool   `json:"biomeGrasslandTropical" legend:"plus"`
+	BiomeLakeTemperateBrackishwater   bool   `json:"biomeLakeTemperateBrackishwater" legend:"plus"`
+	BiomeLakeTemperateFreshwater      bool   `json:"biomeLakeTemperateFreshwater" legend:"plus"`
+	BiomeLakeTemperateSaltwater       bool   `json:"biomeLakeTemperateSaltwater" legend:"plus"`
+	BiomeLakeTropicalBrackishwater    bool   `json:"biomeLakeTropicalBrackishwater" legend:"plus"`
+	BiomeLakeTropicalFreshwater       bool   `json:"biomeLakeTropicalFreshwater" legend:"plus"`
+	BiomeLakeTropicalSaltwater        bool   `json:"biomeLakeTropicalSaltwater" legend:"plus"`
+	BiomeMarshTemperateFreshwater     bool   `json:"biomeMarshTemperateFreshwater" legend:"plus"`
+	BiomeMarshTemperateSaltwater      bool   `json:"biomeMarshTemperateSaltwater" legend:"plus"`
+	BiomeMarshTropicalFreshwater      bool   `json:"biomeMarshTropicalFreshwater" legend:"plus"`
+	BiomeMarshTropicalSaltwater       bool   `json:"biomeMarshTropicalSaltwater" legend:"plus"`
+	BiomeMountain                     bool   `json:"biomeMountain" legend:"plus"`
+	BiomeOceanArctic                  bool   `json:"biomeOceanArctic" legend:"plus"`
+	BiomeOceanTemperate               bool   `json:"biomeOceanTemperate" legend:"plus"`
+	BiomeOceanTropical                bool   `json:"biomeOceanTropical" legend:"plus"`
+	BiomePoolTemperateBrackishwater   bool   `json:"biomePoolTemperateBrackishwater" legend:"plus"`
+	BiomePoolTemperateFreshwater      bool   `json:"biomePoolTemperateFreshwater" legend:"plus"`
+	BiomePoolTemperateSaltwater       bool   `json:"biomePoolTemperateSaltwater" legend:"plus"`
+	BiomePoolTropicalBrackishwater    bool   `json:"biomePoolTropicalBrackishwater" legend:"plus"`
+	BiomePoolTropicalFreshwater       bool   `json:"biomePoolTropicalFreshwater" legend:"plus"`
+	BiomePoolTropicalSaltwater        bool   `json:"biomePoolTropicalSaltwater" legend:"plus"`
+	BiomeRiverTemperateBrackishwater  bool   `json:"biomeRiverTemperateBrackishwater" legend:"plus"`
+	BiomeRiverTemperateFreshwater     bool   `json:"biomeRiverTemperateFreshwater" legend:"plus"`
+	BiomeRiverTemperateSaltwater      bool   `json:"biomeRiverTemperateSaltwater" legend:"plus"`
+	BiomeRiverTropicalBrackishwater   bool   `json:"biomeRiverTropicalBrackishwater" legend:"plus"`
+	BiomeRiverTropicalFreshwater      bool   `json:"biomeRiverTropicalFreshwater" legend:"plus"`
+	BiomeRiverTropicalSaltwater       bool   `json:"biomeRiverTropicalSaltwater" legend:"plus"`
+	BiomeSavannaTemperate             bool   `json:"biomeSavannaTemperate" legend:"plus"`
+	BiomeSavannaTropical              bool   `json:"biomeSavannaTropical" legend:"plus"`
+	BiomeShrublandTemperate           bool   `json:"biomeShrublandTemperate" legend:"plus"`
+	BiomeShrublandTropical            bool   `json:"biomeShrublandTropical" legend:"plus"`
+	BiomeSubterraneanChasm            bool   `json:"biomeSubterraneanChasm" legend:"plus"`
+	BiomeSubterraneanLava             bool   `json:"biomeSubterraneanLava" legend:"plus"`
+	BiomeSubterraneanWater            bool   `json:"biomeSubterraneanWater" legend:"plus"`
+	BiomeSwampMangrove                bool   `json:"biomeSwampMangrove" legend:"plus"`
+	BiomeSwampTemperateFreshwater     bool   `json:"biomeSwampTemperateFreshwater" legend:"plus"`
+	BiomeSwampTemperateSaltwater      bool   `json:"biomeSwampTemperateSaltwater" legend:"plus"`
+	BiomeSwampTropicalFreshwater      bool   `json:"biomeSwampTropicalFreshwater" legend:"plus"`
+	BiomeSwampTropicalSaltwater       bool   `json:"biomeSwampTropicalSaltwater" legend:"plus"`
+	BiomeTundra                       bool   `json:"biomeTundra" legend:"plus"`
 	CreatureId                        string `json:"creatureId" legend:"plus"`
-	DoesNotExist                      string `json:"doesNotExist" legend:"plus"`
-	Equipment                         string `json:"equipment" legend:"plus"`
-	EquipmentWagon                    string `json:"equipmentWagon" legend:"plus"`
-	Evil                              string `json:"evil" legend:"plus"`
-	Fanciful                          string `json:"fanciful" legend:"plus"`
-	Generated                         string `json:"generated" legend:"plus"`
-	Good                              string `json:"good" legend:"plus"`
-	HasAnyBenign                      string `json:"hasAnyBenign" legend:"plus"`
-	HasAnyCanSwim                     string `json:"hasAnyCanSwim" legend:"plus"`
-	HasAnyCannotBreatheAir            string `json:"hasAnyCannotBreatheAir" legend:"plus"`
-	HasAnyCannotBreatheWater          string `json:"hasAnyCannotBreatheWater" legend:"plus"`
-	HasAnyCarnivore                   string `json:"hasAnyCarnivore" legend:"plus"`
-	HasAnyCommonDomestic              string `json:"hasAnyCommonDomestic" legend:"plus"`
-	HasAnyCuriousBeast                string `json:"hasAnyCuriousBeast" legend:"plus"`
-	HasAnyDemon                       string `json:"hasAnyDemon" legend:"plus"`
-	HasAnyFeatureBeast                string `json:"hasAnyFeatureBeast" legend:"plus"`
-	HasAnyFlier                       string `json:"hasAnyFlier" legend:"plus"`
-	HasAnyFlyRaceGait                 string `json:"hasAnyFlyRaceGait" legend:"plus"`
-	HasAnyGrasp                       string `json:"hasAnyGrasp" legend:"plus"`
-	HasAnyGrazer                      string `json:"hasAnyGrazer" legend:"plus"`
-	HasAnyHasBlood                    string `json:"hasAnyHasBlood" legend:"plus"`
-	HasAnyImmobile                    string `json:"hasAnyImmobile" legend:"plus"`
-	HasAnyIntelligentLearns           string `json:"hasAnyIntelligentLearns" legend:"plus"`
-	HasAnyIntelligentSpeaks           string `json:"hasAnyIntelligentSpeaks" legend:"plus"`
-	HasAnyLargePredator               string `json:"hasAnyLargePredator" legend:"plus"`
-	HasAnyLocalPopsControllable       string `json:"hasAnyLocalPopsControllable" legend:"plus"`
-	HasAnyLocalPopsProduceHeroes      string `json:"hasAnyLocalPopsProduceHeroes" legend:"plus"`
-	HasAnyMegabeast                   string `json:"hasAnyMegabeast" legend:"plus"`
-	HasAnyMischievous                 string `json:"hasAnyMischievous" legend:"plus"`
-	HasAnyNaturalAnimal               string `json:"hasAnyNaturalAnimal" legend:"plus"`
-	HasAnyNightCreature               string `json:"hasAnyNightCreature" legend:"plus"`
-	HasAnyNightCreatureBogeyman       string `json:"hasAnyNightCreatureBogeyman" legend:"plus"`
-	HasAnyNightCreatureHunter         string `json:"hasAnyNightCreatureHunter" legend:"plus"`
-	HasAnyNightCreatureNightmare      string `json:"hasAnyNightCreatureNightmare" legend:"plus"`
-	HasAnyNotFireimmune               string `json:"hasAnyNotFireimmune" legend:"plus"`
-	HasAnyNotLiving                   string `json:"hasAnyNotLiving" legend:"plus"`
-	HasAnyOutsiderControllable        string `json:"hasAnyOutsiderControllable" legend:"plus"`
-	HasAnyRaceGait                    string `json:"hasAnyRaceGait" legend:"plus"`
-	HasAnySemimegabeast               string `json:"hasAnySemimegabeast" legend:"plus"`
-	HasAnySlowLearner                 string `json:"hasAnySlowLearner" legend:"plus"`
-	HasAnySupernatural                string `json:"hasAnySupernatural" legend:"plus"`
-	HasAnyTitan                       string `json:"hasAnyTitan" legend:"plus"`
-	HasAnyUniqueDemon                 string `json:"hasAnyUniqueDemon" legend:"plus"`
-	HasAnyUtterances                  string `json:"hasAnyUtterances" legend:"plus"`
-	HasAnyVerminHateable              string `json:"hasAnyVerminHateable" legend:"plus"`
-	HasAnyVerminMicro                 string `json:"hasAnyVerminMicro" legend:"plus"`
-	HasFemale                         string `json:"hasFemale" legend:"plus"`
-	HasMale                           string `json:"hasMale" legend:"plus"`
-	LargeRoaming                      string `json:"largeRoaming" legend:"plus"`
-	LooseClusters                     string `json:"looseClusters" legend:"plus"`
-	MatesToBreed                      string `json:"matesToBreed" legend:"plus"`
-	Mundane                           string `json:"mundane" legend:"plus"`
+	DoesNotExist                      bool   `json:"doesNotExist" legend:"plus"`
+	Equipment                         bool   `json:"equipment" legend:"plus"`
+	EquipmentWagon                    bool   `json:"equipmentWagon" legend:"plus"`
+	Evil                              bool   `json:"evil" legend:"plus"`
+	Fanciful                          bool   `json:"fanciful" legend:"plus"`
+	Generated                         bool   `json:"generated" legend:"plus"`
+	Good                              bool   `json:"good" legend:"plus"`
+	HasAnyBenign                      bool   `json:"hasAnyBenign" legend:"plus"`
+	HasAnyCanSwim                     bool   `json:"hasAnyCanSwim" legend:"plus"`
+	HasAnyCannotBreatheAir            bool   `json:"hasAnyCannotBreatheAir" legend:"plus"`
+	HasAnyCannotBreatheWater          bool   `json:"hasAnyCannotBreatheWater" legend:"plus"`
+	HasAnyCarnivore                   bool   `json:"hasAnyCarnivore" legend:"plus"`
+	HasAnyCommonDomestic              bool   `json:"hasAnyCommonDomestic" legend:"plus"`
+	HasAnyCuriousBeast                bool   `json:"hasAnyCuriousBeast" legend:"plus"`
+	HasAnyDemon                       bool   `json:"hasAnyDemon" legend:"plus"`
+	HasAnyFeatureBeast                bool   `json:"hasAnyFeatureBeast" legend:"plus"`
+	HasAnyFlier                       bool   `json:"hasAnyFlier" legend:"plus"`
+	HasAnyFlyRaceGait                 bool   `json:"hasAnyFlyRaceGait" legend:"plus"`
+	HasAnyGrasp                       bool   `json:"hasAnyGrasp" legend:"plus"`
+	HasAnyGrazer                      bool   `json:"hasAnyGrazer" legend:"plus"`
+	HasAnyHasBlood                    bool   `json:"hasAnyHasBlood" legend:"plus"`
+	HasAnyImmobile                    bool   `json:"hasAnyImmobile" legend:"plus"`
+	HasAnyIntelligentLearns           bool   `json:"hasAnyIntelligentLearns" legend:"plus"`
+	HasAnyIntelligentSpeaks           bool   `json:"hasAnyIntelligentSpeaks" legend:"plus"`
+	HasAnyLargePredator               bool   `json:"hasAnyLargePredator" legend:"plus"`
+	HasAnyLocalPopsControllable       bool   `json:"hasAnyLocalPopsControllable" legend:"plus"`
+	HasAnyLocalPopsProduceHeroes      bool   `json:"hasAnyLocalPopsProduceHeroes" legend:"plus"`
+	HasAnyMegabeast                   bool   `json:"hasAnyMegabeast" legend:"plus"`
+	HasAnyMischievous                 bool   `json:"hasAnyMischievous" legend:"plus"`
+	HasAnyNaturalAnimal               bool   `json:"hasAnyNaturalAnimal" legend:"plus"`
+	HasAnyNightCreature               bool   `json:"hasAnyNightCreature" legend:"plus"`
+	HasAnyNightCreatureBogeyman       bool   `json:"hasAnyNightCreatureBogeyman" legend:"plus"`
+	HasAnyNightCreatureHunter         bool   `json:"hasAnyNightCreatureHunter" legend:"plus"`
+	HasAnyNightCreatureNightmare      bool   `json:"hasAnyNightCreatureNightmare" legend:"plus"`
+	HasAnyNotFireimmune               bool   `json:"hasAnyNotFireimmune" legend:"plus"`
+	HasAnyNotLiving                   bool   `json:"hasAnyNotLiving" legend:"plus"`
+	HasAnyOutsiderControllable        bool   `json:"hasAnyOutsiderControllable" legend:"plus"`
+	HasAnyRaceGait                    bool   `json:"hasAnyRaceGait" legend:"plus"`
+	HasAnySemimegabeast               bool   `json:"hasAnySemimegabeast" legend:"plus"`
+	HasAnySlowLearner                 bool   `json:"hasAnySlowLearner" legend:"plus"`
+	HasAnySupernatural                bool   `json:"hasAnySupernatural" legend:"plus"`
+	HasAnyTitan                       bool   `json:"hasAnyTitan" legend:"plus"`
+	HasAnyUniqueDemon                 bool   `json:"hasAnyUniqueDemon" legend:"plus"`
+	HasAnyUtterances                  bool   `json:"hasAnyUtterances" legend:"plus"`
+	HasAnyVerminHateable              bool   `json:"hasAnyVerminHateable" legend:"plus"`
+	HasAnyVerminMicro                 bool   `json:"hasAnyVerminMicro" legend:"plus"`
+	HasFemale                         bool   `json:"hasFemale" legend:"plus"`
+	HasMale                           bool   `json:"hasMale" legend:"plus"`
+	LargeRoaming                      bool   `json:"largeRoaming" legend:"plus"`
+	LooseClusters                     bool   `json:"looseClusters" legend:"plus"`
+	MatesToBreed                      bool   `json:"matesToBreed" legend:"plus"`
+	Mundane                           bool   `json:"mundane" legend:"plus"`
 	NamePlural                        string `json:"namePlural" legend:"plus"`
 	NameSingular                      string `json:"nameSingular" legend:"plus"`
-	OccursAsEntityRace                string `json:"occursAsEntityRace" legend:"plus"`
-	Savage                            string `json:"savage" legend:"plus"`
-	SmallRace                         string `json:"smallRace" legend:"plus"`
-	TwoGenders                        string `json:"twoGenders" legend:"plus"`
-	Ubiquitous                        string `json:"ubiquitous" legend:"plus"`
-	VerminEater                       string `json:"verminEater" legend:"plus"`
-	VerminFish                        string `json:"verminFish" legend:"plus"`
-	VerminGrounder                    string `json:"verminGrounder" legend:"plus"`
-	VerminRotter                      string `json:"verminRotter" legend:"plus"`
-	VerminSoil                        string `json:"verminSoil" legend:"plus"`
-	VerminSoilColony                  string `json:"verminSoilColony" legend:"plus"`
+	OccursAsEntityRace                bool   `json:"occursAsEntityRace" legend:"plus"`
+	Savage                            bool   `json:"savage" legend:"plus"`
+	SmallRace                         bool   `json:"smallRace" legend:"plus"`
+	TwoGenders                        bool   `json:"twoGenders" legend:"plus"`
+	Ubiquitous                        bool   `json:"ubiquitous" legend:"plus"`
+	VerminEater                       bool   `json:"verminEater" legend:"plus"`
+	VerminFish                        bool   `json:"verminFish" legend:"plus"`
+	VerminGrounder                    bool   `json:"verminGrounder" legend:"plus"`
+	VerminRotter                      bool   `json:"verminRotter" legend:"plus"`
+	VerminSoil                        bool   `json:"verminSoil" legend:"plus"`
+	VerminSoilColony                  bool   `json:"verminSoilColony" legend:"plus"`
 }
 type DanceForm struct {
 	Description string `json:"description" legend:"base"`
@@ -333,13 +333,13 @@ type HistoricalEventAgreementFormed struct {
 	AgreementId               int    `json:"agreementId" legend:"base"`
 	AllyDefenseBonus          int    `json:"allyDefenseBonus" legend:"base"`
 	CoconspiratorBonus        int    `json:"coconspiratorBonus" legend:"base"`
-	Delegated                 string `json:"delegated" legend:"base"`
-	FailedJudgmentTest        string `json:"failedJudgmentTest" legend:"base"`
+	Delegated                 bool   `json:"delegated" legend:"base"`
+	FailedJudgmentTest        bool   `json:"failedJudgmentTest" legend:"base"`
 	Method                    string `json:"method" legend:"base"`
 	RelevantEntityId          int    `json:"relevantEntityId" legend:"base"`
 	RelevantIdForMethod       int    `json:"relevantIdForMethod" legend:"base"`
 	RelevantPositionProfileId int    `json:"relevantPositionProfileId" legend:"base"`
-	Successful                string `json:"successful" legend:"base"`
+	Successful                bool   `json:"successful" legend:"base"`
 	TopFacet                  string `json:"topFacet" legend:"base"`
 	TopFacetModifier          int    `json:"topFacetModifier" legend:"base"`
 	TopFacetRating            int    `json:"topFacetRating" legend:"base"`
@@ -359,14 +359,14 @@ type HistoricalEventArtifactClaimFormed struct {
 	PositionProfileId int    `json:"positionProfileId" legend:"base"`
 }
 type HistoricalEventArtifactCopied struct {
-	ArtifactId        int    `json:"artifactId" legend:"base"`
-	DestEntityId      int    `json:"destEntityId" legend:"base"`
-	DestSiteId        int    `json:"destSiteId" legend:"base"`
-	DestStructureId   int    `json:"destStructureId" legend:"base"`
-	FromOriginal      string `json:"fromOriginal" legend:"base"`
-	SourceEntityId    int    `json:"sourceEntityId" legend:"base"`
-	SourceSiteId      int    `json:"sourceSiteId" legend:"base"`
-	SourceStructureId int    `json:"sourceStructureId" legend:"base"`
+	ArtifactId        int  `json:"artifactId" legend:"base"`
+	DestEntityId      int  `json:"destEntityId" legend:"base"`
+	DestSiteId        int  `json:"destSiteId" legend:"base"`
+	DestStructureId   int  `json:"destStructureId" legend:"base"`
+	FromOriginal      bool `json:"fromOriginal" legend:"base"`
+	SourceEntityId    int  `json:"sourceEntityId" legend:"base"`
+	SourceSiteId      int  `json:"sourceSiteId" legend:"base"`
+	SourceStructureId int  `json:"sourceStructureId" legend:"base"`
 }
 type HistoricalEventArtifactCreated struct {
 	ArtifactId    int                                         `json:"artifactId" legend:"both"`
@@ -374,7 +374,7 @@ type HistoricalEventArtifactCreated struct {
 	CreatorHfid   int                                         `json:"creatorHfid" legend:"plus"`
 	CreatorUnitId int                                         `json:"creatorUnitId" legend:"plus"`
 	HistFigureId  int                                         `json:"histFigureId" legend:"base"`
-	NameOnly      string                                      `json:"nameOnly" legend:"base"`
+	NameOnly      bool                                        `json:"nameOnly" legend:"base"`
 	Reason        string                                      `json:"reason" legend:"plus"`
 	SanctifyHf    int                                         `json:"sanctifyHf" legend:"plus"`
 	Site          int                                         `json:"site" legend:"plus"`
@@ -480,14 +480,14 @@ type HistoricalEventBodyAbused struct {
 	VictimEntity   int    `json:"victimEntity" legend:"plus"`
 }
 type HistoricalEventBuildingProfileAcquired struct {
-	AcquirerEnid      int    `json:"acquirerEnid" legend:"base"`
-	AcquirerHfid      int    `json:"acquirerHfid" legend:"base"`
-	BuildingProfileId int    `json:"buildingProfileId" legend:"base"`
-	Inherited         string `json:"inherited" legend:"base"`
-	LastOwnerHfid     int    `json:"lastOwnerHfid" legend:"base"`
-	PurchasedUnowned  string `json:"purchasedUnowned" legend:"base"`
-	RebuiltRuined     string `json:"rebuiltRuined" legend:"base"`
-	SiteId            int    `json:"siteId" legend:"base"`
+	AcquirerEnid      int  `json:"acquirerEnid" legend:"base"`
+	AcquirerHfid      int  `json:"acquirerHfid" legend:"base"`
+	BuildingProfileId int  `json:"buildingProfileId" legend:"base"`
+	Inherited         bool `json:"inherited" legend:"base"`
+	LastOwnerHfid     int  `json:"lastOwnerHfid" legend:"base"`
+	PurchasedUnowned  bool `json:"purchasedUnowned" legend:"base"`
+	RebuiltRuined     bool `json:"rebuiltRuined" legend:"base"`
+	SiteId            int  `json:"siteId" legend:"base"`
 }
 type HistoricalEventCeremony struct {
 	CivId          int `json:"civId" legend:"base"`
@@ -564,26 +564,26 @@ type HistoricalEventCollectionBattle struct {
 	ASupportMercHfid        []int    `json:"aSupportMercHfid" legend:"base"`
 	AttackingHfid           []int    `json:"attackingHfid" legend:"base"`
 	AttackingMercEnid       int      `json:"attackingMercEnid" legend:"base"`
-	AttackingSquadAnimated  []string `json:"attackingSquadAnimated" legend:"base"`
+	AttackingSquadAnimated  []bool   `json:"attackingSquadAnimated" legend:"base"`
 	AttackingSquadDeaths    []int    `json:"attackingSquadDeaths" legend:"base"`
 	AttackingSquadEntityPop []int    `json:"attackingSquadEntityPop" legend:"base"`
 	AttackingSquadNumber    []int    `json:"attackingSquadNumber" legend:"base"`
 	AttackingSquadRace      []string `json:"attackingSquadRace" legend:"base"`
 	AttackingSquadSite      []int    `json:"attackingSquadSite" legend:"base"`
-	CompanyMerc             []string `json:"companyMerc" legend:"base"`
+	CompanyMerc             []bool   `json:"companyMerc" legend:"base"`
 	Coords                  string   `json:"coords" legend:"base"`
 	DSupportMercEnid        int      `json:"dSupportMercEnid" legend:"base"`
 	DSupportMercHfid        []int    `json:"dSupportMercHfid" legend:"base"`
 	DefendingHfid           []int    `json:"defendingHfid" legend:"base"`
 	DefendingMercEnid       int      `json:"defendingMercEnid" legend:"base"`
-	DefendingSquadAnimated  []string `json:"defendingSquadAnimated" legend:"base"`
+	DefendingSquadAnimated  []bool   `json:"defendingSquadAnimated" legend:"base"`
 	DefendingSquadDeaths    []int    `json:"defendingSquadDeaths" legend:"base"`
 	DefendingSquadEntityPop []int    `json:"defendingSquadEntityPop" legend:"base"`
 	DefendingSquadNumber    []int    `json:"defendingSquadNumber" legend:"base"`
 	DefendingSquadRace      []string `json:"defendingSquadRace" legend:"base"`
 	DefendingSquadSite      []int    `json:"defendingSquadSite" legend:"base"`
 	FeatureLayerId          int      `json:"featureLayerId" legend:"base"`
-	IndividualMerc          []string `json:"individualMerc" legend:"base"`
+	IndividualMerc          []bool   `json:"individualMerc" legend:"base"`
 	Name_                   string   `json:"name" legend:"base"`
 	NoncomHfid              []int    `json:"noncomHfid" legend:"base"`
 	Outcome                 string   `json:"outcome" legend:"base"`
@@ -703,7 +703,7 @@ type HistoricalEventCreatedStructure struct {
 	Civ         int    `json:"civ" legend:"plus"`
 	CivId       int    `json:"civId" legend:"base"`
 	Rebuild     string `json:"rebuild" legend:"plus"`
-	Rebuilt     string `json:"rebuilt" legend:"base"`
+	Rebuilt     bool   `json:"rebuilt" legend:"base"`
 	Site        int    `json:"site" legend:"plus"`
 	SiteCiv     int    `json:"siteCiv" legend:"plus"`
 	SiteCivId   int    `json:"siteCivId" legend:"base"`
@@ -771,11 +771,11 @@ type HistoricalEventEntityEquipmentPurchase struct {
 	NewEquipmentLevel int   `json:"newEquipmentLevel" legend:"base"`
 }
 type HistoricalEventEntityIncorporated struct {
-	JoinedEntityId       int    `json:"joinedEntityId" legend:"base"`
-	JoinerEntityId       int    `json:"joinerEntityId" legend:"base"`
-	LeaderHfid           int    `json:"leaderHfid" legend:"base"`
-	PartialIncorporation string `json:"partialIncorporation" legend:"base"`
-	SiteId               int    `json:"siteId" legend:"base"`
+	JoinedEntityId       int  `json:"joinedEntityId" legend:"base"`
+	JoinerEntityId       int  `json:"joinerEntityId" legend:"base"`
+	LeaderHfid           int  `json:"leaderHfid" legend:"base"`
+	PartialIncorporation bool `json:"partialIncorporation" legend:"base"`
+	SiteId               int  `json:"siteId" legend:"base"`
 }
 type HistoricalEventEntityLaw struct {
 	EntityId     int    `json:"entityId" legend:"base"`
@@ -837,7 +837,7 @@ type HistoricalEventFailedIntrigueCorruption struct {
 	CoconspiratorBonus        int    `json:"coconspiratorBonus" legend:"base"`
 	CorruptorHfid             int    `json:"corruptorHfid" legend:"base"`
 	CorruptorIdentity         int    `json:"corruptorIdentity" legend:"base"`
-	FailedJudgmentTest        string `json:"failedJudgmentTest" legend:"base"`
+	FailedJudgmentTest        bool   `json:"failedJudgmentTest" legend:"base"`
 	FeatureLayerId            int    `json:"featureLayerId" legend:"base"`
 	LureHfid                  int    `json:"lureHfid" legend:"base"`
 	Method                    string `json:"method" legend:"base"`
@@ -904,27 +904,27 @@ type HistoricalEventHfConvicted struct {
 	CoconspiratorHfid              int    `json:"coconspiratorHfid" legend:"base"`
 	ConfessedAfterApbArrestEnid    int    `json:"confessedAfterApbArrestEnid" legend:"base"`
 	ContactHfid                    int    `json:"contactHfid" legend:"base"`
-	ConvictIsContact               string `json:"convictIsContact" legend:"base"`
+	ConvictIsContact               bool   `json:"convictIsContact" legend:"base"`
 	ConvictedHfid                  int    `json:"convictedHfid" legend:"base"`
 	ConvicterEnid                  int    `json:"convicterEnid" legend:"base"`
 	CorruptConvicterHfid           int    `json:"corruptConvicterHfid" legend:"base"`
 	Crime                          string `json:"crime" legend:"base"`
-	DeathPenalty                   string `json:"deathPenalty" legend:"base"`
-	DidNotRevealAllInInterrogation string `json:"didNotRevealAllInInterrogation" legend:"base"`
-	Exiled                         string `json:"exiled" legend:"base"`
+	DeathPenalty                   bool   `json:"deathPenalty" legend:"base"`
+	DidNotRevealAllInInterrogation bool   `json:"didNotRevealAllInInterrogation" legend:"base"`
+	Exiled                         bool   `json:"exiled" legend:"base"`
 	FooledHfid                     int    `json:"fooledHfid" legend:"base"`
 	FramerHfid                     int    `json:"framerHfid" legend:"base"`
-	HeldFirmInInterrogation        string `json:"heldFirmInInterrogation" legend:"base"`
+	HeldFirmInInterrogation        bool   `json:"heldFirmInInterrogation" legend:"base"`
 	ImplicatedHfid                 []int  `json:"implicatedHfid" legend:"base"`
 	InterrogatorHfid               int    `json:"interrogatorHfid" legend:"base"`
 	PlotterHfid                    int    `json:"plotterHfid" legend:"base"`
 	PrisonMonths                   int    `json:"prisonMonths" legend:"base"`
-	SurveiledCoconspirator         string `json:"surveiledCoconspirator" legend:"base"`
-	SurveiledContact               string `json:"surveiledContact" legend:"base"`
-	SurveiledConvicted             string `json:"surveiledConvicted" legend:"base"`
-	SurveiledTarget                string `json:"surveiledTarget" legend:"base"`
+	SurveiledCoconspirator         bool   `json:"surveiledCoconspirator" legend:"base"`
+	SurveiledContact               bool   `json:"surveiledContact" legend:"base"`
+	SurveiledConvicted             bool   `json:"surveiledConvicted" legend:"base"`
+	SurveiledTarget                bool   `json:"surveiledTarget" legend:"base"`
 	TargetHfid                     int    `json:"targetHfid" legend:"base"`
-	WrongfulConviction             string `json:"wrongfulConviction" legend:"base"`
+	WrongfulConviction             bool   `json:"wrongfulConviction" legend:"base"`
 }
 type HistoricalEventHfDestroyedSite struct {
 	AttackerHfid  int `json:"attackerHfid" legend:"base"`
@@ -990,11 +990,11 @@ type HistoricalEventHfGainsSecretGoal struct {
 	SecretGoal string `json:"secretGoal" legend:"base"`
 }
 type HistoricalEventHfInterrogated struct {
-	ArrestingEnid           int    `json:"arrestingEnid" legend:"base"`
-	HeldFirmInInterrogation string `json:"heldFirmInInterrogation" legend:"base"`
-	InterrogatorHfid        int    `json:"interrogatorHfid" legend:"base"`
-	TargetHfid              int    `json:"targetHfid" legend:"base"`
-	WantedAndRecognized     string `json:"wantedAndRecognized" legend:"base"`
+	ArrestingEnid           int  `json:"arrestingEnid" legend:"base"`
+	HeldFirmInInterrogation bool `json:"heldFirmInInterrogation" legend:"base"`
+	InterrogatorHfid        int  `json:"interrogatorHfid" legend:"base"`
+	TargetHfid              int  `json:"targetHfid" legend:"base"`
+	WantedAndRecognized     bool `json:"wantedAndRecognized" legend:"base"`
 }
 type HistoricalEventHfLearnsSecret struct {
 	Artifact    int    `json:"artifact" legend:"plus"`
@@ -1074,12 +1074,12 @@ type HistoricalEventHfReunion struct {
 	SubregionId    int   `json:"subregionId" legend:"base"`
 }
 type HistoricalEventHfRevived struct {
-	ActorHfid      int    `json:"actorHfid" legend:"base"`
-	Disturbance    string `json:"disturbance" legend:"base"`
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
-	Hfid           int    `json:"hfid" legend:"base"`
-	SiteId         int    `json:"siteId" legend:"base"`
-	SubregionId    int    `json:"subregionId" legend:"base"`
+	ActorHfid      int  `json:"actorHfid" legend:"base"`
+	Disturbance    bool `json:"disturbance" legend:"base"`
+	FeatureLayerId int  `json:"featureLayerId" legend:"base"`
+	Hfid           int  `json:"hfid" legend:"base"`
+	SiteId         int  `json:"siteId" legend:"base"`
+	SubregionId    int  `json:"subregionId" legend:"base"`
 }
 type HistoricalEventHfSimpleBattleEvent struct {
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
@@ -1093,7 +1093,7 @@ type HistoricalEventHfTravel struct {
 	Coords         string `json:"coords" legend:"base"`
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
 	GroupHfid      []int  `json:"groupHfid" legend:"base"`
-	Return         string `json:"return" legend:"base"`
+	Return         bool   `json:"return" legend:"base"`
 	SiteId         int    `json:"siteId" legend:"base"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
@@ -1127,7 +1127,7 @@ type HistoricalEventHfsFormedIntrigueRelationship struct {
 	CorruptorHfid             int    `json:"corruptorHfid" legend:"base"`
 	CorruptorIdentity         int    `json:"corruptorIdentity" legend:"base"`
 	CorruptorSeenAs           string `json:"corruptorSeenAs" legend:"base"`
-	FailedJudgmentTest        string `json:"failedJudgmentTest" legend:"base"`
+	FailedJudgmentTest        bool   `json:"failedJudgmentTest" legend:"base"`
 	FeatureLayerId            int    `json:"featureLayerId" legend:"base"`
 	LureHfid                  int    `json:"lureHfid" legend:"base"`
 	Method                    string `json:"method" legend:"base"`
@@ -1136,7 +1136,7 @@ type HistoricalEventHfsFormedIntrigueRelationship struct {
 	RelevantPositionProfileId int    `json:"relevantPositionProfileId" legend:"base"`
 	SiteId                    int    `json:"siteId" legend:"base"`
 	SubregionId               int    `json:"subregionId" legend:"base"`
-	Successful                string `json:"successful" legend:"base"`
+	Successful                bool   `json:"successful" legend:"base"`
 	TargetHfid                int    `json:"targetHfid" legend:"base"`
 	TargetIdentity            int    `json:"targetIdentity" legend:"base"`
 	TargetSeenAs              string `json:"targetSeenAs" legend:"base"`
@@ -1188,7 +1188,7 @@ type HistoricalEventItemStolenCircumstance struct {
 	Type                string `json:"type" legend:"plus"`
 }
 type HistoricalEventKnowledgeDiscovered struct {
-	First     string `json:"first" legend:"base"`
+	First     bool   `json:"first" legend:"base"`
 	Hfid      int    `json:"hfid" legend:"base"`
 	Knowledge string `json:"knowledge" legend:"base"`
 }
@@ -1238,11 +1238,11 @@ type HistoricalEventPerformance struct {
 	SubregionId    int `json:"subregionId" legend:"base"`
 }
 type HistoricalEventPlunderedSite struct {
-	AttackerCivId int    `json:"attackerCivId" legend:"base"`
-	DefenderCivId int    `json:"defenderCivId" legend:"base"`
-	Detected      string `json:"detected" legend:"base"`
-	SiteCivId     int    `json:"siteCivId" legend:"base"`
-	SiteId        int    `json:"siteId" legend:"base"`
+	AttackerCivId int  `json:"attackerCivId" legend:"base"`
+	DefenderCivId int  `json:"defenderCivId" legend:"base"`
+	Detected      bool `json:"detected" legend:"base"`
+	SiteCivId     int  `json:"siteCivId" legend:"base"`
+	SiteId        int  `json:"siteId" legend:"base"`
 }
 type HistoricalEventPoeticFormCreated struct {
 	Circumstance string `json:"circumstance" legend:"base"`
@@ -1359,7 +1359,7 @@ type HistoricalEventWrittenContentComposed struct {
 }
 type HistoricalFigure struct {
 	ActiveInteraction               []string                           `json:"activeInteraction" legend:"base"`
-	Animated                        string                             `json:"animated" legend:"base"`
+	Animated                        bool                               `json:"animated" legend:"base"`
 	AnimatedString                  string                             `json:"animatedString" legend:"base"`
 	Appeared                        int                                `json:"appeared" legend:"base"`
 	AssociatedType                  string                             `json:"associatedType" legend:"base"`
@@ -1369,14 +1369,14 @@ type HistoricalFigure struct {
 	CurrentIdentityId               int                                `json:"currentIdentityId" legend:"base"`
 	DeathSeconds72                  int                                `json:"deathSeconds72" legend:"base"`
 	DeathYear                       int                                `json:"deathYear" legend:"base"`
-	Deity                           string                             `json:"deity" legend:"base"`
+	Deity                           bool                               `json:"deity" legend:"base"`
 	EntPopId                        int                                `json:"entPopId" legend:"base"`
 	EntityFormerPositionLink        []*EntityFormerPositionLink        `json:"entityFormerPositionLink" legend:"base"`
 	EntityLink                      []*HistoricalFigureEntityLink      `json:"entityLink" legend:"base"`
 	EntityPositionLink              []*EntityPositionLink              `json:"entityPositionLink" legend:"base"`
 	EntityReputation                []*EntityReputation                `json:"entityReputation" legend:"base"`
 	EntitySquadLink                 *EntitySquadLink                   `json:"entitySquadLink" legend:"base"`
-	Force                           string                             `json:"force" legend:"base"`
+	Force                           bool                               `json:"force" legend:"base"`
 	Goal                            []string                           `json:"goal" legend:"base"`
 	HfLink                          []*HfLink                          `json:"hfLink" legend:"base"`
 	HfSkill                         []*HfSkill                         `json:"hfSkill" legend:"base"`
@@ -1415,7 +1415,7 @@ type Honor struct {
 	ExemptEpid                    int    `json:"exemptEpid" legend:"base"`
 	ExemptFormerEpid              int    `json:"exemptFormerEpid" legend:"base"`
 	GivesPrecedence               int    `json:"givesPrecedence" legend:"base"`
-	GrantedToEverybody            string `json:"grantedToEverybody" legend:"base"`
+	GrantedToEverybody            bool   `json:"grantedToEverybody" legend:"base"`
 	Id_                           int    `json:"id" legend:"base"`
 	Name_                         string `json:"name" legend:"base"`
 	RequiredBattles               int    `json:"requiredBattles" legend:"base"`
@@ -1423,7 +1423,7 @@ type Honor struct {
 	RequiredSkill                 string `json:"requiredSkill" legend:"base"`
 	RequiredSkillIpTotal          int    `json:"requiredSkillIpTotal" legend:"base"`
 	RequiredYears                 int    `json:"requiredYears" legend:"base"`
-	RequiresAnyMeleeOrRangedSkill string `json:"requiresAnyMeleeOrRangedSkill" legend:"base"`
+	RequiresAnyMeleeOrRangedSkill bool   `json:"requiresAnyMeleeOrRangedSkill" legend:"base"`
 }
 
 func (x *Honor) Id() int      { return x.Id_ }
@@ -1456,25 +1456,25 @@ type IntrigueActor struct {
 	HandleActorId            int    `json:"handleActorId" legend:"base"`
 	Hfid                     int    `json:"hfid" legend:"base"`
 	LocalId                  int    `json:"localId" legend:"base"`
-	PromisedActorImmortality string `json:"promisedActorImmortality" legend:"base"`
-	PromisedMeImmortality    string `json:"promisedMeImmortality" legend:"base"`
+	PromisedActorImmortality bool   `json:"promisedActorImmortality" legend:"base"`
+	PromisedMeImmortality    bool   `json:"promisedMeImmortality" legend:"base"`
 	Role                     string `json:"role" legend:"base"`
 	Strategy                 string `json:"strategy" legend:"base"`
 	StrategyEnid             int    `json:"strategyEnid" legend:"base"`
 	StrategyEppid            int    `json:"strategyEppid" legend:"base"`
 }
 type IntriguePlot struct {
-	ActorId           int        `json:"actorId" legend:"base"`
-	ArtifactId        int        `json:"artifactId" legend:"base"`
-	DelegatedPlotHfid int        `json:"delegatedPlotHfid" legend:"base"`
-	DelegatedPlotId   int        `json:"delegatedPlotId" legend:"base"`
-	EntityId          int        `json:"entityId" legend:"base"`
-	LocalId           int        `json:"localId" legend:"base"`
-	OnHold            string     `json:"onHold" legend:"base"`
-	ParentPlotHfid    int        `json:"parentPlotHfid" legend:"base"`
-	ParentPlotId      int        `json:"parentPlotId" legend:"base"`
-	PlotActor         *PlotActor `json:"plotActor" legend:"base"`
-	Type              string     `json:"type" legend:"base"`
+	ActorId           int          `json:"actorId" legend:"base"`
+	ArtifactId        int          `json:"artifactId" legend:"base"`
+	DelegatedPlotHfid int          `json:"delegatedPlotHfid" legend:"base"`
+	DelegatedPlotId   int          `json:"delegatedPlotId" legend:"base"`
+	EntityId          int          `json:"entityId" legend:"base"`
+	LocalId           int          `json:"localId" legend:"base"`
+	OnHold            bool         `json:"onHold" legend:"base"`
+	ParentPlotHfid    int          `json:"parentPlotHfid" legend:"base"`
+	ParentPlotId      int          `json:"parentPlotId" legend:"base"`
+	PlotActor         []*PlotActor `json:"plotActor" legend:"base"`
+	Type              string       `json:"type" legend:"base"`
 }
 type Item struct {
 	NameString              string `json:"nameString" legend:"base"`
@@ -1496,7 +1496,7 @@ type MountainPeak struct {
 	Coords    string `json:"coords" legend:"plus"`
 	Height    int    `json:"height" legend:"plus"`
 	Id_       int    `json:"id" legend:"plus"`
-	IsVolcano string `json:"isVolcano" legend:"plus"`
+	IsVolcano bool   `json:"isVolcano" legend:"plus"`
 	Name_     string `json:"name" legend:"plus"`
 }
 
@@ -1524,7 +1524,7 @@ func (x *Occasion) Name() string { return x.Name_ }
 
 type PlotActor struct {
 	ActorId               int    `json:"actorId" legend:"base"`
-	AgreementHasMessenger string `json:"agreementHasMessenger" legend:"base"`
+	AgreementHasMessenger bool   `json:"agreementHasMessenger" legend:"base"`
 	AgreementId           int    `json:"agreementId" legend:"base"`
 	PlotRole              string `json:"plotRole" legend:"base"`
 }
@@ -1659,20 +1659,20 @@ type UndergroundRegion struct {
 func (x *UndergroundRegion) Id() int { return x.Id_ }
 
 type VagueRelationship struct {
-	ArtisticBuddy              string `json:"artisticBuddy" legend:"base"`
-	AtheleticRival             string `json:"atheleticRival" legend:"base"`
-	AthleteBuddy               string `json:"athleteBuddy" legend:"base"`
-	BusinessRival              string `json:"businessRival" legend:"base"`
-	ChildhoodFriend            string `json:"childhoodFriend" legend:"base"`
-	Grudge                     string `json:"grudge" legend:"base"`
-	Hfid                       int    `json:"hfid" legend:"base"`
-	JealousObsession           string `json:"jealousObsession" legend:"base"`
-	JealousRelationshipGrudge  string `json:"jealousRelationshipGrudge" legend:"base"`
-	PersecutionGrudge          string `json:"persecutionGrudge" legend:"base"`
-	ReligiousPersecutionGrudge string `json:"religiousPersecutionGrudge" legend:"base"`
-	ScholarBuddy               string `json:"scholarBuddy" legend:"base"`
-	SupernaturalGrudge         string `json:"supernaturalGrudge" legend:"base"`
-	WarBuddy                   string `json:"warBuddy" legend:"base"`
+	ArtisticBuddy              bool `json:"artisticBuddy" legend:"base"`
+	AtheleticRival             bool `json:"atheleticRival" legend:"base"`
+	AthleteBuddy               bool `json:"athleteBuddy" legend:"base"`
+	BusinessRival              bool `json:"businessRival" legend:"base"`
+	ChildhoodFriend            bool `json:"childhoodFriend" legend:"base"`
+	Grudge                     bool `json:"grudge" legend:"base"`
+	Hfid                       int  `json:"hfid" legend:"base"`
+	JealousObsession           bool `json:"jealousObsession" legend:"base"`
+	JealousRelationshipGrudge  bool `json:"jealousRelationshipGrudge" legend:"base"`
+	PersecutionGrudge          bool `json:"persecutionGrudge" legend:"base"`
+	ReligiousPersecutionGrudge bool `json:"religiousPersecutionGrudge" legend:"base"`
+	ScholarBuddy               bool `json:"scholarBuddy" legend:"base"`
+	SupernaturalGrudge         bool `json:"supernaturalGrudge" legend:"base"`
+	WarBuddy                   bool `json:"warBuddy" legend:"base"`
 }
 type WorldConstruction struct {
 	Coords string `json:"coords" legend:"plus"`
@@ -2149,243 +2149,243 @@ func parseCreaturePlus(d *xml.Decoder, start *xml.StartElement, obj *Creature) (
 
 			switch t.Name.Local {
 			case "all_castes_alive":
-				obj.AllCastesAlive = string(data)
+				obj.AllCastesAlive = true
 			case "artificial_hiveable":
-				obj.ArtificialHiveable = string(data)
+				obj.ArtificialHiveable = true
 			case "biome_desert_badland":
-				obj.BiomeDesertBadland = string(data)
+				obj.BiomeDesertBadland = true
 			case "biome_desert_rock":
-				obj.BiomeDesertRock = string(data)
+				obj.BiomeDesertRock = true
 			case "biome_desert_sand":
-				obj.BiomeDesertSand = string(data)
+				obj.BiomeDesertSand = true
 			case "biome_forest_taiga":
-				obj.BiomeForestTaiga = string(data)
+				obj.BiomeForestTaiga = true
 			case "biome_forest_temperate_broadleaf":
-				obj.BiomeForestTemperateBroadleaf = string(data)
+				obj.BiomeForestTemperateBroadleaf = true
 			case "biome_forest_temperate_conifer":
-				obj.BiomeForestTemperateConifer = string(data)
+				obj.BiomeForestTemperateConifer = true
 			case "biome_forest_tropical_conifer":
-				obj.BiomeForestTropicalConifer = string(data)
+				obj.BiomeForestTropicalConifer = true
 			case "biome_forest_tropical_dry_broadleaf":
-				obj.BiomeForestTropicalDryBroadleaf = string(data)
+				obj.BiomeForestTropicalDryBroadleaf = true
 			case "biome_forest_tropical_moist_broadleaf":
-				obj.BiomeForestTropicalMoistBroadleaf = string(data)
+				obj.BiomeForestTropicalMoistBroadleaf = true
 			case "biome_glacier":
-				obj.BiomeGlacier = string(data)
+				obj.BiomeGlacier = true
 			case "biome_grassland_temperate":
-				obj.BiomeGrasslandTemperate = string(data)
+				obj.BiomeGrasslandTemperate = true
 			case "biome_grassland_tropical":
-				obj.BiomeGrasslandTropical = string(data)
+				obj.BiomeGrasslandTropical = true
 			case "biome_lake_temperate_brackishwater":
-				obj.BiomeLakeTemperateBrackishwater = string(data)
+				obj.BiomeLakeTemperateBrackishwater = true
 			case "biome_lake_temperate_freshwater":
-				obj.BiomeLakeTemperateFreshwater = string(data)
+				obj.BiomeLakeTemperateFreshwater = true
 			case "biome_lake_temperate_saltwater":
-				obj.BiomeLakeTemperateSaltwater = string(data)
+				obj.BiomeLakeTemperateSaltwater = true
 			case "biome_lake_tropical_brackishwater":
-				obj.BiomeLakeTropicalBrackishwater = string(data)
+				obj.BiomeLakeTropicalBrackishwater = true
 			case "biome_lake_tropical_freshwater":
-				obj.BiomeLakeTropicalFreshwater = string(data)
+				obj.BiomeLakeTropicalFreshwater = true
 			case "biome_lake_tropical_saltwater":
-				obj.BiomeLakeTropicalSaltwater = string(data)
+				obj.BiomeLakeTropicalSaltwater = true
 			case "biome_marsh_temperate_freshwater":
-				obj.BiomeMarshTemperateFreshwater = string(data)
+				obj.BiomeMarshTemperateFreshwater = true
 			case "biome_marsh_temperate_saltwater":
-				obj.BiomeMarshTemperateSaltwater = string(data)
+				obj.BiomeMarshTemperateSaltwater = true
 			case "biome_marsh_tropical_freshwater":
-				obj.BiomeMarshTropicalFreshwater = string(data)
+				obj.BiomeMarshTropicalFreshwater = true
 			case "biome_marsh_tropical_saltwater":
-				obj.BiomeMarshTropicalSaltwater = string(data)
+				obj.BiomeMarshTropicalSaltwater = true
 			case "biome_mountain":
-				obj.BiomeMountain = string(data)
+				obj.BiomeMountain = true
 			case "biome_ocean_arctic":
-				obj.BiomeOceanArctic = string(data)
+				obj.BiomeOceanArctic = true
 			case "biome_ocean_temperate":
-				obj.BiomeOceanTemperate = string(data)
+				obj.BiomeOceanTemperate = true
 			case "biome_ocean_tropical":
-				obj.BiomeOceanTropical = string(data)
+				obj.BiomeOceanTropical = true
 			case "biome_pool_temperate_brackishwater":
-				obj.BiomePoolTemperateBrackishwater = string(data)
+				obj.BiomePoolTemperateBrackishwater = true
 			case "biome_pool_temperate_freshwater":
-				obj.BiomePoolTemperateFreshwater = string(data)
+				obj.BiomePoolTemperateFreshwater = true
 			case "biome_pool_temperate_saltwater":
-				obj.BiomePoolTemperateSaltwater = string(data)
+				obj.BiomePoolTemperateSaltwater = true
 			case "biome_pool_tropical_brackishwater":
-				obj.BiomePoolTropicalBrackishwater = string(data)
+				obj.BiomePoolTropicalBrackishwater = true
 			case "biome_pool_tropical_freshwater":
-				obj.BiomePoolTropicalFreshwater = string(data)
+				obj.BiomePoolTropicalFreshwater = true
 			case "biome_pool_tropical_saltwater":
-				obj.BiomePoolTropicalSaltwater = string(data)
+				obj.BiomePoolTropicalSaltwater = true
 			case "biome_river_temperate_brackishwater":
-				obj.BiomeRiverTemperateBrackishwater = string(data)
+				obj.BiomeRiverTemperateBrackishwater = true
 			case "biome_river_temperate_freshwater":
-				obj.BiomeRiverTemperateFreshwater = string(data)
+				obj.BiomeRiverTemperateFreshwater = true
 			case "biome_river_temperate_saltwater":
-				obj.BiomeRiverTemperateSaltwater = string(data)
+				obj.BiomeRiverTemperateSaltwater = true
 			case "biome_river_tropical_brackishwater":
-				obj.BiomeRiverTropicalBrackishwater = string(data)
+				obj.BiomeRiverTropicalBrackishwater = true
 			case "biome_river_tropical_freshwater":
-				obj.BiomeRiverTropicalFreshwater = string(data)
+				obj.BiomeRiverTropicalFreshwater = true
 			case "biome_river_tropical_saltwater":
-				obj.BiomeRiverTropicalSaltwater = string(data)
+				obj.BiomeRiverTropicalSaltwater = true
 			case "biome_savanna_temperate":
-				obj.BiomeSavannaTemperate = string(data)
+				obj.BiomeSavannaTemperate = true
 			case "biome_savanna_tropical":
-				obj.BiomeSavannaTropical = string(data)
+				obj.BiomeSavannaTropical = true
 			case "biome_shrubland_temperate":
-				obj.BiomeShrublandTemperate = string(data)
+				obj.BiomeShrublandTemperate = true
 			case "biome_shrubland_tropical":
-				obj.BiomeShrublandTropical = string(data)
+				obj.BiomeShrublandTropical = true
 			case "biome_subterranean_chasm":
-				obj.BiomeSubterraneanChasm = string(data)
+				obj.BiomeSubterraneanChasm = true
 			case "biome_subterranean_lava":
-				obj.BiomeSubterraneanLava = string(data)
+				obj.BiomeSubterraneanLava = true
 			case "biome_subterranean_water":
-				obj.BiomeSubterraneanWater = string(data)
+				obj.BiomeSubterraneanWater = true
 			case "biome_swamp_mangrove":
-				obj.BiomeSwampMangrove = string(data)
+				obj.BiomeSwampMangrove = true
 			case "biome_swamp_temperate_freshwater":
-				obj.BiomeSwampTemperateFreshwater = string(data)
+				obj.BiomeSwampTemperateFreshwater = true
 			case "biome_swamp_temperate_saltwater":
-				obj.BiomeSwampTemperateSaltwater = string(data)
+				obj.BiomeSwampTemperateSaltwater = true
 			case "biome_swamp_tropical_freshwater":
-				obj.BiomeSwampTropicalFreshwater = string(data)
+				obj.BiomeSwampTropicalFreshwater = true
 			case "biome_swamp_tropical_saltwater":
-				obj.BiomeSwampTropicalSaltwater = string(data)
+				obj.BiomeSwampTropicalSaltwater = true
 			case "biome_tundra":
-				obj.BiomeTundra = string(data)
+				obj.BiomeTundra = true
 			case "creature_id":
 				obj.CreatureId = string(data)
 			case "does_not_exist":
-				obj.DoesNotExist = string(data)
+				obj.DoesNotExist = true
 			case "equipment":
-				obj.Equipment = string(data)
+				obj.Equipment = true
 			case "equipment_wagon":
-				obj.EquipmentWagon = string(data)
+				obj.EquipmentWagon = true
 			case "evil":
-				obj.Evil = string(data)
+				obj.Evil = true
 			case "fanciful":
-				obj.Fanciful = string(data)
+				obj.Fanciful = true
 			case "generated":
-				obj.Generated = string(data)
+				obj.Generated = true
 			case "good":
-				obj.Good = string(data)
+				obj.Good = true
 			case "has_any_benign":
-				obj.HasAnyBenign = string(data)
+				obj.HasAnyBenign = true
 			case "has_any_can_swim":
-				obj.HasAnyCanSwim = string(data)
+				obj.HasAnyCanSwim = true
 			case "has_any_cannot_breathe_air":
-				obj.HasAnyCannotBreatheAir = string(data)
+				obj.HasAnyCannotBreatheAir = true
 			case "has_any_cannot_breathe_water":
-				obj.HasAnyCannotBreatheWater = string(data)
+				obj.HasAnyCannotBreatheWater = true
 			case "has_any_carnivore":
-				obj.HasAnyCarnivore = string(data)
+				obj.HasAnyCarnivore = true
 			case "has_any_common_domestic":
-				obj.HasAnyCommonDomestic = string(data)
+				obj.HasAnyCommonDomestic = true
 			case "has_any_curious_beast":
-				obj.HasAnyCuriousBeast = string(data)
+				obj.HasAnyCuriousBeast = true
 			case "has_any_demon":
-				obj.HasAnyDemon = string(data)
+				obj.HasAnyDemon = true
 			case "has_any_feature_beast":
-				obj.HasAnyFeatureBeast = string(data)
+				obj.HasAnyFeatureBeast = true
 			case "has_any_flier":
-				obj.HasAnyFlier = string(data)
+				obj.HasAnyFlier = true
 			case "has_any_fly_race_gait":
-				obj.HasAnyFlyRaceGait = string(data)
+				obj.HasAnyFlyRaceGait = true
 			case "has_any_grasp":
-				obj.HasAnyGrasp = string(data)
+				obj.HasAnyGrasp = true
 			case "has_any_grazer":
-				obj.HasAnyGrazer = string(data)
+				obj.HasAnyGrazer = true
 			case "has_any_has_blood":
-				obj.HasAnyHasBlood = string(data)
+				obj.HasAnyHasBlood = true
 			case "has_any_immobile":
-				obj.HasAnyImmobile = string(data)
+				obj.HasAnyImmobile = true
 			case "has_any_intelligent_learns":
-				obj.HasAnyIntelligentLearns = string(data)
+				obj.HasAnyIntelligentLearns = true
 			case "has_any_intelligent_speaks":
-				obj.HasAnyIntelligentSpeaks = string(data)
+				obj.HasAnyIntelligentSpeaks = true
 			case "has_any_large_predator":
-				obj.HasAnyLargePredator = string(data)
+				obj.HasAnyLargePredator = true
 			case "has_any_local_pops_controllable":
-				obj.HasAnyLocalPopsControllable = string(data)
+				obj.HasAnyLocalPopsControllable = true
 			case "has_any_local_pops_produce_heroes":
-				obj.HasAnyLocalPopsProduceHeroes = string(data)
+				obj.HasAnyLocalPopsProduceHeroes = true
 			case "has_any_megabeast":
-				obj.HasAnyMegabeast = string(data)
+				obj.HasAnyMegabeast = true
 			case "has_any_mischievous":
-				obj.HasAnyMischievous = string(data)
+				obj.HasAnyMischievous = true
 			case "has_any_natural_animal":
-				obj.HasAnyNaturalAnimal = string(data)
+				obj.HasAnyNaturalAnimal = true
 			case "has_any_night_creature":
-				obj.HasAnyNightCreature = string(data)
+				obj.HasAnyNightCreature = true
 			case "has_any_night_creature_bogeyman":
-				obj.HasAnyNightCreatureBogeyman = string(data)
+				obj.HasAnyNightCreatureBogeyman = true
 			case "has_any_night_creature_hunter":
-				obj.HasAnyNightCreatureHunter = string(data)
+				obj.HasAnyNightCreatureHunter = true
 			case "has_any_night_creature_nightmare":
-				obj.HasAnyNightCreatureNightmare = string(data)
+				obj.HasAnyNightCreatureNightmare = true
 			case "has_any_not_fireimmune":
-				obj.HasAnyNotFireimmune = string(data)
+				obj.HasAnyNotFireimmune = true
 			case "has_any_not_living":
-				obj.HasAnyNotLiving = string(data)
+				obj.HasAnyNotLiving = true
 			case "has_any_outsider_controllable":
-				obj.HasAnyOutsiderControllable = string(data)
+				obj.HasAnyOutsiderControllable = true
 			case "has_any_race_gait":
-				obj.HasAnyRaceGait = string(data)
+				obj.HasAnyRaceGait = true
 			case "has_any_semimegabeast":
-				obj.HasAnySemimegabeast = string(data)
+				obj.HasAnySemimegabeast = true
 			case "has_any_slow_learner":
-				obj.HasAnySlowLearner = string(data)
+				obj.HasAnySlowLearner = true
 			case "has_any_supernatural":
-				obj.HasAnySupernatural = string(data)
+				obj.HasAnySupernatural = true
 			case "has_any_titan":
-				obj.HasAnyTitan = string(data)
+				obj.HasAnyTitan = true
 			case "has_any_unique_demon":
-				obj.HasAnyUniqueDemon = string(data)
+				obj.HasAnyUniqueDemon = true
 			case "has_any_utterances":
-				obj.HasAnyUtterances = string(data)
+				obj.HasAnyUtterances = true
 			case "has_any_vermin_hateable":
-				obj.HasAnyVerminHateable = string(data)
+				obj.HasAnyVerminHateable = true
 			case "has_any_vermin_micro":
-				obj.HasAnyVerminMicro = string(data)
+				obj.HasAnyVerminMicro = true
 			case "has_female":
-				obj.HasFemale = string(data)
+				obj.HasFemale = true
 			case "has_male":
-				obj.HasMale = string(data)
+				obj.HasMale = true
 			case "large_roaming":
-				obj.LargeRoaming = string(data)
+				obj.LargeRoaming = true
 			case "loose_clusters":
-				obj.LooseClusters = string(data)
+				obj.LooseClusters = true
 			case "mates_to_breed":
-				obj.MatesToBreed = string(data)
+				obj.MatesToBreed = true
 			case "mundane":
-				obj.Mundane = string(data)
+				obj.Mundane = true
 			case "name_plural":
 				obj.NamePlural = string(data)
 			case "name_singular":
 				obj.NameSingular = string(data)
 			case "occurs_as_entity_race":
-				obj.OccursAsEntityRace = string(data)
+				obj.OccursAsEntityRace = true
 			case "savage":
-				obj.Savage = string(data)
+				obj.Savage = true
 			case "small_race":
-				obj.SmallRace = string(data)
+				obj.SmallRace = true
 			case "two_genders":
-				obj.TwoGenders = string(data)
+				obj.TwoGenders = true
 			case "ubiquitous":
-				obj.Ubiquitous = string(data)
+				obj.Ubiquitous = true
 			case "vermin_eater":
-				obj.VerminEater = string(data)
+				obj.VerminEater = true
 			case "vermin_fish":
-				obj.VerminFish = string(data)
+				obj.VerminFish = true
 			case "vermin_grounder":
-				obj.VerminGrounder = string(data)
+				obj.VerminGrounder = true
 			case "vermin_rotter":
-				obj.VerminRotter = string(data)
+				obj.VerminRotter = true
 			case "vermin_soil":
-				obj.VerminSoil = string(data)
+				obj.VerminSoil = true
 			case "vermin_soil_colony":
-				obj.VerminSoilColony = string(data)
+				obj.VerminSoilColony = true
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -4195,20 +4195,20 @@ func parseHistoricalEventPlus(d *xml.Decoder, start *xml.StartElement, obj *Hist
 					obj.Details, err = parseHistoricalEventCreatureDevouredPlus(d, start, obj.Details.(*HistoricalEventCreatureDevoured))
 				case "entity_action":
 					switch details := obj.Details.(type) {
-					case *HistoricalEventEntityRelocate:
-						obj.Details, err = parseHistoricalEventEntityRelocatePlus(d, start, details)
 					case *HistoricalEventEntityPrimaryCriminals:
 						obj.Details, err = parseHistoricalEventEntityPrimaryCriminalsPlus(d, start, details)
+					case *HistoricalEventEntityRelocate:
+						obj.Details, err = parseHistoricalEventEntityRelocatePlus(d, start, details)
 					default:
 						fmt.Println("unknown subtype option", obj.Details)
 						d.Skip()
 					}
 				case "hf_act_on_building":
 					switch details := obj.Details.(type) {
-					case *HistoricalEventHfProfanedStructure:
-						obj.Details, err = parseHistoricalEventHfProfanedStructurePlus(d, start, details)
 					case *HistoricalEventHfDisturbedStructure:
 						obj.Details, err = parseHistoricalEventHfDisturbedStructurePlus(d, start, details)
+					case *HistoricalEventHfProfanedStructure:
+						obj.Details, err = parseHistoricalEventHfProfanedStructurePlus(d, start, details)
 					case *HistoricalEventHfPrayedInsideStructure:
 						obj.Details, err = parseHistoricalEventHfPrayedInsideStructurePlus(d, start, details)
 					default:
@@ -4711,9 +4711,9 @@ func parseHistoricalEventAgreementFormed(d *xml.Decoder, start *xml.StartElement
 			case "coconspirator_bonus":
 				obj.CoconspiratorBonus = n(data)
 			case "delegated":
-				obj.Delegated = string(data)
+				obj.Delegated = true
 			case "failed_judgment_test":
-				obj.FailedJudgmentTest = string(data)
+				obj.FailedJudgmentTest = true
 			case "method":
 				obj.Method = string(data)
 			case "relevant_entity_id":
@@ -4723,7 +4723,7 @@ func parseHistoricalEventAgreementFormed(d *xml.Decoder, start *xml.StartElement
 			case "relevant_position_profile_id":
 				obj.RelevantPositionProfileId = n(data)
 			case "successful":
-				obj.Successful = string(data)
+				obj.Successful = true
 			case "top_facet":
 				obj.TopFacet = string(data)
 			case "top_facet_modifier":
@@ -4931,7 +4931,7 @@ func parseHistoricalEventArtifactCopied(d *xml.Decoder, start *xml.StartElement)
 			case "dest_structure_id":
 				obj.DestStructureId = n(data)
 			case "from_original":
-				obj.FromOriginal = string(data)
+				obj.FromOriginal = true
 			case "source_entity_id":
 				obj.SourceEntityId = n(data)
 			case "source_site_id":
@@ -5023,7 +5023,7 @@ func parseHistoricalEventArtifactCreated(d *xml.Decoder, start *xml.StartElement
 			case "hist_figure_id":
 				obj.HistFigureId = n(data)
 			case "name_only":
-				obj.NameOnly = string(data)
+				obj.NameOnly = true
 			case "site_id":
 				obj.SiteId = n(data)
 			case "unit_id":
@@ -6224,13 +6224,13 @@ func parseHistoricalEventBuildingProfileAcquired(d *xml.Decoder, start *xml.Star
 			case "building_profile_id":
 				obj.BuildingProfileId = n(data)
 			case "inherited":
-				obj.Inherited = string(data)
+				obj.Inherited = true
 			case "last_owner_hfid":
 				obj.LastOwnerHfid = n(data)
 			case "purchased_unowned":
-				obj.PurchasedUnowned = string(data)
+				obj.PurchasedUnowned = true
 			case "rebuilt_ruined":
-				obj.RebuiltRuined = string(data)
+				obj.RebuiltRuined = true
 			case "site_id":
 				obj.SiteId = n(data)
 			default:
@@ -7147,7 +7147,7 @@ func parseHistoricalEventCollectionBattle(d *xml.Decoder, start *xml.StartElemen
 			case "attacking_merc_enid":
 				obj.AttackingMercEnid = n(data)
 			case "attacking_squad_animated":
-				obj.AttackingSquadAnimated = append(obj.AttackingSquadAnimated, string(data))
+
 			case "attacking_squad_deaths":
 				obj.AttackingSquadDeaths = append(obj.AttackingSquadDeaths, n(data))
 			case "attacking_squad_entity_pop":
@@ -7159,7 +7159,7 @@ func parseHistoricalEventCollectionBattle(d *xml.Decoder, start *xml.StartElemen
 			case "attacking_squad_site":
 				obj.AttackingSquadSite = append(obj.AttackingSquadSite, n(data))
 			case "company_merc":
-				obj.CompanyMerc = append(obj.CompanyMerc, string(data))
+
 			case "coords":
 				obj.Coords = string(data)
 			case "d_support_merc_enid":
@@ -7171,7 +7171,7 @@ func parseHistoricalEventCollectionBattle(d *xml.Decoder, start *xml.StartElemen
 			case "defending_merc_enid":
 				obj.DefendingMercEnid = n(data)
 			case "defending_squad_animated":
-				obj.DefendingSquadAnimated = append(obj.DefendingSquadAnimated, string(data))
+
 			case "defending_squad_deaths":
 				obj.DefendingSquadDeaths = append(obj.DefendingSquadDeaths, n(data))
 			case "defending_squad_entity_pop":
@@ -7185,7 +7185,7 @@ func parseHistoricalEventCollectionBattle(d *xml.Decoder, start *xml.StartElemen
 			case "feature_layer_id":
 				obj.FeatureLayerId = n(data)
 			case "individual_merc":
-				obj.IndividualMerc = append(obj.IndividualMerc, string(data))
+
 			case "name":
 				obj.Name_ = string(data)
 			case "noncom_hfid":
@@ -8739,7 +8739,7 @@ func parseHistoricalEventCreatedStructure(d *xml.Decoder, start *xml.StartElemen
 			case "civ_id":
 				obj.CivId = n(data)
 			case "rebuilt":
-				obj.Rebuilt = string(data)
+				obj.Rebuilt = true
 			case "site_civ_id":
 				obj.SiteCivId = n(data)
 			case "site_id":
@@ -9651,7 +9651,7 @@ func parseHistoricalEventEntityIncorporated(d *xml.Decoder, start *xml.StartElem
 			case "leader_hfid":
 				obj.LeaderHfid = n(data)
 			case "partial_incorporation":
-				obj.PartialIncorporation = string(data)
+				obj.PartialIncorporation = true
 			case "site_id":
 				obj.SiteId = n(data)
 			default:
@@ -10373,7 +10373,7 @@ func parseHistoricalEventFailedIntrigueCorruption(d *xml.Decoder, start *xml.Sta
 			case "corruptor_identity":
 				obj.CorruptorIdentity = n(data)
 			case "failed_judgment_test":
-				obj.FailedJudgmentTest = string(data)
+				obj.FailedJudgmentTest = true
 			case "feature_layer_id":
 				obj.FeatureLayerId = n(data)
 			case "lure_hfid":
@@ -11015,7 +11015,7 @@ func parseHistoricalEventHfConvicted(d *xml.Decoder, start *xml.StartElement) (*
 			case "contact_hfid":
 				obj.ContactHfid = n(data)
 			case "convict_is_contact":
-				obj.ConvictIsContact = string(data)
+				obj.ConvictIsContact = true
 			case "convicted_hfid":
 				obj.ConvictedHfid = n(data)
 			case "convicter_enid":
@@ -11025,17 +11025,17 @@ func parseHistoricalEventHfConvicted(d *xml.Decoder, start *xml.StartElement) (*
 			case "crime":
 				obj.Crime = string(data)
 			case "death_penalty":
-				obj.DeathPenalty = string(data)
+				obj.DeathPenalty = true
 			case "did_not_reveal_all_in_interrogation":
-				obj.DidNotRevealAllInInterrogation = string(data)
+				obj.DidNotRevealAllInInterrogation = true
 			case "exiled":
-				obj.Exiled = string(data)
+				obj.Exiled = true
 			case "fooled_hfid":
 				obj.FooledHfid = n(data)
 			case "framer_hfid":
 				obj.FramerHfid = n(data)
 			case "held_firm_in_interrogation":
-				obj.HeldFirmInInterrogation = string(data)
+				obj.HeldFirmInInterrogation = true
 			case "implicated_hfid":
 				obj.ImplicatedHfid = append(obj.ImplicatedHfid, n(data))
 			case "interrogator_hfid":
@@ -11045,17 +11045,17 @@ func parseHistoricalEventHfConvicted(d *xml.Decoder, start *xml.StartElement) (*
 			case "prison_months":
 				obj.PrisonMonths = n(data)
 			case "surveiled_coconspirator":
-				obj.SurveiledCoconspirator = string(data)
+				obj.SurveiledCoconspirator = true
 			case "surveiled_contact":
-				obj.SurveiledContact = string(data)
+				obj.SurveiledContact = true
 			case "surveiled_convicted":
-				obj.SurveiledConvicted = string(data)
+				obj.SurveiledConvicted = true
 			case "surveiled_target":
-				obj.SurveiledTarget = string(data)
+				obj.SurveiledTarget = true
 			case "target_hfid":
 				obj.TargetHfid = n(data)
 			case "wrongful_conviction":
-				obj.WrongfulConviction = string(data)
+				obj.WrongfulConviction = true
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -11833,13 +11833,13 @@ func parseHistoricalEventHfInterrogated(d *xml.Decoder, start *xml.StartElement)
 			case "arresting_enid":
 				obj.ArrestingEnid = n(data)
 			case "held_firm_in_interrogation":
-				obj.HeldFirmInInterrogation = string(data)
+				obj.HeldFirmInInterrogation = true
 			case "interrogator_hfid":
 				obj.InterrogatorHfid = n(data)
 			case "target_hfid":
 				obj.TargetHfid = n(data)
 			case "wanted_and_recognized":
-				obj.WantedAndRecognized = string(data)
+				obj.WantedAndRecognized = true
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -12791,7 +12791,7 @@ func parseHistoricalEventHfRevived(d *xml.Decoder, start *xml.StartElement) (*Hi
 			case "actor_hfid":
 				obj.ActorHfid = n(data)
 			case "disturbance":
-				obj.Disturbance = string(data)
+				obj.Disturbance = true
 			case "feature_layer_id":
 				obj.FeatureLayerId = n(data)
 			case "hfid":
@@ -12983,7 +12983,7 @@ func parseHistoricalEventHfTravel(d *xml.Decoder, start *xml.StartElement) (*His
 			case "group_hfid":
 				obj.GroupHfid = append(obj.GroupHfid, n(data))
 			case "return":
-				obj.Return = string(data)
+				obj.Return = true
 			case "site_id":
 				obj.SiteId = n(data)
 			case "subregion_id":
@@ -13343,7 +13343,7 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(d *xml.Decoder, start *xm
 			case "corruptor_seen_as":
 				obj.CorruptorSeenAs = string(data)
 			case "failed_judgment_test":
-				obj.FailedJudgmentTest = string(data)
+				obj.FailedJudgmentTest = true
 			case "feature_layer_id":
 				obj.FeatureLayerId = n(data)
 			case "lure_hfid":
@@ -13361,7 +13361,7 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(d *xml.Decoder, start *xm
 			case "subregion_id":
 				obj.SubregionId = n(data)
 			case "successful":
-				obj.Successful = string(data)
+				obj.Successful = true
 			case "target_hfid":
 				obj.TargetHfid = n(data)
 			case "target_identity":
@@ -13865,7 +13865,7 @@ func parseHistoricalEventKnowledgeDiscovered(d *xml.Decoder, start *xml.StartEle
 
 			switch t.Name.Local {
 			case "first":
-				obj.First = string(data)
+				obj.First = true
 			case "hfid":
 				obj.Hfid = n(data)
 			case "knowledge":
@@ -14507,7 +14507,7 @@ func parseHistoricalEventPlunderedSite(d *xml.Decoder, start *xml.StartElement) 
 			case "defender_civ_id":
 				obj.DefenderCivId = n(data)
 			case "detected":
-				obj.Detected = string(data)
+				obj.Detected = true
 			case "site_civ_id":
 				obj.SiteCivId = n(data)
 			case "site_id":
@@ -16058,7 +16058,7 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 			case "active_interaction":
 				obj.ActiveInteraction = append(obj.ActiveInteraction, string(data))
 			case "animated":
-				obj.Animated = string(data)
+				obj.Animated = true
 			case "animated_string":
 				obj.AnimatedString = string(data)
 			case "appeared":
@@ -16078,7 +16078,7 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 			case "death_year":
 				obj.DeathYear = n(data)
 			case "deity":
-				obj.Deity = string(data)
+				obj.Deity = true
 			case "ent_pop_id":
 				obj.EntPopId = n(data)
 			case "entity_former_position_link":
@@ -16092,7 +16092,7 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 			case "entity_squad_link":
 
 			case "force":
-				obj.Force = string(data)
+				obj.Force = true
 			case "goal":
 				obj.Goal = append(obj.Goal, string(data))
 			case "hf_link":
@@ -16404,7 +16404,7 @@ func parseHonor(d *xml.Decoder, start *xml.StartElement) (*Honor, error) {
 			case "gives_precedence":
 				obj.GivesPrecedence = n(data)
 			case "granted_to_everybody":
-				obj.GrantedToEverybody = string(data)
+				obj.GrantedToEverybody = true
 			case "id":
 				obj.Id_ = n(data)
 			case "name":
@@ -16420,7 +16420,7 @@ func parseHonor(d *xml.Decoder, start *xml.StartElement) (*Honor, error) {
 			case "required_years":
 				obj.RequiredYears = n(data)
 			case "requires_any_melee_or_ranged_skill":
-				obj.RequiresAnyMeleeOrRangedSkill = string(data)
+				obj.RequiresAnyMeleeOrRangedSkill = true
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -16716,9 +16716,9 @@ func parseIntrigueActor(d *xml.Decoder, start *xml.StartElement) (*IntrigueActor
 			case "local_id":
 				obj.LocalId = n(data)
 			case "promised_actor_immortality":
-				obj.PromisedActorImmortality = string(data)
+				obj.PromisedActorImmortality = true
 			case "promised_me_immortality":
-				obj.PromisedMeImmortality = string(data)
+				obj.PromisedMeImmortality = true
 			case "role":
 				obj.Role = string(data)
 			case "strategy":
@@ -16803,7 +16803,7 @@ func parseIntriguePlot(d *xml.Decoder, start *xml.StartElement) (*IntriguePlot, 
 				data = nil
 			case "plot_actor":
 				v, _ := parsePlotActor(d, &t)
-				obj.PlotActor = v
+				obj.PlotActor = append(obj.PlotActor, v)
 			case "type":
 				data = nil
 			default:
@@ -16833,7 +16833,7 @@ func parseIntriguePlot(d *xml.Decoder, start *xml.StartElement) (*IntriguePlot, 
 			case "local_id":
 				obj.LocalId = n(data)
 			case "on_hold":
-				obj.OnHold = string(data)
+				obj.OnHold = true
 			case "parent_plot_hfid":
 				obj.ParentPlotHfid = n(data)
 			case "parent_plot_id":
@@ -17137,7 +17137,7 @@ func parseMountainPeakPlus(d *xml.Decoder, start *xml.StartElement, obj *Mountai
 			case "id":
 				obj.Id_ = n(data)
 			case "is_volcano":
-				obj.IsVolcano = string(data)
+				obj.IsVolcano = true
 			case "name":
 				obj.Name_ = string(data)
 			default:
@@ -17358,7 +17358,7 @@ func parsePlotActor(d *xml.Decoder, start *xml.StartElement) (*PlotActor, error)
 			case "actor_id":
 				obj.ActorId = n(data)
 			case "agreement_has_messenger":
-				obj.AgreementHasMessenger = string(data)
+				obj.AgreementHasMessenger = true
 			case "agreement_id":
 				obj.AgreementId = n(data)
 			case "plot_role":
@@ -18622,33 +18622,33 @@ func parseVagueRelationship(d *xml.Decoder, start *xml.StartElement) (*VagueRela
 
 			switch t.Name.Local {
 			case "artistic_buddy":
-				obj.ArtisticBuddy = string(data)
+				obj.ArtisticBuddy = true
 			case "atheletic_rival":
-				obj.AtheleticRival = string(data)
+				obj.AtheleticRival = true
 			case "athlete_buddy":
-				obj.AthleteBuddy = string(data)
+				obj.AthleteBuddy = true
 			case "business_rival":
-				obj.BusinessRival = string(data)
+				obj.BusinessRival = true
 			case "childhood_friend":
-				obj.ChildhoodFriend = string(data)
+				obj.ChildhoodFriend = true
 			case "grudge":
-				obj.Grudge = string(data)
+				obj.Grudge = true
 			case "hfid":
 				obj.Hfid = n(data)
 			case "jealous_obsession":
-				obj.JealousObsession = string(data)
+				obj.JealousObsession = true
 			case "jealous_relationship_grudge":
-				obj.JealousRelationshipGrudge = string(data)
+				obj.JealousRelationshipGrudge = true
 			case "persecution_grudge":
-				obj.PersecutionGrudge = string(data)
+				obj.PersecutionGrudge = true
 			case "religious_persecution_grudge":
-				obj.ReligiousPersecutionGrudge = string(data)
+				obj.ReligiousPersecutionGrudge = true
 			case "scholar_buddy":
-				obj.ScholarBuddy = string(data)
+				obj.ScholarBuddy = true
 			case "supernatural_grudge":
-				obj.SupernaturalGrudge = string(data)
+				obj.SupernaturalGrudge = true
 			case "war_buddy":
-				obj.WarBuddy = string(data)
+				obj.WarBuddy = true
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}

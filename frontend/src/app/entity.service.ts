@@ -15,8 +15,8 @@ export class EntityService {
     return firstValueFrom(this.http.get<Entity[]>("./api/entity"));
   }
 
-  getOne(id: string | number): Promise<Entity> {
-    return firstValueFrom(this.http.get<Entity>("./api/entity/" + id));
+  getOne<T>(resource: string, id: string | number): Promise<T> {
+    return firstValueFrom(this.http.get<T>(`./api/${resource}/${id}`));
   }
 
 }
@@ -41,6 +41,7 @@ export class EntityResolver implements Resolve<Entity> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Entity> | Promise<Entity> | Entity {
-    return this.service.getOne(route.paramMap.get('id')!);
+    console.log("R", route.data)
+    return this.service.getOne(route.data['resource'], route.paramMap.get('id')!);
   }
 }

@@ -2,18 +2,23 @@ package main
 
 import (
 	"embed"
+	"encoding/json"
 	"flag"
 	"fmt"
+	"html/template"
 	"io/fs"
 	"net/http"
 	_ "net/http/pprof"
 	"os"
 	"runtime"
+	"strconv"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/pkg/profile"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/server"
+	"github.com/robertjanetzko/LegendsBrowser2/backend/templates"
 )
 
 var world *model.DfWorld
@@ -26,6 +31,39 @@ func main() {
 	flag.Parse()
 
 	router := mux.NewRouter().StrictSlash(true)
+
+	functions := template.FuncMap{
+		"json": func(obj any) string {
+			b, err := json.MarshalIndent(obj, "", "  ")
+			if err != nil {
+				fmt.Println(err)
+				return ""
+			}
+			return string(b)
+		},
+		"check": func(condition bool, v any) any {
+			if condition {
+				return v
+			}
+			return nil
+		},
+		"title": func(input string) string {
+			words := strings.Split(input, " ")
+			smallwords := " a an on the to of "
+
+			for index, word := range words {
+				if strings.Contains(smallwords, " "+word+" ") && index > 0 {
+					words[index] = word
+				} else {
+					words[index] = strings.Title(word)
+				}
+			}
+			return strings.Join(words, " ")
+		},
+		"getHf":     func(id int) *model.HistoricalFigure { return world.HistoricalFigures[id] },
+		"getEntity": func(id int) *model.Entity { return world.Entities[id] },
+	}
+	t := templates.New(functions)
 
 	if len(*f) > 0 {
 		defer profile.Start(profile.MemProfile).Stop()
@@ -77,6 +115,9 @@ func main() {
 		server.RegisterResource(router, "musicalForm", world.MusicalForms)
 		server.RegisterResource(router, "poeticForm", world.PoeticForms)
 		// server.RegisterResource(router, "written", world.WrittenContents)
+
+		RegisterPage(router, "/hf/{id}", t, "hf.html", func(id int) any { return world.HistoricalFigures[id] })
+
 	}
 
 	spa := spaHandler{staticFS: frontend, staticPath: "resources/frontend", indexPath: "index.html"}
@@ -85,6 +126,23 @@ func main() {
 	fmt.Println("Serving at :8080")
 	http.ListenAndServe(":8080", router)
 
+}
+
+func RegisterPage(router *mux.Router, path string, templates *templates.Template, template string, accessor func(int) any) {
+	get := func(w http.ResponseWriter, r *http.Request) {
+		id, err := strconv.Atoi(mux.Vars(r)["id"])
+		if err != nil {
+			fmt.Fprintln(w, err)
+			fmt.Println(err)
+		}
+		err = templates.Render(w, template, accessor(id))
+		if err != nil {
+			fmt.Fprintln(w, err)
+			fmt.Println(err)
+		}
+	}
+
+	router.HandleFunc(path, get).Methods("GET")
 }
 
 type spaHandler struct {

@@ -20,7 +20,15 @@ func Generate() error {
 		return err
 	}
 
-	return generateCode(m)
+	if err := generateBackendCode(m); err != nil {
+		return err
+	}
+
+	if err := generateFrontendCode(m); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 var allowedTyped = map[string]bool{
@@ -130,6 +138,8 @@ func createMetadata(a *AnalyzeData) (*Metadata, error) {
 							field.Type = "object"
 							el := typeNames[f]
 							field.ElementType = &el
+						} else if !a.Fields[f].NoBool {
+							field.Type = "bool"
 						} else if a.Fields[f].IsString {
 							field.Type = "string"
 						}
