@@ -18,125 +18,125 @@ export interface Artifact {
 	writing: number;
 }
 export interface Creature {
-	allCastesAlive: bool;
-	artificialHiveable: bool;
-	biomeDesertBadland: bool;
-	biomeDesertRock: bool;
-	biomeDesertSand: bool;
-	biomeForestTaiga: bool;
-	biomeForestTemperateBroadleaf: bool;
-	biomeForestTemperateConifer: bool;
-	biomeForestTropicalConifer: bool;
-	biomeForestTropicalDryBroadleaf: bool;
-	biomeForestTropicalMoistBroadleaf: bool;
-	biomeGlacier: bool;
-	biomeGrasslandTemperate: bool;
-	biomeGrasslandTropical: bool;
-	biomeLakeTemperateBrackishwater: bool;
-	biomeLakeTemperateFreshwater: bool;
-	biomeLakeTemperateSaltwater: bool;
-	biomeLakeTropicalBrackishwater: bool;
-	biomeLakeTropicalFreshwater: bool;
-	biomeLakeTropicalSaltwater: bool;
-	biomeMarshTemperateFreshwater: bool;
-	biomeMarshTemperateSaltwater: bool;
-	biomeMarshTropicalFreshwater: bool;
-	biomeMarshTropicalSaltwater: bool;
-	biomeMountain: bool;
-	biomeOceanArctic: bool;
-	biomeOceanTemperate: bool;
-	biomeOceanTropical: bool;
-	biomePoolTemperateBrackishwater: bool;
-	biomePoolTemperateFreshwater: bool;
-	biomePoolTemperateSaltwater: bool;
-	biomePoolTropicalBrackishwater: bool;
-	biomePoolTropicalFreshwater: bool;
-	biomePoolTropicalSaltwater: bool;
-	biomeRiverTemperateBrackishwater: bool;
-	biomeRiverTemperateFreshwater: bool;
-	biomeRiverTemperateSaltwater: bool;
-	biomeRiverTropicalBrackishwater: bool;
-	biomeRiverTropicalFreshwater: bool;
-	biomeRiverTropicalSaltwater: bool;
-	biomeSavannaTemperate: bool;
-	biomeSavannaTropical: bool;
-	biomeShrublandTemperate: bool;
-	biomeShrublandTropical: bool;
-	biomeSubterraneanChasm: bool;
-	biomeSubterraneanLava: bool;
-	biomeSubterraneanWater: bool;
-	biomeSwampMangrove: bool;
-	biomeSwampTemperateFreshwater: bool;
-	biomeSwampTemperateSaltwater: bool;
-	biomeSwampTropicalFreshwater: bool;
-	biomeSwampTropicalSaltwater: bool;
-	biomeTundra: bool;
+	allCastesAlive: boolean;
+	artificialHiveable: boolean;
+	biomeDesertBadland: boolean;
+	biomeDesertRock: boolean;
+	biomeDesertSand: boolean;
+	biomeForestTaiga: boolean;
+	biomeForestTemperateBroadleaf: boolean;
+	biomeForestTemperateConifer: boolean;
+	biomeForestTropicalConifer: boolean;
+	biomeForestTropicalDryBroadleaf: boolean;
+	biomeForestTropicalMoistBroadleaf: boolean;
+	biomeGlacier: boolean;
+	biomeGrasslandTemperate: boolean;
+	biomeGrasslandTropical: boolean;
+	biomeLakeTemperateBrackishwater: boolean;
+	biomeLakeTemperateFreshwater: boolean;
+	biomeLakeTemperateSaltwater: boolean;
+	biomeLakeTropicalBrackishwater: boolean;
+	biomeLakeTropicalFreshwater: boolean;
+	biomeLakeTropicalSaltwater: boolean;
+	biomeMarshTemperateFreshwater: boolean;
+	biomeMarshTemperateSaltwater: boolean;
+	biomeMarshTropicalFreshwater: boolean;
+	biomeMarshTropicalSaltwater: boolean;
+	biomeMountain: boolean;
+	biomeOceanArctic: boolean;
+	biomeOceanTemperate: boolean;
+	biomeOceanTropical: boolean;
+	biomePoolTemperateBrackishwater: boolean;
+	biomePoolTemperateFreshwater: boolean;
+	biomePoolTemperateSaltwater: boolean;
+	biomePoolTropicalBrackishwater: boolean;
+	biomePoolTropicalFreshwater: boolean;
+	biomePoolTropicalSaltwater: boolean;
+	biomeRiverTemperateBrackishwater: boolean;
+	biomeRiverTemperateFreshwater: boolean;
+	biomeRiverTemperateSaltwater: boolean;
+	biomeRiverTropicalBrackishwater: boolean;
+	biomeRiverTropicalFreshwater: boolean;
+	biomeRiverTropicalSaltwater: boolean;
+	biomeSavannaTemperate: boolean;
+	biomeSavannaTropical: boolean;
+	biomeShrublandTemperate: boolean;
+	biomeShrublandTropical: boolean;
+	biomeSubterraneanChasm: boolean;
+	biomeSubterraneanLava: boolean;
+	biomeSubterraneanWater: boolean;
+	biomeSwampMangrove: boolean;
+	biomeSwampTemperateFreshwater: boolean;
+	biomeSwampTemperateSaltwater: boolean;
+	biomeSwampTropicalFreshwater: boolean;
+	biomeSwampTropicalSaltwater: boolean;
+	biomeTundra: boolean;
 	creatureId: string;
-	doesNotExist: bool;
-	equipment: bool;
-	equipmentWagon: bool;
-	evil: bool;
-	fanciful: bool;
-	generated: bool;
-	good: bool;
-	hasAnyBenign: bool;
-	hasAnyCanSwim: bool;
-	hasAnyCannotBreatheAir: bool;
-	hasAnyCannotBreatheWater: bool;
-	hasAnyCarnivore: bool;
-	hasAnyCommonDomestic: bool;
-	hasAnyCuriousBeast: bool;
-	hasAnyDemon: bool;
-	hasAnyFeatureBeast: bool;
-	hasAnyFlier: bool;
-	hasAnyFlyRaceGait: bool;
-	hasAnyGrasp: bool;
-	hasAnyGrazer: bool;
-	hasAnyHasBlood: bool;
-	hasAnyImmobile: bool;
-	hasAnyIntelligentLearns: bool;
-	hasAnyIntelligentSpeaks: bool;
-	hasAnyLargePredator: bool;
-	hasAnyLocalPopsControllable: bool;
-	hasAnyLocalPopsProduceHeroes: bool;
-	hasAnyMegabeast: bool;
-	hasAnyMischievous: bool;
-	hasAnyNaturalAnimal: bool;
-	hasAnyNightCreature: bool;
-	hasAnyNightCreatureBogeyman: bool;
-	hasAnyNightCreatureHunter: bool;
-	hasAnyNightCreatureNightmare: bool;
-	hasAnyNotFireimmune: bool;
-	hasAnyNotLiving: bool;
-	hasAnyOutsiderControllable: bool;
-	hasAnyRaceGait: bool;
-	hasAnySemimegabeast: bool;
-	hasAnySlowLearner: bool;
-	hasAnySupernatural: bool;
-	hasAnyTitan: bool;
-	hasAnyUniqueDemon: bool;
-	hasAnyUtterances: bool;
-	hasAnyVerminHateable: bool;
-	hasAnyVerminMicro: bool;
-	hasFemale: bool;
-	hasMale: bool;
-	largeRoaming: bool;
-	looseClusters: bool;
-	matesToBreed: bool;
-	mundane: bool;
+	doesNotExist: boolean;
+	equipment: boolean;
+	equipmentWagon: boolean;
+	evil: boolean;
+	fanciful: boolean;
+	generated: boolean;
+	good: boolean;
+	hasAnyBenign: boolean;
+	hasAnyCanSwim: boolean;
+	hasAnyCannotBreatheAir: boolean;
+	hasAnyCannotBreatheWater: boolean;
+	hasAnyCarnivore: boolean;
+	hasAnyCommonDomestic: boolean;
+	hasAnyCuriousBeast: boolean;
+	hasAnyDemon: boolean;
+	hasAnyFeatureBeast: boolean;
+	hasAnyFlier: boolean;
+	hasAnyFlyRaceGait: boolean;
+	hasAnyGrasp: boolean;
+	hasAnyGrazer: boolean;
+	hasAnyHasBlood: boolean;
+	hasAnyImmobile: boolean;
+	hasAnyIntelligentLearns: boolean;
+	hasAnyIntelligentSpeaks: boolean;
+	hasAnyLargePredator: boolean;
+	hasAnyLocalPopsControllable: boolean;
+	hasAnyLocalPopsProduceHeroes: boolean;
+	hasAnyMegabeast: boolean;
+	hasAnyMischievous: boolean;
+	hasAnyNaturalAnimal: boolean;
+	hasAnyNightCreature: boolean;
+	hasAnyNightCreatureBogeyman: boolean;
+	hasAnyNightCreatureHunter: boolean;
+	hasAnyNightCreatureNightmare: boolean;
+	hasAnyNotFireimmune: boolean;
+	hasAnyNotLiving: boolean;
+	hasAnyOutsiderControllable: boolean;
+	hasAnyRaceGait: boolean;
+	hasAnySemimegabeast: boolean;
+	hasAnySlowLearner: boolean;
+	hasAnySupernatural: boolean;
+	hasAnyTitan: boolean;
+	hasAnyUniqueDemon: boolean;
+	hasAnyUtterances: boolean;
+	hasAnyVerminHateable: boolean;
+	hasAnyVerminMicro: boolean;
+	hasFemale: boolean;
+	hasMale: boolean;
+	largeRoaming: boolean;
+	looseClusters: boolean;
+	matesToBreed: boolean;
+	mundane: boolean;
 	namePlural: string;
 	nameSingular: string;
-	occursAsEntityRace: bool;
-	savage: bool;
-	smallRace: bool;
-	twoGenders: bool;
-	ubiquitous: bool;
-	verminEater: bool;
-	verminFish: bool;
-	verminGrounder: bool;
-	verminRotter: bool;
-	verminSoil: bool;
-	verminSoilColony: bool;
+	occursAsEntityRace: boolean;
+	savage: boolean;
+	smallRace: boolean;
+	twoGenders: boolean;
+	ubiquitous: boolean;
+	verminEater: boolean;
+	verminFish: boolean;
+	verminGrounder: boolean;
+	verminRotter: boolean;
+	verminSoil: boolean;
+	verminSoilColony: boolean;
 }
 export interface DanceForm {
 	description: string;
@@ -294,13 +294,13 @@ export interface HistoricalEventAgreementFormed {
 	agreementId: number;
 	allyDefenseBonus: number;
 	coconspiratorBonus: number;
-	delegated: bool;
-	failedJudgmentTest: bool;
+	delegated: boolean;
+	failedJudgmentTest: boolean;
 	method: string;
 	relevantEntityId: number;
 	relevantIdForMethod: number;
 	relevantPositionProfileId: number;
-	successful: bool;
+	successful: boolean;
 	topFacet: string;
 	topFacetModifier: number;
 	topFacetRating: number;
@@ -324,7 +324,7 @@ export interface HistoricalEventArtifactCopied {
 	destEntityId: number;
 	destSiteId: number;
 	destStructureId: number;
-	fromOriginal: bool;
+	fromOriginal: boolean;
 	sourceEntityId: number;
 	sourceSiteId: number;
 	sourceStructureId: number;
@@ -335,7 +335,7 @@ export interface HistoricalEventArtifactCreated {
 	creatorHfid: number;
 	creatorUnitId: number;
 	histFigureId: number;
-	nameOnly: bool;
+	nameOnly: boolean;
 	reason: string;
 	sanctifyHf: number;
 	site: number;
@@ -444,10 +444,10 @@ export interface HistoricalEventBuildingProfileAcquired {
 	acquirerEnid: number;
 	acquirerHfid: number;
 	buildingProfileId: number;
-	inherited: bool;
+	inherited: boolean;
 	lastOwnerHfid: number;
-	purchasedUnowned: bool;
-	rebuiltRuined: bool;
+	purchasedUnowned: boolean;
+	rebuiltRuined: boolean;
 	siteId: number;
 }
 export interface HistoricalEventCeremony {
@@ -522,26 +522,26 @@ export interface HistoricalEventCollectionBattle {
 	aSupportMercHfid: number[];
 	attackingHfid: number[];
 	attackingMercEnid: number;
-	attackingSquadAnimated: bool[];
+	attackingSquadAnimated: boolean[];
 	attackingSquadDeaths: number[];
 	attackingSquadEntityPop: number[];
 	attackingSquadNumber: number[];
 	attackingSquadRace: string[];
 	attackingSquadSite: number[];
-	companyMerc: bool[];
+	companyMerc: boolean[];
 	coords: string;
 	dSupportMercEnid: number;
 	dSupportMercHfid: number[];
 	defendingHfid: number[];
 	defendingMercEnid: number;
-	defendingSquadAnimated: bool[];
+	defendingSquadAnimated: boolean[];
 	defendingSquadDeaths: number[];
 	defendingSquadEntityPop: number[];
 	defendingSquadNumber: number[];
 	defendingSquadRace: string[];
 	defendingSquadSite: number[];
 	featureLayerId: number;
-	individualMerc: bool[];
+	individualMerc: boolean[];
 	name: string;
 	noncomHfid: number[];
 	outcome: string;
@@ -655,7 +655,7 @@ export interface HistoricalEventCreatedStructure {
 	civ: number;
 	civId: number;
 	rebuild: string;
-	rebuilt: bool;
+	rebuilt: boolean;
 	site: number;
 	siteCiv: number;
 	siteCivId: number;
@@ -726,7 +726,7 @@ export interface HistoricalEventEntityIncorporated {
 	joinedEntityId: number;
 	joinerEntityId: number;
 	leaderHfid: number;
-	partialIncorporation: bool;
+	partialIncorporation: boolean;
 	siteId: number;
 }
 export interface HistoricalEventEntityLaw {
@@ -789,7 +789,7 @@ export interface HistoricalEventFailedIntrigueCorruption {
 	coconspiratorBonus: number;
 	corruptorHfid: number;
 	corruptorIdentity: number;
-	failedJudgmentTest: bool;
+	failedJudgmentTest: boolean;
 	featureLayerId: number;
 	lureHfid: number;
 	method: string;
@@ -856,27 +856,27 @@ export interface HistoricalEventHfConvicted {
 	coconspiratorHfid: number;
 	confessedAfterApbArrestEnid: number;
 	contactHfid: number;
-	convictIsContact: bool;
+	convictIsContact: boolean;
 	convictedHfid: number;
 	convicterEnid: number;
 	corruptConvicterHfid: number;
 	crime: string;
-	deathPenalty: bool;
-	didNotRevealAllInInterrogation: bool;
-	exiled: bool;
+	deathPenalty: boolean;
+	didNotRevealAllInInterrogation: boolean;
+	exiled: boolean;
 	fooledHfid: number;
 	framerHfid: number;
-	heldFirmInInterrogation: bool;
+	heldFirmInInterrogation: boolean;
 	implicatedHfid: number[];
 	interrogatorHfid: number;
 	plotterHfid: number;
 	prisonMonths: number;
-	surveiledCoconspirator: bool;
-	surveiledContact: bool;
-	surveiledConvicted: bool;
-	surveiledTarget: bool;
+	surveiledCoconspirator: boolean;
+	surveiledContact: boolean;
+	surveiledConvicted: boolean;
+	surveiledTarget: boolean;
 	targetHfid: number;
-	wrongfulConviction: bool;
+	wrongfulConviction: boolean;
 }
 export interface HistoricalEventHfDestroyedSite {
 	attackerHfid: number;
@@ -891,7 +891,9 @@ export interface HistoricalEventHfDied {
 	featureLayerId: number;
 	hfid: number;
 	item: number;
+	itemSubtype: string;
 	itemType: string;
+	mat: string;
 	site: number;
 	siteId: number;
 	slayerCaste: string;
@@ -943,10 +945,10 @@ export interface HistoricalEventHfGainsSecretGoal {
 }
 export interface HistoricalEventHfInterrogated {
 	arrestingEnid: number;
-	heldFirmInInterrogation: bool;
+	heldFirmInInterrogation: boolean;
 	interrogatorHfid: number;
 	targetHfid: number;
-	wantedAndRecognized: bool;
+	wantedAndRecognized: boolean;
 }
 export interface HistoricalEventHfLearnsSecret {
 	artifact: number;
@@ -1027,7 +1029,7 @@ export interface HistoricalEventHfReunion {
 }
 export interface HistoricalEventHfRevived {
 	actorHfid: number;
-	disturbance: bool;
+	disturbance: boolean;
 	featureLayerId: number;
 	hfid: number;
 	siteId: number;
@@ -1045,7 +1047,7 @@ export interface HistoricalEventHfTravel {
 	coords: string;
 	featureLayerId: number;
 	groupHfid: number[];
-	return: bool;
+	return: boolean;
 	siteId: number;
 	subregionId: number;
 }
@@ -1079,7 +1081,7 @@ export interface HistoricalEventHfsFormedIntrigueRelationship {
 	corruptorHfid: number;
 	corruptorIdentity: number;
 	corruptorSeenAs: string;
-	failedJudgmentTest: bool;
+	failedJudgmentTest: boolean;
 	featureLayerId: number;
 	lureHfid: number;
 	method: string;
@@ -1088,7 +1090,7 @@ export interface HistoricalEventHfsFormedIntrigueRelationship {
 	relevantPositionProfileId: number;
 	siteId: number;
 	subregionId: number;
-	successful: bool;
+	successful: boolean;
 	targetHfid: number;
 	targetIdentity: number;
 	targetSeenAs: string;
@@ -1140,9 +1142,29 @@ export interface HistoricalEventItemStolenCircumstance {
 	type: string;
 }
 export interface HistoricalEventKnowledgeDiscovered {
-	first: bool;
+	first: boolean;
 	hfid: number;
 	knowledge: string;
+}
+export interface HistoricalEventMasterpieceItem {
+	entityId: number;
+	hfid: number;
+	itemId: number;
+	itemType: string;
+	maker: number;
+	makerEntity: number;
+	mat: string;
+	site: number;
+	siteId: number;
+	skillAtTime: string;
+}
+export interface HistoricalEventMerchant {
+	depotEntityId: number;
+	destination: number;
+	site: number;
+	siteId: number;
+	source: number;
+	traderEntityId: number;
 }
 export interface HistoricalEventModifiedBuilding {
 	modification: string;
@@ -1192,7 +1214,7 @@ export interface HistoricalEventPerformance {
 export interface HistoricalEventPlunderedSite {
 	attackerCivId: number;
 	defenderCivId: number;
-	detected: bool;
+	detected: boolean;
 	siteCivId: number;
 	siteId: number;
 }
@@ -1289,6 +1311,32 @@ export interface HistoricalEventSiteTakenOver {
 	siteCivId: number;
 	siteId: number;
 }
+export interface HistoricalEventSquadVsSquad {
+	aHfid: number;
+	aSquadId: number;
+	dEffect: number;
+	dInteraction: number;
+	dNumber: number;
+	dRace: number;
+	dSlain: number;
+	dSquadId: number;
+	featureLayerId: number;
+	siteId: number;
+	structureId: number;
+	subregionId: number;
+}
+export interface HistoricalEventTacticalSituation {
+	aTacticianHfid: number;
+	aTacticsRoll: number;
+	dTacticianHfid: number;
+	dTacticsRoll: number;
+	featureLayerId: number;
+	siteId: number;
+	situation: string;
+	start: boolean;
+	structureId: number;
+	subregionId: number;
+}
 export interface HistoricalEventTrade {
 	accountShift: number;
 	allotment: number;
@@ -1311,7 +1359,7 @@ export interface HistoricalEventWrittenContentComposed {
 }
 export interface HistoricalFigure {
 	activeInteraction: string[];
-	animated: bool;
+	animated: boolean;
 	animatedString: string;
 	appeared: number;
 	associatedType: string;
@@ -1321,14 +1369,14 @@ export interface HistoricalFigure {
 	currentIdentityId: number;
 	deathSeconds72: number;
 	deathYear: number;
-	deity: bool;
+	deity: boolean;
 	entPopId: number;
 	entityFormerPositionLink: EntityFormerPositionLink[];
 	entityLink: HistoricalFigureEntityLink[];
 	entityPositionLink: EntityPositionLink[];
 	entityReputation: EntityReputation[];
 	entitySquadLink: EntitySquadLink;
-	force: bool;
+	force: boolean;
 	goal: string[];
 	hfLink: HfLink[];
 	hfSkill: HfSkill[];
@@ -1363,7 +1411,7 @@ export interface Honor {
 	exemptEpid: number;
 	exemptFormerEpid: number;
 	givesPrecedence: number;
-	grantedToEverybody: bool;
+	grantedToEverybody: boolean;
 	id: number;
 	name: string;
 	requiredBattles: number;
@@ -1371,7 +1419,7 @@ export interface Honor {
 	requiredSkill: string;
 	requiredSkillIpTotal: number;
 	requiredYears: number;
-	requiresAnyMeleeOrRangedSkill: bool;
+	requiresAnyMeleeOrRangedSkill: boolean;
 }
 export interface HonorEntity {
 	battles: number;
@@ -1396,8 +1444,8 @@ export interface IntrigueActor {
 	handleActorId: number;
 	hfid: number;
 	localId: number;
-	promisedActorImmortality: bool;
-	promisedMeImmortality: bool;
+	promisedActorImmortality: boolean;
+	promisedMeImmortality: boolean;
 	role: string;
 	strategy: string;
 	strategyEnid: number;
@@ -1410,10 +1458,10 @@ export interface IntriguePlot {
 	delegatedPlotId: number;
 	entityId: number;
 	localId: number;
-	onHold: bool;
+	onHold: boolean;
 	parentPlotHfid: number;
 	parentPlotId: number;
-	plotActor: PlotActor[];
+	plotActor: PlotActor;
 	type: string;
 }
 export interface Item {
@@ -1432,7 +1480,7 @@ export interface MountainPeak {
 	coords: string;
 	height: number;
 	id: number;
-	isVolcano: bool;
+	isVolcano: boolean;
 	name: string;
 }
 export interface MusicalForm {
@@ -1448,7 +1496,7 @@ export interface Occasion {
 }
 export interface PlotActor {
 	actorId: number;
-	agreementHasMessenger: bool;
+	agreementHasMessenger: boolean;
 	agreementId: number;
 	plotRole: string;
 }
@@ -1552,20 +1600,20 @@ export interface UndergroundRegion {
 	type: string;
 }
 export interface VagueRelationship {
-	artisticBuddy: bool;
-	atheleticRival: bool;
-	athleteBuddy: bool;
-	businessRival: bool;
-	childhoodFriend: bool;
-	grudge: bool;
+	artisticBuddy: boolean;
+	atheleticRival: boolean;
+	athleteBuddy: boolean;
+	businessRival: boolean;
+	childhoodFriend: boolean;
+	grudge: boolean;
 	hfid: number;
-	jealousObsession: bool;
-	jealousRelationshipGrudge: bool;
-	persecutionGrudge: bool;
-	religiousPersecutionGrudge: bool;
-	scholarBuddy: bool;
-	supernaturalGrudge: bool;
-	warBuddy: bool;
+	jealousObsession: boolean;
+	jealousRelationshipGrudge: boolean;
+	persecutionGrudge: boolean;
+	religiousPersecutionGrudge: boolean;
+	scholarBuddy: boolean;
+	supernaturalGrudge: boolean;
+	warBuddy: boolean;
 }
 export interface WorldConstruction {
 	coords: string;

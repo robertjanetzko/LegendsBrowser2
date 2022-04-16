@@ -26,8 +26,9 @@ type Artifact struct {
 	Writing          int    `json:"writing" legend:"plus"`
 }
 
-func (x *Artifact) Id() int      { return x.Id_ }
-func (x *Artifact) Name() string { return x.Name_ }
+func (x *Artifact) Id() int                 { return x.Id_ }
+func (x *Artifact) Name() string            { return x.Name_ }
+func (x *Artifact) RelatedToHf(id int) bool { return x.HolderHfid == id }
 
 type Creature struct {
 	AllCastesAlive                    bool   `json:"allCastesAlive" legend:"plus"`
@@ -150,14 +151,18 @@ type Creature struct {
 	VerminSoil                        bool   `json:"verminSoil" legend:"plus"`
 	VerminSoilColony                  bool   `json:"verminSoilColony" legend:"plus"`
 }
+
+func (x *Creature) RelatedToHf(id int) bool { return false }
+
 type DanceForm struct {
 	Description string `json:"description" legend:"base"`
 	Id_         int    `json:"id" legend:"both"`
 	Name_       string `json:"name" legend:"plus"`
 }
 
-func (x *DanceForm) Id() int      { return x.Id_ }
-func (x *DanceForm) Name() string { return x.Name_ }
+func (x *DanceForm) Id() int                 { return x.Id_ }
+func (x *DanceForm) Name() string            { return x.Name_ }
+func (x *DanceForm) RelatedToHf(id int) bool { return false }
 
 type DfWorld struct {
 	Altname                                string                                   `json:"altname" legend:"plus"`
@@ -186,7 +191,8 @@ type DfWorld struct {
 	WrittenContents                        map[int]*WrittenContent                  `json:"writtenContents" legend:"both"`
 }
 
-func (x *DfWorld) Name() string { return x.Name_ }
+func (x *DfWorld) Name() string            { return x.Name_ }
+func (x *DfWorld) RelatedToHf(id int) bool { return false }
 
 type Entity struct {
 	Child                    []int                       `json:"child" legend:"plus"`
@@ -206,27 +212,35 @@ type Entity struct {
 	WorshipId                []int                       `json:"worshipId" legend:"plus"`
 }
 
-func (x *Entity) Id() int      { return x.Id_ }
-func (x *Entity) Name() string { return x.Name_ }
+func (x *Entity) Id() int                 { return x.Id_ }
+func (x *Entity) Name() string            { return x.Name_ }
+func (x *Entity) RelatedToHf(id int) bool { return false }
 
 type EntityEntityLink struct {
 	Strength int    `json:"strength" legend:"plus"`
 	Target   int    `json:"target" legend:"plus"`
 	Type     string `json:"type" legend:"plus"`
 }
+
+func (x *EntityEntityLink) RelatedToHf(id int) bool { return false }
+
 type EntityFormerPositionLink struct {
 	EndYear           int `json:"endYear" legend:"base"`
 	EntityId          int `json:"entityId" legend:"base"`
 	PositionProfileId int `json:"positionProfileId" legend:"base"`
 	StartYear         int `json:"startYear" legend:"base"`
 }
+
+func (x *EntityFormerPositionLink) RelatedToHf(id int) bool { return false }
+
 type EntityPopulation struct {
 	CivId int    `json:"civId" legend:"plus"`
 	Id_   int    `json:"id" legend:"both"`
 	Race  string `json:"race" legend:"plus"`
 }
 
-func (x *EntityPopulation) Id() int { return x.Id_ }
+func (x *EntityPopulation) Id() int                 { return x.Id_ }
+func (x *EntityPopulation) RelatedToHf(id int) bool { return false }
 
 type EntityPosition struct {
 	Id_          int    `json:"id" legend:"plus"`
@@ -238,8 +252,9 @@ type EntityPosition struct {
 	SpouseMale   string `json:"spouseMale" legend:"plus"`
 }
 
-func (x *EntityPosition) Id() int      { return x.Id_ }
-func (x *EntityPosition) Name() string { return x.Name_ }
+func (x *EntityPosition) Id() int                 { return x.Id_ }
+func (x *EntityPosition) Name() string            { return x.Name_ }
+func (x *EntityPosition) RelatedToHf(id int) bool { return false }
 
 type EntityPositionAssignment struct {
 	Histfig    int `json:"histfig" legend:"plus"`
@@ -248,59 +263,83 @@ type EntityPositionAssignment struct {
 	SquadId    int `json:"squadId" legend:"plus"`
 }
 
-func (x *EntityPositionAssignment) Id() int { return x.Id_ }
+func (x *EntityPositionAssignment) Id() int                 { return x.Id_ }
+func (x *EntityPositionAssignment) RelatedToHf(id int) bool { return x.Histfig == id }
 
 type EntityPositionLink struct {
 	EntityId          int `json:"entityId" legend:"base"`
 	PositionProfileId int `json:"positionProfileId" legend:"base"`
 	StartYear         int `json:"startYear" legend:"base"`
 }
+
+func (x *EntityPositionLink) RelatedToHf(id int) bool { return false }
+
 type EntityReputation struct {
 	EntityId                int `json:"entityId" legend:"base"`
 	FirstAgelessSeasonCount int `json:"firstAgelessSeasonCount" legend:"base"`
 	FirstAgelessYear        int `json:"firstAgelessYear" legend:"base"`
 	UnsolvedMurders         int `json:"unsolvedMurders" legend:"base"`
 }
+
+func (x *EntityReputation) RelatedToHf(id int) bool { return false }
+
 type EntitySquadLink struct {
 	EntityId      int `json:"entityId" legend:"base"`
 	SquadId       int `json:"squadId" legend:"base"`
 	SquadPosition int `json:"squadPosition" legend:"base"`
 	StartYear     int `json:"startYear" legend:"base"`
 }
+
+func (x *EntitySquadLink) RelatedToHf(id int) bool { return false }
+
 type Feature struct {
 	Reference int    `json:"reference" legend:"plus"`
 	Type      string `json:"type" legend:"plus"`
 }
+
+func (x *Feature) RelatedToHf(id int) bool { return false }
+
 type HfLink struct {
 	Hfid         int    `json:"hfid" legend:"base"`
 	LinkStrength int    `json:"linkStrength" legend:"base"`
 	LinkType     string `json:"linkType" legend:"base"`
 }
+
+func (x *HfLink) RelatedToHf(id int) bool { return x.Hfid == id }
+
 type HfSkill struct {
 	Skill   string `json:"skill" legend:"base"`
 	TotalIp int    `json:"totalIp" legend:"base"`
 }
+
+func (x *HfSkill) RelatedToHf(id int) bool { return false }
+
 type HistoricalEra struct {
 	Name_     string `json:"name" legend:"base"`
 	StartYear int    `json:"startYear" legend:"base"`
 }
 
-func (x *HistoricalEra) Name() string { return x.Name_ }
+func (x *HistoricalEra) Name() string            { return x.Name_ }
+func (x *HistoricalEra) RelatedToHf(id int) bool { return false }
 
 type HistoricalEvent struct {
 	Id_       int `json:"id" legend:"both"`
 	Seconds72 int `json:"seconds72" legend:"base"`
 	Year      int `json:"year" legend:"base"`
-	Details   any
+	Details   HistoricalEventDetails
 }
 
-func (x *HistoricalEvent) Id() int { return x.Id_ }
+func (x *HistoricalEvent) Id() int                 { return x.Id_ }
+func (x *HistoricalEvent) RelatedToHf(id int) bool { return false }
 
 type HistoricalEventAddHfEntityHonor struct {
 	EntityId int `json:"entityId" legend:"base"`
 	Hfid     int `json:"hfid" legend:"base"`
 	HonorId  int `json:"honorId" legend:"base"`
 }
+
+func (x *HistoricalEventAddHfEntityHonor) RelatedToHf(id int) bool { return x.Hfid == id }
+
 type HistoricalEventAddHfEntityLink struct {
 	AppointerHfid int    `json:"appointerHfid" legend:"both"`
 	Civ           int    `json:"civ" legend:"plus"`
@@ -313,6 +352,11 @@ type HistoricalEventAddHfEntityLink struct {
 	PositionId    int    `json:"positionId" legend:"base"`
 	PromiseToHfid int    `json:"promiseToHfid" legend:"both"`
 }
+
+func (x *HistoricalEventAddHfEntityLink) RelatedToHf(id int) bool {
+	return x.Histfig == id || x.AppointerHfid == id || x.Hfid == id || x.PromiseToHfid == id
+}
+
 type HistoricalEventAddHfHfLink struct {
 	Hf         int    `json:"hf" legend:"plus"`
 	HfTarget   int    `json:"hfTarget" legend:"plus"`
@@ -320,6 +364,11 @@ type HistoricalEventAddHfHfLink struct {
 	HfidTarget int    `json:"hfidTarget" legend:"base"`
 	LinkType   string `json:"linkType" legend:"plus"`
 }
+
+func (x *HistoricalEventAddHfHfLink) RelatedToHf(id int) bool {
+	return x.Hfid == id || x.HfidTarget == id
+}
+
 type HistoricalEventAddHfSiteLink struct {
 	Civ       int    `json:"civ" legend:"plus"`
 	Histfig   int    `json:"histfig" legend:"plus"`
@@ -328,6 +377,9 @@ type HistoricalEventAddHfSiteLink struct {
 	SiteId    int    `json:"siteId" legend:"base"`
 	Structure int    `json:"structure" legend:"plus"`
 }
+
+func (x *HistoricalEventAddHfSiteLink) RelatedToHf(id int) bool { return x.Histfig == id }
+
 type HistoricalEventAgreementFormed struct {
 	Action                    string `json:"action" legend:"base"`
 	AgreementId               int    `json:"agreementId" legend:"base"`
@@ -350,6 +402,9 @@ type HistoricalEventAgreementFormed struct {
 	TopValueModifier          int    `json:"topValueModifier" legend:"base"`
 	TopValueRating            int    `json:"topValueRating" legend:"base"`
 }
+
+func (x *HistoricalEventAgreementFormed) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventArtifactClaimFormed struct {
 	ArtifactId        int    `json:"artifactId" legend:"base"`
 	Circumstance      string `json:"circumstance" legend:"base"`
@@ -358,6 +413,9 @@ type HistoricalEventArtifactClaimFormed struct {
 	HistFigureId      int    `json:"histFigureId" legend:"base"`
 	PositionProfileId int    `json:"positionProfileId" legend:"base"`
 }
+
+func (x *HistoricalEventArtifactClaimFormed) RelatedToHf(id int) bool { return x.HistFigureId == id }
+
 type HistoricalEventArtifactCopied struct {
 	ArtifactId        int  `json:"artifactId" legend:"base"`
 	DestEntityId      int  `json:"destEntityId" legend:"base"`
@@ -368,6 +426,9 @@ type HistoricalEventArtifactCopied struct {
 	SourceSiteId      int  `json:"sourceSiteId" legend:"base"`
 	SourceStructureId int  `json:"sourceStructureId" legend:"base"`
 }
+
+func (x *HistoricalEventArtifactCopied) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventArtifactCreated struct {
 	ArtifactId    int                                         `json:"artifactId" legend:"both"`
 	Circumstance  *HistoricalEventArtifactCreatedCircumstance `json:"circumstance" legend:"plus"`
@@ -381,21 +442,35 @@ type HistoricalEventArtifactCreated struct {
 	SiteId        int                                         `json:"siteId" legend:"base"`
 	UnitId        int                                         `json:"unitId" legend:"base"`
 }
+
+func (x *HistoricalEventArtifactCreated) RelatedToHf(id int) bool {
+	return x.HistFigureId == id || x.SanctifyHf == id || x.CreatorHfid == id
+}
+
 type HistoricalEventArtifactCreatedCircumstance struct {
 	Defeated int    `json:"defeated" legend:"plus"`
 	Type     string `json:"type" legend:"plus"`
 }
+
+func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventArtifactDestroyed struct {
 	ArtifactId    int `json:"artifactId" legend:"base"`
 	DestroyerEnid int `json:"destroyerEnid" legend:"base"`
 	SiteId        int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventArtifactDestroyed) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventArtifactFound struct {
 	ArtifactId   int `json:"artifactId" legend:"base"`
 	HistFigureId int `json:"histFigureId" legend:"base"`
 	SiteId       int `json:"siteId" legend:"base"`
 	UnitId       int `json:"unitId" legend:"base"`
 }
+
+func (x *HistoricalEventArtifactFound) RelatedToHf(id int) bool { return x.HistFigureId == id }
+
 type HistoricalEventArtifactGiven struct {
 	ArtifactId           int `json:"artifactId" legend:"base"`
 	GiverEntityId        int `json:"giverEntityId" legend:"base"`
@@ -403,12 +478,20 @@ type HistoricalEventArtifactGiven struct {
 	ReceiverEntityId     int `json:"receiverEntityId" legend:"base"`
 	ReceiverHistFigureId int `json:"receiverHistFigureId" legend:"base"`
 }
+
+func (x *HistoricalEventArtifactGiven) RelatedToHf(id int) bool {
+	return x.GiverHistFigureId == id || x.ReceiverHistFigureId == id
+}
+
 type HistoricalEventArtifactLost struct {
 	ArtifactId     int `json:"artifactId" legend:"base"`
 	SiteId         int `json:"siteId" legend:"base"`
 	SitePropertyId int `json:"sitePropertyId" legend:"base"`
 	SubregionId    int `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventArtifactLost) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventArtifactPossessed struct {
 	ArtifactId     int    `json:"artifactId" legend:"base"`
 	Circumstance   string `json:"circumstance" legend:"base"`
@@ -421,6 +504,9 @@ type HistoricalEventArtifactPossessed struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`
 	UnitId         int    `json:"unitId" legend:"base"`
 }
+
+func (x *HistoricalEventArtifactPossessed) RelatedToHf(id int) bool { return x.HistFigureId == id }
+
 type HistoricalEventArtifactRecovered struct {
 	ArtifactId     int `json:"artifactId" legend:"base"`
 	FeatureLayerId int `json:"featureLayerId" legend:"base"`
@@ -430,12 +516,18 @@ type HistoricalEventArtifactRecovered struct {
 	SubregionId    int `json:"subregionId" legend:"base"`
 	UnitId         int `json:"unitId" legend:"base"`
 }
+
+func (x *HistoricalEventArtifactRecovered) RelatedToHf(id int) bool { return x.HistFigureId == id }
+
 type HistoricalEventArtifactStored struct {
 	ArtifactId   int `json:"artifactId" legend:"base"`
 	HistFigureId int `json:"histFigureId" legend:"base"`
 	SiteId       int `json:"siteId" legend:"base"`
 	UnitId       int `json:"unitId" legend:"base"`
 }
+
+func (x *HistoricalEventArtifactStored) RelatedToHf(id int) bool { return x.HistFigureId == id }
+
 type HistoricalEventAssumeIdentity struct {
 	IdentityCaste     string `json:"identityCaste" legend:"plus"`
 	IdentityHistfigId int    `json:"identityHistfigId" legend:"plus"`
@@ -448,6 +540,11 @@ type HistoricalEventAssumeIdentity struct {
 	Trickster         int    `json:"trickster" legend:"plus"`
 	TricksterHfid     int    `json:"tricksterHfid" legend:"base"`
 }
+
+func (x *HistoricalEventAssumeIdentity) RelatedToHf(id int) bool {
+	return x.TricksterHfid == id || x.IdentityHistfigId == id
+}
+
 type HistoricalEventAttackedSite struct {
 	ASupportMercEnid    int `json:"aSupportMercEnid" legend:"base"`
 	AttackerCivId       int `json:"attackerCivId" legend:"base"`
@@ -460,6 +557,11 @@ type HistoricalEventAttackedSite struct {
 	SiteCivId           int `json:"siteCivId" legend:"base"`
 	SiteId              int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventAttackedSite) RelatedToHf(id int) bool {
+	return x.AttackerGeneralHfid == id || x.DefenderGeneralHfid == id
+}
+
 type HistoricalEventBodyAbused struct {
 	AbuseType      string `json:"abuseType" legend:"plus"`
 	Bodies         []int  `json:"bodies" legend:"plus"`
@@ -479,6 +581,9 @@ type HistoricalEventBodyAbused struct {
 	Tree           int    `json:"tree" legend:"plus"`
 	VictimEntity   int    `json:"victimEntity" legend:"plus"`
 }
+
+func (x *HistoricalEventBodyAbused) RelatedToHf(id int) bool { return x.Histfig == id }
+
 type HistoricalEventBuildingProfileAcquired struct {
 	AcquirerEnid      int  `json:"acquirerEnid" legend:"base"`
 	AcquirerHfid      int  `json:"acquirerHfid" legend:"base"`
@@ -489,6 +594,11 @@ type HistoricalEventBuildingProfileAcquired struct {
 	RebuiltRuined     bool `json:"rebuiltRuined" legend:"base"`
 	SiteId            int  `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToHf(id int) bool {
+	return x.LastOwnerHfid == id || x.AcquirerHfid == id
+}
+
 type HistoricalEventCeremony struct {
 	CivId          int `json:"civId" legend:"base"`
 	FeatureLayerId int `json:"featureLayerId" legend:"base"`
@@ -497,6 +607,9 @@ type HistoricalEventCeremony struct {
 	SiteId         int `json:"siteId" legend:"base"`
 	SubregionId    int `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventCeremony) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventChangeHfBodyState struct {
 	BodyState      string `json:"bodyState" legend:"base"`
 	Coords         string `json:"coords" legend:"base"`
@@ -506,6 +619,9 @@ type HistoricalEventChangeHfBodyState struct {
 	StructureId    int    `json:"structureId" legend:"base"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventChangeHfBodyState) RelatedToHf(id int) bool { return x.Hfid == id }
+
 type HistoricalEventChangeHfJob struct {
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
 	Hfid           int    `json:"hfid" legend:"both"`
@@ -515,6 +631,9 @@ type HistoricalEventChangeHfJob struct {
 	SiteId         int    `json:"siteId" legend:"base"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventChangeHfJob) RelatedToHf(id int) bool { return x.Hfid == id }
+
 type HistoricalEventChangeHfState struct {
 	Coords         string `json:"coords" legend:"base"`
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
@@ -526,6 +645,9 @@ type HistoricalEventChangeHfState struct {
 	State          string `json:"state" legend:"both"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventChangeHfState) RelatedToHf(id int) bool { return x.Hfid == id }
+
 type HistoricalEventChangedCreatureType struct {
 	Changee     int    `json:"changee" legend:"plus"`
 	ChangeeHfid int    `json:"changeeHfid" legend:"base"`
@@ -536,6 +658,11 @@ type HistoricalEventChangedCreatureType struct {
 	OldCaste    string `json:"oldCaste" legend:"both"`
 	OldRace     string `json:"oldRace" legend:"both"`
 }
+
+func (x *HistoricalEventChangedCreatureType) RelatedToHf(id int) bool {
+	return x.ChangeeHfid == id || x.ChangerHfid == id
+}
+
 type HistoricalEventCollection struct {
 	EndSeconds72   int   `json:"endSeconds72" legend:"base"`
 	EndYear        int   `json:"endYear" legend:"base"`
@@ -544,10 +671,11 @@ type HistoricalEventCollection struct {
 	Id_            int   `json:"id" legend:"base"`
 	StartSeconds72 int   `json:"startSeconds72" legend:"base"`
 	StartYear      int   `json:"startYear" legend:"base"`
-	Details        any
+	Details        HistoricalEventCollectionDetails
 }
 
-func (x *HistoricalEventCollection) Id() int { return x.Id_ }
+func (x *HistoricalEventCollection) Id() int                 { return x.Id_ }
+func (x *HistoricalEventCollection) RelatedToHf(id int) bool { return false }
 
 type HistoricalEventCollectionAbduction struct {
 	AttackingEnid  int    `json:"attackingEnid" legend:"base"`
@@ -559,6 +687,9 @@ type HistoricalEventCollectionAbduction struct {
 	SiteId         int    `json:"siteId" legend:"base"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionAbduction) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCollectionBattle struct {
 	ASupportMercEnid        int      `json:"aSupportMercEnid" legend:"base"`
 	ASupportMercHfid        []int    `json:"aSupportMercHfid" legend:"base"`
@@ -592,7 +723,8 @@ type HistoricalEventCollectionBattle struct {
 	WarEventcol             int      `json:"warEventcol" legend:"base"`
 }
 
-func (x *HistoricalEventCollectionBattle) Name() string { return x.Name_ }
+func (x *HistoricalEventCollectionBattle) Name() string            { return x.Name_ }
+func (x *HistoricalEventCollectionBattle) RelatedToHf(id int) bool { return false }
 
 type HistoricalEventCollectionBeastAttack struct {
 	Coords         string `json:"coords" legend:"base"`
@@ -603,12 +735,21 @@ type HistoricalEventCollectionBeastAttack struct {
 	SiteId         int    `json:"siteId" legend:"base"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionBeastAttack) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCollectionCeremony struct {
 	Ordinal int `json:"ordinal" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionCeremony) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCollectionCompetition struct {
 	Ordinal int `json:"ordinal" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionCompetition) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCollectionDuel struct {
 	AttackingHfid  int    `json:"attackingHfid" legend:"base"`
 	Coords         string `json:"coords" legend:"base"`
@@ -619,35 +760,61 @@ type HistoricalEventCollectionDuel struct {
 	SiteId         int    `json:"siteId" legend:"base"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionDuel) RelatedToHf(id int) bool {
+	return x.AttackingHfid == id || x.DefendingHfid == id
+}
+
 type HistoricalEventCollectionEntityOverthrown struct {
 	Ordinal        int `json:"ordinal" legend:"base"`
 	SiteId         int `json:"siteId" legend:"base"`
 	TargetEntityId int `json:"targetEntityId" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCollectionJourney struct {
 	Ordinal int `json:"ordinal" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionJourney) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCollectionOccasion struct {
 	CivId      int `json:"civId" legend:"base"`
 	OccasionId int `json:"occasionId" legend:"base"`
 	Ordinal    int `json:"ordinal" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionOccasion) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCollectionPerformance struct {
 	Ordinal int `json:"ordinal" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionPerformance) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCollectionPersecution struct {
 	Ordinal        int `json:"ordinal" legend:"base"`
 	SiteId         int `json:"siteId" legend:"base"`
 	TargetEntityId int `json:"targetEntityId" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionPersecution) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCollectionProcession struct {
 	Ordinal int `json:"ordinal" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionProcession) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCollectionPurge struct {
 	Adjective string `json:"adjective" legend:"base"`
 	Ordinal   int    `json:"ordinal" legend:"base"`
 	SiteId    int    `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionPurge) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCollectionSiteConquered struct {
 	AttackingEnid int `json:"attackingEnid" legend:"base"`
 	DefendingEnid int `json:"defendingEnid" legend:"base"`
@@ -655,6 +822,9 @@ type HistoricalEventCollectionSiteConquered struct {
 	SiteId        int `json:"siteId" legend:"base"`
 	WarEventcol   int `json:"warEventcol" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionSiteConquered) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCollectionTheft struct {
 	AttackingEnid  int    `json:"attackingEnid" legend:"base"`
 	Coords         string `json:"coords" legend:"base"`
@@ -665,13 +835,17 @@ type HistoricalEventCollectionTheft struct {
 	SiteId         int    `json:"siteId" legend:"base"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventCollectionTheft) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCollectionWar struct {
 	AggressorEntId int    `json:"aggressorEntId" legend:"base"`
 	DefenderEntId  int    `json:"defenderEntId" legend:"base"`
 	Name_          string `json:"name" legend:"base"`
 }
 
-func (x *HistoricalEventCollectionWar) Name() string { return x.Name_ }
+func (x *HistoricalEventCollectionWar) Name() string            { return x.Name_ }
+func (x *HistoricalEventCollectionWar) RelatedToHf(id int) bool { return false }
 
 type HistoricalEventCompetition struct {
 	CivId          int   `json:"civId" legend:"base"`
@@ -683,6 +857,9 @@ type HistoricalEventCompetition struct {
 	SubregionId    int   `json:"subregionId" legend:"base"`
 	WinnerHfid     int   `json:"winnerHfid" legend:"base"`
 }
+
+func (x *HistoricalEventCompetition) RelatedToHf(id int) bool { return x.WinnerHfid == id }
+
 type HistoricalEventCreateEntityPosition struct {
 	Civ      int    `json:"civ" legend:"plus"`
 	Histfig  int    `json:"histfig" legend:"plus"`
@@ -690,6 +867,9 @@ type HistoricalEventCreateEntityPosition struct {
 	Reason   string `json:"reason" legend:"plus"`
 	SiteCiv  int    `json:"siteCiv" legend:"plus"`
 }
+
+func (x *HistoricalEventCreateEntityPosition) RelatedToHf(id int) bool { return x.Histfig == id }
+
 type HistoricalEventCreatedSite struct {
 	BuilderHfid   int `json:"builderHfid" legend:"base"`
 	CivId         int `json:"civId" legend:"base"`
@@ -697,6 +877,9 @@ type HistoricalEventCreatedSite struct {
 	SiteCivId     int `json:"siteCivId" legend:"base"`
 	SiteId        int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventCreatedSite) RelatedToHf(id int) bool { return x.BuilderHfid == id }
+
 type HistoricalEventCreatedStructure struct {
 	BuilderHf   int    `json:"builderHf" legend:"plus"`
 	BuilderHfid int    `json:"builderHfid" legend:"base"`
@@ -711,6 +894,11 @@ type HistoricalEventCreatedStructure struct {
 	Structure   int    `json:"structure" legend:"plus"`
 	StructureId int    `json:"structureId" legend:"base"`
 }
+
+func (x *HistoricalEventCreatedStructure) RelatedToHf(id int) bool {
+	return x.BuilderHf == id || x.BuilderHfid == id
+}
+
 type HistoricalEventCreatedWorldConstruction struct {
 	CivId      int `json:"civId" legend:"base"`
 	MasterWcid int `json:"masterWcid" legend:"base"`
@@ -719,6 +907,9 @@ type HistoricalEventCreatedWorldConstruction struct {
 	SiteId2    int `json:"siteId2" legend:"base"`
 	Wcid       int `json:"wcid" legend:"base"`
 }
+
+func (x *HistoricalEventCreatedWorldConstruction) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventCreatureDevoured struct {
 	Caste          string `json:"caste" legend:"plus"`
 	Eater          int    `json:"eater" legend:"plus"`
@@ -730,6 +921,9 @@ type HistoricalEventCreatureDevoured struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`
 	Victim         int    `json:"victim" legend:"plus"`
 }
+
+func (x *HistoricalEventCreatureDevoured) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventDanceFormCreated struct {
 	Circumstance   string `json:"circumstance" legend:"base"`
 	CircumstanceId int    `json:"circumstanceId" legend:"base"`
@@ -739,37 +933,58 @@ type HistoricalEventDanceFormCreated struct {
 	ReasonId       int    `json:"reasonId" legend:"base"`
 	SiteId         int    `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventDanceFormCreated) RelatedToHf(id int) bool { return x.HistFigureId == id }
+
 type HistoricalEventDestroyedSite struct {
 	AttackerCivId int `json:"attackerCivId" legend:"base"`
 	DefenderCivId int `json:"defenderCivId" legend:"base"`
 	SiteCivId     int `json:"siteCivId" legend:"base"`
 	SiteId        int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventDestroyedSite) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventEntityAllianceFormed struct {
 	InitiatingEnid int   `json:"initiatingEnid" legend:"base"`
 	JoiningEnid    []int `json:"joiningEnid" legend:"base"`
 }
+
+func (x *HistoricalEventEntityAllianceFormed) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventEntityBreachFeatureLayer struct {
 	CivEntityId    int `json:"civEntityId" legend:"base"`
 	FeatureLayerId int `json:"featureLayerId" legend:"base"`
 	SiteEntityId   int `json:"siteEntityId" legend:"base"`
 	SiteId         int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventEntityCreated struct {
 	CreatorHfid int `json:"creatorHfid" legend:"base"`
 	EntityId    int `json:"entityId" legend:"base"`
 	SiteId      int `json:"siteId" legend:"base"`
 	StructureId int `json:"structureId" legend:"base"`
 }
+
+func (x *HistoricalEventEntityCreated) RelatedToHf(id int) bool { return x.CreatorHfid == id }
+
 type HistoricalEventEntityDissolved struct {
 	EntityId int    `json:"entityId" legend:"base"`
 	Reason   string `json:"reason" legend:"base"`
 }
+
+func (x *HistoricalEventEntityDissolved) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventEntityEquipmentPurchase struct {
 	EntityId          int   `json:"entityId" legend:"base"`
 	Hfid              []int `json:"hfid" legend:"base"`
 	NewEquipmentLevel int   `json:"newEquipmentLevel" legend:"base"`
 }
+
+func (x *HistoricalEventEntityEquipmentPurchase) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventEntityIncorporated struct {
 	JoinedEntityId       int  `json:"joinedEntityId" legend:"base"`
 	JoinerEntityId       int  `json:"joinerEntityId" legend:"base"`
@@ -777,12 +992,18 @@ type HistoricalEventEntityIncorporated struct {
 	PartialIncorporation bool `json:"partialIncorporation" legend:"base"`
 	SiteId               int  `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventEntityIncorporated) RelatedToHf(id int) bool { return x.LeaderHfid == id }
+
 type HistoricalEventEntityLaw struct {
 	EntityId     int    `json:"entityId" legend:"base"`
 	HistFigureId int    `json:"histFigureId" legend:"base"`
 	LawAdd       string `json:"lawAdd" legend:"base"`
 	LawRemove    string `json:"lawRemove" legend:"base"`
 }
+
+func (x *HistoricalEventEntityLaw) RelatedToHf(id int) bool { return x.HistFigureId == id }
+
 type HistoricalEventEntityOverthrown struct {
 	ConspiratorHfid   []int `json:"conspiratorHfid" legend:"base"`
 	EntityId          int   `json:"entityId" legend:"base"`
@@ -792,6 +1013,11 @@ type HistoricalEventEntityOverthrown struct {
 	PositionProfileId int   `json:"positionProfileId" legend:"base"`
 	SiteId            int   `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventEntityOverthrown) RelatedToHf(id int) bool {
+	return x.PosTakerHfid == id || x.InstigatorHfid == id || x.OverthrownHfid == id
+}
+
 type HistoricalEventEntityPersecuted struct {
 	DestroyedStructureId        int   `json:"destroyedStructureId" legend:"base"`
 	ExpelledCreature            []int `json:"expelledCreature" legend:"base"`
@@ -805,6 +1031,9 @@ type HistoricalEventEntityPersecuted struct {
 	SiteId                      int   `json:"siteId" legend:"base"`
 	TargetEnid                  int   `json:"targetEnid" legend:"base"`
 }
+
+func (x *HistoricalEventEntityPersecuted) RelatedToHf(id int) bool { return x.PersecutorHfid == id }
+
 type HistoricalEventEntityPrimaryCriminals struct {
 	Action      string `json:"action" legend:"plus"`
 	Entity      int    `json:"entity" legend:"plus"`
@@ -814,6 +1043,9 @@ type HistoricalEventEntityPrimaryCriminals struct {
 	Structure   int    `json:"structure" legend:"plus"`
 	StructureId int    `json:"structureId" legend:"base"`
 }
+
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventEntityRelocate struct {
 	Action      string `json:"action" legend:"plus"`
 	Entity      int    `json:"entity" legend:"plus"`
@@ -823,6 +1055,9 @@ type HistoricalEventEntityRelocate struct {
 	Structure   int    `json:"structure" legend:"plus"`
 	StructureId int    `json:"structureId" legend:"base"`
 }
+
+func (x *HistoricalEventEntityRelocate) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventFailedFrameAttempt struct {
 	ConvicterEnid int    `json:"convicterEnid" legend:"base"`
 	Crime         string `json:"crime" legend:"base"`
@@ -831,6 +1066,11 @@ type HistoricalEventFailedFrameAttempt struct {
 	PlotterHfid   int    `json:"plotterHfid" legend:"base"`
 	TargetHfid    int    `json:"targetHfid" legend:"base"`
 }
+
+func (x *HistoricalEventFailedFrameAttempt) RelatedToHf(id int) bool {
+	return x.FooledHfid == id || x.FramerHfid == id || x.PlotterHfid == id || x.TargetHfid == id
+}
+
 type HistoricalEventFailedIntrigueCorruption struct {
 	Action                    string `json:"action" legend:"base"`
 	AllyDefenseBonus          int    `json:"allyDefenseBonus" legend:"base"`
@@ -858,6 +1098,11 @@ type HistoricalEventFailedIntrigueCorruption struct {
 	TopValueModifier          int    `json:"topValueModifier" legend:"base"`
 	TopValueRating            int    `json:"topValueRating" legend:"base"`
 }
+
+func (x *HistoricalEventFailedIntrigueCorruption) RelatedToHf(id int) bool {
+	return x.CorruptorHfid == id || x.LureHfid == id || x.TargetHfid == id
+}
+
 type HistoricalEventFieldBattle struct {
 	ASupportMercEnid    int    `json:"aSupportMercEnid" legend:"base"`
 	AttackerCivId       int    `json:"attackerCivId" legend:"base"`
@@ -871,6 +1116,11 @@ type HistoricalEventFieldBattle struct {
 	FeatureLayerId      int    `json:"featureLayerId" legend:"base"`
 	SubregionId         int    `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventFieldBattle) RelatedToHf(id int) bool {
+	return x.AttackerGeneralHfid == id || x.DefenderGeneralHfid == id
+}
+
 type HistoricalEventGamble struct {
 	GamblerHfid int `json:"gamblerHfid" legend:"base"`
 	NewAccount  int `json:"newAccount" legend:"base"`
@@ -878,6 +1128,9 @@ type HistoricalEventGamble struct {
 	SiteId      int `json:"siteId" legend:"base"`
 	StructureId int `json:"structureId" legend:"base"`
 }
+
+func (x *HistoricalEventGamble) RelatedToHf(id int) bool { return x.GamblerHfid == id }
+
 type HistoricalEventHfAbducted struct {
 	FeatureLayerId int `json:"featureLayerId" legend:"base"`
 	SiteId         int `json:"siteId" legend:"base"`
@@ -885,12 +1138,20 @@ type HistoricalEventHfAbducted struct {
 	SubregionId    int `json:"subregionId" legend:"base"`
 	TargetHfid     int `json:"targetHfid" legend:"base"`
 }
+
+func (x *HistoricalEventHfAbducted) RelatedToHf(id int) bool {
+	return x.SnatcherHfid == id || x.TargetHfid == id
+}
+
 type HistoricalEventHfAttackedSite struct {
 	AttackerHfid  int `json:"attackerHfid" legend:"base"`
 	DefenderCivId int `json:"defenderCivId" legend:"base"`
 	SiteCivId     int `json:"siteCivId" legend:"base"`
 	SiteId        int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventHfAttackedSite) RelatedToHf(id int) bool { return x.AttackerHfid == id }
+
 type HistoricalEventHfConfronted struct {
 	Coords         string   `json:"coords" legend:"base"`
 	FeatureLayerId int      `json:"featureLayerId" legend:"base"`
@@ -900,6 +1161,9 @@ type HistoricalEventHfConfronted struct {
 	Situation      string   `json:"situation" legend:"base"`
 	SubregionId    int      `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventHfConfronted) RelatedToHf(id int) bool { return x.Hfid == id }
+
 type HistoricalEventHfConvicted struct {
 	CoconspiratorHfid              int    `json:"coconspiratorHfid" legend:"base"`
 	ConfessedAfterApbArrestEnid    int    `json:"confessedAfterApbArrestEnid" legend:"base"`
@@ -926,12 +1190,20 @@ type HistoricalEventHfConvicted struct {
 	TargetHfid                     int    `json:"targetHfid" legend:"base"`
 	WrongfulConviction             bool   `json:"wrongfulConviction" legend:"base"`
 }
+
+func (x *HistoricalEventHfConvicted) RelatedToHf(id int) bool {
+	return x.PlotterHfid == id || x.ContactHfid == id || x.FooledHfid == id || x.FramerHfid == id || x.InterrogatorHfid == id || x.ConvictedHfid == id || x.CorruptConvicterHfid == id || x.CoconspiratorHfid == id || x.TargetHfid == id
+}
+
 type HistoricalEventHfDestroyedSite struct {
 	AttackerHfid  int `json:"attackerHfid" legend:"base"`
 	DefenderCivId int `json:"defenderCivId" legend:"base"`
 	SiteCivId     int `json:"siteCivId" legend:"base"`
 	SiteId        int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventHfDestroyedSite) RelatedToHf(id int) bool { return x.AttackerHfid == id }
+
 type HistoricalEventHfDied struct {
 	ArtifactId          int    `json:"artifactId" legend:"plus"`
 	Cause               string `json:"cause" legend:"base"`
@@ -939,7 +1211,9 @@ type HistoricalEventHfDied struct {
 	FeatureLayerId      int    `json:"featureLayerId" legend:"base"`
 	Hfid                int    `json:"hfid" legend:"base"`
 	Item                int    `json:"item" legend:"plus"`
+	ItemSubtype         string `json:"itemSubtype" legend:"plus"`
 	ItemType            string `json:"itemType" legend:"plus"`
+	Mat                 string `json:"mat" legend:"plus"`
 	Site                int    `json:"site" legend:"plus"`
 	SiteId              int    `json:"siteId" legend:"base"`
 	SlayerCaste         string `json:"slayerCaste" legend:"both"`
@@ -951,6 +1225,11 @@ type HistoricalEventHfDied struct {
 	SubregionId         int    `json:"subregionId" legend:"base"`
 	VictimHf            int    `json:"victimHf" legend:"plus"`
 }
+
+func (x *HistoricalEventHfDied) RelatedToHf(id int) bool {
+	return x.SlayerHfid == id || x.SlayerHf == id || x.Hfid == id || x.VictimHf == id
+}
+
 type HistoricalEventHfDisturbedStructure struct {
 	Action      string `json:"action" legend:"plus"`
 	HistFigId   int    `json:"histFigId" legend:"base"`
@@ -960,6 +1239,9 @@ type HistoricalEventHfDisturbedStructure struct {
 	Structure   int    `json:"structure" legend:"plus"`
 	StructureId int    `json:"structureId" legend:"base"`
 }
+
+func (x *HistoricalEventHfDisturbedStructure) RelatedToHf(id int) bool { return x.Histfig == id }
+
 type HistoricalEventHfDoesInteraction struct {
 	Doer              int    `json:"doer" legend:"plus"`
 	DoerHfid          int    `json:"doerHfid" legend:"base"`
@@ -971,12 +1253,22 @@ type HistoricalEventHfDoesInteraction struct {
 	Target            int    `json:"target" legend:"plus"`
 	TargetHfid        int    `json:"targetHfid" legend:"base"`
 }
+
+func (x *HistoricalEventHfDoesInteraction) RelatedToHf(id int) bool {
+	return x.TargetHfid == id || x.DoerHfid == id
+}
+
 type HistoricalEventHfEnslaved struct {
 	EnslavedHfid  int `json:"enslavedHfid" legend:"base"`
 	MovedToSiteId int `json:"movedToSiteId" legend:"base"`
 	PayerEntityId int `json:"payerEntityId" legend:"base"`
 	SellerHfid    int `json:"sellerHfid" legend:"base"`
 }
+
+func (x *HistoricalEventHfEnslaved) RelatedToHf(id int) bool {
+	return x.SellerHfid == id || x.EnslavedHfid == id
+}
+
 type HistoricalEventHfEquipmentPurchase struct {
 	FeatureLayerId int `json:"featureLayerId" legend:"base"`
 	GroupHfid      int `json:"groupHfid" legend:"base"`
@@ -985,10 +1277,16 @@ type HistoricalEventHfEquipmentPurchase struct {
 	StructureId    int `json:"structureId" legend:"base"`
 	SubregionId    int `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToHf(id int) bool { return x.GroupHfid == id }
+
 type HistoricalEventHfGainsSecretGoal struct {
 	Hfid       int    `json:"hfid" legend:"base"`
 	SecretGoal string `json:"secretGoal" legend:"base"`
 }
+
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToHf(id int) bool { return x.Hfid == id }
+
 type HistoricalEventHfInterrogated struct {
 	ArrestingEnid           int  `json:"arrestingEnid" legend:"base"`
 	HeldFirmInInterrogation bool `json:"heldFirmInInterrogation" legend:"base"`
@@ -996,6 +1294,11 @@ type HistoricalEventHfInterrogated struct {
 	TargetHfid              int  `json:"targetHfid" legend:"base"`
 	WantedAndRecognized     bool `json:"wantedAndRecognized" legend:"base"`
 }
+
+func (x *HistoricalEventHfInterrogated) RelatedToHf(id int) bool {
+	return x.InterrogatorHfid == id || x.TargetHfid == id
+}
+
 type HistoricalEventHfLearnsSecret struct {
 	Artifact    int    `json:"artifact" legend:"plus"`
 	ArtifactId  int    `json:"artifactId" legend:"base"`
@@ -1006,6 +1309,11 @@ type HistoricalEventHfLearnsSecret struct {
 	Teacher     int    `json:"teacher" legend:"plus"`
 	TeacherHfid int    `json:"teacherHfid" legend:"base"`
 }
+
+func (x *HistoricalEventHfLearnsSecret) RelatedToHf(id int) bool {
+	return x.StudentHfid == id || x.TeacherHfid == id
+}
+
 type HistoricalEventHfNewPet struct {
 	Coords         string `json:"coords" legend:"base"`
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
@@ -1016,6 +1324,9 @@ type HistoricalEventHfNewPet struct {
 	SiteId         int    `json:"siteId" legend:"base"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventHfNewPet) RelatedToHf(id int) bool { return x.GroupHfid == id }
+
 type HistoricalEventHfPerformedHorribleExperiments struct {
 	FeatureLayerId int `json:"featureLayerId" legend:"base"`
 	GroupHfid      int `json:"groupHfid" legend:"base"`
@@ -1023,6 +1334,11 @@ type HistoricalEventHfPerformedHorribleExperiments struct {
 	StructureId    int `json:"structureId" legend:"base"`
 	SubregionId    int `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToHf(id int) bool {
+	return x.GroupHfid == id
+}
+
 type HistoricalEventHfPrayedInsideStructure struct {
 	Action      string `json:"action" legend:"plus"`
 	HistFigId   int    `json:"histFigId" legend:"base"`
@@ -1032,6 +1348,9 @@ type HistoricalEventHfPrayedInsideStructure struct {
 	Structure   int    `json:"structure" legend:"plus"`
 	StructureId int    `json:"structureId" legend:"base"`
 }
+
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToHf(id int) bool { return x.Histfig == id }
+
 type HistoricalEventHfPreach struct {
 	Entity1     int    `json:"entity1" legend:"base"`
 	Entity2     int    `json:"entity2" legend:"base"`
@@ -1039,6 +1358,11 @@ type HistoricalEventHfPreach struct {
 	SpeakerHfid int    `json:"speakerHfid" legend:"base"`
 	Topic       string `json:"topic" legend:"base"`
 }
+
+func (x *HistoricalEventHfPreach) RelatedToHf(id int) bool {
+	return x.SiteHfid == id || x.SpeakerHfid == id
+}
+
 type HistoricalEventHfProfanedStructure struct {
 	Action      string `json:"action" legend:"plus"`
 	HistFigId   int    `json:"histFigId" legend:"base"`
@@ -1048,6 +1372,9 @@ type HistoricalEventHfProfanedStructure struct {
 	Structure   int    `json:"structure" legend:"plus"`
 	StructureId int    `json:"structureId" legend:"base"`
 }
+
+func (x *HistoricalEventHfProfanedStructure) RelatedToHf(id int) bool { return x.Histfig == id }
+
 type HistoricalEventHfRecruitedUnitTypeForEntity struct {
 	EntityId       int    `json:"entityId" legend:"base"`
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
@@ -1056,6 +1383,9 @@ type HistoricalEventHfRecruitedUnitTypeForEntity struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`
 	UnitType       string `json:"unitType" legend:"base"`
 }
+
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToHf(id int) bool { return x.Hfid == id }
+
 type HistoricalEventHfRelationshipDenied struct {
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
 	Reason         string `json:"reason" legend:"base"`
@@ -1066,6 +1396,11 @@ type HistoricalEventHfRelationshipDenied struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`
 	TargetHfid     int    `json:"targetHfid" legend:"base"`
 }
+
+func (x *HistoricalEventHfRelationshipDenied) RelatedToHf(id int) bool {
+	return x.TargetHfid == id || x.SeekerHfid == id
+}
+
 type HistoricalEventHfReunion struct {
 	FeatureLayerId int   `json:"featureLayerId" legend:"base"`
 	Group1Hfid     int   `json:"group1Hfid" legend:"base"`
@@ -1073,6 +1408,9 @@ type HistoricalEventHfReunion struct {
 	SiteId         int   `json:"siteId" legend:"base"`
 	SubregionId    int   `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventHfReunion) RelatedToHf(id int) bool { return x.Group1Hfid == id }
+
 type HistoricalEventHfRevived struct {
 	ActorHfid      int  `json:"actorHfid" legend:"base"`
 	Disturbance    bool `json:"disturbance" legend:"base"`
@@ -1081,6 +1419,9 @@ type HistoricalEventHfRevived struct {
 	SiteId         int  `json:"siteId" legend:"base"`
 	SubregionId    int  `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventHfRevived) RelatedToHf(id int) bool { return x.ActorHfid == id || x.Hfid == id }
+
 type HistoricalEventHfSimpleBattleEvent struct {
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
 	Group1Hfid     int    `json:"group1Hfid" legend:"base"`
@@ -1089,6 +1430,11 @@ type HistoricalEventHfSimpleBattleEvent struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`
 	Subtype        string `json:"subtype" legend:"base"`
 }
+
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToHf(id int) bool {
+	return x.Group1Hfid == id || x.Group2Hfid == id
+}
+
 type HistoricalEventHfTravel struct {
 	Coords         string `json:"coords" legend:"base"`
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
@@ -1097,12 +1443,18 @@ type HistoricalEventHfTravel struct {
 	SiteId         int    `json:"siteId" legend:"base"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventHfTravel) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventHfViewedArtifact struct {
 	ArtifactId  int `json:"artifactId" legend:"base"`
 	HistFigId   int `json:"histFigId" legend:"base"`
 	SiteId      int `json:"siteId" legend:"base"`
 	StructureId int `json:"structureId" legend:"base"`
 }
+
+func (x *HistoricalEventHfViewedArtifact) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventHfWounded struct {
 	BodyPart       int    `json:"bodyPart" legend:"plus"`
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
@@ -1118,6 +1470,11 @@ type HistoricalEventHfWounded struct {
 	Wounder        int    `json:"wounder" legend:"plus"`
 	WounderHfid    int    `json:"wounderHfid" legend:"base"`
 }
+
+func (x *HistoricalEventHfWounded) RelatedToHf(id int) bool {
+	return x.WoundeeHfid == id || x.WounderHfid == id
+}
+
 type HistoricalEventHfsFormedIntrigueRelationship struct {
 	Action                    string `json:"action" legend:"base"`
 	AllyDefenseBonus          int    `json:"allyDefenseBonus" legend:"base"`
@@ -1150,6 +1507,11 @@ type HistoricalEventHfsFormedIntrigueRelationship struct {
 	TopValueModifier          int    `json:"topValueModifier" legend:"base"`
 	TopValueRating            int    `json:"topValueRating" legend:"base"`
 }
+
+func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToHf(id int) bool {
+	return x.LureHfid == id || x.CorruptorHfid == id || x.TargetHfid == id
+}
+
 type HistoricalEventHfsFormedReputationRelationship struct {
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
 	HfRep1Of2      string `json:"hfRep1Of2" legend:"base"`
@@ -1161,10 +1523,18 @@ type HistoricalEventHfsFormedReputationRelationship struct {
 	SiteId         int    `json:"siteId" legend:"base"`
 	SubregionId    int    `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToHf(id int) bool {
+	return x.Hfid1 == id || x.Hfid2 == id
+}
+
 type HistoricalEventHolyCityDeclaration struct {
 	ReligionId int `json:"religionId" legend:"base"`
 	SiteId     int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventHolyCityDeclaration) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventItemStolen struct {
 	Circumstance   *HistoricalEventItemStolenCircumstance `json:"circumstance" legend:"both"`
 	CircumstanceId int                                    `json:"circumstanceId" legend:"base"`
@@ -1181,23 +1551,61 @@ type HistoricalEventItemStolen struct {
 	Structure      int                                    `json:"structure" legend:"plus"`
 	TheftMethod    string                                 `json:"theftMethod" legend:"plus"`
 }
+
+func (x *HistoricalEventItemStolen) RelatedToHf(id int) bool { return x.Histfig == id }
+
 type HistoricalEventItemStolenCircumstance struct {
 	Defeated            int    `json:"defeated" legend:"plus"`
 	HistEventCollection int    `json:"histEventCollection" legend:"plus"`
 	Murdered            int    `json:"murdered" legend:"plus"`
 	Type                string `json:"type" legend:"plus"`
 }
+
+func (x *HistoricalEventItemStolenCircumstance) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventKnowledgeDiscovered struct {
 	First     bool   `json:"first" legend:"base"`
 	Hfid      int    `json:"hfid" legend:"base"`
 	Knowledge string `json:"knowledge" legend:"base"`
 }
+
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToHf(id int) bool { return x.Hfid == id }
+
+type HistoricalEventMasterpieceItem struct {
+	EntityId    int    `json:"entityId" legend:"base"`
+	Hfid        int    `json:"hfid" legend:"base"`
+	ItemId      int    `json:"itemId" legend:"plus"`
+	ItemType    string `json:"itemType" legend:"plus"`
+	Maker       int    `json:"maker" legend:"plus"`
+	MakerEntity int    `json:"makerEntity" legend:"plus"`
+	Mat         string `json:"mat" legend:"plus"`
+	Site        int    `json:"site" legend:"plus"`
+	SiteId      int    `json:"siteId" legend:"base"`
+	SkillAtTime string `json:"skillAtTime" legend:"both"`
+}
+
+func (x *HistoricalEventMasterpieceItem) RelatedToHf(id int) bool { return x.Hfid == id }
+
+type HistoricalEventMerchant struct {
+	DepotEntityId  int `json:"depotEntityId" legend:"base"`
+	Destination    int `json:"destination" legend:"plus"`
+	Site           int `json:"site" legend:"plus"`
+	SiteId         int `json:"siteId" legend:"base"`
+	Source         int `json:"source" legend:"plus"`
+	TraderEntityId int `json:"traderEntityId" legend:"base"`
+}
+
+func (x *HistoricalEventMerchant) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventModifiedBuilding struct {
 	Modification string `json:"modification" legend:"base"`
 	ModifierHfid int    `json:"modifierHfid" legend:"base"`
 	SiteId       int    `json:"siteId" legend:"base"`
 	StructureId  int    `json:"structureId" legend:"base"`
 }
+
+func (x *HistoricalEventModifiedBuilding) RelatedToHf(id int) bool { return x.ModifierHfid == id }
+
 type HistoricalEventMusicalFormCreated struct {
 	Circumstance   string `json:"circumstance" legend:"base"`
 	CircumstanceId int    `json:"circumstanceId" legend:"base"`
@@ -1207,6 +1615,9 @@ type HistoricalEventMusicalFormCreated struct {
 	ReasonId       int    `json:"reasonId" legend:"base"`
 	SiteId         int    `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventMusicalFormCreated) RelatedToHf(id int) bool { return x.HistFigureId == id }
+
 type HistoricalEventNewSiteLeader struct {
 	AttackerCivId int `json:"attackerCivId" legend:"base"`
 	DefenderCivId int `json:"defenderCivId" legend:"base"`
@@ -1215,6 +1626,9 @@ type HistoricalEventNewSiteLeader struct {
 	SiteCivId     int `json:"siteCivId" legend:"base"`
 	SiteId        int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventNewSiteLeader) RelatedToHf(id int) bool { return x.NewLeaderHfid == id }
+
 type HistoricalEventPeaceAccepted struct {
 	Destination int    `json:"destination" legend:"plus"`
 	Site        int    `json:"site" legend:"plus"`
@@ -1222,6 +1636,9 @@ type HistoricalEventPeaceAccepted struct {
 	Source      int    `json:"source" legend:"plus"`
 	Topic       string `json:"topic" legend:"plus"`
 }
+
+func (x *HistoricalEventPeaceAccepted) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventPeaceRejected struct {
 	Destination int    `json:"destination" legend:"plus"`
 	Site        int    `json:"site" legend:"plus"`
@@ -1229,6 +1646,9 @@ type HistoricalEventPeaceRejected struct {
 	Source      int    `json:"source" legend:"plus"`
 	Topic       string `json:"topic" legend:"plus"`
 }
+
+func (x *HistoricalEventPeaceRejected) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventPerformance struct {
 	CivId          int `json:"civId" legend:"base"`
 	FeatureLayerId int `json:"featureLayerId" legend:"base"`
@@ -1237,6 +1657,9 @@ type HistoricalEventPerformance struct {
 	SiteId         int `json:"siteId" legend:"base"`
 	SubregionId    int `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventPerformance) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventPlunderedSite struct {
 	AttackerCivId int  `json:"attackerCivId" legend:"base"`
 	DefenderCivId int  `json:"defenderCivId" legend:"base"`
@@ -1244,12 +1667,18 @@ type HistoricalEventPlunderedSite struct {
 	SiteCivId     int  `json:"siteCivId" legend:"base"`
 	SiteId        int  `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventPlunderedSite) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventPoeticFormCreated struct {
 	Circumstance string `json:"circumstance" legend:"base"`
 	FormId       int    `json:"formId" legend:"base"`
 	HistFigureId int    `json:"histFigureId" legend:"base"`
 	SiteId       int    `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventPoeticFormCreated) RelatedToHf(id int) bool { return x.HistFigureId == id }
+
 type HistoricalEventProcession struct {
 	CivId          int `json:"civId" legend:"base"`
 	FeatureLayerId int `json:"featureLayerId" legend:"base"`
@@ -1258,16 +1687,25 @@ type HistoricalEventProcession struct {
 	SiteId         int `json:"siteId" legend:"base"`
 	SubregionId    int `json:"subregionId" legend:"base"`
 }
+
+func (x *HistoricalEventProcession) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventRazedStructure struct {
 	CivId       int `json:"civId" legend:"base"`
 	SiteId      int `json:"siteId" legend:"base"`
 	StructureId int `json:"structureId" legend:"base"`
 }
+
+func (x *HistoricalEventRazedStructure) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventReclaimSite struct {
 	CivId     int `json:"civId" legend:"base"`
 	SiteCivId int `json:"siteCivId" legend:"base"`
 	SiteId    int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventReclaimSite) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventRegionpopIncorporatedIntoEntity struct {
 	JoinEntityId   int `json:"joinEntityId" legend:"base"`
 	PopFlid        int `json:"popFlid" legend:"base"`
@@ -1276,6 +1714,9 @@ type HistoricalEventRegionpopIncorporatedIntoEntity struct {
 	PopSrid        int `json:"popSrid" legend:"base"`
 	SiteId         int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventRelationship struct {
 	Event        int    `json:"event" legend:"plus"`
 	Relationship string `json:"relationship" legend:"plus"`
@@ -1283,12 +1724,20 @@ type HistoricalEventRelationship struct {
 	TargetHf     int    `json:"targetHf" legend:"plus"`
 	Year         int    `json:"year" legend:"plus"`
 }
+
+func (x *HistoricalEventRelationship) RelatedToHf(id int) bool {
+	return x.SourceHf == id || x.TargetHf == id
+}
+
 type HistoricalEventRelationshipSupplement struct {
 	Event        int `json:"event" legend:"plus"`
 	OccasionType int `json:"occasionType" legend:"plus"`
 	Site         int `json:"site" legend:"plus"`
 	Unk1         int `json:"unk1" legend:"plus"`
 }
+
+func (x *HistoricalEventRelationshipSupplement) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventRemoveHfEntityLink struct {
 	Civ        int    `json:"civ" legend:"plus"`
 	CivId      int    `json:"civId" legend:"base"`
@@ -1299,10 +1748,20 @@ type HistoricalEventRemoveHfEntityLink struct {
 	Position   string `json:"position" legend:"plus"`
 	PositionId int    `json:"positionId" legend:"base"`
 }
+
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToHf(id int) bool {
+	return x.Hfid == id || x.Histfig == id
+}
+
 type HistoricalEventRemoveHfHfLink struct {
 	Hfid       int `json:"hfid" legend:"base"`
 	HfidTarget int `json:"hfidTarget" legend:"base"`
 }
+
+func (x *HistoricalEventRemoveHfHfLink) RelatedToHf(id int) bool {
+	return x.Hfid == id || x.HfidTarget == id
+}
+
 type HistoricalEventRemoveHfSiteLink struct {
 	Civ       int    `json:"civ" legend:"plus"`
 	Histfig   int    `json:"histfig" legend:"plus"`
@@ -1311,6 +1770,9 @@ type HistoricalEventRemoveHfSiteLink struct {
 	SiteId    int    `json:"siteId" legend:"base"`
 	Structure int    `json:"structure" legend:"plus"`
 }
+
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToHf(id int) bool { return x.Histfig == id }
+
 type HistoricalEventReplacedStructure struct {
 	Civ          int `json:"civ" legend:"plus"`
 	CivId        int `json:"civId" legend:"base"`
@@ -1323,6 +1785,9 @@ type HistoricalEventReplacedStructure struct {
 	SiteCivId    int `json:"siteCivId" legend:"base"`
 	SiteId       int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventReplacedStructure) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventSiteDispute struct {
 	Dispute   string `json:"dispute" legend:"base"`
 	EntityId1 int    `json:"entityId1" legend:"base"`
@@ -1330,6 +1795,9 @@ type HistoricalEventSiteDispute struct {
 	SiteId1   int    `json:"siteId1" legend:"base"`
 	SiteId2   int    `json:"siteId2" legend:"base"`
 }
+
+func (x *HistoricalEventSiteDispute) RelatedToHf(id int) bool { return false }
+
 type HistoricalEventSiteTakenOver struct {
 	AttackerCivId int `json:"attackerCivId" legend:"base"`
 	DefenderCivId int `json:"defenderCivId" legend:"base"`
@@ -1337,6 +1805,43 @@ type HistoricalEventSiteTakenOver struct {
 	SiteCivId     int `json:"siteCivId" legend:"base"`
 	SiteId        int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalEventSiteTakenOver) RelatedToHf(id int) bool { return false }
+
+type HistoricalEventSquadVsSquad struct {
+	AHfid          int `json:"aHfid" legend:"base"`
+	ASquadId       int `json:"aSquadId" legend:"base"`
+	DEffect        int `json:"dEffect" legend:"base"`
+	DInteraction   int `json:"dInteraction" legend:"base"`
+	DNumber        int `json:"dNumber" legend:"base"`
+	DRace          int `json:"dRace" legend:"base"`
+	DSlain         int `json:"dSlain" legend:"base"`
+	DSquadId       int `json:"dSquadId" legend:"base"`
+	FeatureLayerId int `json:"featureLayerId" legend:"base"`
+	SiteId         int `json:"siteId" legend:"base"`
+	StructureId    int `json:"structureId" legend:"base"`
+	SubregionId    int `json:"subregionId" legend:"base"`
+}
+
+func (x *HistoricalEventSquadVsSquad) RelatedToHf(id int) bool { return x.AHfid == id }
+
+type HistoricalEventTacticalSituation struct {
+	ATacticianHfid int    `json:"aTacticianHfid" legend:"base"`
+	ATacticsRoll   int    `json:"aTacticsRoll" legend:"base"`
+	DTacticianHfid int    `json:"dTacticianHfid" legend:"base"`
+	DTacticsRoll   int    `json:"dTacticsRoll" legend:"base"`
+	FeatureLayerId int    `json:"featureLayerId" legend:"base"`
+	SiteId         int    `json:"siteId" legend:"base"`
+	Situation      string `json:"situation" legend:"base"`
+	Start          bool   `json:"start" legend:"base"`
+	StructureId    int    `json:"structureId" legend:"base"`
+	SubregionId    int    `json:"subregionId" legend:"base"`
+}
+
+func (x *HistoricalEventTacticalSituation) RelatedToHf(id int) bool {
+	return x.ATacticianHfid == id || x.DTacticianHfid == id
+}
+
 type HistoricalEventTrade struct {
 	AccountShift     int `json:"accountShift" legend:"base"`
 	Allotment        int `json:"allotment" legend:"base"`
@@ -1347,6 +1852,9 @@ type HistoricalEventTrade struct {
 	TraderEntityId   int `json:"traderEntityId" legend:"base"`
 	TraderHfid       int `json:"traderHfid" legend:"base"`
 }
+
+func (x *HistoricalEventTrade) RelatedToHf(id int) bool { return x.TraderHfid == id }
+
 type HistoricalEventWrittenContentComposed struct {
 	Circumstance   string `json:"circumstance" legend:"base"`
 	CircumstanceId int    `json:"circumstanceId" legend:"base"`
@@ -1357,6 +1865,9 @@ type HistoricalEventWrittenContentComposed struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`
 	WcId           int    `json:"wcId" legend:"base"`
 }
+
+func (x *HistoricalEventWrittenContentComposed) RelatedToHf(id int) bool { return x.HistFigureId == id }
+
 type HistoricalFigure struct {
 	ActiveInteraction               []string                           `json:"activeInteraction" legend:"base"`
 	Animated                        bool                               `json:"animated" legend:"base"`
@@ -1399,18 +1910,25 @@ type HistoricalFigure struct {
 	VagueRelationship               []*VagueRelationship               `json:"vagueRelationship" legend:"base"`
 }
 
-func (x *HistoricalFigure) Id() int      { return x.Id_ }
-func (x *HistoricalFigure) Name() string { return x.Name_ }
+func (x *HistoricalFigure) Id() int                 { return x.Id_ }
+func (x *HistoricalFigure) Name() string            { return x.Name_ }
+func (x *HistoricalFigure) RelatedToHf(id int) bool { return false }
 
 type HistoricalFigureEntityLink struct {
 	EntityId     int    `json:"entityId" legend:"base"`
 	LinkStrength int    `json:"linkStrength" legend:"base"`
 	LinkType     string `json:"linkType" legend:"base"`
 }
+
+func (x *HistoricalFigureEntityLink) RelatedToHf(id int) bool { return false }
+
 type HistoricalFigureSiteProperty struct {
 	PropertyId int `json:"propertyId" legend:"base"`
 	SiteId     int `json:"siteId" legend:"base"`
 }
+
+func (x *HistoricalFigureSiteProperty) RelatedToHf(id int) bool { return false }
+
 type Honor struct {
 	ExemptEpid                    int    `json:"exemptEpid" legend:"base"`
 	ExemptFormerEpid              int    `json:"exemptFormerEpid" legend:"base"`
@@ -1426,8 +1944,9 @@ type Honor struct {
 	RequiresAnyMeleeOrRangedSkill bool   `json:"requiresAnyMeleeOrRangedSkill" legend:"base"`
 }
 
-func (x *Honor) Id() int      { return x.Id_ }
-func (x *Honor) Name() string { return x.Name_ }
+func (x *Honor) Id() int                 { return x.Id_ }
+func (x *Honor) Name() string            { return x.Name_ }
+func (x *Honor) RelatedToHf(id int) bool { return false }
 
 type HonorEntity struct {
 	Battles int   `json:"battles" legend:"base"`
@@ -1435,6 +1954,9 @@ type HonorEntity struct {
 	HonorId []int `json:"honorId" legend:"base"`
 	Kills   int   `json:"kills" legend:"base"`
 }
+
+func (x *HonorEntity) RelatedToHf(id int) bool { return false }
+
 type Identity struct {
 	BirthSecond int    `json:"birthSecond" legend:"plus"`
 	BirthYear   int    `json:"birthYear" legend:"plus"`
@@ -1448,8 +1970,9 @@ type Identity struct {
 	Race        string `json:"race" legend:"plus"`
 }
 
-func (x *Identity) Id() int      { return x.Id_ }
-func (x *Identity) Name() string { return x.Name_ }
+func (x *Identity) Id() int                 { return x.Id_ }
+func (x *Identity) Name() string            { return x.Name_ }
+func (x *Identity) RelatedToHf(id int) bool { return x.HistfigId == id }
 
 type IntrigueActor struct {
 	EntityId                 int    `json:"entityId" legend:"base"`
@@ -1463,25 +1986,36 @@ type IntrigueActor struct {
 	StrategyEnid             int    `json:"strategyEnid" legend:"base"`
 	StrategyEppid            int    `json:"strategyEppid" legend:"base"`
 }
+
+func (x *IntrigueActor) RelatedToHf(id int) bool { return x.Hfid == id }
+
 type IntriguePlot struct {
-	ActorId           int          `json:"actorId" legend:"base"`
-	ArtifactId        int          `json:"artifactId" legend:"base"`
-	DelegatedPlotHfid int          `json:"delegatedPlotHfid" legend:"base"`
-	DelegatedPlotId   int          `json:"delegatedPlotId" legend:"base"`
-	EntityId          int          `json:"entityId" legend:"base"`
-	LocalId           int          `json:"localId" legend:"base"`
-	OnHold            bool         `json:"onHold" legend:"base"`
-	ParentPlotHfid    int          `json:"parentPlotHfid" legend:"base"`
-	ParentPlotId      int          `json:"parentPlotId" legend:"base"`
-	PlotActor         []*PlotActor `json:"plotActor" legend:"base"`
-	Type              string       `json:"type" legend:"base"`
+	ActorId           int        `json:"actorId" legend:"base"`
+	ArtifactId        int        `json:"artifactId" legend:"base"`
+	DelegatedPlotHfid int        `json:"delegatedPlotHfid" legend:"base"`
+	DelegatedPlotId   int        `json:"delegatedPlotId" legend:"base"`
+	EntityId          int        `json:"entityId" legend:"base"`
+	LocalId           int        `json:"localId" legend:"base"`
+	OnHold            bool       `json:"onHold" legend:"base"`
+	ParentPlotHfid    int        `json:"parentPlotHfid" legend:"base"`
+	ParentPlotId      int        `json:"parentPlotId" legend:"base"`
+	PlotActor         *PlotActor `json:"plotActor" legend:"base"`
+	Type              string     `json:"type" legend:"base"`
 }
+
+func (x *IntriguePlot) RelatedToHf(id int) bool {
+	return x.ParentPlotHfid == id || x.DelegatedPlotHfid == id
+}
+
 type Item struct {
 	NameString              string `json:"nameString" legend:"base"`
 	PageNumber              int    `json:"pageNumber" legend:"base"`
 	PageWrittenContentId    int    `json:"pageWrittenContentId" legend:"base"`
 	WritingWrittenContentId int    `json:"writingWrittenContentId" legend:"base"`
 }
+
+func (x *Item) RelatedToHf(id int) bool { return false }
+
 type Landmass struct {
 	Coord1 string `json:"coord1" legend:"plus"`
 	Coord2 string `json:"coord2" legend:"plus"`
@@ -1489,8 +2023,9 @@ type Landmass struct {
 	Name_  string `json:"name" legend:"plus"`
 }
 
-func (x *Landmass) Id() int      { return x.Id_ }
-func (x *Landmass) Name() string { return x.Name_ }
+func (x *Landmass) Id() int                 { return x.Id_ }
+func (x *Landmass) Name() string            { return x.Name_ }
+func (x *Landmass) RelatedToHf(id int) bool { return false }
 
 type MountainPeak struct {
 	Coords    string `json:"coords" legend:"plus"`
@@ -1500,8 +2035,9 @@ type MountainPeak struct {
 	Name_     string `json:"name" legend:"plus"`
 }
 
-func (x *MountainPeak) Id() int      { return x.Id_ }
-func (x *MountainPeak) Name() string { return x.Name_ }
+func (x *MountainPeak) Id() int                 { return x.Id_ }
+func (x *MountainPeak) Name() string            { return x.Name_ }
+func (x *MountainPeak) RelatedToHf(id int) bool { return false }
 
 type MusicalForm struct {
 	Description string `json:"description" legend:"base"`
@@ -1509,8 +2045,9 @@ type MusicalForm struct {
 	Name_       string `json:"name" legend:"plus"`
 }
 
-func (x *MusicalForm) Id() int      { return x.Id_ }
-func (x *MusicalForm) Name() string { return x.Name_ }
+func (x *MusicalForm) Id() int                 { return x.Id_ }
+func (x *MusicalForm) Name() string            { return x.Name_ }
+func (x *MusicalForm) RelatedToHf(id int) bool { return false }
 
 type Occasion struct {
 	Event    int         `json:"event" legend:"plus"`
@@ -1519,8 +2056,9 @@ type Occasion struct {
 	Schedule []*Schedule `json:"schedule" legend:"plus"`
 }
 
-func (x *Occasion) Id() int      { return x.Id_ }
-func (x *Occasion) Name() string { return x.Name_ }
+func (x *Occasion) Id() int                 { return x.Id_ }
+func (x *Occasion) Name() string            { return x.Name_ }
+func (x *Occasion) RelatedToHf(id int) bool { return false }
 
 type PlotActor struct {
 	ActorId               int    `json:"actorId" legend:"base"`
@@ -1528,21 +2066,26 @@ type PlotActor struct {
 	AgreementId           int    `json:"agreementId" legend:"base"`
 	PlotRole              string `json:"plotRole" legend:"base"`
 }
+
+func (x *PlotActor) RelatedToHf(id int) bool { return false }
+
 type PoeticForm struct {
 	Description string `json:"description" legend:"base"`
 	Id_         int    `json:"id" legend:"both"`
 	Name_       string `json:"name" legend:"plus"`
 }
 
-func (x *PoeticForm) Id() int      { return x.Id_ }
-func (x *PoeticForm) Name() string { return x.Name_ }
+func (x *PoeticForm) Id() int                 { return x.Id_ }
+func (x *PoeticForm) Name() string            { return x.Name_ }
+func (x *PoeticForm) RelatedToHf(id int) bool { return false }
 
 type Reference struct {
 	Id_  int    `json:"id" legend:"plus"`
 	Type string `json:"type" legend:"plus"`
 }
 
-func (x *Reference) Id() int { return x.Id_ }
+func (x *Reference) Id() int                 { return x.Id_ }
+func (x *Reference) RelatedToHf(id int) bool { return false }
 
 type Region struct {
 	Coords   string `json:"coords" legend:"plus"`
@@ -1553,8 +2096,9 @@ type Region struct {
 	Type     string `json:"type" legend:"base"`
 }
 
-func (x *Region) Id() int      { return x.Id_ }
-func (x *Region) Name() string { return x.Name_ }
+func (x *Region) Id() int                 { return x.Id_ }
+func (x *Region) Name() string            { return x.Name_ }
+func (x *Region) RelatedToHf(id int) bool { return false }
 
 type RelationshipProfileHfHistorical struct {
 	Fear    int `json:"fear" legend:"base"`
@@ -1564,6 +2108,9 @@ type RelationshipProfileHfHistorical struct {
 	Respect int `json:"respect" legend:"base"`
 	Trust   int `json:"trust" legend:"base"`
 }
+
+func (x *RelationshipProfileHfHistorical) RelatedToHf(id int) bool { return x.HfId == id }
+
 type RelationshipProfileHfVisual struct {
 	Fear                 int `json:"fear" legend:"base"`
 	HfId                 int `json:"hfId" legend:"base"`
@@ -1578,13 +2125,17 @@ type RelationshipProfileHfVisual struct {
 	Respect              int `json:"respect" legend:"base"`
 	Trust                int `json:"trust" legend:"base"`
 }
+
+func (x *RelationshipProfileHfVisual) RelatedToHf(id int) bool { return x.HfId == id }
+
 type River struct {
 	EndPos string `json:"endPos" legend:"plus"`
 	Name_  string `json:"name" legend:"plus"`
 	Path   string `json:"path" legend:"plus"`
 }
 
-func (x *River) Name() string { return x.Name_ }
+func (x *River) Name() string            { return x.Name_ }
+func (x *River) RelatedToHf(id int) bool { return false }
 
 type Schedule struct {
 	Feature     []*Feature `json:"feature" legend:"plus"`
@@ -1596,7 +2147,8 @@ type Schedule struct {
 	Type        string     `json:"type" legend:"plus"`
 }
 
-func (x *Schedule) Id() int { return x.Id_ }
+func (x *Schedule) Id() int                 { return x.Id_ }
+func (x *Schedule) RelatedToHf(id int) bool { return false }
 
 type Site struct {
 	CivId          int                       `json:"civId" legend:"plus"`
@@ -1610,8 +2162,9 @@ type Site struct {
 	Type           string                    `json:"type" legend:"base"`
 }
 
-func (x *Site) Id() int      { return x.Id_ }
-func (x *Site) Name() string { return x.Name_ }
+func (x *Site) Id() int                 { return x.Id_ }
+func (x *Site) Name() string            { return x.Name_ }
+func (x *Site) RelatedToHf(id int) bool { return false }
 
 type SiteLink struct {
 	EntityId     int    `json:"entityId" legend:"base"`
@@ -1620,6 +2173,9 @@ type SiteLink struct {
 	SiteId       int    `json:"siteId" legend:"base"`
 	SubId        int    `json:"subId" legend:"base"`
 }
+
+func (x *SiteLink) RelatedToHf(id int) bool { return false }
+
 type SiteSiteProperty struct {
 	Id_         int    `json:"id" legend:"base"`
 	OwnerHfid   int    `json:"ownerHfid" legend:"base"`
@@ -1627,7 +2183,8 @@ type SiteSiteProperty struct {
 	Type        string `json:"type" legend:"base"`
 }
 
-func (x *SiteSiteProperty) Id() int { return x.Id_ }
+func (x *SiteSiteProperty) Id() int                 { return x.Id_ }
+func (x *SiteSiteProperty) RelatedToHf(id int) bool { return x.OwnerHfid == id }
 
 type Structure struct {
 	CopiedArtifactId []int  `json:"copiedArtifactId" legend:"base"`
@@ -1646,8 +2203,9 @@ type Structure struct {
 	WorshipHfid      int    `json:"worshipHfid" legend:"base"`
 }
 
-func (x *Structure) Id() int      { return x.Id_ }
-func (x *Structure) Name() string { return x.Name_ }
+func (x *Structure) Id() int                 { return x.Id_ }
+func (x *Structure) Name() string            { return x.Name_ }
+func (x *Structure) RelatedToHf(id int) bool { return x.WorshipHfid == id }
 
 type UndergroundRegion struct {
 	Coords string `json:"coords" legend:"plus"`
@@ -1656,7 +2214,8 @@ type UndergroundRegion struct {
 	Type   string `json:"type" legend:"base"`
 }
 
-func (x *UndergroundRegion) Id() int { return x.Id_ }
+func (x *UndergroundRegion) Id() int                 { return x.Id_ }
+func (x *UndergroundRegion) RelatedToHf(id int) bool { return false }
 
 type VagueRelationship struct {
 	ArtisticBuddy              bool `json:"artisticBuddy" legend:"base"`
@@ -1674,6 +2233,9 @@ type VagueRelationship struct {
 	SupernaturalGrudge         bool `json:"supernaturalGrudge" legend:"base"`
 	WarBuddy                   bool `json:"warBuddy" legend:"base"`
 }
+
+func (x *VagueRelationship) RelatedToHf(id int) bool { return x.Hfid == id }
+
 type WorldConstruction struct {
 	Coords string `json:"coords" legend:"plus"`
 	Id_    int    `json:"id" legend:"plus"`
@@ -1681,8 +2243,9 @@ type WorldConstruction struct {
 	Type   string `json:"type" legend:"plus"`
 }
 
-func (x *WorldConstruction) Id() int      { return x.Id_ }
-func (x *WorldConstruction) Name() string { return x.Name_ }
+func (x *WorldConstruction) Id() int                 { return x.Id_ }
+func (x *WorldConstruction) Name() string            { return x.Name_ }
+func (x *WorldConstruction) RelatedToHf(id int) bool { return false }
 
 type WrittenContent struct {
 	Author     int          `json:"author" legend:"plus"`
@@ -1699,7 +2262,8 @@ type WrittenContent struct {
 	Type       string       `json:"type" legend:"plus"`
 }
 
-func (x *WrittenContent) Id() int { return x.Id_ }
+func (x *WrittenContent) Id() int                 { return x.Id_ }
+func (x *WrittenContent) RelatedToHf(id int) bool { return x.AuthorHfid == id }
 
 // Parser
 
@@ -2795,20 +3359,20 @@ func parseEntityPlus(d *xml.Decoder, start *xml.StartElement, obj *Entity) (*Ent
 			case "claims":
 				data = nil
 			case "entity_link":
-				v, _ := parseEntityEntityLink(d, &t)
+				v, _ := parseEntityEntityLinkPlus(d, &t, &EntityEntityLink{})
 				obj.EntityLink = append(obj.EntityLink, v)
 			case "entity_position":
-				v, _ := parseEntityPosition(d, &t)
+				v, _ := parseEntityPositionPlus(d, &t, &EntityPosition{})
 				obj.EntityPosition = append(obj.EntityPosition, v)
 			case "entity_position_assignment":
-				v, _ := parseEntityPositionAssignment(d, &t)
+				v, _ := parseEntityPositionAssignmentPlus(d, &t, &EntityPositionAssignment{})
 				obj.EntityPositionAssignment = append(obj.EntityPositionAssignment, v)
 			case "histfig_id":
 				data = nil
 			case "id":
 				data = nil
 			case "occasion":
-				v, _ := parseOccasion(d, &t)
+				v, _ := parseOccasionPlus(d, &t, &Occasion{})
 				obj.Occasion = append(obj.Occasion, v)
 			case "profession":
 				data = nil
@@ -4074,6 +4638,10 @@ func parseHistoricalEvent(d *xml.Decoder, start *xml.StartElement) (*HistoricalE
 					obj.Details, err = parseHistoricalEventItemStolen(d, start)
 				case "knowledge discovered":
 					obj.Details, err = parseHistoricalEventKnowledgeDiscovered(d, start)
+				case "masterpiece item":
+					obj.Details, err = parseHistoricalEventMasterpieceItem(d, start)
+				case "merchant":
+					obj.Details, err = parseHistoricalEventMerchant(d, start)
 				case "modified building":
 					obj.Details, err = parseHistoricalEventModifiedBuilding(d, start)
 				case "musical form created":
@@ -4110,6 +4678,10 @@ func parseHistoricalEvent(d *xml.Decoder, start *xml.StartElement) (*HistoricalE
 					obj.Details, err = parseHistoricalEventSiteDispute(d, start)
 				case "site taken over":
 					obj.Details, err = parseHistoricalEventSiteTakenOver(d, start)
+				case "squad vs squad":
+					obj.Details, err = parseHistoricalEventSquadVsSquad(d, start)
+				case "tactical situation":
+					obj.Details, err = parseHistoricalEventTacticalSituation(d, start)
 				case "trade":
 					obj.Details, err = parseHistoricalEventTrade(d, start)
 				case "written content composed":
@@ -4195,22 +4767,22 @@ func parseHistoricalEventPlus(d *xml.Decoder, start *xml.StartElement, obj *Hist
 					obj.Details, err = parseHistoricalEventCreatureDevouredPlus(d, start, obj.Details.(*HistoricalEventCreatureDevoured))
 				case "entity_action":
 					switch details := obj.Details.(type) {
-					case *HistoricalEventEntityPrimaryCriminals:
-						obj.Details, err = parseHistoricalEventEntityPrimaryCriminalsPlus(d, start, details)
 					case *HistoricalEventEntityRelocate:
 						obj.Details, err = parseHistoricalEventEntityRelocatePlus(d, start, details)
+					case *HistoricalEventEntityPrimaryCriminals:
+						obj.Details, err = parseHistoricalEventEntityPrimaryCriminalsPlus(d, start, details)
 					default:
 						fmt.Println("unknown subtype option", obj.Details)
 						d.Skip()
 					}
 				case "hf_act_on_building":
 					switch details := obj.Details.(type) {
+					case *HistoricalEventHfPrayedInsideStructure:
+						obj.Details, err = parseHistoricalEventHfPrayedInsideStructurePlus(d, start, details)
 					case *HistoricalEventHfDisturbedStructure:
 						obj.Details, err = parseHistoricalEventHfDisturbedStructurePlus(d, start, details)
 					case *HistoricalEventHfProfanedStructure:
 						obj.Details, err = parseHistoricalEventHfProfanedStructurePlus(d, start, details)
-					case *HistoricalEventHfPrayedInsideStructure:
-						obj.Details, err = parseHistoricalEventHfPrayedInsideStructurePlus(d, start, details)
 					default:
 						fmt.Println("unknown subtype option", obj.Details)
 						d.Skip()
@@ -4227,6 +4799,10 @@ func parseHistoricalEventPlus(d *xml.Decoder, start *xml.StartElement, obj *Hist
 					obj.Details, err = parseHistoricalEventHfWoundedPlus(d, start, obj.Details.(*HistoricalEventHfWounded))
 				case "item_stolen":
 					obj.Details, err = parseHistoricalEventItemStolenPlus(d, start, obj.Details.(*HistoricalEventItemStolen))
+				case "masterpiece_created_item":
+					obj.Details, err = parseHistoricalEventMasterpieceItemPlus(d, start, obj.Details.(*HistoricalEventMasterpieceItem))
+				case "merchant":
+					obj.Details, err = parseHistoricalEventMerchantPlus(d, start, obj.Details.(*HistoricalEventMerchant))
 				case "remove_hf_entity_link":
 					obj.Details, err = parseHistoricalEventRemoveHfEntityLinkPlus(d, start, obj.Details.(*HistoricalEventRemoveHfEntityLink))
 				case "remove_hf_site_link":
@@ -5053,7 +5629,7 @@ func parseHistoricalEventArtifactCreatedPlus(d *xml.Decoder, start *xml.StartEle
 			case "artifact_id":
 				data = nil
 			case "circumstance":
-				v, _ := parseHistoricalEventArtifactCreatedCircumstance(d, &t)
+				v, _ := parseHistoricalEventArtifactCreatedCircumstancePlus(d, &t, &HistoricalEventArtifactCreatedCircumstance{})
 				obj.Circumstance = v
 			case "creator_hfid":
 				data = nil
@@ -11280,7 +11856,11 @@ func parseHistoricalEventHfDiedPlus(d *xml.Decoder, start *xml.StartElement, obj
 				data = nil
 			case "item":
 				data = nil
+			case "item_subtype":
+				data = nil
 			case "item_type":
+				data = nil
+			case "mat":
 				data = nil
 			case "site":
 				data = nil
@@ -11312,8 +11892,12 @@ func parseHistoricalEventHfDiedPlus(d *xml.Decoder, start *xml.StartElement, obj
 				obj.DeathCause = string(data)
 			case "item":
 				obj.Item = n(data)
+			case "item_subtype":
+				obj.ItemSubtype = string(data)
 			case "item_type":
 				obj.ItemType = string(data)
+			case "mat":
+				obj.Mat = string(data)
 			case "site":
 				obj.Site = n(data)
 			case "slayer_caste":
@@ -13672,7 +14256,7 @@ func parseHistoricalEventItemStolenPlus(d *xml.Decoder, start *xml.StartElement,
 		case xml.StartElement:
 			switch t.Name.Local {
 			case "circumstance":
-				v, _ := parseHistoricalEventItemStolenCircumstance(d, &t)
+				v, _ := parseHistoricalEventItemStolenCircumstancePlus(d, &t, &HistoricalEventItemStolenCircumstance{})
 				obj.Circumstance = v
 			case "entity":
 				data = nil
@@ -13906,6 +14490,214 @@ func parseHistoricalEventKnowledgeDiscoveredPlus(d *xml.Decoder, start *xml.Star
 			}
 
 			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventMasterpieceItem(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventMasterpieceItem, error) {
+	var (
+		obj  = &HistoricalEventMasterpieceItem{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "entity_id":
+				data = nil
+			case "hfid":
+				data = nil
+			case "site_id":
+				data = nil
+			case "skill_at_time":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "entity_id":
+				obj.EntityId = n(data)
+			case "hfid":
+				obj.Hfid = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "skill_at_time":
+				obj.SkillAtTime = string(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventMasterpieceItemPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventMasterpieceItem) (*HistoricalEventMasterpieceItem, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventMasterpieceItem{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "item_id":
+				data = nil
+			case "item_type":
+				data = nil
+			case "maker":
+				data = nil
+			case "maker_entity":
+				data = nil
+			case "mat":
+				data = nil
+			case "site":
+				data = nil
+			case "skill_at_time":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "item_id":
+				obj.ItemId = n(data)
+			case "item_type":
+				obj.ItemType = string(data)
+			case "maker":
+				obj.Maker = n(data)
+			case "maker_entity":
+				obj.MakerEntity = n(data)
+			case "mat":
+				obj.Mat = string(data)
+			case "site":
+				obj.Site = n(data)
+			case "skill_at_time":
+				obj.SkillAtTime = string(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventMerchant(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventMerchant, error) {
+	var (
+		obj  = &HistoricalEventMerchant{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "depot_entity_id":
+				data = nil
+			case "site_id":
+				data = nil
+			case "trader_entity_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "depot_entity_id":
+				obj.DepotEntityId = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "trader_entity_id":
+				obj.TraderEntityId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventMerchantPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventMerchant) (*HistoricalEventMerchant, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventMerchant{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "destination":
+				data = nil
+			case "site":
+				data = nil
+			case "source":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "destination":
+				obj.Destination = n(data)
+			case "site":
+				obj.Site = n(data)
+			case "source":
+				obj.Source = n(data)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -15732,6 +16524,234 @@ func parseHistoricalEventSiteTakenOverPlus(d *xml.Decoder, start *xml.StartEleme
 		}
 	}
 }
+func parseHistoricalEventSquadVsSquad(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventSquadVsSquad, error) {
+	var (
+		obj  = &HistoricalEventSquadVsSquad{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "a_hfid":
+				data = nil
+			case "a_squad_id":
+				data = nil
+			case "d_effect":
+				data = nil
+			case "d_interaction":
+				data = nil
+			case "d_number":
+				data = nil
+			case "d_race":
+				data = nil
+			case "d_slain":
+				data = nil
+			case "d_squad_id":
+				data = nil
+			case "feature_layer_id":
+				data = nil
+			case "site_id":
+				data = nil
+			case "structure_id":
+				data = nil
+			case "subregion_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "a_hfid":
+				obj.AHfid = n(data)
+			case "a_squad_id":
+				obj.ASquadId = n(data)
+			case "d_effect":
+				obj.DEffect = n(data)
+			case "d_interaction":
+				obj.DInteraction = n(data)
+			case "d_number":
+				obj.DNumber = n(data)
+			case "d_race":
+				obj.DRace = n(data)
+			case "d_slain":
+				obj.DSlain = n(data)
+			case "d_squad_id":
+				obj.DSquadId = n(data)
+			case "feature_layer_id":
+				obj.FeatureLayerId = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "structure_id":
+				obj.StructureId = n(data)
+			case "subregion_id":
+				obj.SubregionId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventSquadVsSquadPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventSquadVsSquad) (*HistoricalEventSquadVsSquad, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventSquadVsSquad{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventTacticalSituation(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventTacticalSituation, error) {
+	var (
+		obj  = &HistoricalEventTacticalSituation{}
+		data []byte
+	)
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "a_tactician_hfid":
+				data = nil
+			case "a_tactics_roll":
+				data = nil
+			case "d_tactician_hfid":
+				data = nil
+			case "d_tactics_roll":
+				data = nil
+			case "feature_layer_id":
+				data = nil
+			case "site_id":
+				data = nil
+			case "situation":
+				data = nil
+			case "start":
+				data = nil
+			case "structure_id":
+				data = nil
+			case "subregion_id":
+				data = nil
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			case "a_tactician_hfid":
+				obj.ATacticianHfid = n(data)
+			case "a_tactics_roll":
+				obj.ATacticsRoll = n(data)
+			case "d_tactician_hfid":
+				obj.DTacticianHfid = n(data)
+			case "d_tactics_roll":
+				obj.DTacticsRoll = n(data)
+			case "feature_layer_id":
+				obj.FeatureLayerId = n(data)
+			case "site_id":
+				obj.SiteId = n(data)
+			case "situation":
+				obj.Situation = string(data)
+			case "start":
+				obj.Start = true
+			case "structure_id":
+				obj.StructureId = n(data)
+			case "subregion_id":
+				obj.SubregionId = n(data)
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
+func parseHistoricalEventTacticalSituationPlus(d *xml.Decoder, start *xml.StartElement, obj *HistoricalEventTacticalSituation) (*HistoricalEventTacticalSituation, error) {
+	var (
+		data []byte
+	)
+	if obj == nil {
+		obj = &HistoricalEventTacticalSituation{}
+	}
+
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+				d.Skip()
+			}
+
+		case xml.CharData:
+			data = append(data, t...)
+
+		case xml.EndElement:
+			if t.Name.Local == start.Name.Local {
+				return obj, nil
+			}
+
+			switch t.Name.Local {
+			default:
+				// fmt.Println("unknown field", t.Name.Local)
+			}
+		}
+	}
+}
 func parseHistoricalEventTrade(d *xml.Decoder, start *xml.StartElement) (*HistoricalEventTrade, error) {
 	var (
 		obj  = &HistoricalEventTrade{}
@@ -16803,7 +17823,7 @@ func parseIntriguePlot(d *xml.Decoder, start *xml.StartElement) (*IntriguePlot, 
 				data = nil
 			case "plot_actor":
 				v, _ := parsePlotActor(d, &t)
-				obj.PlotActor = append(obj.PlotActor, v)
+				obj.PlotActor = v
 			case "type":
 				data = nil
 			default:
@@ -17289,7 +18309,7 @@ func parseOccasionPlus(d *xml.Decoder, start *xml.StartElement, obj *Occasion) (
 			case "name":
 				data = nil
 			case "schedule":
-				v, _ := parseSchedule(d, &t)
+				v, _ := parseSchedulePlus(d, &t, &Schedule{})
 				obj.Schedule = append(obj.Schedule, v)
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
@@ -18012,7 +19032,7 @@ func parseSchedulePlus(d *xml.Decoder, start *xml.StartElement, obj *Schedule) (
 		case xml.StartElement:
 			switch t.Name.Local {
 			case "feature":
-				v, _ := parseFeature(d, &t)
+				v, _ := parseFeaturePlus(d, &t, &Feature{})
 				obj.Feature = append(obj.Feature, v)
 			case "id":
 				data = nil
@@ -18860,7 +19880,7 @@ func parseWrittenContentPlus(d *xml.Decoder, start *xml.StartElement, obj *Writt
 			case "page_start":
 				data = nil
 			case "reference":
-				v, _ := parseReference(d, &t)
+				v, _ := parseReferencePlus(d, &t, &Reference{})
 				obj.Reference = append(obj.Reference, v)
 			case "style":
 				data = nil

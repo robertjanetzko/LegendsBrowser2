@@ -1,0 +1,7 @@
+<ul>
+    {{- range $event := events . }}
+    <li>
+        {{ $event.Id }} in of {{ $event.Year }} {{ json $event.Details }}
+    </li>
+    {{- end}}
+</ul>

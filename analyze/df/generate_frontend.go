@@ -61,6 +61,9 @@ func (f Field) JsonTypeLine() string {
 	if f.Type == "int" {
 		t = "number"
 	}
+	if f.Type == "bool" {
+		t = "boolean"
+	}
 	if f.Type == "array" {
 		t = *f.ElementType + "[]"
 	}

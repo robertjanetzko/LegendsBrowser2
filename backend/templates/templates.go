@@ -2,6 +2,7 @@ package templates
 
 import (
 	"embed"
+	"fmt"
 	"html/template"
 	"io"
 )
@@ -23,10 +24,10 @@ func New(funcMap template.FuncMap) *Template {
 }
 
 func NewDebug(funcMap template.FuncMap) *Template {
-	templates := template.Must(template.New("").Funcs(funcMap).ParseGlob("templates/*.html"))
+	ts := template.Must(template.New("").Funcs(funcMap).ParseGlob("templates/*.html"))
 	return &Template{
 		funcMap:   funcMap,
-		templates: templates,
+		templates: ts,
 	}
 }
 
@@ -34,7 +35,12 @@ var DebugTemplates = true
 
 func (t *Template) Render(w io.Writer, name string, data interface{}) error {
 	if DebugTemplates {
-		return NewDebug(t.funcMap).templates.ExecuteTemplate(w, name, data)
+		fmt.Println("RENDER", name)
+		tmpl := NewDebug(t.funcMap).templates
+		tmpl = template.Must(tmpl.ParseFiles("templates/" + name))
+		return tmpl.ExecuteTemplate(w, name, data)
 	}
-	return t.templates.ExecuteTemplate(w, name, data)
+	tmpl := template.Must(t.templates.Clone())
+	tmpl = template.Must(tmpl.ParseFS(templateFS, name))
+	return tmpl.ExecuteTemplate(w, name, data)
 }

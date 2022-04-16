@@ -17,7 +17,6 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/pkg/profile"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
-	"github.com/robertjanetzko/LegendsBrowser2/backend/server"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/templates"
 )
 
@@ -62,6 +61,21 @@ func main() {
 		},
 		"getHf":     func(id int) *model.HistoricalFigure { return world.HistoricalFigures[id] },
 		"getEntity": func(id int) *model.Entity { return world.Entities[id] },
+		"events": func(obj model.Identifiable) []*model.HistoricalEvent {
+			id := obj.Id()
+			var list []*model.HistoricalEvent
+			switch obj.(type) {
+			case *model.HistoricalFigure:
+				for _, e := range world.HistoricalEvents {
+					if e.Details.RelatedToHf(id) {
+						list = append(list, e)
+					}
+				}
+			default:
+				fmt.Printf("unknown type %T\n", obj)
+			}
+			return list
+		},
 	}
 	t := templates.New(functions)
 
@@ -100,22 +114,23 @@ func main() {
 		// model.ListOtherElements("poeticForm", &world.PoeticForms)
 		// model.ListOtherElements("written", &world.WrittenContents)
 
-		server.RegisterResource(router, "region", world.Regions)
-		// server.RegisterResource(router, "undergroundRegion", world.UndergroundRegions)
-		server.RegisterResource(router, "landmass", world.Landmasses)
-		server.RegisterResource(router, "site", world.Sites)
-		server.RegisterResource(router, "worldConstruction", world.WorldConstructions)
-		server.RegisterResource(router, "artifact", world.Artifacts)
-		server.RegisterResource(router, "hf", world.HistoricalFigures)
-		server.RegisterResource(router, "collection", world.HistoricalEventCollections)
-		server.RegisterResource(router, "entity", world.Entities)
-		server.RegisterResource(router, "event", world.HistoricalEvents)
-		// server.RegisterResource(router, "era", world.HistoricalEras)
-		server.RegisterResource(router, "danceForm", world.DanceForms)
-		server.RegisterResource(router, "musicalForm", world.MusicalForms)
-		server.RegisterResource(router, "poeticForm", world.PoeticForms)
+		// server.RegisterResource(router, "region", world.Regions)
+		// // server.RegisterResource(router, "undergroundRegion", world.UndergroundRegions)
+		// server.RegisterResource(router, "landmass", world.Landmasses)
+		// server.RegisterResource(router, "site", world.Sites)
+		// server.RegisterResource(router, "worldConstruction", world.WorldConstructions)
+		// server.RegisterResource(router, "artifact", world.Artifacts)
+		// server.RegisterResource(router, "hf", world.HistoricalFigures)
+		// server.RegisterResource(router, "collection", world.HistoricalEventCollections)
+		// server.RegisterResource(router, "entity", world.Entities)
+		// server.RegisterResource(router, "event", world.HistoricalEvents)
+		// // server.RegisterResource(router, "era", world.HistoricalEras)
+		// server.RegisterResource(router, "danceForm", world.DanceForms)
+		// server.RegisterResource(router, "musicalForm", world.MusicalForms)
+		// server.RegisterResource(router, "poeticForm", world.PoeticForms)
 		// server.RegisterResource(router, "written", world.WrittenContents)
 
+		RegisterPage(router, "/entity/{id}", t, "entity.html", func(id int) any { return world.Entities[id] })
 		RegisterPage(router, "/hf/{id}", t, "hf.html", func(id int) any { return world.HistoricalFigures[id] })
 
 	}
@@ -135,6 +150,7 @@ func RegisterPage(router *mux.Router, path string, templates *templates.Template
 			fmt.Fprintln(w, err)
 			fmt.Println(err)
 		}
+		fmt.Println("render", template, id)
 		err = templates.Render(w, template, accessor(id))
 		if err != nil {
 			fmt.Fprintln(w, err)

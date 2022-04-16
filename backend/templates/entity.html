@@ -1,0 +1,7 @@
+{{template "layout.html" .}}
+
+{{define "title"}}{{ title .Name }}{{end}}
+
+{{define "content"}}
+{{ json . }}
+{{- end }}

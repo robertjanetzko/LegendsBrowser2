@@ -7,6 +7,23 @@
 {{ .Race }} (*{{ .BirthYear }}{{ if ge .DeathYear 0 }} †{{ .DeathYear }}{{ end }})
 {{end}}
 
+{{- if or (ne 0 (len .EntityFormerPositionLink)) (ne 0 (len .EntityPositionLink)) }}
+<h3>Positions</h3>
+<ul>
+    {{- range $i := .EntityFormerPositionLink }}
+    <li>
+        {{ ((getEntity $i.EntityId).Position $i.PositionProfileId).Name }} of {{ template "entityLink.html" (getEntity $i.EntityId) }} ({{
+        $i.StartYear }} - {{ $i.EndYear }})
+    </li>
+    {{- end }}
+    {{- range $i := .EntityPositionLink }}
+    <li>
+        of {{ template "entityLink.html" (getEntity $i.EntityId) }}
+    </li>
+    {{- end }}
+</ul>
+{{- end }}
+
 {{- if ne 0 (len .HfLink) }}
 <h3>Related Figures</h3>
 <ul>
@@ -28,3 +45,9 @@
     {{- end }}
 </ul>
 {{- end }}
+
+<h3>Events</h3>
+
+{{ template "events.html" . }}
+
+{{ json . }}
