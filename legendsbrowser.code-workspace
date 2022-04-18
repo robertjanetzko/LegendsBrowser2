@@ -8,10 +8,7 @@
 		},
 		{
 			"path": "backend"
-		},
-		{
-			"path": "frontend"
-		},
+		}
 	],
 	"settings": {}
 }
