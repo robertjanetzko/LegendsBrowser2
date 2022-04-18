@@ -1,7 +1,4 @@
 {
-  "Artifact": {
-    "Writing": "StructureLocalId"
-  },
   "HistoricalEventAddHfEntityLink": {
     "LinkType": "Link"
   },
@@ -11,25 +8,14 @@
   "HistoricalEventCreatedStructure": {
     "Structure": "StructureId"
   },
+  "HistoricalEventDiplomatLost": {
+    "Entity": "SiteId",
+    "Involved": "SiteId",
+    "Site": "SiteId"
+  },
   "HistoricalEventHfDied": {
     "ItemSubtype": "Cause",
     "Mat": "Cause"
-  },
-  "HistoricalEventHfDoesInteraction": {
-    "InteractionAction": "Interaction"
-  },
-  "HistoricalEventHfLearnsSecret": {
-    "SecretText": "Interaction"
-  },
-  "HistoricalEventMasterpieceItem": {
-    "Maker": "Hfid",
-    "MakerEntity": "EntityId",
-    "Site": "SiteId"
-  },
-  "HistoricalEventMerchant": {
-    "Destination": "DepotEntityId",
-    "Site": "SiteId",
-    "Source": "TraderEntityId"
   },
   "HistoricalEventPeaceAccepted": {
     "Site": "SiteId"
@@ -42,6 +28,9 @@
   },
   "HistoricalEventRemoveHfSiteLink": {
     "Site": "SiteId"
+  },
+  "HistoricalFigure": {
+    "Sex": "BreedId"
   },
   "Structure": {
     "Name2": "Subtype"

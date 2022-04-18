@@ -12,6 +12,10 @@ func (x *HistoricalEventAddHfSiteLink) Html() string { return "UNKNWON Historica
 func (x *HistoricalEventAgreementFormed) Html() string {
 	return "UNKNWON HistoricalEventAgreementFormed"
 }
+func (x *HistoricalEventAgreementMade) Html() string { return "UNKNWON HistoricalEventAgreementMade" }
+func (x *HistoricalEventAgreementRejected) Html() string {
+	return "UNKNWON HistoricalEventAgreementRejected"
+}
 func (x *HistoricalEventArtifactClaimFormed) Html() string {
 	return "UNKNWON HistoricalEventArtifactClaimFormed"
 }
@@ -32,6 +36,9 @@ func (x *HistoricalEventArtifactRecovered) Html() string {
 	return "UNKNWON HistoricalEventArtifactRecovered"
 }
 func (x *HistoricalEventArtifactStored) Html() string { return "UNKNWON HistoricalEventArtifactStored" }
+func (x *HistoricalEventArtifactTransformed) Html() string {
+	return "UNKNWON HistoricalEventArtifactTransformed"
+}
 func (x *HistoricalEventAssumeIdentity) Html() string { return "UNKNWON HistoricalEventAssumeIdentity" }
 func (x *HistoricalEventAttackedSite) Html() string   { return "UNKNWON HistoricalEventAttackedSite" }
 func (x *HistoricalEventBodyAbused) Html() string     { return "UNKNWON HistoricalEventBodyAbused" }
@@ -65,6 +72,7 @@ func (x *HistoricalEventDanceFormCreated) Html() string {
 	return "UNKNWON HistoricalEventDanceFormCreated"
 }
 func (x *HistoricalEventDestroyedSite) Html() string { return "UNKNWON HistoricalEventDestroyedSite" }
+func (x *HistoricalEventDiplomatLost) Html() string  { return "UNKNWON HistoricalEventDiplomatLost" }
 func (x *HistoricalEventEntityAllianceFormed) Html() string {
 	return "UNKNWON HistoricalEventEntityAllianceFormed"
 }
@@ -78,6 +86,8 @@ func (x *HistoricalEventEntityDissolved) Html() string {
 func (x *HistoricalEventEntityEquipmentPurchase) Html() string {
 	return "UNKNWON HistoricalEventEntityEquipmentPurchase"
 }
+func (x *HistoricalEventEntityExpelsHf) Html() string { return "UNKNWON HistoricalEventEntityExpelsHf" }
+func (x *HistoricalEventEntityFledSite) Html() string { return "UNKNWON HistoricalEventEntityFledSite" }
 func (x *HistoricalEventEntityIncorporated) Html() string {
 	return "UNKNWON HistoricalEventEntityIncorporated"
 }
@@ -91,7 +101,13 @@ func (x *HistoricalEventEntityPersecuted) Html() string {
 func (x *HistoricalEventEntityPrimaryCriminals) Html() string {
 	return "UNKNWON HistoricalEventEntityPrimaryCriminals"
 }
+func (x *HistoricalEventEntityRampagedInSite) Html() string {
+	return "UNKNWON HistoricalEventEntityRampagedInSite"
+}
 func (x *HistoricalEventEntityRelocate) Html() string { return "UNKNWON HistoricalEventEntityRelocate" }
+func (x *HistoricalEventEntitySearchedSite) Html() string {
+	return "UNKNWON HistoricalEventEntitySearchedSite"
+}
 func (x *HistoricalEventFailedFrameAttempt) Html() string {
 	return "UNKNWON HistoricalEventFailedFrameAttempt"
 }
@@ -99,6 +115,7 @@ func (x *HistoricalEventFailedIntrigueCorruption) Html() string {
 	return "UNKNWON HistoricalEventFailedIntrigueCorruption"
 }
 func (x *HistoricalEventFieldBattle) Html() string    { return "UNKNWON HistoricalEventFieldBattle" }
+func (x *HistoricalEventFirstContact) Html() string   { return "UNKNWON HistoricalEventFirstContact" }
 func (x *HistoricalEventGamble) Html() string         { return "UNKNWON HistoricalEventGamble" }
 func (x *HistoricalEventHfAbducted) Html() string     { return "UNKNWON HistoricalEventHfAbducted" }
 func (x *HistoricalEventHfAttackedSite) Html() string { return "UNKNWON HistoricalEventHfAttackedSite" }
@@ -118,6 +135,7 @@ func (x *HistoricalEventHfEnslaved) Html() string { return "UNKNWON HistoricalEv
 func (x *HistoricalEventHfEquipmentPurchase) Html() string {
 	return "UNKNWON HistoricalEventHfEquipmentPurchase"
 }
+func (x *HistoricalEventHfFreed) Html() string { return "UNKNWON HistoricalEventHfFreed" }
 func (x *HistoricalEventHfGainsSecretGoal) Html() string {
 	return "UNKNWON HistoricalEventHfGainsSecretGoal"
 }
@@ -134,6 +152,8 @@ func (x *HistoricalEventHfPreach) Html() string { return "UNKNWON HistoricalEven
 func (x *HistoricalEventHfProfanedStructure) Html() string {
 	return "UNKNWON HistoricalEventHfProfanedStructure"
 }
+func (x *HistoricalEventHfRansomed) Html() string    { return "UNKNWON HistoricalEventHfRansomed" }
+func (x *HistoricalEventHfReachSummit) Html() string { return "UNKNWON HistoricalEventHfReachSummit" }
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) Html() string {
 	return "UNKNWON HistoricalEventHfRecruitedUnitTypeForEntity"
 }
@@ -159,12 +179,30 @@ func (x *HistoricalEventHfsFormedReputationRelationship) Html() string {
 func (x *HistoricalEventHolyCityDeclaration) Html() string {
 	return "UNKNWON HistoricalEventHolyCityDeclaration"
 }
+func (x *HistoricalEventInsurrectionStarted) Html() string {
+	return "UNKNWON HistoricalEventInsurrectionStarted"
+}
 func (x *HistoricalEventItemStolen) Html() string { return "UNKNWON HistoricalEventItemStolen" }
 func (x *HistoricalEventKnowledgeDiscovered) Html() string {
 	return "UNKNWON HistoricalEventKnowledgeDiscovered"
 }
+func (x *HistoricalEventMasterpieceArchConstructed) Html() string {
+	return "UNKNWON HistoricalEventMasterpieceArchConstructed"
+}
+func (x *HistoricalEventMasterpieceEngraving) Html() string {
+	return "UNKNWON HistoricalEventMasterpieceEngraving"
+}
+func (x *HistoricalEventMasterpieceFood) Html() string {
+	return "UNKNWON HistoricalEventMasterpieceFood"
+}
 func (x *HistoricalEventMasterpieceItem) Html() string {
 	return "UNKNWON HistoricalEventMasterpieceItem"
+}
+func (x *HistoricalEventMasterpieceItemImprovement) Html() string {
+	return "UNKNWON HistoricalEventMasterpieceItemImprovement"
+}
+func (x *HistoricalEventMasterpieceLost) Html() string {
+	return "UNKNWON HistoricalEventMasterpieceLost"
 }
 func (x *HistoricalEventMerchant) Html() string { return "UNKNWON HistoricalEventMerchant" }
 func (x *HistoricalEventModifiedBuilding) Html() string {
@@ -197,9 +235,21 @@ func (x *HistoricalEventRemoveHfSiteLink) Html() string {
 func (x *HistoricalEventReplacedStructure) Html() string {
 	return "UNKNWON HistoricalEventReplacedStructure"
 }
-func (x *HistoricalEventSiteDispute) Html() string   { return "UNKNWON HistoricalEventSiteDispute" }
+func (x *HistoricalEventSiteDied) Html() string    { return "UNKNWON HistoricalEventSiteDied" }
+func (x *HistoricalEventSiteDispute) Html() string { return "UNKNWON HistoricalEventSiteDispute" }
+func (x *HistoricalEventSiteRetired) Html() string { return "UNKNWON HistoricalEventSiteRetired" }
+func (x *HistoricalEventSiteSurrendered) Html() string {
+	return "UNKNWON HistoricalEventSiteSurrendered"
+}
 func (x *HistoricalEventSiteTakenOver) Html() string { return "UNKNWON HistoricalEventSiteTakenOver" }
-func (x *HistoricalEventSquadVsSquad) Html() string  { return "UNKNWON HistoricalEventSquadVsSquad" }
+func (x *HistoricalEventSiteTributeForced) Html() string {
+	return "UNKNWON HistoricalEventSiteTributeForced"
+}
+func (x *HistoricalEventSneakIntoSite) Html() string { return "UNKNWON HistoricalEventSneakIntoSite" }
+func (x *HistoricalEventSpottedLeavingSite) Html() string {
+	return "UNKNWON HistoricalEventSpottedLeavingSite"
+}
+func (x *HistoricalEventSquadVsSquad) Html() string { return "UNKNWON HistoricalEventSquadVsSquad" }
 func (x *HistoricalEventTacticalSituation) Html() string {
 	return "UNKNWON HistoricalEventTacticalSituation"
 }

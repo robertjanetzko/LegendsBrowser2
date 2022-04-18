@@ -10,14 +10,20 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/cheggaaa/pb/v3"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
 
 func (e *HistoricalEvent) Name() string           { return "" }
 func (e *HistoricalEventCollection) Name() string { return "" }
 
-func Parse(file string) (*DfWorld, error) {
-	InitSameFields()
+func NewLegendsDecoder(file string) (*xml.Decoder, *os.File, *pb.ProgressBar, error) {
+	fi, err := os.Stat(file)
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	size := fi.Size()
+	bar := pb.Full.Start64(size)
 
 	xmlFile, err := os.Open(file)
 	if err != nil {
@@ -25,10 +31,22 @@ func Parse(file string) (*DfWorld, error) {
 	}
 
 	fmt.Println("Successfully Opened", file)
-	defer xmlFile.Close()
 
 	converter := util.NewConvertReader(xmlFile)
-	d := xml.NewDecoder(converter)
+	barReader := bar.NewProxyReader(converter)
+	d := xml.NewDecoder(barReader)
+
+	return d, xmlFile, bar, err
+}
+
+func Parse(file string) (*DfWorld, error) {
+	InitSameFields()
+
+	d, xmlFile, bar, err := NewLegendsDecoder(file)
+	if err != nil {
+		return nil, err
+	}
+	defer xmlFile.Close()
 
 	var world *DfWorld
 BaseLoop:
@@ -49,21 +67,18 @@ BaseLoop:
 		}
 	}
 
+	bar.Finish()
+
 	plus := true
 
 	if plus {
 		file = strings.Replace(file, "-legends.xml", "-legends_plus.xml", 1)
-		xmlFile, err := os.Open(file)
+
+		d, xmlFile, bar, err := NewLegendsDecoder(file)
 		if err != nil {
-			fmt.Println(err)
-			return world, nil
+			return nil, err
 		}
-
-		fmt.Println("Successfully Opened", file)
 		defer xmlFile.Close()
-
-		converter := util.NewConvertReader(xmlFile)
-		d := xml.NewDecoder(converter)
 
 	PlusLoop:
 		for {
@@ -82,6 +97,8 @@ BaseLoop:
 				}
 			}
 		}
+
+		bar.Finish()
 	}
 
 	same, err := json.MarshalIndent(exportSameFields(), "", "  ")

@@ -197,6 +197,12 @@ export interface EntityFormerPositionLink {
 	positionProfileId: number;
 	startYear: number;
 }
+export interface EntityFormerSquadLink {
+	endYear: number;
+	entityId: number;
+	squadId: number;
+	startYear: number;
+}
 export interface EntityPopulation {
 	civId: number;
 	id: number;
@@ -226,6 +232,17 @@ export interface EntityReputation {
 	entityId: number;
 	firstAgelessSeasonCount: number;
 	firstAgelessYear: number;
+	repBard: number;
+	repEnemyFighter: number;
+	repHero: number;
+	repHunter: number;
+	repKiller: number;
+	repKnowledgePreserver: number;
+	repPoet: number;
+	repProtectorOfWeak: number;
+	repStoryteller: number;
+	repThief: number;
+	repTreasureHunter: number;
 	unsolvedMurders: number;
 }
 export interface EntitySquadLink {
@@ -292,11 +309,14 @@ export interface HistoricalEventAddHfSiteLink {
 export interface HistoricalEventAgreementFormed {
 	action: string;
 	agreementId: number;
+	agreementSubjectId: number;
 	allyDefenseBonus: number;
 	coconspiratorBonus: number;
+	concluderHfid: number;
 	delegated: boolean;
 	failedJudgmentTest: boolean;
 	method: string;
+	reason: string;
 	relevantEntityId: number;
 	relevantIdForMethod: number;
 	relevantPositionProfileId: number;
@@ -310,6 +330,12 @@ export interface HistoricalEventAgreementFormed {
 	topValue: string;
 	topValueModifier: number;
 	topValueRating: number;
+}
+export interface HistoricalEventAgreementMade {
+	siteId: number;
+}
+export interface HistoricalEventAgreementRejected {
+	siteId: number;
 }
 export interface HistoricalEventArtifactClaimFormed {
 	artifactId: number;
@@ -361,11 +387,13 @@ export interface HistoricalEventArtifactGiven {
 	artifactId: number;
 	giverEntityId: number;
 	giverHistFigureId: number;
+	reason: string;
 	receiverEntityId: number;
 	receiverHistFigureId: number;
 }
 export interface HistoricalEventArtifactLost {
 	artifactId: number;
+	featureLayerId: number;
 	siteId: number;
 	sitePropertyId: number;
 	subregionId: number;
@@ -394,6 +422,13 @@ export interface HistoricalEventArtifactRecovered {
 export interface HistoricalEventArtifactStored {
 	artifactId: number;
 	histFigureId: number;
+	siteId: number;
+	unitId: number;
+}
+export interface HistoricalEventArtifactTransformed {
+	histFigureId: number;
+	newArtifactId: number;
+	oldArtifactId: number;
 	siteId: number;
 	unitId: number;
 }
@@ -579,6 +614,11 @@ export interface HistoricalEventCollectionEntityOverthrown {
 	siteId: number;
 	targetEntityId: number;
 }
+export interface HistoricalEventCollectionInsurrection {
+	ordinal: number;
+	siteId: number;
+	targetEnid: number;
+}
 export interface HistoricalEventCollectionJourney {
 	ordinal: number;
 }
@@ -602,6 +642,16 @@ export interface HistoricalEventCollectionPurge {
 	adjective: string;
 	ordinal: number;
 	siteId: number;
+}
+export interface HistoricalEventCollectionRaid {
+	attackingEnid: number;
+	coords: string;
+	defendingEnid: number;
+	featureLayerId: number;
+	ordinal: number;
+	parentEventcol: number;
+	siteId: number;
+	subregionId: number;
 }
 export interface HistoricalEventCollectionSiteConquered {
 	attackingEnid: number;
@@ -694,7 +744,14 @@ export interface HistoricalEventDanceFormCreated {
 export interface HistoricalEventDestroyedSite {
 	attackerCivId: number;
 	defenderCivId: number;
+	noDefeatMention: boolean;
 	siteCivId: number;
+	siteId: number;
+}
+export interface HistoricalEventDiplomatLost {
+	entity: number;
+	involved: number;
+	site: number;
 	siteId: number;
 }
 export interface HistoricalEventEntityAllianceFormed {
@@ -721,6 +778,15 @@ export interface HistoricalEventEntityEquipmentPurchase {
 	entityId: number;
 	hfid: number[];
 	newEquipmentLevel: number;
+}
+export interface HistoricalEventEntityExpelsHf {
+	entityId: number;
+	hfid: number;
+	siteId: number;
+}
+export interface HistoricalEventEntityFledSite {
+	fledCivId: number;
+	siteId: number;
 }
 export interface HistoricalEventEntityIncorporated {
 	joinedEntityId: number;
@@ -766,6 +832,10 @@ export interface HistoricalEventEntityPrimaryCriminals {
 	structure: number;
 	structureId: number;
 }
+export interface HistoricalEventEntityRampagedInSite {
+	rampageCivId: number;
+	siteId: number;
+}
 export interface HistoricalEventEntityRelocate {
 	action: string;
 	entity: number;
@@ -774,6 +844,11 @@ export interface HistoricalEventEntityRelocate {
 	siteId: number;
 	structure: number;
 	structureId: number;
+}
+export interface HistoricalEventEntitySearchedSite {
+	result: string;
+	searcherCivId: number;
+	siteId: number;
 }
 export interface HistoricalEventFailedFrameAttempt {
 	convicterEnid: number;
@@ -823,6 +898,11 @@ export interface HistoricalEventFieldBattle {
 	featureLayerId: number;
 	subregionId: number;
 }
+export interface HistoricalEventFirstContact {
+	contactedEnid: number;
+	contactorEnid: number;
+	siteId: number;
+}
 export interface HistoricalEventGamble {
 	gamblerHfid: number;
 	newAccount: number;
@@ -853,6 +933,7 @@ export interface HistoricalEventHfConfronted {
 	subregionId: number;
 }
 export interface HistoricalEventHfConvicted {
+	beating: boolean;
 	coconspiratorHfid: number;
 	confessedAfterApbArrestEnid: number;
 	contactHfid: number;
@@ -866,9 +947,11 @@ export interface HistoricalEventHfConvicted {
 	exiled: boolean;
 	fooledHfid: number;
 	framerHfid: number;
+	hammerstrokes: number;
 	heldFirmInInterrogation: boolean;
 	implicatedHfid: number[];
 	interrogatorHfid: number;
+	noPrisonAvailable: boolean;
 	plotterHfid: number;
 	prisonMonths: number;
 	surveiledCoconspirator: boolean;
@@ -939,6 +1022,13 @@ export interface HistoricalEventHfEquipmentPurchase {
 	structureId: number;
 	subregionId: number;
 }
+export interface HistoricalEventHfFreed {
+	freeingHfid: number;
+	holdingCivId: number;
+	rescuedHfid: number;
+	siteCivId: number;
+	siteId: number;
+}
 export interface HistoricalEventHfGainsSecretGoal {
 	hfid: number;
 	secretGoal: string;
@@ -946,6 +1036,7 @@ export interface HistoricalEventHfGainsSecretGoal {
 export interface HistoricalEventHfInterrogated {
 	arrestingEnid: number;
 	heldFirmInInterrogation: boolean;
+	implicatedHfid: number;
 	interrogatorHfid: number;
 	targetHfid: number;
 	wantedAndRecognized: boolean;
@@ -1002,6 +1093,19 @@ export interface HistoricalEventHfProfanedStructure {
 	structure: number;
 	structureId: number;
 }
+export interface HistoricalEventHfRansomed {
+	movedToSiteId: number;
+	payerEntityId: number;
+	payerHfid: number;
+	ransomedHfid: number;
+	ransomerHfid: number;
+}
+export interface HistoricalEventHfReachSummit {
+	coords: string;
+	featureLayerId: number;
+	groupHfid: number[];
+	subregionId: number;
+}
 export interface HistoricalEventHfRecruitedUnitTypeForEntity {
 	entityId: number;
 	featureLayerId: number;
@@ -1031,7 +1135,9 @@ export interface HistoricalEventHfRevived {
 	actorHfid: number;
 	disturbance: boolean;
 	featureLayerId: number;
+	ghost: string;
 	hfid: number;
+	raisedBefore: boolean;
 	siteId: number;
 	subregionId: number;
 }
@@ -1065,6 +1171,7 @@ export interface HistoricalEventHfWounded {
 	site: number;
 	siteId: number;
 	subregionId: number;
+	wasTorture: boolean;
 	woundee: number;
 	woundeeCaste: number;
 	woundeeHfid: number;
@@ -1119,6 +1226,11 @@ export interface HistoricalEventHolyCityDeclaration {
 	religionId: number;
 	siteId: number;
 }
+export interface HistoricalEventInsurrectionStarted {
+	outcome: string;
+	siteId: number;
+	targetCivId: number;
+}
 export interface HistoricalEventItemStolen {
 	circumstance: HistoricalEventItemStolenCircumstance;
 	circumstanceId: number;
@@ -1146,10 +1258,41 @@ export interface HistoricalEventKnowledgeDiscovered {
 	hfid: number;
 	knowledge: string;
 }
+export interface HistoricalEventMasterpieceArchConstructed {
+	buildingCustom: number;
+	buildingSubtype: string;
+	buildingType: string;
+	entityId: number;
+	hfid: number;
+	maker: number;
+	makerEntity: number;
+	site: number;
+	siteId: number;
+	skillAtTime: string;
+	unk2: number;
+}
+export interface HistoricalEventMasterpieceEngraving {
+	artId: number;
+	artSubid: number;
+	entityId: number;
+	hfid: number;
+	maker: number;
+	makerEntity: number;
+	site: number;
+	siteId: number;
+	skillAtTime: string;
+}
+export interface HistoricalEventMasterpieceFood {
+	entityId: number;
+	hfid: number;
+	siteId: number;
+	skillAtTime: number;
+}
 export interface HistoricalEventMasterpieceItem {
 	entityId: number;
 	hfid: number;
 	itemId: number;
+	itemSubtype: string;
 	itemType: string;
 	maker: number;
 	makerEntity: number;
@@ -1158,9 +1301,23 @@ export interface HistoricalEventMasterpieceItem {
 	siteId: number;
 	skillAtTime: string;
 }
+export interface HistoricalEventMasterpieceItemImprovement {
+	entityId: number;
+	hfid: number;
+	siteId: number;
+	skillAtTime: number;
+}
+export interface HistoricalEventMasterpieceLost {
+	creationEvent: number;
+	histfig: number;
+	method: string;
+	site: number;
+}
 export interface HistoricalEventMerchant {
 	depotEntityId: number;
 	destination: number;
+	hardship: boolean;
+	lostValue: boolean;
 	site: number;
 	siteId: number;
 	source: number;
@@ -1215,8 +1372,12 @@ export interface HistoricalEventPlunderedSite {
 	attackerCivId: number;
 	defenderCivId: number;
 	detected: boolean;
+	noDefeatMention: boolean;
 	siteCivId: number;
 	siteId: number;
+	tookItems: boolean;
+	tookLivestock: boolean;
+	wasRaid: boolean;
 }
 export interface HistoricalEventPoeticFormCreated {
 	circumstance: string;
@@ -1241,6 +1402,7 @@ export interface HistoricalEventReclaimSite {
 	civId: number;
 	siteCivId: number;
 	siteId: number;
+	unretire: boolean;
 }
 export interface HistoricalEventRegionpopIncorporatedIntoEntity {
 	joinEntityId: number;
@@ -1297,12 +1459,30 @@ export interface HistoricalEventReplacedStructure {
 	siteCivId: number;
 	siteId: number;
 }
+export interface HistoricalEventSiteDied {
+	abandoned: boolean;
+	civId: number;
+	siteCivId: number;
+	siteId: number;
+}
 export interface HistoricalEventSiteDispute {
 	dispute: string;
 	entityId1: number;
 	entityId2: number;
 	siteId1: number;
 	siteId2: number;
+}
+export interface HistoricalEventSiteRetired {
+	civId: number;
+	first: boolean;
+	siteCivId: number;
+	siteId: number;
+}
+export interface HistoricalEventSiteSurrendered {
+	attackerCivId: number;
+	defenderCivId: number;
+	siteCivId: number;
+	siteId: number;
 }
 export interface HistoricalEventSiteTakenOver {
 	attackerCivId: number;
@@ -1311,11 +1491,35 @@ export interface HistoricalEventSiteTakenOver {
 	siteCivId: number;
 	siteId: number;
 }
+export interface HistoricalEventSiteTributeForced {
+	attackerCivId: number;
+	defenderCivId: number;
+	season: string;
+	siteCivId: number;
+	siteId: number;
+}
+export interface HistoricalEventSneakIntoSite {
+	attackerCivId: number;
+	defenderCivId: number;
+	siteCivId: number;
+	siteId: number;
+}
+export interface HistoricalEventSpottedLeavingSite {
+	leaverCivId: number;
+	siteCivId: number;
+	siteId: number;
+	spotterHfid: number;
+}
 export interface HistoricalEventSquadVsSquad {
-	aHfid: number;
+	aHfid: number[];
+	aLeaderHfid: number;
+	aLeadershipRoll: number;
 	aSquadId: number;
 	dEffect: number;
+	dHfid: number[];
 	dInteraction: number;
+	dLeaderHfid: number;
+	dLeadershipRoll: number;
 	dNumber: number;
 	dRace: number;
 	dSlain: number;
@@ -1359,12 +1563,14 @@ export interface HistoricalEventWrittenContentComposed {
 }
 export interface HistoricalFigure {
 	activeInteraction: string[];
+	adventurer: boolean;
 	animated: boolean;
 	animatedString: string;
 	appeared: number;
 	associatedType: string;
 	birthSeconds72: number;
 	birthYear: number;
+	breedId: number;
 	caste: string;
 	currentIdentityId: number;
 	deathSeconds72: number;
@@ -1372,11 +1578,13 @@ export interface HistoricalFigure {
 	deity: boolean;
 	entPopId: number;
 	entityFormerPositionLink: EntityFormerPositionLink[];
+	entityFormerSquadLink: EntityFormerSquadLink[];
 	entityLink: HistoricalFigureEntityLink[];
 	entityPositionLink: EntityPositionLink[];
 	entityReputation: EntityReputation[];
 	entitySquadLink: EntitySquadLink;
 	force: boolean;
+	ghost: boolean;
 	goal: string[];
 	hfLink: HfLink[];
 	hfSkill: HfSkill[];
@@ -1390,6 +1598,7 @@ export interface HistoricalFigure {
 	name: string;
 	race: string;
 	relationshipProfileHfHistorical: RelationshipProfileHfHistorical[];
+	relationshipProfileHfIdentity: RelationshipProfileHfIdentity[];
 	relationshipProfileHfVisual: RelationshipProfileHfVisual[];
 	sex: number;
 	siteLink: SiteLink[];
@@ -1522,6 +1731,22 @@ export interface RelationshipProfileHfHistorical {
 	hfId: number;
 	love: number;
 	loyalty: number;
+	repEnemyFighter: number;
+	repHero: number;
+	repHunter: number;
+	repKiller: number;
+	repPsychopath: number;
+	repStoryteller: number;
+	repViolent: number;
+	respect: number;
+	trust: number;
+}
+export interface RelationshipProfileHfIdentity {
+	fear: number;
+	id: number;
+	love: number;
+	loyalty: number;
+	repPsychopath: number;
 	respect: number;
 	trust: number;
 }
@@ -1534,8 +1759,17 @@ export interface RelationshipProfileHfVisual {
 	love: number;
 	loyalty: number;
 	meetCount: number;
+	repBonded: number;
+	repComrade: number;
+	repFlatterer: number;
 	repFriendly: number;
+	repHero: number;
+	repHunter: number;
 	repInformationSource: number;
+	repKiller: number;
+	repPsychopath: number;
+	repQuarreler: number;
+	repTradePartner: number;
 	respect: number;
 	trust: number;
 }

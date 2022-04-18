@@ -15,6 +15,8 @@ func Generate() error {
 		return err
 	}
 
+	listEnumCandidates(a)
+
 	m, err := createMetadata(a)
 	if err != nil {
 		return err
@@ -24,9 +26,9 @@ func Generate() error {
 		return err
 	}
 
-	// if err := generateEventsCode(m); err != nil {
-	// 	return err
-	// }
+	if err := generateEventsCode(m); err != nil {
+		return err
+	}
 
 	if err := generateFrontendCode(m); err != nil {
 		return err
@@ -244,4 +246,30 @@ func isObject(typ string, types []string) (bool, string) {
 		fc++
 	}
 	return fc > 0, typ
+}
+
+func listEnumCandidates(a *AnalyzeData) {
+	keys := util.Keys(a.Fields)
+	sort.Strings(keys)
+
+	for _, k := range keys {
+		f := a.Fields[k]
+		if !f.Enum {
+			continue
+		}
+		f.Enum = false
+		n := k[strings.LastIndex(k, PATH_SEPARATOR)+1:]
+		if n == "name" || n == "altname" || strings.Contains(n, "name_") || strings.Contains(n, "spouse") || n == "coords" || n == "rectangle" || n == "interaction_action" || strings.Contains(n, "race") || strings.Contains(n, "caste") || strings.Contains(n, "_mat") {
+			continue
+		}
+		if f.IsString {
+			v := util.Keys(f.Values)
+			sort.Strings(v)
+			if len(v) == 0 {
+				continue
+			}
+			fmt.Println(k, ":", strings.Join(v, ", "))
+			f.Enum = true
+		}
+	}
 }

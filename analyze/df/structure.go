@@ -11,6 +11,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/cheggaaa/pb/v3"
 	"github.com/iancoleman/strcase"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
@@ -38,10 +39,15 @@ type FieldData struct {
 	Multiple bool
 	Base     bool
 	Plus     bool
+	Values   map[string]bool
+	Enum     bool
 }
 
 func NewFieldData() *FieldData {
-	return &FieldData{}
+	return &FieldData{
+		Enum:   true,
+		Values: make(map[string]bool),
+	}
 }
 
 type AnalyzeData struct {
@@ -79,7 +85,7 @@ func (a *AnalyzeData) GetField(s string) *FieldData {
 	if f, ok := a.Fields[s]; ok {
 		return f
 	} else {
-		f := &FieldData{}
+		f := NewFieldData()
 		a.Fields[s] = f
 		return f
 	}
@@ -123,32 +129,57 @@ func analyze(file string, a *AnalyzeData) error {
 
 	// base file
 
+	fi, err := os.Stat(file)
+	if err != nil {
+		return err
+	}
+	size := fi.Size()
+	bar := pb.Full.Start64(size)
+
 	xmlFile, err := os.Open(file)
 	if err != nil {
 		return err
 	}
 
-	fmt.Println("Successfully Opened", file)
+	fmt.Println("\nAnalyzing", file)
 	defer xmlFile.Close()
 
-	_, err = analyzeElement(xml.NewDecoder(util.NewConvertReader(xmlFile)), a, make([]string, 0), &ctx)
+	converter := util.NewConvertReader(xmlFile)
+	barReader := bar.NewProxyReader(converter)
+
+	_, err = analyzeElement(xml.NewDecoder(barReader), a, make([]string, 0), &ctx)
 	if err != nil {
 		return err
 	}
+
+	bar.Finish()
 
 	// plus file
 
 	ctx.plus = true
 	file = strings.Replace(file, "-legends.xml", "-legends_plus.xml", 1)
+
+	fi, err = os.Stat(file)
+	if err != nil {
+		return err
+	}
+	size = fi.Size()
+	bar = pb.Full.Start64(size)
+
 	xmlFile, err = os.Open(file)
 	if err != nil {
 		return err
 	}
 
-	fmt.Println("Successfully Opened", file)
+	fmt.Println("\nAnalyzing", file)
 	defer xmlFile.Close()
 
-	_, err = analyzeElement(xml.NewDecoder(util.NewConvertReader(xmlFile)), a, make([]string, 0), &ctx)
+	converter = util.NewConvertReader(xmlFile)
+	barReader = bar.NewProxyReader(converter)
+
+	_, err = analyzeElement(xml.NewDecoder(barReader), a, make([]string, 0), &ctx)
+
+	bar.Finish()
 
 	return err
 }
@@ -241,7 +272,9 @@ Loop:
 						}
 					}
 
-					path[len(path)-1] = path[len(path)-1] + "+" + strcase.ToCamel(subtype)
+					if allowedTyped[strings.Join(path, PATH_SEPARATOR)] {
+						path[len(path)-1] = path[len(path)-1] + "+" + strcase.ToCamel(subtype)
+					}
 				}
 			}
 
@@ -250,9 +283,17 @@ Loop:
 
 		case xml.EndElement:
 			if value {
-				s := string(data)
+				s := strings.TrimSpace(string(data))
 				if _, err := strconv.Atoi(s); err != nil {
-					a.GetField(strings.Join(path, PATH_SEPARATOR)).IsString = true
+					f := a.GetField(strings.Join(path, PATH_SEPARATOR))
+					f.IsString = true
+					if s != "" && f.Enum {
+						f.Values[s] = true
+					}
+					if len(f.Values) > 30 {
+						f.Values = make(map[string]bool)
+						f.Enum = false
+					}
 				}
 				if len(s) > 0 {
 					a.GetField(strings.Join(path, PATH_SEPARATOR)).NoBool = true
