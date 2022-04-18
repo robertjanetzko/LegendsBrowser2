@@ -57,8 +57,6 @@
   "HistoricalEventHfDied": {
     "ArtifactId": "SlayerItemId",
     "Item": "SlayerItemId",
-    "ItemSubtype": "Cause",
-    "Mat": "Cause",
     "Site": "SiteId",
     "SlayerHf": "SlayerHfid",
     "VictimHf": "Hfid"
@@ -110,9 +108,7 @@
   "HistoricalEventRemoveHfSiteLink": {
     "Site": "SiteId"
   },
-  "Structure": {
-    "Name2": "Subtype"
-  },
+  "Structure": {},
   "WrittenContent": {
     "Author": "AuthorHfid"
   }

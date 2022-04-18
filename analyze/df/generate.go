@@ -30,6 +30,7 @@ type Field struct {
 	Legend      string  `json:"legend"`
 	Base        bool
 	Plus        bool
+	EnumValues  *[]string
 }
 
 func (f Field) Active(plus bool) bool {

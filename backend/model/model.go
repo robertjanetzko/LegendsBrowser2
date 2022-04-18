@@ -2,6 +2,7 @@
 package model
 
 import (
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"strconv"
@@ -10,28 +11,28 @@ import (
 func InitSameFields() {
 	sameFields = map[string]map[string]map[string]bool{
 		"Artifact": {
-			"Mat":      {},
-			"ItemType": {},
-			"PageCount": {
-				"AbsTileY":         true,
-				"SiteId":           true,
-				"AbsTileZ":         true,
-				"SubregionId":      true,
-				"HolderHfid":       true,
+			"Writing": {
 				"StructureLocalId": true,
+				"SubregionId":      true,
 				"AbsTileX":         true,
+				"AbsTileZ":         true,
+				"HolderHfid":       true,
+				"SiteId":           true,
+				"AbsTileY":         true,
 			},
 			"ItemDescription": {},
+			"ItemType":        {},
 			"ItemSubtype":     {},
-			"Writing": {
-				"AbsTileY":         true,
-				"SiteId":           true,
-				"AbsTileZ":         true,
-				"SubregionId":      true,
-				"HolderHfid":       true,
-				"StructureLocalId": true,
+			"PageCount": {
 				"AbsTileX":         true,
+				"AbsTileZ":         true,
+				"SiteId":           true,
+				"HolderHfid":       true,
+				"AbsTileY":         true,
+				"StructureLocalId": true,
+				"SubregionId":      true,
 			},
+			"Mat": {},
 		},
 		"Creature":                        {},
 		"DanceForm":                       {},
@@ -53,7 +54,7 @@ func InitSameFields() {
 		"HistoricalEvent":                 {},
 		"HistoricalEventAddHfEntityHonor": {},
 		"HistoricalEventAddHfEntityLink": {
-			"Civ": {
+			"Histfig": {
 				"CivId":      true,
 				"Hfid":       true,
 				"PositionId": true,
@@ -61,38 +62,36 @@ func InitSameFields() {
 			"LinkType": {
 				"Link": true,
 			},
-			"Histfig": {
+			"Position": {},
+			"Civ": {
 				"Hfid":       true,
-				"PositionId": true,
 				"CivId":      true,
-			},
-			"Position": {
-				"Link": true,
+				"PositionId": true,
 			},
 		},
 		"HistoricalEventAddHfHfLink": {
-			"HfTarget": {
-				"Hfid":       true,
-				"HfidTarget": true,
-			},
 			"LinkType": {},
 			"Hf": {
 				"HfidTarget": true,
 				"Hfid":       true,
 			},
+			"HfTarget": {
+				"Hfid":       true,
+				"HfidTarget": true,
+			},
 		},
 		"HistoricalEventAddHfSiteLink": {
-			"Civ": {
-				"SiteId": true,
-			},
-			"Histfig": {
-				"SiteId": true,
-			},
 			"LinkType": {},
 			"Site": {
 				"SiteId": true,
 			},
 			"Structure": {
+				"SiteId": true,
+			},
+			"Civ": {
+				"SiteId": true,
+			},
+			"Histfig": {
 				"SiteId": true,
 			},
 		},
@@ -102,23 +101,23 @@ func InitSameFields() {
 		"HistoricalEventArtifactClaimFormed": {},
 		"HistoricalEventArtifactCopied":      {},
 		"HistoricalEventArtifactCreated": {
-			"SanctifyHf": {
-				"SiteId":       true,
+			"CreatorUnitId": {
 				"HistFigureId": true,
+				"SiteId":       true,
+				"UnitId":       true,
+			},
+			"Reason": {},
+			"SanctifyHf": {
+				"HistFigureId": true,
+				"SiteId":       true,
+				"UnitId":       true,
+			},
+			"CreatorHfid": {
+				"HistFigureId": true,
+				"SiteId":       true,
 				"UnitId":       true,
 			},
 			"Site": {
-				"UnitId":       true,
-				"SiteId":       true,
-				"HistFigureId": true,
-			},
-			"CreatorHfid": {
-				"UnitId":       true,
-				"HistFigureId": true,
-				"SiteId":       true,
-			},
-			"Reason": {},
-			"CreatorUnitId": {
 				"HistFigureId": true,
 				"SiteId":       true,
 				"UnitId":       true,
@@ -134,81 +133,73 @@ func InitSameFields() {
 		"HistoricalEventArtifactStored":              {},
 		"HistoricalEventArtifactTransformed":         {},
 		"HistoricalEventAssumeIdentity": {
-			"IdentityRace": {},
-			"Trickster": {
-				"TargetEnid":    true,
-				"TricksterHfid": true,
-				"IdentityId":    true,
-			},
-			"IdentityCaste": {},
 			"IdentityHistfigId": {
-				"TricksterHfid": true,
-				"IdentityId":    true,
 				"TargetEnid":    true,
+				"IdentityId":    true,
+				"TricksterHfid": true,
 			},
 			"IdentityName": {},
 			"IdentityNemesisId": {
 				"IdentityId":    true,
-				"TricksterHfid": true,
 				"TargetEnid":    true,
+				"TricksterHfid": true,
 			},
+			"IdentityRace": {},
 			"Target": {
+				"IdentityId":    true,
 				"TargetEnid":    true,
 				"TricksterHfid": true,
-				"IdentityId":    true,
 			},
+			"Trickster": {
+				"IdentityId":    true,
+				"TargetEnid":    true,
+				"TricksterHfid": true,
+			},
+			"IdentityCaste": {},
 		},
 		"HistoricalEventAttackedSite": {},
 		"HistoricalEventBodyAbused": {
-			"Site": {
-				"SiteId":         true,
-				"SubregionId":    true,
-				"FeatureLayerId": true,
+			"ItemMat": {
+				"Coords": true,
 			},
+			"ItemSubtype": {},
 			"Structure": {
 				"SiteId":         true,
 				"SubregionId":    true,
 				"FeatureLayerId": true,
 			},
-			"VictimEntity": {
+			"AbuseType": {},
+			"Interaction": {
+				"FeatureLayerId": true,
 				"SiteId":         true,
 				"SubregionId":    true,
-				"FeatureLayerId": true,
-			},
-			"Civ": {
-				"SiteId":         true,
-				"SubregionId":    true,
-				"FeatureLayerId": true,
 			},
 			"Histfig": {
 				"SiteId":         true,
 				"SubregionId":    true,
 				"FeatureLayerId": true,
 			},
-			"Interaction": {
-				"SubregionId":    true,
-				"FeatureLayerId": true,
-				"SiteId":         true,
-			},
-			"PileType": {
-				"Coords": true,
-			},
-			"AbuseType": {
-				"Coords": true,
-			},
-			"ItemType": {
-				"Coords": true,
-			},
+			"ItemType": {},
+			"PileType": {},
 			"Tree": {
+				"FeatureLayerId": true,
 				"SiteId":         true,
 				"SubregionId":    true,
+			},
+			"Civ": {
 				"FeatureLayerId": true,
+				"SiteId":         true,
+				"SubregionId":    true,
 			},
-			"ItemMat": {
-				"Coords": true,
+			"Site": {
+				"FeatureLayerId": true,
+				"SiteId":         true,
+				"SubregionId":    true,
 			},
-			"ItemSubtype": {
-				"Coords": true,
+			"VictimEntity": {
+				"FeatureLayerId": true,
+				"SiteId":         true,
+				"SubregionId":    true,
 			},
 		},
 		"HistoricalEventBuildingProfileAcquired": {},
@@ -225,19 +216,19 @@ func InitSameFields() {
 		},
 		"HistoricalEventChangeHfState": {
 			"Site": {
-				"FeatureLayerId": true,
-				"SiteId":         true,
 				"SubregionId":    true,
+				"SiteId":         true,
+				"FeatureLayerId": true,
 			},
 		},
 		"HistoricalEventChangedCreatureType": {
-			"Changer": {
-				"ChangerHfid": true,
-				"ChangeeHfid": true,
-			},
 			"Changee": {
 				"ChangeeHfid": true,
 				"ChangerHfid": true,
+			},
+			"Changer": {
+				"ChangerHfid": true,
+				"ChangeeHfid": true,
 			},
 		},
 		"HistoricalEventCollection":                 {},
@@ -263,65 +254,65 @@ func InitSameFields() {
 		"HistoricalEventCreateEntityPosition":       {},
 		"HistoricalEventCreatedSite":                {},
 		"HistoricalEventCreatedStructure": {
-			"Site": {
-				"SiteId":      true,
-				"StructureId": true,
-				"SiteCivId":   true,
-				"BuilderHfid": true,
+			"BuilderHf": {
 				"CivId":       true,
+				"SiteCivId":   true,
+				"SiteId":      true,
+				"BuilderHfid": true,
+				"StructureId": true,
 			},
 			"SiteCiv": {
-				"SiteCivId":   true,
-				"SiteId":      true,
-				"StructureId": true,
-				"BuilderHfid": true,
 				"CivId":       true,
-			},
-			"BuilderHf": {
-				"StructureId": true,
 				"SiteCivId":   true,
 				"SiteId":      true,
 				"BuilderHfid": true,
-				"CivId":       true,
-			},
-			"Structure": {
-				"SiteCivId":   true,
-				"SiteId":      true,
 				"StructureId": true,
-				"BuilderHfid": true,
-				"CivId":       true,
 			},
 			"Civ": {
 				"BuilderHfid": true,
 				"CivId":       true,
+				"SiteCivId":   true,
 				"SiteId":      true,
 				"StructureId": true,
-				"SiteCivId":   true,
 			},
 			"Rebuild": {},
+			"Site": {
+				"SiteId":      true,
+				"BuilderHfid": true,
+				"CivId":       true,
+				"SiteCivId":   true,
+				"StructureId": true,
+			},
+			"Structure": {
+				"BuilderHfid": true,
+				"CivId":       true,
+				"SiteCivId":   true,
+				"SiteId":      true,
+				"StructureId": true,
+			},
 		},
 		"HistoricalEventCreatedWorldConstruction": {},
 		"HistoricalEventCreatureDevoured": {
-			"Caste": {},
-			"Race":  {},
-			"Victim": {
-				"SubregionId":    true,
-				"FeatureLayerId": true,
-				"SiteId":         true,
-			},
-			"Eater": {
-				"FeatureLayerId": true,
-				"SiteId":         true,
-				"SubregionId":    true,
-			},
 			"Entity": {
-				"SubregionId":    true,
 				"FeatureLayerId": true,
+				"SubregionId":    true,
 				"SiteId":         true,
 			},
 			"Site": {
 				"FeatureLayerId": true,
+				"SubregionId":    true,
 				"SiteId":         true,
+			},
+			"Race": {},
+			"Victim": {
+				"FeatureLayerId": true,
+				"SubregionId":    true,
+				"SiteId":         true,
+			},
+			"Caste": {},
+			"Eater": {
+				"SiteId":         true,
+				"FeatureLayerId": true,
 				"SubregionId":    true,
 			},
 		},
@@ -350,6 +341,11 @@ func InitSameFields() {
 		"HistoricalEventEntityOverthrown":         {},
 		"HistoricalEventEntityPersecuted":         {},
 		"HistoricalEventEntityPrimaryCriminals": {
+			"Entity": {
+				"SiteId":      true,
+				"StructureId": true,
+				"EntityId":    true,
+			},
 			"Site": {
 				"EntityId":    true,
 				"SiteId":      true,
@@ -361,29 +357,24 @@ func InitSameFields() {
 				"StructureId": true,
 			},
 			"Action": {},
-			"Entity": {
-				"EntityId":    true,
-				"SiteId":      true,
-				"StructureId": true,
-			},
 		},
 		"HistoricalEventEntityRampagedInSite": {},
 		"HistoricalEventEntityRelocate": {
-			"Action": {},
-			"Entity": {
-				"StructureId": true,
-				"EntityId":    true,
-				"SiteId":      true,
-			},
 			"Site": {
 				"EntityId":    true,
 				"SiteId":      true,
 				"StructureId": true,
 			},
 			"Structure": {
+				"EntityId":    true,
 				"SiteId":      true,
 				"StructureId": true,
+			},
+			"Action": {},
+			"Entity": {
 				"EntityId":    true,
+				"SiteId":      true,
+				"StructureId": true,
 			},
 		},
 		"HistoricalEventEntitySearchedSite":       {},
@@ -398,94 +389,75 @@ func InitSameFields() {
 		"HistoricalEventHfConvicted":              {},
 		"HistoricalEventHfDestroyedSite":          {},
 		"HistoricalEventHfDied": {
+			"ItemSubtype": {},
 			"VictimHf": {
+				"SiteId":              true,
 				"SubregionId":         true,
 				"FeatureLayerId":      true,
-				"Hfid":                true,
-				"SlayerHfid":          true,
 				"SlayerItemId":        true,
-				"SiteId":              true,
+				"SlayerHfid":          true,
+				"Hfid":                true,
 				"SlayerShooterItemId": true,
 			},
-			"ItemSubtype": {
-				"Cause": true,
-			},
-			"DeathCause": {
-				"Cause": true,
-			},
-			"Item": {
-				"Hfid":                true,
-				"SlayerHfid":          true,
-				"SlayerItemId":        true,
+			"ItemType": {},
+			"SlayerHf": {
 				"FeatureLayerId":      true,
 				"SiteId":              true,
-				"SlayerShooterItemId": true,
 				"SubregionId":         true,
+				"SlayerHfid":          true,
+				"SlayerItemId":        true,
+				"SlayerShooterItemId": true,
+				"Hfid":                true,
+			},
+			"Site": {
+				"SiteId":              true,
+				"SubregionId":         true,
+				"FeatureLayerId":      true,
+				"SlayerHfid":          true,
+				"SlayerItemId":        true,
+				"Hfid":                true,
+				"SlayerShooterItemId": true,
 			},
 			"ArtifactId": {
-				"FeatureLayerId":      true,
-				"Hfid":                true,
 				"SlayerHfid":          true,
 				"SlayerItemId":        true,
-				"SiteId":              true,
 				"SlayerShooterItemId": true,
-				"SubregionId":         true,
-			},
-			"ItemType": {
-				"Cause": true,
-			},
-			"Mat": {
-				"Cause": true,
-			},
-			"Site": {
-				"FeatureLayerId":      true,
 				"Hfid":                true,
-				"SlayerHfid":          true,
-				"SlayerItemId":        true,
+				"FeatureLayerId":      true,
 				"SiteId":              true,
-				"SlayerShooterItemId": true,
 				"SubregionId":         true,
 			},
-			"SlayerHf": {
+			"DeathCause": {},
+			"Item": {
 				"SubregionId":         true,
 				"FeatureLayerId":      true,
-				"Hfid":                true,
+				"SiteId":              true,
 				"SlayerHfid":          true,
 				"SlayerItemId":        true,
-				"SiteId":              true,
 				"SlayerShooterItemId": true,
+				"Hfid":                true,
 			},
+			"Mat": {},
 		},
 		"HistoricalEventHfDisturbedStructure": {
-			"Histfig": {
-				"StructureId": true,
-				"HistFigId":   true,
-				"SiteId":      true,
-			},
-			"Site": {
-				"StructureId": true,
-				"HistFigId":   true,
-				"SiteId":      true,
-			},
 			"Structure": {
+				"HistFigId":   true,
 				"SiteId":      true,
 				"StructureId": true,
-				"HistFigId":   true,
 			},
 			"Action": {},
+			"Histfig": {
+				"HistFigId":   true,
+				"SiteId":      true,
+				"StructureId": true,
+			},
+			"Site": {
+				"SiteId":      true,
+				"StructureId": true,
+				"HistFigId":   true,
+			},
 		},
 		"HistoricalEventHfDoesInteraction": {
-			"Doer": {
-				"TargetHfid": true,
-				"DoerHfid":   true,
-			},
-			"InteractionAction": {
-				"Interaction": true,
-			},
-			"Target": {
-				"DoerHfid":   true,
-				"TargetHfid": true,
-			},
 			"Region": {
 				"DoerHfid":   true,
 				"TargetHfid": true,
@@ -494,9 +466,20 @@ func InitSameFields() {
 				"DoerHfid":   true,
 				"TargetHfid": true,
 			},
-			"Source": {
+			"Target": {
 				"DoerHfid":   true,
 				"TargetHfid": true,
+			},
+			"Source": {
+				"TargetHfid": true,
+				"DoerHfid":   true,
+			},
+			"Doer": {
+				"DoerHfid":   true,
+				"TargetHfid": true,
+			},
+			"InteractionAction": {
+				"Interaction": true,
 			},
 		},
 		"HistoricalEventHfEnslaved":          {},
@@ -505,13 +488,10 @@ func InitSameFields() {
 		"HistoricalEventHfGainsSecretGoal":   {},
 		"HistoricalEventHfInterrogated":      {},
 		"HistoricalEventHfLearnsSecret": {
-			"SecretText": {
-				"Interaction": true,
-			},
 			"Student": {
+				"ArtifactId":  true,
 				"StudentHfid": true,
 				"TeacherHfid": true,
-				"ArtifactId":  true,
 			},
 			"Teacher": {
 				"StudentHfid": true,
@@ -523,45 +503,51 @@ func InitSameFields() {
 				"TeacherHfid": true,
 				"ArtifactId":  true,
 			},
+			"SecretText": {},
 		},
 		"HistoricalEventHfNewPet": {
+			"Group": {
+				"SubregionId":    true,
+				"FeatureLayerId": true,
+				"GroupHfid":      true,
+				"SiteId":         true,
+			},
 			"Pets": {
 				"Coords": true,
 			},
 			"Site": {
-				"FeatureLayerId": true,
 				"GroupHfid":      true,
 				"SiteId":         true,
 				"SubregionId":    true,
-			},
-			"Group": {
 				"FeatureLayerId": true,
-				"GroupHfid":      true,
-				"SiteId":         true,
-				"SubregionId":    true,
 			},
 		},
 		"HistoricalEventHfPerformedHorribleExperiments": {},
 		"HistoricalEventHfPrayedInsideStructure": {
-			"Structure": {
-				"HistFigId":   true,
-				"SiteId":      true,
-				"StructureId": true,
-			},
-			"Action": {},
 			"Histfig": {
+				"StructureId": true,
 				"HistFigId":   true,
 				"SiteId":      true,
-				"StructureId": true,
 			},
 			"Site": {
 				"HistFigId":   true,
 				"SiteId":      true,
 				"StructureId": true,
 			},
+			"Structure": {
+				"StructureId": true,
+				"HistFigId":   true,
+				"SiteId":      true,
+			},
+			"Action": {},
 		},
 		"HistoricalEventHfPreach": {},
 		"HistoricalEventHfProfanedStructure": {
+			"Structure": {
+				"SiteId":      true,
+				"StructureId": true,
+				"HistFigId":   true,
+			},
 			"Action": {},
 			"Histfig": {
 				"HistFigId":   true,
@@ -569,11 +555,6 @@ func InitSameFields() {
 				"StructureId": true,
 			},
 			"Site": {
-				"SiteId":      true,
-				"StructureId": true,
-				"HistFigId":   true,
-			},
-			"Structure": {
 				"SiteId":      true,
 				"StructureId": true,
 				"HistFigId":   true,
@@ -589,49 +570,49 @@ func InitSameFields() {
 		"HistoricalEventHfTravel":                     {},
 		"HistoricalEventHfViewedArtifact":             {},
 		"HistoricalEventHfWounded": {
-			"WoundeeCaste": {
-				"WoundeeHfid":    true,
-				"SiteId":         true,
-				"WounderHfid":    true,
-				"FeatureLayerId": true,
-				"SubregionId":    true,
-			},
-			"Site": {
-				"SubregionId":    true,
-				"FeatureLayerId": true,
-				"WoundeeHfid":    true,
-				"WounderHfid":    true,
-				"SiteId":         true,
-			},
-			"InjuryType": {},
 			"Woundee": {
-				"FeatureLayerId": true,
-				"SubregionId":    true,
 				"WoundeeHfid":    true,
+				"SubregionId":    true,
 				"SiteId":         true,
 				"WounderHfid":    true,
+				"FeatureLayerId": true,
+			},
+			"WoundeeCaste": {
+				"SiteId":         true,
+				"WounderHfid":    true,
+				"FeatureLayerId": true,
+				"WoundeeHfid":    true,
+				"SubregionId":    true,
+			},
+			"PartLost":   {},
+			"InjuryType": {},
+			"Site": {
+				"WoundeeHfid":    true,
+				"SubregionId":    true,
+				"SiteId":         true,
+				"WounderHfid":    true,
+				"FeatureLayerId": true,
 			},
 			"WoundeeRace": {
-				"SiteId":         true,
-				"WounderHfid":    true,
-				"FeatureLayerId": true,
 				"SubregionId":    true,
-				"WoundeeHfid":    true,
-			},
-			"PartLost": {},
-			"Wounder": {
 				"WounderHfid":    true,
 				"SiteId":         true,
 				"FeatureLayerId": true,
-				"SubregionId":    true,
 				"WoundeeHfid":    true,
 			},
 			"BodyPart": {
-				"WoundeeHfid":    true,
 				"WounderHfid":    true,
 				"SiteId":         true,
 				"FeatureLayerId": true,
+				"WoundeeHfid":    true,
 				"SubregionId":    true,
+			},
+			"Wounder": {
+				"WoundeeHfid":    true,
+				"SubregionId":    true,
+				"SiteId":         true,
+				"WounderHfid":    true,
+				"FeatureLayerId": true,
 			},
 		},
 		"HistoricalEventHfsFormedIntrigueRelationship":   {},
@@ -639,81 +620,76 @@ func InitSameFields() {
 		"HistoricalEventHolyCityDeclaration":             {},
 		"HistoricalEventInsurrectionStarted":             {},
 		"HistoricalEventItemStolen": {
-			"Mat": {},
+			"ItemSubtype": {},
 			"Structure": {
 				"CircumstanceId": true,
 			},
-			"TheftMethod": {},
 			"Entity": {
 				"CircumstanceId": true,
 			},
-			"Matindex": {
-				"CircumstanceId": true,
-			},
-			"Item": {
-				"CircumstanceId": true,
-			},
-			"ItemSubtype": {},
-			"ItemType":    {},
-			"Histfig": {
+			"Site": {
 				"CircumstanceId": true,
 			},
 			"StashSite": {
 				"CircumstanceId": true,
 			},
+			"ItemType": {},
 			"Mattype": {
 				"CircumstanceId": true,
 			},
-			"Site": {
+			"Mat": {},
+			"Matindex": {
+				"CircumstanceId": true,
+			},
+			"TheftMethod": {},
+			"Histfig": {
+				"CircumstanceId": true,
+			},
+			"Item": {
 				"CircumstanceId": true,
 			},
 		},
 		"HistoricalEventItemStolenCircumstance": {},
 		"HistoricalEventKnowledgeDiscovered":    {},
 		"HistoricalEventMasterpieceArchConstructed": {
-			"Unk2": {
-				"Hfid":     true,
-				"EntityId": true,
-				"SiteId":   true,
-			},
 			"BuildingCustom": {
-				"Hfid":     true,
 				"EntityId": true,
-				"SiteId":   true,
-			},
-			"Maker": {
 				"Hfid":     true,
 				"SiteId":   true,
-				"EntityId": true,
 			},
 			"MakerEntity": {
 				"Hfid":     true,
+				"SiteId":   true,
 				"EntityId": true,
+			},
+			"Site": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"Unk2": {
+				"EntityId": true,
+				"Hfid":     true,
 				"SiteId":   true,
 			},
 			"BuildingSubtype": {},
 			"BuildingType":    {},
-			"Site": {
-				"Hfid":     true,
+			"Maker": {
 				"EntityId": true,
+				"Hfid":     true,
 				"SiteId":   true,
 			},
 		},
 		"HistoricalEventMasterpieceEngraving": {
-			"ArtId": {
-				"EntityId": true,
+			"Site": {
 				"SiteId":   true,
+				"EntityId": true,
 				"Hfid":     true,
 			},
 			"ArtSubid": {
+				"SiteId":   true,
 				"EntityId": true,
 				"Hfid":     true,
-				"SiteId":   true,
-			},
-			"Site": {
-				"EntityId": true,
-				"Hfid":     true,
-				"SiteId":   true,
 			},
 			"Maker": {
 				"EntityId": true,
@@ -721,6 +697,11 @@ func InitSameFields() {
 				"SiteId":   true,
 			},
 			"MakerEntity": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"ArtId": {
 				"EntityId": true,
 				"Hfid":     true,
 				"SiteId":   true,
@@ -728,65 +709,68 @@ func InitSameFields() {
 		},
 		"HistoricalEventMasterpieceFood": {},
 		"HistoricalEventMasterpieceItem": {
-			"ItemId": {
-				"SiteId":   true,
-				"EntityId": true,
-				"Hfid":     true,
-			},
 			"Maker": {
+				"Hfid":     true,
 				"SiteId":   true,
 				"EntityId": true,
+			},
+			"Mat": {},
+			"ItemId": {
 				"Hfid":     true,
+				"SiteId":   true,
+				"EntityId": true,
+			},
+			"ItemSubtype": {},
+			"ItemType":    {},
+			"MakerEntity": {
+				"Hfid":     true,
+				"SiteId":   true,
+				"EntityId": true,
 			},
 			"Site": {
-				"EntityId": true,
 				"Hfid":     true,
 				"SiteId":   true,
-			},
-			"ItemType": {},
-			"MakerEntity": {
-				"SiteId":   true,
 				"EntityId": true,
-				"Hfid":     true,
 			},
-			"Mat":         {},
-			"ItemSubtype": {},
 		},
 		"HistoricalEventMasterpieceItemImprovement": {},
 		"HistoricalEventMasterpieceLost":            {},
 		"HistoricalEventMerchant": {
-			"Destination": {
+			"Source": {
 				"DepotEntityId":  true,
 				"SiteId":         true,
 				"TraderEntityId": true,
+			},
+			"Destination": {
+				"SiteId":         true,
+				"TraderEntityId": true,
+				"DepotEntityId":  true,
 			},
 			"Site": {
-				"DepotEntityId":  true,
 				"SiteId":         true,
 				"TraderEntityId": true,
-			},
-			"Source": {
-				"TraderEntityId": true,
 				"DepotEntityId":  true,
-				"SiteId":         true,
 			},
 		},
 		"HistoricalEventModifiedBuilding":   {},
 		"HistoricalEventMusicalFormCreated": {},
 		"HistoricalEventNewSiteLeader":      {},
 		"HistoricalEventPeaceAccepted": {
+			"Source": {
+				"SiteId": true,
+			},
+			"Topic": {},
 			"Destination": {
 				"SiteId": true,
 			},
 			"Site": {
 				"SiteId": true,
 			},
-			"Source": {
-				"SiteId": true,
-			},
-			"Topic": {},
 		},
 		"HistoricalEventPeaceRejected": {
+			"Destination": {
+				"SiteId": true,
+			},
 			"Site": {
 				"SiteId": true,
 			},
@@ -794,9 +778,6 @@ func InitSameFields() {
 				"SiteId": true,
 			},
 			"Topic": {},
-			"Destination": {
-				"SiteId": true,
-			},
 		},
 		"HistoricalEventPerformance":                     {},
 		"HistoricalEventPlunderedSite":                   {},
@@ -808,6 +789,10 @@ func InitSameFields() {
 		"HistoricalEventRelationship":                    {},
 		"HistoricalEventRelationshipSupplement":          {},
 		"HistoricalEventRemoveHfEntityLink": {
+			"LinkType": {
+				"Link": true,
+			},
+			"Position": {},
 			"Civ": {
 				"PositionId": true,
 				"CivId":      true,
@@ -817,12 +802,6 @@ func InitSameFields() {
 				"PositionId": true,
 				"CivId":      true,
 				"Hfid":       true,
-			},
-			"LinkType": {
-				"Link": true,
-			},
-			"Position": {
-				"Link": true,
 			},
 		},
 		"HistoricalEventRemoveHfHfLink": {},
@@ -842,40 +821,40 @@ func InitSameFields() {
 			},
 		},
 		"HistoricalEventReplacedStructure": {
+			"OldStructure": {
+				"NewAbId":   true,
+				"OldAbId":   true,
+				"SiteCivId": true,
+				"SiteId":    true,
+				"CivId":     true,
+			},
+			"SiteCiv": {
+				"SiteId":    true,
+				"CivId":     true,
+				"NewAbId":   true,
+				"OldAbId":   true,
+				"SiteCivId": true,
+			},
 			"Civ": {
 				"CivId":     true,
-				"OldAbId":   true,
 				"SiteId":    true,
+				"OldAbId":   true,
 				"SiteCivId": true,
 				"NewAbId":   true,
 			},
-			"OldStructure": {
+			"NewStructure": {
+				"SiteCivId": true,
+				"NewAbId":   true,
+				"OldAbId":   true,
 				"SiteId":    true,
 				"CivId":     true,
-				"OldAbId":   true,
-				"NewAbId":   true,
-				"SiteCivId": true,
 			},
 			"Site": {
 				"CivId":     true,
-				"OldAbId":   true,
 				"SiteId":    true,
 				"NewAbId":   true,
-				"SiteCivId": true,
-			},
-			"SiteCiv": {
-				"NewAbId":   true,
-				"SiteCivId": true,
-				"SiteId":    true,
-				"CivId":     true,
 				"OldAbId":   true,
-			},
-			"NewStructure": {
-				"NewAbId":   true,
 				"SiteCivId": true,
-				"SiteId":    true,
-				"CivId":     true,
-				"OldAbId":   true,
 			},
 		},
 		"HistoricalEventSiteDied":               {},
@@ -892,14 +871,14 @@ func InitSameFields() {
 		"HistoricalEventWrittenContentComposed": {},
 		"HistoricalFigure": {
 			"Sex": {
-				"DeathYear":         true,
 				"BreedId":           true,
 				"EntPopId":          true,
-				"CurrentIdentityId": true,
 				"BirthSeconds72":    true,
-				"DeathSeconds72":    true,
-				"BirthYear":         true,
 				"Appeared":          true,
+				"DeathYear":         true,
+				"DeathSeconds72":    true,
+				"CurrentIdentityId": true,
+				"BirthYear":         true,
 			},
 		},
 		"HistoricalFigureEntityLink":      {},
@@ -924,34 +903,32 @@ func InitSameFields() {
 		"River":                           {},
 		"Schedule":                        {},
 		"Site": {
-			"CivId":      {},
 			"CurOwnerId": {},
+			"CivId":      {},
 		},
 		"SiteLink":         {},
 		"SiteSiteProperty": {},
 		"Structure": {
-			"Deity": {
-				"EntityId":    true,
-				"LocalId":     true,
-				"WorshipHfid": true,
-			},
 			"Religion": {
 				"LocalId":     true,
+				"EntityId":    true,
+				"WorshipHfid": true,
+			},
+			"Deity": {
+				"LocalId":     true,
 				"WorshipHfid": true,
 				"EntityId":    true,
 			},
+			"Name2": {},
 			"DeityType": {
-				"WorshipHfid": true,
-				"EntityId":    true,
 				"LocalId":     true,
+				"EntityId":    true,
+				"WorshipHfid": true,
 			},
 			"DungeonType": {
-				"WorshipHfid": true,
 				"EntityId":    true,
+				"WorshipHfid": true,
 				"LocalId":     true,
-			},
-			"Name2": {
-				"Subtype": true,
 			},
 		},
 		"UndergroundRegion": {
@@ -961,19 +938,19 @@ func InitSameFields() {
 		"WorldConstruction": {},
 		"WrittenContent": {
 			"PageEnd": {
-				"AuthorRoll": true,
 				"FormId":     true,
 				"AuthorHfid": true,
-			},
-			"Author": {
-				"AuthorHfid": true,
 				"AuthorRoll": true,
-				"FormId":     true,
 			},
 			"PageStart": {
-				"FormId":     true,
-				"AuthorRoll": true,
 				"AuthorHfid": true,
+				"AuthorRoll": true,
+				"FormId":     true,
+			},
+			"Author": {
+				"FormId":     true,
+				"AuthorHfid": true,
+				"AuthorRoll": true,
 			},
 		},
 	}
@@ -1004,47 +981,47 @@ func (x *Artifact) RelatedToEntity(id int) bool { return false }
 func (x *Artifact) RelatedToHf(id int) bool     { return x.HolderHfid == id }
 
 func (x *Artifact) CheckFields() {
-	if x.Writing != x.SubregionId && x.Writing != 0 && x.SubregionId != 0 {
-		sameFields["Artifact"]["Writing"]["SubregionId"] = false
-	}
-	if x.Writing != x.HolderHfid && x.Writing != 0 && x.HolderHfid != 0 {
-		sameFields["Artifact"]["Writing"]["HolderHfid"] = false
-	}
-	if x.Writing != x.StructureLocalId && x.Writing != 0 && x.StructureLocalId != 0 {
-		sameFields["Artifact"]["Writing"]["StructureLocalId"] = false
-	}
 	if x.Writing != x.AbsTileX && x.Writing != 0 && x.AbsTileX != 0 {
 		sameFields["Artifact"]["Writing"]["AbsTileX"] = false
-	}
-	if x.Writing != x.AbsTileY && x.Writing != 0 && x.AbsTileY != 0 {
-		sameFields["Artifact"]["Writing"]["AbsTileY"] = false
-	}
-	if x.Writing != x.SiteId && x.Writing != 0 && x.SiteId != 0 {
-		sameFields["Artifact"]["Writing"]["SiteId"] = false
 	}
 	if x.Writing != x.AbsTileZ && x.Writing != 0 && x.AbsTileZ != 0 {
 		sameFields["Artifact"]["Writing"]["AbsTileZ"] = false
 	}
-	if x.PageCount != x.AbsTileY && x.PageCount != 0 && x.AbsTileY != 0 {
-		sameFields["Artifact"]["PageCount"]["AbsTileY"] = false
+	if x.Writing != x.SiteId && x.Writing != 0 && x.SiteId != 0 {
+		sameFields["Artifact"]["Writing"]["SiteId"] = false
 	}
-	if x.PageCount != x.AbsTileZ && x.PageCount != 0 && x.AbsTileZ != 0 {
-		sameFields["Artifact"]["PageCount"]["AbsTileZ"] = false
+	if x.Writing != x.HolderHfid && x.Writing != 0 && x.HolderHfid != 0 {
+		sameFields["Artifact"]["Writing"]["HolderHfid"] = false
 	}
-	if x.PageCount != x.SiteId && x.PageCount != 0 && x.SiteId != 0 {
-		sameFields["Artifact"]["PageCount"]["SiteId"] = false
+	if x.Writing != x.AbsTileY && x.Writing != 0 && x.AbsTileY != 0 {
+		sameFields["Artifact"]["Writing"]["AbsTileY"] = false
 	}
-	if x.PageCount != x.HolderHfid && x.PageCount != 0 && x.HolderHfid != 0 {
-		sameFields["Artifact"]["PageCount"]["HolderHfid"] = false
+	if x.Writing != x.StructureLocalId && x.Writing != 0 && x.StructureLocalId != 0 {
+		sameFields["Artifact"]["Writing"]["StructureLocalId"] = false
 	}
-	if x.PageCount != x.SubregionId && x.PageCount != 0 && x.SubregionId != 0 {
-		sameFields["Artifact"]["PageCount"]["SubregionId"] = false
+	if x.Writing != x.SubregionId && x.Writing != 0 && x.SubregionId != 0 {
+		sameFields["Artifact"]["Writing"]["SubregionId"] = false
 	}
 	if x.PageCount != x.AbsTileX && x.PageCount != 0 && x.AbsTileX != 0 {
 		sameFields["Artifact"]["PageCount"]["AbsTileX"] = false
 	}
+	if x.PageCount != x.AbsTileZ && x.PageCount != 0 && x.AbsTileZ != 0 {
+		sameFields["Artifact"]["PageCount"]["AbsTileZ"] = false
+	}
+	if x.PageCount != x.HolderHfid && x.PageCount != 0 && x.HolderHfid != 0 {
+		sameFields["Artifact"]["PageCount"]["HolderHfid"] = false
+	}
+	if x.PageCount != x.SiteId && x.PageCount != 0 && x.SiteId != 0 {
+		sameFields["Artifact"]["PageCount"]["SiteId"] = false
+	}
+	if x.PageCount != x.AbsTileY && x.PageCount != 0 && x.AbsTileY != 0 {
+		sameFields["Artifact"]["PageCount"]["AbsTileY"] = false
+	}
 	if x.PageCount != x.StructureLocalId && x.PageCount != 0 && x.StructureLocalId != 0 {
 		sameFields["Artifact"]["PageCount"]["StructureLocalId"] = false
+	}
+	if x.PageCount != x.SubregionId && x.PageCount != 0 && x.SubregionId != 0 {
+		sameFields["Artifact"]["PageCount"]["SubregionId"] = false
 	}
 }
 
@@ -1224,6 +1201,277 @@ func (x *DfWorld) RelatedToHf(id int) bool     { return false }
 func (x *DfWorld) CheckFields() {
 }
 
+type EntityProfession int
+
+const (
+	EntityProfession_Unknown EntityProfession = iota
+	EntityProfession_Armorer
+	EntityProfession_Blacksmith
+	EntityProfession_BoneCarver
+	EntityProfession_Bowyer
+	EntityProfession_Carpenter
+	EntityProfession_Clothier
+	EntityProfession_Craftsman
+	EntityProfession_GemCutter
+	EntityProfession_Mason
+	EntityProfession_Metalcrafter
+	EntityProfession_Weaponsmith
+	EntityProfession_Weaver
+)
+
+func parseEntityProfession(s string) EntityProfession {
+	switch s {
+	case "armorer":
+		return EntityProfession_Armorer
+	case "blacksmith":
+		return EntityProfession_Blacksmith
+	case "bone_carver":
+		return EntityProfession_BoneCarver
+	case "bowyer":
+		return EntityProfession_Bowyer
+	case "carpenter":
+		return EntityProfession_Carpenter
+	case "clothier":
+		return EntityProfession_Clothier
+	case "craftsman":
+		return EntityProfession_Craftsman
+	case "gem_cutter":
+		return EntityProfession_GemCutter
+	case "mason":
+		return EntityProfession_Mason
+	case "metalcrafter":
+		return EntityProfession_Metalcrafter
+	case "weaponsmith":
+		return EntityProfession_Weaponsmith
+	case "weaver":
+		return EntityProfession_Weaver
+	}
+	return EntityProfession_Unknown
+}
+
+func (s EntityProfession) String() string {
+	switch s {
+	case EntityProfession_Armorer:
+		return "armorer"
+	case EntityProfession_Blacksmith:
+		return "blacksmith"
+	case EntityProfession_BoneCarver:
+		return "bone carver"
+	case EntityProfession_Bowyer:
+		return "bowyer"
+	case EntityProfession_Carpenter:
+		return "carpenter"
+	case EntityProfession_Clothier:
+		return "clothier"
+	case EntityProfession_Craftsman:
+		return "craftsman"
+	case EntityProfession_GemCutter:
+		return "gem cutter"
+	case EntityProfession_Mason:
+		return "mason"
+	case EntityProfession_Metalcrafter:
+		return "metalcrafter"
+	case EntityProfession_Weaponsmith:
+		return "weaponsmith"
+	case EntityProfession_Weaver:
+		return "weaver"
+	}
+	return "unknown"
+}
+
+func (s EntityProfession) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type EntityType int
+
+const (
+	EntityType_Unknown EntityType = iota
+	EntityType_Civilization
+	EntityType_Guild
+	EntityType_Merchantcompany
+	EntityType_Migratinggroup
+	EntityType_Militaryunit
+	EntityType_Nomadicgroup
+	EntityType_Outcast
+	EntityType_Performancetroupe
+	EntityType_Religion
+	EntityType_Sitegovernment
+)
+
+func parseEntityType(s string) EntityType {
+	switch s {
+	case "civilization":
+		return EntityType_Civilization
+	case "guild":
+		return EntityType_Guild
+	case "merchantcompany":
+		return EntityType_Merchantcompany
+	case "migratinggroup":
+		return EntityType_Migratinggroup
+	case "militaryunit":
+		return EntityType_Militaryunit
+	case "nomadicgroup":
+		return EntityType_Nomadicgroup
+	case "outcast":
+		return EntityType_Outcast
+	case "performancetroupe":
+		return EntityType_Performancetroupe
+	case "religion":
+		return EntityType_Religion
+	case "sitegovernment":
+		return EntityType_Sitegovernment
+	}
+	return EntityType_Unknown
+}
+
+func (s EntityType) String() string {
+	switch s {
+	case EntityType_Civilization:
+		return "civilization"
+	case EntityType_Guild:
+		return "guild"
+	case EntityType_Merchantcompany:
+		return "merchantcompany"
+	case EntityType_Migratinggroup:
+		return "migratinggroup"
+	case EntityType_Militaryunit:
+		return "militaryunit"
+	case EntityType_Nomadicgroup:
+		return "nomadicgroup"
+	case EntityType_Outcast:
+		return "outcast"
+	case EntityType_Performancetroupe:
+		return "performancetroupe"
+	case EntityType_Religion:
+		return "religion"
+	case EntityType_Sitegovernment:
+		return "sitegovernment"
+	}
+	return "unknown"
+}
+
+func (s EntityType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type EntityWeapon int
+
+const (
+	EntityWeapon_Unknown EntityWeapon = iota
+	EntityWeapon_BattleAxe
+	EntityWeapon_Bow
+	EntityWeapon_Crossbow
+	EntityWeapon_Dagger
+	EntityWeapon_Flail
+	EntityWeapon_GreatAxe
+	EntityWeapon_Halberd
+	EntityWeapon_LongSword
+	EntityWeapon_Mace
+	EntityWeapon_Maul
+	EntityWeapon_Morningstar
+	EntityWeapon_Pike
+	EntityWeapon_Scimitar
+	EntityWeapon_Scourge
+	EntityWeapon_ShortSword
+	EntityWeapon_Spear
+	EntityWeapon_TwoHandedSword
+	EntityWeapon_WarHammer
+	EntityWeapon_Whip
+)
+
+func parseEntityWeapon(s string) EntityWeapon {
+	switch s {
+	case "battle axe":
+		return EntityWeapon_BattleAxe
+	case "bow":
+		return EntityWeapon_Bow
+	case "crossbow":
+		return EntityWeapon_Crossbow
+	case "dagger":
+		return EntityWeapon_Dagger
+	case "flail":
+		return EntityWeapon_Flail
+	case "great axe":
+		return EntityWeapon_GreatAxe
+	case "halberd":
+		return EntityWeapon_Halberd
+	case "long sword":
+		return EntityWeapon_LongSword
+	case "mace":
+		return EntityWeapon_Mace
+	case "maul":
+		return EntityWeapon_Maul
+	case "morningstar":
+		return EntityWeapon_Morningstar
+	case "pike":
+		return EntityWeapon_Pike
+	case "scimitar":
+		return EntityWeapon_Scimitar
+	case "scourge":
+		return EntityWeapon_Scourge
+	case "short sword":
+		return EntityWeapon_ShortSword
+	case "spear":
+		return EntityWeapon_Spear
+	case "two-handed sword":
+		return EntityWeapon_TwoHandedSword
+	case "war hammer":
+		return EntityWeapon_WarHammer
+	case "whip":
+		return EntityWeapon_Whip
+	}
+	return EntityWeapon_Unknown
+}
+
+func (s EntityWeapon) String() string {
+	switch s {
+	case EntityWeapon_BattleAxe:
+		return "battle axe"
+	case EntityWeapon_Bow:
+		return "bow"
+	case EntityWeapon_Crossbow:
+		return "crossbow"
+	case EntityWeapon_Dagger:
+		return "dagger"
+	case EntityWeapon_Flail:
+		return "flail"
+	case EntityWeapon_GreatAxe:
+		return "great axe"
+	case EntityWeapon_Halberd:
+		return "halberd"
+	case EntityWeapon_LongSword:
+		return "long sword"
+	case EntityWeapon_Mace:
+		return "mace"
+	case EntityWeapon_Maul:
+		return "maul"
+	case EntityWeapon_Morningstar:
+		return "morningstar"
+	case EntityWeapon_Pike:
+		return "pike"
+	case EntityWeapon_Scimitar:
+		return "scimitar"
+	case EntityWeapon_Scourge:
+		return "scourge"
+	case EntityWeapon_ShortSword:
+		return "short sword"
+	case EntityWeapon_Spear:
+		return "spear"
+	case EntityWeapon_TwoHandedSword:
+		return "two handed sword"
+	case EntityWeapon_WarHammer:
+		return "war hammer"
+	case EntityWeapon_Whip:
+		return "whip"
+	}
+	return "unknown"
+}
+
+func (s EntityWeapon) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type Entity struct {
 	Child                    []int                       `json:"child" legend:"plus"`                    // child
 	Claims                   string                      `json:"claims" legend:"plus"`                   // claims
@@ -1235,10 +1483,10 @@ type Entity struct {
 	Id_                      int                         `json:"id" legend:"both"`                       // id
 	Name_                    string                      `json:"name" legend:"base"`                     // name
 	Occasion                 []*Occasion                 `json:"occasion" legend:"plus"`                 // occasion
-	Profession               string                      `json:"profession" legend:"plus"`               // profession
+	Profession               EntityProfession            `json:"profession" legend:"plus"`               // profession
 	Race                     string                      `json:"race" legend:"plus"`                     // race
-	Type                     string                      `json:"type" legend:"plus"`                     // type
-	Weapon                   []string                    `json:"weapon" legend:"plus"`                   // weapon
+	Type                     EntityType                  `json:"type" legend:"plus"`                     // type
+	Weapon                   []EntityWeapon              `json:"weapon" legend:"plus"`                   // weapon
 	WorshipId                []int                       `json:"worshipId" legend:"plus"`                // worship_id
 }
 
@@ -1250,10 +1498,47 @@ func (x *Entity) RelatedToHf(id int) bool     { return containsInt(x.HistfigId, 
 func (x *Entity) CheckFields() {
 }
 
+type EntityEntityLinkType int
+
+const (
+	EntityEntityLinkType_Unknown EntityEntityLinkType = iota
+	EntityEntityLinkType_CHILD
+	EntityEntityLinkType_PARENT
+	EntityEntityLinkType_RELIGIOUS
+)
+
+func parseEntityEntityLinkType(s string) EntityEntityLinkType {
+	switch s {
+	case "CHILD":
+		return EntityEntityLinkType_CHILD
+	case "PARENT":
+		return EntityEntityLinkType_PARENT
+	case "RELIGIOUS":
+		return EntityEntityLinkType_RELIGIOUS
+	}
+	return EntityEntityLinkType_Unknown
+}
+
+func (s EntityEntityLinkType) String() string {
+	switch s {
+	case EntityEntityLinkType_CHILD:
+		return "child"
+	case EntityEntityLinkType_PARENT:
+		return "parent"
+	case EntityEntityLinkType_RELIGIOUS:
+		return "religious"
+	}
+	return "unknown"
+}
+
+func (s EntityEntityLinkType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type EntityEntityLink struct {
-	Strength int    `json:"strength" legend:"plus"` // strength
-	Target   int    `json:"target" legend:"plus"`   // target
-	Type     string `json:"type" legend:"plus"`     // type
+	Strength int                  `json:"strength" legend:"plus"` // strength
+	Target   int                  `json:"target" legend:"plus"`   // target
+	Type     EntityEntityLinkType `json:"type" legend:"plus"`     // type
 }
 
 func (x *EntityEntityLink) RelatedToEntity(id int) bool { return false }
@@ -1382,9 +1667,101 @@ func (x *EntitySquadLink) RelatedToHf(id int) bool     { return false }
 func (x *EntitySquadLink) CheckFields() {
 }
 
+type FeatureType int
+
+const (
+	FeatureType_Unknown FeatureType = iota
+	FeatureType_Acrobats
+	FeatureType_Banners
+	FeatureType_Candles
+	FeatureType_Costumes
+	FeatureType_CriersInFront
+	FeatureType_DancePerformance
+	FeatureType_Images
+	FeatureType_IncenseBurning
+	FeatureType_MusicalPerformance
+	FeatureType_OrderOfPrecedence
+	FeatureType_PoetryRecital
+	FeatureType_Storytelling
+	FeatureType_TheGivingOfItems
+	FeatureType_TheSacrificeOfItems
+)
+
+func parseFeatureType(s string) FeatureType {
+	switch s {
+	case "acrobats":
+		return FeatureType_Acrobats
+	case "banners":
+		return FeatureType_Banners
+	case "candles":
+		return FeatureType_Candles
+	case "costumes":
+		return FeatureType_Costumes
+	case "criers_in_front":
+		return FeatureType_CriersInFront
+	case "dance_performance":
+		return FeatureType_DancePerformance
+	case "images":
+		return FeatureType_Images
+	case "incense_burning":
+		return FeatureType_IncenseBurning
+	case "musical_performance":
+		return FeatureType_MusicalPerformance
+	case "order_of_precedence":
+		return FeatureType_OrderOfPrecedence
+	case "poetry_recital":
+		return FeatureType_PoetryRecital
+	case "storytelling":
+		return FeatureType_Storytelling
+	case "the_giving_of_items":
+		return FeatureType_TheGivingOfItems
+	case "the_sacrifice_of_items":
+		return FeatureType_TheSacrificeOfItems
+	}
+	return FeatureType_Unknown
+}
+
+func (s FeatureType) String() string {
+	switch s {
+	case FeatureType_Acrobats:
+		return "acrobats"
+	case FeatureType_Banners:
+		return "banners"
+	case FeatureType_Candles:
+		return "candles"
+	case FeatureType_Costumes:
+		return "costumes"
+	case FeatureType_CriersInFront:
+		return "criers in front"
+	case FeatureType_DancePerformance:
+		return "dance performance"
+	case FeatureType_Images:
+		return "images"
+	case FeatureType_IncenseBurning:
+		return "incense burning"
+	case FeatureType_MusicalPerformance:
+		return "musical performance"
+	case FeatureType_OrderOfPrecedence:
+		return "order of precedence"
+	case FeatureType_PoetryRecital:
+		return "poetry recital"
+	case FeatureType_Storytelling:
+		return "storytelling"
+	case FeatureType_TheGivingOfItems:
+		return "the giving of items"
+	case FeatureType_TheSacrificeOfItems:
+		return "the sacrifice of items"
+	}
+	return "unknown"
+}
+
+func (s FeatureType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type Feature struct {
-	Reference int    `json:"reference" legend:"plus"` // reference
-	Type      string `json:"type" legend:"plus"`      // type
+	Reference int         `json:"reference" legend:"plus"` // reference
+	Type      FeatureType `json:"type" legend:"plus"`      // type
 }
 
 func (x *Feature) RelatedToEntity(id int) bool { return false }
@@ -1393,10 +1770,102 @@ func (x *Feature) RelatedToHf(id int) bool     { return false }
 func (x *Feature) CheckFields() {
 }
 
+type HfLinkLinkType int
+
+const (
+	HfLinkLinkType_Unknown HfLinkLinkType = iota
+	HfLinkLinkType_Apprentice
+	HfLinkLinkType_Child
+	HfLinkLinkType_Companion
+	HfLinkLinkType_DeceasedSpouse
+	HfLinkLinkType_Deity
+	HfLinkLinkType_Father
+	HfLinkLinkType_FormerApprentice
+	HfLinkLinkType_FormerMaster
+	HfLinkLinkType_FormerSpouse
+	HfLinkLinkType_Lover
+	HfLinkLinkType_Master
+	HfLinkLinkType_Mother
+	HfLinkLinkType_PetOwner
+	HfLinkLinkType_Spouse
+)
+
+func parseHfLinkLinkType(s string) HfLinkLinkType {
+	switch s {
+	case "apprentice":
+		return HfLinkLinkType_Apprentice
+	case "child":
+		return HfLinkLinkType_Child
+	case "companion":
+		return HfLinkLinkType_Companion
+	case "deceased spouse":
+		return HfLinkLinkType_DeceasedSpouse
+	case "deity":
+		return HfLinkLinkType_Deity
+	case "father":
+		return HfLinkLinkType_Father
+	case "former apprentice":
+		return HfLinkLinkType_FormerApprentice
+	case "former master":
+		return HfLinkLinkType_FormerMaster
+	case "former spouse":
+		return HfLinkLinkType_FormerSpouse
+	case "lover":
+		return HfLinkLinkType_Lover
+	case "master":
+		return HfLinkLinkType_Master
+	case "mother":
+		return HfLinkLinkType_Mother
+	case "pet owner":
+		return HfLinkLinkType_PetOwner
+	case "spouse":
+		return HfLinkLinkType_Spouse
+	}
+	return HfLinkLinkType_Unknown
+}
+
+func (s HfLinkLinkType) String() string {
+	switch s {
+	case HfLinkLinkType_Apprentice:
+		return "apprentice"
+	case HfLinkLinkType_Child:
+		return "child"
+	case HfLinkLinkType_Companion:
+		return "companion"
+	case HfLinkLinkType_DeceasedSpouse:
+		return "deceased spouse"
+	case HfLinkLinkType_Deity:
+		return "deity"
+	case HfLinkLinkType_Father:
+		return "father"
+	case HfLinkLinkType_FormerApprentice:
+		return "former apprentice"
+	case HfLinkLinkType_FormerMaster:
+		return "former master"
+	case HfLinkLinkType_FormerSpouse:
+		return "former spouse"
+	case HfLinkLinkType_Lover:
+		return "lover"
+	case HfLinkLinkType_Master:
+		return "master"
+	case HfLinkLinkType_Mother:
+		return "mother"
+	case HfLinkLinkType_PetOwner:
+		return "pet owner"
+	case HfLinkLinkType_Spouse:
+		return "spouse"
+	}
+	return "unknown"
+}
+
+func (s HfLinkLinkType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HfLink struct {
-	Hfid         int    `json:"hfid" legend:"base"`         // hfid
-	LinkStrength int    `json:"linkStrength" legend:"base"` // link_strength
-	LinkType     string `json:"linkType" legend:"base"`     // link_type
+	Hfid         int            `json:"hfid" legend:"base"`         // hfid
+	LinkStrength int            `json:"linkStrength" legend:"base"` // link_strength
+	LinkType     HfLinkLinkType `json:"linkType" legend:"base"`     // link_type
 }
 
 func (x *HfLink) RelatedToEntity(id int) bool { return false }
@@ -1454,31 +1923,189 @@ func (x *HistoricalEventAddHfEntityHonor) RelatedToHf(id int) bool     { return 
 func (x *HistoricalEventAddHfEntityHonor) CheckFields() {
 }
 
+type HistoricalEventAddHfEntityLinkLink int
+
+const (
+	HistoricalEventAddHfEntityLinkLink_Unknown HistoricalEventAddHfEntityLinkLink = iota
+	HistoricalEventAddHfEntityLinkLink_Enemy
+	HistoricalEventAddHfEntityLinkLink_Member
+	HistoricalEventAddHfEntityLinkLink_Position
+	HistoricalEventAddHfEntityLinkLink_Prisoner
+	HistoricalEventAddHfEntityLinkLink_Slave
+	HistoricalEventAddHfEntityLinkLink_Squad
+)
+
+func parseHistoricalEventAddHfEntityLinkLink(s string) HistoricalEventAddHfEntityLinkLink {
+	switch s {
+	case "enemy":
+		return HistoricalEventAddHfEntityLinkLink_Enemy
+	case "member":
+		return HistoricalEventAddHfEntityLinkLink_Member
+	case "position":
+		return HistoricalEventAddHfEntityLinkLink_Position
+	case "prisoner":
+		return HistoricalEventAddHfEntityLinkLink_Prisoner
+	case "slave":
+		return HistoricalEventAddHfEntityLinkLink_Slave
+	case "squad":
+		return HistoricalEventAddHfEntityLinkLink_Squad
+	}
+	return HistoricalEventAddHfEntityLinkLink_Unknown
+}
+
+func (s HistoricalEventAddHfEntityLinkLink) String() string {
+	switch s {
+	case HistoricalEventAddHfEntityLinkLink_Enemy:
+		return "enemy"
+	case HistoricalEventAddHfEntityLinkLink_Member:
+		return "member"
+	case HistoricalEventAddHfEntityLinkLink_Position:
+		return "position"
+	case HistoricalEventAddHfEntityLinkLink_Prisoner:
+		return "prisoner"
+	case HistoricalEventAddHfEntityLinkLink_Slave:
+		return "slave"
+	case HistoricalEventAddHfEntityLinkLink_Squad:
+		return "squad"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventAddHfEntityLinkLink) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventAddHfEntityLinkLinkType int
+
+const (
+	HistoricalEventAddHfEntityLinkLinkType_Unknown HistoricalEventAddHfEntityLinkLinkType = iota
+	HistoricalEventAddHfEntityLinkLinkType_Enemy
+	HistoricalEventAddHfEntityLinkLinkType_Member
+	HistoricalEventAddHfEntityLinkLinkType_Position
+	HistoricalEventAddHfEntityLinkLinkType_Prisoner
+	HistoricalEventAddHfEntityLinkLinkType_Slave
+)
+
+func parseHistoricalEventAddHfEntityLinkLinkType(s string) HistoricalEventAddHfEntityLinkLinkType {
+	switch s {
+	case "enemy":
+		return HistoricalEventAddHfEntityLinkLinkType_Enemy
+	case "member":
+		return HistoricalEventAddHfEntityLinkLinkType_Member
+	case "position":
+		return HistoricalEventAddHfEntityLinkLinkType_Position
+	case "prisoner":
+		return HistoricalEventAddHfEntityLinkLinkType_Prisoner
+	case "slave":
+		return HistoricalEventAddHfEntityLinkLinkType_Slave
+	}
+	return HistoricalEventAddHfEntityLinkLinkType_Unknown
+}
+
+func (s HistoricalEventAddHfEntityLinkLinkType) String() string {
+	switch s {
+	case HistoricalEventAddHfEntityLinkLinkType_Enemy:
+		return "enemy"
+	case HistoricalEventAddHfEntityLinkLinkType_Member:
+		return "member"
+	case HistoricalEventAddHfEntityLinkLinkType_Position:
+		return "position"
+	case HistoricalEventAddHfEntityLinkLinkType_Prisoner:
+		return "prisoner"
+	case HistoricalEventAddHfEntityLinkLinkType_Slave:
+		return "slave"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventAddHfEntityLinkLinkType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventAddHfEntityLink struct {
-	AppointerHfid int    `json:"appointerHfid" legend:"both"` // appointer_hfid
-	CivId         int    `json:"civId" legend:"base"`         // civ_id
-	Hfid          int    `json:"hfid" legend:"base"`          // hfid
-	Link          string `json:"link" legend:"base"`          // link
-	Position      string `json:"position" legend:"plus"`      // position
-	PositionId    int    `json:"positionId" legend:"base"`    // position_id
-	PromiseToHfid int    `json:"promiseToHfid" legend:"both"` // promise_to_hfid
+	AppointerHfid int                                `json:"appointerHfid" legend:"both"` // appointer_hfid
+	CivId         int                                `json:"civId" legend:"base"`         // civ_id
+	Hfid          int                                `json:"hfid" legend:"base"`          // hfid
+	Link          HistoricalEventAddHfEntityLinkLink `json:"link" legend:"base"`          // link
+	Position      string                             `json:"position" legend:"plus"`      // position
+	PositionId    int                                `json:"positionId" legend:"base"`    // position_id
+	PromiseToHfid int                                `json:"promiseToHfid" legend:"both"` // promise_to_hfid
 }
 
 func (x *HistoricalEventAddHfEntityLink) RelatedToEntity(id int) bool { return x.CivId == id }
 func (x *HistoricalEventAddHfEntityLink) RelatedToHf(id int) bool {
-	return x.Hfid == id || x.PromiseToHfid == id || x.AppointerHfid == id
+	return x.PromiseToHfid == id || x.AppointerHfid == id || x.Hfid == id
 }
 
 func (x *HistoricalEventAddHfEntityLink) CheckFields() {
-	if x.Position != x.Link && x.Position != "" && x.Link != "" {
-		sameFields["HistoricalEventAddHfEntityLink"]["Position"]["Link"] = false
+}
+
+type HistoricalEventAddHfHfLinkLinkType int
+
+const (
+	HistoricalEventAddHfHfLinkLinkType_Unknown HistoricalEventAddHfHfLinkLinkType = iota
+	HistoricalEventAddHfHfLinkLinkType_Apprentice
+	HistoricalEventAddHfHfLinkLinkType_Deity
+	HistoricalEventAddHfHfLinkLinkType_FormerMaster
+	HistoricalEventAddHfHfLinkLinkType_Lover
+	HistoricalEventAddHfHfLinkLinkType_Master
+	HistoricalEventAddHfHfLinkLinkType_PetOwner
+	HistoricalEventAddHfHfLinkLinkType_Prisoner
+	HistoricalEventAddHfHfLinkLinkType_Spouse
+)
+
+func parseHistoricalEventAddHfHfLinkLinkType(s string) HistoricalEventAddHfHfLinkLinkType {
+	switch s {
+	case "apprentice":
+		return HistoricalEventAddHfHfLinkLinkType_Apprentice
+	case "deity":
+		return HistoricalEventAddHfHfLinkLinkType_Deity
+	case "former_master":
+		return HistoricalEventAddHfHfLinkLinkType_FormerMaster
+	case "lover":
+		return HistoricalEventAddHfHfLinkLinkType_Lover
+	case "master":
+		return HistoricalEventAddHfHfLinkLinkType_Master
+	case "pet_owner":
+		return HistoricalEventAddHfHfLinkLinkType_PetOwner
+	case "prisoner":
+		return HistoricalEventAddHfHfLinkLinkType_Prisoner
+	case "spouse":
+		return HistoricalEventAddHfHfLinkLinkType_Spouse
 	}
+	return HistoricalEventAddHfHfLinkLinkType_Unknown
+}
+
+func (s HistoricalEventAddHfHfLinkLinkType) String() string {
+	switch s {
+	case HistoricalEventAddHfHfLinkLinkType_Apprentice:
+		return "apprentice"
+	case HistoricalEventAddHfHfLinkLinkType_Deity:
+		return "deity"
+	case HistoricalEventAddHfHfLinkLinkType_FormerMaster:
+		return "former master"
+	case HistoricalEventAddHfHfLinkLinkType_Lover:
+		return "lover"
+	case HistoricalEventAddHfHfLinkLinkType_Master:
+		return "master"
+	case HistoricalEventAddHfHfLinkLinkType_PetOwner:
+		return "pet owner"
+	case HistoricalEventAddHfHfLinkLinkType_Prisoner:
+		return "prisoner"
+	case HistoricalEventAddHfHfLinkLinkType_Spouse:
+		return "spouse"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventAddHfHfLinkLinkType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
 }
 
 type HistoricalEventAddHfHfLink struct {
-	Hfid       int    `json:"hfid" legend:"base"`       // hfid
-	HfidTarget int    `json:"hfidTarget" legend:"base"` // hfid_target
-	LinkType   string `json:"linkType" legend:"plus"`   // link_type
+	Hfid       int                                `json:"hfid" legend:"base"`       // hfid
+	HfidTarget int                                `json:"hfidTarget" legend:"base"` // hfid_target
+	LinkType   HistoricalEventAddHfHfLinkLinkType `json:"linkType" legend:"plus"`   // link_type
 }
 
 func (x *HistoricalEventAddHfHfLink) RelatedToEntity(id int) bool { return false }
@@ -1489,12 +2116,49 @@ func (x *HistoricalEventAddHfHfLink) RelatedToHf(id int) bool {
 func (x *HistoricalEventAddHfHfLink) CheckFields() {
 }
 
+type HistoricalEventAddHfSiteLinkLinkType int
+
+const (
+	HistoricalEventAddHfSiteLinkLinkType_Unknown HistoricalEventAddHfSiteLinkLinkType = iota
+	HistoricalEventAddHfSiteLinkLinkType_HomeSiteAbstractBuilding
+	HistoricalEventAddHfSiteLinkLinkType_Occupation
+	HistoricalEventAddHfSiteLinkLinkType_SeatOfPower
+)
+
+func parseHistoricalEventAddHfSiteLinkLinkType(s string) HistoricalEventAddHfSiteLinkLinkType {
+	switch s {
+	case "home_site_abstract_building":
+		return HistoricalEventAddHfSiteLinkLinkType_HomeSiteAbstractBuilding
+	case "occupation":
+		return HistoricalEventAddHfSiteLinkLinkType_Occupation
+	case "seat_of_power":
+		return HistoricalEventAddHfSiteLinkLinkType_SeatOfPower
+	}
+	return HistoricalEventAddHfSiteLinkLinkType_Unknown
+}
+
+func (s HistoricalEventAddHfSiteLinkLinkType) String() string {
+	switch s {
+	case HistoricalEventAddHfSiteLinkLinkType_HomeSiteAbstractBuilding:
+		return "home site abstract building"
+	case HistoricalEventAddHfSiteLinkLinkType_Occupation:
+		return "occupation"
+	case HistoricalEventAddHfSiteLinkLinkType_SeatOfPower:
+		return "seat of power"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventAddHfSiteLinkLinkType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventAddHfSiteLink struct {
-	Civ       int    `json:"civ" legend:"plus"`       // civ
-	Histfig   int    `json:"histfig" legend:"plus"`   // histfig
-	LinkType  string `json:"linkType" legend:"plus"`  // link_type
-	SiteId    int    `json:"siteId" legend:"base"`    // site_id
-	Structure int    `json:"structure" legend:"plus"` // structure
+	Civ       int                                  `json:"civ" legend:"plus"`       // civ
+	Histfig   int                                  `json:"histfig" legend:"plus"`   // histfig
+	LinkType  HistoricalEventAddHfSiteLinkLinkType `json:"linkType" legend:"plus"`  // link_type
+	SiteId    int                                  `json:"siteId" legend:"base"`    // site_id
+	Structure int                                  `json:"structure" legend:"plus"` // structure
 }
 
 func (x *HistoricalEventAddHfSiteLink) RelatedToEntity(id int) bool { return false }
@@ -1512,30 +2176,317 @@ func (x *HistoricalEventAddHfSiteLink) CheckFields() {
 	}
 }
 
+type HistoricalEventAgreementFormedAction int
+
+const (
+	HistoricalEventAgreementFormedAction_Unknown HistoricalEventAgreementFormedAction = iota
+	HistoricalEventAgreementFormedAction_BribeOfficial
+	HistoricalEventAgreementFormedAction_InduceToEmbezzle
+)
+
+func parseHistoricalEventAgreementFormedAction(s string) HistoricalEventAgreementFormedAction {
+	switch s {
+	case "bribe official":
+		return HistoricalEventAgreementFormedAction_BribeOfficial
+	case "induce to embezzle":
+		return HistoricalEventAgreementFormedAction_InduceToEmbezzle
+	}
+	return HistoricalEventAgreementFormedAction_Unknown
+}
+
+func (s HistoricalEventAgreementFormedAction) String() string {
+	switch s {
+	case HistoricalEventAgreementFormedAction_BribeOfficial:
+		return "bribe official"
+	case HistoricalEventAgreementFormedAction_InduceToEmbezzle:
+		return "induce to embezzle"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventAgreementFormedAction) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventAgreementFormedMethod int
+
+const (
+	HistoricalEventAgreementFormedMethod_Unknown HistoricalEventAgreementFormedMethod = iota
+	HistoricalEventAgreementFormedMethod_BlackmailOverEmbezzlement
+	HistoricalEventAgreementFormedMethod_Bribe
+	HistoricalEventAgreementFormedMethod_Flatter
+	HistoricalEventAgreementFormedMethod_Intimidate
+	HistoricalEventAgreementFormedMethod_OfferImmortality
+	HistoricalEventAgreementFormedMethod_Precedence
+	HistoricalEventAgreementFormedMethod_ReligiousSympathy
+	HistoricalEventAgreementFormedMethod_RevengeOnGrudge
+)
+
+func parseHistoricalEventAgreementFormedMethod(s string) HistoricalEventAgreementFormedMethod {
+	switch s {
+	case "blackmail over embezzlement":
+		return HistoricalEventAgreementFormedMethod_BlackmailOverEmbezzlement
+	case "bribe":
+		return HistoricalEventAgreementFormedMethod_Bribe
+	case "flatter":
+		return HistoricalEventAgreementFormedMethod_Flatter
+	case "intimidate":
+		return HistoricalEventAgreementFormedMethod_Intimidate
+	case "offer immortality":
+		return HistoricalEventAgreementFormedMethod_OfferImmortality
+	case "precedence":
+		return HistoricalEventAgreementFormedMethod_Precedence
+	case "religious sympathy":
+		return HistoricalEventAgreementFormedMethod_ReligiousSympathy
+	case "revenge on grudge":
+		return HistoricalEventAgreementFormedMethod_RevengeOnGrudge
+	}
+	return HistoricalEventAgreementFormedMethod_Unknown
+}
+
+func (s HistoricalEventAgreementFormedMethod) String() string {
+	switch s {
+	case HistoricalEventAgreementFormedMethod_BlackmailOverEmbezzlement:
+		return "blackmail over embezzlement"
+	case HistoricalEventAgreementFormedMethod_Bribe:
+		return "bribe"
+	case HistoricalEventAgreementFormedMethod_Flatter:
+		return "flatter"
+	case HistoricalEventAgreementFormedMethod_Intimidate:
+		return "intimidate"
+	case HistoricalEventAgreementFormedMethod_OfferImmortality:
+		return "offer immortality"
+	case HistoricalEventAgreementFormedMethod_Precedence:
+		return "precedence"
+	case HistoricalEventAgreementFormedMethod_ReligiousSympathy:
+		return "religious sympathy"
+	case HistoricalEventAgreementFormedMethod_RevengeOnGrudge:
+		return "revenge on grudge"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventAgreementFormedMethod) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventAgreementFormedReason int
+
+const (
+	HistoricalEventAgreementFormedReason_Unknown HistoricalEventAgreementFormedReason = iota
+	HistoricalEventAgreementFormedReason_ReunitedWithLovedOne
+	HistoricalEventAgreementFormedReason_ViolentDisagreement
+	HistoricalEventAgreementFormedReason_Whim
+)
+
+func parseHistoricalEventAgreementFormedReason(s string) HistoricalEventAgreementFormedReason {
+	switch s {
+	case "reunited with loved one":
+		return HistoricalEventAgreementFormedReason_ReunitedWithLovedOne
+	case "violent disagreement":
+		return HistoricalEventAgreementFormedReason_ViolentDisagreement
+	case "whim":
+		return HistoricalEventAgreementFormedReason_Whim
+	}
+	return HistoricalEventAgreementFormedReason_Unknown
+}
+
+func (s HistoricalEventAgreementFormedReason) String() string {
+	switch s {
+	case HistoricalEventAgreementFormedReason_ReunitedWithLovedOne:
+		return "reunited with loved one"
+	case HistoricalEventAgreementFormedReason_ViolentDisagreement:
+		return "violent disagreement"
+	case HistoricalEventAgreementFormedReason_Whim:
+		return "whim"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventAgreementFormedReason) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventAgreementFormedTopFacet int
+
+const (
+	HistoricalEventAgreementFormedTopFacet_Unknown HistoricalEventAgreementFormedTopFacet = iota
+	HistoricalEventAgreementFormedTopFacet_Ambition
+	HistoricalEventAgreementFormedTopFacet_AnxietyPropensity
+	HistoricalEventAgreementFormedTopFacet_Confidence
+	HistoricalEventAgreementFormedTopFacet_EnvyPropensity
+	HistoricalEventAgreementFormedTopFacet_Fearlessness
+	HistoricalEventAgreementFormedTopFacet_Greed
+	HistoricalEventAgreementFormedTopFacet_Hope
+	HistoricalEventAgreementFormedTopFacet_Pride
+	HistoricalEventAgreementFormedTopFacet_StressVulnerability
+	HistoricalEventAgreementFormedTopFacet_Swayable
+	HistoricalEventAgreementFormedTopFacet_Vanity
+	HistoricalEventAgreementFormedTopFacet_Vengeful
+)
+
+func parseHistoricalEventAgreementFormedTopFacet(s string) HistoricalEventAgreementFormedTopFacet {
+	switch s {
+	case "ambition":
+		return HistoricalEventAgreementFormedTopFacet_Ambition
+	case "anxiety propensity":
+		return HistoricalEventAgreementFormedTopFacet_AnxietyPropensity
+	case "confidence":
+		return HistoricalEventAgreementFormedTopFacet_Confidence
+	case "envy propensity":
+		return HistoricalEventAgreementFormedTopFacet_EnvyPropensity
+	case "fearlessness":
+		return HistoricalEventAgreementFormedTopFacet_Fearlessness
+	case "greed":
+		return HistoricalEventAgreementFormedTopFacet_Greed
+	case "hope":
+		return HistoricalEventAgreementFormedTopFacet_Hope
+	case "pride":
+		return HistoricalEventAgreementFormedTopFacet_Pride
+	case "stress vulnerability":
+		return HistoricalEventAgreementFormedTopFacet_StressVulnerability
+	case "swayable":
+		return HistoricalEventAgreementFormedTopFacet_Swayable
+	case "vanity":
+		return HistoricalEventAgreementFormedTopFacet_Vanity
+	case "vengeful":
+		return HistoricalEventAgreementFormedTopFacet_Vengeful
+	}
+	return HistoricalEventAgreementFormedTopFacet_Unknown
+}
+
+func (s HistoricalEventAgreementFormedTopFacet) String() string {
+	switch s {
+	case HistoricalEventAgreementFormedTopFacet_Ambition:
+		return "ambition"
+	case HistoricalEventAgreementFormedTopFacet_AnxietyPropensity:
+		return "anxiety propensity"
+	case HistoricalEventAgreementFormedTopFacet_Confidence:
+		return "confidence"
+	case HistoricalEventAgreementFormedTopFacet_EnvyPropensity:
+		return "envy propensity"
+	case HistoricalEventAgreementFormedTopFacet_Fearlessness:
+		return "fearlessness"
+	case HistoricalEventAgreementFormedTopFacet_Greed:
+		return "greed"
+	case HistoricalEventAgreementFormedTopFacet_Hope:
+		return "hope"
+	case HistoricalEventAgreementFormedTopFacet_Pride:
+		return "pride"
+	case HistoricalEventAgreementFormedTopFacet_StressVulnerability:
+		return "stress vulnerability"
+	case HistoricalEventAgreementFormedTopFacet_Swayable:
+		return "swayable"
+	case HistoricalEventAgreementFormedTopFacet_Vanity:
+		return "vanity"
+	case HistoricalEventAgreementFormedTopFacet_Vengeful:
+		return "vengeful"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventAgreementFormedTopFacet) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventAgreementFormedTopRelationshipFactor int
+
+const (
+	HistoricalEventAgreementFormedTopRelationshipFactor_Unknown HistoricalEventAgreementFormedTopRelationshipFactor = iota
+	HistoricalEventAgreementFormedTopRelationshipFactor_Fear
+	HistoricalEventAgreementFormedTopRelationshipFactor_Love
+	HistoricalEventAgreementFormedTopRelationshipFactor_Respect
+	HistoricalEventAgreementFormedTopRelationshipFactor_Trust
+)
+
+func parseHistoricalEventAgreementFormedTopRelationshipFactor(s string) HistoricalEventAgreementFormedTopRelationshipFactor {
+	switch s {
+	case "fear":
+		return HistoricalEventAgreementFormedTopRelationshipFactor_Fear
+	case "love":
+		return HistoricalEventAgreementFormedTopRelationshipFactor_Love
+	case "respect":
+		return HistoricalEventAgreementFormedTopRelationshipFactor_Respect
+	case "trust":
+		return HistoricalEventAgreementFormedTopRelationshipFactor_Trust
+	}
+	return HistoricalEventAgreementFormedTopRelationshipFactor_Unknown
+}
+
+func (s HistoricalEventAgreementFormedTopRelationshipFactor) String() string {
+	switch s {
+	case HistoricalEventAgreementFormedTopRelationshipFactor_Fear:
+		return "fear"
+	case HistoricalEventAgreementFormedTopRelationshipFactor_Love:
+		return "love"
+	case HistoricalEventAgreementFormedTopRelationshipFactor_Respect:
+		return "respect"
+	case HistoricalEventAgreementFormedTopRelationshipFactor_Trust:
+		return "trust"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventAgreementFormedTopRelationshipFactor) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventAgreementFormedTopValue int
+
+const (
+	HistoricalEventAgreementFormedTopValue_Unknown HistoricalEventAgreementFormedTopValue = iota
+	HistoricalEventAgreementFormedTopValue_Law
+	HistoricalEventAgreementFormedTopValue_Power
+)
+
+func parseHistoricalEventAgreementFormedTopValue(s string) HistoricalEventAgreementFormedTopValue {
+	switch s {
+	case "law":
+		return HistoricalEventAgreementFormedTopValue_Law
+	case "power":
+		return HistoricalEventAgreementFormedTopValue_Power
+	}
+	return HistoricalEventAgreementFormedTopValue_Unknown
+}
+
+func (s HistoricalEventAgreementFormedTopValue) String() string {
+	switch s {
+	case HistoricalEventAgreementFormedTopValue_Law:
+		return "law"
+	case HistoricalEventAgreementFormedTopValue_Power:
+		return "power"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventAgreementFormedTopValue) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventAgreementFormed struct {
-	Action                    string `json:"action" legend:"base"`                    // action
-	AgreementId               int    `json:"agreementId" legend:"base"`               // agreement_id
-	AgreementSubjectId        int    `json:"agreementSubjectId" legend:"base"`        // agreement_subject_id
-	AllyDefenseBonus          int    `json:"allyDefenseBonus" legend:"base"`          // ally_defense_bonus
-	CoconspiratorBonus        int    `json:"coconspiratorBonus" legend:"base"`        // coconspirator_bonus
-	ConcluderHfid             int    `json:"concluderHfid" legend:"base"`             // concluder_hfid
-	Delegated                 bool   `json:"delegated" legend:"base"`                 // delegated
-	FailedJudgmentTest        bool   `json:"failedJudgmentTest" legend:"base"`        // failed_judgment_test
-	Method                    string `json:"method" legend:"base"`                    // method
-	Reason                    string `json:"reason" legend:"base"`                    // reason
-	RelevantEntityId          int    `json:"relevantEntityId" legend:"base"`          // relevant_entity_id
-	RelevantIdForMethod       int    `json:"relevantIdForMethod" legend:"base"`       // relevant_id_for_method
-	RelevantPositionProfileId int    `json:"relevantPositionProfileId" legend:"base"` // relevant_position_profile_id
-	Successful                bool   `json:"successful" legend:"base"`                // successful
-	TopFacet                  string `json:"topFacet" legend:"base"`                  // top_facet
-	TopFacetModifier          int    `json:"topFacetModifier" legend:"base"`          // top_facet_modifier
-	TopFacetRating            int    `json:"topFacetRating" legend:"base"`            // top_facet_rating
-	TopRelationshipFactor     string `json:"topRelationshipFactor" legend:"base"`     // top_relationship_factor
-	TopRelationshipModifier   int    `json:"topRelationshipModifier" legend:"base"`   // top_relationship_modifier
-	TopRelationshipRating     int    `json:"topRelationshipRating" legend:"base"`     // top_relationship_rating
-	TopValue                  string `json:"topValue" legend:"base"`                  // top_value
-	TopValueModifier          int    `json:"topValueModifier" legend:"base"`          // top_value_modifier
-	TopValueRating            int    `json:"topValueRating" legend:"base"`            // top_value_rating
+	Action                    HistoricalEventAgreementFormedAction                `json:"action" legend:"base"`                    // action
+	AgreementId               int                                                 `json:"agreementId" legend:"base"`               // agreement_id
+	AgreementSubjectId        int                                                 `json:"agreementSubjectId" legend:"base"`        // agreement_subject_id
+	AllyDefenseBonus          int                                                 `json:"allyDefenseBonus" legend:"base"`          // ally_defense_bonus
+	CoconspiratorBonus        int                                                 `json:"coconspiratorBonus" legend:"base"`        // coconspirator_bonus
+	ConcluderHfid             int                                                 `json:"concluderHfid" legend:"base"`             // concluder_hfid
+	Delegated                 bool                                                `json:"delegated" legend:"base"`                 // delegated
+	FailedJudgmentTest        bool                                                `json:"failedJudgmentTest" legend:"base"`        // failed_judgment_test
+	Method                    HistoricalEventAgreementFormedMethod                `json:"method" legend:"base"`                    // method
+	Reason                    HistoricalEventAgreementFormedReason                `json:"reason" legend:"base"`                    // reason
+	RelevantEntityId          int                                                 `json:"relevantEntityId" legend:"base"`          // relevant_entity_id
+	RelevantIdForMethod       int                                                 `json:"relevantIdForMethod" legend:"base"`       // relevant_id_for_method
+	RelevantPositionProfileId int                                                 `json:"relevantPositionProfileId" legend:"base"` // relevant_position_profile_id
+	Successful                bool                                                `json:"successful" legend:"base"`                // successful
+	TopFacet                  HistoricalEventAgreementFormedTopFacet              `json:"topFacet" legend:"base"`                  // top_facet
+	TopFacetModifier          int                                                 `json:"topFacetModifier" legend:"base"`          // top_facet_modifier
+	TopFacetRating            int                                                 `json:"topFacetRating" legend:"base"`            // top_facet_rating
+	TopRelationshipFactor     HistoricalEventAgreementFormedTopRelationshipFactor `json:"topRelationshipFactor" legend:"base"`     // top_relationship_factor
+	TopRelationshipModifier   int                                                 `json:"topRelationshipModifier" legend:"base"`   // top_relationship_modifier
+	TopRelationshipRating     int                                                 `json:"topRelationshipRating" legend:"base"`     // top_relationship_rating
+	TopValue                  HistoricalEventAgreementFormedTopValue              `json:"topValue" legend:"base"`                  // top_value
+	TopValueModifier          int                                                 `json:"topValueModifier" legend:"base"`          // top_value_modifier
+	TopValueRating            int                                                 `json:"topValueRating" legend:"base"`            // top_value_rating
 }
 
 func (x *HistoricalEventAgreementFormed) RelatedToEntity(id int) bool {
@@ -1566,13 +2517,82 @@ func (x *HistoricalEventAgreementRejected) RelatedToHf(id int) bool     { return
 func (x *HistoricalEventAgreementRejected) CheckFields() {
 }
 
+type HistoricalEventArtifactClaimFormedCircumstance int
+
+const (
+	HistoricalEventArtifactClaimFormedCircumstance_Unknown HistoricalEventArtifactClaimFormedCircumstance = iota
+	HistoricalEventArtifactClaimFormedCircumstance_DuringAnInfiltrationMission
+	HistoricalEventArtifactClaimFormedCircumstance_FromAfar
+)
+
+func parseHistoricalEventArtifactClaimFormedCircumstance(s string) HistoricalEventArtifactClaimFormedCircumstance {
+	switch s {
+	case "during an infiltration mission":
+		return HistoricalEventArtifactClaimFormedCircumstance_DuringAnInfiltrationMission
+	case "from afar":
+		return HistoricalEventArtifactClaimFormedCircumstance_FromAfar
+	}
+	return HistoricalEventArtifactClaimFormedCircumstance_Unknown
+}
+
+func (s HistoricalEventArtifactClaimFormedCircumstance) String() string {
+	switch s {
+	case HistoricalEventArtifactClaimFormedCircumstance_DuringAnInfiltrationMission:
+		return "during an infiltration mission"
+	case HistoricalEventArtifactClaimFormedCircumstance_FromAfar:
+		return "from afar"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventArtifactClaimFormedCircumstance) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventArtifactClaimFormedClaim int
+
+const (
+	HistoricalEventArtifactClaimFormedClaim_Unknown HistoricalEventArtifactClaimFormedClaim = iota
+	HistoricalEventArtifactClaimFormedClaim_Heirloom
+	HistoricalEventArtifactClaimFormedClaim_Symbol
+	HistoricalEventArtifactClaimFormedClaim_Treasure
+)
+
+func parseHistoricalEventArtifactClaimFormedClaim(s string) HistoricalEventArtifactClaimFormedClaim {
+	switch s {
+	case "heirloom":
+		return HistoricalEventArtifactClaimFormedClaim_Heirloom
+	case "symbol":
+		return HistoricalEventArtifactClaimFormedClaim_Symbol
+	case "treasure":
+		return HistoricalEventArtifactClaimFormedClaim_Treasure
+	}
+	return HistoricalEventArtifactClaimFormedClaim_Unknown
+}
+
+func (s HistoricalEventArtifactClaimFormedClaim) String() string {
+	switch s {
+	case HistoricalEventArtifactClaimFormedClaim_Heirloom:
+		return "heirloom"
+	case HistoricalEventArtifactClaimFormedClaim_Symbol:
+		return "symbol"
+	case HistoricalEventArtifactClaimFormedClaim_Treasure:
+		return "treasure"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventArtifactClaimFormedClaim) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventArtifactClaimFormed struct {
-	ArtifactId        int    `json:"artifactId" legend:"base"`        // artifact_id
-	Circumstance      string `json:"circumstance" legend:"base"`      // circumstance
-	Claim             string `json:"claim" legend:"base"`             // claim
-	EntityId          int    `json:"entityId" legend:"base"`          // entity_id
-	HistFigureId      int    `json:"histFigureId" legend:"base"`      // hist_figure_id
-	PositionProfileId int    `json:"positionProfileId" legend:"base"` // position_profile_id
+	ArtifactId        int                                            `json:"artifactId" legend:"base"`        // artifact_id
+	Circumstance      HistoricalEventArtifactClaimFormedCircumstance `json:"circumstance" legend:"base"`      // circumstance
+	Claim             HistoricalEventArtifactClaimFormedClaim        `json:"claim" legend:"base"`             // claim
+	EntityId          int                                            `json:"entityId" legend:"base"`          // entity_id
+	HistFigureId      int                                            `json:"histFigureId" legend:"base"`      // hist_figure_id
+	PositionProfileId int                                            `json:"positionProfileId" legend:"base"` // position_profile_id
 }
 
 func (x *HistoricalEventArtifactClaimFormed) RelatedToEntity(id int) bool { return x.EntityId == id }
@@ -1600,12 +2620,39 @@ func (x *HistoricalEventArtifactCopied) RelatedToHf(id int) bool { return false 
 func (x *HistoricalEventArtifactCopied) CheckFields() {
 }
 
+type HistoricalEventArtifactCreatedReason int
+
+const (
+	HistoricalEventArtifactCreatedReason_Unknown HistoricalEventArtifactCreatedReason = iota
+	HistoricalEventArtifactCreatedReason_SanctifyHf
+)
+
+func parseHistoricalEventArtifactCreatedReason(s string) HistoricalEventArtifactCreatedReason {
+	switch s {
+	case "sanctify_hf":
+		return HistoricalEventArtifactCreatedReason_SanctifyHf
+	}
+	return HistoricalEventArtifactCreatedReason_Unknown
+}
+
+func (s HistoricalEventArtifactCreatedReason) String() string {
+	switch s {
+	case HistoricalEventArtifactCreatedReason_SanctifyHf:
+		return "sanctify hf"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventArtifactCreatedReason) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventArtifactCreated struct {
 	ArtifactId   int                                         `json:"artifactId" legend:"both"`   // artifact_id
 	Circumstance *HistoricalEventArtifactCreatedCircumstance `json:"circumstance" legend:"plus"` // circumstance
 	HistFigureId int                                         `json:"histFigureId" legend:"base"` // hist_figure_id
 	NameOnly     bool                                        `json:"nameOnly" legend:"base"`     // name_only
-	Reason       string                                      `json:"reason" legend:"plus"`       // reason
+	Reason       HistoricalEventArtifactCreatedReason        `json:"reason" legend:"plus"`       // reason
 	SanctifyHf   int                                         `json:"sanctifyHf" legend:"plus"`   // sanctify_hf
 	SiteId       int                                         `json:"siteId" legend:"base"`       // site_id
 	UnitId       int                                         `json:"unitId" legend:"base"`       // unit_id
@@ -1613,7 +2660,7 @@ type HistoricalEventArtifactCreated struct {
 
 func (x *HistoricalEventArtifactCreated) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventArtifactCreated) RelatedToHf(id int) bool {
-	return x.SanctifyHf == id || x.HistFigureId == id
+	return x.HistFigureId == id || x.SanctifyHf == id
 }
 
 func (x *HistoricalEventArtifactCreated) CheckFields() {
@@ -1628,9 +2675,46 @@ func (x *HistoricalEventArtifactCreated) CheckFields() {
 	}
 }
 
+type HistoricalEventArtifactCreatedCircumstanceType int
+
+const (
+	HistoricalEventArtifactCreatedCircumstanceType_Unknown HistoricalEventArtifactCreatedCircumstanceType = iota
+	HistoricalEventArtifactCreatedCircumstanceType_Defeated
+	HistoricalEventArtifactCreatedCircumstanceType_Favoritepossession
+	HistoricalEventArtifactCreatedCircumstanceType_Preservebody
+)
+
+func parseHistoricalEventArtifactCreatedCircumstanceType(s string) HistoricalEventArtifactCreatedCircumstanceType {
+	switch s {
+	case "defeated":
+		return HistoricalEventArtifactCreatedCircumstanceType_Defeated
+	case "favoritepossession":
+		return HistoricalEventArtifactCreatedCircumstanceType_Favoritepossession
+	case "preservebody":
+		return HistoricalEventArtifactCreatedCircumstanceType_Preservebody
+	}
+	return HistoricalEventArtifactCreatedCircumstanceType_Unknown
+}
+
+func (s HistoricalEventArtifactCreatedCircumstanceType) String() string {
+	switch s {
+	case HistoricalEventArtifactCreatedCircumstanceType_Defeated:
+		return "defeated"
+	case HistoricalEventArtifactCreatedCircumstanceType_Favoritepossession:
+		return "favoritepossession"
+	case HistoricalEventArtifactCreatedCircumstanceType_Preservebody:
+		return "preservebody"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventArtifactCreatedCircumstanceType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventArtifactCreatedCircumstance struct {
-	Defeated int    `json:"defeated" legend:"plus"` // defeated
-	Type     string `json:"type" legend:"plus"`     // type
+	Defeated int                                            `json:"defeated" legend:"plus"` // defeated
+	Type     HistoricalEventArtifactCreatedCircumstanceType `json:"type" legend:"plus"`     // type
 }
 
 func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToEntity(id int) bool { return false }
@@ -1664,20 +2748,47 @@ func (x *HistoricalEventArtifactFound) RelatedToHf(id int) bool     { return x.H
 func (x *HistoricalEventArtifactFound) CheckFields() {
 }
 
+type HistoricalEventArtifactGivenReason int
+
+const (
+	HistoricalEventArtifactGivenReason_Unknown HistoricalEventArtifactGivenReason = iota
+	HistoricalEventArtifactGivenReason_PartOfTradeNegotiation
+)
+
+func parseHistoricalEventArtifactGivenReason(s string) HistoricalEventArtifactGivenReason {
+	switch s {
+	case "part of trade negotiation":
+		return HistoricalEventArtifactGivenReason_PartOfTradeNegotiation
+	}
+	return HistoricalEventArtifactGivenReason_Unknown
+}
+
+func (s HistoricalEventArtifactGivenReason) String() string {
+	switch s {
+	case HistoricalEventArtifactGivenReason_PartOfTradeNegotiation:
+		return "part of trade negotiation"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventArtifactGivenReason) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventArtifactGiven struct {
-	ArtifactId           int    `json:"artifactId" legend:"base"`           // artifact_id
-	GiverEntityId        int    `json:"giverEntityId" legend:"base"`        // giver_entity_id
-	GiverHistFigureId    int    `json:"giverHistFigureId" legend:"base"`    // giver_hist_figure_id
-	Reason               string `json:"reason" legend:"base"`               // reason
-	ReceiverEntityId     int    `json:"receiverEntityId" legend:"base"`     // receiver_entity_id
-	ReceiverHistFigureId int    `json:"receiverHistFigureId" legend:"base"` // receiver_hist_figure_id
+	ArtifactId           int                                `json:"artifactId" legend:"base"`           // artifact_id
+	GiverEntityId        int                                `json:"giverEntityId" legend:"base"`        // giver_entity_id
+	GiverHistFigureId    int                                `json:"giverHistFigureId" legend:"base"`    // giver_hist_figure_id
+	Reason               HistoricalEventArtifactGivenReason `json:"reason" legend:"base"`               // reason
+	ReceiverEntityId     int                                `json:"receiverEntityId" legend:"base"`     // receiver_entity_id
+	ReceiverHistFigureId int                                `json:"receiverHistFigureId" legend:"base"` // receiver_hist_figure_id
 }
 
 func (x *HistoricalEventArtifactGiven) RelatedToEntity(id int) bool {
-	return x.ReceiverEntityId == id || x.GiverEntityId == id
+	return x.GiverEntityId == id || x.ReceiverEntityId == id
 }
 func (x *HistoricalEventArtifactGiven) RelatedToHf(id int) bool {
-	return x.ReceiverHistFigureId == id || x.GiverHistFigureId == id
+	return x.GiverHistFigureId == id || x.ReceiverHistFigureId == id
 }
 
 func (x *HistoricalEventArtifactGiven) CheckFields() {
@@ -1697,17 +2808,76 @@ func (x *HistoricalEventArtifactLost) RelatedToHf(id int) bool     { return fals
 func (x *HistoricalEventArtifactLost) CheckFields() {
 }
 
+type HistoricalEventArtifactPossessedCircumstance int
+
+const (
+	HistoricalEventArtifactPossessedCircumstance_Unknown HistoricalEventArtifactPossessedCircumstance = iota
+	HistoricalEventArtifactPossessedCircumstance_HfIsDead
+)
+
+func parseHistoricalEventArtifactPossessedCircumstance(s string) HistoricalEventArtifactPossessedCircumstance {
+	switch s {
+	case "hf is dead":
+		return HistoricalEventArtifactPossessedCircumstance_HfIsDead
+	}
+	return HistoricalEventArtifactPossessedCircumstance_Unknown
+}
+
+func (s HistoricalEventArtifactPossessedCircumstance) String() string {
+	switch s {
+	case HistoricalEventArtifactPossessedCircumstance_HfIsDead:
+		return "hf is dead"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventArtifactPossessedCircumstance) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventArtifactPossessedReason int
+
+const (
+	HistoricalEventArtifactPossessedReason_Unknown HistoricalEventArtifactPossessedReason = iota
+	HistoricalEventArtifactPossessedReason_ArtifactIsHeirloomOfFamilyHfid
+	HistoricalEventArtifactPossessedReason_ArtifactIsSymbolOfEntityPosition
+)
+
+func parseHistoricalEventArtifactPossessedReason(s string) HistoricalEventArtifactPossessedReason {
+	switch s {
+	case "artifact is heirloom of family hfid":
+		return HistoricalEventArtifactPossessedReason_ArtifactIsHeirloomOfFamilyHfid
+	case "artifact is symbol of entity position":
+		return HistoricalEventArtifactPossessedReason_ArtifactIsSymbolOfEntityPosition
+	}
+	return HistoricalEventArtifactPossessedReason_Unknown
+}
+
+func (s HistoricalEventArtifactPossessedReason) String() string {
+	switch s {
+	case HistoricalEventArtifactPossessedReason_ArtifactIsHeirloomOfFamilyHfid:
+		return "artifact is heirloom of family hfid"
+	case HistoricalEventArtifactPossessedReason_ArtifactIsSymbolOfEntityPosition:
+		return "artifact is symbol of entity position"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventArtifactPossessedReason) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventArtifactPossessed struct {
-	ArtifactId     int    `json:"artifactId" legend:"base"`     // artifact_id
-	Circumstance   string `json:"circumstance" legend:"base"`   // circumstance
-	CircumstanceId int    `json:"circumstanceId" legend:"base"` // circumstance_id
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	HistFigureId   int    `json:"histFigureId" legend:"base"`   // hist_figure_id
-	Reason         string `json:"reason" legend:"base"`         // reason
-	ReasonId       int    `json:"reasonId" legend:"base"`       // reason_id
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
-	UnitId         int    `json:"unitId" legend:"base"`         // unit_id
+	ArtifactId     int                                          `json:"artifactId" legend:"base"`     // artifact_id
+	Circumstance   HistoricalEventArtifactPossessedCircumstance `json:"circumstance" legend:"base"`   // circumstance
+	CircumstanceId int                                          `json:"circumstanceId" legend:"base"` // circumstance_id
+	FeatureLayerId int                                          `json:"featureLayerId" legend:"base"` // feature_layer_id
+	HistFigureId   int                                          `json:"histFigureId" legend:"base"`   // hist_figure_id
+	Reason         HistoricalEventArtifactPossessedReason       `json:"reason" legend:"base"`         // reason
+	ReasonId       int                                          `json:"reasonId" legend:"base"`       // reason_id
+	SiteId         int                                          `json:"siteId" legend:"base"`         // site_id
+	SubregionId    int                                          `json:"subregionId" legend:"base"`    // subregion_id
+	UnitId         int                                          `json:"unitId" legend:"base"`         // unit_id
 }
 
 func (x *HistoricalEventArtifactPossessed) RelatedToEntity(id int) bool { return false }
@@ -1788,7 +2958,7 @@ type HistoricalEventAttackedSite struct {
 }
 
 func (x *HistoricalEventAttackedSite) RelatedToEntity(id int) bool {
-	return x.SiteCivId == id || x.AttackerCivId == id || x.DefenderCivId == id
+	return x.DefenderCivId == id || x.AttackerCivId == id || x.SiteCivId == id
 }
 func (x *HistoricalEventAttackedSite) RelatedToHf(id int) bool {
 	return x.AttackerGeneralHfid == id || x.DefenderGeneralHfid == id
@@ -1797,57 +2967,190 @@ func (x *HistoricalEventAttackedSite) RelatedToHf(id int) bool {
 func (x *HistoricalEventAttackedSite) CheckFields() {
 }
 
+type HistoricalEventBodyAbusedAbuseType int
+
+const (
+	HistoricalEventBodyAbusedAbuseType_Unknown HistoricalEventBodyAbusedAbuseType = iota
+	HistoricalEventBodyAbusedAbuseType_Animated
+	HistoricalEventBodyAbusedAbuseType_Flayed
+	HistoricalEventBodyAbusedAbuseType_Hung
+	HistoricalEventBodyAbusedAbuseType_Impaled
+	HistoricalEventBodyAbusedAbuseType_Mutilated
+	HistoricalEventBodyAbusedAbuseType_Piled
+)
+
+func parseHistoricalEventBodyAbusedAbuseType(s string) HistoricalEventBodyAbusedAbuseType {
+	switch s {
+	case "animated":
+		return HistoricalEventBodyAbusedAbuseType_Animated
+	case "flayed":
+		return HistoricalEventBodyAbusedAbuseType_Flayed
+	case "hung":
+		return HistoricalEventBodyAbusedAbuseType_Hung
+	case "impaled":
+		return HistoricalEventBodyAbusedAbuseType_Impaled
+	case "mutilated":
+		return HistoricalEventBodyAbusedAbuseType_Mutilated
+	case "piled":
+		return HistoricalEventBodyAbusedAbuseType_Piled
+	}
+	return HistoricalEventBodyAbusedAbuseType_Unknown
+}
+
+func (s HistoricalEventBodyAbusedAbuseType) String() string {
+	switch s {
+	case HistoricalEventBodyAbusedAbuseType_Animated:
+		return "animated"
+	case HistoricalEventBodyAbusedAbuseType_Flayed:
+		return "flayed"
+	case HistoricalEventBodyAbusedAbuseType_Hung:
+		return "hung"
+	case HistoricalEventBodyAbusedAbuseType_Impaled:
+		return "impaled"
+	case HistoricalEventBodyAbusedAbuseType_Mutilated:
+		return "mutilated"
+	case HistoricalEventBodyAbusedAbuseType_Piled:
+		return "piled"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventBodyAbusedAbuseType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventBodyAbusedItemSubtype int
+
+const (
+	HistoricalEventBodyAbusedItemSubtype_Unknown HistoricalEventBodyAbusedItemSubtype = iota
+	HistoricalEventBodyAbusedItemSubtype_Pike
+	HistoricalEventBodyAbusedItemSubtype_Spear
+)
+
+func parseHistoricalEventBodyAbusedItemSubtype(s string) HistoricalEventBodyAbusedItemSubtype {
+	switch s {
+	case "pike":
+		return HistoricalEventBodyAbusedItemSubtype_Pike
+	case "spear":
+		return HistoricalEventBodyAbusedItemSubtype_Spear
+	}
+	return HistoricalEventBodyAbusedItemSubtype_Unknown
+}
+
+func (s HistoricalEventBodyAbusedItemSubtype) String() string {
+	switch s {
+	case HistoricalEventBodyAbusedItemSubtype_Pike:
+		return "pike"
+	case HistoricalEventBodyAbusedItemSubtype_Spear:
+		return "spear"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventBodyAbusedItemSubtype) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventBodyAbusedItemType int
+
+const (
+	HistoricalEventBodyAbusedItemType_Unknown HistoricalEventBodyAbusedItemType = iota
+	HistoricalEventBodyAbusedItemType_Weapon
+)
+
+func parseHistoricalEventBodyAbusedItemType(s string) HistoricalEventBodyAbusedItemType {
+	switch s {
+	case "weapon":
+		return HistoricalEventBodyAbusedItemType_Weapon
+	}
+	return HistoricalEventBodyAbusedItemType_Unknown
+}
+
+func (s HistoricalEventBodyAbusedItemType) String() string {
+	switch s {
+	case HistoricalEventBodyAbusedItemType_Weapon:
+		return "weapon"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventBodyAbusedItemType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventBodyAbusedPileType int
+
+const (
+	HistoricalEventBodyAbusedPileType_Unknown HistoricalEventBodyAbusedPileType = iota
+	HistoricalEventBodyAbusedPileType_Grislymound
+	HistoricalEventBodyAbusedPileType_Grotesquepillar
+	HistoricalEventBodyAbusedPileType_Gruesomesculpture
+)
+
+func parseHistoricalEventBodyAbusedPileType(s string) HistoricalEventBodyAbusedPileType {
+	switch s {
+	case "grislymound":
+		return HistoricalEventBodyAbusedPileType_Grislymound
+	case "grotesquepillar":
+		return HistoricalEventBodyAbusedPileType_Grotesquepillar
+	case "gruesomesculpture":
+		return HistoricalEventBodyAbusedPileType_Gruesomesculpture
+	}
+	return HistoricalEventBodyAbusedPileType_Unknown
+}
+
+func (s HistoricalEventBodyAbusedPileType) String() string {
+	switch s {
+	case HistoricalEventBodyAbusedPileType_Grislymound:
+		return "grislymound"
+	case HistoricalEventBodyAbusedPileType_Grotesquepillar:
+		return "grotesquepillar"
+	case HistoricalEventBodyAbusedPileType_Gruesomesculpture:
+		return "gruesomesculpture"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventBodyAbusedPileType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventBodyAbused struct {
-	AbuseType      string `json:"abuseType" legend:"plus"`      // abuse_type
-	Bodies         []int  `json:"bodies" legend:"plus"`         // bodies
-	Civ            int    `json:"civ" legend:"plus"`            // civ
-	Coords         string `json:"coords" legend:"base"`         // coords
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Histfig        int    `json:"histfig" legend:"plus"`        // histfig
-	Interaction    int    `json:"interaction" legend:"plus"`    // interaction
-	ItemMat        string `json:"itemMat" legend:"plus"`        // item_mat
-	ItemSubtype    string `json:"itemSubtype" legend:"plus"`    // item_subtype
-	ItemType       string `json:"itemType" legend:"plus"`       // item_type
-	PileType       string `json:"pileType" legend:"plus"`       // pile_type
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	Structure      int    `json:"structure" legend:"plus"`      // structure
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
-	Tree           int    `json:"tree" legend:"plus"`           // tree
-	VictimEntity   int    `json:"victimEntity" legend:"plus"`   // victim_entity
+	AbuseType      HistoricalEventBodyAbusedAbuseType   `json:"abuseType" legend:"plus"`      // abuse_type
+	Bodies         []int                                `json:"bodies" legend:"plus"`         // bodies
+	Civ            int                                  `json:"civ" legend:"plus"`            // civ
+	Coords         string                               `json:"coords" legend:"base"`         // coords
+	FeatureLayerId int                                  `json:"featureLayerId" legend:"base"` // feature_layer_id
+	Histfig        int                                  `json:"histfig" legend:"plus"`        // histfig
+	Interaction    int                                  `json:"interaction" legend:"plus"`    // interaction
+	ItemMat        string                               `json:"itemMat" legend:"plus"`        // item_mat
+	ItemSubtype    HistoricalEventBodyAbusedItemSubtype `json:"itemSubtype" legend:"plus"`    // item_subtype
+	ItemType       HistoricalEventBodyAbusedItemType    `json:"itemType" legend:"plus"`       // item_type
+	PileType       HistoricalEventBodyAbusedPileType    `json:"pileType" legend:"plus"`       // pile_type
+	SiteId         int                                  `json:"siteId" legend:"base"`         // site_id
+	Structure      int                                  `json:"structure" legend:"plus"`      // structure
+	SubregionId    int                                  `json:"subregionId" legend:"base"`    // subregion_id
+	Tree           int                                  `json:"tree" legend:"plus"`           // tree
+	VictimEntity   int                                  `json:"victimEntity" legend:"plus"`   // victim_entity
 }
 
 func (x *HistoricalEventBodyAbused) RelatedToEntity(id int) bool { return x.VictimEntity == id }
 func (x *HistoricalEventBodyAbused) RelatedToHf(id int) bool {
-	return containsInt(x.Bodies, id) || x.Histfig == id
+	return x.Histfig == id || containsInt(x.Bodies, id)
 }
 
 func (x *HistoricalEventBodyAbused) CheckFields() {
-	if x.ItemSubtype != x.Coords && x.ItemSubtype != "" && x.Coords != "" {
-		sameFields["HistoricalEventBodyAbused"]["ItemSubtype"]["Coords"] = false
+	if x.VictimEntity != x.SiteId && x.VictimEntity != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["VictimEntity"]["SiteId"] = false
 	}
-	if x.Tree != x.SubregionId && x.Tree != 0 && x.SubregionId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["Tree"]["SubregionId"] = false
+	if x.VictimEntity != x.SubregionId && x.VictimEntity != 0 && x.SubregionId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["VictimEntity"]["SubregionId"] = false
 	}
-	if x.Tree != x.FeatureLayerId && x.Tree != 0 && x.FeatureLayerId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["Tree"]["FeatureLayerId"] = false
+	if x.VictimEntity != x.FeatureLayerId && x.VictimEntity != 0 && x.FeatureLayerId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["VictimEntity"]["FeatureLayerId"] = false
 	}
-	if x.Tree != x.SiteId && x.Tree != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["Tree"]["SiteId"] = false
-	}
-	if x.ItemMat != x.Coords && x.ItemMat != "" && x.Coords != "" {
-		sameFields["HistoricalEventBodyAbused"]["ItemMat"]["Coords"] = false
-	}
-	if x.Interaction != x.SubregionId && x.Interaction != 0 && x.SubregionId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["Interaction"]["SubregionId"] = false
-	}
-	if x.Interaction != x.FeatureLayerId && x.Interaction != 0 && x.FeatureLayerId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["Interaction"]["FeatureLayerId"] = false
-	}
-	if x.Interaction != x.SiteId && x.Interaction != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["Interaction"]["SiteId"] = false
-	}
-	if x.PileType != x.Coords && x.PileType != "" && x.Coords != "" {
-		sameFields["HistoricalEventBodyAbused"]["PileType"]["Coords"] = false
+	if x.Structure != x.FeatureLayerId && x.Structure != 0 && x.FeatureLayerId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["Structure"]["FeatureLayerId"] = false
 	}
 	if x.Structure != x.SiteId && x.Structure != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventBodyAbused"]["Structure"]["SiteId"] = false
@@ -1855,26 +3158,20 @@ func (x *HistoricalEventBodyAbused) CheckFields() {
 	if x.Structure != x.SubregionId && x.Structure != 0 && x.SubregionId != 0 {
 		sameFields["HistoricalEventBodyAbused"]["Structure"]["SubregionId"] = false
 	}
-	if x.Structure != x.FeatureLayerId && x.Structure != 0 && x.FeatureLayerId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["Structure"]["FeatureLayerId"] = false
+	if x.Interaction != x.FeatureLayerId && x.Interaction != 0 && x.FeatureLayerId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["Interaction"]["FeatureLayerId"] = false
 	}
-	if x.VictimEntity != x.FeatureLayerId && x.VictimEntity != 0 && x.FeatureLayerId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["VictimEntity"]["FeatureLayerId"] = false
+	if x.Interaction != x.SiteId && x.Interaction != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["Interaction"]["SiteId"] = false
 	}
-	if x.VictimEntity != x.SiteId && x.VictimEntity != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["VictimEntity"]["SiteId"] = false
+	if x.Interaction != x.SubregionId && x.Interaction != 0 && x.SubregionId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["Interaction"]["SubregionId"] = false
 	}
-	if x.VictimEntity != x.SubregionId && x.VictimEntity != 0 && x.SubregionId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["VictimEntity"]["SubregionId"] = false
+	if x.ItemMat != x.Coords && x.ItemMat != "" && x.Coords != "" {
+		sameFields["HistoricalEventBodyAbused"]["ItemMat"]["Coords"] = false
 	}
-	if x.Civ != x.SiteId && x.Civ != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["Civ"]["SiteId"] = false
-	}
-	if x.Civ != x.SubregionId && x.Civ != 0 && x.SubregionId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["Civ"]["SubregionId"] = false
-	}
-	if x.Civ != x.FeatureLayerId && x.Civ != 0 && x.FeatureLayerId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["Civ"]["FeatureLayerId"] = false
+	if x.Histfig != x.SiteId && x.Histfig != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["Histfig"]["SiteId"] = false
 	}
 	if x.Histfig != x.SubregionId && x.Histfig != 0 && x.SubregionId != 0 {
 		sameFields["HistoricalEventBodyAbused"]["Histfig"]["SubregionId"] = false
@@ -1882,14 +3179,23 @@ func (x *HistoricalEventBodyAbused) CheckFields() {
 	if x.Histfig != x.FeatureLayerId && x.Histfig != 0 && x.FeatureLayerId != 0 {
 		sameFields["HistoricalEventBodyAbused"]["Histfig"]["FeatureLayerId"] = false
 	}
-	if x.Histfig != x.SiteId && x.Histfig != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventBodyAbused"]["Histfig"]["SiteId"] = false
+	if x.Civ != x.FeatureLayerId && x.Civ != 0 && x.FeatureLayerId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["Civ"]["FeatureLayerId"] = false
 	}
-	if x.ItemType != x.Coords && x.ItemType != "" && x.Coords != "" {
-		sameFields["HistoricalEventBodyAbused"]["ItemType"]["Coords"] = false
+	if x.Civ != x.SiteId && x.Civ != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["Civ"]["SiteId"] = false
 	}
-	if x.AbuseType != x.Coords && x.AbuseType != "" && x.Coords != "" {
-		sameFields["HistoricalEventBodyAbused"]["AbuseType"]["Coords"] = false
+	if x.Civ != x.SubregionId && x.Civ != 0 && x.SubregionId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["Civ"]["SubregionId"] = false
+	}
+	if x.Tree != x.FeatureLayerId && x.Tree != 0 && x.FeatureLayerId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["Tree"]["FeatureLayerId"] = false
+	}
+	if x.Tree != x.SiteId && x.Tree != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["Tree"]["SiteId"] = false
+	}
+	if x.Tree != x.SubregionId && x.Tree != 0 && x.SubregionId != 0 {
+		sameFields["HistoricalEventBodyAbused"]["Tree"]["SubregionId"] = false
 	}
 }
 
@@ -1927,14 +3233,41 @@ func (x *HistoricalEventCeremony) RelatedToHf(id int) bool     { return false }
 func (x *HistoricalEventCeremony) CheckFields() {
 }
 
+type HistoricalEventChangeHfBodyStateBodyState int
+
+const (
+	HistoricalEventChangeHfBodyStateBodyState_Unknown HistoricalEventChangeHfBodyStateBodyState = iota
+	HistoricalEventChangeHfBodyStateBodyState_EntombedAtSite
+)
+
+func parseHistoricalEventChangeHfBodyStateBodyState(s string) HistoricalEventChangeHfBodyStateBodyState {
+	switch s {
+	case "entombed at site":
+		return HistoricalEventChangeHfBodyStateBodyState_EntombedAtSite
+	}
+	return HistoricalEventChangeHfBodyStateBodyState_Unknown
+}
+
+func (s HistoricalEventChangeHfBodyStateBodyState) String() string {
+	switch s {
+	case HistoricalEventChangeHfBodyStateBodyState_EntombedAtSite:
+		return "entombed at site"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventChangeHfBodyStateBodyState) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventChangeHfBodyState struct {
-	BodyState      string `json:"bodyState" legend:"base"`      // body_state
-	Coords         string `json:"coords" legend:"base"`         // coords
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Hfid           int    `json:"hfid" legend:"base"`           // hfid
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	StructureId    int    `json:"structureId" legend:"base"`    // structure_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	BodyState      HistoricalEventChangeHfBodyStateBodyState `json:"bodyState" legend:"base"`      // body_state
+	Coords         string                                    `json:"coords" legend:"base"`         // coords
+	FeatureLayerId int                                       `json:"featureLayerId" legend:"base"` // feature_layer_id
+	Hfid           int                                       `json:"hfid" legend:"base"`           // hfid
+	SiteId         int                                       `json:"siteId" legend:"base"`         // site_id
+	StructureId    int                                       `json:"structureId" legend:"base"`    // structure_id
+	SubregionId    int                                       `json:"subregionId" legend:"base"`    // subregion_id
 }
 
 func (x *HistoricalEventChangeHfBodyState) RelatedToEntity(id int) bool { return false }
@@ -1958,15 +3291,207 @@ func (x *HistoricalEventChangeHfJob) RelatedToHf(id int) bool     { return x.Hfi
 func (x *HistoricalEventChangeHfJob) CheckFields() {
 }
 
+type HistoricalEventChangeHfStateMood int
+
+const (
+	HistoricalEventChangeHfStateMood_Unknown HistoricalEventChangeHfStateMood = iota
+	HistoricalEventChangeHfStateMood_Berserk
+	HistoricalEventChangeHfStateMood_Fell
+	HistoricalEventChangeHfStateMood_Fey
+	HistoricalEventChangeHfStateMood_Insane
+	HistoricalEventChangeHfStateMood_Macabre
+	HistoricalEventChangeHfStateMood_Melancholy
+	HistoricalEventChangeHfStateMood_Possessed
+	HistoricalEventChangeHfStateMood_Secretive
+)
+
+func parseHistoricalEventChangeHfStateMood(s string) HistoricalEventChangeHfStateMood {
+	switch s {
+	case "berserk":
+		return HistoricalEventChangeHfStateMood_Berserk
+	case "fell":
+		return HistoricalEventChangeHfStateMood_Fell
+	case "fey":
+		return HistoricalEventChangeHfStateMood_Fey
+	case "insane":
+		return HistoricalEventChangeHfStateMood_Insane
+	case "macabre":
+		return HistoricalEventChangeHfStateMood_Macabre
+	case "melancholy":
+		return HistoricalEventChangeHfStateMood_Melancholy
+	case "possessed":
+		return HistoricalEventChangeHfStateMood_Possessed
+	case "secretive":
+		return HistoricalEventChangeHfStateMood_Secretive
+	}
+	return HistoricalEventChangeHfStateMood_Unknown
+}
+
+func (s HistoricalEventChangeHfStateMood) String() string {
+	switch s {
+	case HistoricalEventChangeHfStateMood_Berserk:
+		return "berserk"
+	case HistoricalEventChangeHfStateMood_Fell:
+		return "fell"
+	case HistoricalEventChangeHfStateMood_Fey:
+		return "fey"
+	case HistoricalEventChangeHfStateMood_Insane:
+		return "insane"
+	case HistoricalEventChangeHfStateMood_Macabre:
+		return "macabre"
+	case HistoricalEventChangeHfStateMood_Melancholy:
+		return "melancholy"
+	case HistoricalEventChangeHfStateMood_Possessed:
+		return "possessed"
+	case HistoricalEventChangeHfStateMood_Secretive:
+		return "secretive"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventChangeHfStateMood) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventChangeHfStateReason int
+
+const (
+	HistoricalEventChangeHfStateReason_Unknown HistoricalEventChangeHfStateReason = iota
+	HistoricalEventChangeHfStateReason_BeWithMaster
+	HistoricalEventChangeHfStateReason_ConvictionExile
+	HistoricalEventChangeHfStateReason_ExiledAfterConviction
+	HistoricalEventChangeHfStateReason_FailedMood
+	HistoricalEventChangeHfStateReason_Flight
+	HistoricalEventChangeHfStateReason_GatherInformation
+	HistoricalEventChangeHfStateReason_GreatDealOfStress
+	HistoricalEventChangeHfStateReason_LackOfSleep
+	HistoricalEventChangeHfStateReason_None
+	HistoricalEventChangeHfStateReason_OnAPilgrimage
+	HistoricalEventChangeHfStateReason_Scholarship
+	HistoricalEventChangeHfStateReason_UnableToLeaveLocation
+)
+
+func parseHistoricalEventChangeHfStateReason(s string) HistoricalEventChangeHfStateReason {
+	switch s {
+	case "be with master":
+		return HistoricalEventChangeHfStateReason_BeWithMaster
+	case "be_with_master":
+		return HistoricalEventChangeHfStateReason_BeWithMaster
+	case "conviction_exile":
+		return HistoricalEventChangeHfStateReason_ConvictionExile
+	case "exiled after conviction":
+		return HistoricalEventChangeHfStateReason_ExiledAfterConviction
+	case "failed mood":
+		return HistoricalEventChangeHfStateReason_FailedMood
+	case "flight":
+		return HistoricalEventChangeHfStateReason_Flight
+	case "gather information":
+		return HistoricalEventChangeHfStateReason_GatherInformation
+	case "gather_information":
+		return HistoricalEventChangeHfStateReason_GatherInformation
+	case "great deal of stress":
+		return HistoricalEventChangeHfStateReason_GreatDealOfStress
+	case "lack of sleep":
+		return HistoricalEventChangeHfStateReason_LackOfSleep
+	case "none":
+		return HistoricalEventChangeHfStateReason_None
+	case "on a pilgrimage":
+		return HistoricalEventChangeHfStateReason_OnAPilgrimage
+	case "on_a_pilgrimage":
+		return HistoricalEventChangeHfStateReason_OnAPilgrimage
+	case "scholarship":
+		return HistoricalEventChangeHfStateReason_Scholarship
+	case "unable to leave location":
+		return HistoricalEventChangeHfStateReason_UnableToLeaveLocation
+	}
+	return HistoricalEventChangeHfStateReason_Unknown
+}
+
+func (s HistoricalEventChangeHfStateReason) String() string {
+	switch s {
+	case HistoricalEventChangeHfStateReason_BeWithMaster:
+		return "be with master"
+	case HistoricalEventChangeHfStateReason_ConvictionExile:
+		return "conviction exile"
+	case HistoricalEventChangeHfStateReason_ExiledAfterConviction:
+		return "exiled after conviction"
+	case HistoricalEventChangeHfStateReason_FailedMood:
+		return "failed mood"
+	case HistoricalEventChangeHfStateReason_Flight:
+		return "flight"
+	case HistoricalEventChangeHfStateReason_GatherInformation:
+		return "gather information"
+	case HistoricalEventChangeHfStateReason_GreatDealOfStress:
+		return "great deal of stress"
+	case HistoricalEventChangeHfStateReason_LackOfSleep:
+		return "lack of sleep"
+	case HistoricalEventChangeHfStateReason_None:
+		return "none"
+	case HistoricalEventChangeHfStateReason_OnAPilgrimage:
+		return "on a pilgrimage"
+	case HistoricalEventChangeHfStateReason_Scholarship:
+		return "scholarship"
+	case HistoricalEventChangeHfStateReason_UnableToLeaveLocation:
+		return "unable to leave location"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventChangeHfStateReason) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventChangeHfStateState int
+
+const (
+	HistoricalEventChangeHfStateState_Unknown HistoricalEventChangeHfStateState = iota
+	HistoricalEventChangeHfStateState_Refugee
+	HistoricalEventChangeHfStateState_Settled
+	HistoricalEventChangeHfStateState_Visiting
+	HistoricalEventChangeHfStateState_Wandering
+)
+
+func parseHistoricalEventChangeHfStateState(s string) HistoricalEventChangeHfStateState {
+	switch s {
+	case "refugee":
+		return HistoricalEventChangeHfStateState_Refugee
+	case "settled":
+		return HistoricalEventChangeHfStateState_Settled
+	case "visiting":
+		return HistoricalEventChangeHfStateState_Visiting
+	case "wandering":
+		return HistoricalEventChangeHfStateState_Wandering
+	}
+	return HistoricalEventChangeHfStateState_Unknown
+}
+
+func (s HistoricalEventChangeHfStateState) String() string {
+	switch s {
+	case HistoricalEventChangeHfStateState_Refugee:
+		return "refugee"
+	case HistoricalEventChangeHfStateState_Settled:
+		return "settled"
+	case HistoricalEventChangeHfStateState_Visiting:
+		return "visiting"
+	case HistoricalEventChangeHfStateState_Wandering:
+		return "wandering"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventChangeHfStateState) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventChangeHfState struct {
-	Coords         string `json:"coords" legend:"base"`         // coords
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Hfid           int    `json:"hfid" legend:"both"`           // hfid
-	Mood           string `json:"mood" legend:"base"`           // mood
-	Reason         string `json:"reason" legend:"both"`         // reason
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	State          string `json:"state" legend:"both"`          // state
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	Coords         string                             `json:"coords" legend:"base"`         // coords
+	FeatureLayerId int                                `json:"featureLayerId" legend:"base"` // feature_layer_id
+	Hfid           int                                `json:"hfid" legend:"both"`           // hfid
+	Mood           HistoricalEventChangeHfStateMood   `json:"mood" legend:"base"`           // mood
+	Reason         HistoricalEventChangeHfStateReason `json:"reason" legend:"both"`         // reason
+	SiteId         int                                `json:"siteId" legend:"base"`         // site_id
+	State          HistoricalEventChangeHfStateState  `json:"state" legend:"both"`          // state
+	SubregionId    int                                `json:"subregionId" legend:"base"`    // subregion_id
 }
 
 func (x *HistoricalEventChangeHfState) RelatedToEntity(id int) bool { return false }
@@ -1990,6 +3515,118 @@ func (x *HistoricalEventChangedCreatureType) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventChangedCreatureType) CheckFields() {
+}
+
+type HistoricalEventCollectionType int
+
+const (
+	HistoricalEventCollectionType_Unknown HistoricalEventCollectionType = iota
+	HistoricalEventCollectionType_Abduction
+	HistoricalEventCollectionType_Battle
+	HistoricalEventCollectionType_BeastAttack
+	HistoricalEventCollectionType_Ceremony
+	HistoricalEventCollectionType_Competition
+	HistoricalEventCollectionType_Duel
+	HistoricalEventCollectionType_EntityOverthrown
+	HistoricalEventCollectionType_Insurrection
+	HistoricalEventCollectionType_Journey
+	HistoricalEventCollectionType_Occasion
+	HistoricalEventCollectionType_Performance
+	HistoricalEventCollectionType_Persecution
+	HistoricalEventCollectionType_Procession
+	HistoricalEventCollectionType_Purge
+	HistoricalEventCollectionType_Raid
+	HistoricalEventCollectionType_SiteConquered
+	HistoricalEventCollectionType_Theft
+	HistoricalEventCollectionType_War
+)
+
+func parseHistoricalEventCollectionType(s string) HistoricalEventCollectionType {
+	switch s {
+	case "abduction":
+		return HistoricalEventCollectionType_Abduction
+	case "battle":
+		return HistoricalEventCollectionType_Battle
+	case "beast attack":
+		return HistoricalEventCollectionType_BeastAttack
+	case "ceremony":
+		return HistoricalEventCollectionType_Ceremony
+	case "competition":
+		return HistoricalEventCollectionType_Competition
+	case "duel":
+		return HistoricalEventCollectionType_Duel
+	case "entity overthrown":
+		return HistoricalEventCollectionType_EntityOverthrown
+	case "insurrection":
+		return HistoricalEventCollectionType_Insurrection
+	case "journey":
+		return HistoricalEventCollectionType_Journey
+	case "occasion":
+		return HistoricalEventCollectionType_Occasion
+	case "performance":
+		return HistoricalEventCollectionType_Performance
+	case "persecution":
+		return HistoricalEventCollectionType_Persecution
+	case "procession":
+		return HistoricalEventCollectionType_Procession
+	case "purge":
+		return HistoricalEventCollectionType_Purge
+	case "raid":
+		return HistoricalEventCollectionType_Raid
+	case "site conquered":
+		return HistoricalEventCollectionType_SiteConquered
+	case "theft":
+		return HistoricalEventCollectionType_Theft
+	case "war":
+		return HistoricalEventCollectionType_War
+	}
+	return HistoricalEventCollectionType_Unknown
+}
+
+func (s HistoricalEventCollectionType) String() string {
+	switch s {
+	case HistoricalEventCollectionType_Abduction:
+		return "abduction"
+	case HistoricalEventCollectionType_Battle:
+		return "battle"
+	case HistoricalEventCollectionType_BeastAttack:
+		return "beast attack"
+	case HistoricalEventCollectionType_Ceremony:
+		return "ceremony"
+	case HistoricalEventCollectionType_Competition:
+		return "competition"
+	case HistoricalEventCollectionType_Duel:
+		return "duel"
+	case HistoricalEventCollectionType_EntityOverthrown:
+		return "entity overthrown"
+	case HistoricalEventCollectionType_Insurrection:
+		return "insurrection"
+	case HistoricalEventCollectionType_Journey:
+		return "journey"
+	case HistoricalEventCollectionType_Occasion:
+		return "occasion"
+	case HistoricalEventCollectionType_Performance:
+		return "performance"
+	case HistoricalEventCollectionType_Persecution:
+		return "persecution"
+	case HistoricalEventCollectionType_Procession:
+		return "procession"
+	case HistoricalEventCollectionType_Purge:
+		return "purge"
+	case HistoricalEventCollectionType_Raid:
+		return "raid"
+	case HistoricalEventCollectionType_SiteConquered:
+		return "site conquered"
+	case HistoricalEventCollectionType_Theft:
+		return "theft"
+	case HistoricalEventCollectionType_War:
+		return "war"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventCollectionType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
 }
 
 type HistoricalEventCollection struct {
@@ -2027,37 +3664,69 @@ func (x *HistoricalEventCollectionAbduction) RelatedToHf(id int) bool     { retu
 func (x *HistoricalEventCollectionAbduction) CheckFields() {
 }
 
+type HistoricalEventCollectionBattleOutcome int
+
+const (
+	HistoricalEventCollectionBattleOutcome_Unknown HistoricalEventCollectionBattleOutcome = iota
+	HistoricalEventCollectionBattleOutcome_AttackerWon
+	HistoricalEventCollectionBattleOutcome_DefenderWon
+)
+
+func parseHistoricalEventCollectionBattleOutcome(s string) HistoricalEventCollectionBattleOutcome {
+	switch s {
+	case "attacker won":
+		return HistoricalEventCollectionBattleOutcome_AttackerWon
+	case "defender won":
+		return HistoricalEventCollectionBattleOutcome_DefenderWon
+	}
+	return HistoricalEventCollectionBattleOutcome_Unknown
+}
+
+func (s HistoricalEventCollectionBattleOutcome) String() string {
+	switch s {
+	case HistoricalEventCollectionBattleOutcome_AttackerWon:
+		return "attacker won"
+	case HistoricalEventCollectionBattleOutcome_DefenderWon:
+		return "defender won"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventCollectionBattleOutcome) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventCollectionBattle struct {
-	ASupportMercEnid        int      `json:"aSupportMercEnid" legend:"base"`        // a_support_merc_enid
-	ASupportMercHfid        []int    `json:"aSupportMercHfid" legend:"base"`        // a_support_merc_hfid
-	AttackingHfid           []int    `json:"attackingHfid" legend:"base"`           // attacking_hfid
-	AttackingMercEnid       int      `json:"attackingMercEnid" legend:"base"`       // attacking_merc_enid
-	AttackingSquadAnimated  []bool   `json:"attackingSquadAnimated" legend:"base"`  // attacking_squad_animated
-	AttackingSquadDeaths    []int    `json:"attackingSquadDeaths" legend:"base"`    // attacking_squad_deaths
-	AttackingSquadEntityPop []int    `json:"attackingSquadEntityPop" legend:"base"` // attacking_squad_entity_pop
-	AttackingSquadNumber    []int    `json:"attackingSquadNumber" legend:"base"`    // attacking_squad_number
-	AttackingSquadRace      []string `json:"attackingSquadRace" legend:"base"`      // attacking_squad_race
-	AttackingSquadSite      []int    `json:"attackingSquadSite" legend:"base"`      // attacking_squad_site
-	CompanyMerc             []bool   `json:"companyMerc" legend:"base"`             // company_merc
-	Coords                  string   `json:"coords" legend:"base"`                  // coords
-	DSupportMercEnid        int      `json:"dSupportMercEnid" legend:"base"`        // d_support_merc_enid
-	DSupportMercHfid        []int    `json:"dSupportMercHfid" legend:"base"`        // d_support_merc_hfid
-	DefendingHfid           []int    `json:"defendingHfid" legend:"base"`           // defending_hfid
-	DefendingMercEnid       int      `json:"defendingMercEnid" legend:"base"`       // defending_merc_enid
-	DefendingSquadAnimated  []bool   `json:"defendingSquadAnimated" legend:"base"`  // defending_squad_animated
-	DefendingSquadDeaths    []int    `json:"defendingSquadDeaths" legend:"base"`    // defending_squad_deaths
-	DefendingSquadEntityPop []int    `json:"defendingSquadEntityPop" legend:"base"` // defending_squad_entity_pop
-	DefendingSquadNumber    []int    `json:"defendingSquadNumber" legend:"base"`    // defending_squad_number
-	DefendingSquadRace      []string `json:"defendingSquadRace" legend:"base"`      // defending_squad_race
-	DefendingSquadSite      []int    `json:"defendingSquadSite" legend:"base"`      // defending_squad_site
-	FeatureLayerId          int      `json:"featureLayerId" legend:"base"`          // feature_layer_id
-	IndividualMerc          []bool   `json:"individualMerc" legend:"base"`          // individual_merc
-	Name_                   string   `json:"name" legend:"base"`                    // name
-	NoncomHfid              []int    `json:"noncomHfid" legend:"base"`              // noncom_hfid
-	Outcome                 string   `json:"outcome" legend:"base"`                 // outcome
-	SiteId                  int      `json:"siteId" legend:"base"`                  // site_id
-	SubregionId             int      `json:"subregionId" legend:"base"`             // subregion_id
-	WarEventcol             int      `json:"warEventcol" legend:"base"`             // war_eventcol
+	ASupportMercEnid        int                                    `json:"aSupportMercEnid" legend:"base"`        // a_support_merc_enid
+	ASupportMercHfid        []int                                  `json:"aSupportMercHfid" legend:"base"`        // a_support_merc_hfid
+	AttackingHfid           []int                                  `json:"attackingHfid" legend:"base"`           // attacking_hfid
+	AttackingMercEnid       int                                    `json:"attackingMercEnid" legend:"base"`       // attacking_merc_enid
+	AttackingSquadAnimated  []bool                                 `json:"attackingSquadAnimated" legend:"base"`  // attacking_squad_animated
+	AttackingSquadDeaths    []int                                  `json:"attackingSquadDeaths" legend:"base"`    // attacking_squad_deaths
+	AttackingSquadEntityPop []int                                  `json:"attackingSquadEntityPop" legend:"base"` // attacking_squad_entity_pop
+	AttackingSquadNumber    []int                                  `json:"attackingSquadNumber" legend:"base"`    // attacking_squad_number
+	AttackingSquadRace      []string                               `json:"attackingSquadRace" legend:"base"`      // attacking_squad_race
+	AttackingSquadSite      []int                                  `json:"attackingSquadSite" legend:"base"`      // attacking_squad_site
+	CompanyMerc             []bool                                 `json:"companyMerc" legend:"base"`             // company_merc
+	Coords                  string                                 `json:"coords" legend:"base"`                  // coords
+	DSupportMercEnid        int                                    `json:"dSupportMercEnid" legend:"base"`        // d_support_merc_enid
+	DSupportMercHfid        []int                                  `json:"dSupportMercHfid" legend:"base"`        // d_support_merc_hfid
+	DefendingHfid           []int                                  `json:"defendingHfid" legend:"base"`           // defending_hfid
+	DefendingMercEnid       int                                    `json:"defendingMercEnid" legend:"base"`       // defending_merc_enid
+	DefendingSquadAnimated  []bool                                 `json:"defendingSquadAnimated" legend:"base"`  // defending_squad_animated
+	DefendingSquadDeaths    []int                                  `json:"defendingSquadDeaths" legend:"base"`    // defending_squad_deaths
+	DefendingSquadEntityPop []int                                  `json:"defendingSquadEntityPop" legend:"base"` // defending_squad_entity_pop
+	DefendingSquadNumber    []int                                  `json:"defendingSquadNumber" legend:"base"`    // defending_squad_number
+	DefendingSquadRace      []string                               `json:"defendingSquadRace" legend:"base"`      // defending_squad_race
+	DefendingSquadSite      []int                                  `json:"defendingSquadSite" legend:"base"`      // defending_squad_site
+	FeatureLayerId          int                                    `json:"featureLayerId" legend:"base"`          // feature_layer_id
+	IndividualMerc          []bool                                 `json:"individualMerc" legend:"base"`          // individual_merc
+	Name_                   string                                 `json:"name" legend:"base"`                    // name
+	NoncomHfid              []int                                  `json:"noncomHfid" legend:"base"`              // noncom_hfid
+	Outcome                 HistoricalEventCollectionBattleOutcome `json:"outcome" legend:"base"`                 // outcome
+	SiteId                  int                                    `json:"siteId" legend:"base"`                  // site_id
+	SubregionId             int                                    `json:"subregionId" legend:"base"`             // subregion_id
+	WarEventcol             int                                    `json:"warEventcol" legend:"base"`             // war_eventcol
 }
 
 func (x *HistoricalEventCollectionBattle) Name() string { return x.Name_ }
@@ -2065,7 +3734,7 @@ func (x *HistoricalEventCollectionBattle) RelatedToEntity(id int) bool {
 	return containsInt(x.DefendingSquadEntityPop, id) || containsInt(x.AttackingSquadEntityPop, id)
 }
 func (x *HistoricalEventCollectionBattle) RelatedToHf(id int) bool {
-	return containsInt(x.ASupportMercHfid, id) || containsInt(x.DSupportMercHfid, id) || containsInt(x.NoncomHfid, id) || containsInt(x.AttackingHfid, id) || containsInt(x.DefendingHfid, id)
+	return containsInt(x.AttackingHfid, id) || containsInt(x.DefendingHfid, id) || containsInt(x.NoncomHfid, id) || containsInt(x.DSupportMercHfid, id) || containsInt(x.ASupportMercHfid, id)
 }
 
 func (x *HistoricalEventCollectionBattle) CheckFields() {
@@ -2208,10 +3877,37 @@ func (x *HistoricalEventCollectionProcession) RelatedToHf(id int) bool     { ret
 func (x *HistoricalEventCollectionProcession) CheckFields() {
 }
 
+type HistoricalEventCollectionPurgeAdjective int
+
+const (
+	HistoricalEventCollectionPurgeAdjective_Unknown HistoricalEventCollectionPurgeAdjective = iota
+	HistoricalEventCollectionPurgeAdjective_Vampire
+)
+
+func parseHistoricalEventCollectionPurgeAdjective(s string) HistoricalEventCollectionPurgeAdjective {
+	switch s {
+	case "Vampire":
+		return HistoricalEventCollectionPurgeAdjective_Vampire
+	}
+	return HistoricalEventCollectionPurgeAdjective_Unknown
+}
+
+func (s HistoricalEventCollectionPurgeAdjective) String() string {
+	switch s {
+	case HistoricalEventCollectionPurgeAdjective_Vampire:
+		return "vampire"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventCollectionPurgeAdjective) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventCollectionPurge struct {
-	Adjective string `json:"adjective" legend:"base"` // adjective
-	Ordinal   int    `json:"ordinal" legend:"base"`   // ordinal
-	SiteId    int    `json:"siteId" legend:"base"`    // site_id
+	Adjective HistoricalEventCollectionPurgeAdjective `json:"adjective" legend:"base"` // adjective
+	Ordinal   int                                     `json:"ordinal" legend:"base"`   // ordinal
+	SiteId    int                                     `json:"siteId" legend:"base"`    // site_id
 }
 
 func (x *HistoricalEventCollectionPurge) RelatedToEntity(id int) bool { return false }
@@ -2300,12 +3996,59 @@ func (x *HistoricalEventCompetition) RelatedToHf(id int) bool {
 func (x *HistoricalEventCompetition) CheckFields() {
 }
 
+type HistoricalEventCreateEntityPositionReason int
+
+const (
+	HistoricalEventCreateEntityPositionReason_Unknown HistoricalEventCreateEntityPositionReason = iota
+	HistoricalEventCreateEntityPositionReason_AsAMatterOfCourse
+	HistoricalEventCreateEntityPositionReason_Collaboration
+	HistoricalEventCreateEntityPositionReason_ForceOfArgument
+	HistoricalEventCreateEntityPositionReason_ThreatOfViolence
+	HistoricalEventCreateEntityPositionReason_WaveOfPopularSupport
+)
+
+func parseHistoricalEventCreateEntityPositionReason(s string) HistoricalEventCreateEntityPositionReason {
+	switch s {
+	case "as_a_matter_of_course":
+		return HistoricalEventCreateEntityPositionReason_AsAMatterOfCourse
+	case "collaboration":
+		return HistoricalEventCreateEntityPositionReason_Collaboration
+	case "force_of_argument":
+		return HistoricalEventCreateEntityPositionReason_ForceOfArgument
+	case "threat_of_violence":
+		return HistoricalEventCreateEntityPositionReason_ThreatOfViolence
+	case "wave_of_popular_support":
+		return HistoricalEventCreateEntityPositionReason_WaveOfPopularSupport
+	}
+	return HistoricalEventCreateEntityPositionReason_Unknown
+}
+
+func (s HistoricalEventCreateEntityPositionReason) String() string {
+	switch s {
+	case HistoricalEventCreateEntityPositionReason_AsAMatterOfCourse:
+		return "as a matter of course"
+	case HistoricalEventCreateEntityPositionReason_Collaboration:
+		return "collaboration"
+	case HistoricalEventCreateEntityPositionReason_ForceOfArgument:
+		return "force of argument"
+	case HistoricalEventCreateEntityPositionReason_ThreatOfViolence:
+		return "threat of violence"
+	case HistoricalEventCreateEntityPositionReason_WaveOfPopularSupport:
+		return "wave of popular support"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventCreateEntityPositionReason) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventCreateEntityPosition struct {
-	Civ      int    `json:"civ" legend:"plus"`      // civ
-	Histfig  int    `json:"histfig" legend:"plus"`  // histfig
-	Position string `json:"position" legend:"plus"` // position
-	Reason   string `json:"reason" legend:"plus"`   // reason
-	SiteCiv  int    `json:"siteCiv" legend:"plus"`  // site_civ
+	Civ      int                                       `json:"civ" legend:"plus"`      // civ
+	Histfig  int                                       `json:"histfig" legend:"plus"`  // histfig
+	Position string                                    `json:"position" legend:"plus"` // position
+	Reason   HistoricalEventCreateEntityPositionReason `json:"reason" legend:"plus"`   // reason
+	SiteCiv  int                                       `json:"siteCiv" legend:"plus"`  // site_civ
 }
 
 func (x *HistoricalEventCreateEntityPosition) RelatedToEntity(id int) bool { return false }
@@ -2323,41 +4066,73 @@ type HistoricalEventCreatedSite struct {
 }
 
 func (x *HistoricalEventCreatedSite) RelatedToEntity(id int) bool {
-	return x.CivId == id || x.ResidentCivId == id || x.SiteCivId == id
+	return x.SiteCivId == id || x.CivId == id || x.ResidentCivId == id
 }
 func (x *HistoricalEventCreatedSite) RelatedToHf(id int) bool { return x.BuilderHfid == id }
 
 func (x *HistoricalEventCreatedSite) CheckFields() {
 }
 
+type HistoricalEventCreatedStructureRebuild int
+
+const (
+	HistoricalEventCreatedStructureRebuild_Unknown HistoricalEventCreatedStructureRebuild = iota
+	HistoricalEventCreatedStructureRebuild_False
+	HistoricalEventCreatedStructureRebuild_True
+)
+
+func parseHistoricalEventCreatedStructureRebuild(s string) HistoricalEventCreatedStructureRebuild {
+	switch s {
+	case "false":
+		return HistoricalEventCreatedStructureRebuild_False
+	case "true":
+		return HistoricalEventCreatedStructureRebuild_True
+	}
+	return HistoricalEventCreatedStructureRebuild_Unknown
+}
+
+func (s HistoricalEventCreatedStructureRebuild) String() string {
+	switch s {
+	case HistoricalEventCreatedStructureRebuild_False:
+		return "false"
+	case HistoricalEventCreatedStructureRebuild_True:
+		return "true"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventCreatedStructureRebuild) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventCreatedStructure struct {
-	BuilderHfid int    `json:"builderHfid" legend:"base"` // builder_hfid
-	CivId       int    `json:"civId" legend:"base"`       // civ_id
-	Rebuild     string `json:"rebuild" legend:"plus"`     // rebuild
-	Rebuilt     bool   `json:"rebuilt" legend:"base"`     // rebuilt
-	SiteCivId   int    `json:"siteCivId" legend:"base"`   // site_civ_id
-	SiteId      int    `json:"siteId" legend:"base"`      // site_id
-	Structure   int    `json:"structure" legend:"plus"`   // structure
-	StructureId int    `json:"structureId" legend:"base"` // structure_id
+	BuilderHfid int                                    `json:"builderHfid" legend:"base"` // builder_hfid
+	CivId       int                                    `json:"civId" legend:"base"`       // civ_id
+	Rebuild     HistoricalEventCreatedStructureRebuild `json:"rebuild" legend:"plus"`     // rebuild
+	Rebuilt     bool                                   `json:"rebuilt" legend:"base"`     // rebuilt
+	SiteCivId   int                                    `json:"siteCivId" legend:"base"`   // site_civ_id
+	SiteId      int                                    `json:"siteId" legend:"base"`      // site_id
+	Structure   int                                    `json:"structure" legend:"plus"`   // structure
+	StructureId int                                    `json:"structureId" legend:"base"` // structure_id
 }
 
 func (x *HistoricalEventCreatedStructure) RelatedToEntity(id int) bool {
-	return x.SiteCivId == id || x.CivId == id
+	return x.CivId == id || x.SiteCivId == id
 }
 func (x *HistoricalEventCreatedStructure) RelatedToHf(id int) bool { return x.BuilderHfid == id }
 
 func (x *HistoricalEventCreatedStructure) CheckFields() {
-	if x.Structure != x.BuilderHfid && x.Structure != 0 && x.BuilderHfid != 0 {
-		sameFields["HistoricalEventCreatedStructure"]["Structure"]["BuilderHfid"] = false
-	}
-	if x.Structure != x.CivId && x.Structure != 0 && x.CivId != 0 {
-		sameFields["HistoricalEventCreatedStructure"]["Structure"]["CivId"] = false
-	}
 	if x.Structure != x.SiteCivId && x.Structure != 0 && x.SiteCivId != 0 {
 		sameFields["HistoricalEventCreatedStructure"]["Structure"]["SiteCivId"] = false
 	}
 	if x.Structure != x.SiteId && x.Structure != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventCreatedStructure"]["Structure"]["SiteId"] = false
+	}
+	if x.Structure != x.BuilderHfid && x.Structure != 0 && x.BuilderHfid != 0 {
+		sameFields["HistoricalEventCreatedStructure"]["Structure"]["BuilderHfid"] = false
+	}
+	if x.Structure != x.CivId && x.Structure != 0 && x.CivId != 0 {
+		sameFields["HistoricalEventCreatedStructure"]["Structure"]["CivId"] = false
 	}
 	if x.Structure != x.StructureId && x.Structure != 0 && x.StructureId != 0 {
 		sameFields["HistoricalEventCreatedStructure"]["Structure"]["StructureId"] = false
@@ -2374,7 +4149,7 @@ type HistoricalEventCreatedWorldConstruction struct {
 }
 
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToEntity(id int) bool {
-	return x.SiteCivId == id || x.CivId == id
+	return x.CivId == id || x.SiteCivId == id
 }
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToHf(id int) bool { return false }
 
@@ -2396,23 +4171,14 @@ func (x *HistoricalEventCreatureDevoured) RelatedToEntity(id int) bool { return 
 func (x *HistoricalEventCreatureDevoured) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventCreatureDevoured) CheckFields() {
-	if x.Entity != x.FeatureLayerId && x.Entity != 0 && x.FeatureLayerId != 0 {
-		sameFields["HistoricalEventCreatureDevoured"]["Entity"]["FeatureLayerId"] = false
-	}
-	if x.Entity != x.SiteId && x.Entity != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventCreatureDevoured"]["Entity"]["SiteId"] = false
-	}
-	if x.Entity != x.SubregionId && x.Entity != 0 && x.SubregionId != 0 {
-		sameFields["HistoricalEventCreatureDevoured"]["Entity"]["SubregionId"] = false
-	}
-	if x.Eater != x.FeatureLayerId && x.Eater != 0 && x.FeatureLayerId != 0 {
-		sameFields["HistoricalEventCreatureDevoured"]["Eater"]["FeatureLayerId"] = false
-	}
 	if x.Eater != x.SiteId && x.Eater != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventCreatureDevoured"]["Eater"]["SiteId"] = false
 	}
 	if x.Eater != x.SubregionId && x.Eater != 0 && x.SubregionId != 0 {
 		sameFields["HistoricalEventCreatureDevoured"]["Eater"]["SubregionId"] = false
+	}
+	if x.Eater != x.FeatureLayerId && x.Eater != 0 && x.FeatureLayerId != 0 {
+		sameFields["HistoricalEventCreatureDevoured"]["Eater"]["FeatureLayerId"] = false
 	}
 	if x.Victim != x.SubregionId && x.Victim != 0 && x.SubregionId != 0 {
 		sameFields["HistoricalEventCreatureDevoured"]["Victim"]["SubregionId"] = false
@@ -2423,16 +4189,94 @@ func (x *HistoricalEventCreatureDevoured) CheckFields() {
 	if x.Victim != x.SiteId && x.Victim != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventCreatureDevoured"]["Victim"]["SiteId"] = false
 	}
+	if x.Entity != x.FeatureLayerId && x.Entity != 0 && x.FeatureLayerId != 0 {
+		sameFields["HistoricalEventCreatureDevoured"]["Entity"]["FeatureLayerId"] = false
+	}
+	if x.Entity != x.SubregionId && x.Entity != 0 && x.SubregionId != 0 {
+		sameFields["HistoricalEventCreatureDevoured"]["Entity"]["SubregionId"] = false
+	}
+	if x.Entity != x.SiteId && x.Entity != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventCreatureDevoured"]["Entity"]["SiteId"] = false
+	}
+}
+
+type HistoricalEventDanceFormCreatedCircumstance int
+
+const (
+	HistoricalEventDanceFormCreatedCircumstance_Unknown HistoricalEventDanceFormCreatedCircumstance = iota
+	HistoricalEventDanceFormCreatedCircumstance_Dream
+	HistoricalEventDanceFormCreatedCircumstance_DreamAboutHf
+	HistoricalEventDanceFormCreatedCircumstance_Nightmare
+	HistoricalEventDanceFormCreatedCircumstance_PrayToHf
+)
+
+func parseHistoricalEventDanceFormCreatedCircumstance(s string) HistoricalEventDanceFormCreatedCircumstance {
+	switch s {
+	case "dream":
+		return HistoricalEventDanceFormCreatedCircumstance_Dream
+	case "dream about hf":
+		return HistoricalEventDanceFormCreatedCircumstance_DreamAboutHf
+	case "nightmare":
+		return HistoricalEventDanceFormCreatedCircumstance_Nightmare
+	case "pray to hf":
+		return HistoricalEventDanceFormCreatedCircumstance_PrayToHf
+	}
+	return HistoricalEventDanceFormCreatedCircumstance_Unknown
+}
+
+func (s HistoricalEventDanceFormCreatedCircumstance) String() string {
+	switch s {
+	case HistoricalEventDanceFormCreatedCircumstance_Dream:
+		return "dream"
+	case HistoricalEventDanceFormCreatedCircumstance_DreamAboutHf:
+		return "dream about hf"
+	case HistoricalEventDanceFormCreatedCircumstance_Nightmare:
+		return "nightmare"
+	case HistoricalEventDanceFormCreatedCircumstance_PrayToHf:
+		return "pray to hf"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventDanceFormCreatedCircumstance) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventDanceFormCreatedReason int
+
+const (
+	HistoricalEventDanceFormCreatedReason_Unknown HistoricalEventDanceFormCreatedReason = iota
+	HistoricalEventDanceFormCreatedReason_GlorifyHf
+)
+
+func parseHistoricalEventDanceFormCreatedReason(s string) HistoricalEventDanceFormCreatedReason {
+	switch s {
+	case "glorify hf":
+		return HistoricalEventDanceFormCreatedReason_GlorifyHf
+	}
+	return HistoricalEventDanceFormCreatedReason_Unknown
+}
+
+func (s HistoricalEventDanceFormCreatedReason) String() string {
+	switch s {
+	case HistoricalEventDanceFormCreatedReason_GlorifyHf:
+		return "glorify hf"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventDanceFormCreatedReason) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
 }
 
 type HistoricalEventDanceFormCreated struct {
-	Circumstance   string `json:"circumstance" legend:"base"`   // circumstance
-	CircumstanceId int    `json:"circumstanceId" legend:"base"` // circumstance_id
-	FormId         int    `json:"formId" legend:"base"`         // form_id
-	HistFigureId   int    `json:"histFigureId" legend:"base"`   // hist_figure_id
-	Reason         string `json:"reason" legend:"base"`         // reason
-	ReasonId       int    `json:"reasonId" legend:"base"`       // reason_id
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
+	Circumstance   HistoricalEventDanceFormCreatedCircumstance `json:"circumstance" legend:"base"`   // circumstance
+	CircumstanceId int                                         `json:"circumstanceId" legend:"base"` // circumstance_id
+	FormId         int                                         `json:"formId" legend:"base"`         // form_id
+	HistFigureId   int                                         `json:"histFigureId" legend:"base"`   // hist_figure_id
+	Reason         HistoricalEventDanceFormCreatedReason       `json:"reason" legend:"base"`         // reason
+	ReasonId       int                                         `json:"reasonId" legend:"base"`       // reason_id
+	SiteId         int                                         `json:"siteId" legend:"base"`         // site_id
 }
 
 func (x *HistoricalEventDanceFormCreated) RelatedToEntity(id int) bool { return false }
@@ -2450,7 +4294,7 @@ type HistoricalEventDestroyedSite struct {
 }
 
 func (x *HistoricalEventDestroyedSite) RelatedToEntity(id int) bool {
-	return x.SiteCivId == id || x.AttackerCivId == id || x.DefenderCivId == id
+	return x.DefenderCivId == id || x.SiteCivId == id || x.AttackerCivId == id
 }
 func (x *HistoricalEventDestroyedSite) RelatedToHf(id int) bool { return false }
 
@@ -2468,14 +4312,14 @@ func (x *HistoricalEventDiplomatLost) RelatedToEntity(id int) bool { return x.En
 func (x *HistoricalEventDiplomatLost) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventDiplomatLost) CheckFields() {
+	if x.Entity != x.SiteId && x.Entity != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventDiplomatLost"]["Entity"]["SiteId"] = false
+	}
 	if x.Involved != x.SiteId && x.Involved != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventDiplomatLost"]["Involved"]["SiteId"] = false
 	}
 	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventDiplomatLost"]["Site"]["SiteId"] = false
-	}
-	if x.Entity != x.SiteId && x.Entity != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventDiplomatLost"]["Entity"]["SiteId"] = false
 	}
 }
 
@@ -2518,9 +4362,41 @@ func (x *HistoricalEventEntityCreated) RelatedToHf(id int) bool     { return x.C
 func (x *HistoricalEventEntityCreated) CheckFields() {
 }
 
+type HistoricalEventEntityDissolvedReason int
+
+const (
+	HistoricalEventEntityDissolvedReason_Unknown HistoricalEventEntityDissolvedReason = iota
+	HistoricalEventEntityDissolvedReason_HeavyLossesInBattle
+	HistoricalEventEntityDissolvedReason_LackOfFunds
+)
+
+func parseHistoricalEventEntityDissolvedReason(s string) HistoricalEventEntityDissolvedReason {
+	switch s {
+	case "heavy losses in battle":
+		return HistoricalEventEntityDissolvedReason_HeavyLossesInBattle
+	case "lack of funds":
+		return HistoricalEventEntityDissolvedReason_LackOfFunds
+	}
+	return HistoricalEventEntityDissolvedReason_Unknown
+}
+
+func (s HistoricalEventEntityDissolvedReason) String() string {
+	switch s {
+	case HistoricalEventEntityDissolvedReason_HeavyLossesInBattle:
+		return "heavy losses in battle"
+	case HistoricalEventEntityDissolvedReason_LackOfFunds:
+		return "lack of funds"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventEntityDissolvedReason) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventEntityDissolved struct {
-	EntityId int    `json:"entityId" legend:"base"` // entity_id
-	Reason   string `json:"reason" legend:"base"`   // reason
+	EntityId int                                  `json:"entityId" legend:"base"` // entity_id
+	Reason   HistoricalEventEntityDissolvedReason `json:"reason" legend:"base"`   // reason
 }
 
 func (x *HistoricalEventEntityDissolved) RelatedToEntity(id int) bool { return x.EntityId == id }
@@ -2584,11 +4460,65 @@ func (x *HistoricalEventEntityIncorporated) RelatedToHf(id int) bool { return x.
 func (x *HistoricalEventEntityIncorporated) CheckFields() {
 }
 
+type HistoricalEventEntityLawLawAdd int
+
+const (
+	HistoricalEventEntityLawLawAdd_Unknown HistoricalEventEntityLawLawAdd = iota
+	HistoricalEventEntityLawLawAdd_Harsh
+)
+
+func parseHistoricalEventEntityLawLawAdd(s string) HistoricalEventEntityLawLawAdd {
+	switch s {
+	case "harsh":
+		return HistoricalEventEntityLawLawAdd_Harsh
+	}
+	return HistoricalEventEntityLawLawAdd_Unknown
+}
+
+func (s HistoricalEventEntityLawLawAdd) String() string {
+	switch s {
+	case HistoricalEventEntityLawLawAdd_Harsh:
+		return "harsh"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventEntityLawLawAdd) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventEntityLawLawRemove int
+
+const (
+	HistoricalEventEntityLawLawRemove_Unknown HistoricalEventEntityLawLawRemove = iota
+	HistoricalEventEntityLawLawRemove_Harsh
+)
+
+func parseHistoricalEventEntityLawLawRemove(s string) HistoricalEventEntityLawLawRemove {
+	switch s {
+	case "harsh":
+		return HistoricalEventEntityLawLawRemove_Harsh
+	}
+	return HistoricalEventEntityLawLawRemove_Unknown
+}
+
+func (s HistoricalEventEntityLawLawRemove) String() string {
+	switch s {
+	case HistoricalEventEntityLawLawRemove_Harsh:
+		return "harsh"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventEntityLawLawRemove) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventEntityLaw struct {
-	EntityId     int    `json:"entityId" legend:"base"`     // entity_id
-	HistFigureId int    `json:"histFigureId" legend:"base"` // hist_figure_id
-	LawAdd       string `json:"lawAdd" legend:"base"`       // law_add
-	LawRemove    string `json:"lawRemove" legend:"base"`    // law_remove
+	EntityId     int                               `json:"entityId" legend:"base"`     // entity_id
+	HistFigureId int                               `json:"histFigureId" legend:"base"` // hist_figure_id
+	LawAdd       HistoricalEventEntityLawLawAdd    `json:"lawAdd" legend:"base"`       // law_add
+	LawRemove    HistoricalEventEntityLawLawRemove `json:"lawRemove" legend:"base"`    // law_remove
 }
 
 func (x *HistoricalEventEntityLaw) RelatedToEntity(id int) bool { return x.EntityId == id }
@@ -2631,17 +4561,44 @@ type HistoricalEventEntityPersecuted struct {
 
 func (x *HistoricalEventEntityPersecuted) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventEntityPersecuted) RelatedToHf(id int) bool {
-	return containsInt(x.PropertyConfiscatedFromHfid, id) || containsInt(x.ExpelledHfid, id) || x.PersecutorHfid == id
+	return containsInt(x.ExpelledHfid, id) || x.PersecutorHfid == id || containsInt(x.PropertyConfiscatedFromHfid, id)
 }
 
 func (x *HistoricalEventEntityPersecuted) CheckFields() {
 }
 
+type HistoricalEventEntityPrimaryCriminalsAction int
+
+const (
+	HistoricalEventEntityPrimaryCriminalsAction_Unknown HistoricalEventEntityPrimaryCriminalsAction = iota
+	HistoricalEventEntityPrimaryCriminalsAction_EntityPrimaryCriminals
+)
+
+func parseHistoricalEventEntityPrimaryCriminalsAction(s string) HistoricalEventEntityPrimaryCriminalsAction {
+	switch s {
+	case "entity_primary_criminals":
+		return HistoricalEventEntityPrimaryCriminalsAction_EntityPrimaryCriminals
+	}
+	return HistoricalEventEntityPrimaryCriminalsAction_Unknown
+}
+
+func (s HistoricalEventEntityPrimaryCriminalsAction) String() string {
+	switch s {
+	case HistoricalEventEntityPrimaryCriminalsAction_EntityPrimaryCriminals:
+		return "entity primary criminals"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventEntityPrimaryCriminalsAction) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventEntityPrimaryCriminals struct {
-	Action      string `json:"action" legend:"plus"`      // action
-	EntityId    int    `json:"entityId" legend:"base"`    // entity_id
-	SiteId      int    `json:"siteId" legend:"base"`      // site_id
-	StructureId int    `json:"structureId" legend:"base"` // structure_id
+	Action      HistoricalEventEntityPrimaryCriminalsAction `json:"action" legend:"plus"`      // action
+	EntityId    int                                         `json:"entityId" legend:"base"`    // entity_id
+	SiteId      int                                         `json:"siteId" legend:"base"`      // site_id
+	StructureId int                                         `json:"structureId" legend:"base"` // structure_id
 }
 
 func (x *HistoricalEventEntityPrimaryCriminals) RelatedToEntity(id int) bool { return x.EntityId == id }
@@ -2663,11 +4620,38 @@ func (x *HistoricalEventEntityRampagedInSite) RelatedToHf(id int) bool { return 
 func (x *HistoricalEventEntityRampagedInSite) CheckFields() {
 }
 
+type HistoricalEventEntityRelocateAction int
+
+const (
+	HistoricalEventEntityRelocateAction_Unknown HistoricalEventEntityRelocateAction = iota
+	HistoricalEventEntityRelocateAction_EntityRelocate
+)
+
+func parseHistoricalEventEntityRelocateAction(s string) HistoricalEventEntityRelocateAction {
+	switch s {
+	case "entity_relocate":
+		return HistoricalEventEntityRelocateAction_EntityRelocate
+	}
+	return HistoricalEventEntityRelocateAction_Unknown
+}
+
+func (s HistoricalEventEntityRelocateAction) String() string {
+	switch s {
+	case HistoricalEventEntityRelocateAction_EntityRelocate:
+		return "entity relocate"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventEntityRelocateAction) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventEntityRelocate struct {
-	Action      string `json:"action" legend:"plus"`      // action
-	EntityId    int    `json:"entityId" legend:"base"`    // entity_id
-	SiteId      int    `json:"siteId" legend:"base"`      // site_id
-	StructureId int    `json:"structureId" legend:"base"` // structure_id
+	Action      HistoricalEventEntityRelocateAction `json:"action" legend:"plus"`      // action
+	EntityId    int                                 `json:"entityId" legend:"base"`    // entity_id
+	SiteId      int                                 `json:"siteId" legend:"base"`      // site_id
+	StructureId int                                 `json:"structureId" legend:"base"` // structure_id
 }
 
 func (x *HistoricalEventEntityRelocate) RelatedToEntity(id int) bool { return x.EntityId == id }
@@ -2676,10 +4660,37 @@ func (x *HistoricalEventEntityRelocate) RelatedToHf(id int) bool     { return fa
 func (x *HistoricalEventEntityRelocate) CheckFields() {
 }
 
+type HistoricalEventEntitySearchedSiteResult int
+
+const (
+	HistoricalEventEntitySearchedSiteResult_Unknown HistoricalEventEntitySearchedSiteResult = iota
+	HistoricalEventEntitySearchedSiteResult_FoundNothing
+)
+
+func parseHistoricalEventEntitySearchedSiteResult(s string) HistoricalEventEntitySearchedSiteResult {
+	switch s {
+	case "found nothing":
+		return HistoricalEventEntitySearchedSiteResult_FoundNothing
+	}
+	return HistoricalEventEntitySearchedSiteResult_Unknown
+}
+
+func (s HistoricalEventEntitySearchedSiteResult) String() string {
+	switch s {
+	case HistoricalEventEntitySearchedSiteResult_FoundNothing:
+		return "found nothing"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventEntitySearchedSiteResult) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventEntitySearchedSite struct {
-	Result        string `json:"result" legend:"base"`        // result
-	SearcherCivId int    `json:"searcherCivId" legend:"base"` // searcher_civ_id
-	SiteId        int    `json:"siteId" legend:"base"`        // site_id
+	Result        HistoricalEventEntitySearchedSiteResult `json:"result" legend:"base"`        // result
+	SearcherCivId int                                     `json:"searcherCivId" legend:"base"` // searcher_civ_id
+	SiteId        int                                     `json:"siteId" legend:"base"`        // site_id
 }
 
 func (x *HistoricalEventEntitySearchedSite) RelatedToEntity(id int) bool {
@@ -2690,49 +4701,336 @@ func (x *HistoricalEventEntitySearchedSite) RelatedToHf(id int) bool { return fa
 func (x *HistoricalEventEntitySearchedSite) CheckFields() {
 }
 
+type HistoricalEventFailedFrameAttemptCrime int
+
+const (
+	HistoricalEventFailedFrameAttemptCrime_Unknown HistoricalEventFailedFrameAttemptCrime = iota
+	HistoricalEventFailedFrameAttemptCrime_Treason
+)
+
+func parseHistoricalEventFailedFrameAttemptCrime(s string) HistoricalEventFailedFrameAttemptCrime {
+	switch s {
+	case "treason":
+		return HistoricalEventFailedFrameAttemptCrime_Treason
+	}
+	return HistoricalEventFailedFrameAttemptCrime_Unknown
+}
+
+func (s HistoricalEventFailedFrameAttemptCrime) String() string {
+	switch s {
+	case HistoricalEventFailedFrameAttemptCrime_Treason:
+		return "treason"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventFailedFrameAttemptCrime) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventFailedFrameAttempt struct {
-	ConvicterEnid int    `json:"convicterEnid" legend:"base"` // convicter_enid
-	Crime         string `json:"crime" legend:"base"`         // crime
-	FooledHfid    int    `json:"fooledHfid" legend:"base"`    // fooled_hfid
-	FramerHfid    int    `json:"framerHfid" legend:"base"`    // framer_hfid
-	PlotterHfid   int    `json:"plotterHfid" legend:"base"`   // plotter_hfid
-	TargetHfid    int    `json:"targetHfid" legend:"base"`    // target_hfid
+	ConvicterEnid int                                    `json:"convicterEnid" legend:"base"` // convicter_enid
+	Crime         HistoricalEventFailedFrameAttemptCrime `json:"crime" legend:"base"`         // crime
+	FooledHfid    int                                    `json:"fooledHfid" legend:"base"`    // fooled_hfid
+	FramerHfid    int                                    `json:"framerHfid" legend:"base"`    // framer_hfid
+	PlotterHfid   int                                    `json:"plotterHfid" legend:"base"`   // plotter_hfid
+	TargetHfid    int                                    `json:"targetHfid" legend:"base"`    // target_hfid
 }
 
 func (x *HistoricalEventFailedFrameAttempt) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventFailedFrameAttempt) RelatedToHf(id int) bool {
-	return x.TargetHfid == id || x.FooledHfid == id || x.FramerHfid == id || x.PlotterHfid == id
+	return x.FooledHfid == id || x.FramerHfid == id || x.PlotterHfid == id || x.TargetHfid == id
 }
 
 func (x *HistoricalEventFailedFrameAttempt) CheckFields() {
 }
 
+type HistoricalEventFailedIntrigueCorruptionAction int
+
+const (
+	HistoricalEventFailedIntrigueCorruptionAction_Unknown HistoricalEventFailedIntrigueCorruptionAction = iota
+	HistoricalEventFailedIntrigueCorruptionAction_BribeOfficial
+	HistoricalEventFailedIntrigueCorruptionAction_BringIntoNetwork
+	HistoricalEventFailedIntrigueCorruptionAction_CorruptInPlace
+	HistoricalEventFailedIntrigueCorruptionAction_InduceToEmbezzle
+)
+
+func parseHistoricalEventFailedIntrigueCorruptionAction(s string) HistoricalEventFailedIntrigueCorruptionAction {
+	switch s {
+	case "bribe official":
+		return HistoricalEventFailedIntrigueCorruptionAction_BribeOfficial
+	case "bring into network":
+		return HistoricalEventFailedIntrigueCorruptionAction_BringIntoNetwork
+	case "corrupt in place":
+		return HistoricalEventFailedIntrigueCorruptionAction_CorruptInPlace
+	case "induce to embezzle":
+		return HistoricalEventFailedIntrigueCorruptionAction_InduceToEmbezzle
+	}
+	return HistoricalEventFailedIntrigueCorruptionAction_Unknown
+}
+
+func (s HistoricalEventFailedIntrigueCorruptionAction) String() string {
+	switch s {
+	case HistoricalEventFailedIntrigueCorruptionAction_BribeOfficial:
+		return "bribe official"
+	case HistoricalEventFailedIntrigueCorruptionAction_BringIntoNetwork:
+		return "bring into network"
+	case HistoricalEventFailedIntrigueCorruptionAction_CorruptInPlace:
+		return "corrupt in place"
+	case HistoricalEventFailedIntrigueCorruptionAction_InduceToEmbezzle:
+		return "induce to embezzle"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventFailedIntrigueCorruptionAction) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventFailedIntrigueCorruptionMethod int
+
+const (
+	HistoricalEventFailedIntrigueCorruptionMethod_Unknown HistoricalEventFailedIntrigueCorruptionMethod = iota
+	HistoricalEventFailedIntrigueCorruptionMethod_BlackmailOverEmbezzlement
+	HistoricalEventFailedIntrigueCorruptionMethod_Bribe
+	HistoricalEventFailedIntrigueCorruptionMethod_Flatter
+	HistoricalEventFailedIntrigueCorruptionMethod_Intimidate
+	HistoricalEventFailedIntrigueCorruptionMethod_OfferImmortality
+	HistoricalEventFailedIntrigueCorruptionMethod_Precedence
+	HistoricalEventFailedIntrigueCorruptionMethod_ReligiousSympathy
+	HistoricalEventFailedIntrigueCorruptionMethod_RevengeOnGrudge
+)
+
+func parseHistoricalEventFailedIntrigueCorruptionMethod(s string) HistoricalEventFailedIntrigueCorruptionMethod {
+	switch s {
+	case "blackmail over embezzlement":
+		return HistoricalEventFailedIntrigueCorruptionMethod_BlackmailOverEmbezzlement
+	case "bribe":
+		return HistoricalEventFailedIntrigueCorruptionMethod_Bribe
+	case "flatter":
+		return HistoricalEventFailedIntrigueCorruptionMethod_Flatter
+	case "intimidate":
+		return HistoricalEventFailedIntrigueCorruptionMethod_Intimidate
+	case "offer immortality":
+		return HistoricalEventFailedIntrigueCorruptionMethod_OfferImmortality
+	case "precedence":
+		return HistoricalEventFailedIntrigueCorruptionMethod_Precedence
+	case "religious sympathy":
+		return HistoricalEventFailedIntrigueCorruptionMethod_ReligiousSympathy
+	case "revenge on grudge":
+		return HistoricalEventFailedIntrigueCorruptionMethod_RevengeOnGrudge
+	}
+	return HistoricalEventFailedIntrigueCorruptionMethod_Unknown
+}
+
+func (s HistoricalEventFailedIntrigueCorruptionMethod) String() string {
+	switch s {
+	case HistoricalEventFailedIntrigueCorruptionMethod_BlackmailOverEmbezzlement:
+		return "blackmail over embezzlement"
+	case HistoricalEventFailedIntrigueCorruptionMethod_Bribe:
+		return "bribe"
+	case HistoricalEventFailedIntrigueCorruptionMethod_Flatter:
+		return "flatter"
+	case HistoricalEventFailedIntrigueCorruptionMethod_Intimidate:
+		return "intimidate"
+	case HistoricalEventFailedIntrigueCorruptionMethod_OfferImmortality:
+		return "offer immortality"
+	case HistoricalEventFailedIntrigueCorruptionMethod_Precedence:
+		return "precedence"
+	case HistoricalEventFailedIntrigueCorruptionMethod_ReligiousSympathy:
+		return "religious sympathy"
+	case HistoricalEventFailedIntrigueCorruptionMethod_RevengeOnGrudge:
+		return "revenge on grudge"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventFailedIntrigueCorruptionMethod) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventFailedIntrigueCorruptionTopFacet int
+
+const (
+	HistoricalEventFailedIntrigueCorruptionTopFacet_Unknown HistoricalEventFailedIntrigueCorruptionTopFacet = iota
+	HistoricalEventFailedIntrigueCorruptionTopFacet_Ambition
+	HistoricalEventFailedIntrigueCorruptionTopFacet_AnxietyPropensity
+	HistoricalEventFailedIntrigueCorruptionTopFacet_Confidence
+	HistoricalEventFailedIntrigueCorruptionTopFacet_EnvyPropensity
+	HistoricalEventFailedIntrigueCorruptionTopFacet_Fearlessness
+	HistoricalEventFailedIntrigueCorruptionTopFacet_Greed
+	HistoricalEventFailedIntrigueCorruptionTopFacet_Hope
+	HistoricalEventFailedIntrigueCorruptionTopFacet_Pride
+	HistoricalEventFailedIntrigueCorruptionTopFacet_StressVulnerability
+	HistoricalEventFailedIntrigueCorruptionTopFacet_Swayable
+	HistoricalEventFailedIntrigueCorruptionTopFacet_Vanity
+	HistoricalEventFailedIntrigueCorruptionTopFacet_Vengeful
+)
+
+func parseHistoricalEventFailedIntrigueCorruptionTopFacet(s string) HistoricalEventFailedIntrigueCorruptionTopFacet {
+	switch s {
+	case "ambition":
+		return HistoricalEventFailedIntrigueCorruptionTopFacet_Ambition
+	case "anxiety propensity":
+		return HistoricalEventFailedIntrigueCorruptionTopFacet_AnxietyPropensity
+	case "confidence":
+		return HistoricalEventFailedIntrigueCorruptionTopFacet_Confidence
+	case "envy propensity":
+		return HistoricalEventFailedIntrigueCorruptionTopFacet_EnvyPropensity
+	case "fearlessness":
+		return HistoricalEventFailedIntrigueCorruptionTopFacet_Fearlessness
+	case "greed":
+		return HistoricalEventFailedIntrigueCorruptionTopFacet_Greed
+	case "hope":
+		return HistoricalEventFailedIntrigueCorruptionTopFacet_Hope
+	case "pride":
+		return HistoricalEventFailedIntrigueCorruptionTopFacet_Pride
+	case "stress vulnerability":
+		return HistoricalEventFailedIntrigueCorruptionTopFacet_StressVulnerability
+	case "swayable":
+		return HistoricalEventFailedIntrigueCorruptionTopFacet_Swayable
+	case "vanity":
+		return HistoricalEventFailedIntrigueCorruptionTopFacet_Vanity
+	case "vengeful":
+		return HistoricalEventFailedIntrigueCorruptionTopFacet_Vengeful
+	}
+	return HistoricalEventFailedIntrigueCorruptionTopFacet_Unknown
+}
+
+func (s HistoricalEventFailedIntrigueCorruptionTopFacet) String() string {
+	switch s {
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Ambition:
+		return "ambition"
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_AnxietyPropensity:
+		return "anxiety propensity"
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Confidence:
+		return "confidence"
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_EnvyPropensity:
+		return "envy propensity"
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Fearlessness:
+		return "fearlessness"
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Greed:
+		return "greed"
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Hope:
+		return "hope"
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Pride:
+		return "pride"
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_StressVulnerability:
+		return "stress vulnerability"
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Swayable:
+		return "swayable"
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Vanity:
+		return "vanity"
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Vengeful:
+		return "vengeful"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventFailedIntrigueCorruptionTopFacet) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor int
+
+const (
+	HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Unknown HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor = iota
+	HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Fear
+	HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Love
+	HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Respect
+	HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Trust
+)
+
+func parseHistoricalEventFailedIntrigueCorruptionTopRelationshipFactor(s string) HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor {
+	switch s {
+	case "fear":
+		return HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Fear
+	case "love":
+		return HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Love
+	case "respect":
+		return HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Respect
+	case "trust":
+		return HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Trust
+	}
+	return HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Unknown
+}
+
+func (s HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor) String() string {
+	switch s {
+	case HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Fear:
+		return "fear"
+	case HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Love:
+		return "love"
+	case HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Respect:
+		return "respect"
+	case HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Trust:
+		return "trust"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventFailedIntrigueCorruptionTopValue int
+
+const (
+	HistoricalEventFailedIntrigueCorruptionTopValue_Unknown HistoricalEventFailedIntrigueCorruptionTopValue = iota
+	HistoricalEventFailedIntrigueCorruptionTopValue_Law
+	HistoricalEventFailedIntrigueCorruptionTopValue_Power
+)
+
+func parseHistoricalEventFailedIntrigueCorruptionTopValue(s string) HistoricalEventFailedIntrigueCorruptionTopValue {
+	switch s {
+	case "law":
+		return HistoricalEventFailedIntrigueCorruptionTopValue_Law
+	case "power":
+		return HistoricalEventFailedIntrigueCorruptionTopValue_Power
+	}
+	return HistoricalEventFailedIntrigueCorruptionTopValue_Unknown
+}
+
+func (s HistoricalEventFailedIntrigueCorruptionTopValue) String() string {
+	switch s {
+	case HistoricalEventFailedIntrigueCorruptionTopValue_Law:
+		return "law"
+	case HistoricalEventFailedIntrigueCorruptionTopValue_Power:
+		return "power"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventFailedIntrigueCorruptionTopValue) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventFailedIntrigueCorruption struct {
-	Action                    string `json:"action" legend:"base"`                    // action
-	AllyDefenseBonus          int    `json:"allyDefenseBonus" legend:"base"`          // ally_defense_bonus
-	CoconspiratorBonus        int    `json:"coconspiratorBonus" legend:"base"`        // coconspirator_bonus
-	CorruptorHfid             int    `json:"corruptorHfid" legend:"base"`             // corruptor_hfid
-	CorruptorIdentity         int    `json:"corruptorIdentity" legend:"base"`         // corruptor_identity
-	FailedJudgmentTest        bool   `json:"failedJudgmentTest" legend:"base"`        // failed_judgment_test
-	FeatureLayerId            int    `json:"featureLayerId" legend:"base"`            // feature_layer_id
-	LureHfid                  int    `json:"lureHfid" legend:"base"`                  // lure_hfid
-	Method                    string `json:"method" legend:"base"`                    // method
-	RelevantEntityId          int    `json:"relevantEntityId" legend:"base"`          // relevant_entity_id
-	RelevantIdForMethod       int    `json:"relevantIdForMethod" legend:"base"`       // relevant_id_for_method
-	RelevantPositionProfileId int    `json:"relevantPositionProfileId" legend:"base"` // relevant_position_profile_id
-	SiteId                    int    `json:"siteId" legend:"base"`                    // site_id
-	SubregionId               int    `json:"subregionId" legend:"base"`               // subregion_id
-	TargetHfid                int    `json:"targetHfid" legend:"base"`                // target_hfid
-	TargetIdentity            int    `json:"targetIdentity" legend:"base"`            // target_identity
-	TopFacet                  string `json:"topFacet" legend:"base"`                  // top_facet
-	TopFacetModifier          int    `json:"topFacetModifier" legend:"base"`          // top_facet_modifier
-	TopFacetRating            int    `json:"topFacetRating" legend:"base"`            // top_facet_rating
-	TopRelationshipFactor     string `json:"topRelationshipFactor" legend:"base"`     // top_relationship_factor
-	TopRelationshipModifier   int    `json:"topRelationshipModifier" legend:"base"`   // top_relationship_modifier
-	TopRelationshipRating     int    `json:"topRelationshipRating" legend:"base"`     // top_relationship_rating
-	TopValue                  string `json:"topValue" legend:"base"`                  // top_value
-	TopValueModifier          int    `json:"topValueModifier" legend:"base"`          // top_value_modifier
-	TopValueRating            int    `json:"topValueRating" legend:"base"`            // top_value_rating
+	Action                    HistoricalEventFailedIntrigueCorruptionAction                `json:"action" legend:"base"`                    // action
+	AllyDefenseBonus          int                                                          `json:"allyDefenseBonus" legend:"base"`          // ally_defense_bonus
+	CoconspiratorBonus        int                                                          `json:"coconspiratorBonus" legend:"base"`        // coconspirator_bonus
+	CorruptorHfid             int                                                          `json:"corruptorHfid" legend:"base"`             // corruptor_hfid
+	CorruptorIdentity         int                                                          `json:"corruptorIdentity" legend:"base"`         // corruptor_identity
+	FailedJudgmentTest        bool                                                         `json:"failedJudgmentTest" legend:"base"`        // failed_judgment_test
+	FeatureLayerId            int                                                          `json:"featureLayerId" legend:"base"`            // feature_layer_id
+	LureHfid                  int                                                          `json:"lureHfid" legend:"base"`                  // lure_hfid
+	Method                    HistoricalEventFailedIntrigueCorruptionMethod                `json:"method" legend:"base"`                    // method
+	RelevantEntityId          int                                                          `json:"relevantEntityId" legend:"base"`          // relevant_entity_id
+	RelevantIdForMethod       int                                                          `json:"relevantIdForMethod" legend:"base"`       // relevant_id_for_method
+	RelevantPositionProfileId int                                                          `json:"relevantPositionProfileId" legend:"base"` // relevant_position_profile_id
+	SiteId                    int                                                          `json:"siteId" legend:"base"`                    // site_id
+	SubregionId               int                                                          `json:"subregionId" legend:"base"`               // subregion_id
+	TargetHfid                int                                                          `json:"targetHfid" legend:"base"`                // target_hfid
+	TargetIdentity            int                                                          `json:"targetIdentity" legend:"base"`            // target_identity
+	TopFacet                  HistoricalEventFailedIntrigueCorruptionTopFacet              `json:"topFacet" legend:"base"`                  // top_facet
+	TopFacetModifier          int                                                          `json:"topFacetModifier" legend:"base"`          // top_facet_modifier
+	TopFacetRating            int                                                          `json:"topFacetRating" legend:"base"`            // top_facet_rating
+	TopRelationshipFactor     HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor `json:"topRelationshipFactor" legend:"base"`     // top_relationship_factor
+	TopRelationshipModifier   int                                                          `json:"topRelationshipModifier" legend:"base"`   // top_relationship_modifier
+	TopRelationshipRating     int                                                          `json:"topRelationshipRating" legend:"base"`     // top_relationship_rating
+	TopValue                  HistoricalEventFailedIntrigueCorruptionTopValue              `json:"topValue" legend:"base"`                  // top_value
+	TopValueModifier          int                                                          `json:"topValueModifier" legend:"base"`          // top_value_modifier
+	TopValueRating            int                                                          `json:"topValueRating" legend:"base"`            // top_value_rating
 }
 
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToEntity(id int) bool {
@@ -2805,7 +5103,7 @@ type HistoricalEventHfAbducted struct {
 
 func (x *HistoricalEventHfAbducted) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfAbducted) RelatedToHf(id int) bool {
-	return x.TargetHfid == id || x.SnatcherHfid == id
+	return x.SnatcherHfid == id || x.TargetHfid == id
 }
 
 func (x *HistoricalEventHfAbducted) CheckFields() {
@@ -2826,14 +5124,73 @@ func (x *HistoricalEventHfAttackedSite) RelatedToHf(id int) bool { return x.Atta
 func (x *HistoricalEventHfAttackedSite) CheckFields() {
 }
 
+type HistoricalEventHfConfrontedReason int
+
+const (
+	HistoricalEventHfConfrontedReason_Unknown HistoricalEventHfConfrontedReason = iota
+	HistoricalEventHfConfrontedReason_Ageless
+	HistoricalEventHfConfrontedReason_Murder
+)
+
+func parseHistoricalEventHfConfrontedReason(s string) HistoricalEventHfConfrontedReason {
+	switch s {
+	case "ageless":
+		return HistoricalEventHfConfrontedReason_Ageless
+	case "murder":
+		return HistoricalEventHfConfrontedReason_Murder
+	}
+	return HistoricalEventHfConfrontedReason_Unknown
+}
+
+func (s HistoricalEventHfConfrontedReason) String() string {
+	switch s {
+	case HistoricalEventHfConfrontedReason_Ageless:
+		return "ageless"
+	case HistoricalEventHfConfrontedReason_Murder:
+		return "murder"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfConfrontedReason) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfConfrontedSituation int
+
+const (
+	HistoricalEventHfConfrontedSituation_Unknown HistoricalEventHfConfrontedSituation = iota
+	HistoricalEventHfConfrontedSituation_GeneralSuspicion
+)
+
+func parseHistoricalEventHfConfrontedSituation(s string) HistoricalEventHfConfrontedSituation {
+	switch s {
+	case "general suspicion":
+		return HistoricalEventHfConfrontedSituation_GeneralSuspicion
+	}
+	return HistoricalEventHfConfrontedSituation_Unknown
+}
+
+func (s HistoricalEventHfConfrontedSituation) String() string {
+	switch s {
+	case HistoricalEventHfConfrontedSituation_GeneralSuspicion:
+		return "general suspicion"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfConfrontedSituation) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfConfronted struct {
-	Coords         string   `json:"coords" legend:"base"`         // coords
-	FeatureLayerId int      `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Hfid           int      `json:"hfid" legend:"base"`           // hfid
-	Reason         []string `json:"reason" legend:"base"`         // reason
-	SiteId         int      `json:"siteId" legend:"base"`         // site_id
-	Situation      string   `json:"situation" legend:"base"`      // situation
-	SubregionId    int      `json:"subregionId" legend:"base"`    // subregion_id
+	Coords         string                               `json:"coords" legend:"base"`         // coords
+	FeatureLayerId int                                  `json:"featureLayerId" legend:"base"` // feature_layer_id
+	Hfid           int                                  `json:"hfid" legend:"base"`           // hfid
+	Reason         []HistoricalEventHfConfrontedReason  `json:"reason" legend:"base"`         // reason
+	SiteId         int                                  `json:"siteId" legend:"base"`         // site_id
+	Situation      HistoricalEventHfConfrontedSituation `json:"situation" legend:"base"`      // situation
+	SubregionId    int                                  `json:"subregionId" legend:"base"`    // subregion_id
 }
 
 func (x *HistoricalEventHfConfronted) RelatedToEntity(id int) bool { return false }
@@ -2842,39 +5199,121 @@ func (x *HistoricalEventHfConfronted) RelatedToHf(id int) bool     { return x.Hf
 func (x *HistoricalEventHfConfronted) CheckFields() {
 }
 
+type HistoricalEventHfConvictedCrime int
+
+const (
+	HistoricalEventHfConvictedCrime_Unknown HistoricalEventHfConvictedCrime = iota
+	HistoricalEventHfConvictedCrime_AttemptedKidnapping
+	HistoricalEventHfConvictedCrime_AttemptedMurder
+	HistoricalEventHfConvictedCrime_AttemptedTheft
+	HistoricalEventHfConvictedCrime_Bribery
+	HistoricalEventHfConvictedCrime_BuildingDestruction
+	HistoricalEventHfConvictedCrime_DisorderlyConduct
+	HistoricalEventHfConvictedCrime_Embezzlement
+	HistoricalEventHfConvictedCrime_Espionage
+	HistoricalEventHfConvictedCrime_Murder
+	HistoricalEventHfConvictedCrime_Theft
+	HistoricalEventHfConvictedCrime_Treason
+	HistoricalEventHfConvictedCrime_Vandalism
+)
+
+func parseHistoricalEventHfConvictedCrime(s string) HistoricalEventHfConvictedCrime {
+	switch s {
+	case "attempted kidnapping":
+		return HistoricalEventHfConvictedCrime_AttemptedKidnapping
+	case "attempted murder":
+		return HistoricalEventHfConvictedCrime_AttemptedMurder
+	case "attempted theft":
+		return HistoricalEventHfConvictedCrime_AttemptedTheft
+	case "bribery":
+		return HistoricalEventHfConvictedCrime_Bribery
+	case "building destruction":
+		return HistoricalEventHfConvictedCrime_BuildingDestruction
+	case "disorderly conduct":
+		return HistoricalEventHfConvictedCrime_DisorderlyConduct
+	case "embezzlement":
+		return HistoricalEventHfConvictedCrime_Embezzlement
+	case "espionage":
+		return HistoricalEventHfConvictedCrime_Espionage
+	case "murder":
+		return HistoricalEventHfConvictedCrime_Murder
+	case "theft":
+		return HistoricalEventHfConvictedCrime_Theft
+	case "treason":
+		return HistoricalEventHfConvictedCrime_Treason
+	case "vandalism":
+		return HistoricalEventHfConvictedCrime_Vandalism
+	}
+	return HistoricalEventHfConvictedCrime_Unknown
+}
+
+func (s HistoricalEventHfConvictedCrime) String() string {
+	switch s {
+	case HistoricalEventHfConvictedCrime_AttemptedKidnapping:
+		return "attempted kidnapping"
+	case HistoricalEventHfConvictedCrime_AttemptedMurder:
+		return "attempted murder"
+	case HistoricalEventHfConvictedCrime_AttemptedTheft:
+		return "attempted theft"
+	case HistoricalEventHfConvictedCrime_Bribery:
+		return "bribery"
+	case HistoricalEventHfConvictedCrime_BuildingDestruction:
+		return "building destruction"
+	case HistoricalEventHfConvictedCrime_DisorderlyConduct:
+		return "disorderly conduct"
+	case HistoricalEventHfConvictedCrime_Embezzlement:
+		return "embezzlement"
+	case HistoricalEventHfConvictedCrime_Espionage:
+		return "espionage"
+	case HistoricalEventHfConvictedCrime_Murder:
+		return "murder"
+	case HistoricalEventHfConvictedCrime_Theft:
+		return "theft"
+	case HistoricalEventHfConvictedCrime_Treason:
+		return "treason"
+	case HistoricalEventHfConvictedCrime_Vandalism:
+		return "vandalism"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfConvictedCrime) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfConvicted struct {
-	Beating                        bool   `json:"beating" legend:"base"`                        // beating
-	CoconspiratorHfid              int    `json:"coconspiratorHfid" legend:"base"`              // coconspirator_hfid
-	ConfessedAfterApbArrestEnid    int    `json:"confessedAfterApbArrestEnid" legend:"base"`    // confessed_after_apb_arrest_enid
-	ContactHfid                    int    `json:"contactHfid" legend:"base"`                    // contact_hfid
-	ConvictIsContact               bool   `json:"convictIsContact" legend:"base"`               // convict_is_contact
-	ConvictedHfid                  int    `json:"convictedHfid" legend:"base"`                  // convicted_hfid
-	ConvicterEnid                  int    `json:"convicterEnid" legend:"base"`                  // convicter_enid
-	CorruptConvicterHfid           int    `json:"corruptConvicterHfid" legend:"base"`           // corrupt_convicter_hfid
-	Crime                          string `json:"crime" legend:"base"`                          // crime
-	DeathPenalty                   bool   `json:"deathPenalty" legend:"base"`                   // death_penalty
-	DidNotRevealAllInInterrogation bool   `json:"didNotRevealAllInInterrogation" legend:"base"` // did_not_reveal_all_in_interrogation
-	Exiled                         bool   `json:"exiled" legend:"base"`                         // exiled
-	FooledHfid                     int    `json:"fooledHfid" legend:"base"`                     // fooled_hfid
-	FramerHfid                     int    `json:"framerHfid" legend:"base"`                     // framer_hfid
-	Hammerstrokes                  int    `json:"hammerstrokes" legend:"base"`                  // hammerstrokes
-	HeldFirmInInterrogation        bool   `json:"heldFirmInInterrogation" legend:"base"`        // held_firm_in_interrogation
-	ImplicatedHfid                 []int  `json:"implicatedHfid" legend:"base"`                 // implicated_hfid
-	InterrogatorHfid               int    `json:"interrogatorHfid" legend:"base"`               // interrogator_hfid
-	NoPrisonAvailable              bool   `json:"noPrisonAvailable" legend:"base"`              // no_prison_available
-	PlotterHfid                    int    `json:"plotterHfid" legend:"base"`                    // plotter_hfid
-	PrisonMonths                   int    `json:"prisonMonths" legend:"base"`                   // prison_months
-	SurveiledCoconspirator         bool   `json:"surveiledCoconspirator" legend:"base"`         // surveiled_coconspirator
-	SurveiledContact               bool   `json:"surveiledContact" legend:"base"`               // surveiled_contact
-	SurveiledConvicted             bool   `json:"surveiledConvicted" legend:"base"`             // surveiled_convicted
-	SurveiledTarget                bool   `json:"surveiledTarget" legend:"base"`                // surveiled_target
-	TargetHfid                     int    `json:"targetHfid" legend:"base"`                     // target_hfid
-	WrongfulConviction             bool   `json:"wrongfulConviction" legend:"base"`             // wrongful_conviction
+	Beating                        bool                            `json:"beating" legend:"base"`                        // beating
+	CoconspiratorHfid              int                             `json:"coconspiratorHfid" legend:"base"`              // coconspirator_hfid
+	ConfessedAfterApbArrestEnid    int                             `json:"confessedAfterApbArrestEnid" legend:"base"`    // confessed_after_apb_arrest_enid
+	ContactHfid                    int                             `json:"contactHfid" legend:"base"`                    // contact_hfid
+	ConvictIsContact               bool                            `json:"convictIsContact" legend:"base"`               // convict_is_contact
+	ConvictedHfid                  int                             `json:"convictedHfid" legend:"base"`                  // convicted_hfid
+	ConvicterEnid                  int                             `json:"convicterEnid" legend:"base"`                  // convicter_enid
+	CorruptConvicterHfid           int                             `json:"corruptConvicterHfid" legend:"base"`           // corrupt_convicter_hfid
+	Crime                          HistoricalEventHfConvictedCrime `json:"crime" legend:"base"`                          // crime
+	DeathPenalty                   bool                            `json:"deathPenalty" legend:"base"`                   // death_penalty
+	DidNotRevealAllInInterrogation bool                            `json:"didNotRevealAllInInterrogation" legend:"base"` // did_not_reveal_all_in_interrogation
+	Exiled                         bool                            `json:"exiled" legend:"base"`                         // exiled
+	FooledHfid                     int                             `json:"fooledHfid" legend:"base"`                     // fooled_hfid
+	FramerHfid                     int                             `json:"framerHfid" legend:"base"`                     // framer_hfid
+	Hammerstrokes                  int                             `json:"hammerstrokes" legend:"base"`                  // hammerstrokes
+	HeldFirmInInterrogation        bool                            `json:"heldFirmInInterrogation" legend:"base"`        // held_firm_in_interrogation
+	ImplicatedHfid                 []int                           `json:"implicatedHfid" legend:"base"`                 // implicated_hfid
+	InterrogatorHfid               int                             `json:"interrogatorHfid" legend:"base"`               // interrogator_hfid
+	NoPrisonAvailable              bool                            `json:"noPrisonAvailable" legend:"base"`              // no_prison_available
+	PlotterHfid                    int                             `json:"plotterHfid" legend:"base"`                    // plotter_hfid
+	PrisonMonths                   int                             `json:"prisonMonths" legend:"base"`                   // prison_months
+	SurveiledCoconspirator         bool                            `json:"surveiledCoconspirator" legend:"base"`         // surveiled_coconspirator
+	SurveiledContact               bool                            `json:"surveiledContact" legend:"base"`               // surveiled_contact
+	SurveiledConvicted             bool                            `json:"surveiledConvicted" legend:"base"`             // surveiled_convicted
+	SurveiledTarget                bool                            `json:"surveiledTarget" legend:"base"`                // surveiled_target
+	TargetHfid                     int                             `json:"targetHfid" legend:"base"`                     // target_hfid
+	WrongfulConviction             bool                            `json:"wrongfulConviction" legend:"base"`             // wrongful_conviction
 }
 
 func (x *HistoricalEventHfConvicted) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfConvicted) RelatedToHf(id int) bool {
-	return x.InterrogatorHfid == id || x.FooledHfid == id || x.CorruptConvicterHfid == id || x.TargetHfid == id || x.FramerHfid == id || x.ConvictedHfid == id || x.CoconspiratorHfid == id || x.ContactHfid == id || containsInt(x.ImplicatedHfid, id) || x.PlotterHfid == id
+	return x.ConvictedHfid == id || x.FramerHfid == id || x.CorruptConvicterHfid == id || containsInt(x.ImplicatedHfid, id) || x.TargetHfid == id || x.ContactHfid == id || x.InterrogatorHfid == id || x.PlotterHfid == id || x.CoconspiratorHfid == id || x.FooledHfid == id
 }
 
 func (x *HistoricalEventHfConvicted) CheckFields() {
@@ -2895,38 +5334,324 @@ func (x *HistoricalEventHfDestroyedSite) RelatedToHf(id int) bool { return x.Att
 func (x *HistoricalEventHfDestroyedSite) CheckFields() {
 }
 
+type HistoricalEventHfDiedDeathCause int
+
+const (
+	HistoricalEventHfDiedDeathCause_Unknown HistoricalEventHfDiedDeathCause = iota
+	HistoricalEventHfDiedDeathCause_Behead
+	HistoricalEventHfDiedDeathCause_Bleed
+	HistoricalEventHfDiedDeathCause_BurnAlive
+	HistoricalEventHfDiedDeathCause_BuryAlive
+	HistoricalEventHfDiedDeathCause_Cavein
+	HistoricalEventHfDiedDeathCause_Crucify
+	HistoricalEventHfDiedDeathCause_Drown
+	HistoricalEventHfDiedDeathCause_DrownAlt
+	HistoricalEventHfDiedDeathCause_DrownAltTwo
+	HistoricalEventHfDiedDeathCause_ExecutionGeneric
+	HistoricalEventHfDiedDeathCause_FeedToBeasts
+	HistoricalEventHfDiedDeathCause_HackToPieces
+	HistoricalEventHfDiedDeathCause_Heat
+	HistoricalEventHfDiedDeathCause_Infection
+	HistoricalEventHfDiedDeathCause_LeaptFromHeight
+	HistoricalEventHfDiedDeathCause_Memorialize
+	HistoricalEventHfDiedDeathCause_Murder
+	HistoricalEventHfDiedDeathCause_OldAge
+	HistoricalEventHfDiedDeathCause_Shot
+	HistoricalEventHfDiedDeathCause_StruckDown
+	HistoricalEventHfDiedDeathCause_Suffocate
+	HistoricalEventHfDiedDeathCause_Thirst
+)
+
+func parseHistoricalEventHfDiedDeathCause(s string) HistoricalEventHfDiedDeathCause {
+	switch s {
+	case "behead":
+		return HistoricalEventHfDiedDeathCause_Behead
+	case "bleed":
+		return HistoricalEventHfDiedDeathCause_Bleed
+	case "burn_alive":
+		return HistoricalEventHfDiedDeathCause_BurnAlive
+	case "bury_alive":
+		return HistoricalEventHfDiedDeathCause_BuryAlive
+	case "cavein":
+		return HistoricalEventHfDiedDeathCause_Cavein
+	case "crucify":
+		return HistoricalEventHfDiedDeathCause_Crucify
+	case "drown":
+		return HistoricalEventHfDiedDeathCause_Drown
+	case "drown_alt":
+		return HistoricalEventHfDiedDeathCause_DrownAlt
+	case "drown_alt2":
+		return HistoricalEventHfDiedDeathCause_DrownAltTwo
+	case "execution_generic":
+		return HistoricalEventHfDiedDeathCause_ExecutionGeneric
+	case "feed_to_beasts":
+		return HistoricalEventHfDiedDeathCause_FeedToBeasts
+	case "hack_to_pieces":
+		return HistoricalEventHfDiedDeathCause_HackToPieces
+	case "heat":
+		return HistoricalEventHfDiedDeathCause_Heat
+	case "infection":
+		return HistoricalEventHfDiedDeathCause_Infection
+	case "leapt_from_height":
+		return HistoricalEventHfDiedDeathCause_LeaptFromHeight
+	case "memorialize":
+		return HistoricalEventHfDiedDeathCause_Memorialize
+	case "murder":
+		return HistoricalEventHfDiedDeathCause_Murder
+	case "old_age":
+		return HistoricalEventHfDiedDeathCause_OldAge
+	case "shot":
+		return HistoricalEventHfDiedDeathCause_Shot
+	case "struck_down":
+		return HistoricalEventHfDiedDeathCause_StruckDown
+	case "suffocate":
+		return HistoricalEventHfDiedDeathCause_Suffocate
+	case "thirst":
+		return HistoricalEventHfDiedDeathCause_Thirst
+	}
+	return HistoricalEventHfDiedDeathCause_Unknown
+}
+
+func (s HistoricalEventHfDiedDeathCause) String() string {
+	switch s {
+	case HistoricalEventHfDiedDeathCause_Behead:
+		return "behead"
+	case HistoricalEventHfDiedDeathCause_Bleed:
+		return "bleed"
+	case HistoricalEventHfDiedDeathCause_BurnAlive:
+		return "burn alive"
+	case HistoricalEventHfDiedDeathCause_BuryAlive:
+		return "bury alive"
+	case HistoricalEventHfDiedDeathCause_Cavein:
+		return "cavein"
+	case HistoricalEventHfDiedDeathCause_Crucify:
+		return "crucify"
+	case HistoricalEventHfDiedDeathCause_Drown:
+		return "drown"
+	case HistoricalEventHfDiedDeathCause_DrownAlt:
+		return "drown alt"
+	case HistoricalEventHfDiedDeathCause_DrownAltTwo:
+		return "drown alt two"
+	case HistoricalEventHfDiedDeathCause_ExecutionGeneric:
+		return "execution generic"
+	case HistoricalEventHfDiedDeathCause_FeedToBeasts:
+		return "feed to beasts"
+	case HistoricalEventHfDiedDeathCause_HackToPieces:
+		return "hack to pieces"
+	case HistoricalEventHfDiedDeathCause_Heat:
+		return "heat"
+	case HistoricalEventHfDiedDeathCause_Infection:
+		return "infection"
+	case HistoricalEventHfDiedDeathCause_LeaptFromHeight:
+		return "leapt from height"
+	case HistoricalEventHfDiedDeathCause_Memorialize:
+		return "memorialize"
+	case HistoricalEventHfDiedDeathCause_Murder:
+		return "murder"
+	case HistoricalEventHfDiedDeathCause_OldAge:
+		return "old age"
+	case HistoricalEventHfDiedDeathCause_Shot:
+		return "shot"
+	case HistoricalEventHfDiedDeathCause_StruckDown:
+		return "struck down"
+	case HistoricalEventHfDiedDeathCause_Suffocate:
+		return "suffocate"
+	case HistoricalEventHfDiedDeathCause_Thirst:
+		return "thirst"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfDiedDeathCause) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfDiedItemSubtype int
+
+const (
+	HistoricalEventHfDiedItemSubtype_Unknown HistoricalEventHfDiedItemSubtype = iota
+	HistoricalEventHfDiedItemSubtype_BattleAxe
+	HistoricalEventHfDiedItemSubtype_Buckler
+	HistoricalEventHfDiedItemSubtype_Pick
+	HistoricalEventHfDiedItemSubtype_Shield
+	HistoricalEventHfDiedItemSubtype_Spear
+	HistoricalEventHfDiedItemSubtype_WarHammer
+)
+
+func parseHistoricalEventHfDiedItemSubtype(s string) HistoricalEventHfDiedItemSubtype {
+	switch s {
+	case "battle axe":
+		return HistoricalEventHfDiedItemSubtype_BattleAxe
+	case "buckler":
+		return HistoricalEventHfDiedItemSubtype_Buckler
+	case "pick":
+		return HistoricalEventHfDiedItemSubtype_Pick
+	case "shield":
+		return HistoricalEventHfDiedItemSubtype_Shield
+	case "spear":
+		return HistoricalEventHfDiedItemSubtype_Spear
+	case "war hammer":
+		return HistoricalEventHfDiedItemSubtype_WarHammer
+	}
+	return HistoricalEventHfDiedItemSubtype_Unknown
+}
+
+func (s HistoricalEventHfDiedItemSubtype) String() string {
+	switch s {
+	case HistoricalEventHfDiedItemSubtype_BattleAxe:
+		return "battle axe"
+	case HistoricalEventHfDiedItemSubtype_Buckler:
+		return "buckler"
+	case HistoricalEventHfDiedItemSubtype_Pick:
+		return "pick"
+	case HistoricalEventHfDiedItemSubtype_Shield:
+		return "shield"
+	case HistoricalEventHfDiedItemSubtype_Spear:
+		return "spear"
+	case HistoricalEventHfDiedItemSubtype_WarHammer:
+		return "war hammer"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfDiedItemSubtype) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfDiedItemType int
+
+const (
+	HistoricalEventHfDiedItemType_Unknown HistoricalEventHfDiedItemType = iota
+	HistoricalEventHfDiedItemType_None
+	HistoricalEventHfDiedItemType_Shield
+	HistoricalEventHfDiedItemType_Weapon
+)
+
+func parseHistoricalEventHfDiedItemType(s string) HistoricalEventHfDiedItemType {
+	switch s {
+	case "none":
+		return HistoricalEventHfDiedItemType_None
+	case "shield":
+		return HistoricalEventHfDiedItemType_Shield
+	case "weapon":
+		return HistoricalEventHfDiedItemType_Weapon
+	}
+	return HistoricalEventHfDiedItemType_Unknown
+}
+
+func (s HistoricalEventHfDiedItemType) String() string {
+	switch s {
+	case HistoricalEventHfDiedItemType_None:
+		return "none"
+	case HistoricalEventHfDiedItemType_Shield:
+		return "shield"
+	case HistoricalEventHfDiedItemType_Weapon:
+		return "weapon"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfDiedItemType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfDiedMat int
+
+const (
+	HistoricalEventHfDiedMat_Unknown HistoricalEventHfDiedMat = iota
+	HistoricalEventHfDiedMat_Bronze
+	HistoricalEventHfDiedMat_Copper
+	HistoricalEventHfDiedMat_Silver
+	HistoricalEventHfDiedMat_SporeTree
+)
+
+func parseHistoricalEventHfDiedMat(s string) HistoricalEventHfDiedMat {
+	switch s {
+	case "bronze":
+		return HistoricalEventHfDiedMat_Bronze
+	case "copper":
+		return HistoricalEventHfDiedMat_Copper
+	case "silver":
+		return HistoricalEventHfDiedMat_Silver
+	case "spore tree":
+		return HistoricalEventHfDiedMat_SporeTree
+	}
+	return HistoricalEventHfDiedMat_Unknown
+}
+
+func (s HistoricalEventHfDiedMat) String() string {
+	switch s {
+	case HistoricalEventHfDiedMat_Bronze:
+		return "bronze"
+	case HistoricalEventHfDiedMat_Copper:
+		return "copper"
+	case HistoricalEventHfDiedMat_Silver:
+		return "silver"
+	case HistoricalEventHfDiedMat_SporeTree:
+		return "spore tree"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfDiedMat) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfDied struct {
-	Cause               string `json:"cause" legend:"base"`               // cause
-	DeathCause          string `json:"deathCause" legend:"plus"`          // death_cause
-	FeatureLayerId      int    `json:"featureLayerId" legend:"base"`      // feature_layer_id
-	Hfid                int    `json:"hfid" legend:"base"`                // hfid
-	ItemType            string `json:"itemType" legend:"plus"`            // item_type
-	SiteId              int    `json:"siteId" legend:"base"`              // site_id
-	SlayerCaste         string `json:"slayerCaste" legend:"both"`         // slayer_caste
-	SlayerHfid          int    `json:"slayerHfid" legend:"base"`          // slayer_hfid
-	SlayerItemId        int    `json:"slayerItemId" legend:"base"`        // slayer_item_id
-	SlayerRace          string `json:"slayerRace" legend:"both"`          // slayer_race
-	SlayerShooterItemId int    `json:"slayerShooterItemId" legend:"base"` // slayer_shooter_item_id
-	SubregionId         int    `json:"subregionId" legend:"base"`         // subregion_id
+	Cause               string                           `json:"cause" legend:"base"`               // cause
+	DeathCause          HistoricalEventHfDiedDeathCause  `json:"deathCause" legend:"plus"`          // death_cause
+	FeatureLayerId      int                              `json:"featureLayerId" legend:"base"`      // feature_layer_id
+	Hfid                int                              `json:"hfid" legend:"base"`                // hfid
+	ItemSubtype         HistoricalEventHfDiedItemSubtype `json:"itemSubtype" legend:"plus"`         // item_subtype
+	ItemType            HistoricalEventHfDiedItemType    `json:"itemType" legend:"plus"`            // item_type
+	Mat                 HistoricalEventHfDiedMat         `json:"mat" legend:"plus"`                 // mat
+	SiteId              int                              `json:"siteId" legend:"base"`              // site_id
+	SlayerCaste         string                           `json:"slayerCaste" legend:"both"`         // slayer_caste
+	SlayerHfid          int                              `json:"slayerHfid" legend:"base"`          // slayer_hfid
+	SlayerItemId        int                              `json:"slayerItemId" legend:"base"`        // slayer_item_id
+	SlayerRace          string                           `json:"slayerRace" legend:"both"`          // slayer_race
+	SlayerShooterItemId int                              `json:"slayerShooterItemId" legend:"base"` // slayer_shooter_item_id
+	SubregionId         int                              `json:"subregionId" legend:"base"`         // subregion_id
 }
 
 func (x *HistoricalEventHfDied) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfDied) RelatedToHf(id int) bool     { return x.Hfid == id || x.SlayerHfid == id }
+func (x *HistoricalEventHfDied) RelatedToHf(id int) bool     { return x.SlayerHfid == id || x.Hfid == id }
 
 func (x *HistoricalEventHfDied) CheckFields() {
-	if x.DeathCause != x.Cause && x.DeathCause != "" && x.Cause != "" {
-		sameFields["HistoricalEventHfDied"]["DeathCause"]["Cause"] = false
+}
+
+type HistoricalEventHfDisturbedStructureAction int
+
+const (
+	HistoricalEventHfDisturbedStructureAction_Unknown HistoricalEventHfDisturbedStructureAction = iota
+	HistoricalEventHfDisturbedStructureAction_Disturb
+)
+
+func parseHistoricalEventHfDisturbedStructureAction(s string) HistoricalEventHfDisturbedStructureAction {
+	switch s {
+	case "disturb":
+		return HistoricalEventHfDisturbedStructureAction_Disturb
 	}
-	if x.ItemType != x.Cause && x.ItemType != "" && x.Cause != "" {
-		sameFields["HistoricalEventHfDied"]["ItemType"]["Cause"] = false
+	return HistoricalEventHfDisturbedStructureAction_Unknown
+}
+
+func (s HistoricalEventHfDisturbedStructureAction) String() string {
+	switch s {
+	case HistoricalEventHfDisturbedStructureAction_Disturb:
+		return "disturb"
 	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfDisturbedStructureAction) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
 }
 
 type HistoricalEventHfDisturbedStructure struct {
-	Action      string `json:"action" legend:"plus"`      // action
-	HistFigId   int    `json:"histFigId" legend:"base"`   // hist_fig_id
-	SiteId      int    `json:"siteId" legend:"base"`      // site_id
-	StructureId int    `json:"structureId" legend:"base"` // structure_id
+	Action      HistoricalEventHfDisturbedStructureAction `json:"action" legend:"plus"`      // action
+	HistFigId   int                                       `json:"histFigId" legend:"base"`   // hist_fig_id
+	SiteId      int                                       `json:"siteId" legend:"base"`      // site_id
+	StructureId int                                       `json:"structureId" legend:"base"` // structure_id
 }
 
 func (x *HistoricalEventHfDisturbedStructure) RelatedToEntity(id int) bool { return false }
@@ -2947,30 +5672,30 @@ type HistoricalEventHfDoesInteraction struct {
 
 func (x *HistoricalEventHfDoesInteraction) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfDoesInteraction) RelatedToHf(id int) bool {
-	return x.TargetHfid == id || x.DoerHfid == id
+	return x.DoerHfid == id || x.TargetHfid == id
 }
 
 func (x *HistoricalEventHfDoesInteraction) CheckFields() {
-	if x.InteractionAction != x.Interaction && x.InteractionAction != "" && x.Interaction != "" {
-		sameFields["HistoricalEventHfDoesInteraction"]["InteractionAction"]["Interaction"] = false
-	}
 	if x.Region != x.DoerHfid && x.Region != 0 && x.DoerHfid != 0 {
 		sameFields["HistoricalEventHfDoesInteraction"]["Region"]["DoerHfid"] = false
 	}
 	if x.Region != x.TargetHfid && x.Region != 0 && x.TargetHfid != 0 {
 		sameFields["HistoricalEventHfDoesInteraction"]["Region"]["TargetHfid"] = false
 	}
-	if x.Site != x.TargetHfid && x.Site != 0 && x.TargetHfid != 0 {
-		sameFields["HistoricalEventHfDoesInteraction"]["Site"]["TargetHfid"] = false
-	}
 	if x.Site != x.DoerHfid && x.Site != 0 && x.DoerHfid != 0 {
 		sameFields["HistoricalEventHfDoesInteraction"]["Site"]["DoerHfid"] = false
 	}
-	if x.Source != x.TargetHfid && x.Source != 0 && x.TargetHfid != 0 {
-		sameFields["HistoricalEventHfDoesInteraction"]["Source"]["TargetHfid"] = false
+	if x.Site != x.TargetHfid && x.Site != 0 && x.TargetHfid != 0 {
+		sameFields["HistoricalEventHfDoesInteraction"]["Site"]["TargetHfid"] = false
+	}
+	if x.InteractionAction != x.Interaction && x.InteractionAction != "" && x.Interaction != "" {
+		sameFields["HistoricalEventHfDoesInteraction"]["InteractionAction"]["Interaction"] = false
 	}
 	if x.Source != x.DoerHfid && x.Source != 0 && x.DoerHfid != 0 {
 		sameFields["HistoricalEventHfDoesInteraction"]["Source"]["DoerHfid"] = false
+	}
+	if x.Source != x.TargetHfid && x.Source != 0 && x.TargetHfid != 0 {
+		sameFields["HistoricalEventHfDoesInteraction"]["Source"]["TargetHfid"] = false
 	}
 }
 
@@ -3022,9 +5747,36 @@ func (x *HistoricalEventHfFreed) RelatedToHf(id int) bool {
 func (x *HistoricalEventHfFreed) CheckFields() {
 }
 
+type HistoricalEventHfGainsSecretGoalSecretGoal int
+
+const (
+	HistoricalEventHfGainsSecretGoalSecretGoal_Unknown HistoricalEventHfGainsSecretGoalSecretGoal = iota
+	HistoricalEventHfGainsSecretGoalSecretGoal_Immortality
+)
+
+func parseHistoricalEventHfGainsSecretGoalSecretGoal(s string) HistoricalEventHfGainsSecretGoalSecretGoal {
+	switch s {
+	case "immortality":
+		return HistoricalEventHfGainsSecretGoalSecretGoal_Immortality
+	}
+	return HistoricalEventHfGainsSecretGoalSecretGoal_Unknown
+}
+
+func (s HistoricalEventHfGainsSecretGoalSecretGoal) String() string {
+	switch s {
+	case HistoricalEventHfGainsSecretGoalSecretGoal_Immortality:
+		return "immortality"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfGainsSecretGoalSecretGoal) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfGainsSecretGoal struct {
-	Hfid       int    `json:"hfid" legend:"base"`       // hfid
-	SecretGoal string `json:"secretGoal" legend:"base"` // secret_goal
+	Hfid       int                                        `json:"hfid" legend:"base"`       // hfid
+	SecretGoal HistoricalEventHfGainsSecretGoalSecretGoal `json:"secretGoal" legend:"base"` // secret_goal
 }
 
 func (x *HistoricalEventHfGainsSecretGoal) RelatedToEntity(id int) bool { return false }
@@ -3044,18 +5796,45 @@ type HistoricalEventHfInterrogated struct {
 
 func (x *HistoricalEventHfInterrogated) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfInterrogated) RelatedToHf(id int) bool {
-	return x.InterrogatorHfid == id || x.TargetHfid == id || x.ImplicatedHfid == id
+	return x.ImplicatedHfid == id || x.InterrogatorHfid == id || x.TargetHfid == id
 }
 
 func (x *HistoricalEventHfInterrogated) CheckFields() {
 }
 
+type HistoricalEventHfLearnsSecretSecretText int
+
+const (
+	HistoricalEventHfLearnsSecretSecretText_Unknown HistoricalEventHfLearnsSecretSecretText = iota
+	HistoricalEventHfLearnsSecretSecretText_TheSecretsOfLifeAndDeath
+)
+
+func parseHistoricalEventHfLearnsSecretSecretText(s string) HistoricalEventHfLearnsSecretSecretText {
+	switch s {
+	case "the secrets of life and death":
+		return HistoricalEventHfLearnsSecretSecretText_TheSecretsOfLifeAndDeath
+	}
+	return HistoricalEventHfLearnsSecretSecretText_Unknown
+}
+
+func (s HistoricalEventHfLearnsSecretSecretText) String() string {
+	switch s {
+	case HistoricalEventHfLearnsSecretSecretText_TheSecretsOfLifeAndDeath:
+		return "the secrets of life and death"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfLearnsSecretSecretText) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfLearnsSecret struct {
-	ArtifactId  int    `json:"artifactId" legend:"base"`  // artifact_id
-	Interaction string `json:"interaction" legend:"base"` // interaction
-	SecretText  string `json:"secretText" legend:"plus"`  // secret_text
-	StudentHfid int    `json:"studentHfid" legend:"base"` // student_hfid
-	TeacherHfid int    `json:"teacherHfid" legend:"base"` // teacher_hfid
+	ArtifactId  int                                     `json:"artifactId" legend:"base"`  // artifact_id
+	Interaction string                                  `json:"interaction" legend:"base"` // interaction
+	SecretText  HistoricalEventHfLearnsSecretSecretText `json:"secretText" legend:"plus"`  // secret_text
+	StudentHfid int                                     `json:"studentHfid" legend:"base"` // student_hfid
+	TeacherHfid int                                     `json:"teacherHfid" legend:"base"` // teacher_hfid
 }
 
 func (x *HistoricalEventHfLearnsSecret) RelatedToEntity(id int) bool { return false }
@@ -3064,9 +5843,6 @@ func (x *HistoricalEventHfLearnsSecret) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventHfLearnsSecret) CheckFields() {
-	if x.SecretText != x.Interaction && x.SecretText != "" && x.Interaction != "" {
-		sameFields["HistoricalEventHfLearnsSecret"]["SecretText"]["Interaction"] = false
-	}
 }
 
 type HistoricalEventHfNewPet struct {
@@ -3103,11 +5879,38 @@ func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToHf(id int) bool
 func (x *HistoricalEventHfPerformedHorribleExperiments) CheckFields() {
 }
 
+type HistoricalEventHfPrayedInsideStructureAction int
+
+const (
+	HistoricalEventHfPrayedInsideStructureAction_Unknown HistoricalEventHfPrayedInsideStructureAction = iota
+	HistoricalEventHfPrayedInsideStructureAction_Prayedinside
+)
+
+func parseHistoricalEventHfPrayedInsideStructureAction(s string) HistoricalEventHfPrayedInsideStructureAction {
+	switch s {
+	case "prayedinside":
+		return HistoricalEventHfPrayedInsideStructureAction_Prayedinside
+	}
+	return HistoricalEventHfPrayedInsideStructureAction_Unknown
+}
+
+func (s HistoricalEventHfPrayedInsideStructureAction) String() string {
+	switch s {
+	case HistoricalEventHfPrayedInsideStructureAction_Prayedinside:
+		return "prayedinside"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfPrayedInsideStructureAction) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfPrayedInsideStructure struct {
-	Action      string `json:"action" legend:"plus"`      // action
-	HistFigId   int    `json:"histFigId" legend:"base"`   // hist_fig_id
-	SiteId      int    `json:"siteId" legend:"base"`      // site_id
-	StructureId int    `json:"structureId" legend:"base"` // structure_id
+	Action      HistoricalEventHfPrayedInsideStructureAction `json:"action" legend:"plus"`      // action
+	HistFigId   int                                          `json:"histFigId" legend:"base"`   // hist_fig_id
+	SiteId      int                                          `json:"siteId" legend:"base"`      // site_id
+	StructureId int                                          `json:"structureId" legend:"base"` // structure_id
 }
 
 func (x *HistoricalEventHfPrayedInsideStructure) RelatedToEntity(id int) bool { return false }
@@ -3116,12 +5919,44 @@ func (x *HistoricalEventHfPrayedInsideStructure) RelatedToHf(id int) bool     { 
 func (x *HistoricalEventHfPrayedInsideStructure) CheckFields() {
 }
 
+type HistoricalEventHfPreachTopic int
+
+const (
+	HistoricalEventHfPreachTopic_Unknown HistoricalEventHfPreachTopic = iota
+	HistoricalEventHfPreachTopic_Entity1ShouldLoveEntityTwo
+	HistoricalEventHfPreachTopic_SetEntity1AgainstEntityTwo
+)
+
+func parseHistoricalEventHfPreachTopic(s string) HistoricalEventHfPreachTopic {
+	switch s {
+	case "entity 1 should love entity 2":
+		return HistoricalEventHfPreachTopic_Entity1ShouldLoveEntityTwo
+	case "set entity 1 against entity 2":
+		return HistoricalEventHfPreachTopic_SetEntity1AgainstEntityTwo
+	}
+	return HistoricalEventHfPreachTopic_Unknown
+}
+
+func (s HistoricalEventHfPreachTopic) String() string {
+	switch s {
+	case HistoricalEventHfPreachTopic_Entity1ShouldLoveEntityTwo:
+		return "entity 1 should love entity two"
+	case HistoricalEventHfPreachTopic_SetEntity1AgainstEntityTwo:
+		return "set entity 1 against entity two"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfPreachTopic) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfPreach struct {
-	Entity1     int    `json:"entity1" legend:"base"`     // entity_1
-	Entity2     int    `json:"entity2" legend:"base"`     // entity_2
-	SiteHfid    int    `json:"siteHfid" legend:"base"`    // site_hfid
-	SpeakerHfid int    `json:"speakerHfid" legend:"base"` // speaker_hfid
-	Topic       string `json:"topic" legend:"base"`       // topic
+	Entity1     int                          `json:"entity1" legend:"base"`     // entity_1
+	Entity2     int                          `json:"entity2" legend:"base"`     // entity_2
+	SiteHfid    int                          `json:"siteHfid" legend:"base"`    // site_hfid
+	SpeakerHfid int                          `json:"speakerHfid" legend:"base"` // speaker_hfid
+	Topic       HistoricalEventHfPreachTopic `json:"topic" legend:"base"`       // topic
 }
 
 func (x *HistoricalEventHfPreach) RelatedToEntity(id int) bool {
@@ -3134,11 +5969,38 @@ func (x *HistoricalEventHfPreach) RelatedToHf(id int) bool {
 func (x *HistoricalEventHfPreach) CheckFields() {
 }
 
+type HistoricalEventHfProfanedStructureAction int
+
+const (
+	HistoricalEventHfProfanedStructureAction_Unknown HistoricalEventHfProfanedStructureAction = iota
+	HistoricalEventHfProfanedStructureAction_Profane
+)
+
+func parseHistoricalEventHfProfanedStructureAction(s string) HistoricalEventHfProfanedStructureAction {
+	switch s {
+	case "profane":
+		return HistoricalEventHfProfanedStructureAction_Profane
+	}
+	return HistoricalEventHfProfanedStructureAction_Unknown
+}
+
+func (s HistoricalEventHfProfanedStructureAction) String() string {
+	switch s {
+	case HistoricalEventHfProfanedStructureAction_Profane:
+		return "profane"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfProfanedStructureAction) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfProfanedStructure struct {
-	Action      string `json:"action" legend:"plus"`      // action
-	HistFigId   int    `json:"histFigId" legend:"base"`   // hist_fig_id
-	SiteId      int    `json:"siteId" legend:"base"`      // site_id
-	StructureId int    `json:"structureId" legend:"base"` // structure_id
+	Action      HistoricalEventHfProfanedStructureAction `json:"action" legend:"plus"`      // action
+	HistFigId   int                                      `json:"histFigId" legend:"base"`   // hist_fig_id
+	SiteId      int                                      `json:"siteId" legend:"base"`      // site_id
+	StructureId int                                      `json:"structureId" legend:"base"` // structure_id
 }
 
 func (x *HistoricalEventHfProfanedStructure) RelatedToEntity(id int) bool { return false }
@@ -3176,13 +6038,40 @@ func (x *HistoricalEventHfReachSummit) RelatedToHf(id int) bool     { return con
 func (x *HistoricalEventHfReachSummit) CheckFields() {
 }
 
+type HistoricalEventHfRecruitedUnitTypeForEntityUnitType int
+
+const (
+	HistoricalEventHfRecruitedUnitTypeForEntityUnitType_Unknown HistoricalEventHfRecruitedUnitTypeForEntityUnitType = iota
+	HistoricalEventHfRecruitedUnitTypeForEntityUnitType_Monk
+)
+
+func parseHistoricalEventHfRecruitedUnitTypeForEntityUnitType(s string) HistoricalEventHfRecruitedUnitTypeForEntityUnitType {
+	switch s {
+	case "monk":
+		return HistoricalEventHfRecruitedUnitTypeForEntityUnitType_Monk
+	}
+	return HistoricalEventHfRecruitedUnitTypeForEntityUnitType_Unknown
+}
+
+func (s HistoricalEventHfRecruitedUnitTypeForEntityUnitType) String() string {
+	switch s {
+	case HistoricalEventHfRecruitedUnitTypeForEntityUnitType_Monk:
+		return "monk"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfRecruitedUnitTypeForEntityUnitType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfRecruitedUnitTypeForEntity struct {
-	EntityId       int    `json:"entityId" legend:"base"`       // entity_id
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Hfid           int    `json:"hfid" legend:"base"`           // hfid
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
-	UnitType       string `json:"unitType" legend:"base"`       // unit_type
+	EntityId       int                                                 `json:"entityId" legend:"base"`       // entity_id
+	FeatureLayerId int                                                 `json:"featureLayerId" legend:"base"` // feature_layer_id
+	Hfid           int                                                 `json:"hfid" legend:"base"`           // hfid
+	SiteId         int                                                 `json:"siteId" legend:"base"`         // site_id
+	SubregionId    int                                                 `json:"subregionId" legend:"base"`    // subregion_id
+	UnitType       HistoricalEventHfRecruitedUnitTypeForEntityUnitType `json:"unitType" legend:"base"`       // unit_type
 }
 
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToEntity(id int) bool {
@@ -3193,20 +6082,79 @@ func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToHf(id int) bool {
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) CheckFields() {
 }
 
+type HistoricalEventHfRelationshipDeniedReason int
+
+const (
+	HistoricalEventHfRelationshipDeniedReason_Unknown HistoricalEventHfRelationshipDeniedReason = iota
+	HistoricalEventHfRelationshipDeniedReason_Jealousy
+	HistoricalEventHfRelationshipDeniedReason_PrefersWorkingAlone
+)
+
+func parseHistoricalEventHfRelationshipDeniedReason(s string) HistoricalEventHfRelationshipDeniedReason {
+	switch s {
+	case "jealousy":
+		return HistoricalEventHfRelationshipDeniedReason_Jealousy
+	case "prefers working alone":
+		return HistoricalEventHfRelationshipDeniedReason_PrefersWorkingAlone
+	}
+	return HistoricalEventHfRelationshipDeniedReason_Unknown
+}
+
+func (s HistoricalEventHfRelationshipDeniedReason) String() string {
+	switch s {
+	case HistoricalEventHfRelationshipDeniedReason_Jealousy:
+		return "jealousy"
+	case HistoricalEventHfRelationshipDeniedReason_PrefersWorkingAlone:
+		return "prefers working alone"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfRelationshipDeniedReason) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfRelationshipDeniedRelationship int
+
+const (
+	HistoricalEventHfRelationshipDeniedRelationship_Unknown HistoricalEventHfRelationshipDeniedRelationship = iota
+	HistoricalEventHfRelationshipDeniedRelationship_Apprentice
+)
+
+func parseHistoricalEventHfRelationshipDeniedRelationship(s string) HistoricalEventHfRelationshipDeniedRelationship {
+	switch s {
+	case "apprentice":
+		return HistoricalEventHfRelationshipDeniedRelationship_Apprentice
+	}
+	return HistoricalEventHfRelationshipDeniedRelationship_Unknown
+}
+
+func (s HistoricalEventHfRelationshipDeniedRelationship) String() string {
+	switch s {
+	case HistoricalEventHfRelationshipDeniedRelationship_Apprentice:
+		return "apprentice"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfRelationshipDeniedRelationship) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfRelationshipDenied struct {
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Reason         string `json:"reason" legend:"base"`         // reason
-	ReasonId       int    `json:"reasonId" legend:"base"`       // reason_id
-	Relationship   string `json:"relationship" legend:"base"`   // relationship
-	SeekerHfid     int    `json:"seekerHfid" legend:"base"`     // seeker_hfid
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
-	TargetHfid     int    `json:"targetHfid" legend:"base"`     // target_hfid
+	FeatureLayerId int                                             `json:"featureLayerId" legend:"base"` // feature_layer_id
+	Reason         HistoricalEventHfRelationshipDeniedReason       `json:"reason" legend:"base"`         // reason
+	ReasonId       int                                             `json:"reasonId" legend:"base"`       // reason_id
+	Relationship   HistoricalEventHfRelationshipDeniedRelationship `json:"relationship" legend:"base"`   // relationship
+	SeekerHfid     int                                             `json:"seekerHfid" legend:"base"`     // seeker_hfid
+	SiteId         int                                             `json:"siteId" legend:"base"`         // site_id
+	SubregionId    int                                             `json:"subregionId" legend:"base"`    // subregion_id
+	TargetHfid     int                                             `json:"targetHfid" legend:"base"`     // target_hfid
 }
 
 func (x *HistoricalEventHfRelationshipDenied) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfRelationshipDenied) RelatedToHf(id int) bool {
-	return x.SeekerHfid == id || x.TargetHfid == id
+	return x.TargetHfid == id || x.SeekerHfid == id
 }
 
 func (x *HistoricalEventHfRelationshipDenied) CheckFields() {
@@ -3228,35 +6176,189 @@ func (x *HistoricalEventHfReunion) RelatedToHf(id int) bool {
 func (x *HistoricalEventHfReunion) CheckFields() {
 }
 
+type HistoricalEventHfRevivedGhost int
+
+const (
+	HistoricalEventHfRevivedGhost_Unknown HistoricalEventHfRevivedGhost = iota
+	HistoricalEventHfRevivedGhost_AngryGhost
+	HistoricalEventHfRevivedGhost_EnergeticPoltergeist
+	HistoricalEventHfRevivedGhost_ForlornHaunt
+	HistoricalEventHfRevivedGhost_HowlingSpirit
+	HistoricalEventHfRevivedGhost_MoaningSpirit
+	HistoricalEventHfRevivedGhost_MurderousGhost
+	HistoricalEventHfRevivedGhost_RestlessHaunt
+	HistoricalEventHfRevivedGhost_SecretivePoltergeist
+	HistoricalEventHfRevivedGhost_TroublesomePoltergeist
+	HistoricalEventHfRevivedGhost_ViolentGhost
+)
+
+func parseHistoricalEventHfRevivedGhost(s string) HistoricalEventHfRevivedGhost {
+	switch s {
+	case "angry ghost":
+		return HistoricalEventHfRevivedGhost_AngryGhost
+	case "energetic poltergeist":
+		return HistoricalEventHfRevivedGhost_EnergeticPoltergeist
+	case "forlorn haunt":
+		return HistoricalEventHfRevivedGhost_ForlornHaunt
+	case "howling spirit":
+		return HistoricalEventHfRevivedGhost_HowlingSpirit
+	case "moaning spirit":
+		return HistoricalEventHfRevivedGhost_MoaningSpirit
+	case "murderous ghost":
+		return HistoricalEventHfRevivedGhost_MurderousGhost
+	case "restless haunt":
+		return HistoricalEventHfRevivedGhost_RestlessHaunt
+	case "secretive poltergeist":
+		return HistoricalEventHfRevivedGhost_SecretivePoltergeist
+	case "troublesome poltergeist":
+		return HistoricalEventHfRevivedGhost_TroublesomePoltergeist
+	case "violent ghost":
+		return HistoricalEventHfRevivedGhost_ViolentGhost
+	}
+	return HistoricalEventHfRevivedGhost_Unknown
+}
+
+func (s HistoricalEventHfRevivedGhost) String() string {
+	switch s {
+	case HistoricalEventHfRevivedGhost_AngryGhost:
+		return "angry ghost"
+	case HistoricalEventHfRevivedGhost_EnergeticPoltergeist:
+		return "energetic poltergeist"
+	case HistoricalEventHfRevivedGhost_ForlornHaunt:
+		return "forlorn haunt"
+	case HistoricalEventHfRevivedGhost_HowlingSpirit:
+		return "howling spirit"
+	case HistoricalEventHfRevivedGhost_MoaningSpirit:
+		return "moaning spirit"
+	case HistoricalEventHfRevivedGhost_MurderousGhost:
+		return "murderous ghost"
+	case HistoricalEventHfRevivedGhost_RestlessHaunt:
+		return "restless haunt"
+	case HistoricalEventHfRevivedGhost_SecretivePoltergeist:
+		return "secretive poltergeist"
+	case HistoricalEventHfRevivedGhost_TroublesomePoltergeist:
+		return "troublesome poltergeist"
+	case HistoricalEventHfRevivedGhost_ViolentGhost:
+		return "violent ghost"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfRevivedGhost) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfRevived struct {
-	ActorHfid      int    `json:"actorHfid" legend:"base"`      // actor_hfid
-	Disturbance    bool   `json:"disturbance" legend:"base"`    // disturbance
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Ghost          string `json:"ghost" legend:"base"`          // ghost
-	Hfid           int    `json:"hfid" legend:"base"`           // hfid
-	RaisedBefore   bool   `json:"raisedBefore" legend:"base"`   // raised_before
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	ActorHfid      int                           `json:"actorHfid" legend:"base"`      // actor_hfid
+	Disturbance    bool                          `json:"disturbance" legend:"base"`    // disturbance
+	FeatureLayerId int                           `json:"featureLayerId" legend:"base"` // feature_layer_id
+	Ghost          HistoricalEventHfRevivedGhost `json:"ghost" legend:"base"`          // ghost
+	Hfid           int                           `json:"hfid" legend:"base"`           // hfid
+	RaisedBefore   bool                          `json:"raisedBefore" legend:"base"`   // raised_before
+	SiteId         int                           `json:"siteId" legend:"base"`         // site_id
+	SubregionId    int                           `json:"subregionId" legend:"base"`    // subregion_id
 }
 
 func (x *HistoricalEventHfRevived) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfRevived) RelatedToHf(id int) bool     { return x.Hfid == id || x.ActorHfid == id }
+func (x *HistoricalEventHfRevived) RelatedToHf(id int) bool     { return x.ActorHfid == id || x.Hfid == id }
 
 func (x *HistoricalEventHfRevived) CheckFields() {
 }
 
+type HistoricalEventHfSimpleBattleEventSubtype int
+
+const (
+	HistoricalEventHfSimpleBattleEventSubtype_Unknown HistoricalEventHfSimpleBattleEventSubtype = iota
+	HistoricalEventHfSimpleBattleEventSubtype_Ambushed
+	HistoricalEventHfSimpleBattleEventSubtype_Attacked
+	HistoricalEventHfSimpleBattleEventSubtype_Confront
+	HistoricalEventHfSimpleBattleEventSubtype_Corner
+	HistoricalEventHfSimpleBattleEventSubtype_GotIntoABrawl
+	HistoricalEventHfSimpleBattleEventSubtype_HappenUpon
+	HistoricalEventHfSimpleBattleEventSubtype_Scuffle
+	HistoricalEventHfSimpleBattleEventSubtype_Subdued
+	HistoricalEventHfSimpleBattleEventSubtype_Surprised
+	HistoricalEventHfSimpleBattleEventSubtype_TwoLostAfterGivingWounds
+	HistoricalEventHfSimpleBattleEventSubtype_TwoLostAfterMutualWounds
+	HistoricalEventHfSimpleBattleEventSubtype_TwoLostAfterReceivingWounds
+)
+
+func parseHistoricalEventHfSimpleBattleEventSubtype(s string) HistoricalEventHfSimpleBattleEventSubtype {
+	switch s {
+	case "2 lost after giving wounds":
+		return HistoricalEventHfSimpleBattleEventSubtype_TwoLostAfterGivingWounds
+	case "2 lost after mutual wounds":
+		return HistoricalEventHfSimpleBattleEventSubtype_TwoLostAfterMutualWounds
+	case "2 lost after receiving wounds":
+		return HistoricalEventHfSimpleBattleEventSubtype_TwoLostAfterReceivingWounds
+	case "ambushed":
+		return HistoricalEventHfSimpleBattleEventSubtype_Ambushed
+	case "attacked":
+		return HistoricalEventHfSimpleBattleEventSubtype_Attacked
+	case "confront":
+		return HistoricalEventHfSimpleBattleEventSubtype_Confront
+	case "corner":
+		return HistoricalEventHfSimpleBattleEventSubtype_Corner
+	case "got into a brawl":
+		return HistoricalEventHfSimpleBattleEventSubtype_GotIntoABrawl
+	case "happen upon":
+		return HistoricalEventHfSimpleBattleEventSubtype_HappenUpon
+	case "scuffle":
+		return HistoricalEventHfSimpleBattleEventSubtype_Scuffle
+	case "subdued":
+		return HistoricalEventHfSimpleBattleEventSubtype_Subdued
+	case "surprised":
+		return HistoricalEventHfSimpleBattleEventSubtype_Surprised
+	}
+	return HistoricalEventHfSimpleBattleEventSubtype_Unknown
+}
+
+func (s HistoricalEventHfSimpleBattleEventSubtype) String() string {
+	switch s {
+	case HistoricalEventHfSimpleBattleEventSubtype_Ambushed:
+		return "ambushed"
+	case HistoricalEventHfSimpleBattleEventSubtype_Attacked:
+		return "attacked"
+	case HistoricalEventHfSimpleBattleEventSubtype_Confront:
+		return "confront"
+	case HistoricalEventHfSimpleBattleEventSubtype_Corner:
+		return "corner"
+	case HistoricalEventHfSimpleBattleEventSubtype_GotIntoABrawl:
+		return "got into a brawl"
+	case HistoricalEventHfSimpleBattleEventSubtype_HappenUpon:
+		return "happen upon"
+	case HistoricalEventHfSimpleBattleEventSubtype_Scuffle:
+		return "scuffle"
+	case HistoricalEventHfSimpleBattleEventSubtype_Subdued:
+		return "subdued"
+	case HistoricalEventHfSimpleBattleEventSubtype_Surprised:
+		return "surprised"
+	case HistoricalEventHfSimpleBattleEventSubtype_TwoLostAfterGivingWounds:
+		return "two lost after giving wounds"
+	case HistoricalEventHfSimpleBattleEventSubtype_TwoLostAfterMutualWounds:
+		return "two lost after mutual wounds"
+	case HistoricalEventHfSimpleBattleEventSubtype_TwoLostAfterReceivingWounds:
+		return "two lost after receiving wounds"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfSimpleBattleEventSubtype) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfSimpleBattleEvent struct {
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Group1Hfid     int    `json:"group1Hfid" legend:"base"`     // group_1_hfid
-	Group2Hfid     int    `json:"group2Hfid" legend:"base"`     // group_2_hfid
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
-	Subtype        string `json:"subtype" legend:"base"`        // subtype
+	FeatureLayerId int                                       `json:"featureLayerId" legend:"base"` // feature_layer_id
+	Group1Hfid     int                                       `json:"group1Hfid" legend:"base"`     // group_1_hfid
+	Group2Hfid     int                                       `json:"group2Hfid" legend:"base"`     // group_2_hfid
+	SiteId         int                                       `json:"siteId" legend:"base"`         // site_id
+	SubregionId    int                                       `json:"subregionId" legend:"base"`    // subregion_id
+	Subtype        HistoricalEventHfSimpleBattleEventSubtype `json:"subtype" legend:"base"`        // subtype
 }
 
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToHf(id int) bool {
-	return x.Group1Hfid == id || x.Group2Hfid == id
+	return x.Group2Hfid == id || x.Group1Hfid == id
 }
 
 func (x *HistoricalEventHfSimpleBattleEvent) CheckFields() {
@@ -3290,28 +6392,114 @@ func (x *HistoricalEventHfViewedArtifact) RelatedToHf(id int) bool     { return 
 func (x *HistoricalEventHfViewedArtifact) CheckFields() {
 }
 
+type HistoricalEventHfWoundedInjuryType int
+
+const (
+	HistoricalEventHfWoundedInjuryType_Unknown HistoricalEventHfWoundedInjuryType = iota
+	HistoricalEventHfWoundedInjuryType_Rip
+	HistoricalEventHfWoundedInjuryType_Slash
+	HistoricalEventHfWoundedInjuryType_Smash
+	HistoricalEventHfWoundedInjuryType_Stab
+)
+
+func parseHistoricalEventHfWoundedInjuryType(s string) HistoricalEventHfWoundedInjuryType {
+	switch s {
+	case "rip":
+		return HistoricalEventHfWoundedInjuryType_Rip
+	case "slash":
+		return HistoricalEventHfWoundedInjuryType_Slash
+	case "smash":
+		return HistoricalEventHfWoundedInjuryType_Smash
+	case "stab":
+		return HistoricalEventHfWoundedInjuryType_Stab
+	}
+	return HistoricalEventHfWoundedInjuryType_Unknown
+}
+
+func (s HistoricalEventHfWoundedInjuryType) String() string {
+	switch s {
+	case HistoricalEventHfWoundedInjuryType_Rip:
+		return "rip"
+	case HistoricalEventHfWoundedInjuryType_Slash:
+		return "slash"
+	case HistoricalEventHfWoundedInjuryType_Smash:
+		return "smash"
+	case HistoricalEventHfWoundedInjuryType_Stab:
+		return "stab"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfWoundedInjuryType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfWoundedPartLost int
+
+const (
+	HistoricalEventHfWoundedPartLost_Unknown HistoricalEventHfWoundedPartLost = iota
+	HistoricalEventHfWoundedPartLost_False
+	HistoricalEventHfWoundedPartLost_True
+)
+
+func parseHistoricalEventHfWoundedPartLost(s string) HistoricalEventHfWoundedPartLost {
+	switch s {
+	case "false":
+		return HistoricalEventHfWoundedPartLost_False
+	case "true":
+		return HistoricalEventHfWoundedPartLost_True
+	}
+	return HistoricalEventHfWoundedPartLost_Unknown
+}
+
+func (s HistoricalEventHfWoundedPartLost) String() string {
+	switch s {
+	case HistoricalEventHfWoundedPartLost_False:
+		return "false"
+	case HistoricalEventHfWoundedPartLost_True:
+		return "true"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfWoundedPartLost) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfWounded struct {
-	BodyPart       int    `json:"bodyPart" legend:"plus"`       // body_part
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	InjuryType     string `json:"injuryType" legend:"plus"`     // injury_type
-	PartLost       string `json:"partLost" legend:"plus"`       // part_lost
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
-	WasTorture     bool   `json:"wasTorture" legend:"base"`     // was_torture
-	WoundeeCaste   int    `json:"woundeeCaste" legend:"plus"`   // woundee_caste
-	WoundeeHfid    int    `json:"woundeeHfid" legend:"base"`    // woundee_hfid
-	WoundeeRace    int    `json:"woundeeRace" legend:"plus"`    // woundee_race
-	WounderHfid    int    `json:"wounderHfid" legend:"base"`    // wounder_hfid
+	BodyPart       int                                `json:"bodyPart" legend:"plus"`       // body_part
+	FeatureLayerId int                                `json:"featureLayerId" legend:"base"` // feature_layer_id
+	InjuryType     HistoricalEventHfWoundedInjuryType `json:"injuryType" legend:"plus"`     // injury_type
+	PartLost       HistoricalEventHfWoundedPartLost   `json:"partLost" legend:"plus"`       // part_lost
+	SiteId         int                                `json:"siteId" legend:"base"`         // site_id
+	SubregionId    int                                `json:"subregionId" legend:"base"`    // subregion_id
+	WasTorture     bool                               `json:"wasTorture" legend:"base"`     // was_torture
+	WoundeeCaste   int                                `json:"woundeeCaste" legend:"plus"`   // woundee_caste
+	WoundeeHfid    int                                `json:"woundeeHfid" legend:"base"`    // woundee_hfid
+	WoundeeRace    int                                `json:"woundeeRace" legend:"plus"`    // woundee_race
+	WounderHfid    int                                `json:"wounderHfid" legend:"base"`    // wounder_hfid
 }
 
 func (x *HistoricalEventHfWounded) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfWounded) RelatedToHf(id int) bool {
-	return x.WoundeeHfid == id || x.WounderHfid == id
+	return x.WounderHfid == id || x.WoundeeHfid == id
 }
 
 func (x *HistoricalEventHfWounded) CheckFields() {
-	if x.WoundeeRace != x.WoundeeHfid && x.WoundeeRace != 0 && x.WoundeeHfid != 0 {
-		sameFields["HistoricalEventHfWounded"]["WoundeeRace"]["WoundeeHfid"] = false
+	if x.BodyPart != x.FeatureLayerId && x.BodyPart != 0 && x.FeatureLayerId != 0 {
+		sameFields["HistoricalEventHfWounded"]["BodyPart"]["FeatureLayerId"] = false
+	}
+	if x.BodyPart != x.WoundeeHfid && x.BodyPart != 0 && x.WoundeeHfid != 0 {
+		sameFields["HistoricalEventHfWounded"]["BodyPart"]["WoundeeHfid"] = false
+	}
+	if x.BodyPart != x.SubregionId && x.BodyPart != 0 && x.SubregionId != 0 {
+		sameFields["HistoricalEventHfWounded"]["BodyPart"]["SubregionId"] = false
+	}
+	if x.BodyPart != x.SiteId && x.BodyPart != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventHfWounded"]["BodyPart"]["SiteId"] = false
+	}
+	if x.BodyPart != x.WounderHfid && x.BodyPart != 0 && x.WounderHfid != 0 {
+		sameFields["HistoricalEventHfWounded"]["BodyPart"]["WounderHfid"] = false
 	}
 	if x.WoundeeRace != x.SiteId && x.WoundeeRace != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventHfWounded"]["WoundeeRace"]["SiteId"] = false
@@ -3322,26 +6510,20 @@ func (x *HistoricalEventHfWounded) CheckFields() {
 	if x.WoundeeRace != x.FeatureLayerId && x.WoundeeRace != 0 && x.FeatureLayerId != 0 {
 		sameFields["HistoricalEventHfWounded"]["WoundeeRace"]["FeatureLayerId"] = false
 	}
+	if x.WoundeeRace != x.WoundeeHfid && x.WoundeeRace != 0 && x.WoundeeHfid != 0 {
+		sameFields["HistoricalEventHfWounded"]["WoundeeRace"]["WoundeeHfid"] = false
+	}
 	if x.WoundeeRace != x.SubregionId && x.WoundeeRace != 0 && x.SubregionId != 0 {
 		sameFields["HistoricalEventHfWounded"]["WoundeeRace"]["SubregionId"] = false
 	}
-	if x.BodyPart != x.WounderHfid && x.BodyPart != 0 && x.WounderHfid != 0 {
-		sameFields["HistoricalEventHfWounded"]["BodyPart"]["WounderHfid"] = false
-	}
-	if x.BodyPart != x.SiteId && x.BodyPart != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventHfWounded"]["BodyPart"]["SiteId"] = false
-	}
-	if x.BodyPart != x.FeatureLayerId && x.BodyPart != 0 && x.FeatureLayerId != 0 {
-		sameFields["HistoricalEventHfWounded"]["BodyPart"]["FeatureLayerId"] = false
-	}
-	if x.BodyPart != x.SubregionId && x.BodyPart != 0 && x.SubregionId != 0 {
-		sameFields["HistoricalEventHfWounded"]["BodyPart"]["SubregionId"] = false
-	}
-	if x.BodyPart != x.WoundeeHfid && x.BodyPart != 0 && x.WoundeeHfid != 0 {
-		sameFields["HistoricalEventHfWounded"]["BodyPart"]["WoundeeHfid"] = false
+	if x.WoundeeCaste != x.FeatureLayerId && x.WoundeeCaste != 0 && x.FeatureLayerId != 0 {
+		sameFields["HistoricalEventHfWounded"]["WoundeeCaste"]["FeatureLayerId"] = false
 	}
 	if x.WoundeeCaste != x.WoundeeHfid && x.WoundeeCaste != 0 && x.WoundeeHfid != 0 {
 		sameFields["HistoricalEventHfWounded"]["WoundeeCaste"]["WoundeeHfid"] = false
+	}
+	if x.WoundeeCaste != x.SubregionId && x.WoundeeCaste != 0 && x.SubregionId != 0 {
+		sameFields["HistoricalEventHfWounded"]["WoundeeCaste"]["SubregionId"] = false
 	}
 	if x.WoundeeCaste != x.SiteId && x.WoundeeCaste != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventHfWounded"]["WoundeeCaste"]["SiteId"] = false
@@ -3349,67 +6531,456 @@ func (x *HistoricalEventHfWounded) CheckFields() {
 	if x.WoundeeCaste != x.WounderHfid && x.WoundeeCaste != 0 && x.WounderHfid != 0 {
 		sameFields["HistoricalEventHfWounded"]["WoundeeCaste"]["WounderHfid"] = false
 	}
-	if x.WoundeeCaste != x.FeatureLayerId && x.WoundeeCaste != 0 && x.FeatureLayerId != 0 {
-		sameFields["HistoricalEventHfWounded"]["WoundeeCaste"]["FeatureLayerId"] = false
+}
+
+type HistoricalEventHfsFormedIntrigueRelationshipAction int
+
+const (
+	HistoricalEventHfsFormedIntrigueRelationshipAction_Unknown HistoricalEventHfsFormedIntrigueRelationshipAction = iota
+	HistoricalEventHfsFormedIntrigueRelationshipAction_BringIntoNetwork
+	HistoricalEventHfsFormedIntrigueRelationshipAction_CorruptInPlace
+)
+
+func parseHistoricalEventHfsFormedIntrigueRelationshipAction(s string) HistoricalEventHfsFormedIntrigueRelationshipAction {
+	switch s {
+	case "bring into network":
+		return HistoricalEventHfsFormedIntrigueRelationshipAction_BringIntoNetwork
+	case "corrupt in place":
+		return HistoricalEventHfsFormedIntrigueRelationshipAction_CorruptInPlace
 	}
-	if x.WoundeeCaste != x.SubregionId && x.WoundeeCaste != 0 && x.SubregionId != 0 {
-		sameFields["HistoricalEventHfWounded"]["WoundeeCaste"]["SubregionId"] = false
+	return HistoricalEventHfsFormedIntrigueRelationshipAction_Unknown
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipAction) String() string {
+	switch s {
+	case HistoricalEventHfsFormedIntrigueRelationshipAction_BringIntoNetwork:
+		return "bring into network"
+	case HistoricalEventHfsFormedIntrigueRelationshipAction_CorruptInPlace:
+		return "corrupt in place"
 	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipAction) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfsFormedIntrigueRelationshipCircumstance int
+
+const (
+	HistoricalEventHfsFormedIntrigueRelationshipCircumstance_Unknown HistoricalEventHfsFormedIntrigueRelationshipCircumstance = iota
+	HistoricalEventHfsFormedIntrigueRelationshipCircumstance_IsEntitySubordinate
+)
+
+func parseHistoricalEventHfsFormedIntrigueRelationshipCircumstance(s string) HistoricalEventHfsFormedIntrigueRelationshipCircumstance {
+	switch s {
+	case "is entity subordinate":
+		return HistoricalEventHfsFormedIntrigueRelationshipCircumstance_IsEntitySubordinate
+	}
+	return HistoricalEventHfsFormedIntrigueRelationshipCircumstance_Unknown
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipCircumstance) String() string {
+	switch s {
+	case HistoricalEventHfsFormedIntrigueRelationshipCircumstance_IsEntitySubordinate:
+		return "is entity subordinate"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipCircumstance) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs int
+
+const (
+	HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs_Unknown HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs = iota
+	HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs_Master
+	HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs_PossiblyUnknownDirector
+)
+
+func parseHistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs(s string) HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs {
+	switch s {
+	case "master":
+		return HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs_Master
+	case "possibly unknown director":
+		return HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs_PossiblyUnknownDirector
+	}
+	return HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs_Unknown
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs) String() string {
+	switch s {
+	case HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs_Master:
+		return "master"
+	case HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs_PossiblyUnknownDirector:
+		return "possibly unknown director"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfsFormedIntrigueRelationshipMethod int
+
+const (
+	HistoricalEventHfsFormedIntrigueRelationshipMethod_Unknown HistoricalEventHfsFormedIntrigueRelationshipMethod = iota
+	HistoricalEventHfsFormedIntrigueRelationshipMethod_BlackmailOverEmbezzlement
+	HistoricalEventHfsFormedIntrigueRelationshipMethod_Bribe
+	HistoricalEventHfsFormedIntrigueRelationshipMethod_Flatter
+	HistoricalEventHfsFormedIntrigueRelationshipMethod_Intimidate
+	HistoricalEventHfsFormedIntrigueRelationshipMethod_OfferImmortality
+	HistoricalEventHfsFormedIntrigueRelationshipMethod_Precedence
+	HistoricalEventHfsFormedIntrigueRelationshipMethod_ReligiousSympathy
+	HistoricalEventHfsFormedIntrigueRelationshipMethod_RevengeOnGrudge
+)
+
+func parseHistoricalEventHfsFormedIntrigueRelationshipMethod(s string) HistoricalEventHfsFormedIntrigueRelationshipMethod {
+	switch s {
+	case "blackmail over embezzlement":
+		return HistoricalEventHfsFormedIntrigueRelationshipMethod_BlackmailOverEmbezzlement
+	case "bribe":
+		return HistoricalEventHfsFormedIntrigueRelationshipMethod_Bribe
+	case "flatter":
+		return HistoricalEventHfsFormedIntrigueRelationshipMethod_Flatter
+	case "intimidate":
+		return HistoricalEventHfsFormedIntrigueRelationshipMethod_Intimidate
+	case "offer immortality":
+		return HistoricalEventHfsFormedIntrigueRelationshipMethod_OfferImmortality
+	case "precedence":
+		return HistoricalEventHfsFormedIntrigueRelationshipMethod_Precedence
+	case "religious sympathy":
+		return HistoricalEventHfsFormedIntrigueRelationshipMethod_ReligiousSympathy
+	case "revenge on grudge":
+		return HistoricalEventHfsFormedIntrigueRelationshipMethod_RevengeOnGrudge
+	}
+	return HistoricalEventHfsFormedIntrigueRelationshipMethod_Unknown
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipMethod) String() string {
+	switch s {
+	case HistoricalEventHfsFormedIntrigueRelationshipMethod_BlackmailOverEmbezzlement:
+		return "blackmail over embezzlement"
+	case HistoricalEventHfsFormedIntrigueRelationshipMethod_Bribe:
+		return "bribe"
+	case HistoricalEventHfsFormedIntrigueRelationshipMethod_Flatter:
+		return "flatter"
+	case HistoricalEventHfsFormedIntrigueRelationshipMethod_Intimidate:
+		return "intimidate"
+	case HistoricalEventHfsFormedIntrigueRelationshipMethod_OfferImmortality:
+		return "offer immortality"
+	case HistoricalEventHfsFormedIntrigueRelationshipMethod_Precedence:
+		return "precedence"
+	case HistoricalEventHfsFormedIntrigueRelationshipMethod_ReligiousSympathy:
+		return "religious sympathy"
+	case HistoricalEventHfsFormedIntrigueRelationshipMethod_RevengeOnGrudge:
+		return "revenge on grudge"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipMethod) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs int
+
+const (
+	HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs_Unknown HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs = iota
+	HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs_CompromisedPositionHolder
+	HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs_GeneralPurposeAsset
+)
+
+func parseHistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs(s string) HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs {
+	switch s {
+	case "compromised position holder":
+		return HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs_CompromisedPositionHolder
+	case "general purpose asset":
+		return HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs_GeneralPurposeAsset
+	}
+	return HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs_Unknown
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs) String() string {
+	switch s {
+	case HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs_CompromisedPositionHolder:
+		return "compromised position holder"
+	case HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs_GeneralPurposeAsset:
+		return "general purpose asset"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfsFormedIntrigueRelationshipTopFacet int
+
+const (
+	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Unknown HistoricalEventHfsFormedIntrigueRelationshipTopFacet = iota
+	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Ambition
+	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Confidence
+	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_EnvyPropensity
+	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Fearlessness
+	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Greed
+	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Hope
+	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Pride
+	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_StressVulnerability
+	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Swayable
+	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Vanity
+	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Vengeful
+)
+
+func parseHistoricalEventHfsFormedIntrigueRelationshipTopFacet(s string) HistoricalEventHfsFormedIntrigueRelationshipTopFacet {
+	switch s {
+	case "ambition":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Ambition
+	case "confidence":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Confidence
+	case "envy propensity":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_EnvyPropensity
+	case "fearlessness":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Fearlessness
+	case "greed":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Greed
+	case "hope":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Hope
+	case "pride":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Pride
+	case "stress vulnerability":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_StressVulnerability
+	case "swayable":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Swayable
+	case "vanity":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Vanity
+	case "vengeful":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Vengeful
+	}
+	return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Unknown
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipTopFacet) String() string {
+	switch s {
+	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Ambition:
+		return "ambition"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Confidence:
+		return "confidence"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_EnvyPropensity:
+		return "envy propensity"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Fearlessness:
+		return "fearlessness"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Greed:
+		return "greed"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Hope:
+		return "hope"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Pride:
+		return "pride"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_StressVulnerability:
+		return "stress vulnerability"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Swayable:
+		return "swayable"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Vanity:
+		return "vanity"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Vengeful:
+		return "vengeful"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipTopFacet) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor int
+
+const (
+	HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Unknown HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor = iota
+	HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Fear
+	HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Love
+	HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Loyalty
+	HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Trust
+)
+
+func parseHistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor(s string) HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor {
+	switch s {
+	case "fear":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Fear
+	case "love":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Love
+	case "loyalty":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Loyalty
+	case "trust":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Trust
+	}
+	return HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Unknown
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor) String() string {
+	switch s {
+	case HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Fear:
+		return "fear"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Love:
+		return "love"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Loyalty:
+		return "loyalty"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Trust:
+		return "trust"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfsFormedIntrigueRelationshipTopValue int
+
+const (
+	HistoricalEventHfsFormedIntrigueRelationshipTopValue_Unknown HistoricalEventHfsFormedIntrigueRelationshipTopValue = iota
+	HistoricalEventHfsFormedIntrigueRelationshipTopValue_Law
+	HistoricalEventHfsFormedIntrigueRelationshipTopValue_Power
+)
+
+func parseHistoricalEventHfsFormedIntrigueRelationshipTopValue(s string) HistoricalEventHfsFormedIntrigueRelationshipTopValue {
+	switch s {
+	case "law":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopValue_Law
+	case "power":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopValue_Power
+	}
+	return HistoricalEventHfsFormedIntrigueRelationshipTopValue_Unknown
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipTopValue) String() string {
+	switch s {
+	case HistoricalEventHfsFormedIntrigueRelationshipTopValue_Law:
+		return "law"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopValue_Power:
+		return "power"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfsFormedIntrigueRelationshipTopValue) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
 }
 
 type HistoricalEventHfsFormedIntrigueRelationship struct {
-	Action                    string `json:"action" legend:"base"`                    // action
-	AllyDefenseBonus          int    `json:"allyDefenseBonus" legend:"base"`          // ally_defense_bonus
-	Circumstance              string `json:"circumstance" legend:"base"`              // circumstance
-	CircumstanceId            int    `json:"circumstanceId" legend:"base"`            // circumstance_id
-	CoconspiratorBonus        int    `json:"coconspiratorBonus" legend:"base"`        // coconspirator_bonus
-	CorruptorHfid             int    `json:"corruptorHfid" legend:"base"`             // corruptor_hfid
-	CorruptorIdentity         int    `json:"corruptorIdentity" legend:"base"`         // corruptor_identity
-	CorruptorSeenAs           string `json:"corruptorSeenAs" legend:"base"`           // corruptor_seen_as
-	FailedJudgmentTest        bool   `json:"failedJudgmentTest" legend:"base"`        // failed_judgment_test
-	FeatureLayerId            int    `json:"featureLayerId" legend:"base"`            // feature_layer_id
-	LureHfid                  int    `json:"lureHfid" legend:"base"`                  // lure_hfid
-	Method                    string `json:"method" legend:"base"`                    // method
-	RelevantEntityId          int    `json:"relevantEntityId" legend:"base"`          // relevant_entity_id
-	RelevantIdForMethod       int    `json:"relevantIdForMethod" legend:"base"`       // relevant_id_for_method
-	RelevantPositionProfileId int    `json:"relevantPositionProfileId" legend:"base"` // relevant_position_profile_id
-	SiteId                    int    `json:"siteId" legend:"base"`                    // site_id
-	SubregionId               int    `json:"subregionId" legend:"base"`               // subregion_id
-	Successful                bool   `json:"successful" legend:"base"`                // successful
-	TargetHfid                int    `json:"targetHfid" legend:"base"`                // target_hfid
-	TargetIdentity            int    `json:"targetIdentity" legend:"base"`            // target_identity
-	TargetSeenAs              string `json:"targetSeenAs" legend:"base"`              // target_seen_as
-	TopFacet                  string `json:"topFacet" legend:"base"`                  // top_facet
-	TopFacetModifier          int    `json:"topFacetModifier" legend:"base"`          // top_facet_modifier
-	TopFacetRating            int    `json:"topFacetRating" legend:"base"`            // top_facet_rating
-	TopRelationshipFactor     string `json:"topRelationshipFactor" legend:"base"`     // top_relationship_factor
-	TopRelationshipModifier   int    `json:"topRelationshipModifier" legend:"base"`   // top_relationship_modifier
-	TopRelationshipRating     int    `json:"topRelationshipRating" legend:"base"`     // top_relationship_rating
-	TopValue                  string `json:"topValue" legend:"base"`                  // top_value
-	TopValueModifier          int    `json:"topValueModifier" legend:"base"`          // top_value_modifier
-	TopValueRating            int    `json:"topValueRating" legend:"base"`            // top_value_rating
+	Action                    HistoricalEventHfsFormedIntrigueRelationshipAction                `json:"action" legend:"base"`                    // action
+	AllyDefenseBonus          int                                                               `json:"allyDefenseBonus" legend:"base"`          // ally_defense_bonus
+	Circumstance              HistoricalEventHfsFormedIntrigueRelationshipCircumstance          `json:"circumstance" legend:"base"`              // circumstance
+	CircumstanceId            int                                                               `json:"circumstanceId" legend:"base"`            // circumstance_id
+	CoconspiratorBonus        int                                                               `json:"coconspiratorBonus" legend:"base"`        // coconspirator_bonus
+	CorruptorHfid             int                                                               `json:"corruptorHfid" legend:"base"`             // corruptor_hfid
+	CorruptorIdentity         int                                                               `json:"corruptorIdentity" legend:"base"`         // corruptor_identity
+	CorruptorSeenAs           HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs       `json:"corruptorSeenAs" legend:"base"`           // corruptor_seen_as
+	FailedJudgmentTest        bool                                                              `json:"failedJudgmentTest" legend:"base"`        // failed_judgment_test
+	FeatureLayerId            int                                                               `json:"featureLayerId" legend:"base"`            // feature_layer_id
+	LureHfid                  int                                                               `json:"lureHfid" legend:"base"`                  // lure_hfid
+	Method                    HistoricalEventHfsFormedIntrigueRelationshipMethod                `json:"method" legend:"base"`                    // method
+	RelevantEntityId          int                                                               `json:"relevantEntityId" legend:"base"`          // relevant_entity_id
+	RelevantIdForMethod       int                                                               `json:"relevantIdForMethod" legend:"base"`       // relevant_id_for_method
+	RelevantPositionProfileId int                                                               `json:"relevantPositionProfileId" legend:"base"` // relevant_position_profile_id
+	SiteId                    int                                                               `json:"siteId" legend:"base"`                    // site_id
+	SubregionId               int                                                               `json:"subregionId" legend:"base"`               // subregion_id
+	Successful                bool                                                              `json:"successful" legend:"base"`                // successful
+	TargetHfid                int                                                               `json:"targetHfid" legend:"base"`                // target_hfid
+	TargetIdentity            int                                                               `json:"targetIdentity" legend:"base"`            // target_identity
+	TargetSeenAs              HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs          `json:"targetSeenAs" legend:"base"`              // target_seen_as
+	TopFacet                  HistoricalEventHfsFormedIntrigueRelationshipTopFacet              `json:"topFacet" legend:"base"`                  // top_facet
+	TopFacetModifier          int                                                               `json:"topFacetModifier" legend:"base"`          // top_facet_modifier
+	TopFacetRating            int                                                               `json:"topFacetRating" legend:"base"`            // top_facet_rating
+	TopRelationshipFactor     HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor `json:"topRelationshipFactor" legend:"base"`     // top_relationship_factor
+	TopRelationshipModifier   int                                                               `json:"topRelationshipModifier" legend:"base"`   // top_relationship_modifier
+	TopRelationshipRating     int                                                               `json:"topRelationshipRating" legend:"base"`     // top_relationship_rating
+	TopValue                  HistoricalEventHfsFormedIntrigueRelationshipTopValue              `json:"topValue" legend:"base"`                  // top_value
+	TopValueModifier          int                                                               `json:"topValueModifier" legend:"base"`          // top_value_modifier
+	TopValueRating            int                                                               `json:"topValueRating" legend:"base"`            // top_value_rating
 }
 
 func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToEntity(id int) bool {
 	return x.RelevantEntityId == id || x.TargetIdentity == id || x.CorruptorIdentity == id
 }
 func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToHf(id int) bool {
-	return x.CorruptorHfid == id || x.LureHfid == id || x.TargetHfid == id
+	return x.LureHfid == id || x.TargetHfid == id || x.CorruptorHfid == id
 }
 
 func (x *HistoricalEventHfsFormedIntrigueRelationship) CheckFields() {
 }
 
+type HistoricalEventHfsFormedReputationRelationshipHfRep1Of2 int
+
+const (
+	HistoricalEventHfsFormedReputationRelationshipHfRep1Of2_Unknown HistoricalEventHfsFormedReputationRelationshipHfRep1Of2 = iota
+	HistoricalEventHfsFormedReputationRelationshipHfRep1Of2_InformationSource
+)
+
+func parseHistoricalEventHfsFormedReputationRelationshipHfRep1Of2(s string) HistoricalEventHfsFormedReputationRelationshipHfRep1Of2 {
+	switch s {
+	case "information source":
+		return HistoricalEventHfsFormedReputationRelationshipHfRep1Of2_InformationSource
+	}
+	return HistoricalEventHfsFormedReputationRelationshipHfRep1Of2_Unknown
+}
+
+func (s HistoricalEventHfsFormedReputationRelationshipHfRep1Of2) String() string {
+	switch s {
+	case HistoricalEventHfsFormedReputationRelationshipHfRep1Of2_InformationSource:
+		return "information source"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfsFormedReputationRelationshipHfRep1Of2) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfsFormedReputationRelationshipHfRep2Of1 int
+
+const (
+	HistoricalEventHfsFormedReputationRelationshipHfRep2Of1_Unknown HistoricalEventHfsFormedReputationRelationshipHfRep2Of1 = iota
+	HistoricalEventHfsFormedReputationRelationshipHfRep2Of1_Friendly
+	HistoricalEventHfsFormedReputationRelationshipHfRep2Of1_InformationSource
+)
+
+func parseHistoricalEventHfsFormedReputationRelationshipHfRep2Of1(s string) HistoricalEventHfsFormedReputationRelationshipHfRep2Of1 {
+	switch s {
+	case "friendly":
+		return HistoricalEventHfsFormedReputationRelationshipHfRep2Of1_Friendly
+	case "information source":
+		return HistoricalEventHfsFormedReputationRelationshipHfRep2Of1_InformationSource
+	}
+	return HistoricalEventHfsFormedReputationRelationshipHfRep2Of1_Unknown
+}
+
+func (s HistoricalEventHfsFormedReputationRelationshipHfRep2Of1) String() string {
+	switch s {
+	case HistoricalEventHfsFormedReputationRelationshipHfRep2Of1_Friendly:
+		return "friendly"
+	case HistoricalEventHfsFormedReputationRelationshipHfRep2Of1_InformationSource:
+		return "information source"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfsFormedReputationRelationshipHfRep2Of1) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfsFormedReputationRelationship struct {
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	HfRep1Of2      string `json:"hfRep1Of2" legend:"base"`      // hf_rep_1_of_2
-	HfRep2Of1      string `json:"hfRep2Of1" legend:"base"`      // hf_rep_2_of_1
-	Hfid1          int    `json:"hfid1" legend:"base"`          // hfid1
-	Hfid2          int    `json:"hfid2" legend:"base"`          // hfid2
-	IdentityId1    int    `json:"identityId1" legend:"base"`    // identity_id1
-	IdentityId2    int    `json:"identityId2" legend:"base"`    // identity_id2
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	FeatureLayerId int                                                     `json:"featureLayerId" legend:"base"` // feature_layer_id
+	HfRep1Of2      HistoricalEventHfsFormedReputationRelationshipHfRep1Of2 `json:"hfRep1Of2" legend:"base"`      // hf_rep_1_of_2
+	HfRep2Of1      HistoricalEventHfsFormedReputationRelationshipHfRep2Of1 `json:"hfRep2Of1" legend:"base"`      // hf_rep_2_of_1
+	Hfid1          int                                                     `json:"hfid1" legend:"base"`          // hfid1
+	Hfid2          int                                                     `json:"hfid2" legend:"base"`          // hfid2
+	IdentityId1    int                                                     `json:"identityId1" legend:"base"`    // identity_id1
+	IdentityId2    int                                                     `json:"identityId2" legend:"base"`    // identity_id2
+	SiteId         int                                                     `json:"siteId" legend:"base"`         // site_id
+	SubregionId    int                                                     `json:"subregionId" legend:"base"`    // subregion_id
 }
 
 func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToEntity(id int) bool {
@@ -3433,16 +7004,90 @@ func (x *HistoricalEventHolyCityDeclaration) RelatedToHf(id int) bool     { retu
 func (x *HistoricalEventHolyCityDeclaration) CheckFields() {
 }
 
+type HistoricalEventInsurrectionStartedOutcome int
+
+const (
+	HistoricalEventInsurrectionStartedOutcome_Unknown HistoricalEventInsurrectionStartedOutcome = iota
+	HistoricalEventInsurrectionStartedOutcome_LeadershipOverthrown
+	HistoricalEventInsurrectionStartedOutcome_PopulationGone
+)
+
+func parseHistoricalEventInsurrectionStartedOutcome(s string) HistoricalEventInsurrectionStartedOutcome {
+	switch s {
+	case "leadership overthrown":
+		return HistoricalEventInsurrectionStartedOutcome_LeadershipOverthrown
+	case "population gone":
+		return HistoricalEventInsurrectionStartedOutcome_PopulationGone
+	}
+	return HistoricalEventInsurrectionStartedOutcome_Unknown
+}
+
+func (s HistoricalEventInsurrectionStartedOutcome) String() string {
+	switch s {
+	case HistoricalEventInsurrectionStartedOutcome_LeadershipOverthrown:
+		return "leadership overthrown"
+	case HistoricalEventInsurrectionStartedOutcome_PopulationGone:
+		return "population gone"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventInsurrectionStartedOutcome) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventInsurrectionStarted struct {
-	Outcome     string `json:"outcome" legend:"base"`     // outcome
-	SiteId      int    `json:"siteId" legend:"base"`      // site_id
-	TargetCivId int    `json:"targetCivId" legend:"base"` // target_civ_id
+	Outcome     HistoricalEventInsurrectionStartedOutcome `json:"outcome" legend:"base"`     // outcome
+	SiteId      int                                       `json:"siteId" legend:"base"`      // site_id
+	TargetCivId int                                       `json:"targetCivId" legend:"base"` // target_civ_id
 }
 
 func (x *HistoricalEventInsurrectionStarted) RelatedToEntity(id int) bool { return x.TargetCivId == id }
 func (x *HistoricalEventInsurrectionStarted) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventInsurrectionStarted) CheckFields() {
+}
+
+type HistoricalEventItemStolenTheftMethod int
+
+const (
+	HistoricalEventItemStolenTheftMethod_Unknown HistoricalEventItemStolenTheftMethod = iota
+	HistoricalEventItemStolenTheftMethod_Confiscated
+	HistoricalEventItemStolenTheftMethod_Looted
+	HistoricalEventItemStolenTheftMethod_Recovered
+	HistoricalEventItemStolenTheftMethod_Theft
+)
+
+func parseHistoricalEventItemStolenTheftMethod(s string) HistoricalEventItemStolenTheftMethod {
+	switch s {
+	case "confiscated":
+		return HistoricalEventItemStolenTheftMethod_Confiscated
+	case "looted":
+		return HistoricalEventItemStolenTheftMethod_Looted
+	case "recovered":
+		return HistoricalEventItemStolenTheftMethod_Recovered
+	case "theft":
+		return HistoricalEventItemStolenTheftMethod_Theft
+	}
+	return HistoricalEventItemStolenTheftMethod_Unknown
+}
+
+func (s HistoricalEventItemStolenTheftMethod) String() string {
+	switch s {
+	case HistoricalEventItemStolenTheftMethod_Confiscated:
+		return "confiscated"
+	case HistoricalEventItemStolenTheftMethod_Looted:
+		return "looted"
+	case HistoricalEventItemStolenTheftMethod_Recovered:
+		return "recovered"
+	case HistoricalEventItemStolenTheftMethod_Theft:
+		return "theft"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventItemStolenTheftMethod) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
 }
 
 type HistoricalEventItemStolen struct {
@@ -3459,21 +7104,15 @@ type HistoricalEventItemStolen struct {
 	Site           int                                    `json:"site" legend:"plus"`           // site
 	StashSite      int                                    `json:"stashSite" legend:"plus"`      // stash_site
 	Structure      int                                    `json:"structure" legend:"plus"`      // structure
-	TheftMethod    string                                 `json:"theftMethod" legend:"plus"`    // theft_method
+	TheftMethod    HistoricalEventItemStolenTheftMethod   `json:"theftMethod" legend:"plus"`    // theft_method
 }
 
 func (x *HistoricalEventItemStolen) RelatedToEntity(id int) bool { return x.Entity == id }
 func (x *HistoricalEventItemStolen) RelatedToHf(id int) bool     { return x.Histfig == id }
 
 func (x *HistoricalEventItemStolen) CheckFields() {
-	if x.Entity != x.CircumstanceId && x.Entity != 0 && x.CircumstanceId != 0 {
-		sameFields["HistoricalEventItemStolen"]["Entity"]["CircumstanceId"] = false
-	}
-	if x.Structure != x.CircumstanceId && x.Structure != 0 && x.CircumstanceId != 0 {
-		sameFields["HistoricalEventItemStolen"]["Structure"]["CircumstanceId"] = false
-	}
-	if x.Item != x.CircumstanceId && x.Item != 0 && x.CircumstanceId != 0 {
-		sameFields["HistoricalEventItemStolen"]["Item"]["CircumstanceId"] = false
+	if x.Mattype != x.CircumstanceId && x.Mattype != 0 && x.CircumstanceId != 0 {
+		sameFields["HistoricalEventItemStolen"]["Mattype"]["CircumstanceId"] = false
 	}
 	if x.Matindex != x.CircumstanceId && x.Matindex != 0 && x.CircumstanceId != 0 {
 		sameFields["HistoricalEventItemStolen"]["Matindex"]["CircumstanceId"] = false
@@ -3481,8 +7120,14 @@ func (x *HistoricalEventItemStolen) CheckFields() {
 	if x.Histfig != x.CircumstanceId && x.Histfig != 0 && x.CircumstanceId != 0 {
 		sameFields["HistoricalEventItemStolen"]["Histfig"]["CircumstanceId"] = false
 	}
-	if x.Mattype != x.CircumstanceId && x.Mattype != 0 && x.CircumstanceId != 0 {
-		sameFields["HistoricalEventItemStolen"]["Mattype"]["CircumstanceId"] = false
+	if x.Item != x.CircumstanceId && x.Item != 0 && x.CircumstanceId != 0 {
+		sameFields["HistoricalEventItemStolen"]["Item"]["CircumstanceId"] = false
+	}
+	if x.Structure != x.CircumstanceId && x.Structure != 0 && x.CircumstanceId != 0 {
+		sameFields["HistoricalEventItemStolen"]["Structure"]["CircumstanceId"] = false
+	}
+	if x.Entity != x.CircumstanceId && x.Entity != 0 && x.CircumstanceId != 0 {
+		sameFields["HistoricalEventItemStolen"]["Entity"]["CircumstanceId"] = false
 	}
 	if x.Site != x.CircumstanceId && x.Site != 0 && x.CircumstanceId != 0 {
 		sameFields["HistoricalEventItemStolen"]["Site"]["CircumstanceId"] = false
@@ -3492,11 +7137,48 @@ func (x *HistoricalEventItemStolen) CheckFields() {
 	}
 }
 
+type HistoricalEventItemStolenCircumstanceType int
+
+const (
+	HistoricalEventItemStolenCircumstanceType_Unknown HistoricalEventItemStolenCircumstanceType = iota
+	HistoricalEventItemStolenCircumstanceType_Defeated
+	HistoricalEventItemStolenCircumstanceType_Histeventcollection
+	HistoricalEventItemStolenCircumstanceType_Murdered
+)
+
+func parseHistoricalEventItemStolenCircumstanceType(s string) HistoricalEventItemStolenCircumstanceType {
+	switch s {
+	case "defeated":
+		return HistoricalEventItemStolenCircumstanceType_Defeated
+	case "histeventcollection":
+		return HistoricalEventItemStolenCircumstanceType_Histeventcollection
+	case "murdered":
+		return HistoricalEventItemStolenCircumstanceType_Murdered
+	}
+	return HistoricalEventItemStolenCircumstanceType_Unknown
+}
+
+func (s HistoricalEventItemStolenCircumstanceType) String() string {
+	switch s {
+	case HistoricalEventItemStolenCircumstanceType_Defeated:
+		return "defeated"
+	case HistoricalEventItemStolenCircumstanceType_Histeventcollection:
+		return "histeventcollection"
+	case HistoricalEventItemStolenCircumstanceType_Murdered:
+		return "murdered"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventItemStolenCircumstanceType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventItemStolenCircumstance struct {
-	Defeated            int    `json:"defeated" legend:"plus"`            // defeated
-	HistEventCollection int    `json:"histEventCollection" legend:"plus"` // hist_event_collection
-	Murdered            int    `json:"murdered" legend:"plus"`            // murdered
-	Type                string `json:"type" legend:"plus"`                // type
+	Defeated            int                                       `json:"defeated" legend:"plus"`            // defeated
+	HistEventCollection int                                       `json:"histEventCollection" legend:"plus"` // hist_event_collection
+	Murdered            int                                       `json:"murdered" legend:"plus"`            // murdered
+	Type                HistoricalEventItemStolenCircumstanceType `json:"type" legend:"plus"`                // type
 }
 
 func (x *HistoricalEventItemStolenCircumstance) RelatedToEntity(id int) bool { return false }
@@ -3517,46 +7199,167 @@ func (x *HistoricalEventKnowledgeDiscovered) RelatedToHf(id int) bool     { retu
 func (x *HistoricalEventKnowledgeDiscovered) CheckFields() {
 }
 
+type HistoricalEventMasterpieceArchConstructedBuildingSubtype int
+
+const (
+	HistoricalEventMasterpieceArchConstructedBuildingSubtype_Unknown HistoricalEventMasterpieceArchConstructedBuildingSubtype = iota
+	HistoricalEventMasterpieceArchConstructedBuildingSubtype_Magmasmelter
+	HistoricalEventMasterpieceArchConstructedBuildingSubtype_Woodfurnace
+)
+
+func parseHistoricalEventMasterpieceArchConstructedBuildingSubtype(s string) HistoricalEventMasterpieceArchConstructedBuildingSubtype {
+	switch s {
+	case "magmasmelter":
+		return HistoricalEventMasterpieceArchConstructedBuildingSubtype_Magmasmelter
+	case "woodfurnace":
+		return HistoricalEventMasterpieceArchConstructedBuildingSubtype_Woodfurnace
+	}
+	return HistoricalEventMasterpieceArchConstructedBuildingSubtype_Unknown
+}
+
+func (s HistoricalEventMasterpieceArchConstructedBuildingSubtype) String() string {
+	switch s {
+	case HistoricalEventMasterpieceArchConstructedBuildingSubtype_Magmasmelter:
+		return "magmasmelter"
+	case HistoricalEventMasterpieceArchConstructedBuildingSubtype_Woodfurnace:
+		return "woodfurnace"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceArchConstructedBuildingSubtype) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventMasterpieceArchConstructedBuildingType int
+
+const (
+	HistoricalEventMasterpieceArchConstructedBuildingType_Unknown HistoricalEventMasterpieceArchConstructedBuildingType = iota
+	HistoricalEventMasterpieceArchConstructedBuildingType_Bridge
+	HistoricalEventMasterpieceArchConstructedBuildingType_Furnace
+)
+
+func parseHistoricalEventMasterpieceArchConstructedBuildingType(s string) HistoricalEventMasterpieceArchConstructedBuildingType {
+	switch s {
+	case "bridge":
+		return HistoricalEventMasterpieceArchConstructedBuildingType_Bridge
+	case "furnace":
+		return HistoricalEventMasterpieceArchConstructedBuildingType_Furnace
+	}
+	return HistoricalEventMasterpieceArchConstructedBuildingType_Unknown
+}
+
+func (s HistoricalEventMasterpieceArchConstructedBuildingType) String() string {
+	switch s {
+	case HistoricalEventMasterpieceArchConstructedBuildingType_Bridge:
+		return "bridge"
+	case HistoricalEventMasterpieceArchConstructedBuildingType_Furnace:
+		return "furnace"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceArchConstructedBuildingType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventMasterpieceArchConstructedSkillAtTime int
+
+const (
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_Unknown HistoricalEventMasterpieceArchConstructedSkillAtTime = iota
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_Accomplished
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_Master
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_Professional
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo1
+)
+
+func parseHistoricalEventMasterpieceArchConstructedSkillAtTime(s string) HistoricalEventMasterpieceArchConstructedSkillAtTime {
+	switch s {
+	case "accomplished":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_Accomplished
+	case "master":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_Master
+	case "professional":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_Professional
+	case "unknown 21":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo1
+	}
+	return HistoricalEventMasterpieceArchConstructedSkillAtTime_Unknown
+}
+
+func (s HistoricalEventMasterpieceArchConstructedSkillAtTime) String() string {
+	switch s {
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_Accomplished:
+		return "accomplished"
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_Master:
+		return "master"
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_Professional:
+		return "professional"
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo1:
+		return "unknown two 1"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceArchConstructedSkillAtTime) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventMasterpieceArchConstructed struct {
-	BuildingCustom  int    `json:"buildingCustom" legend:"plus"`  // building_custom
-	BuildingSubtype string `json:"buildingSubtype" legend:"plus"` // building_subtype
-	BuildingType    string `json:"buildingType" legend:"plus"`    // building_type
-	EntityId        int    `json:"entityId" legend:"base"`        // entity_id
-	Hfid            int    `json:"hfid" legend:"base"`            // hfid
-	Maker           int    `json:"maker" legend:"plus"`           // maker
-	MakerEntity     int    `json:"makerEntity" legend:"plus"`     // maker_entity
-	Site            int    `json:"site" legend:"plus"`            // site
-	SiteId          int    `json:"siteId" legend:"base"`          // site_id
-	SkillAtTime     string `json:"skillAtTime" legend:"both"`     // skill_at_time
-	Unk2            int    `json:"unk2" legend:"plus"`            // unk_2
+	BuildingCustom  int                                                      `json:"buildingCustom" legend:"plus"`  // building_custom
+	BuildingSubtype HistoricalEventMasterpieceArchConstructedBuildingSubtype `json:"buildingSubtype" legend:"plus"` // building_subtype
+	BuildingType    HistoricalEventMasterpieceArchConstructedBuildingType    `json:"buildingType" legend:"plus"`    // building_type
+	EntityId        int                                                      `json:"entityId" legend:"base"`        // entity_id
+	Hfid            int                                                      `json:"hfid" legend:"base"`            // hfid
+	Maker           int                                                      `json:"maker" legend:"plus"`           // maker
+	MakerEntity     int                                                      `json:"makerEntity" legend:"plus"`     // maker_entity
+	Site            int                                                      `json:"site" legend:"plus"`            // site
+	SiteId          int                                                      `json:"siteId" legend:"base"`          // site_id
+	SkillAtTime     HistoricalEventMasterpieceArchConstructedSkillAtTime     `json:"skillAtTime" legend:"both"`     // skill_at_time
+	Unk2            int                                                      `json:"unk2" legend:"plus"`            // unk_2
 }
 
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToEntity(id int) bool {
-	return x.EntityId == id || x.MakerEntity == id
+	return x.MakerEntity == id || x.EntityId == id
 }
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToHf(id int) bool { return x.Hfid == id }
 
 func (x *HistoricalEventMasterpieceArchConstructed) CheckFields() {
-	if x.BuildingCustom != x.Hfid && x.BuildingCustom != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["BuildingCustom"]["Hfid"] = false
+	if x.BuildingCustom != x.SiteId && x.BuildingCustom != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventMasterpieceArchConstructed"]["BuildingCustom"]["SiteId"] = false
 	}
 	if x.BuildingCustom != x.EntityId && x.BuildingCustom != 0 && x.EntityId != 0 {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["BuildingCustom"]["EntityId"] = false
 	}
-	if x.BuildingCustom != x.SiteId && x.BuildingCustom != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["BuildingCustom"]["SiteId"] = false
+	if x.BuildingCustom != x.Hfid && x.BuildingCustom != 0 && x.Hfid != 0 {
+		sameFields["HistoricalEventMasterpieceArchConstructed"]["BuildingCustom"]["Hfid"] = false
 	}
-	if x.Maker != x.EntityId && x.Maker != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Maker"]["EntityId"] = false
+	if x.Site != x.EntityId && x.Site != 0 && x.EntityId != 0 {
+		sameFields["HistoricalEventMasterpieceArchConstructed"]["Site"]["EntityId"] = false
 	}
-	if x.Maker != x.SiteId && x.Maker != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Maker"]["SiteId"] = false
+	if x.Site != x.Hfid && x.Site != 0 && x.Hfid != 0 {
+		sameFields["HistoricalEventMasterpieceArchConstructed"]["Site"]["Hfid"] = false
+	}
+	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventMasterpieceArchConstructed"]["Site"]["SiteId"] = false
+	}
+	if x.Unk2 != x.SiteId && x.Unk2 != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventMasterpieceArchConstructed"]["Unk2"]["SiteId"] = false
+	}
+	if x.Unk2 != x.EntityId && x.Unk2 != 0 && x.EntityId != 0 {
+		sameFields["HistoricalEventMasterpieceArchConstructed"]["Unk2"]["EntityId"] = false
+	}
+	if x.Unk2 != x.Hfid && x.Unk2 != 0 && x.Hfid != 0 {
+		sameFields["HistoricalEventMasterpieceArchConstructed"]["Unk2"]["Hfid"] = false
 	}
 	if x.Maker != x.Hfid && x.Maker != 0 && x.Hfid != 0 {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["Maker"]["Hfid"] = false
 	}
-	if x.MakerEntity != x.SiteId && x.MakerEntity != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["MakerEntity"]["SiteId"] = false
+	if x.Maker != x.SiteId && x.Maker != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventMasterpieceArchConstructed"]["Maker"]["SiteId"] = false
+	}
+	if x.Maker != x.EntityId && x.Maker != 0 && x.EntityId != 0 {
+		sameFields["HistoricalEventMasterpieceArchConstructed"]["Maker"]["EntityId"] = false
 	}
 	if x.MakerEntity != x.EntityId && x.MakerEntity != 0 && x.EntityId != 0 {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["MakerEntity"]["EntityId"] = false
@@ -3564,70 +7367,109 @@ func (x *HistoricalEventMasterpieceArchConstructed) CheckFields() {
 	if x.MakerEntity != x.Hfid && x.MakerEntity != 0 && x.Hfid != 0 {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["MakerEntity"]["Hfid"] = false
 	}
-	if x.Unk2 != x.Hfid && x.Unk2 != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Unk2"]["Hfid"] = false
+	if x.MakerEntity != x.SiteId && x.MakerEntity != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventMasterpieceArchConstructed"]["MakerEntity"]["SiteId"] = false
 	}
-	if x.Unk2 != x.EntityId && x.Unk2 != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Unk2"]["EntityId"] = false
+}
+
+type HistoricalEventMasterpieceEngravingSkillAtTime int
+
+const (
+	HistoricalEventMasterpieceEngravingSkillAtTime_Unknown HistoricalEventMasterpieceEngravingSkillAtTime = iota
+	HistoricalEventMasterpieceEngravingSkillAtTime_Accomplished
+	HistoricalEventMasterpieceEngravingSkillAtTime_Expert
+	HistoricalEventMasterpieceEngravingSkillAtTime_Grandmaster
+	HistoricalEventMasterpieceEngravingSkillAtTime_Great
+	HistoricalEventMasterpieceEngravingSkillAtTime_Highmaster
+	HistoricalEventMasterpieceEngravingSkillAtTime_Legendary
+	HistoricalEventMasterpieceEngravingSkillAtTime_Legendary4
+	HistoricalEventMasterpieceEngravingSkillAtTime_Master
+	HistoricalEventMasterpieceEngravingSkillAtTime_Professional
+	HistoricalEventMasterpieceEngravingSkillAtTime_Proficient
+)
+
+func parseHistoricalEventMasterpieceEngravingSkillAtTime(s string) HistoricalEventMasterpieceEngravingSkillAtTime {
+	switch s {
+	case "accomplished":
+		return HistoricalEventMasterpieceEngravingSkillAtTime_Accomplished
+	case "expert":
+		return HistoricalEventMasterpieceEngravingSkillAtTime_Expert
+	case "grandmaster":
+		return HistoricalEventMasterpieceEngravingSkillAtTime_Grandmaster
+	case "great":
+		return HistoricalEventMasterpieceEngravingSkillAtTime_Great
+	case "highmaster":
+		return HistoricalEventMasterpieceEngravingSkillAtTime_Highmaster
+	case "legendary":
+		return HistoricalEventMasterpieceEngravingSkillAtTime_Legendary
+	case "legendary4":
+		return HistoricalEventMasterpieceEngravingSkillAtTime_Legendary4
+	case "master":
+		return HistoricalEventMasterpieceEngravingSkillAtTime_Master
+	case "professional":
+		return HistoricalEventMasterpieceEngravingSkillAtTime_Professional
+	case "proficient":
+		return HistoricalEventMasterpieceEngravingSkillAtTime_Proficient
 	}
-	if x.Unk2 != x.SiteId && x.Unk2 != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Unk2"]["SiteId"] = false
+	return HistoricalEventMasterpieceEngravingSkillAtTime_Unknown
+}
+
+func (s HistoricalEventMasterpieceEngravingSkillAtTime) String() string {
+	switch s {
+	case HistoricalEventMasterpieceEngravingSkillAtTime_Accomplished:
+		return "accomplished"
+	case HistoricalEventMasterpieceEngravingSkillAtTime_Expert:
+		return "expert"
+	case HistoricalEventMasterpieceEngravingSkillAtTime_Grandmaster:
+		return "grandmaster"
+	case HistoricalEventMasterpieceEngravingSkillAtTime_Great:
+		return "great"
+	case HistoricalEventMasterpieceEngravingSkillAtTime_Highmaster:
+		return "highmaster"
+	case HistoricalEventMasterpieceEngravingSkillAtTime_Legendary:
+		return "legendary"
+	case HistoricalEventMasterpieceEngravingSkillAtTime_Legendary4:
+		return "legendary 4"
+	case HistoricalEventMasterpieceEngravingSkillAtTime_Master:
+		return "master"
+	case HistoricalEventMasterpieceEngravingSkillAtTime_Professional:
+		return "professional"
+	case HistoricalEventMasterpieceEngravingSkillAtTime_Proficient:
+		return "proficient"
 	}
-	if x.Site != x.EntityId && x.Site != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Site"]["EntityId"] = false
-	}
-	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Site"]["SiteId"] = false
-	}
-	if x.Site != x.Hfid && x.Site != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Site"]["Hfid"] = false
-	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceEngravingSkillAtTime) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
 }
 
 type HistoricalEventMasterpieceEngraving struct {
-	ArtId       int    `json:"artId" legend:"plus"`       // art_id
-	ArtSubid    int    `json:"artSubid" legend:"plus"`    // art_subid
-	EntityId    int    `json:"entityId" legend:"base"`    // entity_id
-	Hfid        int    `json:"hfid" legend:"base"`        // hfid
-	Maker       int    `json:"maker" legend:"plus"`       // maker
-	MakerEntity int    `json:"makerEntity" legend:"plus"` // maker_entity
-	Site        int    `json:"site" legend:"plus"`        // site
-	SiteId      int    `json:"siteId" legend:"base"`      // site_id
-	SkillAtTime string `json:"skillAtTime" legend:"both"` // skill_at_time
+	ArtId       int                                            `json:"artId" legend:"plus"`       // art_id
+	ArtSubid    int                                            `json:"artSubid" legend:"plus"`    // art_subid
+	EntityId    int                                            `json:"entityId" legend:"base"`    // entity_id
+	Hfid        int                                            `json:"hfid" legend:"base"`        // hfid
+	Maker       int                                            `json:"maker" legend:"plus"`       // maker
+	MakerEntity int                                            `json:"makerEntity" legend:"plus"` // maker_entity
+	Site        int                                            `json:"site" legend:"plus"`        // site
+	SiteId      int                                            `json:"siteId" legend:"base"`      // site_id
+	SkillAtTime HistoricalEventMasterpieceEngravingSkillAtTime `json:"skillAtTime" legend:"both"` // skill_at_time
 }
 
 func (x *HistoricalEventMasterpieceEngraving) RelatedToEntity(id int) bool {
-	return x.EntityId == id || x.MakerEntity == id
+	return x.MakerEntity == id || x.EntityId == id
 }
 func (x *HistoricalEventMasterpieceEngraving) RelatedToHf(id int) bool { return x.Hfid == id }
 
 func (x *HistoricalEventMasterpieceEngraving) CheckFields() {
-	if x.ArtId != x.Hfid && x.ArtId != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["ArtId"]["Hfid"] = false
-	}
-	if x.ArtId != x.SiteId && x.ArtId != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["ArtId"]["SiteId"] = false
-	}
-	if x.ArtId != x.EntityId && x.ArtId != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["ArtId"]["EntityId"] = false
-	}
-	if x.ArtSubid != x.EntityId && x.ArtSubid != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["ArtSubid"]["EntityId"] = false
-	}
 	if x.ArtSubid != x.Hfid && x.ArtSubid != 0 && x.Hfid != 0 {
 		sameFields["HistoricalEventMasterpieceEngraving"]["ArtSubid"]["Hfid"] = false
 	}
 	if x.ArtSubid != x.SiteId && x.ArtSubid != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventMasterpieceEngraving"]["ArtSubid"]["SiteId"] = false
 	}
-	if x.Site != x.EntityId && x.Site != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["Site"]["EntityId"] = false
-	}
-	if x.Site != x.Hfid && x.Site != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["Site"]["Hfid"] = false
-	}
-	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["Site"]["SiteId"] = false
+	if x.ArtSubid != x.EntityId && x.ArtSubid != 0 && x.EntityId != 0 {
+		sameFields["HistoricalEventMasterpieceEngraving"]["ArtSubid"]["EntityId"] = false
 	}
 	if x.Maker != x.EntityId && x.Maker != 0 && x.EntityId != 0 {
 		sameFields["HistoricalEventMasterpieceEngraving"]["Maker"]["EntityId"] = false
@@ -3647,6 +7489,24 @@ func (x *HistoricalEventMasterpieceEngraving) CheckFields() {
 	if x.MakerEntity != x.SiteId && x.MakerEntity != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventMasterpieceEngraving"]["MakerEntity"]["SiteId"] = false
 	}
+	if x.Site != x.EntityId && x.Site != 0 && x.EntityId != 0 {
+		sameFields["HistoricalEventMasterpieceEngraving"]["Site"]["EntityId"] = false
+	}
+	if x.Site != x.Hfid && x.Site != 0 && x.Hfid != 0 {
+		sameFields["HistoricalEventMasterpieceEngraving"]["Site"]["Hfid"] = false
+	}
+	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventMasterpieceEngraving"]["Site"]["SiteId"] = false
+	}
+	if x.ArtId != x.EntityId && x.ArtId != 0 && x.EntityId != 0 {
+		sameFields["HistoricalEventMasterpieceEngraving"]["ArtId"]["EntityId"] = false
+	}
+	if x.ArtId != x.Hfid && x.ArtId != 0 && x.Hfid != 0 {
+		sameFields["HistoricalEventMasterpieceEngraving"]["ArtId"]["Hfid"] = false
+	}
+	if x.ArtId != x.SiteId && x.ArtId != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventMasterpieceEngraving"]["ArtId"]["SiteId"] = false
+	}
 }
 
 type HistoricalEventMasterpieceFood struct {
@@ -3662,35 +7522,310 @@ func (x *HistoricalEventMasterpieceFood) RelatedToHf(id int) bool     { return x
 func (x *HistoricalEventMasterpieceFood) CheckFields() {
 }
 
+type HistoricalEventMasterpieceItemItemSubtype int
+
+const (
+	HistoricalEventMasterpieceItemItemSubtype_Unknown HistoricalEventMasterpieceItemItemSubtype = iota
+	HistoricalEventMasterpieceItemItemSubtype_Bookcase
+	HistoricalEventMasterpieceItemItemSubtype_Breastplate
+	HistoricalEventMasterpieceItemItemSubtype_Cap
+	HistoricalEventMasterpieceItemItemSubtype_Cloak
+	HistoricalEventMasterpieceItemItemSubtype_Coat
+	HistoricalEventMasterpieceItemItemSubtype_Corkscrew
+	HistoricalEventMasterpieceItemItemSubtype_Gauntlet
+	HistoricalEventMasterpieceItemItemSubtype_Glove
+	HistoricalEventMasterpieceItemItemSubtype_Greaves
+	HistoricalEventMasterpieceItemItemSubtype_Helm
+	HistoricalEventMasterpieceItemItemSubtype_HighBoot
+	HistoricalEventMasterpieceItemItemSubtype_Hood
+	HistoricalEventMasterpieceItemItemSubtype_Leggings
+	HistoricalEventMasterpieceItemItemSubtype_MailShirt
+	HistoricalEventMasterpieceItemItemSubtype_Mitten
+	HistoricalEventMasterpieceItemItemSubtype_Robe
+	HistoricalEventMasterpieceItemItemSubtype_ScrollRollers
+	HistoricalEventMasterpieceItemItemSubtype_Shield
+	HistoricalEventMasterpieceItemItemSubtype_Shirt
+	HistoricalEventMasterpieceItemItemSubtype_Shoe
+	HistoricalEventMasterpieceItemItemSubtype_Sock
+	HistoricalEventMasterpieceItemItemSubtype_Trousers
+)
+
+func parseHistoricalEventMasterpieceItemItemSubtype(s string) HistoricalEventMasterpieceItemItemSubtype {
+	switch s {
+	case "bookcase":
+		return HistoricalEventMasterpieceItemItemSubtype_Bookcase
+	case "breastplate":
+		return HistoricalEventMasterpieceItemItemSubtype_Breastplate
+	case "cap":
+		return HistoricalEventMasterpieceItemItemSubtype_Cap
+	case "cloak":
+		return HistoricalEventMasterpieceItemItemSubtype_Cloak
+	case "coat":
+		return HistoricalEventMasterpieceItemItemSubtype_Coat
+	case "corkscrew":
+		return HistoricalEventMasterpieceItemItemSubtype_Corkscrew
+	case "gauntlet":
+		return HistoricalEventMasterpieceItemItemSubtype_Gauntlet
+	case "glove":
+		return HistoricalEventMasterpieceItemItemSubtype_Glove
+	case "greaves":
+		return HistoricalEventMasterpieceItemItemSubtype_Greaves
+	case "helm":
+		return HistoricalEventMasterpieceItemItemSubtype_Helm
+	case "high boot":
+		return HistoricalEventMasterpieceItemItemSubtype_HighBoot
+	case "hood":
+		return HistoricalEventMasterpieceItemItemSubtype_Hood
+	case "leggings":
+		return HistoricalEventMasterpieceItemItemSubtype_Leggings
+	case "mail shirt":
+		return HistoricalEventMasterpieceItemItemSubtype_MailShirt
+	case "mitten":
+		return HistoricalEventMasterpieceItemItemSubtype_Mitten
+	case "robe":
+		return HistoricalEventMasterpieceItemItemSubtype_Robe
+	case "scroll rollers":
+		return HistoricalEventMasterpieceItemItemSubtype_ScrollRollers
+	case "shield":
+		return HistoricalEventMasterpieceItemItemSubtype_Shield
+	case "shirt":
+		return HistoricalEventMasterpieceItemItemSubtype_Shirt
+	case "shoe":
+		return HistoricalEventMasterpieceItemItemSubtype_Shoe
+	case "sock":
+		return HistoricalEventMasterpieceItemItemSubtype_Sock
+	case "trousers":
+		return HistoricalEventMasterpieceItemItemSubtype_Trousers
+	}
+	return HistoricalEventMasterpieceItemItemSubtype_Unknown
+}
+
+func (s HistoricalEventMasterpieceItemItemSubtype) String() string {
+	switch s {
+	case HistoricalEventMasterpieceItemItemSubtype_Bookcase:
+		return "bookcase"
+	case HistoricalEventMasterpieceItemItemSubtype_Breastplate:
+		return "breastplate"
+	case HistoricalEventMasterpieceItemItemSubtype_Cap:
+		return "cap"
+	case HistoricalEventMasterpieceItemItemSubtype_Cloak:
+		return "cloak"
+	case HistoricalEventMasterpieceItemItemSubtype_Coat:
+		return "coat"
+	case HistoricalEventMasterpieceItemItemSubtype_Corkscrew:
+		return "corkscrew"
+	case HistoricalEventMasterpieceItemItemSubtype_Gauntlet:
+		return "gauntlet"
+	case HistoricalEventMasterpieceItemItemSubtype_Glove:
+		return "glove"
+	case HistoricalEventMasterpieceItemItemSubtype_Greaves:
+		return "greaves"
+	case HistoricalEventMasterpieceItemItemSubtype_Helm:
+		return "helm"
+	case HistoricalEventMasterpieceItemItemSubtype_HighBoot:
+		return "high boot"
+	case HistoricalEventMasterpieceItemItemSubtype_Hood:
+		return "hood"
+	case HistoricalEventMasterpieceItemItemSubtype_Leggings:
+		return "leggings"
+	case HistoricalEventMasterpieceItemItemSubtype_MailShirt:
+		return "mail shirt"
+	case HistoricalEventMasterpieceItemItemSubtype_Mitten:
+		return "mitten"
+	case HistoricalEventMasterpieceItemItemSubtype_Robe:
+		return "robe"
+	case HistoricalEventMasterpieceItemItemSubtype_ScrollRollers:
+		return "scroll rollers"
+	case HistoricalEventMasterpieceItemItemSubtype_Shield:
+		return "shield"
+	case HistoricalEventMasterpieceItemItemSubtype_Shirt:
+		return "shirt"
+	case HistoricalEventMasterpieceItemItemSubtype_Shoe:
+		return "shoe"
+	case HistoricalEventMasterpieceItemItemSubtype_Sock:
+		return "sock"
+	case HistoricalEventMasterpieceItemItemSubtype_Trousers:
+		return "trousers"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceItemItemSubtype) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventMasterpieceItemItemType int
+
+const (
+	HistoricalEventMasterpieceItemItemType_Unknown HistoricalEventMasterpieceItemItemType = iota
+	HistoricalEventMasterpieceItemItemType_Armor
+	HistoricalEventMasterpieceItemItemType_Armorstand
+	HistoricalEventMasterpieceItemItemType_Backpack
+	HistoricalEventMasterpieceItemItemType_Barrel
+	HistoricalEventMasterpieceItemItemType_Bed
+	HistoricalEventMasterpieceItemItemType_Box
+	HistoricalEventMasterpieceItemItemType_Bucket
+	HistoricalEventMasterpieceItemItemType_Cabinet
+	HistoricalEventMasterpieceItemItemType_Chair
+	HistoricalEventMasterpieceItemItemType_Cloth
+	HistoricalEventMasterpieceItemItemType_Coffin
+	HistoricalEventMasterpieceItemItemType_Crown
+	HistoricalEventMasterpieceItemItemType_Door
+	HistoricalEventMasterpieceItemItemType_Figurine
+	HistoricalEventMasterpieceItemItemType_Flask
+	HistoricalEventMasterpieceItemItemType_Floodgate
+	HistoricalEventMasterpieceItemItemType_Gloves
+	HistoricalEventMasterpieceItemItemType_Helm
+	HistoricalEventMasterpieceItemItemType_Pants
+	HistoricalEventMasterpieceItemItemType_Shield
+	HistoricalEventMasterpieceItemItemType_Shoes
+	HistoricalEventMasterpieceItemItemType_Slab
+	HistoricalEventMasterpieceItemItemType_Table
+	HistoricalEventMasterpieceItemItemType_Tool
+	HistoricalEventMasterpieceItemItemType_Totem
+	HistoricalEventMasterpieceItemItemType_Trapcomp
+)
+
+func parseHistoricalEventMasterpieceItemItemType(s string) HistoricalEventMasterpieceItemItemType {
+	switch s {
+	case "armor":
+		return HistoricalEventMasterpieceItemItemType_Armor
+	case "armorstand":
+		return HistoricalEventMasterpieceItemItemType_Armorstand
+	case "backpack":
+		return HistoricalEventMasterpieceItemItemType_Backpack
+	case "barrel":
+		return HistoricalEventMasterpieceItemItemType_Barrel
+	case "bed":
+		return HistoricalEventMasterpieceItemItemType_Bed
+	case "box":
+		return HistoricalEventMasterpieceItemItemType_Box
+	case "bucket":
+		return HistoricalEventMasterpieceItemItemType_Bucket
+	case "cabinet":
+		return HistoricalEventMasterpieceItemItemType_Cabinet
+	case "chair":
+		return HistoricalEventMasterpieceItemItemType_Chair
+	case "cloth":
+		return HistoricalEventMasterpieceItemItemType_Cloth
+	case "coffin":
+		return HistoricalEventMasterpieceItemItemType_Coffin
+	case "crown":
+		return HistoricalEventMasterpieceItemItemType_Crown
+	case "door":
+		return HistoricalEventMasterpieceItemItemType_Door
+	case "figurine":
+		return HistoricalEventMasterpieceItemItemType_Figurine
+	case "flask":
+		return HistoricalEventMasterpieceItemItemType_Flask
+	case "floodgate":
+		return HistoricalEventMasterpieceItemItemType_Floodgate
+	case "gloves":
+		return HistoricalEventMasterpieceItemItemType_Gloves
+	case "helm":
+		return HistoricalEventMasterpieceItemItemType_Helm
+	case "pants":
+		return HistoricalEventMasterpieceItemItemType_Pants
+	case "shield":
+		return HistoricalEventMasterpieceItemItemType_Shield
+	case "shoes":
+		return HistoricalEventMasterpieceItemItemType_Shoes
+	case "slab":
+		return HistoricalEventMasterpieceItemItemType_Slab
+	case "table":
+		return HistoricalEventMasterpieceItemItemType_Table
+	case "tool":
+		return HistoricalEventMasterpieceItemItemType_Tool
+	case "totem":
+		return HistoricalEventMasterpieceItemItemType_Totem
+	case "trapcomp":
+		return HistoricalEventMasterpieceItemItemType_Trapcomp
+	}
+	return HistoricalEventMasterpieceItemItemType_Unknown
+}
+
+func (s HistoricalEventMasterpieceItemItemType) String() string {
+	switch s {
+	case HistoricalEventMasterpieceItemItemType_Armor:
+		return "armor"
+	case HistoricalEventMasterpieceItemItemType_Armorstand:
+		return "armorstand"
+	case HistoricalEventMasterpieceItemItemType_Backpack:
+		return "backpack"
+	case HistoricalEventMasterpieceItemItemType_Barrel:
+		return "barrel"
+	case HistoricalEventMasterpieceItemItemType_Bed:
+		return "bed"
+	case HistoricalEventMasterpieceItemItemType_Box:
+		return "box"
+	case HistoricalEventMasterpieceItemItemType_Bucket:
+		return "bucket"
+	case HistoricalEventMasterpieceItemItemType_Cabinet:
+		return "cabinet"
+	case HistoricalEventMasterpieceItemItemType_Chair:
+		return "chair"
+	case HistoricalEventMasterpieceItemItemType_Cloth:
+		return "cloth"
+	case HistoricalEventMasterpieceItemItemType_Coffin:
+		return "coffin"
+	case HistoricalEventMasterpieceItemItemType_Crown:
+		return "crown"
+	case HistoricalEventMasterpieceItemItemType_Door:
+		return "door"
+	case HistoricalEventMasterpieceItemItemType_Figurine:
+		return "figurine"
+	case HistoricalEventMasterpieceItemItemType_Flask:
+		return "flask"
+	case HistoricalEventMasterpieceItemItemType_Floodgate:
+		return "floodgate"
+	case HistoricalEventMasterpieceItemItemType_Gloves:
+		return "gloves"
+	case HistoricalEventMasterpieceItemItemType_Helm:
+		return "helm"
+	case HistoricalEventMasterpieceItemItemType_Pants:
+		return "pants"
+	case HistoricalEventMasterpieceItemItemType_Shield:
+		return "shield"
+	case HistoricalEventMasterpieceItemItemType_Shoes:
+		return "shoes"
+	case HistoricalEventMasterpieceItemItemType_Slab:
+		return "slab"
+	case HistoricalEventMasterpieceItemItemType_Table:
+		return "table"
+	case HistoricalEventMasterpieceItemItemType_Tool:
+		return "tool"
+	case HistoricalEventMasterpieceItemItemType_Totem:
+		return "totem"
+	case HistoricalEventMasterpieceItemItemType_Trapcomp:
+		return "trapcomp"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceItemItemType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventMasterpieceItem struct {
-	EntityId    int    `json:"entityId" legend:"base"`    // entity_id
-	Hfid        int    `json:"hfid" legend:"base"`        // hfid
-	ItemId      int    `json:"itemId" legend:"plus"`      // item_id
-	ItemSubtype string `json:"itemSubtype" legend:"plus"` // item_subtype
-	ItemType    string `json:"itemType" legend:"plus"`    // item_type
-	Maker       int    `json:"maker" legend:"plus"`       // maker
-	MakerEntity int    `json:"makerEntity" legend:"plus"` // maker_entity
-	Mat         string `json:"mat" legend:"plus"`         // mat
-	Site        int    `json:"site" legend:"plus"`        // site
-	SiteId      int    `json:"siteId" legend:"base"`      // site_id
-	SkillAtTime string `json:"skillAtTime" legend:"both"` // skill_at_time
+	EntityId    int                                       `json:"entityId" legend:"base"`    // entity_id
+	Hfid        int                                       `json:"hfid" legend:"base"`        // hfid
+	ItemId      int                                       `json:"itemId" legend:"plus"`      // item_id
+	ItemSubtype HistoricalEventMasterpieceItemItemSubtype `json:"itemSubtype" legend:"plus"` // item_subtype
+	ItemType    HistoricalEventMasterpieceItemItemType    `json:"itemType" legend:"plus"`    // item_type
+	Maker       int                                       `json:"maker" legend:"plus"`       // maker
+	MakerEntity int                                       `json:"makerEntity" legend:"plus"` // maker_entity
+	Mat         string                                    `json:"mat" legend:"plus"`         // mat
+	Site        int                                       `json:"site" legend:"plus"`        // site
+	SiteId      int                                       `json:"siteId" legend:"base"`      // site_id
+	SkillAtTime string                                    `json:"skillAtTime" legend:"both"` // skill_at_time
 }
 
 func (x *HistoricalEventMasterpieceItem) RelatedToEntity(id int) bool {
-	return x.EntityId == id || x.MakerEntity == id
+	return x.MakerEntity == id || x.EntityId == id
 }
 func (x *HistoricalEventMasterpieceItem) RelatedToHf(id int) bool { return x.Hfid == id }
 
 func (x *HistoricalEventMasterpieceItem) CheckFields() {
-	if x.MakerEntity != x.SiteId && x.MakerEntity != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["MakerEntity"]["SiteId"] = false
-	}
-	if x.MakerEntity != x.EntityId && x.MakerEntity != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["MakerEntity"]["EntityId"] = false
-	}
-	if x.MakerEntity != x.Hfid && x.MakerEntity != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["MakerEntity"]["Hfid"] = false
-	}
 	if x.ItemId != x.Hfid && x.ItemId != 0 && x.Hfid != 0 {
 		sameFields["HistoricalEventMasterpieceItem"]["ItemId"]["Hfid"] = false
 	}
@@ -3700,8 +7835,23 @@ func (x *HistoricalEventMasterpieceItem) CheckFields() {
 	if x.ItemId != x.EntityId && x.ItemId != 0 && x.EntityId != 0 {
 		sameFields["HistoricalEventMasterpieceItem"]["ItemId"]["EntityId"] = false
 	}
-	if x.Maker != x.SiteId && x.Maker != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["Maker"]["SiteId"] = false
+	if x.MakerEntity != x.Hfid && x.MakerEntity != 0 && x.Hfid != 0 {
+		sameFields["HistoricalEventMasterpieceItem"]["MakerEntity"]["Hfid"] = false
+	}
+	if x.MakerEntity != x.SiteId && x.MakerEntity != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventMasterpieceItem"]["MakerEntity"]["SiteId"] = false
+	}
+	if x.MakerEntity != x.EntityId && x.MakerEntity != 0 && x.EntityId != 0 {
+		sameFields["HistoricalEventMasterpieceItem"]["MakerEntity"]["EntityId"] = false
+	}
+	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventMasterpieceItem"]["Site"]["SiteId"] = false
+	}
+	if x.Site != x.Hfid && x.Site != 0 && x.Hfid != 0 {
+		sameFields["HistoricalEventMasterpieceItem"]["Site"]["Hfid"] = false
+	}
+	if x.Site != x.EntityId && x.Site != 0 && x.EntityId != 0 {
+		sameFields["HistoricalEventMasterpieceItem"]["Site"]["EntityId"] = false
 	}
 	if x.Maker != x.EntityId && x.Maker != 0 && x.EntityId != 0 {
 		sameFields["HistoricalEventMasterpieceItem"]["Maker"]["EntityId"] = false
@@ -3709,14 +7859,8 @@ func (x *HistoricalEventMasterpieceItem) CheckFields() {
 	if x.Maker != x.Hfid && x.Maker != 0 && x.Hfid != 0 {
 		sameFields["HistoricalEventMasterpieceItem"]["Maker"]["Hfid"] = false
 	}
-	if x.Site != x.EntityId && x.Site != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["Site"]["EntityId"] = false
-	}
-	if x.Site != x.Hfid && x.Site != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["Site"]["Hfid"] = false
-	}
-	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["Site"]["SiteId"] = false
+	if x.Maker != x.SiteId && x.Maker != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventMasterpieceItem"]["Maker"]["SiteId"] = false
 	}
 }
 
@@ -3735,11 +7879,38 @@ func (x *HistoricalEventMasterpieceItemImprovement) RelatedToHf(id int) bool { r
 func (x *HistoricalEventMasterpieceItemImprovement) CheckFields() {
 }
 
+type HistoricalEventMasterpieceLostMethod int
+
+const (
+	HistoricalEventMasterpieceLostMethod_Unknown HistoricalEventMasterpieceLostMethod = iota
+	HistoricalEventMasterpieceLostMethod_Melt
+)
+
+func parseHistoricalEventMasterpieceLostMethod(s string) HistoricalEventMasterpieceLostMethod {
+	switch s {
+	case "melt":
+		return HistoricalEventMasterpieceLostMethod_Melt
+	}
+	return HistoricalEventMasterpieceLostMethod_Unknown
+}
+
+func (s HistoricalEventMasterpieceLostMethod) String() string {
+	switch s {
+	case HistoricalEventMasterpieceLostMethod_Melt:
+		return "melt"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceLostMethod) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventMasterpieceLost struct {
-	CreationEvent int    `json:"creationEvent" legend:"plus"` // creation_event
-	Histfig       int    `json:"histfig" legend:"plus"`       // histfig
-	Method        string `json:"method" legend:"plus"`        // method
-	Site          int    `json:"site" legend:"plus"`          // site
+	CreationEvent int                                  `json:"creationEvent" legend:"plus"` // creation_event
+	Histfig       int                                  `json:"histfig" legend:"plus"`       // histfig
+	Method        HistoricalEventMasterpieceLostMethod `json:"method" legend:"plus"`        // method
+	Site          int                                  `json:"site" legend:"plus"`          // site
 }
 
 func (x *HistoricalEventMasterpieceLost) RelatedToEntity(id int) bool { return false }
@@ -3760,11 +7931,20 @@ type HistoricalEventMerchant struct {
 }
 
 func (x *HistoricalEventMerchant) RelatedToEntity(id int) bool {
-	return x.TraderEntityId == id || x.DepotEntityId == id
+	return x.DepotEntityId == id || x.TraderEntityId == id
 }
 func (x *HistoricalEventMerchant) RelatedToHf(id int) bool { return false }
 
 func (x *HistoricalEventMerchant) CheckFields() {
+	if x.Destination != x.SiteId && x.Destination != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventMerchant"]["Destination"]["SiteId"] = false
+	}
+	if x.Destination != x.TraderEntityId && x.Destination != 0 && x.TraderEntityId != 0 {
+		sameFields["HistoricalEventMerchant"]["Destination"]["TraderEntityId"] = false
+	}
+	if x.Destination != x.DepotEntityId && x.Destination != 0 && x.DepotEntityId != 0 {
+		sameFields["HistoricalEventMerchant"]["Destination"]["DepotEntityId"] = false
+	}
 	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventMerchant"]["Site"]["SiteId"] = false
 	}
@@ -3783,22 +7963,55 @@ func (x *HistoricalEventMerchant) CheckFields() {
 	if x.Source != x.DepotEntityId && x.Source != 0 && x.DepotEntityId != 0 {
 		sameFields["HistoricalEventMerchant"]["Source"]["DepotEntityId"] = false
 	}
-	if x.Destination != x.SiteId && x.Destination != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMerchant"]["Destination"]["SiteId"] = false
+}
+
+type HistoricalEventModifiedBuildingModification int
+
+const (
+	HistoricalEventModifiedBuildingModification_Unknown HistoricalEventModifiedBuildingModification = iota
+	HistoricalEventModifiedBuildingModification_Dungeon
+	HistoricalEventModifiedBuildingModification_FeastHall
+	HistoricalEventModifiedBuildingModification_GatedCourtyard
+	HistoricalEventModifiedBuildingModification_ImprovedFortifications
+)
+
+func parseHistoricalEventModifiedBuildingModification(s string) HistoricalEventModifiedBuildingModification {
+	switch s {
+	case "dungeon":
+		return HistoricalEventModifiedBuildingModification_Dungeon
+	case "feast hall":
+		return HistoricalEventModifiedBuildingModification_FeastHall
+	case "gated courtyard":
+		return HistoricalEventModifiedBuildingModification_GatedCourtyard
+	case "improved fortifications":
+		return HistoricalEventModifiedBuildingModification_ImprovedFortifications
 	}
-	if x.Destination != x.TraderEntityId && x.Destination != 0 && x.TraderEntityId != 0 {
-		sameFields["HistoricalEventMerchant"]["Destination"]["TraderEntityId"] = false
+	return HistoricalEventModifiedBuildingModification_Unknown
+}
+
+func (s HistoricalEventModifiedBuildingModification) String() string {
+	switch s {
+	case HistoricalEventModifiedBuildingModification_Dungeon:
+		return "dungeon"
+	case HistoricalEventModifiedBuildingModification_FeastHall:
+		return "feast hall"
+	case HistoricalEventModifiedBuildingModification_GatedCourtyard:
+		return "gated courtyard"
+	case HistoricalEventModifiedBuildingModification_ImprovedFortifications:
+		return "improved fortifications"
 	}
-	if x.Destination != x.DepotEntityId && x.Destination != 0 && x.DepotEntityId != 0 {
-		sameFields["HistoricalEventMerchant"]["Destination"]["DepotEntityId"] = false
-	}
+	return "unknown"
+}
+
+func (s HistoricalEventModifiedBuildingModification) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
 }
 
 type HistoricalEventModifiedBuilding struct {
-	Modification string `json:"modification" legend:"base"` // modification
-	ModifierHfid int    `json:"modifierHfid" legend:"base"` // modifier_hfid
-	SiteId       int    `json:"siteId" legend:"base"`       // site_id
-	StructureId  int    `json:"structureId" legend:"base"`  // structure_id
+	Modification HistoricalEventModifiedBuildingModification `json:"modification" legend:"base"` // modification
+	ModifierHfid int                                         `json:"modifierHfid" legend:"base"` // modifier_hfid
+	SiteId       int                                         `json:"siteId" legend:"base"`       // site_id
+	StructureId  int                                         `json:"structureId" legend:"base"`  // structure_id
 }
 
 func (x *HistoricalEventModifiedBuilding) RelatedToEntity(id int) bool { return false }
@@ -3807,14 +8020,83 @@ func (x *HistoricalEventModifiedBuilding) RelatedToHf(id int) bool     { return 
 func (x *HistoricalEventModifiedBuilding) CheckFields() {
 }
 
+type HistoricalEventMusicalFormCreatedCircumstance int
+
+const (
+	HistoricalEventMusicalFormCreatedCircumstance_Unknown HistoricalEventMusicalFormCreatedCircumstance = iota
+	HistoricalEventMusicalFormCreatedCircumstance_Dream
+	HistoricalEventMusicalFormCreatedCircumstance_DreamAboutHf
+	HistoricalEventMusicalFormCreatedCircumstance_Nightmare
+	HistoricalEventMusicalFormCreatedCircumstance_PrayToHf
+)
+
+func parseHistoricalEventMusicalFormCreatedCircumstance(s string) HistoricalEventMusicalFormCreatedCircumstance {
+	switch s {
+	case "dream":
+		return HistoricalEventMusicalFormCreatedCircumstance_Dream
+	case "dream about hf":
+		return HistoricalEventMusicalFormCreatedCircumstance_DreamAboutHf
+	case "nightmare":
+		return HistoricalEventMusicalFormCreatedCircumstance_Nightmare
+	case "pray to hf":
+		return HistoricalEventMusicalFormCreatedCircumstance_PrayToHf
+	}
+	return HistoricalEventMusicalFormCreatedCircumstance_Unknown
+}
+
+func (s HistoricalEventMusicalFormCreatedCircumstance) String() string {
+	switch s {
+	case HistoricalEventMusicalFormCreatedCircumstance_Dream:
+		return "dream"
+	case HistoricalEventMusicalFormCreatedCircumstance_DreamAboutHf:
+		return "dream about hf"
+	case HistoricalEventMusicalFormCreatedCircumstance_Nightmare:
+		return "nightmare"
+	case HistoricalEventMusicalFormCreatedCircumstance_PrayToHf:
+		return "pray to hf"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMusicalFormCreatedCircumstance) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventMusicalFormCreatedReason int
+
+const (
+	HistoricalEventMusicalFormCreatedReason_Unknown HistoricalEventMusicalFormCreatedReason = iota
+	HistoricalEventMusicalFormCreatedReason_GlorifyHf
+)
+
+func parseHistoricalEventMusicalFormCreatedReason(s string) HistoricalEventMusicalFormCreatedReason {
+	switch s {
+	case "glorify hf":
+		return HistoricalEventMusicalFormCreatedReason_GlorifyHf
+	}
+	return HistoricalEventMusicalFormCreatedReason_Unknown
+}
+
+func (s HistoricalEventMusicalFormCreatedReason) String() string {
+	switch s {
+	case HistoricalEventMusicalFormCreatedReason_GlorifyHf:
+		return "glorify hf"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMusicalFormCreatedReason) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventMusicalFormCreated struct {
-	Circumstance   string `json:"circumstance" legend:"base"`   // circumstance
-	CircumstanceId int    `json:"circumstanceId" legend:"base"` // circumstance_id
-	FormId         int    `json:"formId" legend:"base"`         // form_id
-	HistFigureId   int    `json:"histFigureId" legend:"base"`   // hist_figure_id
-	Reason         string `json:"reason" legend:"base"`         // reason
-	ReasonId       int    `json:"reasonId" legend:"base"`       // reason_id
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
+	Circumstance   HistoricalEventMusicalFormCreatedCircumstance `json:"circumstance" legend:"base"`   // circumstance
+	CircumstanceId int                                           `json:"circumstanceId" legend:"base"` // circumstance_id
+	FormId         int                                           `json:"formId" legend:"base"`         // form_id
+	HistFigureId   int                                           `json:"histFigureId" legend:"base"`   // hist_figure_id
+	Reason         HistoricalEventMusicalFormCreatedReason       `json:"reason" legend:"base"`         // reason
+	ReasonId       int                                           `json:"reasonId" legend:"base"`       // reason_id
+	SiteId         int                                           `json:"siteId" legend:"base"`         // site_id
 }
 
 func (x *HistoricalEventMusicalFormCreated) RelatedToEntity(id int) bool { return false }
@@ -3840,11 +8122,38 @@ func (x *HistoricalEventNewSiteLeader) RelatedToHf(id int) bool { return x.NewLe
 func (x *HistoricalEventNewSiteLeader) CheckFields() {
 }
 
+type HistoricalEventPeaceAcceptedTopic int
+
+const (
+	HistoricalEventPeaceAcceptedTopic_Unknown HistoricalEventPeaceAcceptedTopic = iota
+	HistoricalEventPeaceAcceptedTopic_Requestpeace
+)
+
+func parseHistoricalEventPeaceAcceptedTopic(s string) HistoricalEventPeaceAcceptedTopic {
+	switch s {
+	case "requestpeace":
+		return HistoricalEventPeaceAcceptedTopic_Requestpeace
+	}
+	return HistoricalEventPeaceAcceptedTopic_Unknown
+}
+
+func (s HistoricalEventPeaceAcceptedTopic) String() string {
+	switch s {
+	case HistoricalEventPeaceAcceptedTopic_Requestpeace:
+		return "requestpeace"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventPeaceAcceptedTopic) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventPeaceAccepted struct {
-	Destination int    `json:"destination" legend:"plus"` // destination
-	SiteId      int    `json:"siteId" legend:"base"`      // site_id
-	Source      int    `json:"source" legend:"plus"`      // source
-	Topic       string `json:"topic" legend:"plus"`       // topic
+	Destination int                               `json:"destination" legend:"plus"` // destination
+	SiteId      int                               `json:"siteId" legend:"base"`      // site_id
+	Source      int                               `json:"source" legend:"plus"`      // source
+	Topic       HistoricalEventPeaceAcceptedTopic `json:"topic" legend:"plus"`       // topic
 }
 
 func (x *HistoricalEventPeaceAccepted) RelatedToEntity(id int) bool { return false }
@@ -3859,22 +8168,49 @@ func (x *HistoricalEventPeaceAccepted) CheckFields() {
 	}
 }
 
+type HistoricalEventPeaceRejectedTopic int
+
+const (
+	HistoricalEventPeaceRejectedTopic_Unknown HistoricalEventPeaceRejectedTopic = iota
+	HistoricalEventPeaceRejectedTopic_Requestpeace
+)
+
+func parseHistoricalEventPeaceRejectedTopic(s string) HistoricalEventPeaceRejectedTopic {
+	switch s {
+	case "requestpeace":
+		return HistoricalEventPeaceRejectedTopic_Requestpeace
+	}
+	return HistoricalEventPeaceRejectedTopic_Unknown
+}
+
+func (s HistoricalEventPeaceRejectedTopic) String() string {
+	switch s {
+	case HistoricalEventPeaceRejectedTopic_Requestpeace:
+		return "requestpeace"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventPeaceRejectedTopic) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventPeaceRejected struct {
-	Destination int    `json:"destination" legend:"plus"` // destination
-	SiteId      int    `json:"siteId" legend:"base"`      // site_id
-	Source      int    `json:"source" legend:"plus"`      // source
-	Topic       string `json:"topic" legend:"plus"`       // topic
+	Destination int                               `json:"destination" legend:"plus"` // destination
+	SiteId      int                               `json:"siteId" legend:"base"`      // site_id
+	Source      int                               `json:"source" legend:"plus"`      // source
+	Topic       HistoricalEventPeaceRejectedTopic `json:"topic" legend:"plus"`       // topic
 }
 
 func (x *HistoricalEventPeaceRejected) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventPeaceRejected) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventPeaceRejected) CheckFields() {
-	if x.Source != x.SiteId && x.Source != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventPeaceRejected"]["Source"]["SiteId"] = false
-	}
 	if x.Destination != x.SiteId && x.Destination != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventPeaceRejected"]["Destination"]["SiteId"] = false
+	}
+	if x.Source != x.SiteId && x.Source != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventPeaceRejected"]["Source"]["SiteId"] = false
 	}
 }
 
@@ -3913,11 +8249,43 @@ func (x *HistoricalEventPlunderedSite) RelatedToHf(id int) bool { return false }
 func (x *HistoricalEventPlunderedSite) CheckFields() {
 }
 
+type HistoricalEventPoeticFormCreatedCircumstance int
+
+const (
+	HistoricalEventPoeticFormCreatedCircumstance_Unknown HistoricalEventPoeticFormCreatedCircumstance = iota
+	HistoricalEventPoeticFormCreatedCircumstance_Dream
+	HistoricalEventPoeticFormCreatedCircumstance_Nightmare
+)
+
+func parseHistoricalEventPoeticFormCreatedCircumstance(s string) HistoricalEventPoeticFormCreatedCircumstance {
+	switch s {
+	case "dream":
+		return HistoricalEventPoeticFormCreatedCircumstance_Dream
+	case "nightmare":
+		return HistoricalEventPoeticFormCreatedCircumstance_Nightmare
+	}
+	return HistoricalEventPoeticFormCreatedCircumstance_Unknown
+}
+
+func (s HistoricalEventPoeticFormCreatedCircumstance) String() string {
+	switch s {
+	case HistoricalEventPoeticFormCreatedCircumstance_Dream:
+		return "dream"
+	case HistoricalEventPoeticFormCreatedCircumstance_Nightmare:
+		return "nightmare"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventPoeticFormCreatedCircumstance) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventPoeticFormCreated struct {
-	Circumstance string `json:"circumstance" legend:"base"` // circumstance
-	FormId       int    `json:"formId" legend:"base"`       // form_id
-	HistFigureId int    `json:"histFigureId" legend:"base"` // hist_figure_id
-	SiteId       int    `json:"siteId" legend:"base"`       // site_id
+	Circumstance HistoricalEventPoeticFormCreatedCircumstance `json:"circumstance" legend:"base"` // circumstance
+	FormId       int                                          `json:"formId" legend:"base"`       // form_id
+	HistFigureId int                                          `json:"histFigureId" legend:"base"` // hist_figure_id
+	SiteId       int                                          `json:"siteId" legend:"base"`       // site_id
 }
 
 func (x *HistoricalEventPoeticFormCreated) RelatedToEntity(id int) bool { return false }
@@ -3985,17 +8353,119 @@ func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToHf(id int) boo
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) CheckFields() {
 }
 
+type HistoricalEventRelationshipRelationship int
+
+const (
+	HistoricalEventRelationshipRelationship_Unknown HistoricalEventRelationshipRelationship = iota
+	HistoricalEventRelationshipRelationship_ArtisticBuddy
+	HistoricalEventRelationshipRelationship_AtheleticRival
+	HistoricalEventRelationshipRelationship_AthleteBuddy
+	HistoricalEventRelationshipRelationship_BusinessRival
+	HistoricalEventRelationshipRelationship_ChildhoodFriend
+	HistoricalEventRelationshipRelationship_FormerLover
+	HistoricalEventRelationshipRelationship_Grudge
+	HistoricalEventRelationshipRelationship_JealousObsession
+	HistoricalEventRelationshipRelationship_JealousRelationshipGrudge
+	HistoricalEventRelationshipRelationship_Lieutenant
+	HistoricalEventRelationshipRelationship_Lover
+	HistoricalEventRelationshipRelationship_PersecutionGrudge
+	HistoricalEventRelationshipRelationship_ReligiousPersecutionGrudge
+	HistoricalEventRelationshipRelationship_ScholarBuddy
+	HistoricalEventRelationshipRelationship_SupernaturalGrudge
+	HistoricalEventRelationshipRelationship_WarBuddy
+)
+
+func parseHistoricalEventRelationshipRelationship(s string) HistoricalEventRelationshipRelationship {
+	switch s {
+	case "artistic_buddy":
+		return HistoricalEventRelationshipRelationship_ArtisticBuddy
+	case "atheletic_rival":
+		return HistoricalEventRelationshipRelationship_AtheleticRival
+	case "athlete_buddy":
+		return HistoricalEventRelationshipRelationship_AthleteBuddy
+	case "business_rival":
+		return HistoricalEventRelationshipRelationship_BusinessRival
+	case "childhood_friend":
+		return HistoricalEventRelationshipRelationship_ChildhoodFriend
+	case "former_lover":
+		return HistoricalEventRelationshipRelationship_FormerLover
+	case "grudge":
+		return HistoricalEventRelationshipRelationship_Grudge
+	case "jealous_obsession":
+		return HistoricalEventRelationshipRelationship_JealousObsession
+	case "jealous_relationship_grudge":
+		return HistoricalEventRelationshipRelationship_JealousRelationshipGrudge
+	case "lieutenant":
+		return HistoricalEventRelationshipRelationship_Lieutenant
+	case "lover":
+		return HistoricalEventRelationshipRelationship_Lover
+	case "persecution_grudge":
+		return HistoricalEventRelationshipRelationship_PersecutionGrudge
+	case "religious_persecution_grudge":
+		return HistoricalEventRelationshipRelationship_ReligiousPersecutionGrudge
+	case "scholar_buddy":
+		return HistoricalEventRelationshipRelationship_ScholarBuddy
+	case "supernatural_grudge":
+		return HistoricalEventRelationshipRelationship_SupernaturalGrudge
+	case "war_buddy":
+		return HistoricalEventRelationshipRelationship_WarBuddy
+	}
+	return HistoricalEventRelationshipRelationship_Unknown
+}
+
+func (s HistoricalEventRelationshipRelationship) String() string {
+	switch s {
+	case HistoricalEventRelationshipRelationship_ArtisticBuddy:
+		return "artistic buddy"
+	case HistoricalEventRelationshipRelationship_AtheleticRival:
+		return "atheletic rival"
+	case HistoricalEventRelationshipRelationship_AthleteBuddy:
+		return "athlete buddy"
+	case HistoricalEventRelationshipRelationship_BusinessRival:
+		return "business rival"
+	case HistoricalEventRelationshipRelationship_ChildhoodFriend:
+		return "childhood friend"
+	case HistoricalEventRelationshipRelationship_FormerLover:
+		return "former lover"
+	case HistoricalEventRelationshipRelationship_Grudge:
+		return "grudge"
+	case HistoricalEventRelationshipRelationship_JealousObsession:
+		return "jealous obsession"
+	case HistoricalEventRelationshipRelationship_JealousRelationshipGrudge:
+		return "jealous relationship grudge"
+	case HistoricalEventRelationshipRelationship_Lieutenant:
+		return "lieutenant"
+	case HistoricalEventRelationshipRelationship_Lover:
+		return "lover"
+	case HistoricalEventRelationshipRelationship_PersecutionGrudge:
+		return "persecution grudge"
+	case HistoricalEventRelationshipRelationship_ReligiousPersecutionGrudge:
+		return "religious persecution grudge"
+	case HistoricalEventRelationshipRelationship_ScholarBuddy:
+		return "scholar buddy"
+	case HistoricalEventRelationshipRelationship_SupernaturalGrudge:
+		return "supernatural grudge"
+	case HistoricalEventRelationshipRelationship_WarBuddy:
+		return "war buddy"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventRelationshipRelationship) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventRelationship struct {
-	Event        int    `json:"event" legend:"plus"`        // event
-	Relationship string `json:"relationship" legend:"plus"` // relationship
-	SourceHf     int    `json:"sourceHf" legend:"plus"`     // source_hf
-	TargetHf     int    `json:"targetHf" legend:"plus"`     // target_hf
-	Year         int    `json:"year" legend:"plus"`         // year
+	Event        int                                     `json:"event" legend:"plus"`        // event
+	Relationship HistoricalEventRelationshipRelationship `json:"relationship" legend:"plus"` // relationship
+	SourceHf     int                                     `json:"sourceHf" legend:"plus"`     // source_hf
+	TargetHf     int                                     `json:"targetHf" legend:"plus"`     // target_hf
+	Year         int                                     `json:"year" legend:"plus"`         // year
 }
 
 func (x *HistoricalEventRelationship) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventRelationship) RelatedToHf(id int) bool {
-	return x.TargetHf == id || x.SourceHf == id
+	return x.SourceHf == id || x.TargetHf == id
 }
 
 func (x *HistoricalEventRelationship) CheckFields() {
@@ -4014,21 +8484,102 @@ func (x *HistoricalEventRelationshipSupplement) RelatedToHf(id int) bool     { r
 func (x *HistoricalEventRelationshipSupplement) CheckFields() {
 }
 
+type HistoricalEventRemoveHfEntityLinkLink int
+
+const (
+	HistoricalEventRemoveHfEntityLinkLink_Unknown HistoricalEventRemoveHfEntityLinkLink = iota
+	HistoricalEventRemoveHfEntityLinkLink_Member
+	HistoricalEventRemoveHfEntityLinkLink_Position
+	HistoricalEventRemoveHfEntityLinkLink_Prisoner
+	HistoricalEventRemoveHfEntityLinkLink_Slave
+)
+
+func parseHistoricalEventRemoveHfEntityLinkLink(s string) HistoricalEventRemoveHfEntityLinkLink {
+	switch s {
+	case "member":
+		return HistoricalEventRemoveHfEntityLinkLink_Member
+	case "position":
+		return HistoricalEventRemoveHfEntityLinkLink_Position
+	case "prisoner":
+		return HistoricalEventRemoveHfEntityLinkLink_Prisoner
+	case "slave":
+		return HistoricalEventRemoveHfEntityLinkLink_Slave
+	}
+	return HistoricalEventRemoveHfEntityLinkLink_Unknown
+}
+
+func (s HistoricalEventRemoveHfEntityLinkLink) String() string {
+	switch s {
+	case HistoricalEventRemoveHfEntityLinkLink_Member:
+		return "member"
+	case HistoricalEventRemoveHfEntityLinkLink_Position:
+		return "position"
+	case HistoricalEventRemoveHfEntityLinkLink_Prisoner:
+		return "prisoner"
+	case HistoricalEventRemoveHfEntityLinkLink_Slave:
+		return "slave"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventRemoveHfEntityLinkLink) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventRemoveHfEntityLinkLinkType int
+
+const (
+	HistoricalEventRemoveHfEntityLinkLinkType_Unknown HistoricalEventRemoveHfEntityLinkLinkType = iota
+	HistoricalEventRemoveHfEntityLinkLinkType_Member
+	HistoricalEventRemoveHfEntityLinkLinkType_Position
+	HistoricalEventRemoveHfEntityLinkLinkType_Prisoner
+	HistoricalEventRemoveHfEntityLinkLinkType_Slave
+)
+
+func parseHistoricalEventRemoveHfEntityLinkLinkType(s string) HistoricalEventRemoveHfEntityLinkLinkType {
+	switch s {
+	case "member":
+		return HistoricalEventRemoveHfEntityLinkLinkType_Member
+	case "position":
+		return HistoricalEventRemoveHfEntityLinkLinkType_Position
+	case "prisoner":
+		return HistoricalEventRemoveHfEntityLinkLinkType_Prisoner
+	case "slave":
+		return HistoricalEventRemoveHfEntityLinkLinkType_Slave
+	}
+	return HistoricalEventRemoveHfEntityLinkLinkType_Unknown
+}
+
+func (s HistoricalEventRemoveHfEntityLinkLinkType) String() string {
+	switch s {
+	case HistoricalEventRemoveHfEntityLinkLinkType_Member:
+		return "member"
+	case HistoricalEventRemoveHfEntityLinkLinkType_Position:
+		return "position"
+	case HistoricalEventRemoveHfEntityLinkLinkType_Prisoner:
+		return "prisoner"
+	case HistoricalEventRemoveHfEntityLinkLinkType_Slave:
+		return "slave"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventRemoveHfEntityLinkLinkType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventRemoveHfEntityLink struct {
-	CivId      int    `json:"civId" legend:"base"`      // civ_id
-	Hfid       int    `json:"hfid" legend:"base"`       // hfid
-	Link       string `json:"link" legend:"base"`       // link
-	Position   string `json:"position" legend:"plus"`   // position
-	PositionId int    `json:"positionId" legend:"base"` // position_id
+	CivId      int                                   `json:"civId" legend:"base"`      // civ_id
+	Hfid       int                                   `json:"hfid" legend:"base"`       // hfid
+	Link       HistoricalEventRemoveHfEntityLinkLink `json:"link" legend:"base"`       // link
+	Position   string                                `json:"position" legend:"plus"`   // position
+	PositionId int                                   `json:"positionId" legend:"base"` // position_id
 }
 
 func (x *HistoricalEventRemoveHfEntityLink) RelatedToEntity(id int) bool { return x.CivId == id }
 func (x *HistoricalEventRemoveHfEntityLink) RelatedToHf(id int) bool     { return x.Hfid == id }
 
 func (x *HistoricalEventRemoveHfEntityLink) CheckFields() {
-	if x.Position != x.Link && x.Position != "" && x.Link != "" {
-		sameFields["HistoricalEventRemoveHfEntityLink"]["Position"]["Link"] = false
-	}
 }
 
 type HistoricalEventRemoveHfHfLink struct {
@@ -4038,32 +8589,69 @@ type HistoricalEventRemoveHfHfLink struct {
 
 func (x *HistoricalEventRemoveHfHfLink) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventRemoveHfHfLink) RelatedToHf(id int) bool {
-	return x.Hfid == id || x.HfidTarget == id
+	return x.HfidTarget == id || x.Hfid == id
 }
 
 func (x *HistoricalEventRemoveHfHfLink) CheckFields() {
 }
 
+type HistoricalEventRemoveHfSiteLinkLinkType int
+
+const (
+	HistoricalEventRemoveHfSiteLinkLinkType_Unknown HistoricalEventRemoveHfSiteLinkLinkType = iota
+	HistoricalEventRemoveHfSiteLinkLinkType_HomeSiteAbstractBuilding
+	HistoricalEventRemoveHfSiteLinkLinkType_Occupation
+	HistoricalEventRemoveHfSiteLinkLinkType_SeatOfPower
+)
+
+func parseHistoricalEventRemoveHfSiteLinkLinkType(s string) HistoricalEventRemoveHfSiteLinkLinkType {
+	switch s {
+	case "home_site_abstract_building":
+		return HistoricalEventRemoveHfSiteLinkLinkType_HomeSiteAbstractBuilding
+	case "occupation":
+		return HistoricalEventRemoveHfSiteLinkLinkType_Occupation
+	case "seat_of_power":
+		return HistoricalEventRemoveHfSiteLinkLinkType_SeatOfPower
+	}
+	return HistoricalEventRemoveHfSiteLinkLinkType_Unknown
+}
+
+func (s HistoricalEventRemoveHfSiteLinkLinkType) String() string {
+	switch s {
+	case HistoricalEventRemoveHfSiteLinkLinkType_HomeSiteAbstractBuilding:
+		return "home site abstract building"
+	case HistoricalEventRemoveHfSiteLinkLinkType_Occupation:
+		return "occupation"
+	case HistoricalEventRemoveHfSiteLinkLinkType_SeatOfPower:
+		return "seat of power"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventRemoveHfSiteLinkLinkType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventRemoveHfSiteLink struct {
-	Civ       int    `json:"civ" legend:"plus"`       // civ
-	Histfig   int    `json:"histfig" legend:"plus"`   // histfig
-	LinkType  string `json:"linkType" legend:"plus"`  // link_type
-	SiteId    int    `json:"siteId" legend:"base"`    // site_id
-	Structure int    `json:"structure" legend:"plus"` // structure
+	Civ       int                                     `json:"civ" legend:"plus"`       // civ
+	Histfig   int                                     `json:"histfig" legend:"plus"`   // histfig
+	LinkType  HistoricalEventRemoveHfSiteLinkLinkType `json:"linkType" legend:"plus"`  // link_type
+	SiteId    int                                     `json:"siteId" legend:"base"`    // site_id
+	Structure int                                     `json:"structure" legend:"plus"` // structure
 }
 
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToHf(id int) bool     { return x.Histfig == id }
 
 func (x *HistoricalEventRemoveHfSiteLink) CheckFields() {
+	if x.Structure != x.SiteId && x.Structure != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventRemoveHfSiteLink"]["Structure"]["SiteId"] = false
+	}
 	if x.Civ != x.SiteId && x.Civ != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventRemoveHfSiteLink"]["Civ"]["SiteId"] = false
 	}
 	if x.Histfig != x.SiteId && x.Histfig != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventRemoveHfSiteLink"]["Histfig"]["SiteId"] = false
-	}
-	if x.Structure != x.SiteId && x.Structure != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventRemoveHfSiteLink"]["Structure"]["SiteId"] = false
 	}
 }
 
@@ -4086,8 +8674,20 @@ func (x *HistoricalEventReplacedStructure) RelatedToEntity(id int) bool {
 func (x *HistoricalEventReplacedStructure) RelatedToHf(id int) bool { return false }
 
 func (x *HistoricalEventReplacedStructure) CheckFields() {
-	if x.NewStructure != x.OldAbId && x.NewStructure != 0 && x.OldAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["NewStructure"]["OldAbId"] = false
+	if x.Civ != x.OldAbId && x.Civ != 0 && x.OldAbId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["Civ"]["OldAbId"] = false
+	}
+	if x.Civ != x.SiteCivId && x.Civ != 0 && x.SiteCivId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["Civ"]["SiteCivId"] = false
+	}
+	if x.Civ != x.NewAbId && x.Civ != 0 && x.NewAbId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["Civ"]["NewAbId"] = false
+	}
+	if x.Civ != x.CivId && x.Civ != 0 && x.CivId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["Civ"]["CivId"] = false
+	}
+	if x.Civ != x.SiteId && x.Civ != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["Civ"]["SiteId"] = false
 	}
 	if x.NewStructure != x.SiteId && x.NewStructure != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventReplacedStructure"]["NewStructure"]["SiteId"] = false
@@ -4101,35 +8701,32 @@ func (x *HistoricalEventReplacedStructure) CheckFields() {
 	if x.NewStructure != x.NewAbId && x.NewStructure != 0 && x.NewAbId != 0 {
 		sameFields["HistoricalEventReplacedStructure"]["NewStructure"]["NewAbId"] = false
 	}
-	if x.OldStructure != x.NewAbId && x.OldStructure != 0 && x.NewAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["OldStructure"]["NewAbId"] = false
-	}
-	if x.OldStructure != x.SiteCivId && x.OldStructure != 0 && x.SiteCivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["OldStructure"]["SiteCivId"] = false
+	if x.NewStructure != x.OldAbId && x.NewStructure != 0 && x.OldAbId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["NewStructure"]["OldAbId"] = false
 	}
 	if x.OldStructure != x.CivId && x.OldStructure != 0 && x.CivId != 0 {
 		sameFields["HistoricalEventReplacedStructure"]["OldStructure"]["CivId"] = false
 	}
-	if x.OldStructure != x.OldAbId && x.OldStructure != 0 && x.OldAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["OldStructure"]["OldAbId"] = false
-	}
 	if x.OldStructure != x.SiteId && x.OldStructure != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventReplacedStructure"]["OldStructure"]["SiteId"] = false
 	}
-	if x.Site != x.SiteCivId && x.Site != 0 && x.SiteCivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Site"]["SiteCivId"] = false
+	if x.OldStructure != x.NewAbId && x.OldStructure != 0 && x.NewAbId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["OldStructure"]["NewAbId"] = false
 	}
-	if x.Site != x.NewAbId && x.Site != 0 && x.NewAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Site"]["NewAbId"] = false
+	if x.OldStructure != x.OldAbId && x.OldStructure != 0 && x.OldAbId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["OldStructure"]["OldAbId"] = false
 	}
-	if x.Site != x.CivId && x.Site != 0 && x.CivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Site"]["CivId"] = false
+	if x.OldStructure != x.SiteCivId && x.OldStructure != 0 && x.SiteCivId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["OldStructure"]["SiteCivId"] = false
 	}
-	if x.Site != x.OldAbId && x.Site != 0 && x.OldAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Site"]["OldAbId"] = false
+	if x.SiteCiv != x.CivId && x.SiteCiv != 0 && x.CivId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["SiteCiv"]["CivId"] = false
 	}
-	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Site"]["SiteId"] = false
+	if x.SiteCiv != x.SiteId && x.SiteCiv != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["SiteCiv"]["SiteId"] = false
+	}
+	if x.SiteCiv != x.OldAbId && x.SiteCiv != 0 && x.OldAbId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["SiteCiv"]["OldAbId"] = false
 	}
 	if x.SiteCiv != x.SiteCivId && x.SiteCiv != 0 && x.SiteCivId != 0 {
 		sameFields["HistoricalEventReplacedStructure"]["SiteCiv"]["SiteCivId"] = false
@@ -4137,29 +8734,20 @@ func (x *HistoricalEventReplacedStructure) CheckFields() {
 	if x.SiteCiv != x.NewAbId && x.SiteCiv != 0 && x.NewAbId != 0 {
 		sameFields["HistoricalEventReplacedStructure"]["SiteCiv"]["NewAbId"] = false
 	}
-	if x.SiteCiv != x.CivId && x.SiteCiv != 0 && x.CivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["SiteCiv"]["CivId"] = false
+	if x.Site != x.CivId && x.Site != 0 && x.CivId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["Site"]["CivId"] = false
 	}
-	if x.SiteCiv != x.OldAbId && x.SiteCiv != 0 && x.OldAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["SiteCiv"]["OldAbId"] = false
+	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["Site"]["SiteId"] = false
 	}
-	if x.SiteCiv != x.SiteId && x.SiteCiv != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["SiteCiv"]["SiteId"] = false
+	if x.Site != x.OldAbId && x.Site != 0 && x.OldAbId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["Site"]["OldAbId"] = false
 	}
-	if x.Civ != x.NewAbId && x.Civ != 0 && x.NewAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Civ"]["NewAbId"] = false
+	if x.Site != x.SiteCivId && x.Site != 0 && x.SiteCivId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["Site"]["SiteCivId"] = false
 	}
-	if x.Civ != x.SiteCivId && x.Civ != 0 && x.SiteCivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Civ"]["SiteCivId"] = false
-	}
-	if x.Civ != x.SiteId && x.Civ != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Civ"]["SiteId"] = false
-	}
-	if x.Civ != x.CivId && x.Civ != 0 && x.CivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Civ"]["CivId"] = false
-	}
-	if x.Civ != x.OldAbId && x.Civ != 0 && x.OldAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Civ"]["OldAbId"] = false
+	if x.Site != x.NewAbId && x.Site != 0 && x.NewAbId != 0 {
+		sameFields["HistoricalEventReplacedStructure"]["Site"]["NewAbId"] = false
 	}
 }
 
@@ -4178,12 +8766,64 @@ func (x *HistoricalEventSiteDied) RelatedToHf(id int) bool { return false }
 func (x *HistoricalEventSiteDied) CheckFields() {
 }
 
+type HistoricalEventSiteDisputeDispute int
+
+const (
+	HistoricalEventSiteDisputeDispute_Unknown HistoricalEventSiteDisputeDispute = iota
+	HistoricalEventSiteDisputeDispute_FishingRights
+	HistoricalEventSiteDisputeDispute_GrazingRights
+	HistoricalEventSiteDisputeDispute_LivestockOwnership
+	HistoricalEventSiteDisputeDispute_RightsOfWay
+	HistoricalEventSiteDisputeDispute_Territory
+	HistoricalEventSiteDisputeDispute_WaterRights
+)
+
+func parseHistoricalEventSiteDisputeDispute(s string) HistoricalEventSiteDisputeDispute {
+	switch s {
+	case "fishing rights":
+		return HistoricalEventSiteDisputeDispute_FishingRights
+	case "grazing rights":
+		return HistoricalEventSiteDisputeDispute_GrazingRights
+	case "livestock ownership":
+		return HistoricalEventSiteDisputeDispute_LivestockOwnership
+	case "rights-of-way":
+		return HistoricalEventSiteDisputeDispute_RightsOfWay
+	case "territory":
+		return HistoricalEventSiteDisputeDispute_Territory
+	case "water rights":
+		return HistoricalEventSiteDisputeDispute_WaterRights
+	}
+	return HistoricalEventSiteDisputeDispute_Unknown
+}
+
+func (s HistoricalEventSiteDisputeDispute) String() string {
+	switch s {
+	case HistoricalEventSiteDisputeDispute_FishingRights:
+		return "fishing rights"
+	case HistoricalEventSiteDisputeDispute_GrazingRights:
+		return "grazing rights"
+	case HistoricalEventSiteDisputeDispute_LivestockOwnership:
+		return "livestock ownership"
+	case HistoricalEventSiteDisputeDispute_RightsOfWay:
+		return "rights of way"
+	case HistoricalEventSiteDisputeDispute_Territory:
+		return "territory"
+	case HistoricalEventSiteDisputeDispute_WaterRights:
+		return "water rights"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventSiteDisputeDispute) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventSiteDispute struct {
-	Dispute   string `json:"dispute" legend:"base"`   // dispute
-	EntityId1 int    `json:"entityId1" legend:"base"` // entity_id_1
-	EntityId2 int    `json:"entityId2" legend:"base"` // entity_id_2
-	SiteId1   int    `json:"siteId1" legend:"base"`   // site_id_1
-	SiteId2   int    `json:"siteId2" legend:"base"`   // site_id_2
+	Dispute   HistoricalEventSiteDisputeDispute `json:"dispute" legend:"base"`   // dispute
+	EntityId1 int                               `json:"entityId1" legend:"base"` // entity_id_1
+	EntityId2 int                               `json:"entityId2" legend:"base"` // entity_id_2
+	SiteId1   int                               `json:"siteId1" legend:"base"`   // site_id_1
+	SiteId2   int                               `json:"siteId2" legend:"base"`   // site_id_2
 }
 
 func (x *HistoricalEventSiteDispute) RelatedToEntity(id int) bool {
@@ -4202,7 +8842,7 @@ type HistoricalEventSiteRetired struct {
 }
 
 func (x *HistoricalEventSiteRetired) RelatedToEntity(id int) bool {
-	return x.CivId == id || x.SiteCivId == id
+	return x.SiteCivId == id || x.CivId == id
 }
 func (x *HistoricalEventSiteRetired) RelatedToHf(id int) bool { return false }
 
@@ -4217,7 +8857,7 @@ type HistoricalEventSiteSurrendered struct {
 }
 
 func (x *HistoricalEventSiteSurrendered) RelatedToEntity(id int) bool {
-	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
+	return x.DefenderCivId == id || x.SiteCivId == id || x.AttackerCivId == id
 }
 func (x *HistoricalEventSiteSurrendered) RelatedToHf(id int) bool { return false }
 
@@ -4233,19 +8873,51 @@ type HistoricalEventSiteTakenOver struct {
 }
 
 func (x *HistoricalEventSiteTakenOver) RelatedToEntity(id int) bool {
-	return x.AttackerCivId == id || x.DefenderCivId == id || x.NewSiteCivId == id || x.SiteCivId == id
+	return x.NewSiteCivId == id || x.SiteCivId == id || x.AttackerCivId == id || x.DefenderCivId == id
 }
 func (x *HistoricalEventSiteTakenOver) RelatedToHf(id int) bool { return false }
 
 func (x *HistoricalEventSiteTakenOver) CheckFields() {
 }
 
+type HistoricalEventSiteTributeForcedSeason int
+
+const (
+	HistoricalEventSiteTributeForcedSeason_Unknown HistoricalEventSiteTributeForcedSeason = iota
+	HistoricalEventSiteTributeForcedSeason_Autumn
+	HistoricalEventSiteTributeForcedSeason_Summer
+)
+
+func parseHistoricalEventSiteTributeForcedSeason(s string) HistoricalEventSiteTributeForcedSeason {
+	switch s {
+	case "Autumn":
+		return HistoricalEventSiteTributeForcedSeason_Autumn
+	case "Summer":
+		return HistoricalEventSiteTributeForcedSeason_Summer
+	}
+	return HistoricalEventSiteTributeForcedSeason_Unknown
+}
+
+func (s HistoricalEventSiteTributeForcedSeason) String() string {
+	switch s {
+	case HistoricalEventSiteTributeForcedSeason_Autumn:
+		return "autumn"
+	case HistoricalEventSiteTributeForcedSeason_Summer:
+		return "summer"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventSiteTributeForcedSeason) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventSiteTributeForced struct {
-	AttackerCivId int    `json:"attackerCivId" legend:"base"` // attacker_civ_id
-	DefenderCivId int    `json:"defenderCivId" legend:"base"` // defender_civ_id
-	Season        string `json:"season" legend:"base"`        // season
-	SiteCivId     int    `json:"siteCivId" legend:"base"`     // site_civ_id
-	SiteId        int    `json:"siteId" legend:"base"`        // site_id
+	AttackerCivId int                                    `json:"attackerCivId" legend:"base"` // attacker_civ_id
+	DefenderCivId int                                    `json:"defenderCivId" legend:"base"` // defender_civ_id
+	Season        HistoricalEventSiteTributeForcedSeason `json:"season" legend:"base"`        // season
+	SiteCivId     int                                    `json:"siteCivId" legend:"base"`     // site_civ_id
+	SiteId        int                                    `json:"siteId" legend:"base"`        // site_id
 }
 
 func (x *HistoricalEventSiteTributeForced) RelatedToEntity(id int) bool {
@@ -4308,23 +8980,75 @@ type HistoricalEventSquadVsSquad struct {
 
 func (x *HistoricalEventSquadVsSquad) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventSquadVsSquad) RelatedToHf(id int) bool {
-	return containsInt(x.DHfid, id) || containsInt(x.AHfid, id) || x.ALeaderHfid == id || x.DLeaderHfid == id
+	return containsInt(x.DHfid, id) || x.DLeaderHfid == id || x.ALeaderHfid == id || containsInt(x.AHfid, id)
 }
 
 func (x *HistoricalEventSquadVsSquad) CheckFields() {
 }
 
+type HistoricalEventTacticalSituationSituation int
+
+const (
+	HistoricalEventTacticalSituationSituation_Unknown HistoricalEventTacticalSituationSituation = iota
+	HistoricalEventTacticalSituationSituation_AFavored
+	HistoricalEventTacticalSituationSituation_ASlightlyFavored
+	HistoricalEventTacticalSituationSituation_AStronglyFavored
+	HistoricalEventTacticalSituationSituation_DSlightlyFavored
+	HistoricalEventTacticalSituationSituation_DStronglyFavored
+	HistoricalEventTacticalSituationSituation_NeitherFavored
+)
+
+func parseHistoricalEventTacticalSituationSituation(s string) HistoricalEventTacticalSituationSituation {
+	switch s {
+	case "a favored":
+		return HistoricalEventTacticalSituationSituation_AFavored
+	case "a slightly favored":
+		return HistoricalEventTacticalSituationSituation_ASlightlyFavored
+	case "a strongly favored":
+		return HistoricalEventTacticalSituationSituation_AStronglyFavored
+	case "d slightly favored":
+		return HistoricalEventTacticalSituationSituation_DSlightlyFavored
+	case "d strongly favored":
+		return HistoricalEventTacticalSituationSituation_DStronglyFavored
+	case "neither favored":
+		return HistoricalEventTacticalSituationSituation_NeitherFavored
+	}
+	return HistoricalEventTacticalSituationSituation_Unknown
+}
+
+func (s HistoricalEventTacticalSituationSituation) String() string {
+	switch s {
+	case HistoricalEventTacticalSituationSituation_AFavored:
+		return "a favored"
+	case HistoricalEventTacticalSituationSituation_ASlightlyFavored:
+		return "a slightly favored"
+	case HistoricalEventTacticalSituationSituation_AStronglyFavored:
+		return "a strongly favored"
+	case HistoricalEventTacticalSituationSituation_DSlightlyFavored:
+		return "d slightly favored"
+	case HistoricalEventTacticalSituationSituation_DStronglyFavored:
+		return "d strongly favored"
+	case HistoricalEventTacticalSituationSituation_NeitherFavored:
+		return "neither favored"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventTacticalSituationSituation) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventTacticalSituation struct {
-	ATacticianHfid int    `json:"aTacticianHfid" legend:"base"` // a_tactician_hfid
-	ATacticsRoll   int    `json:"aTacticsRoll" legend:"base"`   // a_tactics_roll
-	DTacticianHfid int    `json:"dTacticianHfid" legend:"base"` // d_tactician_hfid
-	DTacticsRoll   int    `json:"dTacticsRoll" legend:"base"`   // d_tactics_roll
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	Situation      string `json:"situation" legend:"base"`      // situation
-	Start          bool   `json:"start" legend:"base"`          // start
-	StructureId    int    `json:"structureId" legend:"base"`    // structure_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	ATacticianHfid int                                       `json:"aTacticianHfid" legend:"base"` // a_tactician_hfid
+	ATacticsRoll   int                                       `json:"aTacticsRoll" legend:"base"`   // a_tactics_roll
+	DTacticianHfid int                                       `json:"dTacticianHfid" legend:"base"` // d_tactician_hfid
+	DTacticsRoll   int                                       `json:"dTacticsRoll" legend:"base"`   // d_tactics_roll
+	FeatureLayerId int                                       `json:"featureLayerId" legend:"base"` // feature_layer_id
+	SiteId         int                                       `json:"siteId" legend:"base"`         // site_id
+	Situation      HistoricalEventTacticalSituationSituation `json:"situation" legend:"base"`      // situation
+	Start          bool                                      `json:"start" legend:"base"`          // start
+	StructureId    int                                       `json:"structureId" legend:"base"`    // structure_id
+	SubregionId    int                                       `json:"subregionId" legend:"base"`    // subregion_id
 }
 
 func (x *HistoricalEventTacticalSituation) RelatedToEntity(id int) bool { return false }
@@ -4352,21 +9076,182 @@ func (x *HistoricalEventTrade) RelatedToHf(id int) bool     { return x.TraderHfi
 func (x *HistoricalEventTrade) CheckFields() {
 }
 
+type HistoricalEventWrittenContentComposedCircumstance int
+
+const (
+	HistoricalEventWrittenContentComposedCircumstance_Unknown HistoricalEventWrittenContentComposedCircumstance = iota
+	HistoricalEventWrittenContentComposedCircumstance_Dream
+	HistoricalEventWrittenContentComposedCircumstance_DreamAboutHf
+	HistoricalEventWrittenContentComposedCircumstance_Nightmare
+	HistoricalEventWrittenContentComposedCircumstance_PrayToHf
+)
+
+func parseHistoricalEventWrittenContentComposedCircumstance(s string) HistoricalEventWrittenContentComposedCircumstance {
+	switch s {
+	case "dream":
+		return HistoricalEventWrittenContentComposedCircumstance_Dream
+	case "dream about hf":
+		return HistoricalEventWrittenContentComposedCircumstance_DreamAboutHf
+	case "nightmare":
+		return HistoricalEventWrittenContentComposedCircumstance_Nightmare
+	case "pray to hf":
+		return HistoricalEventWrittenContentComposedCircumstance_PrayToHf
+	}
+	return HistoricalEventWrittenContentComposedCircumstance_Unknown
+}
+
+func (s HistoricalEventWrittenContentComposedCircumstance) String() string {
+	switch s {
+	case HistoricalEventWrittenContentComposedCircumstance_Dream:
+		return "dream"
+	case HistoricalEventWrittenContentComposedCircumstance_DreamAboutHf:
+		return "dream about hf"
+	case HistoricalEventWrittenContentComposedCircumstance_Nightmare:
+		return "nightmare"
+	case HistoricalEventWrittenContentComposedCircumstance_PrayToHf:
+		return "pray to hf"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventWrittenContentComposedCircumstance) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventWrittenContentComposedReason int
+
+const (
+	HistoricalEventWrittenContentComposedReason_Unknown HistoricalEventWrittenContentComposedReason = iota
+	HistoricalEventWrittenContentComposedReason_GlorifyHf
+)
+
+func parseHistoricalEventWrittenContentComposedReason(s string) HistoricalEventWrittenContentComposedReason {
+	switch s {
+	case "glorify hf":
+		return HistoricalEventWrittenContentComposedReason_GlorifyHf
+	}
+	return HistoricalEventWrittenContentComposedReason_Unknown
+}
+
+func (s HistoricalEventWrittenContentComposedReason) String() string {
+	switch s {
+	case HistoricalEventWrittenContentComposedReason_GlorifyHf:
+		return "glorify hf"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventWrittenContentComposedReason) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventWrittenContentComposed struct {
-	Circumstance   string `json:"circumstance" legend:"base"`   // circumstance
-	CircumstanceId int    `json:"circumstanceId" legend:"base"` // circumstance_id
-	HistFigureId   int    `json:"histFigureId" legend:"base"`   // hist_figure_id
-	Reason         string `json:"reason" legend:"base"`         // reason
-	ReasonId       int    `json:"reasonId" legend:"base"`       // reason_id
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
-	WcId           int    `json:"wcId" legend:"base"`           // wc_id
+	Circumstance   HistoricalEventWrittenContentComposedCircumstance `json:"circumstance" legend:"base"`   // circumstance
+	CircumstanceId int                                               `json:"circumstanceId" legend:"base"` // circumstance_id
+	HistFigureId   int                                               `json:"histFigureId" legend:"base"`   // hist_figure_id
+	Reason         HistoricalEventWrittenContentComposedReason       `json:"reason" legend:"base"`         // reason
+	ReasonId       int                                               `json:"reasonId" legend:"base"`       // reason_id
+	SiteId         int                                               `json:"siteId" legend:"base"`         // site_id
+	SubregionId    int                                               `json:"subregionId" legend:"base"`    // subregion_id
+	WcId           int                                               `json:"wcId" legend:"base"`           // wc_id
 }
 
 func (x *HistoricalEventWrittenContentComposed) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventWrittenContentComposed) RelatedToHf(id int) bool     { return x.HistFigureId == id }
 
 func (x *HistoricalEventWrittenContentComposed) CheckFields() {
+}
+
+type HistoricalFigureGoal int
+
+const (
+	HistoricalFigureGoal_Unknown HistoricalFigureGoal = iota
+	HistoricalFigureGoal_AttainRankInSociety
+	HistoricalFigureGoal_BatheWorldInChaos
+	HistoricalFigureGoal_BecomeALegendaryWarrior
+	HistoricalFigureGoal_BringPeaceToTheWorld
+	HistoricalFigureGoal_CraftAMasterwork
+	HistoricalFigureGoal_CreateAGreatWorkOfArt
+	HistoricalFigureGoal_FallInLove
+	HistoricalFigureGoal_Immortality
+	HistoricalFigureGoal_MaintainEntityStatus
+	HistoricalFigureGoal_MakeAGreatDiscovery
+	HistoricalFigureGoal_MasterASkill
+	HistoricalFigureGoal_RuleTheWorld
+	HistoricalFigureGoal_SeeTheGreatNaturalSites
+	HistoricalFigureGoal_StartAFamily
+)
+
+func parseHistoricalFigureGoal(s string) HistoricalFigureGoal {
+	switch s {
+	case "attain rank in society":
+		return HistoricalFigureGoal_AttainRankInSociety
+	case "bathe world in chaos":
+		return HistoricalFigureGoal_BatheWorldInChaos
+	case "become a legendary warrior":
+		return HistoricalFigureGoal_BecomeALegendaryWarrior
+	case "bring peace to the world":
+		return HistoricalFigureGoal_BringPeaceToTheWorld
+	case "craft a masterwork":
+		return HistoricalFigureGoal_CraftAMasterwork
+	case "create a great work of art":
+		return HistoricalFigureGoal_CreateAGreatWorkOfArt
+	case "fall in love":
+		return HistoricalFigureGoal_FallInLove
+	case "immortality":
+		return HistoricalFigureGoal_Immortality
+	case "maintain entity status":
+		return HistoricalFigureGoal_MaintainEntityStatus
+	case "make a great discovery":
+		return HistoricalFigureGoal_MakeAGreatDiscovery
+	case "master a skill":
+		return HistoricalFigureGoal_MasterASkill
+	case "rule the world":
+		return HistoricalFigureGoal_RuleTheWorld
+	case "see the great natural sites":
+		return HistoricalFigureGoal_SeeTheGreatNaturalSites
+	case "start a family":
+		return HistoricalFigureGoal_StartAFamily
+	}
+	return HistoricalFigureGoal_Unknown
+}
+
+func (s HistoricalFigureGoal) String() string {
+	switch s {
+	case HistoricalFigureGoal_AttainRankInSociety:
+		return "attain rank in society"
+	case HistoricalFigureGoal_BatheWorldInChaos:
+		return "bathe world in chaos"
+	case HistoricalFigureGoal_BecomeALegendaryWarrior:
+		return "become a legendary warrior"
+	case HistoricalFigureGoal_BringPeaceToTheWorld:
+		return "bring peace to the world"
+	case HistoricalFigureGoal_CraftAMasterwork:
+		return "craft a masterwork"
+	case HistoricalFigureGoal_CreateAGreatWorkOfArt:
+		return "create a great work of art"
+	case HistoricalFigureGoal_FallInLove:
+		return "fall in love"
+	case HistoricalFigureGoal_Immortality:
+		return "immortality"
+	case HistoricalFigureGoal_MaintainEntityStatus:
+		return "maintain entity status"
+	case HistoricalFigureGoal_MakeAGreatDiscovery:
+		return "make a great discovery"
+	case HistoricalFigureGoal_MasterASkill:
+		return "master a skill"
+	case HistoricalFigureGoal_RuleTheWorld:
+		return "rule the world"
+	case HistoricalFigureGoal_SeeTheGreatNaturalSites:
+		return "see the great natural sites"
+	case HistoricalFigureGoal_StartAFamily:
+		return "start a family"
+	}
+	return "unknown"
+}
+
+func (s HistoricalFigureGoal) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
 }
 
 type HistoricalFigure struct {
@@ -4393,7 +9278,7 @@ type HistoricalFigure struct {
 	EntitySquadLink                 *EntitySquadLink                   `json:"entitySquadLink" legend:"base"`                 // entity_squad_link
 	Force                           bool                               `json:"force" legend:"base"`                           // force
 	Ghost                           bool                               `json:"ghost" legend:"base"`                           // ghost
-	Goal                            []string                           `json:"goal" legend:"base"`                            // goal
+	Goal                            []HistoricalFigureGoal             `json:"goal" legend:"base"`                            // goal
 	HfLink                          []*HfLink                          `json:"hfLink" legend:"base"`                          // hf_link
 	HfSkill                         []*HfSkill                         `json:"hfSkill" legend:"base"`                         // hf_skill
 	HoldsArtifact                   []int                              `json:"holdsArtifact" legend:"base"`                   // holds_artifact
@@ -4427,20 +9312,14 @@ func (x *HistoricalFigure) CheckFields() {
 	if x.Sex != x.BirthYear && x.Sex != 0 && x.BirthYear != 0 {
 		sameFields["HistoricalFigure"]["Sex"]["BirthYear"] = false
 	}
-	if x.Sex != x.Appeared && x.Sex != 0 && x.Appeared != 0 {
-		sameFields["HistoricalFigure"]["Sex"]["Appeared"] = false
-	}
-	if x.Sex != x.DeathYear && x.Sex != 0 && x.DeathYear != 0 {
-		sameFields["HistoricalFigure"]["Sex"]["DeathYear"] = false
-	}
 	if x.Sex != x.BreedId && x.Sex != 0 && x.BreedId != 0 {
 		sameFields["HistoricalFigure"]["Sex"]["BreedId"] = false
 	}
 	if x.Sex != x.EntPopId && x.Sex != 0 && x.EntPopId != 0 {
 		sameFields["HistoricalFigure"]["Sex"]["EntPopId"] = false
 	}
-	if x.Sex != x.CurrentIdentityId && x.Sex != 0 && x.CurrentIdentityId != 0 {
-		sameFields["HistoricalFigure"]["Sex"]["CurrentIdentityId"] = false
+	if x.Sex != x.Appeared && x.Sex != 0 && x.Appeared != 0 {
+		sameFields["HistoricalFigure"]["Sex"]["Appeared"] = false
 	}
 	if x.Sex != x.BirthSeconds72 && x.Sex != 0 && x.BirthSeconds72 != 0 {
 		sameFields["HistoricalFigure"]["Sex"]["BirthSeconds72"] = false
@@ -4448,12 +9327,80 @@ func (x *HistoricalFigure) CheckFields() {
 	if x.Sex != x.DeathSeconds72 && x.Sex != 0 && x.DeathSeconds72 != 0 {
 		sameFields["HistoricalFigure"]["Sex"]["DeathSeconds72"] = false
 	}
+	if x.Sex != x.DeathYear && x.Sex != 0 && x.DeathYear != 0 {
+		sameFields["HistoricalFigure"]["Sex"]["DeathYear"] = false
+	}
+	if x.Sex != x.CurrentIdentityId && x.Sex != 0 && x.CurrentIdentityId != 0 {
+		sameFields["HistoricalFigure"]["Sex"]["CurrentIdentityId"] = false
+	}
+}
+
+type HistoricalFigureEntityLinkLinkType int
+
+const (
+	HistoricalFigureEntityLinkLinkType_Unknown HistoricalFigureEntityLinkLinkType = iota
+	HistoricalFigureEntityLinkLinkType_Criminal
+	HistoricalFigureEntityLinkLinkType_Enemy
+	HistoricalFigureEntityLinkLinkType_FormerMember
+	HistoricalFigureEntityLinkLinkType_FormerPrisoner
+	HistoricalFigureEntityLinkLinkType_FormerSlave
+	HistoricalFigureEntityLinkLinkType_Member
+	HistoricalFigureEntityLinkLinkType_Prisoner
+	HistoricalFigureEntityLinkLinkType_Slave
+)
+
+func parseHistoricalFigureEntityLinkLinkType(s string) HistoricalFigureEntityLinkLinkType {
+	switch s {
+	case "criminal":
+		return HistoricalFigureEntityLinkLinkType_Criminal
+	case "enemy":
+		return HistoricalFigureEntityLinkLinkType_Enemy
+	case "former member":
+		return HistoricalFigureEntityLinkLinkType_FormerMember
+	case "former prisoner":
+		return HistoricalFigureEntityLinkLinkType_FormerPrisoner
+	case "former slave":
+		return HistoricalFigureEntityLinkLinkType_FormerSlave
+	case "member":
+		return HistoricalFigureEntityLinkLinkType_Member
+	case "prisoner":
+		return HistoricalFigureEntityLinkLinkType_Prisoner
+	case "slave":
+		return HistoricalFigureEntityLinkLinkType_Slave
+	}
+	return HistoricalFigureEntityLinkLinkType_Unknown
+}
+
+func (s HistoricalFigureEntityLinkLinkType) String() string {
+	switch s {
+	case HistoricalFigureEntityLinkLinkType_Criminal:
+		return "criminal"
+	case HistoricalFigureEntityLinkLinkType_Enemy:
+		return "enemy"
+	case HistoricalFigureEntityLinkLinkType_FormerMember:
+		return "former member"
+	case HistoricalFigureEntityLinkLinkType_FormerPrisoner:
+		return "former prisoner"
+	case HistoricalFigureEntityLinkLinkType_FormerSlave:
+		return "former slave"
+	case HistoricalFigureEntityLinkLinkType_Member:
+		return "member"
+	case HistoricalFigureEntityLinkLinkType_Prisoner:
+		return "prisoner"
+	case HistoricalFigureEntityLinkLinkType_Slave:
+		return "slave"
+	}
+	return "unknown"
+}
+
+func (s HistoricalFigureEntityLinkLinkType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
 }
 
 type HistoricalFigureEntityLink struct {
-	EntityId     int    `json:"entityId" legend:"base"`     // entity_id
-	LinkStrength int    `json:"linkStrength" legend:"base"` // link_strength
-	LinkType     string `json:"linkType" legend:"base"`     // link_type
+	EntityId     int                                `json:"entityId" legend:"base"`     // entity_id
+	LinkStrength int                                `json:"linkStrength" legend:"base"` // link_strength
+	LinkType     HistoricalFigureEntityLinkLinkType `json:"linkType" legend:"base"`     // link_type
 }
 
 func (x *HistoricalFigureEntityLink) RelatedToEntity(id int) bool { return x.EntityId == id }
@@ -4473,19 +9420,71 @@ func (x *HistoricalFigureSiteProperty) RelatedToHf(id int) bool     { return fal
 func (x *HistoricalFigureSiteProperty) CheckFields() {
 }
 
+type HonorRequiredSkill int
+
+const (
+	HonorRequiredSkill_Unknown HonorRequiredSkill = iota
+	HonorRequiredSkill_AXE
+	HonorRequiredSkill_CROSSBOW
+	HonorRequiredSkill_HAMMER
+	HonorRequiredSkill_MACE
+	HonorRequiredSkill_SPEAR
+	HonorRequiredSkill_SWORD
+)
+
+func parseHonorRequiredSkill(s string) HonorRequiredSkill {
+	switch s {
+	case "AXE":
+		return HonorRequiredSkill_AXE
+	case "CROSSBOW":
+		return HonorRequiredSkill_CROSSBOW
+	case "HAMMER":
+		return HonorRequiredSkill_HAMMER
+	case "MACE":
+		return HonorRequiredSkill_MACE
+	case "SPEAR":
+		return HonorRequiredSkill_SPEAR
+	case "SWORD":
+		return HonorRequiredSkill_SWORD
+	}
+	return HonorRequiredSkill_Unknown
+}
+
+func (s HonorRequiredSkill) String() string {
+	switch s {
+	case HonorRequiredSkill_AXE:
+		return "axe"
+	case HonorRequiredSkill_CROSSBOW:
+		return "crossbow"
+	case HonorRequiredSkill_HAMMER:
+		return "hammer"
+	case HonorRequiredSkill_MACE:
+		return "mace"
+	case HonorRequiredSkill_SPEAR:
+		return "spear"
+	case HonorRequiredSkill_SWORD:
+		return "sword"
+	}
+	return "unknown"
+}
+
+func (s HonorRequiredSkill) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type Honor struct {
-	ExemptEpid                    int    `json:"exemptEpid" legend:"base"`                    // exempt_epid
-	ExemptFormerEpid              int    `json:"exemptFormerEpid" legend:"base"`              // exempt_former_epid
-	GivesPrecedence               int    `json:"givesPrecedence" legend:"base"`               // gives_precedence
-	GrantedToEverybody            bool   `json:"grantedToEverybody" legend:"base"`            // granted_to_everybody
-	Id_                           int    `json:"id" legend:"base"`                            // id
-	Name_                         string `json:"name" legend:"base"`                          // name
-	RequiredBattles               int    `json:"requiredBattles" legend:"base"`               // required_battles
-	RequiredKills                 int    `json:"requiredKills" legend:"base"`                 // required_kills
-	RequiredSkill                 string `json:"requiredSkill" legend:"base"`                 // required_skill
-	RequiredSkillIpTotal          int    `json:"requiredSkillIpTotal" legend:"base"`          // required_skill_ip_total
-	RequiredYears                 int    `json:"requiredYears" legend:"base"`                 // required_years
-	RequiresAnyMeleeOrRangedSkill bool   `json:"requiresAnyMeleeOrRangedSkill" legend:"base"` // requires_any_melee_or_ranged_skill
+	ExemptEpid                    int                `json:"exemptEpid" legend:"base"`                    // exempt_epid
+	ExemptFormerEpid              int                `json:"exemptFormerEpid" legend:"base"`              // exempt_former_epid
+	GivesPrecedence               int                `json:"givesPrecedence" legend:"base"`               // gives_precedence
+	GrantedToEverybody            bool               `json:"grantedToEverybody" legend:"base"`            // granted_to_everybody
+	Id_                           int                `json:"id" legend:"base"`                            // id
+	Name_                         string             `json:"name" legend:"base"`                          // name
+	RequiredBattles               int                `json:"requiredBattles" legend:"base"`               // required_battles
+	RequiredKills                 int                `json:"requiredKills" legend:"base"`                 // required_kills
+	RequiredSkill                 HonorRequiredSkill `json:"requiredSkill" legend:"base"`                 // required_skill
+	RequiredSkillIpTotal          int                `json:"requiredSkillIpTotal" legend:"base"`          // required_skill_ip_total
+	RequiredYears                 int                `json:"requiredYears" legend:"base"`                 // required_years
+	RequiresAnyMeleeOrRangedSkill bool               `json:"requiresAnyMeleeOrRangedSkill" legend:"base"` // requires_any_melee_or_ranged_skill
 }
 
 func (x *Honor) Id() int                     { return x.Id_ }
@@ -4509,17 +9508,109 @@ func (x *HonorEntity) RelatedToHf(id int) bool     { return false }
 func (x *HonorEntity) CheckFields() {
 }
 
+type IdentityProfession int
+
+const (
+	IdentityProfession_Unknown IdentityProfession = iota
+	IdentityProfession_Bard
+	IdentityProfession_BeastHunter
+	IdentityProfession_Criminal
+	IdentityProfession_Dancer
+	IdentityProfession_Mercenary
+	IdentityProfession_Merchant
+	IdentityProfession_Monk
+	IdentityProfession_MonsterSlayer
+	IdentityProfession_Peddler
+	IdentityProfession_Pilgrim
+	IdentityProfession_Poet
+	IdentityProfession_Prophet
+	IdentityProfession_Scholar
+	IdentityProfession_Snatcher
+)
+
+func parseIdentityProfession(s string) IdentityProfession {
+	switch s {
+	case "bard":
+		return IdentityProfession_Bard
+	case "beast_hunter":
+		return IdentityProfession_BeastHunter
+	case "criminal":
+		return IdentityProfession_Criminal
+	case "dancer":
+		return IdentityProfession_Dancer
+	case "mercenary":
+		return IdentityProfession_Mercenary
+	case "merchant":
+		return IdentityProfession_Merchant
+	case "monk":
+		return IdentityProfession_Monk
+	case "monster_slayer":
+		return IdentityProfession_MonsterSlayer
+	case "peddler":
+		return IdentityProfession_Peddler
+	case "pilgrim":
+		return IdentityProfession_Pilgrim
+	case "poet":
+		return IdentityProfession_Poet
+	case "prophet":
+		return IdentityProfession_Prophet
+	case "scholar":
+		return IdentityProfession_Scholar
+	case "snatcher":
+		return IdentityProfession_Snatcher
+	}
+	return IdentityProfession_Unknown
+}
+
+func (s IdentityProfession) String() string {
+	switch s {
+	case IdentityProfession_Bard:
+		return "bard"
+	case IdentityProfession_BeastHunter:
+		return "beast hunter"
+	case IdentityProfession_Criminal:
+		return "criminal"
+	case IdentityProfession_Dancer:
+		return "dancer"
+	case IdentityProfession_Mercenary:
+		return "mercenary"
+	case IdentityProfession_Merchant:
+		return "merchant"
+	case IdentityProfession_Monk:
+		return "monk"
+	case IdentityProfession_MonsterSlayer:
+		return "monster slayer"
+	case IdentityProfession_Peddler:
+		return "peddler"
+	case IdentityProfession_Pilgrim:
+		return "pilgrim"
+	case IdentityProfession_Poet:
+		return "poet"
+	case IdentityProfession_Prophet:
+		return "prophet"
+	case IdentityProfession_Scholar:
+		return "scholar"
+	case IdentityProfession_Snatcher:
+		return "snatcher"
+	}
+	return "unknown"
+}
+
+func (s IdentityProfession) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type Identity struct {
-	BirthSecond int    `json:"birthSecond" legend:"plus"` // birth_second
-	BirthYear   int    `json:"birthYear" legend:"plus"`   // birth_year
-	Caste       string `json:"caste" legend:"plus"`       // caste
-	EntityId    int    `json:"entityId" legend:"plus"`    // entity_id
-	HistfigId   int    `json:"histfigId" legend:"plus"`   // histfig_id
-	Id_         int    `json:"id" legend:"plus"`          // id
-	Name_       string `json:"name" legend:"plus"`        // name
-	NemesisId   int    `json:"nemesisId" legend:"plus"`   // nemesis_id
-	Profession  string `json:"profession" legend:"plus"`  // profession
-	Race        string `json:"race" legend:"plus"`        // race
+	BirthSecond int                `json:"birthSecond" legend:"plus"` // birth_second
+	BirthYear   int                `json:"birthYear" legend:"plus"`   // birth_year
+	Caste       string             `json:"caste" legend:"plus"`       // caste
+	EntityId    int                `json:"entityId" legend:"plus"`    // entity_id
+	HistfigId   int                `json:"histfigId" legend:"plus"`   // histfig_id
+	Id_         int                `json:"id" legend:"plus"`          // id
+	Name_       string             `json:"name" legend:"plus"`        // name
+	NemesisId   int                `json:"nemesisId" legend:"plus"`   // nemesis_id
+	Profession  IdentityProfession `json:"profession" legend:"plus"`  // profession
+	Race        string             `json:"race" legend:"plus"`        // race
 }
 
 func (x *Identity) Id() int                     { return x.Id_ }
@@ -4530,17 +9621,196 @@ func (x *Identity) RelatedToHf(id int) bool     { return x.HistfigId == id }
 func (x *Identity) CheckFields() {
 }
 
+type IntrigueActorRole int
+
+const (
+	IntrigueActorRole_Unknown IntrigueActorRole = iota
+	IntrigueActorRole_Asset
+	IntrigueActorRole_CorruptPositionHolder
+	IntrigueActorRole_DeliveryTarget
+	IntrigueActorRole_Enemy
+	IntrigueActorRole_Handler
+	IntrigueActorRole_Lieutenant
+	IntrigueActorRole_Master
+	IntrigueActorRole_PossibleThreat
+	IntrigueActorRole_PossiblyUnknownDirector
+	IntrigueActorRole_PotentialEmployer
+	IntrigueActorRole_Rebuffed
+	IntrigueActorRole_SourceOfFunds
+	IntrigueActorRole_SourceOfFundsForMaster
+	IntrigueActorRole_SuspectedCriminal
+	IntrigueActorRole_UnderworldContact
+	IntrigueActorRole_UsableAssassin
+	IntrigueActorRole_UsableSnatcher
+	IntrigueActorRole_UsableThief
+)
+
+func parseIntrigueActorRole(s string) IntrigueActorRole {
+	switch s {
+	case "asset":
+		return IntrigueActorRole_Asset
+	case "corrupt position holder":
+		return IntrigueActorRole_CorruptPositionHolder
+	case "delivery target":
+		return IntrigueActorRole_DeliveryTarget
+	case "enemy":
+		return IntrigueActorRole_Enemy
+	case "handler":
+		return IntrigueActorRole_Handler
+	case "lieutenant":
+		return IntrigueActorRole_Lieutenant
+	case "master":
+		return IntrigueActorRole_Master
+	case "possible threat":
+		return IntrigueActorRole_PossibleThreat
+	case "possibly unknown director":
+		return IntrigueActorRole_PossiblyUnknownDirector
+	case "potential employer":
+		return IntrigueActorRole_PotentialEmployer
+	case "rebuffed":
+		return IntrigueActorRole_Rebuffed
+	case "source of funds":
+		return IntrigueActorRole_SourceOfFunds
+	case "source of funds for master":
+		return IntrigueActorRole_SourceOfFundsForMaster
+	case "suspected criminal":
+		return IntrigueActorRole_SuspectedCriminal
+	case "underworld contact":
+		return IntrigueActorRole_UnderworldContact
+	case "usable assassin":
+		return IntrigueActorRole_UsableAssassin
+	case "usable snatcher":
+		return IntrigueActorRole_UsableSnatcher
+	case "usable thief":
+		return IntrigueActorRole_UsableThief
+	}
+	return IntrigueActorRole_Unknown
+}
+
+func (s IntrigueActorRole) String() string {
+	switch s {
+	case IntrigueActorRole_Asset:
+		return "asset"
+	case IntrigueActorRole_CorruptPositionHolder:
+		return "corrupt position holder"
+	case IntrigueActorRole_DeliveryTarget:
+		return "delivery target"
+	case IntrigueActorRole_Enemy:
+		return "enemy"
+	case IntrigueActorRole_Handler:
+		return "handler"
+	case IntrigueActorRole_Lieutenant:
+		return "lieutenant"
+	case IntrigueActorRole_Master:
+		return "master"
+	case IntrigueActorRole_PossibleThreat:
+		return "possible threat"
+	case IntrigueActorRole_PossiblyUnknownDirector:
+		return "possibly unknown director"
+	case IntrigueActorRole_PotentialEmployer:
+		return "potential employer"
+	case IntrigueActorRole_Rebuffed:
+		return "rebuffed"
+	case IntrigueActorRole_SourceOfFunds:
+		return "source of funds"
+	case IntrigueActorRole_SourceOfFundsForMaster:
+		return "source of funds for master"
+	case IntrigueActorRole_SuspectedCriminal:
+		return "suspected criminal"
+	case IntrigueActorRole_UnderworldContact:
+		return "underworld contact"
+	case IntrigueActorRole_UsableAssassin:
+		return "usable assassin"
+	case IntrigueActorRole_UsableSnatcher:
+		return "usable snatcher"
+	case IntrigueActorRole_UsableThief:
+		return "usable thief"
+	}
+	return "unknown"
+}
+
+func (s IntrigueActorRole) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type IntrigueActorStrategy int
+
+const (
+	IntrigueActorStrategy_Unknown IntrigueActorStrategy = iota
+	IntrigueActorStrategy_Avoid
+	IntrigueActorStrategy_CorruptAndPacify
+	IntrigueActorStrategy_Monitor
+	IntrigueActorStrategy_Neutralize
+	IntrigueActorStrategy_Obey
+	IntrigueActorStrategy_Tax
+	IntrigueActorStrategy_Torment
+	IntrigueActorStrategy_Use
+	IntrigueActorStrategy_WorkIfSuited
+)
+
+func parseIntrigueActorStrategy(s string) IntrigueActorStrategy {
+	switch s {
+	case "avoid":
+		return IntrigueActorStrategy_Avoid
+	case "corrupt and pacify":
+		return IntrigueActorStrategy_CorruptAndPacify
+	case "monitor":
+		return IntrigueActorStrategy_Monitor
+	case "neutralize":
+		return IntrigueActorStrategy_Neutralize
+	case "obey":
+		return IntrigueActorStrategy_Obey
+	case "tax":
+		return IntrigueActorStrategy_Tax
+	case "torment":
+		return IntrigueActorStrategy_Torment
+	case "use":
+		return IntrigueActorStrategy_Use
+	case "work if suited":
+		return IntrigueActorStrategy_WorkIfSuited
+	}
+	return IntrigueActorStrategy_Unknown
+}
+
+func (s IntrigueActorStrategy) String() string {
+	switch s {
+	case IntrigueActorStrategy_Avoid:
+		return "avoid"
+	case IntrigueActorStrategy_CorruptAndPacify:
+		return "corrupt and pacify"
+	case IntrigueActorStrategy_Monitor:
+		return "monitor"
+	case IntrigueActorStrategy_Neutralize:
+		return "neutralize"
+	case IntrigueActorStrategy_Obey:
+		return "obey"
+	case IntrigueActorStrategy_Tax:
+		return "tax"
+	case IntrigueActorStrategy_Torment:
+		return "torment"
+	case IntrigueActorStrategy_Use:
+		return "use"
+	case IntrigueActorStrategy_WorkIfSuited:
+		return "work if suited"
+	}
+	return "unknown"
+}
+
+func (s IntrigueActorStrategy) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type IntrigueActor struct {
-	EntityId                 int    `json:"entityId" legend:"base"`                 // entity_id
-	HandleActorId            int    `json:"handleActorId" legend:"base"`            // handle_actor_id
-	Hfid                     int    `json:"hfid" legend:"base"`                     // hfid
-	LocalId                  int    `json:"localId" legend:"base"`                  // local_id
-	PromisedActorImmortality bool   `json:"promisedActorImmortality" legend:"base"` // promised_actor_immortality
-	PromisedMeImmortality    bool   `json:"promisedMeImmortality" legend:"base"`    // promised_me_immortality
-	Role                     string `json:"role" legend:"base"`                     // role
-	Strategy                 string `json:"strategy" legend:"base"`                 // strategy
-	StrategyEnid             int    `json:"strategyEnid" legend:"base"`             // strategy_enid
-	StrategyEppid            int    `json:"strategyEppid" legend:"base"`            // strategy_eppid
+	EntityId                 int                   `json:"entityId" legend:"base"`                 // entity_id
+	HandleActorId            int                   `json:"handleActorId" legend:"base"`            // handle_actor_id
+	Hfid                     int                   `json:"hfid" legend:"base"`                     // hfid
+	LocalId                  int                   `json:"localId" legend:"base"`                  // local_id
+	PromisedActorImmortality bool                  `json:"promisedActorImmortality" legend:"base"` // promised_actor_immortality
+	PromisedMeImmortality    bool                  `json:"promisedMeImmortality" legend:"base"`    // promised_me_immortality
+	Role                     IntrigueActorRole     `json:"role" legend:"base"`                     // role
+	Strategy                 IntrigueActorStrategy `json:"strategy" legend:"base"`                 // strategy
+	StrategyEnid             int                   `json:"strategyEnid" legend:"base"`             // strategy_enid
+	StrategyEppid            int                   `json:"strategyEppid" legend:"base"`            // strategy_eppid
 }
 
 func (x *IntrigueActor) RelatedToEntity(id int) bool { return x.EntityId == id }
@@ -4549,18 +9819,115 @@ func (x *IntrigueActor) RelatedToHf(id int) bool     { return x.Hfid == id }
 func (x *IntrigueActor) CheckFields() {
 }
 
+type IntriguePlotType int
+
+const (
+	IntriguePlotType_Unknown IntriguePlotType = iota
+	IntriguePlotType_AcquireArtifact
+	IntriguePlotType_AssassinateActor
+	IntriguePlotType_AttainRank
+	IntriguePlotType_BecomeImmortal
+	IntriguePlotType_CorruptActorsGovernment
+	IntriguePlotType_Counterintelligence
+	IntriguePlotType_DirectWarToActor
+	IntriguePlotType_FrameActor
+	IntriguePlotType_GrowAssetNetwork
+	IntriguePlotType_GrowCorruptionNetwork
+	IntriguePlotType_GrowFundingNetwork
+	IntriguePlotType_InfiltrateSociety
+	IntriguePlotType_KidnapActor
+	IntriguePlotType_SabotageActor
+	IntriguePlotType_UndeadWorldConquest
+)
+
+func parseIntriguePlotType(s string) IntriguePlotType {
+	switch s {
+	case "acquire artifact":
+		return IntriguePlotType_AcquireArtifact
+	case "assassinate actor":
+		return IntriguePlotType_AssassinateActor
+	case "attain rank":
+		return IntriguePlotType_AttainRank
+	case "become immortal":
+		return IntriguePlotType_BecomeImmortal
+	case "corrupt actor's government":
+		return IntriguePlotType_CorruptActorsGovernment
+	case "counterintelligence":
+		return IntriguePlotType_Counterintelligence
+	case "direct war to actor":
+		return IntriguePlotType_DirectWarToActor
+	case "frame actor":
+		return IntriguePlotType_FrameActor
+	case "grow asset network":
+		return IntriguePlotType_GrowAssetNetwork
+	case "grow corruption network":
+		return IntriguePlotType_GrowCorruptionNetwork
+	case "grow funding network":
+		return IntriguePlotType_GrowFundingNetwork
+	case "infiltrate society":
+		return IntriguePlotType_InfiltrateSociety
+	case "kidnap actor":
+		return IntriguePlotType_KidnapActor
+	case "sabotage actor":
+		return IntriguePlotType_SabotageActor
+	case "undead world conquest":
+		return IntriguePlotType_UndeadWorldConquest
+	}
+	return IntriguePlotType_Unknown
+}
+
+func (s IntriguePlotType) String() string {
+	switch s {
+	case IntriguePlotType_AcquireArtifact:
+		return "acquire artifact"
+	case IntriguePlotType_AssassinateActor:
+		return "assassinate actor"
+	case IntriguePlotType_AttainRank:
+		return "attain rank"
+	case IntriguePlotType_BecomeImmortal:
+		return "become immortal"
+	case IntriguePlotType_CorruptActorsGovernment:
+		return "corrupt actors government"
+	case IntriguePlotType_Counterintelligence:
+		return "counterintelligence"
+	case IntriguePlotType_DirectWarToActor:
+		return "direct war to actor"
+	case IntriguePlotType_FrameActor:
+		return "frame actor"
+	case IntriguePlotType_GrowAssetNetwork:
+		return "grow asset network"
+	case IntriguePlotType_GrowCorruptionNetwork:
+		return "grow corruption network"
+	case IntriguePlotType_GrowFundingNetwork:
+		return "grow funding network"
+	case IntriguePlotType_InfiltrateSociety:
+		return "infiltrate society"
+	case IntriguePlotType_KidnapActor:
+		return "kidnap actor"
+	case IntriguePlotType_SabotageActor:
+		return "sabotage actor"
+	case IntriguePlotType_UndeadWorldConquest:
+		return "undead world conquest"
+	}
+	return "unknown"
+}
+
+func (s IntriguePlotType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type IntriguePlot struct {
-	ActorId           int          `json:"actorId" legend:"base"`           // actor_id
-	ArtifactId        int          `json:"artifactId" legend:"base"`        // artifact_id
-	DelegatedPlotHfid int          `json:"delegatedPlotHfid" legend:"base"` // delegated_plot_hfid
-	DelegatedPlotId   int          `json:"delegatedPlotId" legend:"base"`   // delegated_plot_id
-	EntityId          int          `json:"entityId" legend:"base"`          // entity_id
-	LocalId           int          `json:"localId" legend:"base"`           // local_id
-	OnHold            bool         `json:"onHold" legend:"base"`            // on_hold
-	ParentPlotHfid    int          `json:"parentPlotHfid" legend:"base"`    // parent_plot_hfid
-	ParentPlotId      int          `json:"parentPlotId" legend:"base"`      // parent_plot_id
-	PlotActor         []*PlotActor `json:"plotActor" legend:"base"`         // plot_actor
-	Type              string       `json:"type" legend:"base"`              // type
+	ActorId           int              `json:"actorId" legend:"base"`           // actor_id
+	ArtifactId        int              `json:"artifactId" legend:"base"`        // artifact_id
+	DelegatedPlotHfid int              `json:"delegatedPlotHfid" legend:"base"` // delegated_plot_hfid
+	DelegatedPlotId   int              `json:"delegatedPlotId" legend:"base"`   // delegated_plot_id
+	EntityId          int              `json:"entityId" legend:"base"`          // entity_id
+	LocalId           int              `json:"localId" legend:"base"`           // local_id
+	OnHold            bool             `json:"onHold" legend:"base"`            // on_hold
+	ParentPlotHfid    int              `json:"parentPlotHfid" legend:"base"`    // parent_plot_hfid
+	ParentPlotId      int              `json:"parentPlotId" legend:"base"`      // parent_plot_id
+	PlotActor         []*PlotActor     `json:"plotActor" legend:"base"`         // plot_actor
+	Type              IntriguePlotType `json:"type" legend:"base"`              // type
 }
 
 func (x *IntriguePlot) RelatedToEntity(id int) bool { return x.EntityId == id }
@@ -4644,11 +10011,48 @@ func (x *Occasion) RelatedToHf(id int) bool     { return false }
 func (x *Occasion) CheckFields() {
 }
 
+type PlotActorPlotRole int
+
+const (
+	PlotActorPlotRole_Unknown PlotActorPlotRole = iota
+	PlotActorPlotRole_Assassin
+	PlotActorPlotRole_SourceOfFunds
+	PlotActorPlotRole_Thief
+)
+
+func parsePlotActorPlotRole(s string) PlotActorPlotRole {
+	switch s {
+	case "assassin":
+		return PlotActorPlotRole_Assassin
+	case "source of funds":
+		return PlotActorPlotRole_SourceOfFunds
+	case "thief":
+		return PlotActorPlotRole_Thief
+	}
+	return PlotActorPlotRole_Unknown
+}
+
+func (s PlotActorPlotRole) String() string {
+	switch s {
+	case PlotActorPlotRole_Assassin:
+		return "assassin"
+	case PlotActorPlotRole_SourceOfFunds:
+		return "source of funds"
+	case PlotActorPlotRole_Thief:
+		return "thief"
+	}
+	return "unknown"
+}
+
+func (s PlotActorPlotRole) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type PlotActor struct {
-	ActorId               int    `json:"actorId" legend:"base"`               // actor_id
-	AgreementHasMessenger bool   `json:"agreementHasMessenger" legend:"base"` // agreement_has_messenger
-	AgreementId           int    `json:"agreementId" legend:"base"`           // agreement_id
-	PlotRole              string `json:"plotRole" legend:"base"`              // plot_role
+	ActorId               int               `json:"actorId" legend:"base"`               // actor_id
+	AgreementHasMessenger bool              `json:"agreementHasMessenger" legend:"base"` // agreement_has_messenger
+	AgreementId           int               `json:"agreementId" legend:"base"`           // agreement_id
+	PlotRole              PlotActorPlotRole `json:"plotRole" legend:"base"`              // plot_role
 }
 
 func (x *PlotActor) RelatedToEntity(id int) bool { return false }
@@ -4671,9 +10075,106 @@ func (x *PoeticForm) RelatedToHf(id int) bool     { return false }
 func (x *PoeticForm) CheckFields() {
 }
 
+type ReferenceType int
+
+const (
+	ReferenceType_Unknown ReferenceType = iota
+	ReferenceType_ABSTRACTBUILDING
+	ReferenceType_ARTIFACT
+	ReferenceType_DANCEFORM
+	ReferenceType_ENTITY
+	ReferenceType_HISTORICALEVENT
+	ReferenceType_HISTORICALFIGURE
+	ReferenceType_INTERACTION
+	ReferenceType_KNOWLEDGESCHOLARFLAG
+	ReferenceType_LANGUAGE
+	ReferenceType_MUSICALFORM
+	ReferenceType_POETICFORM
+	ReferenceType_SITE
+	ReferenceType_SUBREGION
+	ReferenceType_VALUELEVEL
+	ReferenceType_WRITTENCONTENT
+)
+
+func parseReferenceType(s string) ReferenceType {
+	switch s {
+	case "ABSTRACT_BUILDING":
+		return ReferenceType_ABSTRACTBUILDING
+	case "ARTIFACT":
+		return ReferenceType_ARTIFACT
+	case "DANCE_FORM":
+		return ReferenceType_DANCEFORM
+	case "ENTITY":
+		return ReferenceType_ENTITY
+	case "HISTORICAL_EVENT":
+		return ReferenceType_HISTORICALEVENT
+	case "HISTORICAL_FIGURE":
+		return ReferenceType_HISTORICALFIGURE
+	case "INTERACTION":
+		return ReferenceType_INTERACTION
+	case "KNOWLEDGE_SCHOLAR_FLAG":
+		return ReferenceType_KNOWLEDGESCHOLARFLAG
+	case "LANGUAGE":
+		return ReferenceType_LANGUAGE
+	case "MUSICAL_FORM":
+		return ReferenceType_MUSICALFORM
+	case "POETIC_FORM":
+		return ReferenceType_POETICFORM
+	case "SITE":
+		return ReferenceType_SITE
+	case "SUBREGION":
+		return ReferenceType_SUBREGION
+	case "VALUE_LEVEL":
+		return ReferenceType_VALUELEVEL
+	case "WRITTEN_CONTENT":
+		return ReferenceType_WRITTENCONTENT
+	}
+	return ReferenceType_Unknown
+}
+
+func (s ReferenceType) String() string {
+	switch s {
+	case ReferenceType_ABSTRACTBUILDING:
+		return "abstractbuilding"
+	case ReferenceType_ARTIFACT:
+		return "artifact"
+	case ReferenceType_DANCEFORM:
+		return "danceform"
+	case ReferenceType_ENTITY:
+		return "entity"
+	case ReferenceType_HISTORICALEVENT:
+		return "historicalevent"
+	case ReferenceType_HISTORICALFIGURE:
+		return "historicalfigure"
+	case ReferenceType_INTERACTION:
+		return "interaction"
+	case ReferenceType_KNOWLEDGESCHOLARFLAG:
+		return "knowledgescholarflag"
+	case ReferenceType_LANGUAGE:
+		return "language"
+	case ReferenceType_MUSICALFORM:
+		return "musicalform"
+	case ReferenceType_POETICFORM:
+		return "poeticform"
+	case ReferenceType_SITE:
+		return "site"
+	case ReferenceType_SUBREGION:
+		return "subregion"
+	case ReferenceType_VALUELEVEL:
+		return "valuelevel"
+	case ReferenceType_WRITTENCONTENT:
+		return "writtencontent"
+	}
+	return "unknown"
+}
+
+func (s ReferenceType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type Reference struct {
-	Id_  int    `json:"id" legend:"plus"`   // id
-	Type string `json:"type" legend:"plus"` // type
+	Id_  int           `json:"id" legend:"plus"`   // id
+	Type ReferenceType `json:"type" legend:"plus"` // type
 }
 
 func (x *Reference) Id() int                     { return x.Id_ }
@@ -4683,13 +10184,122 @@ func (x *Reference) RelatedToHf(id int) bool     { return false }
 func (x *Reference) CheckFields() {
 }
 
+type RegionEvilness int
+
+const (
+	RegionEvilness_Unknown RegionEvilness = iota
+	RegionEvilness_Evil
+	RegionEvilness_Good
+	RegionEvilness_Neutral
+)
+
+func parseRegionEvilness(s string) RegionEvilness {
+	switch s {
+	case "evil":
+		return RegionEvilness_Evil
+	case "good":
+		return RegionEvilness_Good
+	case "neutral":
+		return RegionEvilness_Neutral
+	}
+	return RegionEvilness_Unknown
+}
+
+func (s RegionEvilness) String() string {
+	switch s {
+	case RegionEvilness_Evil:
+		return "evil"
+	case RegionEvilness_Good:
+		return "good"
+	case RegionEvilness_Neutral:
+		return "neutral"
+	}
+	return "unknown"
+}
+
+func (s RegionEvilness) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type RegionType int
+
+const (
+	RegionType_Unknown RegionType = iota
+	RegionType_Desert
+	RegionType_Forest
+	RegionType_Glacier
+	RegionType_Grassland
+	RegionType_Hills
+	RegionType_Lake
+	RegionType_Mountains
+	RegionType_Ocean
+	RegionType_Tundra
+	RegionType_Wetland
+)
+
+func parseRegionType(s string) RegionType {
+	switch s {
+	case "Desert":
+		return RegionType_Desert
+	case "Forest":
+		return RegionType_Forest
+	case "Glacier":
+		return RegionType_Glacier
+	case "Grassland":
+		return RegionType_Grassland
+	case "Hills":
+		return RegionType_Hills
+	case "Lake":
+		return RegionType_Lake
+	case "Mountains":
+		return RegionType_Mountains
+	case "Ocean":
+		return RegionType_Ocean
+	case "Tundra":
+		return RegionType_Tundra
+	case "Wetland":
+		return RegionType_Wetland
+	}
+	return RegionType_Unknown
+}
+
+func (s RegionType) String() string {
+	switch s {
+	case RegionType_Desert:
+		return "desert"
+	case RegionType_Forest:
+		return "forest"
+	case RegionType_Glacier:
+		return "glacier"
+	case RegionType_Grassland:
+		return "grassland"
+	case RegionType_Hills:
+		return "hills"
+	case RegionType_Lake:
+		return "lake"
+	case RegionType_Mountains:
+		return "mountains"
+	case RegionType_Ocean:
+		return "ocean"
+	case RegionType_Tundra:
+		return "tundra"
+	case RegionType_Wetland:
+		return "wetland"
+	}
+	return "unknown"
+}
+
+func (s RegionType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type Region struct {
-	Coords   string `json:"coords" legend:"plus"`   // coords
-	Evilness string `json:"evilness" legend:"plus"` // evilness
-	ForceId  int    `json:"forceId" legend:"plus"`  // force_id
-	Id_      int    `json:"id" legend:"both"`       // id
-	Name_    string `json:"name" legend:"base"`     // name
-	Type     string `json:"type" legend:"base"`     // type
+	Coords   string         `json:"coords" legend:"plus"`   // coords
+	Evilness RegionEvilness `json:"evilness" legend:"plus"` // evilness
+	ForceId  int            `json:"forceId" legend:"plus"`  // force_id
+	Id_      int            `json:"id" legend:"both"`       // id
+	Name_    string         `json:"name" legend:"base"`     // name
+	Type     RegionType     `json:"type" legend:"base"`     // type
 }
 
 func (x *Region) Id() int                     { return x.Id_ }
@@ -4782,14 +10392,235 @@ func (x *River) RelatedToHf(id int) bool     { return false }
 func (x *River) CheckFields() {
 }
 
+type ScheduleItemSubtype int
+
+const (
+	ScheduleItemSubtype_Unknown ScheduleItemSubtype = iota
+	ScheduleItemSubtype_AstodStand
+	ScheduleItemSubtype_BattleAxe
+	ScheduleItemSubtype_Bow
+	ScheduleItemSubtype_Crossbow
+	ScheduleItemSubtype_Flail
+	ScheduleItemSubtype_GreatAxe
+	ScheduleItemSubtype_LongSword
+	ScheduleItemSubtype_Mace
+	ScheduleItemSubtype_Maul
+	ScheduleItemSubtype_RohirBody
+	ScheduleItemSubtype_Scimitar
+	ScheduleItemSubtype_ShortSword
+	ScheduleItemSubtype_Spear
+	ScheduleItemSubtype_TwoHandedSword
+	ScheduleItemSubtype_WarHammer
+	ScheduleItemSubtype_Whip
+)
+
+func parseScheduleItemSubtype(s string) ScheduleItemSubtype {
+	switch s {
+	case "astod stand":
+		return ScheduleItemSubtype_AstodStand
+	case "battle axe":
+		return ScheduleItemSubtype_BattleAxe
+	case "bow":
+		return ScheduleItemSubtype_Bow
+	case "crossbow":
+		return ScheduleItemSubtype_Crossbow
+	case "flail":
+		return ScheduleItemSubtype_Flail
+	case "great axe":
+		return ScheduleItemSubtype_GreatAxe
+	case "long sword":
+		return ScheduleItemSubtype_LongSword
+	case "mace":
+		return ScheduleItemSubtype_Mace
+	case "maul":
+		return ScheduleItemSubtype_Maul
+	case "rohir body":
+		return ScheduleItemSubtype_RohirBody
+	case "scimitar":
+		return ScheduleItemSubtype_Scimitar
+	case "short sword":
+		return ScheduleItemSubtype_ShortSword
+	case "spear":
+		return ScheduleItemSubtype_Spear
+	case "two-handed sword":
+		return ScheduleItemSubtype_TwoHandedSword
+	case "war hammer":
+		return ScheduleItemSubtype_WarHammer
+	case "whip":
+		return ScheduleItemSubtype_Whip
+	}
+	return ScheduleItemSubtype_Unknown
+}
+
+func (s ScheduleItemSubtype) String() string {
+	switch s {
+	case ScheduleItemSubtype_AstodStand:
+		return "astod stand"
+	case ScheduleItemSubtype_BattleAxe:
+		return "battle axe"
+	case ScheduleItemSubtype_Bow:
+		return "bow"
+	case ScheduleItemSubtype_Crossbow:
+		return "crossbow"
+	case ScheduleItemSubtype_Flail:
+		return "flail"
+	case ScheduleItemSubtype_GreatAxe:
+		return "great axe"
+	case ScheduleItemSubtype_LongSword:
+		return "long sword"
+	case ScheduleItemSubtype_Mace:
+		return "mace"
+	case ScheduleItemSubtype_Maul:
+		return "maul"
+	case ScheduleItemSubtype_RohirBody:
+		return "rohir body"
+	case ScheduleItemSubtype_Scimitar:
+		return "scimitar"
+	case ScheduleItemSubtype_ShortSword:
+		return "short sword"
+	case ScheduleItemSubtype_Spear:
+		return "spear"
+	case ScheduleItemSubtype_TwoHandedSword:
+		return "two handed sword"
+	case ScheduleItemSubtype_WarHammer:
+		return "war hammer"
+	case ScheduleItemSubtype_Whip:
+		return "whip"
+	}
+	return "unknown"
+}
+
+func (s ScheduleItemSubtype) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type ScheduleItemType int
+
+const (
+	ScheduleItemType_Unknown ScheduleItemType = iota
+	ScheduleItemType_Tool
+	ScheduleItemType_Weapon
+)
+
+func parseScheduleItemType(s string) ScheduleItemType {
+	switch s {
+	case "tool":
+		return ScheduleItemType_Tool
+	case "weapon":
+		return ScheduleItemType_Weapon
+	}
+	return ScheduleItemType_Unknown
+}
+
+func (s ScheduleItemType) String() string {
+	switch s {
+	case ScheduleItemType_Tool:
+		return "tool"
+	case ScheduleItemType_Weapon:
+		return "weapon"
+	}
+	return "unknown"
+}
+
+func (s ScheduleItemType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type ScheduleType int
+
+const (
+	ScheduleType_Unknown ScheduleType = iota
+	ScheduleType_Ceremony
+	ScheduleType_DanceCompetition
+	ScheduleType_DancePerformance
+	ScheduleType_FootRace
+	ScheduleType_GladiatoryCompetition
+	ScheduleType_MusicalCompetition
+	ScheduleType_MusicalPerformance
+	ScheduleType_PoetryCompetition
+	ScheduleType_PoetryRecital
+	ScheduleType_Procession
+	ScheduleType_Storytelling
+	ScheduleType_ThrowingCompetition
+	ScheduleType_WrestlingCompetition
+)
+
+func parseScheduleType(s string) ScheduleType {
+	switch s {
+	case "ceremony":
+		return ScheduleType_Ceremony
+	case "dance_competition":
+		return ScheduleType_DanceCompetition
+	case "dance_performance":
+		return ScheduleType_DancePerformance
+	case "foot_race":
+		return ScheduleType_FootRace
+	case "gladiatory_competition":
+		return ScheduleType_GladiatoryCompetition
+	case "musical_competition":
+		return ScheduleType_MusicalCompetition
+	case "musical_performance":
+		return ScheduleType_MusicalPerformance
+	case "poetry_competition":
+		return ScheduleType_PoetryCompetition
+	case "poetry_recital":
+		return ScheduleType_PoetryRecital
+	case "procession":
+		return ScheduleType_Procession
+	case "storytelling":
+		return ScheduleType_Storytelling
+	case "throwing_competition":
+		return ScheduleType_ThrowingCompetition
+	case "wrestling_competition":
+		return ScheduleType_WrestlingCompetition
+	}
+	return ScheduleType_Unknown
+}
+
+func (s ScheduleType) String() string {
+	switch s {
+	case ScheduleType_Ceremony:
+		return "ceremony"
+	case ScheduleType_DanceCompetition:
+		return "dance competition"
+	case ScheduleType_DancePerformance:
+		return "dance performance"
+	case ScheduleType_FootRace:
+		return "foot race"
+	case ScheduleType_GladiatoryCompetition:
+		return "gladiatory competition"
+	case ScheduleType_MusicalCompetition:
+		return "musical competition"
+	case ScheduleType_MusicalPerformance:
+		return "musical performance"
+	case ScheduleType_PoetryCompetition:
+		return "poetry competition"
+	case ScheduleType_PoetryRecital:
+		return "poetry recital"
+	case ScheduleType_Procession:
+		return "procession"
+	case ScheduleType_Storytelling:
+		return "storytelling"
+	case ScheduleType_ThrowingCompetition:
+		return "throwing competition"
+	case ScheduleType_WrestlingCompetition:
+		return "wrestling competition"
+	}
+	return "unknown"
+}
+
+func (s ScheduleType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type Schedule struct {
-	Feature     []*Feature `json:"feature" legend:"plus"`     // feature
-	Id_         int        `json:"id" legend:"plus"`          // id
-	ItemSubtype string     `json:"itemSubtype" legend:"plus"` // item_subtype
-	ItemType    string     `json:"itemType" legend:"plus"`    // item_type
-	Reference   int        `json:"reference" legend:"plus"`   // reference
-	Reference2  int        `json:"reference2" legend:"plus"`  // reference2
-	Type        string     `json:"type" legend:"plus"`        // type
+	Feature     []*Feature          `json:"feature" legend:"plus"`     // feature
+	Id_         int                 `json:"id" legend:"plus"`          // id
+	ItemSubtype ScheduleItemSubtype `json:"itemSubtype" legend:"plus"` // item_subtype
+	ItemType    ScheduleItemType    `json:"itemType" legend:"plus"`    // item_type
+	Reference   int                 `json:"reference" legend:"plus"`   // reference
+	Reference2  int                 `json:"reference2" legend:"plus"`  // reference2
+	Type        ScheduleType        `json:"type" legend:"plus"`        // type
 }
 
 func (x *Schedule) Id() int                     { return x.Id_ }
@@ -4797,6 +10628,128 @@ func (x *Schedule) RelatedToEntity(id int) bool { return false }
 func (x *Schedule) RelatedToHf(id int) bool     { return false }
 
 func (x *Schedule) CheckFields() {
+}
+
+type SiteType int
+
+const (
+	SiteType_Unknown SiteType = iota
+	SiteType_Camp
+	SiteType_Castle
+	SiteType_Cave
+	SiteType_DarkFortress
+	SiteType_DarkPits
+	SiteType_ForestRetreat
+	SiteType_Fort
+	SiteType_Fortress
+	SiteType_Hamlet
+	SiteType_Hillocks
+	SiteType_ImportantLocation
+	SiteType_Labyrinth
+	SiteType_Lair
+	SiteType_Monastery
+	SiteType_MountainHalls
+	SiteType_Shrine
+	SiteType_Tomb
+	SiteType_Tower
+	SiteType_Town
+	SiteType_Vault
+)
+
+func parseSiteType(s string) SiteType {
+	switch s {
+	case "camp":
+		return SiteType_Camp
+	case "castle":
+		return SiteType_Castle
+	case "cave":
+		return SiteType_Cave
+	case "dark fortress":
+		return SiteType_DarkFortress
+	case "dark pits":
+		return SiteType_DarkPits
+	case "forest retreat":
+		return SiteType_ForestRetreat
+	case "fort":
+		return SiteType_Fort
+	case "fortress":
+		return SiteType_Fortress
+	case "hamlet":
+		return SiteType_Hamlet
+	case "hillocks":
+		return SiteType_Hillocks
+	case "important location":
+		return SiteType_ImportantLocation
+	case "labyrinth":
+		return SiteType_Labyrinth
+	case "lair":
+		return SiteType_Lair
+	case "monastery":
+		return SiteType_Monastery
+	case "mountain halls":
+		return SiteType_MountainHalls
+	case "shrine":
+		return SiteType_Shrine
+	case "tomb":
+		return SiteType_Tomb
+	case "tower":
+		return SiteType_Tower
+	case "town":
+		return SiteType_Town
+	case "vault":
+		return SiteType_Vault
+	}
+	return SiteType_Unknown
+}
+
+func (s SiteType) String() string {
+	switch s {
+	case SiteType_Camp:
+		return "camp"
+	case SiteType_Castle:
+		return "castle"
+	case SiteType_Cave:
+		return "cave"
+	case SiteType_DarkFortress:
+		return "dark fortress"
+	case SiteType_DarkPits:
+		return "dark pits"
+	case SiteType_ForestRetreat:
+		return "forest retreat"
+	case SiteType_Fort:
+		return "fort"
+	case SiteType_Fortress:
+		return "fortress"
+	case SiteType_Hamlet:
+		return "hamlet"
+	case SiteType_Hillocks:
+		return "hillocks"
+	case SiteType_ImportantLocation:
+		return "important location"
+	case SiteType_Labyrinth:
+		return "labyrinth"
+	case SiteType_Lair:
+		return "lair"
+	case SiteType_Monastery:
+		return "monastery"
+	case SiteType_MountainHalls:
+		return "mountain halls"
+	case SiteType_Shrine:
+		return "shrine"
+	case SiteType_Tomb:
+		return "tomb"
+	case SiteType_Tower:
+		return "tower"
+	case SiteType_Town:
+		return "town"
+	case SiteType_Vault:
+		return "vault"
+	}
+	return "unknown"
+}
+
+func (s SiteType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
 }
 
 type Site struct {
@@ -4808,7 +10761,7 @@ type Site struct {
 	Rectangle      string                    `json:"rectangle" legend:"base"`      // rectangle
 	SiteProperties map[int]*SiteSiteProperty `json:"siteProperties" legend:"base"` // site_properties
 	Structures     map[int]*Structure        `json:"structures" legend:"both"`     // structures
-	Type           string                    `json:"type" legend:"base"`           // type
+	Type           SiteType                  `json:"type" legend:"base"`           // type
 }
 
 func (x *Site) Id() int                     { return x.Id_ }
@@ -4819,12 +10772,74 @@ func (x *Site) RelatedToHf(id int) bool     { return false }
 func (x *Site) CheckFields() {
 }
 
+type SiteLinkLinkType int
+
+const (
+	SiteLinkLinkType_Unknown SiteLinkLinkType = iota
+	SiteLinkLinkType_Hangout
+	SiteLinkLinkType_HomeSavedZone
+	SiteLinkLinkType_HomeSiteBuilding
+	SiteLinkLinkType_HomeSiteUnderground
+	SiteLinkLinkType_HomeStructure
+	SiteLinkLinkType_Lair
+	SiteLinkLinkType_Occupation
+	SiteLinkLinkType_SeatOfPower
+)
+
+func parseSiteLinkLinkType(s string) SiteLinkLinkType {
+	switch s {
+	case "hangout":
+		return SiteLinkLinkType_Hangout
+	case "home saved zone":
+		return SiteLinkLinkType_HomeSavedZone
+	case "home site building":
+		return SiteLinkLinkType_HomeSiteBuilding
+	case "home site underground":
+		return SiteLinkLinkType_HomeSiteUnderground
+	case "home structure":
+		return SiteLinkLinkType_HomeStructure
+	case "lair":
+		return SiteLinkLinkType_Lair
+	case "occupation":
+		return SiteLinkLinkType_Occupation
+	case "seat of power":
+		return SiteLinkLinkType_SeatOfPower
+	}
+	return SiteLinkLinkType_Unknown
+}
+
+func (s SiteLinkLinkType) String() string {
+	switch s {
+	case SiteLinkLinkType_Hangout:
+		return "hangout"
+	case SiteLinkLinkType_HomeSavedZone:
+		return "home saved zone"
+	case SiteLinkLinkType_HomeSiteBuilding:
+		return "home site building"
+	case SiteLinkLinkType_HomeSiteUnderground:
+		return "home site underground"
+	case SiteLinkLinkType_HomeStructure:
+		return "home structure"
+	case SiteLinkLinkType_Lair:
+		return "lair"
+	case SiteLinkLinkType_Occupation:
+		return "occupation"
+	case SiteLinkLinkType_SeatOfPower:
+		return "seat of power"
+	}
+	return "unknown"
+}
+
+func (s SiteLinkLinkType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type SiteLink struct {
-	EntityId     int    `json:"entityId" legend:"base"`     // entity_id
-	LinkType     string `json:"linkType" legend:"base"`     // link_type
-	OccupationId int    `json:"occupationId" legend:"base"` // occupation_id
-	SiteId       int    `json:"siteId" legend:"base"`       // site_id
-	SubId        int    `json:"subId" legend:"base"`        // sub_id
+	EntityId     int              `json:"entityId" legend:"base"`     // entity_id
+	LinkType     SiteLinkLinkType `json:"linkType" legend:"base"`     // link_type
+	OccupationId int              `json:"occupationId" legend:"base"` // occupation_id
+	SiteId       int              `json:"siteId" legend:"base"`       // site_id
+	SubId        int              `json:"subId" legend:"base"`        // sub_id
 }
 
 func (x *SiteLink) RelatedToEntity(id int) bool { return x.EntityId == id }
@@ -4833,11 +10848,38 @@ func (x *SiteLink) RelatedToHf(id int) bool     { return false }
 func (x *SiteLink) CheckFields() {
 }
 
+type SiteSitePropertyType int
+
+const (
+	SiteSitePropertyType_Unknown SiteSitePropertyType = iota
+	SiteSitePropertyType_House
+)
+
+func parseSiteSitePropertyType(s string) SiteSitePropertyType {
+	switch s {
+	case "house":
+		return SiteSitePropertyType_House
+	}
+	return SiteSitePropertyType_Unknown
+}
+
+func (s SiteSitePropertyType) String() string {
+	switch s {
+	case SiteSitePropertyType_House:
+		return "house"
+	}
+	return "unknown"
+}
+
+func (s SiteSitePropertyType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type SiteSiteProperty struct {
-	Id_         int    `json:"id" legend:"base"`          // id
-	OwnerHfid   int    `json:"ownerHfid" legend:"base"`   // owner_hfid
-	StructureId int    `json:"structureId" legend:"base"` // structure_id
-	Type        string `json:"type" legend:"base"`        // type
+	Id_         int                  `json:"id" legend:"base"`          // id
+	OwnerHfid   int                  `json:"ownerHfid" legend:"base"`   // owner_hfid
+	StructureId int                  `json:"structureId" legend:"base"` // structure_id
+	Type        SiteSitePropertyType `json:"type" legend:"base"`        // type
 }
 
 func (x *SiteSiteProperty) Id() int                     { return x.Id_ }
@@ -4847,20 +10889,143 @@ func (x *SiteSiteProperty) RelatedToHf(id int) bool     { return x.OwnerHfid == 
 func (x *SiteSiteProperty) CheckFields() {
 }
 
+type StructureSubtype int
+
+const (
+	StructureSubtype_Unknown StructureSubtype = iota
+	StructureSubtype_Catacombs
+	StructureSubtype_Sewers
+)
+
+func parseStructureSubtype(s string) StructureSubtype {
+	switch s {
+	case "catacombs":
+		return StructureSubtype_Catacombs
+	case "sewers":
+		return StructureSubtype_Sewers
+	}
+	return StructureSubtype_Unknown
+}
+
+func (s StructureSubtype) String() string {
+	switch s {
+	case StructureSubtype_Catacombs:
+		return "catacombs"
+	case StructureSubtype_Sewers:
+		return "sewers"
+	}
+	return "unknown"
+}
+
+func (s StructureSubtype) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type StructureType int
+
+const (
+	StructureType_Unknown StructureType = iota
+	StructureType_CountingHouse
+	StructureType_Dungeon
+	StructureType_Guildhall
+	StructureType_InnTavern
+	StructureType_Keep
+	StructureType_Library
+	StructureType_Market
+	StructureType_MeadHall
+	StructureType_Temple
+	StructureType_Tomb
+	StructureType_Tower
+	StructureType_UnderworldSpire
+)
+
+func parseStructureType(s string) StructureType {
+	switch s {
+	case "counting house":
+		return StructureType_CountingHouse
+	case "counting_house":
+		return StructureType_CountingHouse
+	case "dungeon":
+		return StructureType_Dungeon
+	case "guildhall":
+		return StructureType_Guildhall
+	case "inn tavern":
+		return StructureType_InnTavern
+	case "inn_tavern":
+		return StructureType_InnTavern
+	case "keep":
+		return StructureType_Keep
+	case "library":
+		return StructureType_Library
+	case "market":
+		return StructureType_Market
+	case "mead hall":
+		return StructureType_MeadHall
+	case "mead_hall":
+		return StructureType_MeadHall
+	case "temple":
+		return StructureType_Temple
+	case "tomb":
+		return StructureType_Tomb
+	case "tower":
+		return StructureType_Tower
+	case "underworld spire":
+		return StructureType_UnderworldSpire
+	case "underworld_spire":
+		return StructureType_UnderworldSpire
+	}
+	return StructureType_Unknown
+}
+
+func (s StructureType) String() string {
+	switch s {
+	case StructureType_CountingHouse:
+		return "counting house"
+	case StructureType_Dungeon:
+		return "dungeon"
+	case StructureType_Guildhall:
+		return "guildhall"
+	case StructureType_InnTavern:
+		return "inn tavern"
+	case StructureType_Keep:
+		return "keep"
+	case StructureType_Library:
+		return "library"
+	case StructureType_Market:
+		return "market"
+	case StructureType_MeadHall:
+		return "mead hall"
+	case StructureType_Temple:
+		return "temple"
+	case StructureType_Tomb:
+		return "tomb"
+	case StructureType_Tower:
+		return "tower"
+	case StructureType_UnderworldSpire:
+		return "underworld spire"
+	}
+	return "unknown"
+}
+
+func (s StructureType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type Structure struct {
-	CopiedArtifactId []int  `json:"copiedArtifactId" legend:"base"` // copied_artifact_id
-	Deity            int    `json:"deity" legend:"plus"`            // deity
-	DeityType        int    `json:"deityType" legend:"plus"`        // deity_type
-	DungeonType      int    `json:"dungeonType" legend:"plus"`      // dungeon_type
-	EntityId         int    `json:"entityId" legend:"base"`         // entity_id
-	Id_              int    `json:"id" legend:"plus"`               // id
-	Inhabitant       []int  `json:"inhabitant" legend:"plus"`       // inhabitant
-	LocalId          int    `json:"localId" legend:"base"`          // local_id
-	Name_            string `json:"name" legend:"both"`             // name
-	Religion         int    `json:"religion" legend:"plus"`         // religion
-	Subtype          string `json:"subtype" legend:"base"`          // subtype
-	Type             string `json:"type" legend:"both"`             // type
-	WorshipHfid      int    `json:"worshipHfid" legend:"base"`      // worship_hfid
+	CopiedArtifactId []int            `json:"copiedArtifactId" legend:"base"` // copied_artifact_id
+	Deity            int              `json:"deity" legend:"plus"`            // deity
+	DeityType        int              `json:"deityType" legend:"plus"`        // deity_type
+	DungeonType      int              `json:"dungeonType" legend:"plus"`      // dungeon_type
+	EntityId         int              `json:"entityId" legend:"base"`         // entity_id
+	Id_              int              `json:"id" legend:"plus"`               // id
+	Inhabitant       []int            `json:"inhabitant" legend:"plus"`       // inhabitant
+	LocalId          int              `json:"localId" legend:"base"`          // local_id
+	Name_            string           `json:"name" legend:"both"`             // name
+	Name2            string           `json:"name2" legend:"plus"`            // name2
+	Religion         int              `json:"religion" legend:"plus"`         // religion
+	Subtype          StructureSubtype `json:"subtype" legend:"base"`          // subtype
+	Type             StructureType    `json:"type" legend:"both"`             // type
+	WorshipHfid      int              `json:"worshipHfid" legend:"base"`      // worship_hfid
 }
 
 func (x *Structure) Id() int                     { return x.Id_ }
@@ -4869,32 +11034,32 @@ func (x *Structure) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *Structure) RelatedToHf(id int) bool     { return x.WorshipHfid == id }
 
 func (x *Structure) CheckFields() {
-	if x.Deity != x.LocalId && x.Deity != 0 && x.LocalId != 0 {
-		sameFields["Structure"]["Deity"]["LocalId"] = false
-	}
-	if x.Deity != x.WorshipHfid && x.Deity != 0 && x.WorshipHfid != 0 {
-		sameFields["Structure"]["Deity"]["WorshipHfid"] = false
-	}
-	if x.Deity != x.EntityId && x.Deity != 0 && x.EntityId != 0 {
-		sameFields["Structure"]["Deity"]["EntityId"] = false
-	}
-	if x.DeityType != x.WorshipHfid && x.DeityType != 0 && x.WorshipHfid != 0 {
-		sameFields["Structure"]["DeityType"]["WorshipHfid"] = false
-	}
-	if x.DeityType != x.EntityId && x.DeityType != 0 && x.EntityId != 0 {
-		sameFields["Structure"]["DeityType"]["EntityId"] = false
-	}
-	if x.DeityType != x.LocalId && x.DeityType != 0 && x.LocalId != 0 {
-		sameFields["Structure"]["DeityType"]["LocalId"] = false
-	}
-	if x.Religion != x.WorshipHfid && x.Religion != 0 && x.WorshipHfid != 0 {
-		sameFields["Structure"]["Religion"]["WorshipHfid"] = false
+	if x.Religion != x.LocalId && x.Religion != 0 && x.LocalId != 0 {
+		sameFields["Structure"]["Religion"]["LocalId"] = false
 	}
 	if x.Religion != x.EntityId && x.Religion != 0 && x.EntityId != 0 {
 		sameFields["Structure"]["Religion"]["EntityId"] = false
 	}
-	if x.Religion != x.LocalId && x.Religion != 0 && x.LocalId != 0 {
-		sameFields["Structure"]["Religion"]["LocalId"] = false
+	if x.Religion != x.WorshipHfid && x.Religion != 0 && x.WorshipHfid != 0 {
+		sameFields["Structure"]["Religion"]["WorshipHfid"] = false
+	}
+	if x.Deity != x.LocalId && x.Deity != 0 && x.LocalId != 0 {
+		sameFields["Structure"]["Deity"]["LocalId"] = false
+	}
+	if x.Deity != x.EntityId && x.Deity != 0 && x.EntityId != 0 {
+		sameFields["Structure"]["Deity"]["EntityId"] = false
+	}
+	if x.Deity != x.WorshipHfid && x.Deity != 0 && x.WorshipHfid != 0 {
+		sameFields["Structure"]["Deity"]["WorshipHfid"] = false
+	}
+	if x.DeityType != x.LocalId && x.DeityType != 0 && x.LocalId != 0 {
+		sameFields["Structure"]["DeityType"]["LocalId"] = false
+	}
+	if x.DeityType != x.EntityId && x.DeityType != 0 && x.EntityId != 0 {
+		sameFields["Structure"]["DeityType"]["EntityId"] = false
+	}
+	if x.DeityType != x.WorshipHfid && x.DeityType != 0 && x.WorshipHfid != 0 {
+		sameFields["Structure"]["DeityType"]["WorshipHfid"] = false
 	}
 	if x.DungeonType != x.LocalId && x.DungeonType != 0 && x.LocalId != 0 {
 		sameFields["Structure"]["DungeonType"]["LocalId"] = false
@@ -4907,11 +11072,48 @@ func (x *Structure) CheckFields() {
 	}
 }
 
+type UndergroundRegionType int
+
+const (
+	UndergroundRegionType_Unknown UndergroundRegionType = iota
+	UndergroundRegionType_Cavern
+	UndergroundRegionType_Magma
+	UndergroundRegionType_Underworld
+)
+
+func parseUndergroundRegionType(s string) UndergroundRegionType {
+	switch s {
+	case "cavern":
+		return UndergroundRegionType_Cavern
+	case "magma":
+		return UndergroundRegionType_Magma
+	case "underworld":
+		return UndergroundRegionType_Underworld
+	}
+	return UndergroundRegionType_Unknown
+}
+
+func (s UndergroundRegionType) String() string {
+	switch s {
+	case UndergroundRegionType_Cavern:
+		return "cavern"
+	case UndergroundRegionType_Magma:
+		return "magma"
+	case UndergroundRegionType_Underworld:
+		return "underworld"
+	}
+	return "unknown"
+}
+
+func (s UndergroundRegionType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type UndergroundRegion struct {
-	Coords string `json:"coords" legend:"plus"` // coords
-	Depth  int    `json:"depth" legend:"base"`  // depth
-	Id_    int    `json:"id" legend:"both"`     // id
-	Type   string `json:"type" legend:"base"`   // type
+	Coords string                `json:"coords" legend:"plus"` // coords
+	Depth  int                   `json:"depth" legend:"base"`  // depth
+	Id_    int                   `json:"id" legend:"both"`     // id
+	Type   UndergroundRegionType `json:"type" legend:"base"`   // type
 }
 
 func (x *UndergroundRegion) Id() int                     { return x.Id_ }
@@ -4944,11 +11146,48 @@ func (x *VagueRelationship) RelatedToHf(id int) bool     { return x.Hfid == id }
 func (x *VagueRelationship) CheckFields() {
 }
 
+type WorldConstructionType int
+
+const (
+	WorldConstructionType_Unknown WorldConstructionType = iota
+	WorldConstructionType_Bridge
+	WorldConstructionType_Road
+	WorldConstructionType_Tunnel
+)
+
+func parseWorldConstructionType(s string) WorldConstructionType {
+	switch s {
+	case "bridge":
+		return WorldConstructionType_Bridge
+	case "road":
+		return WorldConstructionType_Road
+	case "tunnel":
+		return WorldConstructionType_Tunnel
+	}
+	return WorldConstructionType_Unknown
+}
+
+func (s WorldConstructionType) String() string {
+	switch s {
+	case WorldConstructionType_Bridge:
+		return "bridge"
+	case WorldConstructionType_Road:
+		return "road"
+	case WorldConstructionType_Tunnel:
+		return "tunnel"
+	}
+	return "unknown"
+}
+
+func (s WorldConstructionType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type WorldConstruction struct {
-	Coords string `json:"coords" legend:"plus"` // coords
-	Id_    int    `json:"id" legend:"plus"`     // id
-	Name_  string `json:"name" legend:"plus"`   // name
-	Type   string `json:"type" legend:"plus"`   // type
+	Coords string                `json:"coords" legend:"plus"` // coords
+	Id_    int                   `json:"id" legend:"plus"`     // id
+	Name_  string                `json:"name" legend:"plus"`   // name
+	Type   WorldConstructionType `json:"type" legend:"plus"`   // type
 }
 
 func (x *WorldConstruction) Id() int                     { return x.Id_ }
@@ -4959,18 +11198,312 @@ func (x *WorldConstruction) RelatedToHf(id int) bool     { return false }
 func (x *WorldConstruction) CheckFields() {
 }
 
+type WrittenContentForm int
+
+const (
+	WrittenContentForm_Unknown WrittenContentForm = iota
+	WrittenContentForm_AlternateHistory
+	WrittenContentForm_Atlas
+	WrittenContentForm_Autobiography
+	WrittenContentForm_Biography
+	WrittenContentForm_Choreography
+	WrittenContentForm_Chronicle
+	WrittenContentForm_ComparativeBiography
+	WrittenContentForm_CulturalComparison
+	WrittenContentForm_CulturalHistory
+	WrittenContentForm_Dialog
+	WrittenContentForm_Dictionary
+	WrittenContentForm_Encyclopedia
+	WrittenContentForm_Essay
+	WrittenContentForm_Genealogy
+	WrittenContentForm_Guide
+	WrittenContentForm_Letter
+	WrittenContentForm_Manual
+	WrittenContentForm_MusicalComposition
+	WrittenContentForm_Novel
+	WrittenContentForm_Play
+	WrittenContentForm_Poem
+	WrittenContentForm_ShortStory
+	WrittenContentForm_StarCatalogue
+	WrittenContentForm_StarChart
+	WrittenContentForm_TreatiseOnTechnologicalEvolution
+)
+
+func parseWrittenContentForm(s string) WrittenContentForm {
+	switch s {
+	case "alternate history":
+		return WrittenContentForm_AlternateHistory
+	case "atlas":
+		return WrittenContentForm_Atlas
+	case "autobiography":
+		return WrittenContentForm_Autobiography
+	case "biography":
+		return WrittenContentForm_Biography
+	case "choreography":
+		return WrittenContentForm_Choreography
+	case "chronicle":
+		return WrittenContentForm_Chronicle
+	case "comparative biography":
+		return WrittenContentForm_ComparativeBiography
+	case "cultural comparison":
+		return WrittenContentForm_CulturalComparison
+	case "cultural history":
+		return WrittenContentForm_CulturalHistory
+	case "dialog":
+		return WrittenContentForm_Dialog
+	case "dictionary":
+		return WrittenContentForm_Dictionary
+	case "encyclopedia":
+		return WrittenContentForm_Encyclopedia
+	case "essay":
+		return WrittenContentForm_Essay
+	case "genealogy":
+		return WrittenContentForm_Genealogy
+	case "guide":
+		return WrittenContentForm_Guide
+	case "letter":
+		return WrittenContentForm_Letter
+	case "manual":
+		return WrittenContentForm_Manual
+	case "musical composition":
+		return WrittenContentForm_MusicalComposition
+	case "novel":
+		return WrittenContentForm_Novel
+	case "play":
+		return WrittenContentForm_Play
+	case "poem":
+		return WrittenContentForm_Poem
+	case "short story":
+		return WrittenContentForm_ShortStory
+	case "star catalogue":
+		return WrittenContentForm_StarCatalogue
+	case "star chart":
+		return WrittenContentForm_StarChart
+	case "treatise on technological evolution":
+		return WrittenContentForm_TreatiseOnTechnologicalEvolution
+	}
+	return WrittenContentForm_Unknown
+}
+
+func (s WrittenContentForm) String() string {
+	switch s {
+	case WrittenContentForm_AlternateHistory:
+		return "alternate history"
+	case WrittenContentForm_Atlas:
+		return "atlas"
+	case WrittenContentForm_Autobiography:
+		return "autobiography"
+	case WrittenContentForm_Biography:
+		return "biography"
+	case WrittenContentForm_Choreography:
+		return "choreography"
+	case WrittenContentForm_Chronicle:
+		return "chronicle"
+	case WrittenContentForm_ComparativeBiography:
+		return "comparative biography"
+	case WrittenContentForm_CulturalComparison:
+		return "cultural comparison"
+	case WrittenContentForm_CulturalHistory:
+		return "cultural history"
+	case WrittenContentForm_Dialog:
+		return "dialog"
+	case WrittenContentForm_Dictionary:
+		return "dictionary"
+	case WrittenContentForm_Encyclopedia:
+		return "encyclopedia"
+	case WrittenContentForm_Essay:
+		return "essay"
+	case WrittenContentForm_Genealogy:
+		return "genealogy"
+	case WrittenContentForm_Guide:
+		return "guide"
+	case WrittenContentForm_Letter:
+		return "letter"
+	case WrittenContentForm_Manual:
+		return "manual"
+	case WrittenContentForm_MusicalComposition:
+		return "musical composition"
+	case WrittenContentForm_Novel:
+		return "novel"
+	case WrittenContentForm_Play:
+		return "play"
+	case WrittenContentForm_Poem:
+		return "poem"
+	case WrittenContentForm_ShortStory:
+		return "short story"
+	case WrittenContentForm_StarCatalogue:
+		return "star catalogue"
+	case WrittenContentForm_StarChart:
+		return "star chart"
+	case WrittenContentForm_TreatiseOnTechnologicalEvolution:
+		return "treatise on technological evolution"
+	}
+	return "unknown"
+}
+
+func (s WrittenContentForm) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type WrittenContentType int
+
+const (
+	WrittenContentType_Unknown WrittenContentType = iota
+	WrittenContentType_AlternateHistory
+	WrittenContentType_Atlas
+	WrittenContentType_Autobiography
+	WrittenContentType_Biography
+	WrittenContentType_Choreography
+	WrittenContentType_Chronicle
+	WrittenContentType_ComparativeBiography
+	WrittenContentType_CulturalComparison
+	WrittenContentType_CulturalHistory
+	WrittenContentType_Dialog
+	WrittenContentType_Dictionary
+	WrittenContentType_Encyclopedia
+	WrittenContentType_Essay
+	WrittenContentType_Genealogy
+	WrittenContentType_Guide
+	WrittenContentType_Letter
+	WrittenContentType_Manual
+	WrittenContentType_MusicalComposition
+	WrittenContentType_Novel
+	WrittenContentType_Play
+	WrittenContentType_Poem
+	WrittenContentType_ShortStory
+	WrittenContentType_StarCatalogue
+	WrittenContentType_StarChart
+	WrittenContentType_TreatiseOnTechnologicalEvolution
+)
+
+func parseWrittenContentType(s string) WrittenContentType {
+	switch s {
+	case "AlternateHistory":
+		return WrittenContentType_AlternateHistory
+	case "Atlas":
+		return WrittenContentType_Atlas
+	case "Autobiography":
+		return WrittenContentType_Autobiography
+	case "Biography":
+		return WrittenContentType_Biography
+	case "Choreography":
+		return WrittenContentType_Choreography
+	case "Chronicle":
+		return WrittenContentType_Chronicle
+	case "ComparativeBiography":
+		return WrittenContentType_ComparativeBiography
+	case "CulturalComparison":
+		return WrittenContentType_CulturalComparison
+	case "CulturalHistory":
+		return WrittenContentType_CulturalHistory
+	case "Dialog":
+		return WrittenContentType_Dialog
+	case "Dictionary":
+		return WrittenContentType_Dictionary
+	case "Encyclopedia":
+		return WrittenContentType_Encyclopedia
+	case "Essay":
+		return WrittenContentType_Essay
+	case "Genealogy":
+		return WrittenContentType_Genealogy
+	case "Guide":
+		return WrittenContentType_Guide
+	case "Letter":
+		return WrittenContentType_Letter
+	case "Manual":
+		return WrittenContentType_Manual
+	case "MusicalComposition":
+		return WrittenContentType_MusicalComposition
+	case "Novel":
+		return WrittenContentType_Novel
+	case "Play":
+		return WrittenContentType_Play
+	case "Poem":
+		return WrittenContentType_Poem
+	case "ShortStory":
+		return WrittenContentType_ShortStory
+	case "StarCatalogue":
+		return WrittenContentType_StarCatalogue
+	case "StarChart":
+		return WrittenContentType_StarChart
+	case "TreatiseOnTechnologicalEvolution":
+		return WrittenContentType_TreatiseOnTechnologicalEvolution
+	}
+	return WrittenContentType_Unknown
+}
+
+func (s WrittenContentType) String() string {
+	switch s {
+	case WrittenContentType_AlternateHistory:
+		return "alternate history"
+	case WrittenContentType_Atlas:
+		return "atlas"
+	case WrittenContentType_Autobiography:
+		return "autobiography"
+	case WrittenContentType_Biography:
+		return "biography"
+	case WrittenContentType_Choreography:
+		return "choreography"
+	case WrittenContentType_Chronicle:
+		return "chronicle"
+	case WrittenContentType_ComparativeBiography:
+		return "comparative biography"
+	case WrittenContentType_CulturalComparison:
+		return "cultural comparison"
+	case WrittenContentType_CulturalHistory:
+		return "cultural history"
+	case WrittenContentType_Dialog:
+		return "dialog"
+	case WrittenContentType_Dictionary:
+		return "dictionary"
+	case WrittenContentType_Encyclopedia:
+		return "encyclopedia"
+	case WrittenContentType_Essay:
+		return "essay"
+	case WrittenContentType_Genealogy:
+		return "genealogy"
+	case WrittenContentType_Guide:
+		return "guide"
+	case WrittenContentType_Letter:
+		return "letter"
+	case WrittenContentType_Manual:
+		return "manual"
+	case WrittenContentType_MusicalComposition:
+		return "musical composition"
+	case WrittenContentType_Novel:
+		return "novel"
+	case WrittenContentType_Play:
+		return "play"
+	case WrittenContentType_Poem:
+		return "poem"
+	case WrittenContentType_ShortStory:
+		return "short story"
+	case WrittenContentType_StarCatalogue:
+		return "star catalogue"
+	case WrittenContentType_StarChart:
+		return "star chart"
+	case WrittenContentType_TreatiseOnTechnologicalEvolution:
+		return "treatise on technological evolution"
+	}
+	return "unknown"
+}
+
+func (s WrittenContentType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type WrittenContent struct {
-	AuthorHfid int          `json:"authorHfid" legend:"base"` // author_hfid
-	AuthorRoll int          `json:"authorRoll" legend:"base"` // author_roll
-	Form       string       `json:"form" legend:"base"`       // form
-	FormId     int          `json:"formId" legend:"base"`     // form_id
-	Id_        int          `json:"id" legend:"both"`         // id
-	PageEnd    int          `json:"pageEnd" legend:"plus"`    // page_end
-	PageStart  int          `json:"pageStart" legend:"plus"`  // page_start
-	Reference  []*Reference `json:"reference" legend:"plus"`  // reference
-	Style      []string     `json:"style" legend:"both"`      // style
-	Title      string       `json:"title" legend:"both"`      // title
-	Type       string       `json:"type" legend:"plus"`       // type
+	AuthorHfid int                `json:"authorHfid" legend:"base"` // author_hfid
+	AuthorRoll int                `json:"authorRoll" legend:"base"` // author_roll
+	Form       WrittenContentForm `json:"form" legend:"base"`       // form
+	FormId     int                `json:"formId" legend:"base"`     // form_id
+	Id_        int                `json:"id" legend:"both"`         // id
+	PageEnd    int                `json:"pageEnd" legend:"plus"`    // page_end
+	PageStart  int                `json:"pageStart" legend:"plus"`  // page_start
+	Reference  []*Reference       `json:"reference" legend:"plus"`  // reference
+	Style      []string           `json:"style" legend:"both"`      // style
+	Title      string             `json:"title" legend:"both"`      // title
+	Type       WrittenContentType `json:"type" legend:"plus"`       // type
 }
 
 func (x *WrittenContent) Id() int                     { return x.Id_ }
@@ -4978,14 +11511,8 @@ func (x *WrittenContent) RelatedToEntity(id int) bool { return false }
 func (x *WrittenContent) RelatedToHf(id int) bool     { return x.AuthorHfid == id }
 
 func (x *WrittenContent) CheckFields() {
-	if x.PageStart != x.AuthorRoll && x.PageStart != 0 && x.AuthorRoll != 0 {
-		sameFields["WrittenContent"]["PageStart"]["AuthorRoll"] = false
-	}
-	if x.PageStart != x.FormId && x.PageStart != 0 && x.FormId != 0 {
-		sameFields["WrittenContent"]["PageStart"]["FormId"] = false
-	}
-	if x.PageStart != x.AuthorHfid && x.PageStart != 0 && x.AuthorHfid != 0 {
-		sameFields["WrittenContent"]["PageStart"]["AuthorHfid"] = false
+	if x.PageEnd != x.AuthorHfid && x.PageEnd != 0 && x.AuthorHfid != 0 {
+		sameFields["WrittenContent"]["PageEnd"]["AuthorHfid"] = false
 	}
 	if x.PageEnd != x.AuthorRoll && x.PageEnd != 0 && x.AuthorRoll != 0 {
 		sameFields["WrittenContent"]["PageEnd"]["AuthorRoll"] = false
@@ -4993,8 +11520,14 @@ func (x *WrittenContent) CheckFields() {
 	if x.PageEnd != x.FormId && x.PageEnd != 0 && x.FormId != 0 {
 		sameFields["WrittenContent"]["PageEnd"]["FormId"] = false
 	}
-	if x.PageEnd != x.AuthorHfid && x.PageEnd != 0 && x.AuthorHfid != 0 {
-		sameFields["WrittenContent"]["PageEnd"]["AuthorHfid"] = false
+	if x.PageStart != x.AuthorHfid && x.PageStart != 0 && x.AuthorHfid != 0 {
+		sameFields["WrittenContent"]["PageStart"]["AuthorHfid"] = false
+	}
+	if x.PageStart != x.AuthorRoll && x.PageStart != 0 && x.AuthorRoll != 0 {
+		sameFields["WrittenContent"]["PageStart"]["AuthorRoll"] = false
+	}
+	if x.PageStart != x.FormId && x.PageStart != 0 && x.FormId != 0 {
+		sameFields["WrittenContent"]["PageStart"]["FormId"] = false
 	}
 }
 
@@ -6158,13 +12691,13 @@ func parseEntityPlus(d *xml.Decoder, start *xml.StartElement, obj *Entity) (*Ent
 			case "occasion":
 
 			case "profession":
-				obj.Profession = string(data)
+				obj.Profession = parseEntityProfession(string(data))
 			case "race":
 				obj.Race = string(data)
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseEntityType(string(data))
 			case "weapon":
-				obj.Weapon = append(obj.Weapon, string(data))
+				obj.Weapon = append(obj.Weapon, parseEntityWeapon(string(data)))
 			case "worship_id":
 				obj.WorshipId = append(obj.WorshipId, n(data))
 			default:
@@ -6250,7 +12783,7 @@ func parseEntityEntityLinkPlus(d *xml.Decoder, start *xml.StartElement, obj *Ent
 			case "target":
 				obj.Target = n(data)
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseEntityEntityLinkType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -7086,7 +13619,7 @@ func parseFeaturePlus(d *xml.Decoder, start *xml.StartElement, obj *Feature) (*F
 			case "reference":
 				obj.Reference = n(data)
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseFeatureType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -7133,7 +13666,7 @@ func parseHfLink(d *xml.Decoder, start *xml.StartElement) (*HfLink, error) {
 			case "link_strength":
 				obj.LinkStrength = n(data)
 			case "link_type":
-				obj.LinkType = string(data)
+				obj.LinkType = parseHfLinkLinkType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -7915,7 +14448,7 @@ func parseHistoricalEventAddHfEntityLink(d *xml.Decoder, start *xml.StartElement
 			case "hfid":
 				obj.Hfid = n(data)
 			case "link":
-				obj.Link = string(data)
+				obj.Link = parseHistoricalEventAddHfEntityLinkLink(string(data))
 			case "position_id":
 				obj.PositionId = n(data)
 			case "promise_to_hfid":
@@ -7976,7 +14509,7 @@ func parseHistoricalEventAddHfEntityLinkPlus(d *xml.Decoder, start *xml.StartEle
 			case "histfig":
 				obj.Hfid = n(data)
 			case "link_type":
-				obj.Link = string(data)
+				obj.Link = parseHistoricalEventAddHfEntityLinkLink(string(data))
 			case "position":
 				obj.Position = string(data)
 			case "promise_to_hfid":
@@ -8072,7 +14605,7 @@ func parseHistoricalEventAddHfHfLinkPlus(d *xml.Decoder, start *xml.StartElement
 			case "hf_target":
 				obj.HfidTarget = n(data)
 			case "link_type":
-				obj.LinkType = string(data)
+				obj.LinkType = parseHistoricalEventAddHfHfLinkLinkType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -8164,7 +14697,7 @@ func parseHistoricalEventAddHfSiteLinkPlus(d *xml.Decoder, start *xml.StartEleme
 			case "histfig":
 				obj.Histfig = n(data)
 			case "link_type":
-				obj.LinkType = string(data)
+				obj.LinkType = parseHistoricalEventAddHfSiteLinkLinkType(string(data))
 			case "site":
 				obj.SiteId = n(data)
 			case "structure":
@@ -8251,7 +14784,7 @@ func parseHistoricalEventAgreementFormed(d *xml.Decoder, start *xml.StartElement
 
 			switch t.Name.Local {
 			case "action":
-				obj.Action = string(data)
+				obj.Action = parseHistoricalEventAgreementFormedAction(string(data))
 			case "agreement_id":
 				obj.AgreementId = n(data)
 			case "agreement_subject_id":
@@ -8267,9 +14800,9 @@ func parseHistoricalEventAgreementFormed(d *xml.Decoder, start *xml.StartElement
 			case "failed_judgment_test":
 				obj.FailedJudgmentTest = true
 			case "method":
-				obj.Method = string(data)
+				obj.Method = parseHistoricalEventAgreementFormedMethod(string(data))
 			case "reason":
-				obj.Reason = string(data)
+				obj.Reason = parseHistoricalEventAgreementFormedReason(string(data))
 			case "relevant_entity_id":
 				obj.RelevantEntityId = n(data)
 			case "relevant_id_for_method":
@@ -8279,19 +14812,19 @@ func parseHistoricalEventAgreementFormed(d *xml.Decoder, start *xml.StartElement
 			case "successful":
 				obj.Successful = true
 			case "top_facet":
-				obj.TopFacet = string(data)
+				obj.TopFacet = parseHistoricalEventAgreementFormedTopFacet(string(data))
 			case "top_facet_modifier":
 				obj.TopFacetModifier = n(data)
 			case "top_facet_rating":
 				obj.TopFacetRating = n(data)
 			case "top_relationship_factor":
-				obj.TopRelationshipFactor = string(data)
+				obj.TopRelationshipFactor = parseHistoricalEventAgreementFormedTopRelationshipFactor(string(data))
 			case "top_relationship_modifier":
 				obj.TopRelationshipModifier = n(data)
 			case "top_relationship_rating":
 				obj.TopRelationshipRating = n(data)
 			case "top_value":
-				obj.TopValue = string(data)
+				obj.TopValue = parseHistoricalEventAgreementFormedTopValue(string(data))
 			case "top_value_modifier":
 				obj.TopValueModifier = n(data)
 			case "top_value_rating":
@@ -8535,9 +15068,9 @@ func parseHistoricalEventArtifactClaimFormed(d *xml.Decoder, start *xml.StartEle
 			case "artifact_id":
 				obj.ArtifactId = n(data)
 			case "circumstance":
-				obj.Circumstance = string(data)
+				obj.Circumstance = parseHistoricalEventArtifactClaimFormedCircumstance(string(data))
 			case "claim":
-				obj.Claim = string(data)
+				obj.Claim = parseHistoricalEventArtifactClaimFormedClaim(string(data))
 			case "entity_id":
 				obj.EntityId = n(data)
 			case "hist_figure_id":
@@ -8801,7 +15334,7 @@ func parseHistoricalEventArtifactCreatedPlus(d *xml.Decoder, start *xml.StartEle
 			case "creator_unit_id":
 				obj.UnitId = n(data)
 			case "reason":
-				obj.Reason = string(data)
+				obj.Reason = parseHistoricalEventArtifactCreatedReason(string(data))
 			case "sanctify_hf":
 				obj.SanctifyHf = n(data)
 			case "site":
@@ -8885,7 +15418,7 @@ func parseHistoricalEventArtifactCreatedCircumstancePlus(d *xml.Decoder, start *
 			case "defeated":
 				obj.Defeated = n(data)
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseHistoricalEventArtifactCreatedCircumstanceType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -9112,7 +15645,7 @@ func parseHistoricalEventArtifactGiven(d *xml.Decoder, start *xml.StartElement) 
 			case "giver_hist_figure_id":
 				obj.GiverHistFigureId = n(data)
 			case "reason":
-				obj.Reason = string(data)
+				obj.Reason = parseHistoricalEventArtifactGivenReason(string(data))
 			case "receiver_entity_id":
 				obj.ReceiverEntityId = n(data)
 			case "receiver_hist_figure_id":
@@ -9304,7 +15837,7 @@ func parseHistoricalEventArtifactPossessed(d *xml.Decoder, start *xml.StartEleme
 			case "artifact_id":
 				obj.ArtifactId = n(data)
 			case "circumstance":
-				obj.Circumstance = string(data)
+				obj.Circumstance = parseHistoricalEventArtifactPossessedCircumstance(string(data))
 			case "circumstance_id":
 				obj.CircumstanceId = n(data)
 			case "feature_layer_id":
@@ -9312,7 +15845,7 @@ func parseHistoricalEventArtifactPossessed(d *xml.Decoder, start *xml.StartEleme
 			case "hist_figure_id":
 				obj.HistFigureId = n(data)
 			case "reason":
-				obj.Reason = string(data)
+				obj.Reason = parseHistoricalEventArtifactPossessedReason(string(data))
 			case "reason_id":
 				obj.ReasonId = n(data)
 			case "site_id":
@@ -9977,7 +16510,7 @@ func parseHistoricalEventBodyAbusedPlus(d *xml.Decoder, start *xml.StartElement,
 
 			switch t.Name.Local {
 			case "abuse_type":
-				obj.AbuseType = string(data)
+				obj.AbuseType = parseHistoricalEventBodyAbusedAbuseType(string(data))
 			case "bodies":
 				obj.Bodies = append(obj.Bodies, n(data))
 			case "civ":
@@ -9989,11 +16522,11 @@ func parseHistoricalEventBodyAbusedPlus(d *xml.Decoder, start *xml.StartElement,
 			case "item_mat":
 				obj.ItemMat = string(data)
 			case "item_subtype":
-				obj.ItemSubtype = string(data)
+				obj.ItemSubtype = parseHistoricalEventBodyAbusedItemSubtype(string(data))
 			case "item_type":
-				obj.ItemType = string(data)
+				obj.ItemType = parseHistoricalEventBodyAbusedItemType(string(data))
 			case "pile_type":
-				obj.PileType = string(data)
+				obj.PileType = parseHistoricalEventBodyAbusedPileType(string(data))
 			case "site":
 				obj.SiteId = n(data)
 			case "structure":
@@ -10252,7 +16785,7 @@ func parseHistoricalEventChangeHfBodyState(d *xml.Decoder, start *xml.StartEleme
 
 			switch t.Name.Local {
 			case "body_state":
-				obj.BodyState = string(data)
+				obj.BodyState = parseHistoricalEventChangeHfBodyStateBodyState(string(data))
 			case "coords":
 				obj.Coords = string(data)
 			case "feature_layer_id":
@@ -10464,13 +16997,13 @@ func parseHistoricalEventChangeHfState(d *xml.Decoder, start *xml.StartElement) 
 			case "hfid":
 				obj.Hfid = n(data)
 			case "mood":
-				obj.Mood = string(data)
+				obj.Mood = parseHistoricalEventChangeHfStateMood(string(data))
 			case "reason":
-				obj.Reason = string(data)
+				obj.Reason = parseHistoricalEventChangeHfStateReason(string(data))
 			case "site_id":
 				obj.SiteId = n(data)
 			case "state":
-				obj.State = string(data)
+				obj.State = parseHistoricalEventChangeHfStateState(string(data))
 			case "subregion_id":
 				obj.SubregionId = n(data)
 			default:
@@ -10521,11 +17054,11 @@ func parseHistoricalEventChangeHfStatePlus(d *xml.Decoder, start *xml.StartEleme
 			case "hfid":
 				obj.Hfid = n(data)
 			case "reason":
-				obj.Reason = string(data)
+				obj.Reason = parseHistoricalEventChangeHfStateReason(string(data))
 			case "site":
 				obj.SiteId = n(data)
 			case "state":
-				obj.State = string(data)
+				obj.State = parseHistoricalEventChangeHfStateState(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -11047,7 +17580,7 @@ func parseHistoricalEventCollectionBattle(d *xml.Decoder, start *xml.StartElemen
 			case "noncom_hfid":
 				obj.NoncomHfid = append(obj.NoncomHfid, n(data))
 			case "outcome":
-				obj.Outcome = string(data)
+				obj.Outcome = parseHistoricalEventCollectionBattleOutcome(string(data))
 			case "site_id":
 				obj.SiteId = n(data)
 			case "subregion_id":
@@ -12053,7 +18586,7 @@ func parseHistoricalEventCollectionPurge(d *xml.Decoder, start *xml.StartElement
 
 			switch t.Name.Local {
 			case "adjective":
-				obj.Adjective = string(data)
+				obj.Adjective = parseHistoricalEventCollectionPurgeAdjective(string(data))
 			case "ordinal":
 				obj.Ordinal = n(data)
 			case "site_id":
@@ -12672,7 +19205,7 @@ func parseHistoricalEventCreateEntityPositionPlus(d *xml.Decoder, start *xml.Sta
 			case "position":
 				obj.Position = string(data)
 			case "reason":
-				obj.Reason = string(data)
+				obj.Reason = parseHistoricalEventCreateEntityPositionReason(string(data))
 			case "site_civ":
 				obj.SiteCiv = n(data)
 			default:
@@ -12880,7 +19413,7 @@ func parseHistoricalEventCreatedStructurePlus(d *xml.Decoder, start *xml.StartEl
 			case "civ":
 				obj.CivId = n(data)
 			case "rebuild":
-				obj.Rebuild = string(data)
+				obj.Rebuild = parseHistoricalEventCreatedStructureRebuild(string(data))
 			case "site":
 				obj.SiteId = n(data)
 			case "site_civ":
@@ -13141,7 +19674,7 @@ func parseHistoricalEventDanceFormCreated(d *xml.Decoder, start *xml.StartElemen
 
 			switch t.Name.Local {
 			case "circumstance":
-				obj.Circumstance = string(data)
+				obj.Circumstance = parseHistoricalEventDanceFormCreatedCircumstance(string(data))
 			case "circumstance_id":
 				obj.CircumstanceId = n(data)
 			case "form_id":
@@ -13149,7 +19682,7 @@ func parseHistoricalEventDanceFormCreated(d *xml.Decoder, start *xml.StartElemen
 			case "hist_figure_id":
 				obj.HistFigureId = n(data)
 			case "reason":
-				obj.Reason = string(data)
+				obj.Reason = parseHistoricalEventDanceFormCreatedReason(string(data))
 			case "reason_id":
 				obj.ReasonId = n(data)
 			case "site_id":
@@ -13669,7 +20202,7 @@ func parseHistoricalEventEntityDissolved(d *xml.Decoder, start *xml.StartElement
 			case "entity_id":
 				obj.EntityId = n(data)
 			case "reason":
-				obj.Reason = string(data)
+				obj.Reason = parseHistoricalEventEntityDissolvedReason(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -14095,9 +20628,9 @@ func parseHistoricalEventEntityLaw(d *xml.Decoder, start *xml.StartElement) (*Hi
 			case "hist_figure_id":
 				obj.HistFigureId = n(data)
 			case "law_add":
-				obj.LawAdd = string(data)
+				obj.LawAdd = parseHistoricalEventEntityLawLawAdd(string(data))
 			case "law_remove":
-				obj.LawRemove = string(data)
+				obj.LawRemove = parseHistoricalEventEntityLawLawRemove(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -14444,7 +20977,7 @@ func parseHistoricalEventEntityPrimaryCriminalsPlus(d *xml.Decoder, start *xml.S
 
 			switch t.Name.Local {
 			case "action":
-				obj.Action = string(data)
+				obj.Action = parseHistoricalEventEntityPrimaryCriminalsAction(string(data))
 			case "entity":
 				obj.EntityId = n(data)
 			case "site":
@@ -14624,7 +21157,7 @@ func parseHistoricalEventEntityRelocatePlus(d *xml.Decoder, start *xml.StartElem
 
 			switch t.Name.Local {
 			case "action":
-				obj.Action = string(data)
+				obj.Action = parseHistoricalEventEntityRelocateAction(string(data))
 			case "entity":
 				obj.EntityId = n(data)
 			case "site":
@@ -14673,7 +21206,7 @@ func parseHistoricalEventEntitySearchedSite(d *xml.Decoder, start *xml.StartElem
 
 			switch t.Name.Local {
 			case "result":
-				obj.Result = string(data)
+				obj.Result = parseHistoricalEventEntitySearchedSiteResult(string(data))
 			case "searcher_civ_id":
 				obj.SearcherCivId = n(data)
 			case "site_id":
@@ -14765,7 +21298,7 @@ func parseHistoricalEventFailedFrameAttempt(d *xml.Decoder, start *xml.StartElem
 			case "convicter_enid":
 				obj.ConvicterEnid = n(data)
 			case "crime":
-				obj.Crime = string(data)
+				obj.Crime = parseHistoricalEventFailedFrameAttemptCrime(string(data))
 			case "fooled_hfid":
 				obj.FooledHfid = n(data)
 			case "framer_hfid":
@@ -14897,7 +21430,7 @@ func parseHistoricalEventFailedIntrigueCorruption(d *xml.Decoder, start *xml.Sta
 
 			switch t.Name.Local {
 			case "action":
-				obj.Action = string(data)
+				obj.Action = parseHistoricalEventFailedIntrigueCorruptionAction(string(data))
 			case "ally_defense_bonus":
 				obj.AllyDefenseBonus = n(data)
 			case "coconspirator_bonus":
@@ -14913,7 +21446,7 @@ func parseHistoricalEventFailedIntrigueCorruption(d *xml.Decoder, start *xml.Sta
 			case "lure_hfid":
 				obj.LureHfid = n(data)
 			case "method":
-				obj.Method = string(data)
+				obj.Method = parseHistoricalEventFailedIntrigueCorruptionMethod(string(data))
 			case "relevant_entity_id":
 				obj.RelevantEntityId = n(data)
 			case "relevant_id_for_method":
@@ -14929,19 +21462,19 @@ func parseHistoricalEventFailedIntrigueCorruption(d *xml.Decoder, start *xml.Sta
 			case "target_identity":
 				obj.TargetIdentity = n(data)
 			case "top_facet":
-				obj.TopFacet = string(data)
+				obj.TopFacet = parseHistoricalEventFailedIntrigueCorruptionTopFacet(string(data))
 			case "top_facet_modifier":
 				obj.TopFacetModifier = n(data)
 			case "top_facet_rating":
 				obj.TopFacetRating = n(data)
 			case "top_relationship_factor":
-				obj.TopRelationshipFactor = string(data)
+				obj.TopRelationshipFactor = parseHistoricalEventFailedIntrigueCorruptionTopRelationshipFactor(string(data))
 			case "top_relationship_modifier":
 				obj.TopRelationshipModifier = n(data)
 			case "top_relationship_rating":
 				obj.TopRelationshipRating = n(data)
 			case "top_value":
-				obj.TopValue = string(data)
+				obj.TopValue = parseHistoricalEventFailedIntrigueCorruptionTopValue(string(data))
 			case "top_value_modifier":
 				obj.TopValueModifier = n(data)
 			case "top_value_rating":
@@ -15511,11 +22044,11 @@ func parseHistoricalEventHfConfronted(d *xml.Decoder, start *xml.StartElement) (
 			case "hfid":
 				obj.Hfid = n(data)
 			case "reason":
-				obj.Reason = append(obj.Reason, string(data))
+				obj.Reason = append(obj.Reason, parseHistoricalEventHfConfrontedReason(string(data)))
 			case "site_id":
 				obj.SiteId = n(data)
 			case "situation":
-				obj.Situation = string(data)
+				obj.Situation = parseHistoricalEventHfConfrontedSituation(string(data))
 			case "subregion_id":
 				obj.SubregionId = n(data)
 			default:
@@ -15661,7 +22194,7 @@ func parseHistoricalEventHfConvicted(d *xml.Decoder, start *xml.StartElement) (*
 			case "corrupt_convicter_hfid":
 				obj.CorruptConvicterHfid = n(data)
 			case "crime":
-				obj.Crime = string(data)
+				obj.Crime = parseHistoricalEventHfConvictedCrime(string(data))
 			case "death_penalty":
 				obj.DeathPenalty = true
 			case "did_not_reveal_all_in_interrogation":
@@ -15960,15 +22493,15 @@ func parseHistoricalEventHfDiedPlus(d *xml.Decoder, start *xml.StartElement, obj
 			case "artifact_id":
 				obj.SlayerItemId = n(data)
 			case "death_cause":
-				obj.DeathCause = string(data)
+				obj.DeathCause = parseHistoricalEventHfDiedDeathCause(string(data))
 			case "item":
 				obj.SlayerItemId = n(data)
 			case "item_subtype":
-				obj.Cause = string(data)
+				obj.ItemSubtype = parseHistoricalEventHfDiedItemSubtype(string(data))
 			case "item_type":
-				obj.ItemType = string(data)
+				obj.ItemType = parseHistoricalEventHfDiedItemType(string(data))
 			case "mat":
-				obj.Cause = string(data)
+				obj.Mat = parseHistoricalEventHfDiedMat(string(data))
 			case "site":
 				obj.SiteId = n(data)
 			case "slayer_caste":
@@ -16072,7 +22605,7 @@ func parseHistoricalEventHfDisturbedStructurePlus(d *xml.Decoder, start *xml.Sta
 
 			switch t.Name.Local {
 			case "action":
-				obj.Action = string(data)
+				obj.Action = parseHistoricalEventHfDisturbedStructureAction(string(data))
 			case "histfig":
 				obj.HistFigId = n(data)
 			case "site":
@@ -16505,7 +23038,7 @@ func parseHistoricalEventHfGainsSecretGoal(d *xml.Decoder, start *xml.StartEleme
 			case "hfid":
 				obj.Hfid = n(data)
 			case "secret_goal":
-				obj.SecretGoal = string(data)
+				obj.SecretGoal = parseHistoricalEventHfGainsSecretGoalSecretGoal(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -16738,7 +23271,7 @@ func parseHistoricalEventHfLearnsSecretPlus(d *xml.Decoder, start *xml.StartElem
 			case "artifact":
 				obj.ArtifactId = n(data)
 			case "secret_text":
-				obj.SecretText = string(data)
+				obj.SecretText = parseHistoricalEventHfLearnsSecretSecretText(string(data))
 			case "student":
 				obj.StudentHfid = n(data)
 			case "teacher":
@@ -17032,7 +23565,7 @@ func parseHistoricalEventHfPrayedInsideStructurePlus(d *xml.Decoder, start *xml.
 
 			switch t.Name.Local {
 			case "action":
-				obj.Action = string(data)
+				obj.Action = parseHistoricalEventHfPrayedInsideStructureAction(string(data))
 			case "histfig":
 				obj.HistFigId = n(data)
 			case "site":
@@ -17093,7 +23626,7 @@ func parseHistoricalEventHfPreach(d *xml.Decoder, start *xml.StartElement) (*His
 			case "speaker_hfid":
 				obj.SpeakerHfid = n(data)
 			case "topic":
-				obj.Topic = string(data)
+				obj.Topic = parseHistoricalEventHfPreachTopic(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -17224,7 +23757,7 @@ func parseHistoricalEventHfProfanedStructurePlus(d *xml.Decoder, start *xml.Star
 
 			switch t.Name.Local {
 			case "action":
-				obj.Action = string(data)
+				obj.Action = parseHistoricalEventHfProfanedStructureAction(string(data))
 			case "histfig":
 				obj.HistFigId = n(data)
 			case "site":
@@ -17469,7 +24002,7 @@ func parseHistoricalEventHfRecruitedUnitTypeForEntity(d *xml.Decoder, start *xml
 			case "subregion_id":
 				obj.SubregionId = n(data)
 			case "unit_type":
-				obj.UnitType = string(data)
+				obj.UnitType = parseHistoricalEventHfRecruitedUnitTypeForEntityUnitType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -17561,11 +24094,11 @@ func parseHistoricalEventHfRelationshipDenied(d *xml.Decoder, start *xml.StartEl
 			case "feature_layer_id":
 				obj.FeatureLayerId = n(data)
 			case "reason":
-				obj.Reason = string(data)
+				obj.Reason = parseHistoricalEventHfRelationshipDeniedReason(string(data))
 			case "reason_id":
 				obj.ReasonId = n(data)
 			case "relationship":
-				obj.Relationship = string(data)
+				obj.Relationship = parseHistoricalEventHfRelationshipDeniedRelationship(string(data))
 			case "seeker_hfid":
 				obj.SeekerHfid = n(data)
 			case "site_id":
@@ -17761,7 +24294,7 @@ func parseHistoricalEventHfRevived(d *xml.Decoder, start *xml.StartElement) (*Hi
 			case "feature_layer_id":
 				obj.FeatureLayerId = n(data)
 			case "ghost":
-				obj.Ghost = string(data)
+				obj.Ghost = parseHistoricalEventHfRevivedGhost(string(data))
 			case "hfid":
 				obj.Hfid = n(data)
 			case "raised_before":
@@ -17865,7 +24398,7 @@ func parseHistoricalEventHfSimpleBattleEvent(d *xml.Decoder, start *xml.StartEle
 			case "subregion_id":
 				obj.SubregionId = n(data)
 			case "subtype":
-				obj.Subtype = string(data)
+				obj.Subtype = parseHistoricalEventHfSimpleBattleEventSubtype(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -18202,9 +24735,9 @@ func parseHistoricalEventHfWoundedPlus(d *xml.Decoder, start *xml.StartElement, 
 			case "body_part":
 				obj.BodyPart = n(data)
 			case "injury_type":
-				obj.InjuryType = string(data)
+				obj.InjuryType = parseHistoricalEventHfWoundedInjuryType(string(data))
 			case "part_lost":
-				obj.PartLost = string(data)
+				obj.PartLost = parseHistoricalEventHfWoundedPartLost(string(data))
 			case "site":
 				obj.SiteId = n(data)
 			case "woundee":
@@ -18311,11 +24844,11 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(d *xml.Decoder, start *xm
 
 			switch t.Name.Local {
 			case "action":
-				obj.Action = string(data)
+				obj.Action = parseHistoricalEventHfsFormedIntrigueRelationshipAction(string(data))
 			case "ally_defense_bonus":
 				obj.AllyDefenseBonus = n(data)
 			case "circumstance":
-				obj.Circumstance = string(data)
+				obj.Circumstance = parseHistoricalEventHfsFormedIntrigueRelationshipCircumstance(string(data))
 			case "circumstance_id":
 				obj.CircumstanceId = n(data)
 			case "coconspirator_bonus":
@@ -18325,7 +24858,7 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(d *xml.Decoder, start *xm
 			case "corruptor_identity":
 				obj.CorruptorIdentity = n(data)
 			case "corruptor_seen_as":
-				obj.CorruptorSeenAs = string(data)
+				obj.CorruptorSeenAs = parseHistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs(string(data))
 			case "failed_judgment_test":
 				obj.FailedJudgmentTest = true
 			case "feature_layer_id":
@@ -18333,7 +24866,7 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(d *xml.Decoder, start *xm
 			case "lure_hfid":
 				obj.LureHfid = n(data)
 			case "method":
-				obj.Method = string(data)
+				obj.Method = parseHistoricalEventHfsFormedIntrigueRelationshipMethod(string(data))
 			case "relevant_entity_id":
 				obj.RelevantEntityId = n(data)
 			case "relevant_id_for_method":
@@ -18351,21 +24884,21 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(d *xml.Decoder, start *xm
 			case "target_identity":
 				obj.TargetIdentity = n(data)
 			case "target_seen_as":
-				obj.TargetSeenAs = string(data)
+				obj.TargetSeenAs = parseHistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs(string(data))
 			case "top_facet":
-				obj.TopFacet = string(data)
+				obj.TopFacet = parseHistoricalEventHfsFormedIntrigueRelationshipTopFacet(string(data))
 			case "top_facet_modifier":
 				obj.TopFacetModifier = n(data)
 			case "top_facet_rating":
 				obj.TopFacetRating = n(data)
 			case "top_relationship_factor":
-				obj.TopRelationshipFactor = string(data)
+				obj.TopRelationshipFactor = parseHistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor(string(data))
 			case "top_relationship_modifier":
 				obj.TopRelationshipModifier = n(data)
 			case "top_relationship_rating":
 				obj.TopRelationshipRating = n(data)
 			case "top_value":
-				obj.TopValue = string(data)
+				obj.TopValue = parseHistoricalEventHfsFormedIntrigueRelationshipTopValue(string(data))
 			case "top_value_modifier":
 				obj.TopValueModifier = n(data)
 			case "top_value_rating":
@@ -18463,9 +24996,9 @@ func parseHistoricalEventHfsFormedReputationRelationship(d *xml.Decoder, start *
 			case "feature_layer_id":
 				obj.FeatureLayerId = n(data)
 			case "hf_rep_1_of_2":
-				obj.HfRep1Of2 = string(data)
+				obj.HfRep1Of2 = parseHistoricalEventHfsFormedReputationRelationshipHfRep1Of2(string(data))
 			case "hf_rep_2_of_1":
-				obj.HfRep2Of1 = string(data)
+				obj.HfRep2Of1 = parseHistoricalEventHfsFormedReputationRelationshipHfRep2Of1(string(data))
 			case "hfid1":
 				obj.Hfid1 = n(data)
 			case "hfid2":
@@ -18637,7 +25170,7 @@ func parseHistoricalEventInsurrectionStarted(d *xml.Decoder, start *xml.StartEle
 
 			switch t.Name.Local {
 			case "outcome":
-				obj.Outcome = string(data)
+				obj.Outcome = parseHistoricalEventInsurrectionStartedOutcome(string(data))
 			case "site_id":
 				obj.SiteId = n(data)
 			case "target_civ_id":
@@ -18812,7 +25345,7 @@ func parseHistoricalEventItemStolenPlus(d *xml.Decoder, start *xml.StartElement,
 			case "structure":
 				obj.Structure = n(data)
 			case "theft_method":
-				obj.TheftMethod = string(data)
+				obj.TheftMethod = parseHistoricalEventItemStolenTheftMethod(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -18900,7 +25433,7 @@ func parseHistoricalEventItemStolenCircumstancePlus(d *xml.Decoder, start *xml.S
 			case "murdered":
 				obj.Murdered = n(data)
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseHistoricalEventItemStolenCircumstanceType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -19035,7 +25568,7 @@ func parseHistoricalEventMasterpieceArchConstructed(d *xml.Decoder, start *xml.S
 			case "site_id":
 				obj.SiteId = n(data)
 			case "skill_at_time":
-				obj.SkillAtTime = string(data)
+				obj.SkillAtTime = parseHistoricalEventMasterpieceArchConstructedSkillAtTime(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -19092,9 +25625,9 @@ func parseHistoricalEventMasterpieceArchConstructedPlus(d *xml.Decoder, start *x
 			case "building_custom":
 				obj.BuildingCustom = n(data)
 			case "building_subtype":
-				obj.BuildingSubtype = string(data)
+				obj.BuildingSubtype = parseHistoricalEventMasterpieceArchConstructedBuildingSubtype(string(data))
 			case "building_type":
-				obj.BuildingType = string(data)
+				obj.BuildingType = parseHistoricalEventMasterpieceArchConstructedBuildingType(string(data))
 			case "maker":
 				obj.Maker = n(data)
 			case "maker_entity":
@@ -19102,7 +25635,7 @@ func parseHistoricalEventMasterpieceArchConstructedPlus(d *xml.Decoder, start *x
 			case "site":
 				obj.Site = n(data)
 			case "skill_at_time":
-				obj.SkillAtTime = string(data)
+				obj.SkillAtTime = parseHistoricalEventMasterpieceArchConstructedSkillAtTime(string(data))
 			case "unk_2":
 				obj.Unk2 = n(data)
 			default:
@@ -19155,7 +25688,7 @@ func parseHistoricalEventMasterpieceEngraving(d *xml.Decoder, start *xml.StartEl
 			case "site_id":
 				obj.SiteId = n(data)
 			case "skill_at_time":
-				obj.SkillAtTime = string(data)
+				obj.SkillAtTime = parseHistoricalEventMasterpieceEngravingSkillAtTime(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -19216,7 +25749,7 @@ func parseHistoricalEventMasterpieceEngravingPlus(d *xml.Decoder, start *xml.Sta
 			case "site":
 				obj.Site = n(data)
 			case "skill_at_time":
-				obj.SkillAtTime = string(data)
+				obj.SkillAtTime = parseHistoricalEventMasterpieceEngravingSkillAtTime(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -19412,9 +25945,9 @@ func parseHistoricalEventMasterpieceItemPlus(d *xml.Decoder, start *xml.StartEle
 			case "item_id":
 				obj.ItemId = n(data)
 			case "item_subtype":
-				obj.ItemSubtype = string(data)
+				obj.ItemSubtype = parseHistoricalEventMasterpieceItemItemSubtype(string(data))
 			case "item_type":
-				obj.ItemType = string(data)
+				obj.ItemType = parseHistoricalEventMasterpieceItemItemType(string(data))
 			case "maker":
 				obj.Maker = n(data)
 			case "maker_entity":
@@ -19598,7 +26131,7 @@ func parseHistoricalEventMasterpieceLostPlus(d *xml.Decoder, start *xml.StartEle
 			case "histfig":
 				obj.Histfig = n(data)
 			case "method":
-				obj.Method = string(data)
+				obj.Method = parseHistoricalEventMasterpieceLostMethod(string(data))
 			case "site":
 				obj.Site = n(data)
 			default:
@@ -19749,7 +26282,7 @@ func parseHistoricalEventModifiedBuilding(d *xml.Decoder, start *xml.StartElemen
 
 			switch t.Name.Local {
 			case "modification":
-				obj.Modification = string(data)
+				obj.Modification = parseHistoricalEventModifiedBuildingModification(string(data))
 			case "modifier_hfid":
 				obj.ModifierHfid = n(data)
 			case "site_id":
@@ -19843,7 +26376,7 @@ func parseHistoricalEventMusicalFormCreated(d *xml.Decoder, start *xml.StartElem
 
 			switch t.Name.Local {
 			case "circumstance":
-				obj.Circumstance = string(data)
+				obj.Circumstance = parseHistoricalEventMusicalFormCreatedCircumstance(string(data))
 			case "circumstance_id":
 				obj.CircumstanceId = n(data)
 			case "form_id":
@@ -19851,7 +26384,7 @@ func parseHistoricalEventMusicalFormCreated(d *xml.Decoder, start *xml.StartElem
 			case "hist_figure_id":
 				obj.HistFigureId = n(data)
 			case "reason":
-				obj.Reason = string(data)
+				obj.Reason = parseHistoricalEventMusicalFormCreatedReason(string(data))
 			case "reason_id":
 				obj.ReasonId = n(data)
 			case "site_id":
@@ -20080,7 +26613,7 @@ func parseHistoricalEventPeaceAcceptedPlus(d *xml.Decoder, start *xml.StartEleme
 			case "source":
 				obj.Source = n(data)
 			case "topic":
-				obj.Topic = string(data)
+				obj.Topic = parseHistoricalEventPeaceAcceptedTopic(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -20172,7 +26705,7 @@ func parseHistoricalEventPeaceRejectedPlus(d *xml.Decoder, start *xml.StartEleme
 			case "source":
 				obj.Source = n(data)
 			case "topic":
-				obj.Topic = string(data)
+				obj.Topic = parseHistoricalEventPeaceRejectedTopic(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -20421,7 +26954,7 @@ func parseHistoricalEventPoeticFormCreated(d *xml.Decoder, start *xml.StartEleme
 
 			switch t.Name.Local {
 			case "circumstance":
-				obj.Circumstance = string(data)
+				obj.Circumstance = parseHistoricalEventPoeticFormCreatedCircumstance(string(data))
 			case "form_id":
 				obj.FormId = n(data)
 			case "hist_figure_id":
@@ -20914,7 +27447,7 @@ func parseHistoricalEventRelationshipPlus(d *xml.Decoder, start *xml.StartElemen
 			case "event":
 				obj.Event = n(data)
 			case "relationship":
-				obj.Relationship = string(data)
+				obj.Relationship = parseHistoricalEventRelationshipRelationship(string(data))
 			case "source_hf":
 				obj.SourceHf = n(data)
 			case "target_hf":
@@ -21057,7 +27590,7 @@ func parseHistoricalEventRemoveHfEntityLink(d *xml.Decoder, start *xml.StartElem
 			case "hfid":
 				obj.Hfid = n(data)
 			case "link":
-				obj.Link = string(data)
+				obj.Link = parseHistoricalEventRemoveHfEntityLinkLink(string(data))
 			case "position_id":
 				obj.PositionId = n(data)
 			default:
@@ -21110,7 +27643,7 @@ func parseHistoricalEventRemoveHfEntityLinkPlus(d *xml.Decoder, start *xml.Start
 			case "histfig":
 				obj.Hfid = n(data)
 			case "link_type":
-				obj.Link = string(data)
+				obj.Link = parseHistoricalEventRemoveHfEntityLinkLink(string(data))
 			case "position":
 				obj.Position = string(data)
 			default:
@@ -21284,7 +27817,7 @@ func parseHistoricalEventRemoveHfSiteLinkPlus(d *xml.Decoder, start *xml.StartEl
 			case "histfig":
 				obj.Histfig = n(data)
 			case "link_type":
-				obj.LinkType = string(data)
+				obj.LinkType = parseHistoricalEventRemoveHfSiteLinkLinkType(string(data))
 			case "site":
 				obj.SiteId = n(data)
 			case "structure":
@@ -21535,7 +28068,7 @@ func parseHistoricalEventSiteDispute(d *xml.Decoder, start *xml.StartElement) (*
 
 			switch t.Name.Local {
 			case "dispute":
-				obj.Dispute = string(data)
+				obj.Dispute = parseHistoricalEventSiteDisputeDispute(string(data))
 			case "entity_id_1":
 				obj.EntityId1 = n(data)
 			case "entity_id_2":
@@ -21899,7 +28432,7 @@ func parseHistoricalEventSiteTributeForced(d *xml.Decoder, start *xml.StartEleme
 			case "defender_civ_id":
 				obj.DefenderCivId = n(data)
 			case "season":
-				obj.Season = string(data)
+				obj.Season = parseHistoricalEventSiteTributeForcedSeason(string(data))
 			case "site_civ_id":
 				obj.SiteCivId = n(data)
 			case "site_id":
@@ -22325,7 +28858,7 @@ func parseHistoricalEventTacticalSituation(d *xml.Decoder, start *xml.StartEleme
 			case "site_id":
 				obj.SiteId = n(data)
 			case "situation":
-				obj.Situation = string(data)
+				obj.Situation = parseHistoricalEventTacticalSituationSituation(string(data))
 			case "start":
 				obj.Start = true
 			case "structure_id":
@@ -22525,13 +29058,13 @@ func parseHistoricalEventWrittenContentComposed(d *xml.Decoder, start *xml.Start
 
 			switch t.Name.Local {
 			case "circumstance":
-				obj.Circumstance = string(data)
+				obj.Circumstance = parseHistoricalEventWrittenContentComposedCircumstance(string(data))
 			case "circumstance_id":
 				obj.CircumstanceId = n(data)
 			case "hist_figure_id":
 				obj.HistFigureId = n(data)
 			case "reason":
-				obj.Reason = string(data)
+				obj.Reason = parseHistoricalEventWrittenContentComposedReason(string(data))
 			case "reason_id":
 				obj.ReasonId = n(data)
 			case "site_id":
@@ -22762,7 +29295,7 @@ func parseHistoricalFigure(d *xml.Decoder, start *xml.StartElement) (*Historical
 			case "ghost":
 				obj.Ghost = true
 			case "goal":
-				obj.Goal = append(obj.Goal, string(data))
+				obj.Goal = append(obj.Goal, parseHistoricalFigureGoal(string(data)))
 			case "hf_link":
 
 			case "hf_skill":
@@ -22896,7 +29429,7 @@ func parseHistoricalFigureEntityLink(d *xml.Decoder, start *xml.StartElement) (*
 			case "link_strength":
 				obj.LinkStrength = n(data)
 			case "link_type":
-				obj.LinkType = string(data)
+				obj.LinkType = parseHistoricalFigureEntityLinkLinkType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -23090,7 +29623,7 @@ func parseHonor(d *xml.Decoder, start *xml.StartElement) (*Honor, error) {
 			case "required_kills":
 				obj.RequiredKills = n(data)
 			case "required_skill":
-				obj.RequiredSkill = string(data)
+				obj.RequiredSkill = parseHonorRequiredSkill(string(data))
 			case "required_skill_ip_total":
 				obj.RequiredSkillIpTotal = n(data)
 			case "required_years":
@@ -23331,7 +29864,7 @@ func parseIdentityPlus(d *xml.Decoder, start *xml.StartElement, obj *Identity) (
 			case "nemesis_id":
 				obj.NemesisId = n(data)
 			case "profession":
-				obj.Profession = string(data)
+				obj.Profession = parseIdentityProfession(string(data))
 			case "race":
 				obj.Race = string(data)
 			default:
@@ -23402,9 +29935,9 @@ func parseIntrigueActor(d *xml.Decoder, start *xml.StartElement) (*IntrigueActor
 			case "promised_me_immortality":
 				obj.PromisedMeImmortality = true
 			case "role":
-				obj.Role = string(data)
+				obj.Role = parseIntrigueActorRole(string(data))
 			case "strategy":
-				obj.Strategy = string(data)
+				obj.Strategy = parseIntrigueActorStrategy(string(data))
 			case "strategy_enid":
 				obj.StrategyEnid = n(data)
 			case "strategy_eppid":
@@ -23525,7 +30058,7 @@ func parseIntriguePlot(d *xml.Decoder, start *xml.StartElement) (*IntriguePlot, 
 			case "plot_actor":
 
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseIntriguePlotType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -24058,7 +30591,7 @@ func parsePlotActor(d *xml.Decoder, start *xml.StartElement) (*PlotActor, error)
 			case "agreement_id":
 				obj.AgreementId = n(data)
 			case "plot_role":
-				obj.PlotRole = string(data)
+				obj.PlotRole = parsePlotActorPlotRole(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -24263,7 +30796,7 @@ func parseReferencePlus(d *xml.Decoder, start *xml.StartElement, obj *Reference)
 			case "id":
 				obj.Id_ = n(data)
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseReferenceType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -24310,7 +30843,7 @@ func parseRegion(d *xml.Decoder, start *xml.StartElement) (*Region, error) {
 			case "name":
 				obj.Name_ = string(data)
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseRegionType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -24359,7 +30892,7 @@ func parseRegionPlus(d *xml.Decoder, start *xml.StartElement, obj *Region) (*Reg
 			case "coords":
 				obj.Coords = string(data)
 			case "evilness":
-				obj.Evilness = string(data)
+				obj.Evilness = parseRegionEvilness(string(data))
 			case "force_id":
 				obj.ForceId = n(data)
 			case "id":
@@ -24920,15 +31453,15 @@ func parseSchedulePlus(d *xml.Decoder, start *xml.StartElement, obj *Schedule) (
 			case "id":
 				obj.Id_ = n(data)
 			case "item_subtype":
-				obj.ItemSubtype = string(data)
+				obj.ItemSubtype = parseScheduleItemSubtype(string(data))
 			case "item_type":
-				obj.ItemType = string(data)
+				obj.ItemType = parseScheduleItemType(string(data))
 			case "reference":
 				obj.Reference = n(data)
 			case "reference2":
 				obj.Reference2 = n(data)
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseScheduleType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -24994,7 +31527,7 @@ func parseSite(d *xml.Decoder, start *xml.StartElement) (*Site, error) {
 			case "structures":
 
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseSiteType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -25096,7 +31629,7 @@ func parseSiteLink(d *xml.Decoder, start *xml.StartElement) (*SiteLink, error) {
 			case "entity_id":
 				obj.EntityId = n(data)
 			case "link_type":
-				obj.LinkType = string(data)
+				obj.LinkType = parseSiteLinkLinkType(string(data))
 			case "occupation_id":
 				obj.OccupationId = n(data)
 			case "site_id":
@@ -25190,7 +31723,7 @@ func parseSiteSiteProperty(d *xml.Decoder, start *xml.StartElement) (*SiteSitePr
 			case "structure_id":
 				obj.StructureId = n(data)
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseSiteSitePropertyType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -25286,9 +31819,9 @@ func parseStructure(d *xml.Decoder, start *xml.StartElement) (*Structure, error)
 			case "name":
 				obj.Name_ = string(data)
 			case "subtype":
-				obj.Subtype = string(data)
+				obj.Subtype = parseStructureSubtype(string(data))
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseStructureType(string(data))
 			case "worship_hfid":
 				obj.WorshipHfid = n(data)
 			default:
@@ -25359,11 +31892,11 @@ func parseStructurePlus(d *xml.Decoder, start *xml.StartElement, obj *Structure)
 			case "name":
 				obj.Name_ = string(data)
 			case "name2":
-				obj.Subtype = string(data)
+				obj.Name2 = string(data)
 			case "religion":
 				obj.Religion = n(data)
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseStructureType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -25410,7 +31943,7 @@ func parseUndergroundRegion(d *xml.Decoder, start *xml.StartElement) (*Undergrou
 			case "id":
 				obj.Id_ = n(data)
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseUndergroundRegionType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -25671,7 +32204,7 @@ func parseWorldConstructionPlus(d *xml.Decoder, start *xml.StartElement, obj *Wo
 			case "name":
 				obj.Name_ = string(data)
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseWorldConstructionType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}
@@ -25726,7 +32259,7 @@ func parseWrittenContent(d *xml.Decoder, start *xml.StartElement) (*WrittenConte
 			case "author_roll":
 				obj.AuthorRoll = n(data)
 			case "form":
-				obj.Form = string(data)
+				obj.Form = parseWrittenContentForm(string(data))
 			case "form_id":
 				obj.FormId = n(data)
 			case "id":
@@ -25804,7 +32337,7 @@ func parseWrittenContentPlus(d *xml.Decoder, start *xml.StartElement, obj *Writt
 			case "title":
 				obj.Title = string(data)
 			case "type":
-				obj.Type = string(data)
+				obj.Type = parseWrittenContentType(string(data))
 			default:
 				// fmt.Println("unknown field", t.Name.Local)
 			}

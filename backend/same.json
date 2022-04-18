@@ -13,10 +13,6 @@
     "Involved": "SiteId",
     "Site": "SiteId"
   },
-  "HistoricalEventHfDied": {
-    "ItemSubtype": "Cause",
-    "Mat": "Cause"
-  },
   "HistoricalEventPeaceAccepted": {
     "Site": "SiteId"
   },
@@ -31,8 +27,5 @@
   },
   "HistoricalFigure": {
     "Sex": "BreedId"
-  },
-  "Structure": {
-    "Name2": "Subtype"
   }
 }

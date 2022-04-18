@@ -180,16 +180,16 @@ export interface Entity {
 	id: number;
 	name: string;
 	occasion: Occasion[];
-	profession: string;
+	profession: enum;
 	race: string;
-	type: string;
-	weapon: string[];
+	type: enum;
+	weapon: enum[];
 	worshipId: number[];
 }
 export interface EntityEntityLink {
 	strength: number;
 	target: number;
-	type: string;
+	type: enum;
 }
 export interface EntityFormerPositionLink {
 	endYear: number;
@@ -253,12 +253,12 @@ export interface EntitySquadLink {
 }
 export interface Feature {
 	reference: number;
-	type: string;
+	type: enum;
 }
 export interface HfLink {
 	hfid: number;
 	linkStrength: number;
-	linkType: string;
+	linkType: enum;
 }
 export interface HfSkill {
 	skill: string;
@@ -285,8 +285,8 @@ export interface HistoricalEventAddHfEntityLink {
 	civId: number;
 	hfid: number;
 	histfig: number;
-	link: string;
-	linkType: string;
+	link: enum;
+	linkType: enum;
 	position: string;
 	positionId: number;
 	promiseToHfid: number;
@@ -296,18 +296,18 @@ export interface HistoricalEventAddHfHfLink {
 	hfTarget: number;
 	hfid: number;
 	hfidTarget: number;
-	linkType: string;
+	linkType: enum;
 }
 export interface HistoricalEventAddHfSiteLink {
 	civ: number;
 	histfig: number;
-	linkType: string;
+	linkType: enum;
 	site: number;
 	siteId: number;
 	structure: number;
 }
 export interface HistoricalEventAgreementFormed {
-	action: string;
+	action: enum;
 	agreementId: number;
 	agreementSubjectId: number;
 	allyDefenseBonus: number;
@@ -315,19 +315,19 @@ export interface HistoricalEventAgreementFormed {
 	concluderHfid: number;
 	delegated: boolean;
 	failedJudgmentTest: boolean;
-	method: string;
-	reason: string;
+	method: enum;
+	reason: enum;
 	relevantEntityId: number;
 	relevantIdForMethod: number;
 	relevantPositionProfileId: number;
 	successful: boolean;
-	topFacet: string;
+	topFacet: enum;
 	topFacetModifier: number;
 	topFacetRating: number;
-	topRelationshipFactor: string;
+	topRelationshipFactor: enum;
 	topRelationshipModifier: number;
 	topRelationshipRating: number;
-	topValue: string;
+	topValue: enum;
 	topValueModifier: number;
 	topValueRating: number;
 }
@@ -339,8 +339,8 @@ export interface HistoricalEventAgreementRejected {
 }
 export interface HistoricalEventArtifactClaimFormed {
 	artifactId: number;
-	circumstance: string;
-	claim: string;
+	circumstance: enum;
+	claim: enum;
 	entityId: number;
 	histFigureId: number;
 	positionProfileId: number;
@@ -362,7 +362,7 @@ export interface HistoricalEventArtifactCreated {
 	creatorUnitId: number;
 	histFigureId: number;
 	nameOnly: boolean;
-	reason: string;
+	reason: enum;
 	sanctifyHf: number;
 	site: number;
 	siteId: number;
@@ -370,7 +370,7 @@ export interface HistoricalEventArtifactCreated {
 }
 export interface HistoricalEventArtifactCreatedCircumstance {
 	defeated: number;
-	type: string;
+	type: enum;
 }
 export interface HistoricalEventArtifactDestroyed {
 	artifactId: number;
@@ -387,7 +387,7 @@ export interface HistoricalEventArtifactGiven {
 	artifactId: number;
 	giverEntityId: number;
 	giverHistFigureId: number;
-	reason: string;
+	reason: enum;
 	receiverEntityId: number;
 	receiverHistFigureId: number;
 }
@@ -400,11 +400,11 @@ export interface HistoricalEventArtifactLost {
 }
 export interface HistoricalEventArtifactPossessed {
 	artifactId: number;
-	circumstance: string;
+	circumstance: enum;
 	circumstanceId: number;
 	featureLayerId: number;
 	histFigureId: number;
-	reason: string;
+	reason: enum;
 	reasonId: number;
 	siteId: number;
 	subregionId: number;
@@ -457,7 +457,7 @@ export interface HistoricalEventAttackedSite {
 	siteId: number;
 }
 export interface HistoricalEventBodyAbused {
-	abuseType: string;
+	abuseType: enum;
 	bodies: number[];
 	civ: number;
 	coords: string;
@@ -465,9 +465,9 @@ export interface HistoricalEventBodyAbused {
 	histfig: number;
 	interaction: number;
 	itemMat: string;
-	itemSubtype: string;
-	itemType: string;
-	pileType: string;
+	itemSubtype: enum;
+	itemType: enum;
+	pileType: enum;
 	site: number;
 	siteId: number;
 	structure: number;
@@ -494,7 +494,7 @@ export interface HistoricalEventCeremony {
 	subregionId: number;
 }
 export interface HistoricalEventChangeHfBodyState {
-	bodyState: string;
+	bodyState: enum;
 	coords: string;
 	featureLayerId: number;
 	hfid: number;
@@ -515,11 +515,11 @@ export interface HistoricalEventChangeHfState {
 	coords: string;
 	featureLayerId: number;
 	hfid: number;
-	mood: string;
-	reason: string;
+	mood: enum;
+	reason: enum;
 	site: number;
 	siteId: number;
-	state: string;
+	state: enum;
 	subregionId: number;
 }
 export interface HistoricalEventChangedCreatureType {
@@ -579,7 +579,7 @@ export interface HistoricalEventCollectionBattle {
 	individualMerc: boolean[];
 	name: string;
 	noncomHfid: number[];
-	outcome: string;
+	outcome: enum;
 	siteId: number;
 	subregionId: number;
 	warEventcol: number;
@@ -639,7 +639,7 @@ export interface HistoricalEventCollectionProcession {
 	ordinal: number;
 }
 export interface HistoricalEventCollectionPurge {
-	adjective: string;
+	adjective: enum;
 	ordinal: number;
 	siteId: number;
 }
@@ -689,7 +689,7 @@ export interface HistoricalEventCreateEntityPosition {
 	civ: number;
 	histfig: number;
 	position: string;
-	reason: string;
+	reason: enum;
 	siteCiv: number;
 }
 export interface HistoricalEventCreatedSite {
@@ -704,7 +704,7 @@ export interface HistoricalEventCreatedStructure {
 	builderHfid: number;
 	civ: number;
 	civId: number;
-	rebuild: string;
+	rebuild: enum;
 	rebuilt: boolean;
 	site: number;
 	siteCiv: number;
@@ -733,11 +733,11 @@ export interface HistoricalEventCreatureDevoured {
 	victim: number;
 }
 export interface HistoricalEventDanceFormCreated {
-	circumstance: string;
+	circumstance: enum;
 	circumstanceId: number;
 	formId: number;
 	histFigureId: number;
-	reason: string;
+	reason: enum;
 	reasonId: number;
 	siteId: number;
 }
@@ -772,7 +772,7 @@ export interface HistoricalEventEntityCreated {
 }
 export interface HistoricalEventEntityDissolved {
 	entityId: number;
-	reason: string;
+	reason: enum;
 }
 export interface HistoricalEventEntityEquipmentPurchase {
 	entityId: number;
@@ -798,8 +798,8 @@ export interface HistoricalEventEntityIncorporated {
 export interface HistoricalEventEntityLaw {
 	entityId: number;
 	histFigureId: number;
-	lawAdd: string;
-	lawRemove: string;
+	lawAdd: enum;
+	lawRemove: enum;
 }
 export interface HistoricalEventEntityOverthrown {
 	conspiratorHfid: number[];
@@ -824,7 +824,7 @@ export interface HistoricalEventEntityPersecuted {
 	targetEnid: number;
 }
 export interface HistoricalEventEntityPrimaryCriminals {
-	action: string;
+	action: enum;
 	entity: number;
 	entityId: number;
 	site: number;
@@ -837,7 +837,7 @@ export interface HistoricalEventEntityRampagedInSite {
 	siteId: number;
 }
 export interface HistoricalEventEntityRelocate {
-	action: string;
+	action: enum;
 	entity: number;
 	entityId: number;
 	site: number;
@@ -846,20 +846,20 @@ export interface HistoricalEventEntityRelocate {
 	structureId: number;
 }
 export interface HistoricalEventEntitySearchedSite {
-	result: string;
+	result: enum;
 	searcherCivId: number;
 	siteId: number;
 }
 export interface HistoricalEventFailedFrameAttempt {
 	convicterEnid: number;
-	crime: string;
+	crime: enum;
 	fooledHfid: number;
 	framerHfid: number;
 	plotterHfid: number;
 	targetHfid: number;
 }
 export interface HistoricalEventFailedIntrigueCorruption {
-	action: string;
+	action: enum;
 	allyDefenseBonus: number;
 	coconspiratorBonus: number;
 	corruptorHfid: number;
@@ -867,7 +867,7 @@ export interface HistoricalEventFailedIntrigueCorruption {
 	failedJudgmentTest: boolean;
 	featureLayerId: number;
 	lureHfid: number;
-	method: string;
+	method: enum;
 	relevantEntityId: number;
 	relevantIdForMethod: number;
 	relevantPositionProfileId: number;
@@ -875,13 +875,13 @@ export interface HistoricalEventFailedIntrigueCorruption {
 	subregionId: number;
 	targetHfid: number;
 	targetIdentity: number;
-	topFacet: string;
+	topFacet: enum;
 	topFacetModifier: number;
 	topFacetRating: number;
-	topRelationshipFactor: string;
+	topRelationshipFactor: enum;
 	topRelationshipModifier: number;
 	topRelationshipRating: number;
-	topValue: string;
+	topValue: enum;
 	topValueModifier: number;
 	topValueRating: number;
 }
@@ -927,9 +927,9 @@ export interface HistoricalEventHfConfronted {
 	coords: string;
 	featureLayerId: number;
 	hfid: number;
-	reason: string[];
+	reason: enum[];
 	siteId: number;
-	situation: string;
+	situation: enum;
 	subregionId: number;
 }
 export interface HistoricalEventHfConvicted {
@@ -941,7 +941,7 @@ export interface HistoricalEventHfConvicted {
 	convictedHfid: number;
 	convicterEnid: number;
 	corruptConvicterHfid: number;
-	crime: string;
+	crime: enum;
 	deathPenalty: boolean;
 	didNotRevealAllInInterrogation: boolean;
 	exiled: boolean;
@@ -970,13 +970,13 @@ export interface HistoricalEventHfDestroyedSite {
 export interface HistoricalEventHfDied {
 	artifactId: number;
 	cause: string;
-	deathCause: string;
+	deathCause: enum;
 	featureLayerId: number;
 	hfid: number;
 	item: number;
-	itemSubtype: string;
-	itemType: string;
-	mat: string;
+	itemSubtype: enum;
+	itemType: enum;
+	mat: enum;
 	site: number;
 	siteId: number;
 	slayerCaste: string;
@@ -989,7 +989,7 @@ export interface HistoricalEventHfDied {
 	victimHf: number;
 }
 export interface HistoricalEventHfDisturbedStructure {
-	action: string;
+	action: enum;
 	histFigId: number;
 	histfig: number;
 	site: number;
@@ -1031,7 +1031,7 @@ export interface HistoricalEventHfFreed {
 }
 export interface HistoricalEventHfGainsSecretGoal {
 	hfid: number;
-	secretGoal: string;
+	secretGoal: enum;
 }
 export interface HistoricalEventHfInterrogated {
 	arrestingEnid: number;
@@ -1045,7 +1045,7 @@ export interface HistoricalEventHfLearnsSecret {
 	artifact: number;
 	artifactId: number;
 	interaction: string;
-	secretText: string;
+	secretText: enum;
 	student: number;
 	studentHfid: number;
 	teacher: number;
@@ -1069,7 +1069,7 @@ export interface HistoricalEventHfPerformedHorribleExperiments {
 	subregionId: number;
 }
 export interface HistoricalEventHfPrayedInsideStructure {
-	action: string;
+	action: enum;
 	histFigId: number;
 	histfig: number;
 	site: number;
@@ -1082,10 +1082,10 @@ export interface HistoricalEventHfPreach {
 	entity2: number;
 	siteHfid: number;
 	speakerHfid: number;
-	topic: string;
+	topic: enum;
 }
 export interface HistoricalEventHfProfanedStructure {
-	action: string;
+	action: enum;
 	histFigId: number;
 	histfig: number;
 	site: number;
@@ -1112,13 +1112,13 @@ export interface HistoricalEventHfRecruitedUnitTypeForEntity {
 	hfid: number;
 	siteId: number;
 	subregionId: number;
-	unitType: string;
+	unitType: enum;
 }
 export interface HistoricalEventHfRelationshipDenied {
 	featureLayerId: number;
-	reason: string;
+	reason: enum;
 	reasonId: number;
-	relationship: string;
+	relationship: enum;
 	seekerHfid: number;
 	siteId: number;
 	subregionId: number;
@@ -1135,7 +1135,7 @@ export interface HistoricalEventHfRevived {
 	actorHfid: number;
 	disturbance: boolean;
 	featureLayerId: number;
-	ghost: string;
+	ghost: enum;
 	hfid: number;
 	raisedBefore: boolean;
 	siteId: number;
@@ -1147,7 +1147,7 @@ export interface HistoricalEventHfSimpleBattleEvent {
 	group2Hfid: number;
 	siteId: number;
 	subregionId: number;
-	subtype: string;
+	subtype: enum;
 }
 export interface HistoricalEventHfTravel {
 	coords: string;
@@ -1166,8 +1166,8 @@ export interface HistoricalEventHfViewedArtifact {
 export interface HistoricalEventHfWounded {
 	bodyPart: number;
 	featureLayerId: number;
-	injuryType: string;
-	partLost: string;
+	injuryType: enum;
+	partLost: enum;
 	site: number;
 	siteId: number;
 	subregionId: number;
@@ -1180,18 +1180,18 @@ export interface HistoricalEventHfWounded {
 	wounderHfid: number;
 }
 export interface HistoricalEventHfsFormedIntrigueRelationship {
-	action: string;
+	action: enum;
 	allyDefenseBonus: number;
-	circumstance: string;
+	circumstance: enum;
 	circumstanceId: number;
 	coconspiratorBonus: number;
 	corruptorHfid: number;
 	corruptorIdentity: number;
-	corruptorSeenAs: string;
+	corruptorSeenAs: enum;
 	failedJudgmentTest: boolean;
 	featureLayerId: number;
 	lureHfid: number;
-	method: string;
+	method: enum;
 	relevantEntityId: number;
 	relevantIdForMethod: number;
 	relevantPositionProfileId: number;
@@ -1200,21 +1200,21 @@ export interface HistoricalEventHfsFormedIntrigueRelationship {
 	successful: boolean;
 	targetHfid: number;
 	targetIdentity: number;
-	targetSeenAs: string;
-	topFacet: string;
+	targetSeenAs: enum;
+	topFacet: enum;
 	topFacetModifier: number;
 	topFacetRating: number;
-	topRelationshipFactor: string;
+	topRelationshipFactor: enum;
 	topRelationshipModifier: number;
 	topRelationshipRating: number;
-	topValue: string;
+	topValue: enum;
 	topValueModifier: number;
 	topValueRating: number;
 }
 export interface HistoricalEventHfsFormedReputationRelationship {
 	featureLayerId: number;
-	hfRep1Of2: string;
-	hfRep2Of1: string;
+	hfRep1Of2: enum;
+	hfRep2Of1: enum;
 	hfid1: number;
 	hfid2: number;
 	identityId1: number;
@@ -1227,7 +1227,7 @@ export interface HistoricalEventHolyCityDeclaration {
 	siteId: number;
 }
 export interface HistoricalEventInsurrectionStarted {
-	outcome: string;
+	outcome: enum;
 	siteId: number;
 	targetCivId: number;
 }
@@ -1245,13 +1245,13 @@ export interface HistoricalEventItemStolen {
 	site: number;
 	stashSite: number;
 	structure: number;
-	theftMethod: string;
+	theftMethod: enum;
 }
 export interface HistoricalEventItemStolenCircumstance {
 	defeated: number;
 	histEventCollection: number;
 	murdered: number;
-	type: string;
+	type: enum;
 }
 export interface HistoricalEventKnowledgeDiscovered {
 	first: boolean;
@@ -1260,15 +1260,15 @@ export interface HistoricalEventKnowledgeDiscovered {
 }
 export interface HistoricalEventMasterpieceArchConstructed {
 	buildingCustom: number;
-	buildingSubtype: string;
-	buildingType: string;
+	buildingSubtype: enum;
+	buildingType: enum;
 	entityId: number;
 	hfid: number;
 	maker: number;
 	makerEntity: number;
 	site: number;
 	siteId: number;
-	skillAtTime: string;
+	skillAtTime: enum;
 	unk2: number;
 }
 export interface HistoricalEventMasterpieceEngraving {
@@ -1280,7 +1280,7 @@ export interface HistoricalEventMasterpieceEngraving {
 	makerEntity: number;
 	site: number;
 	siteId: number;
-	skillAtTime: string;
+	skillAtTime: enum;
 }
 export interface HistoricalEventMasterpieceFood {
 	entityId: number;
@@ -1292,8 +1292,8 @@ export interface HistoricalEventMasterpieceItem {
 	entityId: number;
 	hfid: number;
 	itemId: number;
-	itemSubtype: string;
-	itemType: string;
+	itemSubtype: enum;
+	itemType: enum;
 	maker: number;
 	makerEntity: number;
 	mat: string;
@@ -1310,7 +1310,7 @@ export interface HistoricalEventMasterpieceItemImprovement {
 export interface HistoricalEventMasterpieceLost {
 	creationEvent: number;
 	histfig: number;
-	method: string;
+	method: enum;
 	site: number;
 }
 export interface HistoricalEventMerchant {
@@ -1324,17 +1324,17 @@ export interface HistoricalEventMerchant {
 	traderEntityId: number;
 }
 export interface HistoricalEventModifiedBuilding {
-	modification: string;
+	modification: enum;
 	modifierHfid: number;
 	siteId: number;
 	structureId: number;
 }
 export interface HistoricalEventMusicalFormCreated {
-	circumstance: string;
+	circumstance: enum;
 	circumstanceId: number;
 	formId: number;
 	histFigureId: number;
-	reason: string;
+	reason: enum;
 	reasonId: number;
 	siteId: number;
 }
@@ -1351,14 +1351,14 @@ export interface HistoricalEventPeaceAccepted {
 	site: number;
 	siteId: number;
 	source: number;
-	topic: string;
+	topic: enum;
 }
 export interface HistoricalEventPeaceRejected {
 	destination: number;
 	site: number;
 	siteId: number;
 	source: number;
-	topic: string;
+	topic: enum;
 }
 export interface HistoricalEventPerformance {
 	civId: number;
@@ -1380,7 +1380,7 @@ export interface HistoricalEventPlunderedSite {
 	wasRaid: boolean;
 }
 export interface HistoricalEventPoeticFormCreated {
-	circumstance: string;
+	circumstance: enum;
 	formId: number;
 	histFigureId: number;
 	siteId: number;
@@ -1414,7 +1414,7 @@ export interface HistoricalEventRegionpopIncorporatedIntoEntity {
 }
 export interface HistoricalEventRelationship {
 	event: number;
-	relationship: string;
+	relationship: enum;
 	sourceHf: number;
 	targetHf: number;
 	year: number;
@@ -1430,8 +1430,8 @@ export interface HistoricalEventRemoveHfEntityLink {
 	civId: number;
 	hfid: number;
 	histfig: number;
-	link: string;
-	linkType: string;
+	link: enum;
+	linkType: enum;
 	position: string;
 	positionId: number;
 }
@@ -1442,7 +1442,7 @@ export interface HistoricalEventRemoveHfHfLink {
 export interface HistoricalEventRemoveHfSiteLink {
 	civ: number;
 	histfig: number;
-	linkType: string;
+	linkType: enum;
 	site: number;
 	siteId: number;
 	structure: number;
@@ -1466,7 +1466,7 @@ export interface HistoricalEventSiteDied {
 	siteId: number;
 }
 export interface HistoricalEventSiteDispute {
-	dispute: string;
+	dispute: enum;
 	entityId1: number;
 	entityId2: number;
 	siteId1: number;
@@ -1494,7 +1494,7 @@ export interface HistoricalEventSiteTakenOver {
 export interface HistoricalEventSiteTributeForced {
 	attackerCivId: number;
 	defenderCivId: number;
-	season: string;
+	season: enum;
 	siteCivId: number;
 	siteId: number;
 }
@@ -1536,7 +1536,7 @@ export interface HistoricalEventTacticalSituation {
 	dTacticsRoll: number;
 	featureLayerId: number;
 	siteId: number;
-	situation: string;
+	situation: enum;
 	start: boolean;
 	structureId: number;
 	subregionId: number;
@@ -1552,10 +1552,10 @@ export interface HistoricalEventTrade {
 	traderHfid: number;
 }
 export interface HistoricalEventWrittenContentComposed {
-	circumstance: string;
+	circumstance: enum;
 	circumstanceId: number;
 	histFigureId: number;
-	reason: string;
+	reason: enum;
 	reasonId: number;
 	siteId: number;
 	subregionId: number;
@@ -1585,7 +1585,7 @@ export interface HistoricalFigure {
 	entitySquadLink: EntitySquadLink;
 	force: boolean;
 	ghost: boolean;
-	goal: string[];
+	goal: enum[];
 	hfLink: HfLink[];
 	hfSkill: HfSkill[];
 	holdsArtifact: number[];
@@ -1610,7 +1610,7 @@ export interface HistoricalFigure {
 export interface HistoricalFigureEntityLink {
 	entityId: number;
 	linkStrength: number;
-	linkType: string;
+	linkType: enum;
 }
 export interface HistoricalFigureSiteProperty {
 	propertyId: number;
@@ -1625,7 +1625,7 @@ export interface Honor {
 	name: string;
 	requiredBattles: number;
 	requiredKills: number;
-	requiredSkill: string;
+	requiredSkill: enum;
 	requiredSkillIpTotal: number;
 	requiredYears: number;
 	requiresAnyMeleeOrRangedSkill: boolean;
@@ -1645,7 +1645,7 @@ export interface Identity {
 	id: number;
 	name: string;
 	nemesisId: number;
-	profession: string;
+	profession: enum;
 	race: string;
 }
 export interface IntrigueActor {
@@ -1655,8 +1655,8 @@ export interface IntrigueActor {
 	localId: number;
 	promisedActorImmortality: boolean;
 	promisedMeImmortality: boolean;
-	role: string;
-	strategy: string;
+	role: enum;
+	strategy: enum;
 	strategyEnid: number;
 	strategyEppid: number;
 }
@@ -1671,7 +1671,7 @@ export interface IntriguePlot {
 	parentPlotHfid: number;
 	parentPlotId: number;
 	plotActor: PlotActor[];
-	type: string;
+	type: enum;
 }
 export interface Item {
 	nameString: string;
@@ -1707,7 +1707,7 @@ export interface PlotActor {
 	actorId: number;
 	agreementHasMessenger: boolean;
 	agreementId: number;
-	plotRole: string;
+	plotRole: enum;
 }
 export interface PoeticForm {
 	description: string;
@@ -1716,15 +1716,15 @@ export interface PoeticForm {
 }
 export interface Reference {
 	id: number;
-	type: string;
+	type: enum;
 }
 export interface Region {
 	coords: string;
-	evilness: string;
+	evilness: enum;
 	forceId: number;
 	id: number;
 	name: string;
-	type: string;
+	type: enum;
 }
 export interface RelationshipProfileHfHistorical {
 	fear: number;
@@ -1781,11 +1781,11 @@ export interface River {
 export interface Schedule {
 	feature: Feature[];
 	id: number;
-	itemSubtype: string;
-	itemType: string;
+	itemSubtype: enum;
+	itemType: enum;
 	reference: number;
 	reference2: number;
-	type: string;
+	type: enum;
 }
 export interface Site {
 	civId: number;
@@ -1796,11 +1796,11 @@ export interface Site {
 	rectangle: string;
 	siteProperties: { [key:number]:SiteSiteProperty; };
 	structures: { [key:number]:Structure; };
-	type: string;
+	type: enum;
 }
 export interface SiteLink {
 	entityId: number;
-	linkType: string;
+	linkType: enum;
 	occupationId: number;
 	siteId: number;
 	subId: number;
@@ -1809,7 +1809,7 @@ export interface SiteSiteProperty {
 	id: number;
 	ownerHfid: number;
 	structureId: number;
-	type: string;
+	type: enum;
 }
 export interface Structure {
 	copiedArtifactId: number[];
@@ -1823,15 +1823,15 @@ export interface Structure {
 	name: string;
 	name2: string;
 	religion: number;
-	subtype: string;
-	type: string;
+	subtype: enum;
+	type: enum;
 	worshipHfid: number;
 }
 export interface UndergroundRegion {
 	coords: string;
 	depth: number;
 	id: number;
-	type: string;
+	type: enum;
 }
 export interface VagueRelationship {
 	artisticBuddy: boolean;
@@ -1853,13 +1853,13 @@ export interface WorldConstruction {
 	coords: string;
 	id: number;
 	name: string;
-	type: string;
+	type: enum;
 }
 export interface WrittenContent {
 	author: number;
 	authorHfid: number;
 	authorRoll: number;
-	form: string;
+	form: enum;
 	formId: number;
 	id: number;
 	pageEnd: number;
@@ -1867,5 +1867,5 @@ export interface WrittenContent {
 	reference: Reference[];
 	style: string[];
 	title: string;
-	type: string;
+	type: enum;
 }

@@ -82,16 +82,13 @@ func createMetadata(a *AnalyzeData) (*Metadata, error) {
 		typeNames[k] = strcase.ToCamel(typeName(k))
 	}
 	for _, n := range util.Keys(double) {
-		fmt.Println(n)
 		for _, k := range objectTypes {
 			if strings.HasSuffix(k, PATH_SEPARATOR+n) {
-				fmt.Println("  ", k)
 				path := strings.Split(k, PATH_SEPARATOR)
 				for i := len(path) - 1; i > 0; i-- {
 					sub := strings.Join(path[:i], PATH_SEPARATOR)
 					if ok, _ := isArray(sub, fs); !ok {
 						typeNames[k] = strcase.ToCamel(typeName(sub) + "_" + typeName(k))
-						fmt.Println("    ", typeNames[k])
 						break
 					}
 				}
@@ -147,7 +144,19 @@ func createMetadata(a *AnalyzeData) (*Metadata, error) {
 						} else if !a.Fields[f].NoBool {
 							field.Type = "bool"
 						} else if a.Fields[f].IsString {
-							field.Type = "string"
+							if !a.Fields[f].Enum {
+								field.Type = "string"
+							} else {
+								var vs []string
+								for k := range a.Fields[f].Values {
+									vs = append(vs, k)
+								}
+								sort.Strings(vs)
+								field.EnumValues = &vs
+								field.Type = "enum"
+								el := typeNames[k] + field.Name
+								field.ElementType = &el
+							}
 						}
 						objFields[fn] = field
 					}
