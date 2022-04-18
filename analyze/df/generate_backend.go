@@ -23,11 +23,34 @@ import (
 	"fmt"
 )
 
+func InitSameFields() {
+	sameFields = map[string]map[string]map[string]bool{
+		{{- range $name, $obj := $.Objects }}
+		"{{$obj.Name}}": {
+			{{- range $field := ($obj.LegendFields "plus") }}
+			{{- if ne 0 (len ($obj.LegendFields "base")) }}
+			"{{$field.Name}}": {
+				{{- range $field2 := ($obj.LegendFields "base") }}
+				{{- if eq $field.Type $field2.Type }}
+				"{{ $field2.Name }}": true,
+				{{- end }}
+				{{- end }}
+			},
+			{{- end }}
+			{{- end }}
+		},
+		{{- end }}
+	}
+}
+
+
 {{- range $name, $obj := $.Objects }}
 type {{ $obj.Name }} struct {
 	{{- range $fname, $field := $obj.Fields }}
 	{{- if not (and (eq $fname "type") (not (not $obj.SubTypes))) }}
-	{{ $field.TypeLine }}
+	{{- if not ($field.SameField $obj) }}
+	{{ $field.TypeLine }} // {{ $fname }}
+	{{- end }}
 	{{- end }}
 	{{- end }}
 	{{- if not (not $obj.SubTypes) }}
@@ -41,7 +64,29 @@ func (x *{{ $obj.Name }}) Id() int { return x.Id_ }
 {{- if $obj.Named }}
 func (x *{{ $obj.Name }}) Name() string { return x.Name_ }
 {{- end }}
-func (x *{{ $obj.Name }}) RelatedToHf(id int) bool { return {{ $obj.Related "hfid,hf_id,_hf,hist_figure_id,Hfid,histfig_id,histfig" }} }
+func (x *{{ $obj.Name }}) RelatedToEntity(id int) bool { return {{ $obj.Related "civId,civ_id,entity_id,entity" }} }
+func (x *{{ $obj.Name }}) RelatedToHf(id int) bool { return {{ $obj.Related "hfid,hf_id,_hf,hist_figure_id,Hfid,histfig_id,histfig,bodies" }} }
+
+func (x *{{ $obj.Name }}) CheckFields() {
+	{{- range $field := ($obj.LegendFields "plus") }}
+	{{- if not ($field.SameField $obj) }}
+	{{- range $field2 := ($obj.LegendFields "base") }}
+		{{- if eq $field.Type $field2.Type }}
+		{{- if eq $field.Type "int" }}
+			if x.{{ $field.Name}} != x.{{ $field2.Name}} && x.{{ $field.Name}} != 0 && x.{{ $field2.Name}} != 0 {
+				sameFields["{{$obj.Name}}"]["{{ $field.Name}}"]["{{ $field2.Name}}"] = false
+			}
+		{{- end }}
+		{{- if eq $field.Type "string" }}
+			if x.{{ $field.Name}} != x.{{ $field2.Name}} && x.{{ $field.Name}} != "" && x.{{ $field2.Name}} != "" {
+				sameFields["{{$obj.Name}}"]["{{ $field.Name}}"]["{{ $field2.Name}}"] = false
+			}
+		{{- end }}		{{- end }}
+		{{- end }}
+		{{- end }}
+	{{- end }}
+}
+
 {{- end }}
 
 // Parser
@@ -94,6 +139,7 @@ func parse{{ $obj.Name }}{{ if $plus }}Plus{{ end }}(d *xml.Decoder, start *xml.
 
 		case xml.EndElement:
 			if t.Name.Local == start.Name.Local {
+				obj.CheckFields()
 				return obj, nil
 			}
 
@@ -133,7 +179,7 @@ func parse{{ $obj.Name }}{{ if $plus }}Plus{{ end }}(d *xml.Decoder, start *xml.
 				return obj, nil
 				
 				{{- else }}
-				{{ $field.EndAction }}
+				{{ $field.EndAction $obj }}
 				{{- end }}
 			{{- end }}{{- end }}
 			default:
@@ -146,7 +192,23 @@ func parse{{ $obj.Name }}{{ if $plus }}Plus{{ end }}(d *xml.Decoder, start *xml.
 {{- end }}
 `))
 
+var sameFields map[string]map[string]string
+
+func LoadSameFields() error {
+	data, err := ioutil.ReadFile("same.json")
+	if err != nil {
+		return err
+	}
+
+	sameFields = make(map[string]map[string]string)
+	json.Unmarshal(data, &sameFields)
+	return nil
+}
+
 func generateBackendCode(objects *Metadata) error {
+	LoadSameFields()
+	fmt.Println(sameFields["HistoricalEventAddHfEntityLink"])
+
 	file, _ := json.MarshalIndent(objects, "", "  ")
 	_ = ioutil.WriteFile("model.json", file, 0644)
 
@@ -254,11 +316,13 @@ func (f Field) StartAction(plus bool) string {
 	return ""
 }
 
-func (f Field) EndAction() string {
+func (f Field) EndAction(obj Object) string {
 	n := f.Name
 
 	if n == "Id" || n == "Name" {
 		n = n + "_"
+	} else {
+		n = f.CorrectedName(obj)
 	}
 
 	if !f.Multiple {
@@ -284,12 +348,46 @@ func (obj Object) Related(fields string) string {
 	var list []string
 	fs := strings.Split(fields, ",")
 	for n, f := range obj.Fields {
-		if f.Type == "int" && !f.Multiple && util.ContainsAny(n, fs...) {
-			list = append(list, fmt.Sprintf("x.%s == id", f.Name))
+		if f.Type == "int" && util.ContainsAny(n, fs...) && !f.SameField(obj) {
+			if !f.Multiple {
+				list = append(list, fmt.Sprintf("x.%s == id", f.Name))
+			} else {
+				list = append(list, fmt.Sprintf("containsInt(x.%s, id)", f.Name))
+			}
 		}
 	}
 	if len(list) > 0 {
 		return strings.Join(list, " || ")
 	}
 	return "false"
+}
+
+func (obj Object) LegendFields(t string) []Field {
+	var list []Field
+	for _, f := range obj.Fields {
+		if f.Name != "Name" && f.Name != "Id" && f.Name != "Type" && f.Legend == t && f.Type != "object" && !f.Multiple {
+			list = append(list, f)
+		}
+	}
+	return list
+}
+
+func (f Field) SameField(obj Object) bool {
+	if f.Legend != "plus" {
+		return false
+	}
+	_, ok := sameFields[obj.Name][f.Name]
+	// fmt.Println(obj.Name, f.Name, ok)
+	return ok
+}
+
+func (f Field) CorrectedName(obj Object) string {
+	if f.Legend != "plus" {
+		return f.Name
+	}
+	n, ok := sameFields[obj.Name][f.Name]
+	if ok {
+		return n
+	}
+	return f.Name
 }

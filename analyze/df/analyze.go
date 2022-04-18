@@ -24,6 +24,10 @@ func Generate() error {
 		return err
 	}
 
+	// if err := generateEventsCode(m); err != nil {
+	// 	return err
+	// }
+
 	if err := generateFrontendCode(m); err != nil {
 		return err
 	}

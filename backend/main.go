@@ -11,6 +11,7 @@ import (
 	_ "net/http/pprof"
 	"os"
 	"runtime"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -65,6 +66,12 @@ func main() {
 			id := obj.Id()
 			var list []*model.HistoricalEvent
 			switch obj.(type) {
+			case *model.Entity:
+				for _, e := range world.HistoricalEvents {
+					if e.Details.RelatedToEntity(id) {
+						list = append(list, e)
+					}
+				}
 			case *model.HistoricalFigure:
 				for _, e := range world.HistoricalEvents {
 					if e.Details.RelatedToHf(id) {
@@ -74,7 +81,32 @@ func main() {
 			default:
 				fmt.Printf("unknown type %T\n", obj)
 			}
+			sort.Slice(list, func(a, b int) bool { return list[a].Id_ < list[b].Id_ })
 			return list
+		},
+		"season": func(seconds int) string {
+			r := ""
+			month := seconds % 100800
+			if month <= 33600 {
+				r += "early "
+			} else if month <= 67200 {
+				r += "mid"
+			} else if month <= 100800 {
+				r += "late "
+			}
+
+			season := seconds % 403200
+			if season < 100800 {
+				r += "spring"
+			} else if season < 201600 {
+				r += "summer"
+			} else if season < 302400 {
+				r += "autumn"
+			} else if season < 403200 {
+				r += "winter"
+			}
+
+			return r
 		},
 	}
 	t := templates.New(functions)

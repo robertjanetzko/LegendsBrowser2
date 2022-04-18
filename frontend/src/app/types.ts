@@ -1461,7 +1461,7 @@ export interface IntriguePlot {
 	onHold: boolean;
 	parentPlotHfid: number;
 	parentPlotId: number;
-	plotActor: PlotActor;
+	plotActor: PlotActor[];
 	type: string;
 }
 export interface Item {

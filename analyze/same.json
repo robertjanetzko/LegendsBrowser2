@@ -1,0 +1,119 @@
+{
+  "HistoricalEventAddHfEntityLink": {
+    "Civ": "CivId",
+    "Histfig": "Hfid",
+    "LinkType": "Link"
+  },
+  "HistoricalEventAddHfHfLink": {
+    "Hf": "Hfid",
+    "HfTarget": "HfidTarget"
+  },
+  "HistoricalEventAddHfSiteLink": {
+    "Site": "SiteId"
+  },
+  "HistoricalEventArtifactCreated": {
+    "CreatorHfid": "HistFigureId",
+    "CreatorUnitId": "UnitId",
+    "Site": "SiteId"
+  },
+  "HistoricalEventAssumeIdentity": {
+    "IdentityHistfigId": "TricksterHfid",
+    "IdentityNemesisId": "TricksterHfid",
+    "Target": "TargetEnid",
+    "Trickster": "TricksterHfid"
+  },
+  "HistoricalEventBodyAbused": {
+    "Site": "SiteId"
+  },
+  "HistoricalEventChangeHfJob": {
+    "Site": "SiteId"
+  },
+  "HistoricalEventChangeHfState": {
+    "Site": "SiteId"
+  },
+  "HistoricalEventChangedCreatureType": {
+    "Changee": "ChangeeHfid",
+    "Changer": "ChangerHfid"
+  },
+  "HistoricalEventCreatedStructure": {
+    "BuilderHf": "BuilderHfid",
+    "Civ": "CivId",
+    "Site": "SiteId",
+    "SiteCiv": "SiteCivId"
+  },
+  "HistoricalEventCreatureDevoured": {
+    "Site": "SiteId"
+  },
+  "HistoricalEventEntityPrimaryCriminals": {
+    "Entity": "EntityId",
+    "Site": "SiteId",
+    "Structure": "StructureId"
+  },
+  "HistoricalEventEntityRelocate": {
+    "Entity": "EntityId",
+    "Site": "SiteId",
+    "Structure": "StructureId"
+  },
+  "HistoricalEventHfDied": {
+    "ArtifactId": "SlayerItemId",
+    "Item": "SlayerItemId",
+    "ItemSubtype": "Cause",
+    "Mat": "Cause",
+    "Site": "SiteId",
+    "SlayerHf": "SlayerHfid",
+    "VictimHf": "Hfid"
+  },
+  "HistoricalEventHfDisturbedStructure": {
+    "Histfig": "HistFigId",
+    "Site": "SiteId",
+    "Structure": "StructureId"
+  },
+  "HistoricalEventHfDoesInteraction": {
+    "Doer": "DoerHfid",
+    "Target": "TargetHfid"
+  },
+  "HistoricalEventHfLearnsSecret": {
+    "Artifact": "ArtifactId",
+    "Student": "StudentHfid",
+    "Teacher": "TeacherHfid"
+  },
+  "HistoricalEventHfNewPet": {
+    "Group": "GroupHfid",
+    "Site": "SiteId"
+  },
+  "HistoricalEventHfPrayedInsideStructure": {
+    "Histfig": "HistFigId",
+    "Site": "SiteId",
+    "Structure": "StructureId"
+  },
+  "HistoricalEventHfProfanedStructure": {
+    "Histfig": "HistFigId",
+    "Site": "SiteId",
+    "Structure": "StructureId"
+  },
+  "HistoricalEventHfWounded": {
+    "Site": "SiteId",
+    "Woundee": "WoundeeHfid",
+    "Wounder": "WounderHfid"
+  },
+  "HistoricalEventPeaceAccepted": {
+    "Site": "SiteId"
+  },
+  "HistoricalEventPeaceRejected": {
+    "Site": "SiteId"
+  },
+  "HistoricalEventRemoveHfEntityLink": {
+    "Civ": "CivId",
+    "Histfig": "Hfid",
+    "LinkType": "Link"
+  },
+  "HistoricalEventRemoveHfSiteLink": {
+    "Site": "SiteId"
+  },
+  "Structure": {
+    "Name2": "Subtype"
+  },
+  "WrittenContent": {
+    "Author": "AuthorHfid"
+  }
+}

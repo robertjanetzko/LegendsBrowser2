@@ -1,0 +1,49 @@
+{
+  "Artifact": {
+    "Writing": "StructureLocalId"
+  },
+  "HistoricalEventAddHfEntityLink": {
+    "LinkType": "Link"
+  },
+  "HistoricalEventAddHfSiteLink": {
+    "Site": "SiteId"
+  },
+  "HistoricalEventCreatedStructure": {
+    "Structure": "StructureId"
+  },
+  "HistoricalEventHfDied": {
+    "ItemSubtype": "Cause",
+    "Mat": "Cause"
+  },
+  "HistoricalEventHfDoesInteraction": {
+    "InteractionAction": "Interaction"
+  },
+  "HistoricalEventHfLearnsSecret": {
+    "SecretText": "Interaction"
+  },
+  "HistoricalEventMasterpieceItem": {
+    "Maker": "Hfid",
+    "MakerEntity": "EntityId",
+    "Site": "SiteId"
+  },
+  "HistoricalEventMerchant": {
+    "Destination": "DepotEntityId",
+    "Site": "SiteId",
+    "Source": "TraderEntityId"
+  },
+  "HistoricalEventPeaceAccepted": {
+    "Site": "SiteId"
+  },
+  "HistoricalEventPeaceRejected": {
+    "Site": "SiteId"
+  },
+  "HistoricalEventRemoveHfEntityLink": {
+    "LinkType": "Link"
+  },
+  "HistoricalEventRemoveHfSiteLink": {
+    "Site": "SiteId"
+  },
+  "Structure": {
+    "Name2": "Subtype"
+  }
+}

@@ -1,8 +1,10 @@
 package model
 
 import (
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"strconv"
@@ -15,6 +17,8 @@ func (e *HistoricalEvent) Name() string           { return "" }
 func (e *HistoricalEventCollection) Name() string { return "" }
 
 func Parse(file string) (*DfWorld, error) {
+	InitSameFields()
+
 	xmlFile, err := os.Open(file)
 	if err != nil {
 		fmt.Println(err)
@@ -79,6 +83,12 @@ BaseLoop:
 			}
 		}
 	}
+
+	same, err := json.MarshalIndent(exportSameFields(), "", "  ")
+	if err != nil {
+		return world, err
+	}
+	ioutil.WriteFile("same.json", same, 0644)
 
 	return world, nil
 }
@@ -164,4 +174,32 @@ func parseId(d *xml.Decoder) (int, error) {
 			}
 		}
 	}
+}
+
+var sameFields map[string]map[string]map[string]bool
+
+func exportSameFields() map[string]map[string]string {
+	export := make(map[string]map[string]string)
+
+	for objectType, v := range sameFields {
+		fields := make(map[string]string)
+		for field, v2 := range v {
+			c := 0
+			f := ""
+			for field2, same := range v2 {
+				if same {
+					c++
+					f = field2
+				}
+			}
+			if c == 1 {
+				fields[field] = f
+			}
+		}
+		if len(fields) > 0 {
+			export[objectType] = fields
+		}
+	}
+
+	return export
 }
