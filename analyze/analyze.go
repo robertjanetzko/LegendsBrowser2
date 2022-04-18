@@ -10,6 +10,7 @@ import (
 func main() {
 	a := flag.String("a", "", "analyze a file")
 	g := flag.Bool("g", false, "generate model")
+	e := flag.Bool("e", false, "regenerate events")
 	flag.Parse()
 
 	if len(*a) > 0 {
@@ -17,9 +18,26 @@ func main() {
 	}
 
 	if *g {
-		err := df.Generate()
+		a, err := df.LoadAnalyzeData()
 		if err != nil {
 			log.Fatal(err)
 		}
+
+		df.ListEnumCandidates(a)
+
+		m, err := df.CreateMetadata(a)
+		if err != nil {
+			log.Fatal(err)
+		}
+		if err := df.GenerateBackendCode(m); err != nil {
+			log.Fatal(err)
+		}
+
+		if *e {
+			if err := df.GenerateEventsCode(m); err != nil {
+				log.Fatal(err)
+			}
+		}
+
 	}
 }

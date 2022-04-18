@@ -20,7 +20,7 @@ func (x *{{ $obj.Name }}) Html() string { return "UNKNWON {{ $obj.Name }}" }
 {{- end }}
 `))
 
-func generateEventsCode(objects *Metadata) error {
+func GenerateEventsCode(objects *Metadata) error {
 	file, _ := json.MarshalIndent(objects, "", "  ")
 	_ = ioutil.WriteFile("model.json", file, 0644)
 

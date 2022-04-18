@@ -251,7 +251,7 @@ func LoadSameFields() error {
 	return nil
 }
 
-func generateBackendCode(objects *Metadata) error {
+func GenerateBackendCode(objects *Metadata) error {
 	LoadSameFields()
 
 	file, _ := json.MarshalIndent(objects, "", "  ")

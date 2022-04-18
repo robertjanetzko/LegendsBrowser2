@@ -9,34 +9,6 @@ import (
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
 
-func Generate() error {
-	a, err := LoadAnalyzeData()
-	if err != nil {
-		return err
-	}
-
-	listEnumCandidates(a)
-
-	m, err := createMetadata(a)
-	if err != nil {
-		return err
-	}
-
-	if err := generateBackendCode(m); err != nil {
-		return err
-	}
-
-	if err := generateEventsCode(m); err != nil {
-		return err
-	}
-
-	if err := generateFrontendCode(m); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 var allowedTyped = map[string]bool{
 	"df_world|historical_events|historical_event":                       true,
 	"df_world|historical_event_collections|historical_event_collection": true,
@@ -51,7 +23,7 @@ func typeName(k string) string {
 
 type Metadata map[string]Object
 
-func createMetadata(a *AnalyzeData) (*Metadata, error) {
+func CreateMetadata(a *AnalyzeData) (*Metadata, error) {
 	fs := filterSubtypes(&a.Fields)
 
 	// unique type names
@@ -257,7 +229,7 @@ func isObject(typ string, types []string) (bool, string) {
 	return fc > 0, typ
 }
 
-func listEnumCandidates(a *AnalyzeData) {
+func ListEnumCandidates(a *AnalyzeData) {
 	keys := util.Keys(a.Fields)
 	sort.Strings(keys)
 
