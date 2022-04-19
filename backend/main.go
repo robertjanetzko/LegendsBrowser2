@@ -23,8 +23,8 @@ import (
 
 var world *model.DfWorld
 
-//go:embed resources/frontend
-var frontend embed.FS
+//go:embed static
+var static embed.FS
 
 func main() {
 	f := flag.String("f", "", "open a file")
@@ -108,6 +108,9 @@ func main() {
 
 			return r
 		},
+		"html": func(value any) template.HTML {
+			return template.HTML(fmt.Sprint(value))
+		},
 	}
 	t := templates.New(functions)
 
@@ -167,7 +170,7 @@ func main() {
 
 	}
 
-	spa := spaHandler{staticFS: frontend, staticPath: "resources/frontend", indexPath: "index.html"}
+	spa := spaHandler{staticFS: static, staticPath: "static", indexPath: "index.html"}
 	router.PathPrefix("/").Handler(spa)
 
 	fmt.Println("Serving at :8080")
@@ -209,7 +212,7 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// }
 	// prepend the path with the path to the static directory
 	path = h.staticPath + path
-	fmt.Println(path)
+	fmt.Println(r.URL, "->", path)
 
 	_, err := h.staticFS.Open(path)
 	if os.IsNotExist(err) {
