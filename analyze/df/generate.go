@@ -13,6 +13,7 @@ type Object struct {
 	Typed     bool             `json:"typed,omitempty"`
 	SubTypes  *[]Subtype       `json:"subtypes,omitempty"`
 	SubTypeOf *string          `json:"subtypeof,omitempty"`
+	SubType   *string          `json:"subtype,omitempty"`
 	Fields    map[string]Field `json:"fields"`
 }
 
@@ -77,6 +78,9 @@ func (f Object) ActiveSubTypes(plus bool) []*ActiveSubType {
 	}
 
 	list := util.Values(subs)
+	for _, a := range list {
+		sort.Strings(a.Options)
+	}
 	sort.SliceStable(list, func(i, j int) bool {
 		return list[i].Case < list[j].Case
 	})

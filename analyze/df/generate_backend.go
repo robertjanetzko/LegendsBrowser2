@@ -110,6 +110,9 @@ func (x *{{ $obj.Name }}) Id() int { return x.Id_ }
 {{- if $obj.Named }}
 func (x *{{ $obj.Name }}) Name() string { return x.Name_ }
 {{- end }}
+{{- if $obj.SubType }}
+func (x *{{ $obj.Name }}) Type() string { return "{{ $obj.SubType }}" }
+{{- end }}
 func (x *{{ $obj.Name }}) RelatedToEntity(id int) bool { return {{ $obj.Related "civId,civ_id,entity_id,entity" }} }
 func (x *{{ $obj.Name }}) RelatedToHf(id int) bool { return {{ $obj.Related "hfid,hf_id,_hf,hist_figure_id,Hfid,histfig_id,histfig,bodies" }} }
 
@@ -408,6 +411,7 @@ func (obj Object) Related(fields string) string {
 			}
 		}
 	}
+	sort.Strings(list)
 	if len(list) > 0 {
 		return strings.Join(list, " || ")
 	}
@@ -421,6 +425,7 @@ func (obj Object) LegendFields(t string) []Field {
 			list = append(list, f)
 		}
 	}
+	sort.Slice(list, func(i, j int) bool { return list[i].Name < list[j].Name })
 	return list
 }
 

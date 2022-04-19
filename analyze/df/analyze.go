@@ -142,6 +142,7 @@ func CreateMetadata(a *AnalyzeData) (*Metadata, error) {
 				Typed:     a.Fields[k+PATH_SEPARATOR+"type"] != nil,
 				SubTypes:  getSubtypes(a, k),
 				SubTypeOf: getSubtypeOf(k),
+				SubType:   getSubtype(k),
 				Fields:    objFields,
 			}
 		}
@@ -190,6 +191,17 @@ func getSubtypeOf(k string) *string {
 		last := k[strings.LastIndex(k, PATH_SEPARATOR)+1:]
 		if strings.Contains(last, "+") {
 			base := strcase.ToCamel(last[:strings.Index(last, "+")])
+			return &base
+		}
+	}
+	return nil
+}
+
+func getSubtype(k string) *string {
+	if strings.Contains(k, PATH_SEPARATOR) {
+		last := k[strings.LastIndex(k, PATH_SEPARATOR)+1:]
+		if strings.Contains(last, "+") {
+			base := strcase.ToDelimited(last[strings.Index(last, "+")+1:], ' ')
 			return &base
 		}
 	}
