@@ -1,0 +1,9 @@
+{{template "layout.html" .}}
+
+{{define "title"}}{{ title .Type }}{{end}}
+
+{{define "content"}}
+
+{{ template "events.html" .Events }}
+
+{{- end }}

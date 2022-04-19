@@ -1,0 +1,11 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Historical Events{{end}}
+
+{{define "content"}}
+<ul>
+    {{- range $t := . }}
+    <li><a href="/events/{{ $t }}">{{ $t }}</a></li>
+    {{- end }}
+</ul>
+{{- end }}

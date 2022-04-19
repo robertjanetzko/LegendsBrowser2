@@ -1,7 +1,4 @@
 {
-  "Artifact": {
-    "Writing": "StructureLocalId"
-  },
   "HistoricalEventAddHfEntityLink": {
     "LinkType": "Link"
   },
@@ -15,19 +12,6 @@
     "Entity": "SiteId",
     "Involved": "SiteId",
     "Site": "SiteId"
-  },
-  "HistoricalEventHfDoesInteraction": {
-    "InteractionAction": "Interaction"
-  },
-  "HistoricalEventMasterpieceItem": {
-    "Maker": "Hfid",
-    "MakerEntity": "EntityId",
-    "Site": "SiteId"
-  },
-  "HistoricalEventMerchant": {
-    "Destination": "DepotEntityId",
-    "Site": "SiteId",
-    "Source": "TraderEntityId"
   },
   "HistoricalEventPeaceAccepted": {
     "Site": "SiteId"

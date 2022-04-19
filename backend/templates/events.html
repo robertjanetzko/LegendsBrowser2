@@ -1,5 +1,5 @@
 <ul>
-    {{- range $event := events . }}
+    {{- range $event := . }}
     <li>
         [{{ $event.Id }}] In {{ if gt $event.Seconds72 -1 }}{{ season $event.Seconds72 }} of {{ end }}{{ $event.Year }} {{
         html $event.Details.Html }} {{ json $event.Details }}

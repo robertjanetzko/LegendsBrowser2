@@ -11,10 +11,29 @@ func (e *Entity) Position(id int) *EntityPosition {
 	return nil
 }
 
+func (p *EntityPosition) GenderName(hf *HistoricalFigure) string {
+	if hf.Female() && p.NameFemale != "" {
+		return p.NameFemale
+	} else if hf.Male() && p.NameMale != "" {
+		return p.NameMale
+	} else {
+		return p.Name_
+	}
+}
+
+func (hf *HistoricalFigure) Female() bool {
+	return hf.Sex == 0 || hf.Caste == "FEMALE"
+}
+
+func (hf *HistoricalFigure) Male() bool {
+	return hf.Sex == 1 || hf.Caste == "MALE"
+}
+
 type HistoricalEventDetails interface {
 	RelatedToEntity(int) bool
 	RelatedToHf(int) bool
 	Html() string
+	Type() string
 }
 
 type HistoricalEventCollectionDetails interface {
@@ -30,6 +49,13 @@ func containsInt(list []int, id int) bool {
 }
 
 var world *DfWorld
+
+func entity(id int) string {
+	if x, ok := world.Entities[id]; ok {
+		return fmt.Sprintf(`<a href="/entity/%d">%s</a>`, x.Id(), x.Name())
+	}
+	return "UNKNOWN ENTITY"
+}
 
 func hf(id int) string {
 	if x, ok := world.HistoricalFigures[id]; ok {

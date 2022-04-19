@@ -19,6 +19,7 @@ import (
 	"github.com/pkg/profile"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/templates"
+	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
 
 var world *model.DfWorld
@@ -165,9 +166,10 @@ func main() {
 		// server.RegisterResource(router, "poeticForm", world.PoeticForms)
 		// server.RegisterResource(router, "written", world.WrittenContents)
 
-		RegisterPage(router, "/entity/{id}", t, "entity.html", func(id int) any { return world.Entities[id] })
-		RegisterPage(router, "/hf/{id}", t, "hf.html", func(id int) any { return world.HistoricalFigures[id] })
-
+		RegisterResourcePage(router, "/entity/{id}", t, "entity.html", func(id int) any { return world.Entities[id] })
+		RegisterResourcePage(router, "/hf/{id}", t, "hf.html", func(id int) any { return world.HistoricalFigures[id] })
+		RegisterPage(router, "/events", t, "eventTypes.html", func(p Parms) any { return allEventTypes() })
+		RegisterPage(router, "/events/{type}", t, "eventType.html", func(p Parms) any { return eventsOfType(p["type"]) })
 	}
 
 	spa := spaHandler{staticFS: static, staticPath: "static", indexPath: "index.html"}
@@ -175,18 +177,42 @@ func main() {
 
 	fmt.Println("Serving at :8080")
 	http.ListenAndServe(":8080", router)
-
 }
 
-func RegisterPage(router *mux.Router, path string, templates *templates.Template, template string, accessor func(int) any) {
-	get := func(w http.ResponseWriter, r *http.Request) {
-		id, err := strconv.Atoi(mux.Vars(r)["id"])
-		if err != nil {
-			fmt.Fprintln(w, err)
-			fmt.Println(err)
+func allEventTypes() []string {
+	types := make(map[string]bool)
+	for _, e := range world.HistoricalEvents {
+		types[e.Details.Type()] = true
+	}
+	var list = util.Keys(types)
+	sort.Strings(list)
+	return list
+}
+
+func eventsOfType(t string) any {
+	var list []*model.HistoricalEvent
+	for _, e := range world.HistoricalEvents {
+		if e.Details.Type() == t {
+			list = append(list, e)
 		}
-		fmt.Println("render", template, id)
-		err = templates.Render(w, template, accessor(id))
+	}
+
+	sort.Slice(list, func(i, j int) bool { return list[i].Id_ < list[j].Id_ })
+
+	return struct {
+		Type   string
+		Events []*model.HistoricalEvent
+	}{
+		Type:   t,
+		Events: list,
+	}
+}
+
+type Parms map[string]string
+
+func RegisterPage(router *mux.Router, path string, templates *templates.Template, template string, accessor func(Parms) any) {
+	get := func(w http.ResponseWriter, r *http.Request) {
+		err := templates.Render(w, template, accessor(mux.Vars(r)))
 		if err != nil {
 			fmt.Fprintln(w, err)
 			fmt.Println(err)
@@ -194,6 +220,13 @@ func RegisterPage(router *mux.Router, path string, templates *templates.Template
 	}
 
 	router.HandleFunc(path, get).Methods("GET")
+}
+
+func RegisterResourcePage(router *mux.Router, path string, templates *templates.Template, template string, accessor func(int) any) {
+	RegisterPage(router, path, templates, template, func(params Parms) any {
+		id, _ := strconv.Atoi(params["id"])
+		return accessor(id)
+	})
 }
 
 type spaHandler struct {

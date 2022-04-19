@@ -1,11 +1,69 @@
 package model
 
+import (
+	"fmt"
+	"strings"
+)
+
+func andList(list []string) string {
+	if len(list) > 1 {
+		return strings.Join(list[:len(list)-1], ", ") + " and " + list[len(list)-1]
+	}
+	return strings.Join(list, ", ")
+}
+
+func (x *Honor) Requirement() string {
+	var list []string
+	if x.GrantedToEverybody {
+		list = append(list, "attaining sufficent skill with a weapon or technique")
+	}
+	// if x.RequiredSkill { // TODO
+
+	// }
+	if x.RequiredBattles == 1 {
+		list = append(list, "serving in combat")
+	}
+	if x.RequiredBattles > 1 {
+		list = append(list, fmt.Sprintf("participating in %d battles", x.RequiredBattles))
+	}
+	if x.RequiredYears >= 1 {
+		list = append(list, fmt.Sprintf("%d years of membership", x.RequiredYears))
+	}
+	if x.RequiredKills >= 1 {
+		list = append(list, fmt.Sprintf("%d KILLS", x.RequiredKills)) // TODO
+	}
+
+	return " after " + andList(list)
+}
+
 func (x *HistoricalEventAddHfEntityHonor) Html() string {
-	return "UNKNWON HistoricalEventAddHfEntityHonor"
+	e := world.Entities[x.EntityId]
+	h := e.Honor[x.HonorId]
+	return fmt.Sprintf("%s received the title %s of %s%s", hf(x.Hfid), h.Name(), entity(x.EntityId), h.Requirement())
 }
 func (x *HistoricalEventAddHfEntityLink) Html() string {
-	return "UNKNWON HistoricalEventAddHfEntityLink"
+	h := hf(x.Hfid)
+	c := entity(x.CivId)
+	if x.AppointerHfid != -1 {
+		c += fmt.Sprintf(", appointed by %s", hf(x.AppointerHfid))
+	}
+	switch x.Link {
+	case HistoricalEventAddHfEntityLinkLink_Enemy:
+		return h + " became an enemy of " + c
+	case HistoricalEventAddHfEntityLinkLink_Member:
+		return h + " became a member of " + c
+	case HistoricalEventAddHfEntityLinkLink_Position:
+		return h + " became " + world.Entities[x.CivId].Position(x.PositionId).GenderName(world.HistoricalFigures[x.Hfid]) + " of " + c
+	case HistoricalEventAddHfEntityLinkLink_Prisoner:
+		return h + " was imprisoned by " + c
+	case HistoricalEventAddHfEntityLinkLink_Slave:
+		return h + " was enslaved by " + c
+	case HistoricalEventAddHfEntityLinkLink_Squad:
+		return h + " SQUAD " + c // TODO
+	}
+	return h + " became SOMETHING of " + c
 }
+
 func (x *HistoricalEventAddHfHfLink) Html() string   { return "UNKNWON HistoricalEventAddHfHfLink" }
 func (x *HistoricalEventAddHfSiteLink) Html() string { return "UNKNWON HistoricalEventAddHfSiteLink" }
 func (x *HistoricalEventAgreementFormed) Html() string {
