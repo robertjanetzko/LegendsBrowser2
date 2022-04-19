@@ -8,7 +8,7 @@ func (e *Entity) Position(id int) *EntityPosition {
 			return p
 		}
 	}
-	return nil
+	return &EntityPosition{Name_: "UNKNOWN POSITION"}
 }
 
 func (p *EntityPosition) GenderName(hf *HistoricalFigure) string {
@@ -50,6 +50,13 @@ func containsInt(list []int, id int) bool {
 
 var world *DfWorld
 
+func artifact(id int) string {
+	if x, ok := world.Artifacts[id]; ok {
+		return fmt.Sprintf(`<a href="/artifact/%d">%s</a>`, x.Id(), x.Name())
+	}
+	return "UNKNOWN ARTIFACT"
+}
+
 func entity(id int) string {
 	if x, ok := world.Entities[id]; ok {
 		return fmt.Sprintf(`<a href="/entity/%d">%s</a>`, x.Id(), x.Name())
@@ -69,4 +76,13 @@ func site(id int, prefix string) string {
 		return fmt.Sprintf(`%s <a href="/site/%d">%s</a>`, prefix, x.Id(), x.Name())
 	}
 	return "UNKNOWN SITE"
+}
+
+func structure(siteId, structureId int) string {
+	if x, ok := world.Sites[siteId]; ok {
+		if y, ok := x.Structures[structureId]; ok {
+			return fmt.Sprintf(`<a href="/site/%d/structure/%d">%s</a>`, siteId, structureId, y.Name())
+		}
+	}
+	return "UNKNOWN STRUCTURE"
 }

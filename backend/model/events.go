@@ -64,8 +64,53 @@ func (x *HistoricalEventAddHfEntityLink) Html() string {
 	return h + " became SOMETHING of " + c
 }
 
-func (x *HistoricalEventAddHfHfLink) Html() string   { return "UNKNWON HistoricalEventAddHfHfLink" }
-func (x *HistoricalEventAddHfSiteLink) Html() string { return "UNKNWON HistoricalEventAddHfSiteLink" }
+func (x *HistoricalEventAddHfHfLink) Html() string {
+	h := hf(x.Hfid)
+	t := hf(x.HfidTarget)
+	switch x.LinkType {
+	case HistoricalEventAddHfHfLinkLinkType_Apprentice:
+		return h + " became the master of " + t
+	case HistoricalEventAddHfHfLinkLinkType_Deity:
+		return h + " began worshipping " + t
+	case HistoricalEventAddHfHfLinkLinkType_FormerMaster: // TODO
+		return h + " began an apprenticeship under " + t
+	case HistoricalEventAddHfHfLinkLinkType_Lover:
+		return h + " became romantically involved with " + t
+	case HistoricalEventAddHfHfLinkLinkType_Master:
+		return h + " began an apprenticeship under " + t
+	case HistoricalEventAddHfHfLinkLinkType_PetOwner:
+		return h + " became the owner of " + t
+	case HistoricalEventAddHfHfLinkLinkType_Prisoner:
+		return h + " imprisoned " + t
+	case HistoricalEventAddHfHfLinkLinkType_Spouse:
+		return h + " married " + t
+	default:
+		return h + " LINKED TO " + t
+	}
+
+}
+func (x *HistoricalEventAddHfSiteLink) Html() string {
+	h := hf(x.Histfig)
+	c := ""
+	if x.Civ != -1 {
+		c = " of " + entity(x.Civ)
+	}
+	b := ""
+	if x.Structure != -1 {
+		b = " " + structure(x.SiteId, x.Structure)
+	}
+	s := site(x.SiteId, "in")
+	switch x.LinkType {
+	case HistoricalEventAddHfSiteLinkLinkType_HomeSiteAbstractBuilding:
+		return h + " took up residence in " + b + c + " " + s
+	case HistoricalEventAddHfSiteLinkLinkType_Occupation:
+		return h + " started working at " + b + c + " " + s
+	case HistoricalEventAddHfSiteLinkLinkType_SeatOfPower:
+		return h + " ruled from " + b + c + " " + s
+	default:
+		return h + " LINKED TO " + s
+	}
+}
 func (x *HistoricalEventAgreementFormed) Html() string {
 	return "UNKNWON HistoricalEventAgreementFormed"
 }
@@ -74,11 +119,48 @@ func (x *HistoricalEventAgreementRejected) Html() string {
 	return "UNKNWON HistoricalEventAgreementRejected"
 }
 func (x *HistoricalEventArtifactClaimFormed) Html() string {
-	return "UNKNWON HistoricalEventArtifactClaimFormed"
+	a := artifact(x.ArtifactId)
+	switch x.Claim {
+	case HistoricalEventArtifactClaimFormedClaim_Heirloom:
+		return a + " was made a family heirloom by " + hf(x.HistFigureId)
+	case HistoricalEventArtifactClaimFormedClaim_Symbol:
+		p := world.Entities[x.EntityId].Position(x.PositionProfileId).Name_
+		e := entity(x.EntityId)
+		return a + " was made a symbol of the " + p + " by " + e
+	case HistoricalEventArtifactClaimFormedClaim_Treasure:
+		c := ""
+		if x.Circumstance != HistoricalEventArtifactClaimFormedCircumstance_Unknown {
+			c = x.Circumstance.String()
+		}
+		if x.HistFigureId != -1 {
+			return a + " was claimed by " + hf(x.HistFigureId) + c
+		} else if x.EntityId != -1 {
+			return a + " was claimed by " + entity(x.EntityId) + c
+		}
+	}
+	return a + " was claimed"
 }
-func (x *HistoricalEventArtifactCopied) Html() string { return "UNKNWON HistoricalEventArtifactCopied" }
+func (x *HistoricalEventArtifactCopied) Html() string { // TODO original
+	return fmt.Sprintf("%s made a copy of the original %s from %s%s of %s, keeping it within %s%s",
+		entity(x.DestEntityId), artifact(x.ArtifactId), structure(x.SourceSiteId, x.SourceStructureId), site(x.SourceSiteId, " in "),
+		entity(x.SourceEntityId), structure(x.DestSiteId, x.DestStructureId), site(x.DestSiteId, " in "))
+}
 func (x *HistoricalEventArtifactCreated) Html() string {
-	return "UNKNWON HistoricalEventArtifactCreated"
+	a := artifact(x.ArtifactId)
+	h := hf(x.HistFigureId)
+	s := ""
+	if x.SiteId != -1 {
+		s = site(x.SiteId, " in ")
+	}
+	if !x.NameOnly {
+		return h + " created " + a + s
+	}
+	switch x.Reason {
+	case HistoricalEventArtifactCreatedReason_SanctifyHf:
+		return fmt.Sprintf("%s received its name%s from %s in order to sanctify %s as the item was a favorite possession", a, s, h, hf(x.SanctifyHf))
+	default:
+		return fmt.Sprintf("%s received its name%s from %s after defeating %s", a, s, h, hf(x.Circumstance.Defeated)) // TODO
+	}
 }
 func (x *HistoricalEventArtifactDestroyed) Html() string {
 	return "UNKNWON HistoricalEventArtifactDestroyed"
