@@ -25,8 +25,7 @@ var backendTemplate = template.Must(template.New("").Funcs(template.FuncMap{
 package model
 
 import (
-	"encoding/xml"
-	"strconv"
+	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 	"fmt"
 	"encoding/json"
 )
@@ -140,19 +139,13 @@ func (x *{{ $obj.Name }}) CheckFields() {
 
 // Parser
 
-func n(d []byte) int {
-	v, _ := strconv.Atoi(string(d))
-	return v
-}
-
 {{- range $name, $obj := $.Objects }}
 {{- range $plus := $.Modes }}
-func parse{{ $obj.Name }}{{ if $plus }}Plus{{ end }}(d *xml.Decoder, start *xml.StartElement{{ if $plus }}, obj *{{ $obj.Name }}{{ end }}) (*{{ $obj.Name }}, error) {
+func parse{{ $obj.Name }}{{ if $plus }}Plus{{ end }}(p *util.XMLParser{{ if $plus }}, obj *{{ $obj.Name }}{{ end }}) (*{{ $obj.Name }}, error) {
 	var (
 		{{- if not $plus }}
 		obj = &{{ $obj.Name }}{}
 		{{- end }}
-		data []byte
 	)
 	{{- if $plus }}
 	if obj == nil {
@@ -165,75 +158,63 @@ func parse{{ $obj.Name }}{{ if $plus }}Plus{{ end }}(d *xml.Decoder, start *xml.
 	{{- end }}
 
 	for {
-		tok, err := d.Token()
+		t, n, err := p.Token()
 		if err != nil {
 			return nil, err
 		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			switch t.Name.Local {
+		switch t {
+		case util.StartElement:
+			switch n {
 			{{- range $fname, $field := $obj.Fields }}
 			{{- if $field.Active $plus }}
 			case "{{ $fname }}":
-				{{ $field.StartAction $plus }}
-			{{- end }}
-			{{- end }}
+						{{- if and (eq $fname "type") (not (not $obj.SubTypes)) }}
+						data, err := p.Value()
+						if err != nil {
+							return nil, err
+						}
+						switch data {
+						{{- range $sub := ($obj.ActiveSubTypes $plus) }}
+						case "{{ $sub.Case }}":
+							{{- if eq 1 (len $sub.Options) }}
+							{{- if not $plus }}
+							obj.Details, err = parse{{ $sub.Name }}(p)
+							{{- else }}
+							obj.Details, err = parse{{ $sub.Name }}Plus(p, obj.Details.(*{{ $sub.Name }}))
+							{{- end }}
+							{{- else }}
+							switch details := obj.Details.(type) {
+								{{- range $opt := $sub.Options }}
+							case *{{ $opt}}:
+								obj.Details, err = parse{{ $opt }}Plus(p, details)
+								{{- end }}
+							default:
+								fmt.Println("unknown subtype option", obj.Details)
+								p.Skip()
+							}
+							{{- end }}
+						{{- end }}
+						default:
+							p.Skip()
+						}
+						if err != nil {
+							return nil, err
+						}
+						return obj, nil
+						
+						{{- else }}
+								{{ $field.StartAction $obj $plus }}
+								{{- end }}
+								{{- end }}
+								{{- end }}
 			default:
-				// fmt.Println("unknown field", t.Name.Local)
-				d.Skip()
+				// fmt.Println("unknown field", n)
+				p.Skip()
 			}
 
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == start.Name.Local {
+		case util.EndElement:
 				obj.CheckFields()
 				return obj, nil
-			}
-
-			switch t.Name.Local {
-			{{- range $fname, $field := $obj.Fields }}{{- if $field.Active $plus }}
-			case "{{ $fname }}":
-				{{- if and (eq $fname "type") (not (not $obj.SubTypes)) }}
-		
-				var err error
-				switch string(data) {
-				{{- range $sub := ($obj.ActiveSubTypes $plus) }}
-				case "{{ $sub.Case }}":
-					{{- if eq 1 (len $sub.Options) }}
-					{{- if not $plus }}
-					obj.Details, err = parse{{ $sub.Name }}(d, start)
-					{{- else }}
-					obj.Details, err = parse{{ $sub.Name }}Plus(d, start, obj.Details.(*{{ $sub.Name }}))
-					{{- end }}
-					{{- else }}
-					switch details := obj.Details.(type) {
-						{{- range $opt := $sub.Options }}
-					case *{{ $opt}}:
-						obj.Details, err = parse{{ $opt }}Plus(d, start, details)
-						{{- end }}
-					default:
-						fmt.Println("unknown subtype option", obj.Details)
-						d.Skip()
-					}
-					{{- end }}
-				{{- end }}
-				default:
-					d.Skip()
-				}
-				if err != nil {
-					return nil, err
-				}
-				return obj, nil
-				
-				{{- else }}
-				{{ $field.EndAction $obj }}
-				{{- end }}
-			{{- end }}{{- end }}
-			default:
-				// fmt.Println("unknown field", t.Name.Local)
-			}
 		}
 	}
 }
@@ -322,7 +303,7 @@ func (f Field) Init(plus bool) string {
 	return ""
 }
 
-func (f Field) StartAction(plus bool) string {
+func (f Field) StartAction(obj Object, plus bool) string {
 	n := f.Name
 
 	if n == "Id" || n == "Name" {
@@ -332,9 +313,9 @@ func (f Field) StartAction(plus bool) string {
 	if f.Type == "object" {
 		var p string
 		if !plus {
-			p = fmt.Sprintf("v, _ := parse%s(d, &t)", *f.ElementType)
+			p = fmt.Sprintf("v, _ := parse%s(p)", *f.ElementType)
 		} else {
-			p = fmt.Sprintf("v, _ := parse%sPlus(d, &t, &%s{})", *f.ElementType, *f.ElementType)
+			p = fmt.Sprintf("v, _ := parse%sPlus(p, &%s{})", *f.ElementType, *f.ElementType)
 		}
 		if !f.Multiple {
 			return fmt.Sprintf("%s\nobj.%s = v", p, n)
@@ -347,21 +328,50 @@ func (f Field) StartAction(plus bool) string {
 		gen := fmt.Sprintf("parse%s", *f.ElementType)
 
 		if f.Type == "array" {
-			return fmt.Sprintf("parseArray(d, &obj.%s, %s)", f.Name, gen)
+			return fmt.Sprintf("parseArray(p, &obj.%s, %s)", f.Name, gen)
 		}
 
 		if f.Type == "map" {
 			if !plus {
-				return fmt.Sprintf("parseMap(d, &obj.%s, %s)", f.Name, gen)
+				return fmt.Sprintf("parseMap(p, &obj.%s, %s)", f.Name, gen)
 			} else {
 				gen = fmt.Sprintf("parse%sPlus", *f.ElementType)
-				return fmt.Sprintf("parseMapPlus(d, &obj.%s, %s)", f.Name, gen)
+				return fmt.Sprintf("parseMapPlus(p, &obj.%s, %s)", f.Name, gen)
 			}
 		}
 	}
 
 	if f.Type == "int" || f.Type == "string" || f.Type == "bool" || f.Type == "enum" {
-		return "data = nil"
+		n := f.Name
+
+		if n == "Id" || n == "Name" {
+			n = n + "_"
+		} else {
+			n = f.CorrectedName(obj)
+		}
+
+		s := "data, err := p.Value()\nif err != nil { return nil, err }\n"
+
+		if !f.Multiple {
+			if f.Type == "int" {
+				return fmt.Sprintf("%sobj.%s = num(data)", s, n)
+			} else if f.Type == "string" {
+				return fmt.Sprintf("%sobj.%s = string(data)", s, n)
+			} else if f.Type == "bool" {
+				s := "_, err := p.Value()\nif err != nil { return nil, err }\n"
+				return fmt.Sprintf("%sobj.%s = true", s, n)
+			} else if f.Type == "enum" {
+				return fmt.Sprintf("%sobj.%s = parse%s%s(string(data))", s, n, obj.Name, n)
+			}
+		} else {
+			if f.Type == "int" {
+				return fmt.Sprintf("%sobj.%s = append(obj.%s, num(data))", s, n, n)
+			} else if f.Type == "string" {
+				return fmt.Sprintf("%sobj.%s = append(obj.%s, string(data))", s, n, n)
+			} else if f.Type == "enum" {
+				return fmt.Sprintf("%sobj.%s = append(obj.%s, parse%s%s(string(data)))", s, n, n, obj.Name, n)
+			}
+		}
 	}
 
 	return ""

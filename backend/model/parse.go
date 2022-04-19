@@ -1,6 +1,7 @@
 package model
 
 import (
+	"bufio"
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
@@ -39,10 +40,32 @@ func NewLegendsDecoder(file string) (*xml.Decoder, *os.File, *pb.ProgressBar, er
 	return d, xmlFile, bar, err
 }
 
+func NewLegendsParser(file string) (*util.XMLParser, *os.File, *pb.ProgressBar, error) {
+	fi, err := os.Stat(file)
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	size := fi.Size()
+	bar := pb.Full.Start64(size)
+
+	xmlFile, err := os.Open(file)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println("Successfully Opened", file)
+
+	converter := util.NewConvertReader(xmlFile)
+	barReader := bar.NewProxyReader(converter)
+	d := util.NewXMLParser(bufio.NewReader(barReader))
+
+	return d, xmlFile, bar, err
+}
+
 func Parse(file string) (*DfWorld, error) {
 	InitSameFields()
 
-	d, xmlFile, bar, err := NewLegendsDecoder(file)
+	p, xmlFile, bar, err := NewLegendsParser(file)
 	if err != nil {
 		return nil, err
 	}
@@ -50,14 +73,14 @@ func Parse(file string) (*DfWorld, error) {
 
 BaseLoop:
 	for {
-		tok, err := d.Token()
+		t, n, err := p.Token()
 		if err != nil {
 			return nil, err
 		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			if t.Name.Local == "df_world" {
-				world, err = parseDfWorld(d, &t)
+		switch t {
+		case util.StartElement:
+			if n == "df_world" {
+				world, err = parseDfWorld(p)
 				if err != nil {
 					return nil, err
 				}
@@ -73,7 +96,7 @@ BaseLoop:
 	if plus {
 		file = strings.Replace(file, "-legends.xml", "-legends_plus.xml", 1)
 
-		d, xmlFile, bar, err := NewLegendsDecoder(file)
+		p, xmlFile, bar, err = NewLegendsParser(file)
 		if err != nil {
 			return nil, err
 		}
@@ -81,14 +104,14 @@ BaseLoop:
 
 	PlusLoop:
 		for {
-			tok, err := d.Token()
+			t, n, err := p.Token()
 			if err != nil {
 				return nil, err
 			}
-			switch t := tok.(type) {
-			case xml.StartElement:
-				if t.Name.Local == "df_world" {
-					world, err = parseDfWorldPlus(d, &t, world)
+			switch t {
+			case util.StartElement:
+				if n == "df_world" {
+					world, err = parseDfWorldPlus(p, world)
 					if err != nil {
 						return nil, err
 					}
@@ -109,87 +132,87 @@ BaseLoop:
 	return world, nil
 }
 
-func parseArray[T any](d *xml.Decoder, dest *[]T, creator func(*xml.Decoder, *xml.StartElement) (T, error)) {
+func parseArray[T any](p *util.XMLParser, dest *[]T, creator func(*util.XMLParser) (T, error)) {
 	for {
-		tok, err := d.Token()
+		t, _, err := p.Token()
 		if err != nil {
 			return // nil, err
 		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			x, _ := creator(d, &t)
+		switch t {
+		case util.StartElement:
+			x, _ := creator(p)
 			*dest = append(*dest, x)
 
-		case xml.EndElement:
+		case util.EndElement:
 			return
 		}
 	}
 }
 
-func parseMap[T Identifiable](d *xml.Decoder, dest *map[int]T, creator func(*xml.Decoder, *xml.StartElement) (T, error)) {
+func parseMap[T Identifiable](p *util.XMLParser, dest *map[int]T, creator func(*util.XMLParser) (T, error)) {
 	for {
-		tok, err := d.Token()
+		t, _, err := p.Token()
 		if err != nil {
 			return // nil, err
 		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			x, _ := creator(d, &t)
+		switch t {
+		case util.StartElement:
+			x, _ := creator(p)
 			(*dest)[x.Id()] = x
 
-		case xml.EndElement:
+		case util.EndElement:
 			return
 		}
 	}
 }
 
-func parseMapPlus[T Identifiable](d *xml.Decoder, dest *map[int]T, creator func(*xml.Decoder, *xml.StartElement, T) (T, error)) {
+func parseMapPlus[T Identifiable](p *util.XMLParser, dest *map[int]T, creator func(*util.XMLParser, T) (T, error)) {
 	for {
-		tok, err := d.Token()
+		t, _, err := p.Token()
 		if err != nil {
 			return
 		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			id, err := parseId(d)
+		switch t {
+		case util.StartElement:
+			id, err := parseId(p)
 			if err != nil {
 				log.Fatal(err)
 			}
-			x, err := creator(d, &t, (*dest)[id])
+			x, err := creator(p, (*dest)[id])
 			if err != nil {
 				return
 			}
 			(*dest)[id] = x
 
-		case xml.EndElement:
+		case util.EndElement:
 			return
 		}
 	}
 }
-func parseId(d *xml.Decoder) (int, error) {
-	var data []byte
+func parseId(p *util.XMLParser) (int, error) {
 	for {
-		tok, err := d.Token()
+		t, n, err := p.Token()
 		if err != nil {
 			return -1, err
 		}
-		switch t := tok.(type) {
-		case xml.StartElement:
-			data = nil
-			if t.Name.Local != "id" {
-				d.Skip()
-				// return -1, fmt.Errorf("expected id at: %d", d.InputOffset())
-			}
-
-		case xml.CharData:
-			data = append(data, t...)
-
-		case xml.EndElement:
-			if t.Name.Local == "id" {
-				return strconv.Atoi(string(data))
+		switch t {
+		case util.StartElement:
+			if n == "id" {
+				s, err := p.Value()
+				if err != nil {
+					return -1, err
+				}
+				return strconv.Atoi(s)
+			} else {
+				p.Skip()
 			}
 		}
 	}
+}
+
+func num(s string) int {
+	v, _ := strconv.Atoi(s)
+	return v
 }
 
 var sameFields map[string]map[string]map[string]bool

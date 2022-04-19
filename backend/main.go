@@ -116,7 +116,7 @@ func main() {
 	t := templates.New(functions)
 
 	if len(*f) > 0 {
-		defer profile.Start(profile.MemProfile).Stop()
+		defer profile.Start(profile.ProfilePath(".")).Stop()
 		go func() {
 			http.ListenAndServe(":8081", nil)
 		}()
