@@ -11740,7 +11740,7 @@ func parseArtifact(p *util.XMLParser) (*Artifact, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "site_id":
 				data, err := p.Value()
 				if err != nil {
@@ -11795,25 +11795,25 @@ func parseArtifactPlus(p *util.XMLParser, obj *Artifact) (*Artifact, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemDescription = string(data)
+				obj.ItemDescription = txt(data)
 			case "item_subtype":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemSubtype = string(data)
+				obj.ItemSubtype = txt(data)
 			case "item_type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemType = string(data)
+				obj.ItemType = txt(data)
 			case "mat":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Mat = string(data)
+				obj.Mat = txt(data)
 			case "page_count":
 				data, err := p.Value()
 				if err != nil {
@@ -12198,7 +12198,7 @@ func parseCreaturePlus(p *util.XMLParser, obj *Creature) (*Creature, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.CreatureId = string(data)
+				obj.CreatureId = txt(data)
 			case "does_not_exist":
 				_, err := p.Value()
 				if err != nil {
@@ -12516,13 +12516,13 @@ func parseCreaturePlus(p *util.XMLParser, obj *Creature) (*Creature, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.NamePlural = string(data)
+				obj.NamePlural = txt(data)
 			case "name_singular":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.NameSingular = string(data)
+				obj.NameSingular = txt(data)
 			case "occurs_as_entity_race":
 				_, err := p.Value()
 				if err != nil {
@@ -12618,7 +12618,7 @@ func parseDanceForm(p *util.XMLParser) (*DanceForm, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Description = string(data)
+				obj.Description = txt(data)
 			case "id":
 				data, err := p.Value()
 				if err != nil {
@@ -12661,7 +12661,7 @@ func parseDanceFormPlus(p *util.XMLParser, obj *DanceForm) (*DanceForm, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -12769,7 +12769,7 @@ func parseDfWorldPlus(p *util.XMLParser, obj *DfWorld) (*DfWorld, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Altname = string(data)
+				obj.Altname = txt(data)
 			case "artifacts":
 				parseMapPlus(p, &obj.Artifacts, parseArtifactPlus)
 			case "creature_raw":
@@ -12805,7 +12805,7 @@ func parseDfWorldPlus(p *util.XMLParser, obj *DfWorld) (*DfWorld, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "poetic_forms":
 				parseMapPlus(p, &obj.PoeticForms, parsePoeticFormPlus)
 			case "regions":
@@ -12858,7 +12858,7 @@ func parseEntity(p *util.XMLParser) (*Entity, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -12895,7 +12895,7 @@ func parseEntityPlus(p *util.XMLParser, obj *Entity) (*Entity, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Claims = string(data)
+				obj.Claims = txt(data)
 			case "entity_link":
 				v, _ := parseEntityEntityLinkPlus(p, &EntityEntityLink{})
 				obj.EntityLink = append(obj.EntityLink, v)
@@ -12925,25 +12925,25 @@ func parseEntityPlus(p *util.XMLParser, obj *Entity) (*Entity, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Profession = parseEntityProfession(string(data))
+				obj.Profession = parseEntityProfession(txt(data))
 			case "race":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Race = string(data)
+				obj.Race = txt(data)
 			case "type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseEntityType(string(data))
+				obj.Type = parseEntityType(txt(data))
 			case "weapon":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Weapon = append(obj.Weapon, parseEntityWeapon(string(data)))
+				obj.Weapon = append(obj.Weapon, parseEntityWeapon(txt(data)))
 			case "worship_id":
 				data, err := p.Value()
 				if err != nil {
@@ -13016,7 +13016,7 @@ func parseEntityEntityLinkPlus(p *util.XMLParser, obj *EntityEntityLink) (*Entit
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseEntityEntityLinkType(string(data))
+				obj.Type = parseEntityEntityLinkType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -13235,7 +13235,7 @@ func parseEntityPopulationPlus(p *util.XMLParser, obj *EntityPopulation) (*Entit
 				if err != nil {
 					return nil, err
 				}
-				obj.Race = string(data)
+				obj.Race = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -13296,37 +13296,37 @@ func parseEntityPositionPlus(p *util.XMLParser, obj *EntityPosition) (*EntityPos
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "name_female":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.NameFemale = string(data)
+				obj.NameFemale = txt(data)
 			case "name_male":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.NameMale = string(data)
+				obj.NameMale = txt(data)
 			case "spouse":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Spouse = string(data)
+				obj.Spouse = txt(data)
 			case "spouse_female":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.SpouseFemale = string(data)
+				obj.SpouseFemale = txt(data)
 			case "spouse_male":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.SpouseMale = string(data)
+				obj.SpouseMale = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -13739,7 +13739,7 @@ func parseFeaturePlus(p *util.XMLParser, obj *Feature) (*Feature, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseFeatureType(string(data))
+				obj.Type = parseFeatureType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -13781,7 +13781,7 @@ func parseHfLink(p *util.XMLParser) (*HfLink, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.LinkType = parseHfLinkLinkType(string(data))
+				obj.LinkType = parseHfLinkLinkType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -13836,7 +13836,7 @@ func parseHfSkill(p *util.XMLParser) (*HfSkill, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Skill = string(data)
+				obj.Skill = txt(data)
 			case "total_ip":
 				data, err := p.Value()
 				if err != nil {
@@ -13897,7 +13897,7 @@ func parseHistoricalEra(p *util.XMLParser) (*HistoricalEra, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "start_year":
 				data, err := p.Value()
 				if err != nil {
@@ -13970,7 +13970,7 @@ func parseHistoricalEvent(p *util.XMLParser) (*HistoricalEvent, error) {
 				if err != nil {
 					return nil, err
 				}
-				switch data {
+				switch string(data) {
 				case "add hf entity honor":
 					obj.Details, err = parseHistoricalEventAddHfEntityHonor(p)
 				case "add hf entity link":
@@ -14272,7 +14272,7 @@ func parseHistoricalEventPlus(p *util.XMLParser, obj *HistoricalEvent) (*Histori
 				if err != nil {
 					return nil, err
 				}
-				switch data {
+				switch string(data) {
 				case "add_hf_entity_link":
 					obj.Details, err = parseHistoricalEventAddHfEntityLinkPlus(p, obj.Details.(*HistoricalEventAddHfEntityLink))
 				case "add_hf_hf_link":
@@ -14474,7 +14474,7 @@ func parseHistoricalEventAddHfEntityLink(p *util.XMLParser) (*HistoricalEventAdd
 				if err != nil {
 					return nil, err
 				}
-				obj.Link = parseHistoricalEventAddHfEntityLinkLink(string(data))
+				obj.Link = parseHistoricalEventAddHfEntityLinkLink(txt(data))
 			case "position_id":
 				data, err := p.Value()
 				if err != nil {
@@ -14535,13 +14535,13 @@ func parseHistoricalEventAddHfEntityLinkPlus(p *util.XMLParser, obj *HistoricalE
 				if err != nil {
 					return nil, err
 				}
-				obj.Link = parseHistoricalEventAddHfEntityLinkLink(string(data))
+				obj.Link = parseHistoricalEventAddHfEntityLinkLink(txt(data))
 			case "position":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Position = string(data)
+				obj.Position = txt(data)
 			case "promise_to_hfid":
 				data, err := p.Value()
 				if err != nil {
@@ -14626,7 +14626,7 @@ func parseHistoricalEventAddHfHfLinkPlus(p *util.XMLParser, obj *HistoricalEvent
 				if err != nil {
 					return nil, err
 				}
-				obj.LinkType = parseHistoricalEventAddHfHfLinkLinkType(string(data))
+				obj.LinkType = parseHistoricalEventAddHfHfLinkLinkType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -14699,7 +14699,7 @@ func parseHistoricalEventAddHfSiteLinkPlus(p *util.XMLParser, obj *HistoricalEve
 				if err != nil {
 					return nil, err
 				}
-				obj.LinkType = parseHistoricalEventAddHfSiteLinkLinkType(string(data))
+				obj.LinkType = parseHistoricalEventAddHfSiteLinkLinkType(txt(data))
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -14741,7 +14741,7 @@ func parseHistoricalEventAgreementFormed(p *util.XMLParser) (*HistoricalEventAgr
 				if err != nil {
 					return nil, err
 				}
-				obj.Action = parseHistoricalEventAgreementFormedAction(string(data))
+				obj.Action = parseHistoricalEventAgreementFormedAction(txt(data))
 			case "agreement_id":
 				data, err := p.Value()
 				if err != nil {
@@ -14789,13 +14789,13 @@ func parseHistoricalEventAgreementFormed(p *util.XMLParser) (*HistoricalEventAgr
 				if err != nil {
 					return nil, err
 				}
-				obj.Method = parseHistoricalEventAgreementFormedMethod(string(data))
+				obj.Method = parseHistoricalEventAgreementFormedMethod(txt(data))
 			case "reason":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Reason = parseHistoricalEventAgreementFormedReason(string(data))
+				obj.Reason = parseHistoricalEventAgreementFormedReason(txt(data))
 			case "relevant_entity_id":
 				data, err := p.Value()
 				if err != nil {
@@ -14825,7 +14825,7 @@ func parseHistoricalEventAgreementFormed(p *util.XMLParser) (*HistoricalEventAgr
 				if err != nil {
 					return nil, err
 				}
-				obj.TopFacet = parseHistoricalEventAgreementFormedTopFacet(string(data))
+				obj.TopFacet = parseHistoricalEventAgreementFormedTopFacet(txt(data))
 			case "top_facet_modifier":
 				data, err := p.Value()
 				if err != nil {
@@ -14843,7 +14843,7 @@ func parseHistoricalEventAgreementFormed(p *util.XMLParser) (*HistoricalEventAgr
 				if err != nil {
 					return nil, err
 				}
-				obj.TopRelationshipFactor = parseHistoricalEventAgreementFormedTopRelationshipFactor(string(data))
+				obj.TopRelationshipFactor = parseHistoricalEventAgreementFormedTopRelationshipFactor(txt(data))
 			case "top_relationship_modifier":
 				data, err := p.Value()
 				if err != nil {
@@ -14861,7 +14861,7 @@ func parseHistoricalEventAgreementFormed(p *util.XMLParser) (*HistoricalEventAgr
 				if err != nil {
 					return nil, err
 				}
-				obj.TopValue = parseHistoricalEventAgreementFormedTopValue(string(data))
+				obj.TopValue = parseHistoricalEventAgreementFormedTopValue(txt(data))
 			case "top_value_modifier":
 				data, err := p.Value()
 				if err != nil {
@@ -15044,13 +15044,13 @@ func parseHistoricalEventArtifactClaimFormed(p *util.XMLParser) (*HistoricalEven
 				if err != nil {
 					return nil, err
 				}
-				obj.Circumstance = parseHistoricalEventArtifactClaimFormedCircumstance(string(data))
+				obj.Circumstance = parseHistoricalEventArtifactClaimFormedCircumstance(txt(data))
 			case "claim":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Claim = parseHistoricalEventArtifactClaimFormedClaim(string(data))
+				obj.Claim = parseHistoricalEventArtifactClaimFormedClaim(txt(data))
 			case "entity_id":
 				data, err := p.Value()
 				if err != nil {
@@ -15296,7 +15296,7 @@ func parseHistoricalEventArtifactCreatedPlus(p *util.XMLParser, obj *HistoricalE
 				if err != nil {
 					return nil, err
 				}
-				obj.Reason = parseHistoricalEventArtifactCreatedReason(string(data))
+				obj.Reason = parseHistoricalEventArtifactCreatedReason(txt(data))
 			case "sanctify_hf":
 				data, err := p.Value()
 				if err != nil {
@@ -15369,7 +15369,7 @@ func parseHistoricalEventArtifactCreatedCircumstancePlus(p *util.XMLParser, obj 
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseHistoricalEventArtifactCreatedCircumstanceType(string(data))
+				obj.Type = parseHistoricalEventArtifactCreatedCircumstanceType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -15557,7 +15557,7 @@ func parseHistoricalEventArtifactGiven(p *util.XMLParser) (*HistoricalEventArtif
 				if err != nil {
 					return nil, err
 				}
-				obj.Reason = parseHistoricalEventArtifactGivenReason(string(data))
+				obj.Reason = parseHistoricalEventArtifactGivenReason(txt(data))
 			case "receiver_entity_id":
 				data, err := p.Value()
 				if err != nil {
@@ -15709,7 +15709,7 @@ func parseHistoricalEventArtifactPossessed(p *util.XMLParser) (*HistoricalEventA
 				if err != nil {
 					return nil, err
 				}
-				obj.Circumstance = parseHistoricalEventArtifactPossessedCircumstance(string(data))
+				obj.Circumstance = parseHistoricalEventArtifactPossessedCircumstance(txt(data))
 			case "circumstance_id":
 				data, err := p.Value()
 				if err != nil {
@@ -15733,7 +15733,7 @@ func parseHistoricalEventArtifactPossessed(p *util.XMLParser) (*HistoricalEventA
 				if err != nil {
 					return nil, err
 				}
-				obj.Reason = parseHistoricalEventArtifactPossessedReason(string(data))
+				obj.Reason = parseHistoricalEventArtifactPossessedReason(txt(data))
 			case "reason_id":
 				data, err := p.Value()
 				if err != nil {
@@ -16098,7 +16098,7 @@ func parseHistoricalEventAssumeIdentityPlus(p *util.XMLParser, obj *HistoricalEv
 				if err != nil {
 					return nil, err
 				}
-				obj.IdentityCaste = string(data)
+				obj.IdentityCaste = txt(data)
 			case "identity_histfig_id":
 				data, err := p.Value()
 				if err != nil {
@@ -16110,7 +16110,7 @@ func parseHistoricalEventAssumeIdentityPlus(p *util.XMLParser, obj *HistoricalEv
 				if err != nil {
 					return nil, err
 				}
-				obj.IdentityName = string(data)
+				obj.IdentityName = txt(data)
 			case "identity_nemesis_id":
 				data, err := p.Value()
 				if err != nil {
@@ -16122,7 +16122,7 @@ func parseHistoricalEventAssumeIdentityPlus(p *util.XMLParser, obj *HistoricalEv
 				if err != nil {
 					return nil, err
 				}
-				obj.IdentityRace = string(data)
+				obj.IdentityRace = txt(data)
 			case "target":
 				data, err := p.Value()
 				if err != nil {
@@ -16273,7 +16273,7 @@ func parseHistoricalEventBodyAbused(p *util.XMLParser) (*HistoricalEventBodyAbus
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "feature_layer_id":
 				data, err := p.Value()
 				if err != nil {
@@ -16322,7 +16322,7 @@ func parseHistoricalEventBodyAbusedPlus(p *util.XMLParser, obj *HistoricalEventB
 				if err != nil {
 					return nil, err
 				}
-				obj.AbuseType = parseHistoricalEventBodyAbusedAbuseType(string(data))
+				obj.AbuseType = parseHistoricalEventBodyAbusedAbuseType(txt(data))
 			case "bodies":
 				data, err := p.Value()
 				if err != nil {
@@ -16352,25 +16352,25 @@ func parseHistoricalEventBodyAbusedPlus(p *util.XMLParser, obj *HistoricalEventB
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemMat = string(data)
+				obj.ItemMat = txt(data)
 			case "item_subtype":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemSubtype = parseHistoricalEventBodyAbusedItemSubtype(string(data))
+				obj.ItemSubtype = parseHistoricalEventBodyAbusedItemSubtype(txt(data))
 			case "item_type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemType = parseHistoricalEventBodyAbusedItemType(string(data))
+				obj.ItemType = parseHistoricalEventBodyAbusedItemType(txt(data))
 			case "pile_type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.PileType = parseHistoricalEventBodyAbusedPileType(string(data))
+				obj.PileType = parseHistoricalEventBodyAbusedPileType(txt(data))
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -16606,13 +16606,13 @@ func parseHistoricalEventChangeHfBodyState(p *util.XMLParser) (*HistoricalEventC
 				if err != nil {
 					return nil, err
 				}
-				obj.BodyState = parseHistoricalEventChangeHfBodyStateBodyState(string(data))
+				obj.BodyState = parseHistoricalEventChangeHfBodyStateBodyState(txt(data))
 			case "coords":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "feature_layer_id":
 				data, err := p.Value()
 				if err != nil {
@@ -16752,13 +16752,13 @@ func parseHistoricalEventChangeHfJobPlus(p *util.XMLParser, obj *HistoricalEvent
 				if err != nil {
 					return nil, err
 				}
-				obj.NewJob = string(data)
+				obj.NewJob = txt(data)
 			case "old_job":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.OldJob = string(data)
+				obj.OldJob = txt(data)
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -16794,7 +16794,7 @@ func parseHistoricalEventChangeHfState(p *util.XMLParser) (*HistoricalEventChang
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "feature_layer_id":
 				data, err := p.Value()
 				if err != nil {
@@ -16812,13 +16812,13 @@ func parseHistoricalEventChangeHfState(p *util.XMLParser) (*HistoricalEventChang
 				if err != nil {
 					return nil, err
 				}
-				obj.Mood = parseHistoricalEventChangeHfStateMood(string(data))
+				obj.Mood = parseHistoricalEventChangeHfStateMood(txt(data))
 			case "reason":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Reason = parseHistoricalEventChangeHfStateReason(string(data))
+				obj.Reason = parseHistoricalEventChangeHfStateReason(txt(data))
 			case "site_id":
 				data, err := p.Value()
 				if err != nil {
@@ -16830,7 +16830,7 @@ func parseHistoricalEventChangeHfState(p *util.XMLParser) (*HistoricalEventChang
 				if err != nil {
 					return nil, err
 				}
-				obj.State = parseHistoricalEventChangeHfStateState(string(data))
+				obj.State = parseHistoricalEventChangeHfStateState(txt(data))
 			case "subregion_id":
 				data, err := p.Value()
 				if err != nil {
@@ -16873,7 +16873,7 @@ func parseHistoricalEventChangeHfStatePlus(p *util.XMLParser, obj *HistoricalEve
 				if err != nil {
 					return nil, err
 				}
-				obj.Reason = parseHistoricalEventChangeHfStateReason(string(data))
+				obj.Reason = parseHistoricalEventChangeHfStateReason(txt(data))
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -16885,7 +16885,7 @@ func parseHistoricalEventChangeHfStatePlus(p *util.XMLParser, obj *HistoricalEve
 				if err != nil {
 					return nil, err
 				}
-				obj.State = parseHistoricalEventChangeHfStateState(string(data))
+				obj.State = parseHistoricalEventChangeHfStateState(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -16927,25 +16927,25 @@ func parseHistoricalEventChangedCreatureType(p *util.XMLParser) (*HistoricalEven
 				if err != nil {
 					return nil, err
 				}
-				obj.NewCaste = string(data)
+				obj.NewCaste = txt(data)
 			case "new_race":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.NewRace = string(data)
+				obj.NewRace = txt(data)
 			case "old_caste":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.OldCaste = string(data)
+				obj.OldCaste = txt(data)
 			case "old_race":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.OldRace = string(data)
+				obj.OldRace = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -16988,25 +16988,25 @@ func parseHistoricalEventChangedCreatureTypePlus(p *util.XMLParser, obj *Histori
 				if err != nil {
 					return nil, err
 				}
-				obj.NewCaste = string(data)
+				obj.NewCaste = txt(data)
 			case "new_race":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.NewRace = string(data)
+				obj.NewRace = txt(data)
 			case "old_caste":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.OldCaste = string(data)
+				obj.OldCaste = txt(data)
 			case "old_race":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.OldRace = string(data)
+				obj.OldRace = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -17078,7 +17078,7 @@ func parseHistoricalEventCollection(p *util.XMLParser) (*HistoricalEventCollecti
 				if err != nil {
 					return nil, err
 				}
-				switch data {
+				switch string(data) {
 				case "abduction":
 					obj.Details, err = parseHistoricalEventCollectionAbduction(p)
 				case "battle":
@@ -17182,7 +17182,7 @@ func parseHistoricalEventCollectionAbduction(p *util.XMLParser) (*HistoricalEven
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "defending_enid":
 				data, err := p.Value()
 				if err != nil {
@@ -17317,7 +17317,7 @@ func parseHistoricalEventCollectionBattle(p *util.XMLParser) (*HistoricalEventCo
 				if err != nil {
 					return nil, err
 				}
-				obj.AttackingSquadRace = append(obj.AttackingSquadRace, string(data))
+				obj.AttackingSquadRace = append(obj.AttackingSquadRace, txt(data))
 			case "attacking_squad_site":
 				data, err := p.Value()
 				if err != nil {
@@ -17331,7 +17331,7 @@ func parseHistoricalEventCollectionBattle(p *util.XMLParser) (*HistoricalEventCo
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "d_support_merc_enid":
 				data, err := p.Value()
 				if err != nil {
@@ -17381,7 +17381,7 @@ func parseHistoricalEventCollectionBattle(p *util.XMLParser) (*HistoricalEventCo
 				if err != nil {
 					return nil, err
 				}
-				obj.DefendingSquadRace = append(obj.DefendingSquadRace, string(data))
+				obj.DefendingSquadRace = append(obj.DefendingSquadRace, txt(data))
 			case "defending_squad_site":
 				data, err := p.Value()
 				if err != nil {
@@ -17401,7 +17401,7 @@ func parseHistoricalEventCollectionBattle(p *util.XMLParser) (*HistoricalEventCo
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "noncom_hfid":
 				data, err := p.Value()
 				if err != nil {
@@ -17413,7 +17413,7 @@ func parseHistoricalEventCollectionBattle(p *util.XMLParser) (*HistoricalEventCo
 				if err != nil {
 					return nil, err
 				}
-				obj.Outcome = parseHistoricalEventCollectionBattleOutcome(string(data))
+				obj.Outcome = parseHistoricalEventCollectionBattleOutcome(txt(data))
 			case "site_id":
 				data, err := p.Value()
 				if err != nil {
@@ -17486,7 +17486,7 @@ func parseHistoricalEventCollectionBeastAttack(p *util.XMLParser) (*HistoricalEv
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "defending_enid":
 				data, err := p.Value()
 				if err != nil {
@@ -17693,7 +17693,7 @@ func parseHistoricalEventCollectionDuel(p *util.XMLParser) (*HistoricalEventColl
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "defending_hfid":
 				data, err := p.Value()
 				if err != nil {
@@ -18217,7 +18217,7 @@ func parseHistoricalEventCollectionPurge(p *util.XMLParser) (*HistoricalEventCol
 				if err != nil {
 					return nil, err
 				}
-				obj.Adjective = parseHistoricalEventCollectionPurgeAdjective(string(data))
+				obj.Adjective = parseHistoricalEventCollectionPurgeAdjective(txt(data))
 			case "ordinal":
 				data, err := p.Value()
 				if err != nil {
@@ -18290,7 +18290,7 @@ func parseHistoricalEventCollectionRaid(p *util.XMLParser) (*HistoricalEventColl
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "defending_enid":
 				data, err := p.Value()
 				if err != nil {
@@ -18466,7 +18466,7 @@ func parseHistoricalEventCollectionTheft(p *util.XMLParser) (*HistoricalEventCol
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "defending_enid":
 				data, err := p.Value()
 				if err != nil {
@@ -18569,7 +18569,7 @@ func parseHistoricalEventCollectionWar(p *util.XMLParser) (*HistoricalEventColle
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -18758,13 +18758,13 @@ func parseHistoricalEventCreateEntityPositionPlus(p *util.XMLParser, obj *Histor
 				if err != nil {
 					return nil, err
 				}
-				obj.Position = string(data)
+				obj.Position = txt(data)
 			case "reason":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Reason = parseHistoricalEventCreateEntityPositionReason(string(data))
+				obj.Reason = parseHistoricalEventCreateEntityPositionReason(txt(data))
 			case "site_civ":
 				data, err := p.Value()
 				if err != nil {
@@ -18952,7 +18952,7 @@ func parseHistoricalEventCreatedStructurePlus(p *util.XMLParser, obj *Historical
 				if err != nil {
 					return nil, err
 				}
-				obj.Rebuild = parseHistoricalEventCreatedStructureRebuild(string(data))
+				obj.Rebuild = parseHistoricalEventCreatedStructureRebuild(txt(data))
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -19128,7 +19128,7 @@ func parseHistoricalEventCreatureDevouredPlus(p *util.XMLParser, obj *Historical
 				if err != nil {
 					return nil, err
 				}
-				obj.Caste = string(data)
+				obj.Caste = txt(data)
 			case "eater":
 				data, err := p.Value()
 				if err != nil {
@@ -19146,7 +19146,7 @@ func parseHistoricalEventCreatureDevouredPlus(p *util.XMLParser, obj *Historical
 				if err != nil {
 					return nil, err
 				}
-				obj.Race = string(data)
+				obj.Race = txt(data)
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -19188,7 +19188,7 @@ func parseHistoricalEventDanceFormCreated(p *util.XMLParser) (*HistoricalEventDa
 				if err != nil {
 					return nil, err
 				}
-				obj.Circumstance = parseHistoricalEventDanceFormCreatedCircumstance(string(data))
+				obj.Circumstance = parseHistoricalEventDanceFormCreatedCircumstance(txt(data))
 			case "circumstance_id":
 				data, err := p.Value()
 				if err != nil {
@@ -19212,7 +19212,7 @@ func parseHistoricalEventDanceFormCreated(p *util.XMLParser) (*HistoricalEventDa
 				if err != nil {
 					return nil, err
 				}
-				obj.Reason = parseHistoricalEventDanceFormCreatedReason(string(data))
+				obj.Reason = parseHistoricalEventDanceFormCreatedReason(txt(data))
 			case "reason_id":
 				data, err := p.Value()
 				if err != nil {
@@ -19644,7 +19644,7 @@ func parseHistoricalEventEntityDissolved(p *util.XMLParser) (*HistoricalEventEnt
 				if err != nil {
 					return nil, err
 				}
-				obj.Reason = parseHistoricalEventEntityDissolvedReason(string(data))
+				obj.Reason = parseHistoricalEventEntityDissolvedReason(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -19985,13 +19985,13 @@ func parseHistoricalEventEntityLaw(p *util.XMLParser) (*HistoricalEventEntityLaw
 				if err != nil {
 					return nil, err
 				}
-				obj.LawAdd = parseHistoricalEventEntityLawLawAdd(string(data))
+				obj.LawAdd = parseHistoricalEventEntityLawLawAdd(txt(data))
 			case "law_remove":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.LawRemove = parseHistoricalEventEntityLawLawRemove(string(data))
+				obj.LawRemove = parseHistoricalEventEntityLawLawRemove(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -20295,7 +20295,7 @@ func parseHistoricalEventEntityPrimaryCriminalsPlus(p *util.XMLParser, obj *Hist
 				if err != nil {
 					return nil, err
 				}
-				obj.Action = parseHistoricalEventEntityPrimaryCriminalsAction(string(data))
+				obj.Action = parseHistoricalEventEntityPrimaryCriminalsAction(txt(data))
 			case "entity":
 				data, err := p.Value()
 				if err != nil {
@@ -20447,7 +20447,7 @@ func parseHistoricalEventEntityRelocatePlus(p *util.XMLParser, obj *HistoricalEv
 				if err != nil {
 					return nil, err
 				}
-				obj.Action = parseHistoricalEventEntityRelocateAction(string(data))
+				obj.Action = parseHistoricalEventEntityRelocateAction(txt(data))
 			case "entity":
 				data, err := p.Value()
 				if err != nil {
@@ -20495,7 +20495,7 @@ func parseHistoricalEventEntitySearchedSite(p *util.XMLParser) (*HistoricalEvent
 				if err != nil {
 					return nil, err
 				}
-				obj.Result = parseHistoricalEventEntitySearchedSiteResult(string(data))
+				obj.Result = parseHistoricalEventEntitySearchedSiteResult(txt(data))
 			case "searcher_civ_id":
 				data, err := p.Value()
 				if err != nil {
@@ -20568,7 +20568,7 @@ func parseHistoricalEventFailedFrameAttempt(p *util.XMLParser) (*HistoricalEvent
 				if err != nil {
 					return nil, err
 				}
-				obj.Crime = parseHistoricalEventFailedFrameAttemptCrime(string(data))
+				obj.Crime = parseHistoricalEventFailedFrameAttemptCrime(txt(data))
 			case "fooled_hfid":
 				data, err := p.Value()
 				if err != nil {
@@ -20647,7 +20647,7 @@ func parseHistoricalEventFailedIntrigueCorruption(p *util.XMLParser) (*Historica
 				if err != nil {
 					return nil, err
 				}
-				obj.Action = parseHistoricalEventFailedIntrigueCorruptionAction(string(data))
+				obj.Action = parseHistoricalEventFailedIntrigueCorruptionAction(txt(data))
 			case "ally_defense_bonus":
 				data, err := p.Value()
 				if err != nil {
@@ -20695,7 +20695,7 @@ func parseHistoricalEventFailedIntrigueCorruption(p *util.XMLParser) (*Historica
 				if err != nil {
 					return nil, err
 				}
-				obj.Method = parseHistoricalEventFailedIntrigueCorruptionMethod(string(data))
+				obj.Method = parseHistoricalEventFailedIntrigueCorruptionMethod(txt(data))
 			case "relevant_entity_id":
 				data, err := p.Value()
 				if err != nil {
@@ -20743,7 +20743,7 @@ func parseHistoricalEventFailedIntrigueCorruption(p *util.XMLParser) (*Historica
 				if err != nil {
 					return nil, err
 				}
-				obj.TopFacet = parseHistoricalEventFailedIntrigueCorruptionTopFacet(string(data))
+				obj.TopFacet = parseHistoricalEventFailedIntrigueCorruptionTopFacet(txt(data))
 			case "top_facet_modifier":
 				data, err := p.Value()
 				if err != nil {
@@ -20761,7 +20761,7 @@ func parseHistoricalEventFailedIntrigueCorruption(p *util.XMLParser) (*Historica
 				if err != nil {
 					return nil, err
 				}
-				obj.TopRelationshipFactor = parseHistoricalEventFailedIntrigueCorruptionTopRelationshipFactor(string(data))
+				obj.TopRelationshipFactor = parseHistoricalEventFailedIntrigueCorruptionTopRelationshipFactor(txt(data))
 			case "top_relationship_modifier":
 				data, err := p.Value()
 				if err != nil {
@@ -20779,7 +20779,7 @@ func parseHistoricalEventFailedIntrigueCorruption(p *util.XMLParser) (*Historica
 				if err != nil {
 					return nil, err
 				}
-				obj.TopValue = parseHistoricalEventFailedIntrigueCorruptionTopValue(string(data))
+				obj.TopValue = parseHistoricalEventFailedIntrigueCorruptionTopValue(txt(data))
 			case "top_value_modifier":
 				data, err := p.Value()
 				if err != nil {
@@ -20870,7 +20870,7 @@ func parseHistoricalEventFieldBattle(p *util.XMLParser) (*HistoricalEventFieldBa
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "d_support_merc_enid":
 				data, err := p.Value()
 				if err != nil {
@@ -21259,7 +21259,7 @@ func parseHistoricalEventHfConfronted(p *util.XMLParser) (*HistoricalEventHfConf
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "feature_layer_id":
 				data, err := p.Value()
 				if err != nil {
@@ -21277,7 +21277,7 @@ func parseHistoricalEventHfConfronted(p *util.XMLParser) (*HistoricalEventHfConf
 				if err != nil {
 					return nil, err
 				}
-				obj.Reason = append(obj.Reason, parseHistoricalEventHfConfrontedReason(string(data)))
+				obj.Reason = append(obj.Reason, parseHistoricalEventHfConfrontedReason(txt(data)))
 			case "site_id":
 				data, err := p.Value()
 				if err != nil {
@@ -21289,7 +21289,7 @@ func parseHistoricalEventHfConfronted(p *util.XMLParser) (*HistoricalEventHfConf
 				if err != nil {
 					return nil, err
 				}
-				obj.Situation = parseHistoricalEventHfConfrontedSituation(string(data))
+				obj.Situation = parseHistoricalEventHfConfrontedSituation(txt(data))
 			case "subregion_id":
 				data, err := p.Value()
 				if err != nil {
@@ -21398,7 +21398,7 @@ func parseHistoricalEventHfConvicted(p *util.XMLParser) (*HistoricalEventHfConvi
 				if err != nil {
 					return nil, err
 				}
-				obj.Crime = parseHistoricalEventHfConvictedCrime(string(data))
+				obj.Crime = parseHistoricalEventHfConvictedCrime(txt(data))
 			case "death_penalty":
 				_, err := p.Value()
 				if err != nil {
@@ -21634,7 +21634,7 @@ func parseHistoricalEventHfDied(p *util.XMLParser) (*HistoricalEventHfDied, erro
 				if err != nil {
 					return nil, err
 				}
-				obj.Cause = string(data)
+				obj.Cause = txt(data)
 			case "feature_layer_id":
 				data, err := p.Value()
 				if err != nil {
@@ -21658,7 +21658,7 @@ func parseHistoricalEventHfDied(p *util.XMLParser) (*HistoricalEventHfDied, erro
 				if err != nil {
 					return nil, err
 				}
-				obj.SlayerCaste = string(data)
+				obj.SlayerCaste = txt(data)
 			case "slayer_hfid":
 				data, err := p.Value()
 				if err != nil {
@@ -21676,7 +21676,7 @@ func parseHistoricalEventHfDied(p *util.XMLParser) (*HistoricalEventHfDied, erro
 				if err != nil {
 					return nil, err
 				}
-				obj.SlayerRace = string(data)
+				obj.SlayerRace = txt(data)
 			case "slayer_shooter_item_id":
 				data, err := p.Value()
 				if err != nil {
@@ -21725,7 +21725,7 @@ func parseHistoricalEventHfDiedPlus(p *util.XMLParser, obj *HistoricalEventHfDie
 				if err != nil {
 					return nil, err
 				}
-				obj.DeathCause = parseHistoricalEventHfDiedDeathCause(string(data))
+				obj.DeathCause = parseHistoricalEventHfDiedDeathCause(txt(data))
 			case "item":
 				data, err := p.Value()
 				if err != nil {
@@ -21737,19 +21737,19 @@ func parseHistoricalEventHfDiedPlus(p *util.XMLParser, obj *HistoricalEventHfDie
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemSubtype = parseHistoricalEventHfDiedItemSubtype(string(data))
+				obj.ItemSubtype = parseHistoricalEventHfDiedItemSubtype(txt(data))
 			case "item_type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemType = parseHistoricalEventHfDiedItemType(string(data))
+				obj.ItemType = parseHistoricalEventHfDiedItemType(txt(data))
 			case "mat":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Mat = parseHistoricalEventHfDiedMat(string(data))
+				obj.Mat = parseHistoricalEventHfDiedMat(txt(data))
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -21761,7 +21761,7 @@ func parseHistoricalEventHfDiedPlus(p *util.XMLParser, obj *HistoricalEventHfDie
 				if err != nil {
 					return nil, err
 				}
-				obj.SlayerCaste = string(data)
+				obj.SlayerCaste = txt(data)
 			case "slayer_hf":
 				data, err := p.Value()
 				if err != nil {
@@ -21773,7 +21773,7 @@ func parseHistoricalEventHfDiedPlus(p *util.XMLParser, obj *HistoricalEventHfDie
 				if err != nil {
 					return nil, err
 				}
-				obj.SlayerRace = string(data)
+				obj.SlayerRace = txt(data)
 			case "victim_hf":
 				data, err := p.Value()
 				if err != nil {
@@ -21852,7 +21852,7 @@ func parseHistoricalEventHfDisturbedStructurePlus(p *util.XMLParser, obj *Histor
 				if err != nil {
 					return nil, err
 				}
-				obj.Action = parseHistoricalEventHfDisturbedStructureAction(string(data))
+				obj.Action = parseHistoricalEventHfDisturbedStructureAction(txt(data))
 			case "histfig":
 				data, err := p.Value()
 				if err != nil {
@@ -21906,7 +21906,7 @@ func parseHistoricalEventHfDoesInteraction(p *util.XMLParser) (*HistoricalEventH
 				if err != nil {
 					return nil, err
 				}
-				obj.Interaction = string(data)
+				obj.Interaction = txt(data)
 			case "target_hfid":
 				data, err := p.Value()
 				if err != nil {
@@ -21949,7 +21949,7 @@ func parseHistoricalEventHfDoesInteractionPlus(p *util.XMLParser, obj *Historica
 				if err != nil {
 					return nil, err
 				}
-				obj.InteractionAction = string(data)
+				obj.InteractionAction = txt(data)
 			case "region":
 				data, err := p.Value()
 				if err != nil {
@@ -22246,7 +22246,7 @@ func parseHistoricalEventHfGainsSecretGoal(p *util.XMLParser) (*HistoricalEventH
 				if err != nil {
 					return nil, err
 				}
-				obj.SecretGoal = parseHistoricalEventHfGainsSecretGoalSecretGoal(string(data))
+				obj.SecretGoal = parseHistoricalEventHfGainsSecretGoalSecretGoal(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -22392,7 +22392,7 @@ func parseHistoricalEventHfLearnsSecret(p *util.XMLParser) (*HistoricalEventHfLe
 				if err != nil {
 					return nil, err
 				}
-				obj.Interaction = string(data)
+				obj.Interaction = txt(data)
 			case "student_hfid":
 				data, err := p.Value()
 				if err != nil {
@@ -22441,7 +22441,7 @@ func parseHistoricalEventHfLearnsSecretPlus(p *util.XMLParser, obj *HistoricalEv
 				if err != nil {
 					return nil, err
 				}
-				obj.SecretText = parseHistoricalEventHfLearnsSecretSecretText(string(data))
+				obj.SecretText = parseHistoricalEventHfLearnsSecretSecretText(txt(data))
 			case "student":
 				data, err := p.Value()
 				if err != nil {
@@ -22483,7 +22483,7 @@ func parseHistoricalEventHfNewPet(p *util.XMLParser) (*HistoricalEventHfNewPet, 
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "feature_layer_id":
 				data, err := p.Value()
 				if err != nil {
@@ -22544,7 +22544,7 @@ func parseHistoricalEventHfNewPetPlus(p *util.XMLParser, obj *HistoricalEventHfN
 				if err != nil {
 					return nil, err
 				}
-				obj.Pets = string(data)
+				obj.Pets = txt(data)
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -22702,7 +22702,7 @@ func parseHistoricalEventHfPrayedInsideStructurePlus(p *util.XMLParser, obj *His
 				if err != nil {
 					return nil, err
 				}
-				obj.Action = parseHistoricalEventHfPrayedInsideStructureAction(string(data))
+				obj.Action = parseHistoricalEventHfPrayedInsideStructureAction(txt(data))
 			case "histfig":
 				data, err := p.Value()
 				if err != nil {
@@ -22774,7 +22774,7 @@ func parseHistoricalEventHfPreach(p *util.XMLParser) (*HistoricalEventHfPreach, 
 				if err != nil {
 					return nil, err
 				}
-				obj.Topic = parseHistoricalEventHfPreachTopic(string(data))
+				obj.Topic = parseHistoricalEventHfPreachTopic(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -22872,7 +22872,7 @@ func parseHistoricalEventHfProfanedStructurePlus(p *util.XMLParser, obj *Histori
 				if err != nil {
 					return nil, err
 				}
-				obj.Action = parseHistoricalEventHfProfanedStructureAction(string(data))
+				obj.Action = parseHistoricalEventHfProfanedStructureAction(txt(data))
 			case "histfig":
 				data, err := p.Value()
 				if err != nil {
@@ -22999,7 +22999,7 @@ func parseHistoricalEventHfReachSummit(p *util.XMLParser) (*HistoricalEventHfRea
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "feature_layer_id":
 				data, err := p.Value()
 				if err != nil {
@@ -23102,7 +23102,7 @@ func parseHistoricalEventHfRecruitedUnitTypeForEntity(p *util.XMLParser) (*Histo
 				if err != nil {
 					return nil, err
 				}
-				obj.UnitType = parseHistoricalEventHfRecruitedUnitTypeForEntityUnitType(string(data))
+				obj.UnitType = parseHistoricalEventHfRecruitedUnitTypeForEntityUnitType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -23163,7 +23163,7 @@ func parseHistoricalEventHfRelationshipDenied(p *util.XMLParser) (*HistoricalEve
 				if err != nil {
 					return nil, err
 				}
-				obj.Reason = parseHistoricalEventHfRelationshipDeniedReason(string(data))
+				obj.Reason = parseHistoricalEventHfRelationshipDeniedReason(txt(data))
 			case "reason_id":
 				data, err := p.Value()
 				if err != nil {
@@ -23175,7 +23175,7 @@ func parseHistoricalEventHfRelationshipDenied(p *util.XMLParser) (*HistoricalEve
 				if err != nil {
 					return nil, err
 				}
-				obj.Relationship = parseHistoricalEventHfRelationshipDeniedRelationship(string(data))
+				obj.Relationship = parseHistoricalEventHfRelationshipDeniedRelationship(txt(data))
 			case "seeker_hfid":
 				data, err := p.Value()
 				if err != nil {
@@ -23351,7 +23351,7 @@ func parseHistoricalEventHfRevived(p *util.XMLParser) (*HistoricalEventHfRevived
 				if err != nil {
 					return nil, err
 				}
-				obj.Ghost = parseHistoricalEventHfRevivedGhost(string(data))
+				obj.Ghost = parseHistoricalEventHfRevivedGhost(txt(data))
 			case "hfid":
 				data, err := p.Value()
 				if err != nil {
@@ -23460,7 +23460,7 @@ func parseHistoricalEventHfSimpleBattleEvent(p *util.XMLParser) (*HistoricalEven
 				if err != nil {
 					return nil, err
 				}
-				obj.Subtype = parseHistoricalEventHfSimpleBattleEventSubtype(string(data))
+				obj.Subtype = parseHistoricalEventHfSimpleBattleEventSubtype(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -23515,7 +23515,7 @@ func parseHistoricalEventHfTravel(p *util.XMLParser) (*HistoricalEventHfTravel, 
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "feature_layer_id":
 				data, err := p.Value()
 				if err != nil {
@@ -23740,13 +23740,13 @@ func parseHistoricalEventHfWoundedPlus(p *util.XMLParser, obj *HistoricalEventHf
 				if err != nil {
 					return nil, err
 				}
-				obj.InjuryType = parseHistoricalEventHfWoundedInjuryType(string(data))
+				obj.InjuryType = parseHistoricalEventHfWoundedInjuryType(txt(data))
 			case "part_lost":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.PartLost = parseHistoricalEventHfWoundedPartLost(string(data))
+				obj.PartLost = parseHistoricalEventHfWoundedPartLost(txt(data))
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -23806,7 +23806,7 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(p *util.XMLParser) (*Hist
 				if err != nil {
 					return nil, err
 				}
-				obj.Action = parseHistoricalEventHfsFormedIntrigueRelationshipAction(string(data))
+				obj.Action = parseHistoricalEventHfsFormedIntrigueRelationshipAction(txt(data))
 			case "ally_defense_bonus":
 				data, err := p.Value()
 				if err != nil {
@@ -23818,7 +23818,7 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(p *util.XMLParser) (*Hist
 				if err != nil {
 					return nil, err
 				}
-				obj.Circumstance = parseHistoricalEventHfsFormedIntrigueRelationshipCircumstance(string(data))
+				obj.Circumstance = parseHistoricalEventHfsFormedIntrigueRelationshipCircumstance(txt(data))
 			case "circumstance_id":
 				data, err := p.Value()
 				if err != nil {
@@ -23848,7 +23848,7 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(p *util.XMLParser) (*Hist
 				if err != nil {
 					return nil, err
 				}
-				obj.CorruptorSeenAs = parseHistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs(string(data))
+				obj.CorruptorSeenAs = parseHistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs(txt(data))
 			case "failed_judgment_test":
 				_, err := p.Value()
 				if err != nil {
@@ -23872,7 +23872,7 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(p *util.XMLParser) (*Hist
 				if err != nil {
 					return nil, err
 				}
-				obj.Method = parseHistoricalEventHfsFormedIntrigueRelationshipMethod(string(data))
+				obj.Method = parseHistoricalEventHfsFormedIntrigueRelationshipMethod(txt(data))
 			case "relevant_entity_id":
 				data, err := p.Value()
 				if err != nil {
@@ -23926,13 +23926,13 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(p *util.XMLParser) (*Hist
 				if err != nil {
 					return nil, err
 				}
-				obj.TargetSeenAs = parseHistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs(string(data))
+				obj.TargetSeenAs = parseHistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs(txt(data))
 			case "top_facet":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.TopFacet = parseHistoricalEventHfsFormedIntrigueRelationshipTopFacet(string(data))
+				obj.TopFacet = parseHistoricalEventHfsFormedIntrigueRelationshipTopFacet(txt(data))
 			case "top_facet_modifier":
 				data, err := p.Value()
 				if err != nil {
@@ -23950,7 +23950,7 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(p *util.XMLParser) (*Hist
 				if err != nil {
 					return nil, err
 				}
-				obj.TopRelationshipFactor = parseHistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor(string(data))
+				obj.TopRelationshipFactor = parseHistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor(txt(data))
 			case "top_relationship_modifier":
 				data, err := p.Value()
 				if err != nil {
@@ -23968,7 +23968,7 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(p *util.XMLParser) (*Hist
 				if err != nil {
 					return nil, err
 				}
-				obj.TopValue = parseHistoricalEventHfsFormedIntrigueRelationshipTopValue(string(data))
+				obj.TopValue = parseHistoricalEventHfsFormedIntrigueRelationshipTopValue(txt(data))
 			case "top_value_modifier":
 				data, err := p.Value()
 				if err != nil {
@@ -24041,13 +24041,13 @@ func parseHistoricalEventHfsFormedReputationRelationship(p *util.XMLParser) (*Hi
 				if err != nil {
 					return nil, err
 				}
-				obj.HfRep1Of2 = parseHistoricalEventHfsFormedReputationRelationshipHfRep1Of2(string(data))
+				obj.HfRep1Of2 = parseHistoricalEventHfsFormedReputationRelationshipHfRep1Of2(txt(data))
 			case "hf_rep_2_of_1":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.HfRep2Of1 = parseHistoricalEventHfsFormedReputationRelationshipHfRep2Of1(string(data))
+				obj.HfRep2Of1 = parseHistoricalEventHfsFormedReputationRelationshipHfRep2Of1(txt(data))
 			case "hfid1":
 				data, err := p.Value()
 				if err != nil {
@@ -24199,7 +24199,7 @@ func parseHistoricalEventInsurrectionStarted(p *util.XMLParser) (*HistoricalEven
 				if err != nil {
 					return nil, err
 				}
-				obj.Outcome = parseHistoricalEventInsurrectionStartedOutcome(string(data))
+				obj.Outcome = parseHistoricalEventInsurrectionStartedOutcome(txt(data))
 			case "site_id":
 				data, err := p.Value()
 				if err != nil {
@@ -24321,19 +24321,19 @@ func parseHistoricalEventItemStolenPlus(p *util.XMLParser, obj *HistoricalEventI
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemSubtype = string(data)
+				obj.ItemSubtype = txt(data)
 			case "item_type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemType = string(data)
+				obj.ItemType = txt(data)
 			case "mat":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Mat = string(data)
+				obj.Mat = txt(data)
 			case "matindex":
 				data, err := p.Value()
 				if err != nil {
@@ -24369,7 +24369,7 @@ func parseHistoricalEventItemStolenPlus(p *util.XMLParser, obj *HistoricalEventI
 				if err != nil {
 					return nil, err
 				}
-				obj.TheftMethod = parseHistoricalEventItemStolenTheftMethod(string(data))
+				obj.TheftMethod = parseHistoricalEventItemStolenTheftMethod(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -24442,7 +24442,7 @@ func parseHistoricalEventItemStolenCircumstancePlus(p *util.XMLParser, obj *Hist
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseHistoricalEventItemStolenCircumstanceType(string(data))
+				obj.Type = parseHistoricalEventItemStolenCircumstanceType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -24484,7 +24484,7 @@ func parseHistoricalEventKnowledgeDiscovered(p *util.XMLParser) (*HistoricalEven
 				if err != nil {
 					return nil, err
 				}
-				obj.Knowledge = string(data)
+				obj.Knowledge = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -24557,7 +24557,7 @@ func parseHistoricalEventMasterpieceArchConstructed(p *util.XMLParser) (*Histori
 				if err != nil {
 					return nil, err
 				}
-				obj.SkillAtTime = parseHistoricalEventMasterpieceArchConstructedSkillAtTime(string(data))
+				obj.SkillAtTime = parseHistoricalEventMasterpieceArchConstructedSkillAtTime(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -24594,13 +24594,13 @@ func parseHistoricalEventMasterpieceArchConstructedPlus(p *util.XMLParser, obj *
 				if err != nil {
 					return nil, err
 				}
-				obj.BuildingSubtype = parseHistoricalEventMasterpieceArchConstructedBuildingSubtype(string(data))
+				obj.BuildingSubtype = parseHistoricalEventMasterpieceArchConstructedBuildingSubtype(txt(data))
 			case "building_type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.BuildingType = parseHistoricalEventMasterpieceArchConstructedBuildingType(string(data))
+				obj.BuildingType = parseHistoricalEventMasterpieceArchConstructedBuildingType(txt(data))
 			case "maker":
 				data, err := p.Value()
 				if err != nil {
@@ -24624,7 +24624,7 @@ func parseHistoricalEventMasterpieceArchConstructedPlus(p *util.XMLParser, obj *
 				if err != nil {
 					return nil, err
 				}
-				obj.SkillAtTime = parseHistoricalEventMasterpieceArchConstructedSkillAtTime(string(data))
+				obj.SkillAtTime = parseHistoricalEventMasterpieceArchConstructedSkillAtTime(txt(data))
 			case "unk_2":
 				data, err := p.Value()
 				if err != nil {
@@ -24678,7 +24678,7 @@ func parseHistoricalEventMasterpieceEngraving(p *util.XMLParser) (*HistoricalEve
 				if err != nil {
 					return nil, err
 				}
-				obj.SkillAtTime = parseHistoricalEventMasterpieceEngravingSkillAtTime(string(data))
+				obj.SkillAtTime = parseHistoricalEventMasterpieceEngravingSkillAtTime(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -24739,7 +24739,7 @@ func parseHistoricalEventMasterpieceEngravingPlus(p *util.XMLParser, obj *Histor
 				if err != nil {
 					return nil, err
 				}
-				obj.SkillAtTime = parseHistoricalEventMasterpieceEngravingSkillAtTime(string(data))
+				obj.SkillAtTime = parseHistoricalEventMasterpieceEngravingSkillAtTime(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -24860,7 +24860,7 @@ func parseHistoricalEventMasterpieceItem(p *util.XMLParser) (*HistoricalEventMas
 				if err != nil {
 					return nil, err
 				}
-				obj.SkillAtTime = string(data)
+				obj.SkillAtTime = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -24897,13 +24897,13 @@ func parseHistoricalEventMasterpieceItemPlus(p *util.XMLParser, obj *HistoricalE
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemSubtype = parseHistoricalEventMasterpieceItemItemSubtype(string(data))
+				obj.ItemSubtype = parseHistoricalEventMasterpieceItemItemSubtype(txt(data))
 			case "item_type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemType = parseHistoricalEventMasterpieceItemItemType(string(data))
+				obj.ItemType = parseHistoricalEventMasterpieceItemItemType(txt(data))
 			case "maker":
 				data, err := p.Value()
 				if err != nil {
@@ -24921,7 +24921,7 @@ func parseHistoricalEventMasterpieceItemPlus(p *util.XMLParser, obj *HistoricalE
 				if err != nil {
 					return nil, err
 				}
-				obj.Mat = string(data)
+				obj.Mat = txt(data)
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -24933,7 +24933,7 @@ func parseHistoricalEventMasterpieceItemPlus(p *util.XMLParser, obj *HistoricalE
 				if err != nil {
 					return nil, err
 				}
-				obj.SkillAtTime = string(data)
+				obj.SkillAtTime = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -25073,7 +25073,7 @@ func parseHistoricalEventMasterpieceLostPlus(p *util.XMLParser, obj *HistoricalE
 				if err != nil {
 					return nil, err
 				}
-				obj.Method = parseHistoricalEventMasterpieceLostMethod(string(data))
+				obj.Method = parseHistoricalEventMasterpieceLostMethod(txt(data))
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -25206,7 +25206,7 @@ func parseHistoricalEventModifiedBuilding(p *util.XMLParser) (*HistoricalEventMo
 				if err != nil {
 					return nil, err
 				}
-				obj.Modification = parseHistoricalEventModifiedBuildingModification(string(data))
+				obj.Modification = parseHistoricalEventModifiedBuildingModification(txt(data))
 			case "modifier_hfid":
 				data, err := p.Value()
 				if err != nil {
@@ -25279,7 +25279,7 @@ func parseHistoricalEventMusicalFormCreated(p *util.XMLParser) (*HistoricalEvent
 				if err != nil {
 					return nil, err
 				}
-				obj.Circumstance = parseHistoricalEventMusicalFormCreatedCircumstance(string(data))
+				obj.Circumstance = parseHistoricalEventMusicalFormCreatedCircumstance(txt(data))
 			case "circumstance_id":
 				data, err := p.Value()
 				if err != nil {
@@ -25303,7 +25303,7 @@ func parseHistoricalEventMusicalFormCreated(p *util.XMLParser) (*HistoricalEvent
 				if err != nil {
 					return nil, err
 				}
-				obj.Reason = parseHistoricalEventMusicalFormCreatedReason(string(data))
+				obj.Reason = parseHistoricalEventMusicalFormCreatedReason(txt(data))
 			case "reason_id":
 				data, err := p.Value()
 				if err != nil {
@@ -25504,7 +25504,7 @@ func parseHistoricalEventPeaceAcceptedPlus(p *util.XMLParser, obj *HistoricalEve
 				if err != nil {
 					return nil, err
 				}
-				obj.Topic = parseHistoricalEventPeaceAcceptedTopic(string(data))
+				obj.Topic = parseHistoricalEventPeaceAcceptedTopic(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -25583,7 +25583,7 @@ func parseHistoricalEventPeaceRejectedPlus(p *util.XMLParser, obj *HistoricalEve
 				if err != nil {
 					return nil, err
 				}
-				obj.Topic = parseHistoricalEventPeaceRejectedTopic(string(data))
+				obj.Topic = parseHistoricalEventPeaceRejectedTopic(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -25801,7 +25801,7 @@ func parseHistoricalEventPoeticFormCreated(p *util.XMLParser) (*HistoricalEventP
 				if err != nil {
 					return nil, err
 				}
-				obj.Circumstance = parseHistoricalEventPoeticFormCreatedCircumstance(string(data))
+				obj.Circumstance = parseHistoricalEventPoeticFormCreatedCircumstance(txt(data))
 			case "form_id":
 				data, err := p.Value()
 				if err != nil {
@@ -26215,7 +26215,7 @@ func parseHistoricalEventRelationshipPlus(p *util.XMLParser, obj *HistoricalEven
 				if err != nil {
 					return nil, err
 				}
-				obj.Relationship = parseHistoricalEventRelationshipRelationship(string(data))
+				obj.Relationship = parseHistoricalEventRelationshipRelationship(txt(data))
 			case "source_hf":
 				data, err := p.Value()
 				if err != nil {
@@ -26348,7 +26348,7 @@ func parseHistoricalEventRemoveHfEntityLink(p *util.XMLParser) (*HistoricalEvent
 				if err != nil {
 					return nil, err
 				}
-				obj.Link = parseHistoricalEventRemoveHfEntityLinkLink(string(data))
+				obj.Link = parseHistoricalEventRemoveHfEntityLinkLink(txt(data))
 			case "position_id":
 				data, err := p.Value()
 				if err != nil {
@@ -26397,13 +26397,13 @@ func parseHistoricalEventRemoveHfEntityLinkPlus(p *util.XMLParser, obj *Historic
 				if err != nil {
 					return nil, err
 				}
-				obj.Link = parseHistoricalEventRemoveHfEntityLinkLink(string(data))
+				obj.Link = parseHistoricalEventRemoveHfEntityLinkLink(txt(data))
 			case "position":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Position = string(data)
+				obj.Position = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -26537,7 +26537,7 @@ func parseHistoricalEventRemoveHfSiteLinkPlus(p *util.XMLParser, obj *Historical
 				if err != nil {
 					return nil, err
 				}
-				obj.LinkType = parseHistoricalEventRemoveHfSiteLinkLinkType(string(data))
+				obj.LinkType = parseHistoricalEventRemoveHfSiteLinkLinkType(txt(data))
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -26761,7 +26761,7 @@ func parseHistoricalEventSiteDispute(p *util.XMLParser) (*HistoricalEventSiteDis
 				if err != nil {
 					return nil, err
 				}
-				obj.Dispute = parseHistoricalEventSiteDisputeDispute(string(data))
+				obj.Dispute = parseHistoricalEventSiteDisputeDispute(txt(data))
 			case "entity_id_1":
 				data, err := p.Value()
 				if err != nil {
@@ -27077,7 +27077,7 @@ func parseHistoricalEventSiteTributeForced(p *util.XMLParser) (*HistoricalEventS
 				if err != nil {
 					return nil, err
 				}
-				obj.Season = parseHistoricalEventSiteTributeForcedSeason(string(data))
+				obj.Season = parseHistoricalEventSiteTributeForcedSeason(txt(data))
 			case "site_civ_id":
 				data, err := p.Value()
 				if err != nil {
@@ -27477,7 +27477,7 @@ func parseHistoricalEventTacticalSituation(p *util.XMLParser) (*HistoricalEventT
 				if err != nil {
 					return nil, err
 				}
-				obj.Situation = parseHistoricalEventTacticalSituationSituation(string(data))
+				obj.Situation = parseHistoricalEventTacticalSituationSituation(txt(data))
 			case "start":
 				_, err := p.Value()
 				if err != nil {
@@ -27647,7 +27647,7 @@ func parseHistoricalEventWrittenContentComposed(p *util.XMLParser) (*HistoricalE
 				if err != nil {
 					return nil, err
 				}
-				obj.Circumstance = parseHistoricalEventWrittenContentComposedCircumstance(string(data))
+				obj.Circumstance = parseHistoricalEventWrittenContentComposedCircumstance(txt(data))
 			case "circumstance_id":
 				data, err := p.Value()
 				if err != nil {
@@ -27665,7 +27665,7 @@ func parseHistoricalEventWrittenContentComposed(p *util.XMLParser) (*HistoricalE
 				if err != nil {
 					return nil, err
 				}
-				obj.Reason = parseHistoricalEventWrittenContentComposedReason(string(data))
+				obj.Reason = parseHistoricalEventWrittenContentComposedReason(txt(data))
 			case "reason_id":
 				data, err := p.Value()
 				if err != nil {
@@ -27744,7 +27744,7 @@ func parseHistoricalFigure(p *util.XMLParser) (*HistoricalFigure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.ActiveInteraction = append(obj.ActiveInteraction, string(data))
+				obj.ActiveInteraction = append(obj.ActiveInteraction, txt(data))
 			case "adventurer":
 				_, err := p.Value()
 				if err != nil {
@@ -27762,7 +27762,7 @@ func parseHistoricalFigure(p *util.XMLParser) (*HistoricalFigure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.AnimatedString = string(data)
+				obj.AnimatedString = txt(data)
 			case "appeared":
 				data, err := p.Value()
 				if err != nil {
@@ -27774,7 +27774,7 @@ func parseHistoricalFigure(p *util.XMLParser) (*HistoricalFigure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.AssociatedType = string(data)
+				obj.AssociatedType = txt(data)
 			case "birth_seconds72":
 				data, err := p.Value()
 				if err != nil {
@@ -27798,7 +27798,7 @@ func parseHistoricalFigure(p *util.XMLParser) (*HistoricalFigure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Caste = string(data)
+				obj.Caste = txt(data)
 			case "current_identity_id":
 				data, err := p.Value()
 				if err != nil {
@@ -27864,7 +27864,7 @@ func parseHistoricalFigure(p *util.XMLParser) (*HistoricalFigure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Goal = append(obj.Goal, parseHistoricalFigureGoal(string(data)))
+				obj.Goal = append(obj.Goal, parseHistoricalFigureGoal(txt(data)))
 			case "hf_link":
 				v, _ := parseHfLink(p)
 				obj.HfLink = append(obj.HfLink, v)
@@ -27891,7 +27891,7 @@ func parseHistoricalFigure(p *util.XMLParser) (*HistoricalFigure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.InteractionKnowledge = append(obj.InteractionKnowledge, string(data))
+				obj.InteractionKnowledge = append(obj.InteractionKnowledge, txt(data))
 			case "intrigue_actor":
 				v, _ := parseIntrigueActor(p)
 				obj.IntrigueActor = append(obj.IntrigueActor, v)
@@ -27903,19 +27903,19 @@ func parseHistoricalFigure(p *util.XMLParser) (*HistoricalFigure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.JourneyPet = append(obj.JourneyPet, string(data))
+				obj.JourneyPet = append(obj.JourneyPet, txt(data))
 			case "name":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "race":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Race = string(data)
+				obj.Race = txt(data)
 			case "relationship_profile_hf_historical":
 				v, _ := parseRelationshipProfileHfHistorical(p)
 				obj.RelationshipProfileHfHistorical = append(obj.RelationshipProfileHfHistorical, v)
@@ -27936,7 +27936,7 @@ func parseHistoricalFigure(p *util.XMLParser) (*HistoricalFigure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Sphere = append(obj.Sphere, string(data))
+				obj.Sphere = append(obj.Sphere, txt(data))
 			case "used_identity_id":
 				data, err := p.Value()
 				if err != nil {
@@ -27982,7 +27982,7 @@ func parseHistoricalFigurePlus(p *util.XMLParser, obj *HistoricalFigure) (*Histo
 				if err != nil {
 					return nil, err
 				}
-				obj.Race = string(data)
+				obj.Race = txt(data)
 			case "sex":
 				data, err := p.Value()
 				if err != nil {
@@ -28030,7 +28030,7 @@ func parseHistoricalFigureEntityLink(p *util.XMLParser) (*HistoricalFigureEntity
 				if err != nil {
 					return nil, err
 				}
-				obj.LinkType = parseHistoricalFigureEntityLinkLinkType(string(data))
+				obj.LinkType = parseHistoricalFigureEntityLinkLinkType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -28176,7 +28176,7 @@ func parseHonor(p *util.XMLParser) (*Honor, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "required_battles":
 				data, err := p.Value()
 				if err != nil {
@@ -28194,7 +28194,7 @@ func parseHonor(p *util.XMLParser) (*Honor, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.RequiredSkill = parseHonorRequiredSkill(string(data))
+				obj.RequiredSkill = parseHonorRequiredSkill(txt(data))
 			case "required_skill_ip_total":
 				data, err := p.Value()
 				if err != nil {
@@ -28377,7 +28377,7 @@ func parseIdentityPlus(p *util.XMLParser, obj *Identity) (*Identity, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Caste = string(data)
+				obj.Caste = txt(data)
 			case "entity_id":
 				data, err := p.Value()
 				if err != nil {
@@ -28401,7 +28401,7 @@ func parseIdentityPlus(p *util.XMLParser, obj *Identity) (*Identity, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "nemesis_id":
 				data, err := p.Value()
 				if err != nil {
@@ -28413,13 +28413,13 @@ func parseIdentityPlus(p *util.XMLParser, obj *Identity) (*Identity, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Profession = parseIdentityProfession(string(data))
+				obj.Profession = parseIdentityProfession(txt(data))
 			case "race":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Race = string(data)
+				obj.Race = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -28485,13 +28485,13 @@ func parseIntrigueActor(p *util.XMLParser) (*IntrigueActor, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Role = parseIntrigueActorRole(string(data))
+				obj.Role = parseIntrigueActorRole(txt(data))
 			case "strategy":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Strategy = parseIntrigueActorStrategy(string(data))
+				obj.Strategy = parseIntrigueActorStrategy(txt(data))
 			case "strategy_enid":
 				data, err := p.Value()
 				if err != nil {
@@ -28615,7 +28615,7 @@ func parseIntriguePlot(p *util.XMLParser) (*IntriguePlot, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseIntriguePlotType(string(data))
+				obj.Type = parseIntriguePlotType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -28670,7 +28670,7 @@ func parseItem(p *util.XMLParser) (*Item, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.NameString = string(data)
+				obj.NameString = txt(data)
 			case "page_number":
 				data, err := p.Value()
 				if err != nil {
@@ -28768,13 +28768,13 @@ func parseLandmassPlus(p *util.XMLParser, obj *Landmass) (*Landmass, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Coord1 = string(data)
+				obj.Coord1 = txt(data)
 			case "coord_2":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Coord2 = string(data)
+				obj.Coord2 = txt(data)
 			case "id":
 				data, err := p.Value()
 				if err != nil {
@@ -28786,7 +28786,7 @@ func parseLandmassPlus(p *util.XMLParser, obj *Landmass) (*Landmass, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -28841,7 +28841,7 @@ func parseMountainPeakPlus(p *util.XMLParser, obj *MountainPeak) (*MountainPeak,
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "height":
 				data, err := p.Value()
 				if err != nil {
@@ -28865,7 +28865,7 @@ func parseMountainPeakPlus(p *util.XMLParser, obj *MountainPeak) (*MountainPeak,
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -28895,7 +28895,7 @@ func parseMusicalForm(p *util.XMLParser) (*MusicalForm, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Description = string(data)
+				obj.Description = txt(data)
 			case "id":
 				data, err := p.Value()
 				if err != nil {
@@ -28938,7 +28938,7 @@ func parseMusicalFormPlus(p *util.XMLParser, obj *MusicalForm) (*MusicalForm, er
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -29005,7 +29005,7 @@ func parseOccasionPlus(p *util.XMLParser, obj *Occasion) (*Occasion, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "schedule":
 				v, _ := parseSchedulePlus(p, &Schedule{})
 				obj.Schedule = append(obj.Schedule, v)
@@ -29056,7 +29056,7 @@ func parsePlotActor(p *util.XMLParser) (*PlotActor, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.PlotRole = parsePlotActorPlotRole(string(data))
+				obj.PlotRole = parsePlotActorPlotRole(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -29111,7 +29111,7 @@ func parsePoeticForm(p *util.XMLParser) (*PoeticForm, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Description = string(data)
+				obj.Description = txt(data)
 			case "id":
 				data, err := p.Value()
 				if err != nil {
@@ -29154,7 +29154,7 @@ func parsePoeticFormPlus(p *util.XMLParser, obj *PoeticForm) (*PoeticForm, error
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -29215,7 +29215,7 @@ func parseReferencePlus(p *util.XMLParser, obj *Reference) (*Reference, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseReferenceType(string(data))
+				obj.Type = parseReferenceType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -29251,13 +29251,13 @@ func parseRegion(p *util.XMLParser) (*Region, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseRegionType(string(data))
+				obj.Type = parseRegionType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -29288,13 +29288,13 @@ func parseRegionPlus(p *util.XMLParser, obj *Region) (*Region, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "evilness":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Evilness = parseRegionEvilness(string(data))
+				obj.Evilness = parseRegionEvilness(txt(data))
 			case "force_id":
 				data, err := p.Value()
 				if err != nil {
@@ -29754,19 +29754,19 @@ func parseRiverPlus(p *util.XMLParser, obj *River) (*River, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.EndPos = string(data)
+				obj.EndPos = txt(data)
 			case "name":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "path":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Path = string(data)
+				obj.Path = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -29830,13 +29830,13 @@ func parseSchedulePlus(p *util.XMLParser, obj *Schedule) (*Schedule, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemSubtype = parseScheduleItemSubtype(string(data))
+				obj.ItemSubtype = parseScheduleItemSubtype(txt(data))
 			case "item_type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemType = parseScheduleItemType(string(data))
+				obj.ItemType = parseScheduleItemType(txt(data))
 			case "reference":
 				data, err := p.Value()
 				if err != nil {
@@ -29854,7 +29854,7 @@ func parseSchedulePlus(p *util.XMLParser, obj *Schedule) (*Schedule, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseScheduleType(string(data))
+				obj.Type = parseScheduleType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -29887,7 +29887,7 @@ func parseSite(p *util.XMLParser) (*Site, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "id":
 				data, err := p.Value()
 				if err != nil {
@@ -29899,13 +29899,13 @@ func parseSite(p *util.XMLParser) (*Site, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "rectangle":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Rectangle = string(data)
+				obj.Rectangle = txt(data)
 			case "site_properties":
 				parseMap(p, &obj.SiteProperties, parseSiteSiteProperty)
 			case "structures":
@@ -29915,7 +29915,7 @@ func parseSite(p *util.XMLParser) (*Site, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseSiteType(string(data))
+				obj.Type = parseSiteType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -29996,7 +29996,7 @@ func parseSiteLink(p *util.XMLParser) (*SiteLink, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.LinkType = parseSiteLinkLinkType(string(data))
+				obj.LinkType = parseSiteLinkLinkType(txt(data))
 			case "occupation_id":
 				data, err := p.Value()
 				if err != nil {
@@ -30087,7 +30087,7 @@ func parseSiteSiteProperty(p *util.XMLParser) (*SiteSiteProperty, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseSiteSitePropertyType(string(data))
+				obj.Type = parseSiteSitePropertyType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -30160,19 +30160,19 @@ func parseStructure(p *util.XMLParser) (*Structure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "subtype":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Subtype = parseStructureSubtype(string(data))
+				obj.Subtype = parseStructureSubtype(txt(data))
 			case "type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseStructureType(string(data))
+				obj.Type = parseStructureType(txt(data))
 			case "worship_hfid":
 				data, err := p.Value()
 				if err != nil {
@@ -30239,13 +30239,13 @@ func parseStructurePlus(p *util.XMLParser, obj *Structure) (*Structure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "name2":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Name2 = string(data)
+				obj.Name2 = txt(data)
 			case "religion":
 				data, err := p.Value()
 				if err != nil {
@@ -30257,7 +30257,7 @@ func parseStructurePlus(p *util.XMLParser, obj *Structure) (*Structure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseStructureType(string(data))
+				obj.Type = parseStructureType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -30299,7 +30299,7 @@ func parseUndergroundRegion(p *util.XMLParser) (*UndergroundRegion, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseUndergroundRegionType(string(data))
+				obj.Type = parseUndergroundRegionType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -30330,7 +30330,7 @@ func parseUndergroundRegionPlus(p *util.XMLParser, obj *UndergroundRegion) (*Und
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "id":
 				data, err := p.Value()
 				if err != nil {
@@ -30524,7 +30524,7 @@ func parseWorldConstructionPlus(p *util.XMLParser, obj *WorldConstruction) (*Wor
 				if err != nil {
 					return nil, err
 				}
-				obj.Coords = string(data)
+				obj.Coords = txt(data)
 			case "id":
 				data, err := p.Value()
 				if err != nil {
@@ -30536,13 +30536,13 @@ func parseWorldConstructionPlus(p *util.XMLParser, obj *WorldConstruction) (*Wor
 				if err != nil {
 					return nil, err
 				}
-				obj.Name_ = string(data)
+				obj.Name_ = txt(data)
 			case "type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseWorldConstructionType(string(data))
+				obj.Type = parseWorldConstructionType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -30584,7 +30584,7 @@ func parseWrittenContent(p *util.XMLParser) (*WrittenContent, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Form = parseWrittenContentForm(string(data))
+				obj.Form = parseWrittenContentForm(txt(data))
 			case "form_id":
 				data, err := p.Value()
 				if err != nil {
@@ -30602,13 +30602,13 @@ func parseWrittenContent(p *util.XMLParser) (*WrittenContent, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Style = append(obj.Style, string(data))
+				obj.Style = append(obj.Style, txt(data))
 			case "title":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Title = string(data)
+				obj.Title = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -30666,19 +30666,19 @@ func parseWrittenContentPlus(p *util.XMLParser, obj *WrittenContent) (*WrittenCo
 				if err != nil {
 					return nil, err
 				}
-				obj.Style = append(obj.Style, string(data))
+				obj.Style = append(obj.Style, txt(data))
 			case "title":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Title = string(data)
+				obj.Title = txt(data)
 			case "type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseWrittenContentType(string(data))
+				obj.Type = parseWrittenContentType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()

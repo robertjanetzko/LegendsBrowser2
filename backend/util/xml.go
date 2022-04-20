@@ -88,10 +88,10 @@ func (x *XMLParser) Token() (TokenType, string, error) {
 	}
 }
 
-func (x *XMLParser) Value() (string, error) {
+func (x *XMLParser) Value() ([]byte, error) {
 	if x.selfClose {
 		x.selfClose = false
-		return "", nil
+		return nil, nil
 	}
 
 	x.scratch.reset()
@@ -101,12 +101,12 @@ func (x *XMLParser) Value() (string, error) {
 	for {
 		b, err := x.reader.ReadByte()
 		if err != nil {
-			return "", err
+			return nil, err
 		}
 		if b == '<' {
 			f = true
 		} else if f && b == '>' {
-			return string(x.scratch.bytes()), nil
+			return x.scratch.bytes(), nil
 
 		} else if !f {
 			x.scratch.add(b)

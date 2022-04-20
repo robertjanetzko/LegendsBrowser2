@@ -26,3 +26,10 @@ func (c *ConvertReader) Read(b []byte) (n int, err error) {
 	}
 	return n, err
 }
+
+func ConvertCp473(b []byte) string {
+	for i := range b {
+		b[i] = cp437[b[i]]
+	}
+	return string(b)
+}

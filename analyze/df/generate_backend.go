@@ -173,7 +173,7 @@ func parse{{ $obj.Name }}{{ if $plus }}Plus{{ end }}(p *util.XMLParser{{ if $plu
 						if err != nil {
 							return nil, err
 						}
-						switch data {
+						switch string(data) {
 						{{- range $sub := ($obj.ActiveSubTypes $plus) }}
 						case "{{ $sub.Case }}":
 							{{- if eq 1 (len $sub.Options) }}
@@ -356,20 +356,20 @@ func (f Field) StartAction(obj Object, plus bool) string {
 			if f.Type == "int" {
 				return fmt.Sprintf("%sobj.%s = num(data)", s, n)
 			} else if f.Type == "string" {
-				return fmt.Sprintf("%sobj.%s = string(data)", s, n)
+				return fmt.Sprintf("%sobj.%s = txt(data)", s, n)
 			} else if f.Type == "bool" {
 				s := "_, err := p.Value()\nif err != nil { return nil, err }\n"
 				return fmt.Sprintf("%sobj.%s = true", s, n)
 			} else if f.Type == "enum" {
-				return fmt.Sprintf("%sobj.%s = parse%s%s(string(data))", s, n, obj.Name, n)
+				return fmt.Sprintf("%sobj.%s = parse%s%s(txt(data))", s, n, obj.Name, n)
 			}
 		} else {
 			if f.Type == "int" {
 				return fmt.Sprintf("%sobj.%s = append(obj.%s, num(data))", s, n, n)
 			} else if f.Type == "string" {
-				return fmt.Sprintf("%sobj.%s = append(obj.%s, string(data))", s, n, n)
+				return fmt.Sprintf("%sobj.%s = append(obj.%s, txt(data))", s, n, n)
 			} else if f.Type == "enum" {
-				return fmt.Sprintf("%sobj.%s = append(obj.%s, parse%s%s(string(data)))", s, n, n, obj.Name, n)
+				return fmt.Sprintf("%sobj.%s = append(obj.%s, parse%s%s(txt(data)))", s, n, n, obj.Name, n)
 			}
 		}
 	}

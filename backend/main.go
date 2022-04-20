@@ -29,6 +29,7 @@ var static embed.FS
 
 func main() {
 	f := flag.String("f", "", "open a file")
+	p := flag.Bool("p", false, "start profiling")
 	flag.Parse()
 
 	router := mux.NewRouter().StrictSlash(true)
@@ -116,10 +117,12 @@ func main() {
 	t := templates.New(functions)
 
 	if len(*f) > 0 {
-		defer profile.Start(profile.ProfilePath(".")).Stop()
-		go func() {
-			http.ListenAndServe(":8081", nil)
-		}()
+		if *p {
+			defer profile.Start(profile.ProfilePath(".")).Stop()
+			go func() {
+				http.ListenAndServe(":8081", nil)
+			}()
+		}
 
 		w, err := model.Parse(*f)
 		if err != nil {

@@ -55,8 +55,7 @@ func NewLegendsParser(file string) (*util.XMLParser, *os.File, *pb.ProgressBar, 
 
 	fmt.Println("Successfully Opened", file)
 
-	converter := util.NewConvertReader(xmlFile)
-	barReader := bar.NewProxyReader(converter)
+	barReader := bar.NewProxyReader(xmlFile)
 	d := util.NewXMLParser(bufio.NewReader(barReader))
 
 	return d, xmlFile, bar, err
@@ -198,11 +197,11 @@ func parseId(p *util.XMLParser) (int, error) {
 		switch t {
 		case util.StartElement:
 			if n == "id" {
-				s, err := p.Value()
+				d, err := p.Value()
 				if err != nil {
 					return -1, err
 				}
-				return strconv.Atoi(s)
+				return strconv.Atoi(string(d))
 			} else {
 				p.Skip()
 			}
@@ -210,9 +209,13 @@ func parseId(p *util.XMLParser) (int, error) {
 	}
 }
 
-func num(s string) int {
-	v, _ := strconv.Atoi(s)
+func num(b []byte) int {
+	v, _ := strconv.Atoi(string(b))
 	return v
+}
+
+func txt(b []byte) string {
+	return util.ConvertCp473(b)
 }
 
 var sameFields map[string]map[string]map[string]bool
