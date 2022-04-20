@@ -86,3 +86,10 @@ func structure(siteId, structureId int) string {
 	}
 	return "UNKNOWN STRUCTURE"
 }
+
+func region(id int) string {
+	if x, ok := world.Regions[id]; ok {
+		return fmt.Sprintf(`<a href="/region/%d">%s</a>`, x.Id(), x.Name())
+	}
+	return "UNKNOWN REGION"
+}
