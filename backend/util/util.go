@@ -46,6 +46,10 @@ func Title(input string) string {
 	return strings.Join(words, " ")
 }
 
+func Capitalize(input string) string {
+	return strings.ToUpper(input[:1]) + input[1:]
+}
+
 func Json(obj any) template.HTML {
 	b, err := json.MarshalIndent(obj, "", "  ")
 	if err != nil {
@@ -53,4 +57,20 @@ func Json(obj any) template.HTML {
 		return ""
 	}
 	return template.HTML(`<span class="json">` + string(b) + `</span>`)
+}
+
+func If[T any](cond bool, v1, v2 T) T {
+	if cond {
+		return v1
+	} else {
+		return v2
+	}
+}
+
+func Map[U, V any](list []U, mapper func(U) V) []V {
+	var newList = make([]V, 0, len(list))
+	for _, i := range list {
+		newList = append(newList, mapper(i))
+	}
+	return newList
 }

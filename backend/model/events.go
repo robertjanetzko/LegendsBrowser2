@@ -2,15 +2,10 @@ package model
 
 import (
 	"fmt"
-	"strings"
-)
 
-func andList(list []string) string {
-	if len(list) > 1 {
-		return strings.Join(list[:len(list)-1], ", ") + " and " + list[len(list)-1]
-	}
-	return strings.Join(list, ", ")
-}
+	"github.com/iancoleman/strcase"
+	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
+)
 
 func (x *Honor) Requirement() string {
 	var list []string
@@ -287,25 +282,183 @@ func (x *HistoricalEventAssumeIdentity) Html() string {
 	}
 }
 
-func (x *HistoricalEventAttackedSite) Html() string { return "UNKNWON HistoricalEventAttackedSite" }
-func (x *HistoricalEventBodyAbused) Html() string   { return "UNKNWON HistoricalEventBodyAbused" }
+func (x *HistoricalEventAttackedSite) Html() string {
+	atk := entity(x.AttackerCivId)
+	def := entity(x.DefenderCivId)
+	if x.SiteCivId != x.DefenderCivId {
+		def = entity(x.SiteCivId) + " of " + def
+	}
+	generals := ""
+	if x.AttackerGeneralHfid != -1 {
+		generals += ". " + util.Capitalize(hf(x.AttackerGeneralHfid)) + " led the attack"
+		if x.DefenderGeneralHfid != -1 {
+			generals += ", and the defenders were led by " + hf(x.DefenderGeneralHfid)
+		}
+	}
+	mercs := ""
+	if x.AttackerMercEnid != -1 {
+		mercs += fmt.Sprintf(". %s were hired by the attackers", entity(x.AttackerMercEnid))
+	}
+	if x.ASupportMercEnid != -1 {
+		mercs += fmt.Sprintf(". %s were hired as scouts by the attackers", entity(x.ASupportMercEnid))
+	}
+	if x.DefenderMercEnid != -1 {
+		mercs += fmt.Sprintf(". The defenders hired %s", entity(x.DefenderMercEnid))
+	}
+	if x.DSupportMercEnid != -1 {
+		mercs += fmt.Sprintf(". The defenders hired %s as scouts", entity(x.DSupportMercEnid))
+	}
+	return fmt.Sprintf("%s attacked %s at %s%s%s", atk, def, site(x.SiteId, ""), generals, mercs)
+}
+
+func (x *HistoricalEventBodyAbused) Html() string {
+	s := "the " + util.If(len(x.Bodies) > 1, "bodies", "body") + " of " + hfList(x.Bodies) + " " + util.If(len(x.Bodies) > 1, "were", "was")
+
+	switch x.AbuseType {
+	case HistoricalEventBodyAbusedAbuseType_Animated:
+		s += " animated" + util.If(x.Histfig != -1, " by "+hf(x.Histfig), "") + site(x.SiteId, " in ")
+	case HistoricalEventBodyAbusedAbuseType_Flayed:
+		s += " flayed and the skin stretched over " + structure(x.SiteId, x.Structure) + " by " + entity(x.Civ) + site(x.SiteId, " in ")
+	case HistoricalEventBodyAbusedAbuseType_Hung:
+		s += " hung from a tree by " + entity(x.Civ) + site(x.SiteId, " in ")
+	case HistoricalEventBodyAbusedAbuseType_Impaled:
+		s += " impaled on " + articled(x.ItemMat+" "+x.ItemSubtype.String()) + " by " + entity(x.Civ) + site(x.SiteId, " in ")
+	case HistoricalEventBodyAbusedAbuseType_Mutilated:
+		s += " horribly mutilated by " + entity(x.Civ) + site(x.SiteId, " in ")
+	case HistoricalEventBodyAbusedAbuseType_Piled:
+		s += " added to a "
+		switch x.PileType {
+		case HistoricalEventBodyAbusedPileType_Grislymound:
+			s += "grisly mound"
+		case HistoricalEventBodyAbusedPileType_Grotesquepillar:
+			s += "grotesque pillar"
+		case HistoricalEventBodyAbusedPileType_Gruesomesculpture:
+			s += "gruesome sculpture"
+		}
+		s += " by " + entity(x.Civ) + site(x.SiteId, " in ")
+	}
+
+	return s
+}
+
 func (x *HistoricalEventBuildingProfileAcquired) Html() string {
-	return "UNKNWON HistoricalEventBuildingProfileAcquired"
+	return util.If(x.AcquirerEnid != -1, entity(x.AcquirerEnid), hf(x.AcquirerHfid)) +
+		util.If(x.PurchasedUnowned, " purchased ", " inherited ") +
+		property(x.SiteId, x.BuildingProfileId) + site(x.SiteId, " in") +
+		util.If(x.LastOwnerHfid != -1, " formerly owned by "+hf(x.LastOwnerHfid), "")
 }
-func (x *HistoricalEventCeremony) Html() string { return "UNKNWON HistoricalEventCeremony" }
+
+func (x *HistoricalEventCeremony) Html() string {
+	r := entity(x.CivId) + " held a ceremony in " + site(x.SiteId, "")
+	if e, ok := world.Entities[x.CivId]; ok {
+		o := e.Occasion[x.OccasionId]
+		r += " as part of " + o.Name()
+		s := o.Schedule[x.ScheduleId]
+		if len(s.Feature) > 0 {
+			r += ". The event featured " + andList(util.Map(s.Feature, feature))
+		}
+	}
+	return r
+}
+
 func (x *HistoricalEventChangeHfBodyState) Html() string {
-	return "UNKNWON HistoricalEventChangeHfBodyState"
+	r := hf(x.Hfid)
+	switch x.BodyState {
+	case HistoricalEventChangeHfBodyStateBodyState_EntombedAtSite:
+		r += " was entombed"
+	}
+	if x.StructureId != -1 {
+		r += " within " + structure(x.SiteId, x.StructureId)
+	}
+	r += site(x.SiteId, " in ")
+	return r
 }
-func (x *HistoricalEventChangeHfJob) Html() string { return "UNKNWON HistoricalEventChangeHfJob" }
+
+func (x *HistoricalEventChangeHfJob) Html() string {
+	w := ""
+	if x.SubregionId != -1 {
+		w = " in " + region(x.SubregionId)
+	}
+	if x.SiteId != -1 {
+		w = " in " + site(x.SiteId, "")
+	}
+	old := articled(strcase.ToDelimited(x.OldJob, ' '))
+	new := articled(strcase.ToDelimited(x.NewJob, ' '))
+	if x.OldJob == "standard" {
+		return hf(x.Hfid) + " became " + new + w
+	} else if x.NewJob == "standard" {
+		return hf(x.Hfid) + " stopped being " + old + w
+	} else {
+		return hf(x.Hfid) + " gave up being " + old + " to become a " + new + w
+	}
+}
 func (x *HistoricalEventChangeHfState) Html() string {
+	r := ""
+	switch x.Reason {
+	case HistoricalEventChangeHfStateReason_BeWithMaster:
+		r = " in order to be with the master"
+	case HistoricalEventChangeHfStateReason_ConvictionExile:
+		r = " after being exiled following a criminal conviction"
+	case HistoricalEventChangeHfStateReason_ExiledAfterConviction:
+		r = " after being exiled following a criminal conviction"
+	case HistoricalEventChangeHfStateReason_FailedMood:
+		r = " after failing to create an artifact"
+	case HistoricalEventChangeHfStateReason_Flight:
+	case HistoricalEventChangeHfStateReason_GatherInformation:
+		r = " to gather information"
+	case HistoricalEventChangeHfStateReason_GreatDealOfStress:
+		r = " after a great deal of stress" // TODO check
+	case HistoricalEventChangeHfStateReason_LackOfSleep:
+		r = " after a lack of sleep" // TODO check
+	case HistoricalEventChangeHfStateReason_OnAPilgrimage:
+		r = " on a pilgrimage"
+	case HistoricalEventChangeHfStateReason_Scholarship:
+		r = " in order to pursue scholarship"
+	case HistoricalEventChangeHfStateReason_UnableToLeaveLocation:
+		r = " after being unable to leave the location" // TODO check
+	}
+
 	switch x.State {
+	case HistoricalEventChangeHfStateState_Refugee:
+		return hf(x.Hfid) + " fled " + location(x.SiteId, "to", x.SubregionId, "into")
 	case HistoricalEventChangeHfStateState_Settled:
 		switch x.Reason {
-		case HistoricalEventChangeHfStateReason_BeWithMaster:
-			return hf(x.Hfid) + " moved to study " + site(x.SiteId, "in") + " in order to be with the master"
-		default:
-			return hf(x.Hfid) + " settled " + site(x.SiteId, "in")
+		case HistoricalEventChangeHfStateReason_BeWithMaster, HistoricalEventChangeHfStateReason_Scholarship:
+			return hf(x.Hfid) + " moved to study " + site(x.SiteId, "in") + r
+		case HistoricalEventChangeHfStateReason_Flight:
+			return hf(x.Hfid) + " fled " + site(x.SiteId, "to")
+		case HistoricalEventChangeHfStateReason_ConvictionExile, HistoricalEventChangeHfStateReason_ExiledAfterConviction:
+			return hf(x.Hfid) + " departed " + site(x.SiteId, "to") + r
+		case HistoricalEventChangeHfStateReason_None:
+			return hf(x.Hfid) + " settled " + location(x.SiteId, "in", x.SubregionId, "in")
 		}
+	case HistoricalEventChangeHfStateState_Visiting:
+		return hf(x.Hfid) + " visited " + site(x.SiteId, "in") + r
+	case HistoricalEventChangeHfStateState_Wandering:
+		if x.SubregionId != -1 {
+			return hf(x.Hfid) + " began wandering " + region(x.SubregionId)
+		} else {
+			return hf(x.Hfid) + " began wandering the wilds"
+		}
+	}
+
+	switch x.Mood { // todo catatonic
+	case HistoricalEventChangeHfStateMood_Berserk:
+		return hf(x.Hfid) + " went berserk " + site(x.SiteId, "in") + r
+	case HistoricalEventChangeHfStateMood_Fell:
+		return hf(x.Hfid) + " was taken by a fell mood " + site(x.SiteId, "in") + r
+	case HistoricalEventChangeHfStateMood_Fey:
+		return hf(x.Hfid) + " was taken by a fey mood " + site(x.SiteId, "in") + r
+	case HistoricalEventChangeHfStateMood_Insane:
+		return hf(x.Hfid) + " became crazed " + site(x.SiteId, "in") + r
+	case HistoricalEventChangeHfStateMood_Macabre:
+		return hf(x.Hfid) + " began to skulk and brood " + site(x.SiteId, "in") + r
+	case HistoricalEventChangeHfStateMood_Melancholy:
+		return hf(x.Hfid) + " was striken by melancholy " + site(x.SiteId, "in") + r
+	case HistoricalEventChangeHfStateMood_Possessed:
+		return hf(x.Hfid) + " was posessed " + site(x.SiteId, "in") + r
+	case HistoricalEventChangeHfStateMood_Secretive:
+		return hf(x.Hfid) + " withdrew from society " + site(x.SiteId, "in") + r
 	}
 	return "UNKNWON HistoricalEventChangeHfState"
 }

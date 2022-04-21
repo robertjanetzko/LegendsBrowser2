@@ -5,14 +5,6 @@
   "HistoricalEventAddHfSiteLink": {
     "Site": "SiteId"
   },
-  "HistoricalEventCreatedStructure": {
-    "Structure": "StructureId"
-  },
-  "HistoricalEventDiplomatLost": {
-    "Entity": "SiteId",
-    "Involved": "SiteId",
-    "Site": "SiteId"
-  },
   "HistoricalEventPeaceAccepted": {
     "Site": "SiteId"
   },
@@ -25,7 +17,11 @@
   "HistoricalEventRemoveHfSiteLink": {
     "Site": "SiteId"
   },
-  "HistoricalFigure": {
-    "Sex": "BreedId"
+  "HistoricalEventReplacedStructure": {
+    "Civ": "OldAbId",
+    "NewStructure": "OldAbId",
+    "OldStructure": "OldAbId",
+    "Site": "OldAbId",
+    "SiteCiv": "OldAbId"
   }
 }

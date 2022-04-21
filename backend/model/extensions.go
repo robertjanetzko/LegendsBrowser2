@@ -2,7 +2,10 @@ package model
 
 import (
 	"fmt"
+	"regexp"
+	"strings"
 
+	"github.com/iancoleman/strcase"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
 
@@ -54,6 +57,20 @@ func containsInt(list []int, id int) bool {
 
 var world *DfWorld
 
+func andList(list []string) string {
+	if len(list) > 1 {
+		return strings.Join(list[:len(list)-1], ", ") + " and " + list[len(list)-1]
+	}
+	return strings.Join(list, ", ")
+}
+
+func articled(s string) string {
+	if ok, _ := regexp.MatchString("^([aeio]|un|ul).*", s); ok {
+		return "an " + s
+	}
+	return "a " + s
+}
+
 func artifact(id int) string {
 	if x, ok := world.Artifacts[id]; ok {
 		return fmt.Sprintf(`<a class="artifact" href="/artifact/%d">%s</a>`, x.Id(), util.Title(x.Name()))
@@ -73,6 +90,10 @@ func hf(id int) string {
 		return fmt.Sprintf(`the %s <a class="hf" href="/hf/%d">%s</a>`, x.Race, x.Id(), util.Title(x.Name()))
 	}
 	return "UNKNOWN HISTORICAL FIGURE"
+}
+
+func hfList(ids []int) string {
+	return andList(util.Map(ids, hf))
 }
 
 func pronoun(id int) string {
@@ -100,6 +121,18 @@ func structure(siteId, structureId int) string {
 	return "UNKNOWN STRUCTURE"
 }
 
+func property(siteId, propertyId int) string {
+	if x, ok := world.Sites[siteId]; ok {
+		if y, ok := x.SiteProperties[propertyId]; ok {
+			if y.StructureId != -1 {
+				return structure(siteId, y.StructureId)
+			}
+			return articled(y.Type.String())
+		}
+	}
+	return "UNKNOWN PROPERTY"
+}
+
 func region(id int) string {
 	if x, ok := world.Regions[id]; ok {
 		return fmt.Sprintf(`<a class="region" href="/region/%d">%s</a>`, x.Id(), util.Title(x.Name()))
@@ -107,9 +140,63 @@ func region(id int) string {
 	return "UNKNOWN REGION"
 }
 
+func location(siteId int, sitePrefix string, regionId int, regionPrefix string) string {
+	if siteId != -1 {
+		return site(siteId, sitePrefix)
+	}
+	if regionId != -1 {
+		return regionPrefix + " " + region(regionId)
+	}
+	return ""
+}
+
 func identity(id int) string {
 	if x, ok := world.Identities[id]; ok {
 		return fmt.Sprintf(`<a class="identity" href="/region/%d">%s</a>`, x.Id(), util.Title(x.Name()))
 	}
 	return "UNKNOWN IDENTITY"
+}
+
+func feature(x *Feature) string {
+	switch x.Type {
+	case FeatureType_DancePerformance:
+		return "a perfomance of " + danceForm(x.Reference)
+	case FeatureType_Images:
+		if x.Reference != -1 {
+			return "images of " + hf(x.Reference)
+		}
+		return "images"
+	case FeatureType_MusicalPerformance:
+		return "a perfomance of " + musicalForm(x.Reference)
+	case FeatureType_PoetryRecital:
+		return "a recital of " + poeticForm(x.Reference)
+	case FeatureType_Storytelling:
+		if x.Reference != -1 {
+			return "a telling of the story of " + hf(x.Reference)
+		}
+		return "a story recital"
+	default:
+		return strcase.ToDelimited(x.Type.String(), ' ')
+	}
+}
+
+func danceForm(id int) string {
+	if x, ok := world.DanceForms[id]; ok {
+		return fmt.Sprintf(`<a class="artform" href="/danceForm/%d">%s</a>`, id, util.Title(x.Name()))
+	}
+	return "UNKNOWN DANCE FORM"
+}
+
+func musicalForm(id int) string {
+	if x, ok := world.MusicalForms[id]; ok {
+		return fmt.Sprintf(`<a class="artform" href="/musicalForm/%d">%s</a>`, id, util.Title(x.Name()))
+	}
+	return "UNKNOWN MUSICAL FORM"
+}
+
+func poeticForm(id int) string {
+	if x, ok := world.PoeticForms[id]; ok {
+		return fmt.Sprintf(`<a class="artform" href="/poeticForm/%d">%s</a>`, id, util.Title(x.Name()))
+	}
+	return "UNKNOWN POETIC FORM"
 }
