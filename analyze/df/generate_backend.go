@@ -103,6 +103,14 @@ type {{ $obj.Name }} struct {
 	{{- end }}
 }
 
+func New{{ $obj.Name }}() *{{ $obj.Name }} {
+	return &{{ $obj.Name }}{
+		{{- range $fname, $field := $obj.Fields }}{{- if $field.MustInit }}{{- if not ($field.SameField $obj) }}
+		{{ $field.Init }}
+		{{- end }}{{- end }}{{- end }}
+	}
+}
+
 {{- if $obj.Id }}
 func (x *{{ $obj.Name }}) Id() int { return x.Id_ }
 {{- end }}
@@ -135,6 +143,14 @@ func (x *{{ $obj.Name }}) CheckFields() {
 	{{- end }}
 }
 
+func (x *{{ $obj.Name }}) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	{{- range $fname, $field := $obj.Fields }}{{- if not ($field.SameField $obj) }}{{- if not (and (eq $fname "type") (not (not $obj.SubTypes))) }}
+	{{ $field.JsonMarshal }}
+	{{- end }}{{- end }}{{- end }}
+	return json.Marshal(d)
+}
+
 {{- end }}
 
 // Parser
@@ -142,19 +158,13 @@ func (x *{{ $obj.Name }}) CheckFields() {
 {{- range $name, $obj := $.Objects }}
 {{- range $plus := $.Modes }}
 func parse{{ $obj.Name }}{{ if $plus }}Plus{{ end }}(p *util.XMLParser{{ if $plus }}, obj *{{ $obj.Name }}{{ end }}) (*{{ $obj.Name }}, error) {
-	var (
-		{{- if not $plus }}
-		obj = &{{ $obj.Name }}{}
-		{{- end }}
-	)
+	{{- if not $plus }}
+	var obj = New{{ $obj.Name }}()
+	{{- end }}
 	{{- if $plus }}
 	if obj == nil {
-		obj = &{{ $obj.Name }}{}
+		obj = New{{ $obj.Name }}()
 	}
-	{{- end }}
-
-	{{- range $fname, $field := $obj.Fields }}
-		{{ $field.Init $plus }}
 	{{- end }}
 
 	for {
@@ -295,9 +305,21 @@ func (f Field) TypeLine() string {
 	return fmt.Sprintf("%s %s%s %s", n, m, t, j)
 }
 
-func (f Field) Init(plus bool) string {
-	if !plus && f.Type == "map" {
-		return fmt.Sprintf("obj.%s = make(map[int]*%s)", f.Name, *f.ElementType)
+func (f Field) MustInit() bool {
+	return f.Type == "map" || (f.Type == "int" && !f.Multiple)
+}
+
+func (f Field) Init() string {
+	n := f.Name
+	if n == "Id" || n == "Name" {
+		n = n + "_"
+	}
+
+	if f.Type == "map" {
+		return fmt.Sprintf("%s: make(map[int]*%s),", n, *f.ElementType)
+	}
+	if f.Type == "int" && !f.Multiple {
+		return fmt.Sprintf("%s: -1,", n)
 	}
 
 	return ""
@@ -437,6 +459,22 @@ func (obj Object) LegendFields(t string) []Field {
 	}
 	sort.Slice(list, func(i, j int) bool { return list[i].Name < list[j].Name })
 	return list
+}
+
+func (f Field) JsonMarshal() string {
+	n := f.Name
+
+	if n == "Id" || n == "Name" {
+		n = n + "_"
+	}
+
+	if f.Type == "int" && !f.Multiple {
+		return fmt.Sprintf(`if x.%s != -1 { d["%s"] = x.%s }`, n, strcase.ToLowerCamel(f.Name), n)
+	}
+	if f.Type == "enum" && !f.Multiple {
+		return fmt.Sprintf(`if x.%s != 0 { d["%s"] = x.%s }`, n, strcase.ToLowerCamel(f.Name), n)
+	}
+	return fmt.Sprintf(`d["%s"] = x.%s`, strcase.ToLowerCamel(f.Name), n)
 }
 
 func (f Field) SameField(obj Object) bool {

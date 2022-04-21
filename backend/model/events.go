@@ -135,7 +135,7 @@ func (x *HistoricalEventArtifactClaimFormed) Html() string {
 	case HistoricalEventArtifactClaimFormedClaim_Treasure:
 		c := ""
 		if x.Circumstance != HistoricalEventArtifactClaimFormedCircumstance_Unknown {
-			c = x.Circumstance.String()
+			c = " " + x.Circumstance.String()
 		}
 		if x.HistFigureId != -1 {
 			return a + " was claimed by " + hf(x.HistFigureId) + c
@@ -219,25 +219,64 @@ func (x *HistoricalEventArtifactGiven) Html() string {
 }
 func (x *HistoricalEventArtifactLost) Html() string {
 	w := ""
+	if x.SubregionId != -1 {
+		w = region(x.SubregionId)
+	}
 	if x.SiteId != -1 {
 		w = site(x.SiteId, "")
 	}
-	if x.SubregionId != -1 {
-		w = region(x.SubregionId) // TODO optional
-	}
-
 	return fmt.Sprintf("%s was lost in %s", artifact(x.ArtifactId), w)
 }
+
 func (x *HistoricalEventArtifactPossessed) Html() string {
-	return "UNKNWON HistoricalEventArtifactPossessed"
+	a := artifact(x.ArtifactId)
+	h := hf(x.HistFigureId)
+	w := ""
+	if x.SubregionId != -1 {
+		w = region(x.SubregionId)
+	}
+	if x.SiteId != -1 {
+		w = site(x.SiteId, "")
+	}
+	c := ""
+	switch x.Circumstance {
+	case HistoricalEventArtifactPossessedCircumstance_HfIsDead:
+		c = " after the death of " + hf(x.CircumstanceId)
+	}
+
+	switch x.Reason {
+	case HistoricalEventArtifactPossessedReason_ArtifactIsHeirloomOfFamilyHfid:
+		return fmt.Sprintf("%s was aquired in %s by %s as an heirloom of %s%s", a, w, h, hf(x.ReasonId), c)
+	case HistoricalEventArtifactPossessedReason_ArtifactIsSymbolOfEntityPosition:
+		return fmt.Sprintf("%s was aquired in %s by %s as a symbol of authority within %s%s", a, w, h, entity(x.ReasonId), c)
+	}
+	return fmt.Sprintf("%s was claimed in %s by %s%s", a, w, h, c) // TODO wording
 }
+
 func (x *HistoricalEventArtifactRecovered) Html() string {
-	return "UNKNWON HistoricalEventArtifactRecovered"
+	a := artifact(x.ArtifactId)
+	h := hf(x.HistFigureId)
+	w := ""
+	if x.SubregionId != -1 {
+		w = "in " + region(x.SubregionId)
+	}
+	if x.SiteId != -1 {
+		w = site(x.SiteId, "in ")
+		if x.StructureId != -1 {
+			w = "from " + structure(x.SiteId, x.StructureId) + " " + w
+		}
+	}
+	return fmt.Sprintf("%s was recovered %s by %s", a, w, h)
 }
-func (x *HistoricalEventArtifactStored) Html() string { return "UNKNWON HistoricalEventArtifactStored" }
+
+func (x *HistoricalEventArtifactStored) Html() string {
+	return fmt.Sprintf("%s stored %s in %s", hf(x.HistFigureId), artifact(x.ArtifactId), site(x.SiteId, ""))
+}
+
 func (x *HistoricalEventArtifactTransformed) Html() string {
-	return "UNKNWON HistoricalEventArtifactTransformed"
+	return fmt.Sprintf("%s was made from %s by %s in %s", artifact(x.NewArtifactId), artifact(x.OldArtifactId), hf(x.HistFigureId), site(x.SiteId, "")) // TODO wording
 }
+
 func (x *HistoricalEventAssumeIdentity) Html() string { return "UNKNWON HistoricalEventAssumeIdentity" }
 func (x *HistoricalEventAttackedSite) Html() string   { return "UNKNWON HistoricalEventAttackedSite" }
 func (x *HistoricalEventBodyAbused) Html() string     { return "UNKNWON HistoricalEventBodyAbused" }

@@ -974,6 +974,20 @@ type Artifact struct {
 	Writing          int    `json:"writing" legend:"plus"`          // writing
 }
 
+func NewArtifact() *Artifact {
+	return &Artifact{
+		AbsTileX:         -1,
+		AbsTileY:         -1,
+		AbsTileZ:         -1,
+		HolderHfid:       -1,
+		Id_:              -1,
+		PageCount:        -1,
+		SiteId:           -1,
+		StructureLocalId: -1,
+		SubregionId:      -1,
+		Writing:          -1,
+	}
+}
 func (x *Artifact) Id() int                     { return x.Id_ }
 func (x *Artifact) Name() string                { return x.Name_ }
 func (x *Artifact) RelatedToEntity(id int) bool { return false }
@@ -1022,6 +1036,47 @@ func (x *Artifact) CheckFields() {
 	if x.Writing != x.SubregionId && x.Writing != 0 && x.SubregionId != 0 {
 		sameFields["Artifact"]["Writing"]["SubregionId"] = false
 	}
+}
+
+func (x *Artifact) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AbsTileX != -1 {
+		d["absTileX"] = x.AbsTileX
+	}
+	if x.AbsTileY != -1 {
+		d["absTileY"] = x.AbsTileY
+	}
+	if x.AbsTileZ != -1 {
+		d["absTileZ"] = x.AbsTileZ
+	}
+	if x.HolderHfid != -1 {
+		d["holderHfid"] = x.HolderHfid
+	}
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["item"] = x.Item
+	d["itemDescription"] = x.ItemDescription
+	d["itemSubtype"] = x.ItemSubtype
+	d["itemType"] = x.ItemType
+	d["mat"] = x.Mat
+	d["name"] = x.Name_
+	if x.PageCount != -1 {
+		d["pageCount"] = x.PageCount
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureLocalId != -1 {
+		d["structureLocalId"] = x.StructureLocalId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	if x.Writing != -1 {
+		d["writing"] = x.Writing
+	}
+	return json.Marshal(d)
 }
 
 type Creature struct {
@@ -1146,10 +1201,137 @@ type Creature struct {
 	VerminSoilColony                  bool   `json:"verminSoilColony" legend:"plus"`                  // vermin_soil_colony
 }
 
+func NewCreature() *Creature {
+	return &Creature{}
+}
 func (x *Creature) RelatedToEntity(id int) bool { return false }
 func (x *Creature) RelatedToHf(id int) bool     { return false }
 
 func (x *Creature) CheckFields() {
+}
+
+func (x *Creature) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["allCastesAlive"] = x.AllCastesAlive
+	d["artificialHiveable"] = x.ArtificialHiveable
+	d["biomeDesertBadland"] = x.BiomeDesertBadland
+	d["biomeDesertRock"] = x.BiomeDesertRock
+	d["biomeDesertSand"] = x.BiomeDesertSand
+	d["biomeForestTaiga"] = x.BiomeForestTaiga
+	d["biomeForestTemperateBroadleaf"] = x.BiomeForestTemperateBroadleaf
+	d["biomeForestTemperateConifer"] = x.BiomeForestTemperateConifer
+	d["biomeForestTropicalConifer"] = x.BiomeForestTropicalConifer
+	d["biomeForestTropicalDryBroadleaf"] = x.BiomeForestTropicalDryBroadleaf
+	d["biomeForestTropicalMoistBroadleaf"] = x.BiomeForestTropicalMoistBroadleaf
+	d["biomeGlacier"] = x.BiomeGlacier
+	d["biomeGrasslandTemperate"] = x.BiomeGrasslandTemperate
+	d["biomeGrasslandTropical"] = x.BiomeGrasslandTropical
+	d["biomeLakeTemperateBrackishwater"] = x.BiomeLakeTemperateBrackishwater
+	d["biomeLakeTemperateFreshwater"] = x.BiomeLakeTemperateFreshwater
+	d["biomeLakeTemperateSaltwater"] = x.BiomeLakeTemperateSaltwater
+	d["biomeLakeTropicalBrackishwater"] = x.BiomeLakeTropicalBrackishwater
+	d["biomeLakeTropicalFreshwater"] = x.BiomeLakeTropicalFreshwater
+	d["biomeLakeTropicalSaltwater"] = x.BiomeLakeTropicalSaltwater
+	d["biomeMarshTemperateFreshwater"] = x.BiomeMarshTemperateFreshwater
+	d["biomeMarshTemperateSaltwater"] = x.BiomeMarshTemperateSaltwater
+	d["biomeMarshTropicalFreshwater"] = x.BiomeMarshTropicalFreshwater
+	d["biomeMarshTropicalSaltwater"] = x.BiomeMarshTropicalSaltwater
+	d["biomeMountain"] = x.BiomeMountain
+	d["biomeOceanArctic"] = x.BiomeOceanArctic
+	d["biomeOceanTemperate"] = x.BiomeOceanTemperate
+	d["biomeOceanTropical"] = x.BiomeOceanTropical
+	d["biomePoolTemperateBrackishwater"] = x.BiomePoolTemperateBrackishwater
+	d["biomePoolTemperateFreshwater"] = x.BiomePoolTemperateFreshwater
+	d["biomePoolTemperateSaltwater"] = x.BiomePoolTemperateSaltwater
+	d["biomePoolTropicalBrackishwater"] = x.BiomePoolTropicalBrackishwater
+	d["biomePoolTropicalFreshwater"] = x.BiomePoolTropicalFreshwater
+	d["biomePoolTropicalSaltwater"] = x.BiomePoolTropicalSaltwater
+	d["biomeRiverTemperateBrackishwater"] = x.BiomeRiverTemperateBrackishwater
+	d["biomeRiverTemperateFreshwater"] = x.BiomeRiverTemperateFreshwater
+	d["biomeRiverTemperateSaltwater"] = x.BiomeRiverTemperateSaltwater
+	d["biomeRiverTropicalBrackishwater"] = x.BiomeRiverTropicalBrackishwater
+	d["biomeRiverTropicalFreshwater"] = x.BiomeRiverTropicalFreshwater
+	d["biomeRiverTropicalSaltwater"] = x.BiomeRiverTropicalSaltwater
+	d["biomeSavannaTemperate"] = x.BiomeSavannaTemperate
+	d["biomeSavannaTropical"] = x.BiomeSavannaTropical
+	d["biomeShrublandTemperate"] = x.BiomeShrublandTemperate
+	d["biomeShrublandTropical"] = x.BiomeShrublandTropical
+	d["biomeSubterraneanChasm"] = x.BiomeSubterraneanChasm
+	d["biomeSubterraneanLava"] = x.BiomeSubterraneanLava
+	d["biomeSubterraneanWater"] = x.BiomeSubterraneanWater
+	d["biomeSwampMangrove"] = x.BiomeSwampMangrove
+	d["biomeSwampTemperateFreshwater"] = x.BiomeSwampTemperateFreshwater
+	d["biomeSwampTemperateSaltwater"] = x.BiomeSwampTemperateSaltwater
+	d["biomeSwampTropicalFreshwater"] = x.BiomeSwampTropicalFreshwater
+	d["biomeSwampTropicalSaltwater"] = x.BiomeSwampTropicalSaltwater
+	d["biomeTundra"] = x.BiomeTundra
+	d["creatureId"] = x.CreatureId
+	d["doesNotExist"] = x.DoesNotExist
+	d["equipment"] = x.Equipment
+	d["equipmentWagon"] = x.EquipmentWagon
+	d["evil"] = x.Evil
+	d["fanciful"] = x.Fanciful
+	d["generated"] = x.Generated
+	d["good"] = x.Good
+	d["hasAnyBenign"] = x.HasAnyBenign
+	d["hasAnyCanSwim"] = x.HasAnyCanSwim
+	d["hasAnyCannotBreatheAir"] = x.HasAnyCannotBreatheAir
+	d["hasAnyCannotBreatheWater"] = x.HasAnyCannotBreatheWater
+	d["hasAnyCarnivore"] = x.HasAnyCarnivore
+	d["hasAnyCommonDomestic"] = x.HasAnyCommonDomestic
+	d["hasAnyCuriousBeast"] = x.HasAnyCuriousBeast
+	d["hasAnyDemon"] = x.HasAnyDemon
+	d["hasAnyFeatureBeast"] = x.HasAnyFeatureBeast
+	d["hasAnyFlier"] = x.HasAnyFlier
+	d["hasAnyFlyRaceGait"] = x.HasAnyFlyRaceGait
+	d["hasAnyGrasp"] = x.HasAnyGrasp
+	d["hasAnyGrazer"] = x.HasAnyGrazer
+	d["hasAnyHasBlood"] = x.HasAnyHasBlood
+	d["hasAnyImmobile"] = x.HasAnyImmobile
+	d["hasAnyIntelligentLearns"] = x.HasAnyIntelligentLearns
+	d["hasAnyIntelligentSpeaks"] = x.HasAnyIntelligentSpeaks
+	d["hasAnyLargePredator"] = x.HasAnyLargePredator
+	d["hasAnyLocalPopsControllable"] = x.HasAnyLocalPopsControllable
+	d["hasAnyLocalPopsProduceHeroes"] = x.HasAnyLocalPopsProduceHeroes
+	d["hasAnyMegabeast"] = x.HasAnyMegabeast
+	d["hasAnyMischievous"] = x.HasAnyMischievous
+	d["hasAnyNaturalAnimal"] = x.HasAnyNaturalAnimal
+	d["hasAnyNightCreature"] = x.HasAnyNightCreature
+	d["hasAnyNightCreatureBogeyman"] = x.HasAnyNightCreatureBogeyman
+	d["hasAnyNightCreatureHunter"] = x.HasAnyNightCreatureHunter
+	d["hasAnyNightCreatureNightmare"] = x.HasAnyNightCreatureNightmare
+	d["hasAnyNotFireimmune"] = x.HasAnyNotFireimmune
+	d["hasAnyNotLiving"] = x.HasAnyNotLiving
+	d["hasAnyOutsiderControllable"] = x.HasAnyOutsiderControllable
+	d["hasAnyRaceGait"] = x.HasAnyRaceGait
+	d["hasAnySemimegabeast"] = x.HasAnySemimegabeast
+	d["hasAnySlowLearner"] = x.HasAnySlowLearner
+	d["hasAnySupernatural"] = x.HasAnySupernatural
+	d["hasAnyTitan"] = x.HasAnyTitan
+	d["hasAnyUniqueDemon"] = x.HasAnyUniqueDemon
+	d["hasAnyUtterances"] = x.HasAnyUtterances
+	d["hasAnyVerminHateable"] = x.HasAnyVerminHateable
+	d["hasAnyVerminMicro"] = x.HasAnyVerminMicro
+	d["hasFemale"] = x.HasFemale
+	d["hasMale"] = x.HasMale
+	d["largeRoaming"] = x.LargeRoaming
+	d["looseClusters"] = x.LooseClusters
+	d["matesToBreed"] = x.MatesToBreed
+	d["mundane"] = x.Mundane
+	d["namePlural"] = x.NamePlural
+	d["nameSingular"] = x.NameSingular
+	d["occursAsEntityRace"] = x.OccursAsEntityRace
+	d["savage"] = x.Savage
+	d["smallRace"] = x.SmallRace
+	d["twoGenders"] = x.TwoGenders
+	d["ubiquitous"] = x.Ubiquitous
+	d["verminEater"] = x.VerminEater
+	d["verminFish"] = x.VerminFish
+	d["verminGrounder"] = x.VerminGrounder
+	d["verminRotter"] = x.VerminRotter
+	d["verminSoil"] = x.VerminSoil
+	d["verminSoilColony"] = x.VerminSoilColony
+	return json.Marshal(d)
 }
 
 type DanceForm struct {
@@ -1158,12 +1340,27 @@ type DanceForm struct {
 	Name_       string `json:"name" legend:"plus"`        // name
 }
 
+func NewDanceForm() *DanceForm {
+	return &DanceForm{
+		Id_: -1,
+	}
+}
 func (x *DanceForm) Id() int                     { return x.Id_ }
 func (x *DanceForm) Name() string                { return x.Name_ }
 func (x *DanceForm) RelatedToEntity(id int) bool { return false }
 func (x *DanceForm) RelatedToHf(id int) bool     { return false }
 
 func (x *DanceForm) CheckFields() {
+}
+
+func (x *DanceForm) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["description"] = x.Description
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["name"] = x.Name_
+	return json.Marshal(d)
 }
 
 type DfWorld struct {
@@ -1193,11 +1390,61 @@ type DfWorld struct {
 	WrittenContents                        map[int]*WrittenContent                  `json:"writtenContents" legend:"both"`                        // written_contents
 }
 
+func NewDfWorld() *DfWorld {
+	return &DfWorld{
+		Artifacts:                  make(map[int]*Artifact),
+		DanceForms:                 make(map[int]*DanceForm),
+		Entities:                   make(map[int]*Entity),
+		EntityPopulations:          make(map[int]*EntityPopulation),
+		HistoricalEventCollections: make(map[int]*HistoricalEventCollection),
+		HistoricalEvents:           make(map[int]*HistoricalEvent),
+		HistoricalFigures:          make(map[int]*HistoricalFigure),
+		Identities:                 make(map[int]*Identity),
+		Landmasses:                 make(map[int]*Landmass),
+		MountainPeaks:              make(map[int]*MountainPeak),
+		MusicalForms:               make(map[int]*MusicalForm),
+		PoeticForms:                make(map[int]*PoeticForm),
+		Regions:                    make(map[int]*Region),
+		Sites:                      make(map[int]*Site),
+		UndergroundRegions:         make(map[int]*UndergroundRegion),
+		WorldConstructions:         make(map[int]*WorldConstruction),
+		WrittenContents:            make(map[int]*WrittenContent),
+	}
+}
 func (x *DfWorld) Name() string                { return x.Name_ }
 func (x *DfWorld) RelatedToEntity(id int) bool { return false }
 func (x *DfWorld) RelatedToHf(id int) bool     { return false }
 
 func (x *DfWorld) CheckFields() {
+}
+
+func (x *DfWorld) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["altname"] = x.Altname
+	d["artifacts"] = x.Artifacts
+	d["creatureRaw"] = x.CreatureRaw
+	d["danceForms"] = x.DanceForms
+	d["entities"] = x.Entities
+	d["entityPopulations"] = x.EntityPopulations
+	d["historicalEras"] = x.HistoricalEras
+	d["historicalEventCollections"] = x.HistoricalEventCollections
+	d["historicalEventRelationshipSupplements"] = x.HistoricalEventRelationshipSupplements
+	d["historicalEventRelationships"] = x.HistoricalEventRelationships
+	d["historicalEvents"] = x.HistoricalEvents
+	d["historicalFigures"] = x.HistoricalFigures
+	d["identities"] = x.Identities
+	d["landmasses"] = x.Landmasses
+	d["mountainPeaks"] = x.MountainPeaks
+	d["musicalForms"] = x.MusicalForms
+	d["name"] = x.Name_
+	d["poeticForms"] = x.PoeticForms
+	d["regions"] = x.Regions
+	d["rivers"] = x.Rivers
+	d["sites"] = x.Sites
+	d["undergroundRegions"] = x.UndergroundRegions
+	d["worldConstructions"] = x.WorldConstructions
+	d["writtenContents"] = x.WrittenContents
+	return json.Marshal(d)
 }
 
 type EntityProfession int
@@ -1489,12 +1736,43 @@ type Entity struct {
 	WorshipId                []int                       `json:"worshipId" legend:"plus"`                // worship_id
 }
 
+func NewEntity() *Entity {
+	return &Entity{
+		Id_: -1,
+	}
+}
 func (x *Entity) Id() int                     { return x.Id_ }
 func (x *Entity) Name() string                { return x.Name_ }
 func (x *Entity) RelatedToEntity(id int) bool { return false }
 func (x *Entity) RelatedToHf(id int) bool     { return containsInt(x.HistfigId, id) }
 
 func (x *Entity) CheckFields() {
+}
+
+func (x *Entity) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["child"] = x.Child
+	d["claims"] = x.Claims
+	d["entityLink"] = x.EntityLink
+	d["entityPosition"] = x.EntityPosition
+	d["entityPositionAssignment"] = x.EntityPositionAssignment
+	d["histfigId"] = x.HistfigId
+	d["honor"] = x.Honor
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["name"] = x.Name_
+	d["occasion"] = x.Occasion
+	if x.Profession != 0 {
+		d["profession"] = x.Profession
+	}
+	d["race"] = x.Race
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	d["weapon"] = x.Weapon
+	d["worshipId"] = x.WorshipId
+	return json.Marshal(d)
 }
 
 type EntityEntityLinkType int
@@ -1540,10 +1818,30 @@ type EntityEntityLink struct {
 	Type     EntityEntityLinkType `json:"type" legend:"plus"`     // type
 }
 
+func NewEntityEntityLink() *EntityEntityLink {
+	return &EntityEntityLink{
+		Strength: -1,
+		Target:   -1,
+	}
+}
 func (x *EntityEntityLink) RelatedToEntity(id int) bool { return false }
 func (x *EntityEntityLink) RelatedToHf(id int) bool     { return false }
 
 func (x *EntityEntityLink) CheckFields() {
+}
+
+func (x *EntityEntityLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Strength != -1 {
+		d["strength"] = x.Strength
+	}
+	if x.Target != -1 {
+		d["target"] = x.Target
+	}
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	return json.Marshal(d)
 }
 
 type EntityFormerPositionLink struct {
@@ -1553,10 +1851,35 @@ type EntityFormerPositionLink struct {
 	StartYear         int `json:"startYear" legend:"base"`         // start_year
 }
 
+func NewEntityFormerPositionLink() *EntityFormerPositionLink {
+	return &EntityFormerPositionLink{
+		EndYear:           -1,
+		EntityId:          -1,
+		PositionProfileId: -1,
+		StartYear:         -1,
+	}
+}
 func (x *EntityFormerPositionLink) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *EntityFormerPositionLink) RelatedToHf(id int) bool     { return false }
 
 func (x *EntityFormerPositionLink) CheckFields() {
+}
+
+func (x *EntityFormerPositionLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EndYear != -1 {
+		d["endYear"] = x.EndYear
+	}
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.PositionProfileId != -1 {
+		d["positionProfileId"] = x.PositionProfileId
+	}
+	if x.StartYear != -1 {
+		d["startYear"] = x.StartYear
+	}
+	return json.Marshal(d)
 }
 
 type EntityFormerSquadLink struct {
@@ -1566,10 +1889,35 @@ type EntityFormerSquadLink struct {
 	StartYear int `json:"startYear" legend:"base"` // start_year
 }
 
+func NewEntityFormerSquadLink() *EntityFormerSquadLink {
+	return &EntityFormerSquadLink{
+		EndYear:   -1,
+		EntityId:  -1,
+		SquadId:   -1,
+		StartYear: -1,
+	}
+}
 func (x *EntityFormerSquadLink) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *EntityFormerSquadLink) RelatedToHf(id int) bool     { return false }
 
 func (x *EntityFormerSquadLink) CheckFields() {
+}
+
+func (x *EntityFormerSquadLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EndYear != -1 {
+		d["endYear"] = x.EndYear
+	}
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.SquadId != -1 {
+		d["squadId"] = x.SquadId
+	}
+	if x.StartYear != -1 {
+		d["startYear"] = x.StartYear
+	}
+	return json.Marshal(d)
 }
 
 type EntityPopulation struct {
@@ -1578,11 +1926,29 @@ type EntityPopulation struct {
 	Race  string `json:"race" legend:"plus"`  // race
 }
 
+func NewEntityPopulation() *EntityPopulation {
+	return &EntityPopulation{
+		CivId: -1,
+		Id_:   -1,
+	}
+}
 func (x *EntityPopulation) Id() int                     { return x.Id_ }
 func (x *EntityPopulation) RelatedToEntity(id int) bool { return x.CivId == id }
 func (x *EntityPopulation) RelatedToHf(id int) bool     { return false }
 
 func (x *EntityPopulation) CheckFields() {
+}
+
+func (x *EntityPopulation) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["race"] = x.Race
+	return json.Marshal(d)
 }
 
 type EntityPosition struct {
@@ -1595,12 +1961,31 @@ type EntityPosition struct {
 	SpouseMale   string `json:"spouseMale" legend:"plus"`   // spouse_male
 }
 
+func NewEntityPosition() *EntityPosition {
+	return &EntityPosition{
+		Id_: -1,
+	}
+}
 func (x *EntityPosition) Id() int                     { return x.Id_ }
 func (x *EntityPosition) Name() string                { return x.Name_ }
 func (x *EntityPosition) RelatedToEntity(id int) bool { return false }
 func (x *EntityPosition) RelatedToHf(id int) bool     { return false }
 
 func (x *EntityPosition) CheckFields() {
+}
+
+func (x *EntityPosition) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["name"] = x.Name_
+	d["nameFemale"] = x.NameFemale
+	d["nameMale"] = x.NameMale
+	d["spouse"] = x.Spouse
+	d["spouseFemale"] = x.SpouseFemale
+	d["spouseMale"] = x.SpouseMale
+	return json.Marshal(d)
 }
 
 type EntityPositionAssignment struct {
@@ -1610,11 +1995,36 @@ type EntityPositionAssignment struct {
 	SquadId    int `json:"squadId" legend:"plus"`    // squad_id
 }
 
+func NewEntityPositionAssignment() *EntityPositionAssignment {
+	return &EntityPositionAssignment{
+		Histfig:    -1,
+		Id_:        -1,
+		PositionId: -1,
+		SquadId:    -1,
+	}
+}
 func (x *EntityPositionAssignment) Id() int                     { return x.Id_ }
 func (x *EntityPositionAssignment) RelatedToEntity(id int) bool { return false }
 func (x *EntityPositionAssignment) RelatedToHf(id int) bool     { return x.Histfig == id }
 
 func (x *EntityPositionAssignment) CheckFields() {
+}
+
+func (x *EntityPositionAssignment) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Histfig != -1 {
+		d["histfig"] = x.Histfig
+	}
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	if x.PositionId != -1 {
+		d["positionId"] = x.PositionId
+	}
+	if x.SquadId != -1 {
+		d["squadId"] = x.SquadId
+	}
+	return json.Marshal(d)
 }
 
 type EntityPositionLink struct {
@@ -1623,10 +2033,31 @@ type EntityPositionLink struct {
 	StartYear         int `json:"startYear" legend:"base"`         // start_year
 }
 
+func NewEntityPositionLink() *EntityPositionLink {
+	return &EntityPositionLink{
+		EntityId:          -1,
+		PositionProfileId: -1,
+		StartYear:         -1,
+	}
+}
 func (x *EntityPositionLink) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *EntityPositionLink) RelatedToHf(id int) bool     { return false }
 
 func (x *EntityPositionLink) CheckFields() {
+}
+
+func (x *EntityPositionLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.PositionProfileId != -1 {
+		d["positionProfileId"] = x.PositionProfileId
+	}
+	if x.StartYear != -1 {
+		d["startYear"] = x.StartYear
+	}
+	return json.Marshal(d)
 }
 
 type EntityReputation struct {
@@ -1647,10 +2078,79 @@ type EntityReputation struct {
 	UnsolvedMurders         int `json:"unsolvedMurders" legend:"base"`         // unsolved_murders
 }
 
+func NewEntityReputation() *EntityReputation {
+	return &EntityReputation{
+		EntityId:                -1,
+		FirstAgelessSeasonCount: -1,
+		FirstAgelessYear:        -1,
+		RepBard:                 -1,
+		RepEnemyFighter:         -1,
+		RepHero:                 -1,
+		RepHunter:               -1,
+		RepKiller:               -1,
+		RepKnowledgePreserver:   -1,
+		RepPoet:                 -1,
+		RepProtectorOfWeak:      -1,
+		RepStoryteller:          -1,
+		RepThief:                -1,
+		RepTreasureHunter:       -1,
+		UnsolvedMurders:         -1,
+	}
+}
 func (x *EntityReputation) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *EntityReputation) RelatedToHf(id int) bool     { return false }
 
 func (x *EntityReputation) CheckFields() {
+}
+
+func (x *EntityReputation) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.FirstAgelessSeasonCount != -1 {
+		d["firstAgelessSeasonCount"] = x.FirstAgelessSeasonCount
+	}
+	if x.FirstAgelessYear != -1 {
+		d["firstAgelessYear"] = x.FirstAgelessYear
+	}
+	if x.RepBard != -1 {
+		d["repBard"] = x.RepBard
+	}
+	if x.RepEnemyFighter != -1 {
+		d["repEnemyFighter"] = x.RepEnemyFighter
+	}
+	if x.RepHero != -1 {
+		d["repHero"] = x.RepHero
+	}
+	if x.RepHunter != -1 {
+		d["repHunter"] = x.RepHunter
+	}
+	if x.RepKiller != -1 {
+		d["repKiller"] = x.RepKiller
+	}
+	if x.RepKnowledgePreserver != -1 {
+		d["repKnowledgePreserver"] = x.RepKnowledgePreserver
+	}
+	if x.RepPoet != -1 {
+		d["repPoet"] = x.RepPoet
+	}
+	if x.RepProtectorOfWeak != -1 {
+		d["repProtectorOfWeak"] = x.RepProtectorOfWeak
+	}
+	if x.RepStoryteller != -1 {
+		d["repStoryteller"] = x.RepStoryteller
+	}
+	if x.RepThief != -1 {
+		d["repThief"] = x.RepThief
+	}
+	if x.RepTreasureHunter != -1 {
+		d["repTreasureHunter"] = x.RepTreasureHunter
+	}
+	if x.UnsolvedMurders != -1 {
+		d["unsolvedMurders"] = x.UnsolvedMurders
+	}
+	return json.Marshal(d)
 }
 
 type EntitySquadLink struct {
@@ -1660,10 +2160,35 @@ type EntitySquadLink struct {
 	StartYear     int `json:"startYear" legend:"base"`     // start_year
 }
 
+func NewEntitySquadLink() *EntitySquadLink {
+	return &EntitySquadLink{
+		EntityId:      -1,
+		SquadId:       -1,
+		SquadPosition: -1,
+		StartYear:     -1,
+	}
+}
 func (x *EntitySquadLink) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *EntitySquadLink) RelatedToHf(id int) bool     { return false }
 
 func (x *EntitySquadLink) CheckFields() {
+}
+
+func (x *EntitySquadLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.SquadId != -1 {
+		d["squadId"] = x.SquadId
+	}
+	if x.SquadPosition != -1 {
+		d["squadPosition"] = x.SquadPosition
+	}
+	if x.StartYear != -1 {
+		d["startYear"] = x.StartYear
+	}
+	return json.Marshal(d)
 }
 
 type FeatureType int
@@ -1763,10 +2288,26 @@ type Feature struct {
 	Type      FeatureType `json:"type" legend:"plus"`      // type
 }
 
+func NewFeature() *Feature {
+	return &Feature{
+		Reference: -1,
+	}
+}
 func (x *Feature) RelatedToEntity(id int) bool { return false }
 func (x *Feature) RelatedToHf(id int) bool     { return false }
 
 func (x *Feature) CheckFields() {
+}
+
+func (x *Feature) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Reference != -1 {
+		d["reference"] = x.Reference
+	}
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	return json.Marshal(d)
 }
 
 type HfLinkLinkType int
@@ -1867,10 +2408,30 @@ type HfLink struct {
 	LinkType     HfLinkLinkType `json:"linkType" legend:"base"`     // link_type
 }
 
+func NewHfLink() *HfLink {
+	return &HfLink{
+		Hfid:         -1,
+		LinkStrength: -1,
+	}
+}
 func (x *HfLink) RelatedToEntity(id int) bool { return false }
 func (x *HfLink) RelatedToHf(id int) bool     { return x.Hfid == id }
 
 func (x *HfLink) CheckFields() {
+}
+
+func (x *HfLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.LinkStrength != -1 {
+		d["linkStrength"] = x.LinkStrength
+	}
+	if x.LinkType != 0 {
+		d["linkType"] = x.LinkType
+	}
+	return json.Marshal(d)
 }
 
 type HfSkill struct {
@@ -1878,10 +2439,24 @@ type HfSkill struct {
 	TotalIp int    `json:"totalIp" legend:"base"` // total_ip
 }
 
+func NewHfSkill() *HfSkill {
+	return &HfSkill{
+		TotalIp: -1,
+	}
+}
 func (x *HfSkill) RelatedToEntity(id int) bool { return false }
 func (x *HfSkill) RelatedToHf(id int) bool     { return false }
 
 func (x *HfSkill) CheckFields() {
+}
+
+func (x *HfSkill) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["skill"] = x.Skill
+	if x.TotalIp != -1 {
+		d["totalIp"] = x.TotalIp
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEra struct {
@@ -1889,11 +2464,25 @@ type HistoricalEra struct {
 	StartYear int    `json:"startYear" legend:"base"` // start_year
 }
 
+func NewHistoricalEra() *HistoricalEra {
+	return &HistoricalEra{
+		StartYear: -1,
+	}
+}
 func (x *HistoricalEra) Name() string                { return x.Name_ }
 func (x *HistoricalEra) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEra) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEra) CheckFields() {
+}
+
+func (x *HistoricalEra) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["name"] = x.Name_
+	if x.StartYear != -1 {
+		d["startYear"] = x.StartYear
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEvent struct {
@@ -1903,11 +2492,32 @@ type HistoricalEvent struct {
 	Details   HistoricalEventDetails
 }
 
+func NewHistoricalEvent() *HistoricalEvent {
+	return &HistoricalEvent{
+		Id_:       -1,
+		Seconds72: -1,
+		Year:      -1,
+	}
+}
 func (x *HistoricalEvent) Id() int                     { return x.Id_ }
 func (x *HistoricalEvent) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEvent) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEvent) CheckFields() {
+}
+
+func (x *HistoricalEvent) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	if x.Seconds72 != -1 {
+		d["seconds72"] = x.Seconds72
+	}
+	if x.Year != -1 {
+		d["year"] = x.Year
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventAddHfEntityHonor struct {
@@ -1916,11 +2526,32 @@ type HistoricalEventAddHfEntityHonor struct {
 	HonorId  int `json:"honorId" legend:"base"`  // honor_id
 }
 
+func NewHistoricalEventAddHfEntityHonor() *HistoricalEventAddHfEntityHonor {
+	return &HistoricalEventAddHfEntityHonor{
+		EntityId: -1,
+		Hfid:     -1,
+		HonorId:  -1,
+	}
+}
 func (x *HistoricalEventAddHfEntityHonor) Type() string                { return "add hf entity honor" }
 func (x *HistoricalEventAddHfEntityHonor) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *HistoricalEventAddHfEntityHonor) RelatedToHf(id int) bool     { return x.Hfid == id }
 
 func (x *HistoricalEventAddHfEntityHonor) CheckFields() {
+}
+
+func (x *HistoricalEventAddHfEntityHonor) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.HonorId != -1 {
+		d["honorId"] = x.HonorId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventAddHfEntityLinkLink int
@@ -2032,6 +2663,15 @@ type HistoricalEventAddHfEntityLink struct {
 	PromiseToHfid int                                `json:"promiseToHfid" legend:"both"` // promise_to_hfid
 }
 
+func NewHistoricalEventAddHfEntityLink() *HistoricalEventAddHfEntityLink {
+	return &HistoricalEventAddHfEntityLink{
+		AppointerHfid: -1,
+		CivId:         -1,
+		Hfid:          -1,
+		PositionId:    -1,
+		PromiseToHfid: -1,
+	}
+}
 func (x *HistoricalEventAddHfEntityLink) Type() string                { return "add hf entity link" }
 func (x *HistoricalEventAddHfEntityLink) RelatedToEntity(id int) bool { return x.CivId == id }
 func (x *HistoricalEventAddHfEntityLink) RelatedToHf(id int) bool {
@@ -2039,6 +2679,30 @@ func (x *HistoricalEventAddHfEntityLink) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventAddHfEntityLink) CheckFields() {
+}
+
+func (x *HistoricalEventAddHfEntityLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AppointerHfid != -1 {
+		d["appointerHfid"] = x.AppointerHfid
+	}
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.Link != 0 {
+		d["link"] = x.Link
+	}
+	d["position"] = x.Position
+	if x.PositionId != -1 {
+		d["positionId"] = x.PositionId
+	}
+	if x.PromiseToHfid != -1 {
+		d["promiseToHfid"] = x.PromiseToHfid
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventAddHfHfLinkLinkType int
@@ -2109,6 +2773,12 @@ type HistoricalEventAddHfHfLink struct {
 	LinkType   HistoricalEventAddHfHfLinkLinkType `json:"linkType" legend:"plus"`   // link_type
 }
 
+func NewHistoricalEventAddHfHfLink() *HistoricalEventAddHfHfLink {
+	return &HistoricalEventAddHfHfLink{
+		Hfid:       -1,
+		HfidTarget: -1,
+	}
+}
 func (x *HistoricalEventAddHfHfLink) Type() string                { return "add hf hf link" }
 func (x *HistoricalEventAddHfHfLink) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventAddHfHfLink) RelatedToHf(id int) bool {
@@ -2116,6 +2786,20 @@ func (x *HistoricalEventAddHfHfLink) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventAddHfHfLink) CheckFields() {
+}
+
+func (x *HistoricalEventAddHfHfLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.HfidTarget != -1 {
+		d["hfidTarget"] = x.HfidTarget
+	}
+	if x.LinkType != 0 {
+		d["linkType"] = x.LinkType
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventAddHfSiteLinkLinkType int
@@ -2163,6 +2847,14 @@ type HistoricalEventAddHfSiteLink struct {
 	Structure int                                  `json:"structure" legend:"plus"` // structure
 }
 
+func NewHistoricalEventAddHfSiteLink() *HistoricalEventAddHfSiteLink {
+	return &HistoricalEventAddHfSiteLink{
+		Civ:       -1,
+		Histfig:   -1,
+		SiteId:    -1,
+		Structure: -1,
+	}
+}
 func (x *HistoricalEventAddHfSiteLink) Type() string                { return "add hf site link" }
 func (x *HistoricalEventAddHfSiteLink) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventAddHfSiteLink) RelatedToHf(id int) bool     { return x.Histfig == id }
@@ -2177,6 +2869,26 @@ func (x *HistoricalEventAddHfSiteLink) CheckFields() {
 	if x.Structure != x.SiteId && x.Structure != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventAddHfSiteLink"]["Structure"]["SiteId"] = false
 	}
+}
+
+func (x *HistoricalEventAddHfSiteLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Civ != -1 {
+		d["civ"] = x.Civ
+	}
+	if x.Histfig != -1 {
+		d["histfig"] = x.Histfig
+	}
+	if x.LinkType != 0 {
+		d["linkType"] = x.LinkType
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.Structure != -1 {
+		d["structure"] = x.Structure
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventAgreementFormedAction int
@@ -2492,6 +3204,24 @@ type HistoricalEventAgreementFormed struct {
 	TopValueRating            int                                                 `json:"topValueRating" legend:"base"`            // top_value_rating
 }
 
+func NewHistoricalEventAgreementFormed() *HistoricalEventAgreementFormed {
+	return &HistoricalEventAgreementFormed{
+		AgreementId:               -1,
+		AgreementSubjectId:        -1,
+		AllyDefenseBonus:          -1,
+		CoconspiratorBonus:        -1,
+		ConcluderHfid:             -1,
+		RelevantEntityId:          -1,
+		RelevantIdForMethod:       -1,
+		RelevantPositionProfileId: -1,
+		TopFacetModifier:          -1,
+		TopFacetRating:            -1,
+		TopRelationshipModifier:   -1,
+		TopRelationshipRating:     -1,
+		TopValueModifier:          -1,
+		TopValueRating:            -1,
+	}
+}
 func (x *HistoricalEventAgreementFormed) Type() string { return "agreement formed" }
 func (x *HistoricalEventAgreementFormed) RelatedToEntity(id int) bool {
 	return x.RelevantEntityId == id
@@ -2501,10 +3231,83 @@ func (x *HistoricalEventAgreementFormed) RelatedToHf(id int) bool { return x.Con
 func (x *HistoricalEventAgreementFormed) CheckFields() {
 }
 
+func (x *HistoricalEventAgreementFormed) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Action != 0 {
+		d["action"] = x.Action
+	}
+	if x.AgreementId != -1 {
+		d["agreementId"] = x.AgreementId
+	}
+	if x.AgreementSubjectId != -1 {
+		d["agreementSubjectId"] = x.AgreementSubjectId
+	}
+	if x.AllyDefenseBonus != -1 {
+		d["allyDefenseBonus"] = x.AllyDefenseBonus
+	}
+	if x.CoconspiratorBonus != -1 {
+		d["coconspiratorBonus"] = x.CoconspiratorBonus
+	}
+	if x.ConcluderHfid != -1 {
+		d["concluderHfid"] = x.ConcluderHfid
+	}
+	d["delegated"] = x.Delegated
+	d["failedJudgmentTest"] = x.FailedJudgmentTest
+	if x.Method != 0 {
+		d["method"] = x.Method
+	}
+	if x.Reason != 0 {
+		d["reason"] = x.Reason
+	}
+	if x.RelevantEntityId != -1 {
+		d["relevantEntityId"] = x.RelevantEntityId
+	}
+	if x.RelevantIdForMethod != -1 {
+		d["relevantIdForMethod"] = x.RelevantIdForMethod
+	}
+	if x.RelevantPositionProfileId != -1 {
+		d["relevantPositionProfileId"] = x.RelevantPositionProfileId
+	}
+	d["successful"] = x.Successful
+	if x.TopFacet != 0 {
+		d["topFacet"] = x.TopFacet
+	}
+	if x.TopFacetModifier != -1 {
+		d["topFacetModifier"] = x.TopFacetModifier
+	}
+	if x.TopFacetRating != -1 {
+		d["topFacetRating"] = x.TopFacetRating
+	}
+	if x.TopRelationshipFactor != 0 {
+		d["topRelationshipFactor"] = x.TopRelationshipFactor
+	}
+	if x.TopRelationshipModifier != -1 {
+		d["topRelationshipModifier"] = x.TopRelationshipModifier
+	}
+	if x.TopRelationshipRating != -1 {
+		d["topRelationshipRating"] = x.TopRelationshipRating
+	}
+	if x.TopValue != 0 {
+		d["topValue"] = x.TopValue
+	}
+	if x.TopValueModifier != -1 {
+		d["topValueModifier"] = x.TopValueModifier
+	}
+	if x.TopValueRating != -1 {
+		d["topValueRating"] = x.TopValueRating
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventAgreementMade struct {
 	SiteId int `json:"siteId" legend:"base"` // site_id
 }
 
+func NewHistoricalEventAgreementMade() *HistoricalEventAgreementMade {
+	return &HistoricalEventAgreementMade{
+		SiteId: -1,
+	}
+}
 func (x *HistoricalEventAgreementMade) Type() string                { return "agreement made" }
 func (x *HistoricalEventAgreementMade) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventAgreementMade) RelatedToHf(id int) bool     { return false }
@@ -2512,15 +3315,36 @@ func (x *HistoricalEventAgreementMade) RelatedToHf(id int) bool     { return fal
 func (x *HistoricalEventAgreementMade) CheckFields() {
 }
 
+func (x *HistoricalEventAgreementMade) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventAgreementRejected struct {
 	SiteId int `json:"siteId" legend:"base"` // site_id
 }
 
+func NewHistoricalEventAgreementRejected() *HistoricalEventAgreementRejected {
+	return &HistoricalEventAgreementRejected{
+		SiteId: -1,
+	}
+}
 func (x *HistoricalEventAgreementRejected) Type() string                { return "agreement rejected" }
 func (x *HistoricalEventAgreementRejected) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventAgreementRejected) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventAgreementRejected) CheckFields() {
+}
+
+func (x *HistoricalEventAgreementRejected) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventArtifactClaimFormedCircumstance int
@@ -2601,11 +3425,42 @@ type HistoricalEventArtifactClaimFormed struct {
 	PositionProfileId int                                            `json:"positionProfileId" legend:"base"` // position_profile_id
 }
 
+func NewHistoricalEventArtifactClaimFormed() *HistoricalEventArtifactClaimFormed {
+	return &HistoricalEventArtifactClaimFormed{
+		ArtifactId:        -1,
+		EntityId:          -1,
+		HistFigureId:      -1,
+		PositionProfileId: -1,
+	}
+}
 func (x *HistoricalEventArtifactClaimFormed) Type() string                { return "artifact claim formed" }
 func (x *HistoricalEventArtifactClaimFormed) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *HistoricalEventArtifactClaimFormed) RelatedToHf(id int) bool     { return x.HistFigureId == id }
 
 func (x *HistoricalEventArtifactClaimFormed) CheckFields() {
+}
+
+func (x *HistoricalEventArtifactClaimFormed) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	if x.Circumstance != 0 {
+		d["circumstance"] = x.Circumstance
+	}
+	if x.Claim != 0 {
+		d["claim"] = x.Claim
+	}
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.HistFigureId != -1 {
+		d["histFigureId"] = x.HistFigureId
+	}
+	if x.PositionProfileId != -1 {
+		d["positionProfileId"] = x.PositionProfileId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventArtifactCopied struct {
@@ -2619,6 +3474,17 @@ type HistoricalEventArtifactCopied struct {
 	SourceStructureId int  `json:"sourceStructureId" legend:"base"` // source_structure_id
 }
 
+func NewHistoricalEventArtifactCopied() *HistoricalEventArtifactCopied {
+	return &HistoricalEventArtifactCopied{
+		ArtifactId:        -1,
+		DestEntityId:      -1,
+		DestSiteId:        -1,
+		DestStructureId:   -1,
+		SourceEntityId:    -1,
+		SourceSiteId:      -1,
+		SourceStructureId: -1,
+	}
+}
 func (x *HistoricalEventArtifactCopied) Type() string { return "artifact copied" }
 func (x *HistoricalEventArtifactCopied) RelatedToEntity(id int) bool {
 	return x.DestEntityId == id || x.SourceEntityId == id
@@ -2626,6 +3492,33 @@ func (x *HistoricalEventArtifactCopied) RelatedToEntity(id int) bool {
 func (x *HistoricalEventArtifactCopied) RelatedToHf(id int) bool { return false }
 
 func (x *HistoricalEventArtifactCopied) CheckFields() {
+}
+
+func (x *HistoricalEventArtifactCopied) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	if x.DestEntityId != -1 {
+		d["destEntityId"] = x.DestEntityId
+	}
+	if x.DestSiteId != -1 {
+		d["destSiteId"] = x.DestSiteId
+	}
+	if x.DestStructureId != -1 {
+		d["destStructureId"] = x.DestStructureId
+	}
+	d["fromOriginal"] = x.FromOriginal
+	if x.SourceEntityId != -1 {
+		d["sourceEntityId"] = x.SourceEntityId
+	}
+	if x.SourceSiteId != -1 {
+		d["sourceSiteId"] = x.SourceSiteId
+	}
+	if x.SourceStructureId != -1 {
+		d["sourceStructureId"] = x.SourceStructureId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventArtifactCreatedReason int
@@ -2666,6 +3559,15 @@ type HistoricalEventArtifactCreated struct {
 	UnitId       int                                         `json:"unitId" legend:"base"`       // unit_id
 }
 
+func NewHistoricalEventArtifactCreated() *HistoricalEventArtifactCreated {
+	return &HistoricalEventArtifactCreated{
+		ArtifactId:   -1,
+		HistFigureId: -1,
+		SanctifyHf:   -1,
+		SiteId:       -1,
+		UnitId:       -1,
+	}
+}
 func (x *HistoricalEventArtifactCreated) Type() string                { return "artifact created" }
 func (x *HistoricalEventArtifactCreated) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventArtifactCreated) RelatedToHf(id int) bool {
@@ -2682,6 +3584,31 @@ func (x *HistoricalEventArtifactCreated) CheckFields() {
 	if x.SanctifyHf != x.UnitId && x.SanctifyHf != 0 && x.UnitId != 0 {
 		sameFields["HistoricalEventArtifactCreated"]["SanctifyHf"]["UnitId"] = false
 	}
+}
+
+func (x *HistoricalEventArtifactCreated) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	d["circumstance"] = x.Circumstance
+	if x.HistFigureId != -1 {
+		d["histFigureId"] = x.HistFigureId
+	}
+	d["nameOnly"] = x.NameOnly
+	if x.Reason != 0 {
+		d["reason"] = x.Reason
+	}
+	if x.SanctifyHf != -1 {
+		d["sanctifyHf"] = x.SanctifyHf
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.UnitId != -1 {
+		d["unitId"] = x.UnitId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventArtifactCreatedCircumstanceType int
@@ -2726,10 +3653,26 @@ type HistoricalEventArtifactCreatedCircumstance struct {
 	Type     HistoricalEventArtifactCreatedCircumstanceType `json:"type" legend:"plus"`     // type
 }
 
+func NewHistoricalEventArtifactCreatedCircumstance() *HistoricalEventArtifactCreatedCircumstance {
+	return &HistoricalEventArtifactCreatedCircumstance{
+		Defeated: -1,
+	}
+}
 func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventArtifactCreatedCircumstance) CheckFields() {
+}
+
+func (x *HistoricalEventArtifactCreatedCircumstance) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Defeated != -1 {
+		d["defeated"] = x.Defeated
+	}
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventArtifactDestroyed struct {
@@ -2738,11 +3681,32 @@ type HistoricalEventArtifactDestroyed struct {
 	SiteId        int `json:"siteId" legend:"base"`        // site_id
 }
 
+func NewHistoricalEventArtifactDestroyed() *HistoricalEventArtifactDestroyed {
+	return &HistoricalEventArtifactDestroyed{
+		ArtifactId:    -1,
+		DestroyerEnid: -1,
+		SiteId:        -1,
+	}
+}
 func (x *HistoricalEventArtifactDestroyed) Type() string                { return "artifact destroyed" }
 func (x *HistoricalEventArtifactDestroyed) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventArtifactDestroyed) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventArtifactDestroyed) CheckFields() {
+}
+
+func (x *HistoricalEventArtifactDestroyed) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	if x.DestroyerEnid != -1 {
+		d["destroyerEnid"] = x.DestroyerEnid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventArtifactFound struct {
@@ -2752,11 +3716,36 @@ type HistoricalEventArtifactFound struct {
 	UnitId       int `json:"unitId" legend:"base"`       // unit_id
 }
 
+func NewHistoricalEventArtifactFound() *HistoricalEventArtifactFound {
+	return &HistoricalEventArtifactFound{
+		ArtifactId:   -1,
+		HistFigureId: -1,
+		SiteId:       -1,
+		UnitId:       -1,
+	}
+}
 func (x *HistoricalEventArtifactFound) Type() string                { return "artifact found" }
 func (x *HistoricalEventArtifactFound) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventArtifactFound) RelatedToHf(id int) bool     { return x.HistFigureId == id }
 
 func (x *HistoricalEventArtifactFound) CheckFields() {
+}
+
+func (x *HistoricalEventArtifactFound) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	if x.HistFigureId != -1 {
+		d["histFigureId"] = x.HistFigureId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.UnitId != -1 {
+		d["unitId"] = x.UnitId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventArtifactGivenReason int
@@ -2795,6 +3784,15 @@ type HistoricalEventArtifactGiven struct {
 	ReceiverHistFigureId int                                `json:"receiverHistFigureId" legend:"base"` // receiver_hist_figure_id
 }
 
+func NewHistoricalEventArtifactGiven() *HistoricalEventArtifactGiven {
+	return &HistoricalEventArtifactGiven{
+		ArtifactId:           -1,
+		GiverEntityId:        -1,
+		GiverHistFigureId:    -1,
+		ReceiverEntityId:     -1,
+		ReceiverHistFigureId: -1,
+	}
+}
 func (x *HistoricalEventArtifactGiven) Type() string { return "artifact given" }
 func (x *HistoricalEventArtifactGiven) RelatedToEntity(id int) bool {
 	return x.GiverEntityId == id || x.ReceiverEntityId == id
@@ -2806,6 +3804,29 @@ func (x *HistoricalEventArtifactGiven) RelatedToHf(id int) bool {
 func (x *HistoricalEventArtifactGiven) CheckFields() {
 }
 
+func (x *HistoricalEventArtifactGiven) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	if x.GiverEntityId != -1 {
+		d["giverEntityId"] = x.GiverEntityId
+	}
+	if x.GiverHistFigureId != -1 {
+		d["giverHistFigureId"] = x.GiverHistFigureId
+	}
+	if x.Reason != 0 {
+		d["reason"] = x.Reason
+	}
+	if x.ReceiverEntityId != -1 {
+		d["receiverEntityId"] = x.ReceiverEntityId
+	}
+	if x.ReceiverHistFigureId != -1 {
+		d["receiverHistFigureId"] = x.ReceiverHistFigureId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventArtifactLost struct {
 	ArtifactId     int `json:"artifactId" legend:"base"`     // artifact_id
 	FeatureLayerId int `json:"featureLayerId" legend:"base"` // feature_layer_id
@@ -2814,11 +3835,40 @@ type HistoricalEventArtifactLost struct {
 	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventArtifactLost() *HistoricalEventArtifactLost {
+	return &HistoricalEventArtifactLost{
+		ArtifactId:     -1,
+		FeatureLayerId: -1,
+		SiteId:         -1,
+		SitePropertyId: -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventArtifactLost) Type() string                { return "artifact lost" }
 func (x *HistoricalEventArtifactLost) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventArtifactLost) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventArtifactLost) CheckFields() {
+}
+
+func (x *HistoricalEventArtifactLost) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SitePropertyId != -1 {
+		d["sitePropertyId"] = x.SitePropertyId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventArtifactPossessedCircumstance int
@@ -2893,11 +3943,58 @@ type HistoricalEventArtifactPossessed struct {
 	UnitId         int                                          `json:"unitId" legend:"base"`         // unit_id
 }
 
+func NewHistoricalEventArtifactPossessed() *HistoricalEventArtifactPossessed {
+	return &HistoricalEventArtifactPossessed{
+		ArtifactId:     -1,
+		CircumstanceId: -1,
+		FeatureLayerId: -1,
+		HistFigureId:   -1,
+		ReasonId:       -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+		UnitId:         -1,
+	}
+}
 func (x *HistoricalEventArtifactPossessed) Type() string                { return "artifact possessed" }
 func (x *HistoricalEventArtifactPossessed) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventArtifactPossessed) RelatedToHf(id int) bool     { return x.HistFigureId == id }
 
 func (x *HistoricalEventArtifactPossessed) CheckFields() {
+}
+
+func (x *HistoricalEventArtifactPossessed) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	if x.Circumstance != 0 {
+		d["circumstance"] = x.Circumstance
+	}
+	if x.CircumstanceId != -1 {
+		d["circumstanceId"] = x.CircumstanceId
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.HistFigureId != -1 {
+		d["histFigureId"] = x.HistFigureId
+	}
+	if x.Reason != 0 {
+		d["reason"] = x.Reason
+	}
+	if x.ReasonId != -1 {
+		d["reasonId"] = x.ReasonId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	if x.UnitId != -1 {
+		d["unitId"] = x.UnitId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventArtifactRecovered struct {
@@ -2910,11 +4007,48 @@ type HistoricalEventArtifactRecovered struct {
 	UnitId         int `json:"unitId" legend:"base"`         // unit_id
 }
 
+func NewHistoricalEventArtifactRecovered() *HistoricalEventArtifactRecovered {
+	return &HistoricalEventArtifactRecovered{
+		ArtifactId:     -1,
+		FeatureLayerId: -1,
+		HistFigureId:   -1,
+		SiteId:         -1,
+		StructureId:    -1,
+		SubregionId:    -1,
+		UnitId:         -1,
+	}
+}
 func (x *HistoricalEventArtifactRecovered) Type() string                { return "artifact recovered" }
 func (x *HistoricalEventArtifactRecovered) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventArtifactRecovered) RelatedToHf(id int) bool     { return x.HistFigureId == id }
 
 func (x *HistoricalEventArtifactRecovered) CheckFields() {
+}
+
+func (x *HistoricalEventArtifactRecovered) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.HistFigureId != -1 {
+		d["histFigureId"] = x.HistFigureId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	if x.UnitId != -1 {
+		d["unitId"] = x.UnitId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventArtifactStored struct {
@@ -2924,11 +4058,36 @@ type HistoricalEventArtifactStored struct {
 	UnitId       int `json:"unitId" legend:"base"`       // unit_id
 }
 
+func NewHistoricalEventArtifactStored() *HistoricalEventArtifactStored {
+	return &HistoricalEventArtifactStored{
+		ArtifactId:   -1,
+		HistFigureId: -1,
+		SiteId:       -1,
+		UnitId:       -1,
+	}
+}
 func (x *HistoricalEventArtifactStored) Type() string                { return "artifact stored" }
 func (x *HistoricalEventArtifactStored) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventArtifactStored) RelatedToHf(id int) bool     { return x.HistFigureId == id }
 
 func (x *HistoricalEventArtifactStored) CheckFields() {
+}
+
+func (x *HistoricalEventArtifactStored) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	if x.HistFigureId != -1 {
+		d["histFigureId"] = x.HistFigureId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.UnitId != -1 {
+		d["unitId"] = x.UnitId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventArtifactTransformed struct {
@@ -2939,11 +4098,40 @@ type HistoricalEventArtifactTransformed struct {
 	UnitId        int `json:"unitId" legend:"base"`        // unit_id
 }
 
+func NewHistoricalEventArtifactTransformed() *HistoricalEventArtifactTransformed {
+	return &HistoricalEventArtifactTransformed{
+		HistFigureId:  -1,
+		NewArtifactId: -1,
+		OldArtifactId: -1,
+		SiteId:        -1,
+		UnitId:        -1,
+	}
+}
 func (x *HistoricalEventArtifactTransformed) Type() string                { return "artifact transformed" }
 func (x *HistoricalEventArtifactTransformed) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventArtifactTransformed) RelatedToHf(id int) bool     { return x.HistFigureId == id }
 
 func (x *HistoricalEventArtifactTransformed) CheckFields() {
+}
+
+func (x *HistoricalEventArtifactTransformed) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.HistFigureId != -1 {
+		d["histFigureId"] = x.HistFigureId
+	}
+	if x.NewArtifactId != -1 {
+		d["newArtifactId"] = x.NewArtifactId
+	}
+	if x.OldArtifactId != -1 {
+		d["oldArtifactId"] = x.OldArtifactId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.UnitId != -1 {
+		d["unitId"] = x.UnitId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventAssumeIdentity struct {
@@ -2955,11 +4143,35 @@ type HistoricalEventAssumeIdentity struct {
 	TricksterHfid int    `json:"tricksterHfid" legend:"base"` // trickster_hfid
 }
 
+func NewHistoricalEventAssumeIdentity() *HistoricalEventAssumeIdentity {
+	return &HistoricalEventAssumeIdentity{
+		IdentityId:    -1,
+		TargetEnid:    -1,
+		TricksterHfid: -1,
+	}
+}
 func (x *HistoricalEventAssumeIdentity) Type() string                { return "assume identity" }
 func (x *HistoricalEventAssumeIdentity) RelatedToEntity(id int) bool { return x.IdentityId == id }
 func (x *HistoricalEventAssumeIdentity) RelatedToHf(id int) bool     { return x.TricksterHfid == id }
 
 func (x *HistoricalEventAssumeIdentity) CheckFields() {
+}
+
+func (x *HistoricalEventAssumeIdentity) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["identityCaste"] = x.IdentityCaste
+	if x.IdentityId != -1 {
+		d["identityId"] = x.IdentityId
+	}
+	d["identityName"] = x.IdentityName
+	d["identityRace"] = x.IdentityRace
+	if x.TargetEnid != -1 {
+		d["targetEnid"] = x.TargetEnid
+	}
+	if x.TricksterHfid != -1 {
+		d["tricksterHfid"] = x.TricksterHfid
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventAttackedSite struct {
@@ -2975,6 +4187,20 @@ type HistoricalEventAttackedSite struct {
 	SiteId              int `json:"siteId" legend:"base"`              // site_id
 }
 
+func NewHistoricalEventAttackedSite() *HistoricalEventAttackedSite {
+	return &HistoricalEventAttackedSite{
+		ASupportMercEnid:    -1,
+		AttackerCivId:       -1,
+		AttackerGeneralHfid: -1,
+		AttackerMercEnid:    -1,
+		DSupportMercEnid:    -1,
+		DefenderCivId:       -1,
+		DefenderGeneralHfid: -1,
+		DefenderMercEnid:    -1,
+		SiteCivId:           -1,
+		SiteId:              -1,
+	}
+}
 func (x *HistoricalEventAttackedSite) Type() string { return "attacked site" }
 func (x *HistoricalEventAttackedSite) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
@@ -2984,6 +4210,41 @@ func (x *HistoricalEventAttackedSite) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventAttackedSite) CheckFields() {
+}
+
+func (x *HistoricalEventAttackedSite) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ASupportMercEnid != -1 {
+		d["aSupportMercEnid"] = x.ASupportMercEnid
+	}
+	if x.AttackerCivId != -1 {
+		d["attackerCivId"] = x.AttackerCivId
+	}
+	if x.AttackerGeneralHfid != -1 {
+		d["attackerGeneralHfid"] = x.AttackerGeneralHfid
+	}
+	if x.AttackerMercEnid != -1 {
+		d["attackerMercEnid"] = x.AttackerMercEnid
+	}
+	if x.DSupportMercEnid != -1 {
+		d["dSupportMercEnid"] = x.DSupportMercEnid
+	}
+	if x.DefenderCivId != -1 {
+		d["defenderCivId"] = x.DefenderCivId
+	}
+	if x.DefenderGeneralHfid != -1 {
+		d["defenderGeneralHfid"] = x.DefenderGeneralHfid
+	}
+	if x.DefenderMercEnid != -1 {
+		d["defenderMercEnid"] = x.DefenderMercEnid
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventBodyAbusedAbuseType int
@@ -3153,6 +4414,19 @@ type HistoricalEventBodyAbused struct {
 	VictimEntity   int                                  `json:"victimEntity" legend:"plus"`   // victim_entity
 }
 
+func NewHistoricalEventBodyAbused() *HistoricalEventBodyAbused {
+	return &HistoricalEventBodyAbused{
+		Civ:            -1,
+		FeatureLayerId: -1,
+		Histfig:        -1,
+		Interaction:    -1,
+		SiteId:         -1,
+		Structure:      -1,
+		SubregionId:    -1,
+		Tree:           -1,
+		VictimEntity:   -1,
+	}
+}
 func (x *HistoricalEventBodyAbused) Type() string                { return "body abused" }
 func (x *HistoricalEventBodyAbused) RelatedToEntity(id int) bool { return x.VictimEntity == id }
 func (x *HistoricalEventBodyAbused) RelatedToHf(id int) bool {
@@ -3219,6 +4493,53 @@ func (x *HistoricalEventBodyAbused) CheckFields() {
 	}
 }
 
+func (x *HistoricalEventBodyAbused) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AbuseType != 0 {
+		d["abuseType"] = x.AbuseType
+	}
+	d["bodies"] = x.Bodies
+	if x.Civ != -1 {
+		d["civ"] = x.Civ
+	}
+	d["coords"] = x.Coords
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Histfig != -1 {
+		d["histfig"] = x.Histfig
+	}
+	if x.Interaction != -1 {
+		d["interaction"] = x.Interaction
+	}
+	d["itemMat"] = x.ItemMat
+	if x.ItemSubtype != 0 {
+		d["itemSubtype"] = x.ItemSubtype
+	}
+	if x.ItemType != 0 {
+		d["itemType"] = x.ItemType
+	}
+	if x.PileType != 0 {
+		d["pileType"] = x.PileType
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.Structure != -1 {
+		d["structure"] = x.Structure
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	if x.Tree != -1 {
+		d["tree"] = x.Tree
+	}
+	if x.VictimEntity != -1 {
+		d["victimEntity"] = x.VictimEntity
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventBuildingProfileAcquired struct {
 	AcquirerEnid      int  `json:"acquirerEnid" legend:"base"`      // acquirer_enid
 	AcquirerHfid      int  `json:"acquirerHfid" legend:"base"`      // acquirer_hfid
@@ -3230,6 +4551,15 @@ type HistoricalEventBuildingProfileAcquired struct {
 	SiteId            int  `json:"siteId" legend:"base"`            // site_id
 }
 
+func NewHistoricalEventBuildingProfileAcquired() *HistoricalEventBuildingProfileAcquired {
+	return &HistoricalEventBuildingProfileAcquired{
+		AcquirerEnid:      -1,
+		AcquirerHfid:      -1,
+		BuildingProfileId: -1,
+		LastOwnerHfid:     -1,
+		SiteId:            -1,
+	}
+}
 func (x *HistoricalEventBuildingProfileAcquired) Type() string                { return "building profile acquired" }
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToHf(id int) bool {
@@ -3237,6 +4567,29 @@ func (x *HistoricalEventBuildingProfileAcquired) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventBuildingProfileAcquired) CheckFields() {
+}
+
+func (x *HistoricalEventBuildingProfileAcquired) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AcquirerEnid != -1 {
+		d["acquirerEnid"] = x.AcquirerEnid
+	}
+	if x.AcquirerHfid != -1 {
+		d["acquirerHfid"] = x.AcquirerHfid
+	}
+	if x.BuildingProfileId != -1 {
+		d["buildingProfileId"] = x.BuildingProfileId
+	}
+	d["inherited"] = x.Inherited
+	if x.LastOwnerHfid != -1 {
+		d["lastOwnerHfid"] = x.LastOwnerHfid
+	}
+	d["purchasedUnowned"] = x.PurchasedUnowned
+	d["rebuiltRuined"] = x.RebuiltRuined
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCeremony struct {
@@ -3248,11 +4601,44 @@ type HistoricalEventCeremony struct {
 	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventCeremony() *HistoricalEventCeremony {
+	return &HistoricalEventCeremony{
+		CivId:          -1,
+		FeatureLayerId: -1,
+		OccasionId:     -1,
+		ScheduleId:     -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventCeremony) Type() string                { return "ceremony" }
 func (x *HistoricalEventCeremony) RelatedToEntity(id int) bool { return x.CivId == id }
 func (x *HistoricalEventCeremony) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventCeremony) CheckFields() {
+}
+
+func (x *HistoricalEventCeremony) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.OccasionId != -1 {
+		d["occasionId"] = x.OccasionId
+	}
+	if x.ScheduleId != -1 {
+		d["scheduleId"] = x.ScheduleId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventChangeHfBodyStateBodyState int
@@ -3292,11 +4678,44 @@ type HistoricalEventChangeHfBodyState struct {
 	SubregionId    int                                       `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventChangeHfBodyState() *HistoricalEventChangeHfBodyState {
+	return &HistoricalEventChangeHfBodyState{
+		FeatureLayerId: -1,
+		Hfid:           -1,
+		SiteId:         -1,
+		StructureId:    -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventChangeHfBodyState) Type() string                { return "change hf body state" }
 func (x *HistoricalEventChangeHfBodyState) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventChangeHfBodyState) RelatedToHf(id int) bool     { return x.Hfid == id }
 
 func (x *HistoricalEventChangeHfBodyState) CheckFields() {
+}
+
+func (x *HistoricalEventChangeHfBodyState) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.BodyState != 0 {
+		d["bodyState"] = x.BodyState
+	}
+	d["coords"] = x.Coords
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventChangeHfJob struct {
@@ -3308,11 +4727,38 @@ type HistoricalEventChangeHfJob struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventChangeHfJob() *HistoricalEventChangeHfJob {
+	return &HistoricalEventChangeHfJob{
+		FeatureLayerId: -1,
+		Hfid:           -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventChangeHfJob) Type() string                { return "change hf job" }
 func (x *HistoricalEventChangeHfJob) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventChangeHfJob) RelatedToHf(id int) bool     { return x.Hfid == id }
 
 func (x *HistoricalEventChangeHfJob) CheckFields() {
+}
+
+func (x *HistoricalEventChangeHfJob) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	d["newJob"] = x.NewJob
+	d["oldJob"] = x.OldJob
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventChangeHfStateMood int
@@ -3518,11 +4964,46 @@ type HistoricalEventChangeHfState struct {
 	SubregionId    int                                `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventChangeHfState() *HistoricalEventChangeHfState {
+	return &HistoricalEventChangeHfState{
+		FeatureLayerId: -1,
+		Hfid:           -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventChangeHfState) Type() string                { return "change hf state" }
 func (x *HistoricalEventChangeHfState) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventChangeHfState) RelatedToHf(id int) bool     { return x.Hfid == id }
 
 func (x *HistoricalEventChangeHfState) CheckFields() {
+}
+
+func (x *HistoricalEventChangeHfState) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["coords"] = x.Coords
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.Mood != 0 {
+		d["mood"] = x.Mood
+	}
+	if x.Reason != 0 {
+		d["reason"] = x.Reason
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.State != 0 {
+		d["state"] = x.State
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventChangedCreatureType struct {
@@ -3534,6 +5015,12 @@ type HistoricalEventChangedCreatureType struct {
 	OldRace     string `json:"oldRace" legend:"both"`     // old_race
 }
 
+func NewHistoricalEventChangedCreatureType() *HistoricalEventChangedCreatureType {
+	return &HistoricalEventChangedCreatureType{
+		ChangeeHfid: -1,
+		ChangerHfid: -1,
+	}
+}
 func (x *HistoricalEventChangedCreatureType) Type() string                { return "changed creature type" }
 func (x *HistoricalEventChangedCreatureType) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventChangedCreatureType) RelatedToHf(id int) bool {
@@ -3541,6 +5028,21 @@ func (x *HistoricalEventChangedCreatureType) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventChangedCreatureType) CheckFields() {
+}
+
+func (x *HistoricalEventChangedCreatureType) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ChangeeHfid != -1 {
+		d["changeeHfid"] = x.ChangeeHfid
+	}
+	if x.ChangerHfid != -1 {
+		d["changerHfid"] = x.ChangerHfid
+	}
+	d["newCaste"] = x.NewCaste
+	d["newRace"] = x.NewRace
+	d["oldCaste"] = x.OldCaste
+	d["oldRace"] = x.OldRace
+	return json.Marshal(d)
 }
 
 type HistoricalEventCollectionType int
@@ -3666,11 +5168,42 @@ type HistoricalEventCollection struct {
 	Details        HistoricalEventCollectionDetails
 }
 
+func NewHistoricalEventCollection() *HistoricalEventCollection {
+	return &HistoricalEventCollection{
+		EndSeconds72:   -1,
+		EndYear:        -1,
+		Id_:            -1,
+		StartSeconds72: -1,
+		StartYear:      -1,
+	}
+}
 func (x *HistoricalEventCollection) Id() int                     { return x.Id_ }
 func (x *HistoricalEventCollection) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollection) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventCollection) CheckFields() {
+}
+
+func (x *HistoricalEventCollection) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EndSeconds72 != -1 {
+		d["endSeconds72"] = x.EndSeconds72
+	}
+	if x.EndYear != -1 {
+		d["endYear"] = x.EndYear
+	}
+	d["event"] = x.Event
+	d["eventcol"] = x.Eventcol
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	if x.StartSeconds72 != -1 {
+		d["startSeconds72"] = x.StartSeconds72
+	}
+	if x.StartYear != -1 {
+		d["startYear"] = x.StartYear
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCollectionAbduction struct {
@@ -3684,11 +5217,49 @@ type HistoricalEventCollectionAbduction struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventCollectionAbduction() *HistoricalEventCollectionAbduction {
+	return &HistoricalEventCollectionAbduction{
+		AttackingEnid:  -1,
+		DefendingEnid:  -1,
+		FeatureLayerId: -1,
+		Ordinal:        -1,
+		ParentEventcol: -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventCollectionAbduction) Type() string                { return "abduction" }
 func (x *HistoricalEventCollectionAbduction) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionAbduction) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventCollectionAbduction) CheckFields() {
+}
+
+func (x *HistoricalEventCollectionAbduction) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackingEnid != -1 {
+		d["attackingEnid"] = x.AttackingEnid
+	}
+	d["coords"] = x.Coords
+	if x.DefendingEnid != -1 {
+		d["defendingEnid"] = x.DefendingEnid
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	if x.ParentEventcol != -1 {
+		d["parentEventcol"] = x.ParentEventcol
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCollectionBattleOutcome int
@@ -3756,6 +5327,18 @@ type HistoricalEventCollectionBattle struct {
 	WarEventcol             int                                    `json:"warEventcol" legend:"base"`             // war_eventcol
 }
 
+func NewHistoricalEventCollectionBattle() *HistoricalEventCollectionBattle {
+	return &HistoricalEventCollectionBattle{
+		ASupportMercEnid:  -1,
+		AttackingMercEnid: -1,
+		DSupportMercEnid:  -1,
+		DefendingMercEnid: -1,
+		FeatureLayerId:    -1,
+		SiteId:            -1,
+		SubregionId:       -1,
+		WarEventcol:       -1,
+	}
+}
 func (x *HistoricalEventCollectionBattle) Name() string { return x.Name_ }
 func (x *HistoricalEventCollectionBattle) Type() string { return "battle" }
 func (x *HistoricalEventCollectionBattle) RelatedToEntity(id int) bool {
@@ -3768,6 +5351,59 @@ func (x *HistoricalEventCollectionBattle) RelatedToHf(id int) bool {
 func (x *HistoricalEventCollectionBattle) CheckFields() {
 }
 
+func (x *HistoricalEventCollectionBattle) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ASupportMercEnid != -1 {
+		d["aSupportMercEnid"] = x.ASupportMercEnid
+	}
+	d["aSupportMercHfid"] = x.ASupportMercHfid
+	d["attackingHfid"] = x.AttackingHfid
+	if x.AttackingMercEnid != -1 {
+		d["attackingMercEnid"] = x.AttackingMercEnid
+	}
+	d["attackingSquadAnimated"] = x.AttackingSquadAnimated
+	d["attackingSquadDeaths"] = x.AttackingSquadDeaths
+	d["attackingSquadEntityPop"] = x.AttackingSquadEntityPop
+	d["attackingSquadNumber"] = x.AttackingSquadNumber
+	d["attackingSquadRace"] = x.AttackingSquadRace
+	d["attackingSquadSite"] = x.AttackingSquadSite
+	d["companyMerc"] = x.CompanyMerc
+	d["coords"] = x.Coords
+	if x.DSupportMercEnid != -1 {
+		d["dSupportMercEnid"] = x.DSupportMercEnid
+	}
+	d["dSupportMercHfid"] = x.DSupportMercHfid
+	d["defendingHfid"] = x.DefendingHfid
+	if x.DefendingMercEnid != -1 {
+		d["defendingMercEnid"] = x.DefendingMercEnid
+	}
+	d["defendingSquadAnimated"] = x.DefendingSquadAnimated
+	d["defendingSquadDeaths"] = x.DefendingSquadDeaths
+	d["defendingSquadEntityPop"] = x.DefendingSquadEntityPop
+	d["defendingSquadNumber"] = x.DefendingSquadNumber
+	d["defendingSquadRace"] = x.DefendingSquadRace
+	d["defendingSquadSite"] = x.DefendingSquadSite
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	d["individualMerc"] = x.IndividualMerc
+	d["name"] = x.Name_
+	d["noncomHfid"] = x.NoncomHfid
+	if x.Outcome != 0 {
+		d["outcome"] = x.Outcome
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	if x.WarEventcol != -1 {
+		d["warEventcol"] = x.WarEventcol
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventCollectionBeastAttack struct {
 	Coords         string `json:"coords" legend:"base"`         // coords
 	DefendingEnid  int    `json:"defendingEnid" legend:"base"`  // defending_enid
@@ -3778,6 +5414,16 @@ type HistoricalEventCollectionBeastAttack struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventCollectionBeastAttack() *HistoricalEventCollectionBeastAttack {
+	return &HistoricalEventCollectionBeastAttack{
+		DefendingEnid:  -1,
+		FeatureLayerId: -1,
+		Ordinal:        -1,
+		ParentEventcol: -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventCollectionBeastAttack) Type() string                { return "beast attack" }
 func (x *HistoricalEventCollectionBeastAttack) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionBeastAttack) RelatedToHf(id int) bool     { return false }
@@ -3785,10 +5431,39 @@ func (x *HistoricalEventCollectionBeastAttack) RelatedToHf(id int) bool     { re
 func (x *HistoricalEventCollectionBeastAttack) CheckFields() {
 }
 
+func (x *HistoricalEventCollectionBeastAttack) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["coords"] = x.Coords
+	if x.DefendingEnid != -1 {
+		d["defendingEnid"] = x.DefendingEnid
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	if x.ParentEventcol != -1 {
+		d["parentEventcol"] = x.ParentEventcol
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventCollectionCeremony struct {
 	Ordinal int `json:"ordinal" legend:"base"` // ordinal
 }
 
+func NewHistoricalEventCollectionCeremony() *HistoricalEventCollectionCeremony {
+	return &HistoricalEventCollectionCeremony{
+		Ordinal: -1,
+	}
+}
 func (x *HistoricalEventCollectionCeremony) Type() string                { return "ceremony" }
 func (x *HistoricalEventCollectionCeremony) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionCeremony) RelatedToHf(id int) bool     { return false }
@@ -3796,15 +5471,36 @@ func (x *HistoricalEventCollectionCeremony) RelatedToHf(id int) bool     { retur
 func (x *HistoricalEventCollectionCeremony) CheckFields() {
 }
 
+func (x *HistoricalEventCollectionCeremony) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventCollectionCompetition struct {
 	Ordinal int `json:"ordinal" legend:"base"` // ordinal
 }
 
+func NewHistoricalEventCollectionCompetition() *HistoricalEventCollectionCompetition {
+	return &HistoricalEventCollectionCompetition{
+		Ordinal: -1,
+	}
+}
 func (x *HistoricalEventCollectionCompetition) Type() string                { return "competition" }
 func (x *HistoricalEventCollectionCompetition) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionCompetition) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventCollectionCompetition) CheckFields() {
+}
+
+func (x *HistoricalEventCollectionCompetition) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCollectionDuel struct {
@@ -3818,6 +5514,17 @@ type HistoricalEventCollectionDuel struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventCollectionDuel() *HistoricalEventCollectionDuel {
+	return &HistoricalEventCollectionDuel{
+		AttackingHfid:  -1,
+		DefendingHfid:  -1,
+		FeatureLayerId: -1,
+		Ordinal:        -1,
+		ParentEventcol: -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventCollectionDuel) Type() string                { return "duel" }
 func (x *HistoricalEventCollectionDuel) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionDuel) RelatedToHf(id int) bool {
@@ -3827,12 +5534,46 @@ func (x *HistoricalEventCollectionDuel) RelatedToHf(id int) bool {
 func (x *HistoricalEventCollectionDuel) CheckFields() {
 }
 
+func (x *HistoricalEventCollectionDuel) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackingHfid != -1 {
+		d["attackingHfid"] = x.AttackingHfid
+	}
+	d["coords"] = x.Coords
+	if x.DefendingHfid != -1 {
+		d["defendingHfid"] = x.DefendingHfid
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	if x.ParentEventcol != -1 {
+		d["parentEventcol"] = x.ParentEventcol
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventCollectionEntityOverthrown struct {
 	Ordinal        int `json:"ordinal" legend:"base"`        // ordinal
 	SiteId         int `json:"siteId" legend:"base"`         // site_id
 	TargetEntityId int `json:"targetEntityId" legend:"base"` // target_entity_id
 }
 
+func NewHistoricalEventCollectionEntityOverthrown() *HistoricalEventCollectionEntityOverthrown {
+	return &HistoricalEventCollectionEntityOverthrown{
+		Ordinal:        -1,
+		SiteId:         -1,
+		TargetEntityId: -1,
+	}
+}
 func (x *HistoricalEventCollectionEntityOverthrown) Type() string { return "entity overthrown" }
 func (x *HistoricalEventCollectionEntityOverthrown) RelatedToEntity(id int) bool {
 	return x.TargetEntityId == id
@@ -3842,12 +5583,33 @@ func (x *HistoricalEventCollectionEntityOverthrown) RelatedToHf(id int) bool { r
 func (x *HistoricalEventCollectionEntityOverthrown) CheckFields() {
 }
 
+func (x *HistoricalEventCollectionEntityOverthrown) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.TargetEntityId != -1 {
+		d["targetEntityId"] = x.TargetEntityId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventCollectionInsurrection struct {
 	Ordinal    int `json:"ordinal" legend:"base"`    // ordinal
 	SiteId     int `json:"siteId" legend:"base"`     // site_id
 	TargetEnid int `json:"targetEnid" legend:"base"` // target_enid
 }
 
+func NewHistoricalEventCollectionInsurrection() *HistoricalEventCollectionInsurrection {
+	return &HistoricalEventCollectionInsurrection{
+		Ordinal:    -1,
+		SiteId:     -1,
+		TargetEnid: -1,
+	}
+}
 func (x *HistoricalEventCollectionInsurrection) Type() string                { return "insurrection" }
 func (x *HistoricalEventCollectionInsurrection) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionInsurrection) RelatedToHf(id int) bool     { return false }
@@ -3855,15 +5617,42 @@ func (x *HistoricalEventCollectionInsurrection) RelatedToHf(id int) bool     { r
 func (x *HistoricalEventCollectionInsurrection) CheckFields() {
 }
 
+func (x *HistoricalEventCollectionInsurrection) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.TargetEnid != -1 {
+		d["targetEnid"] = x.TargetEnid
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventCollectionJourney struct {
 	Ordinal int `json:"ordinal" legend:"base"` // ordinal
 }
 
+func NewHistoricalEventCollectionJourney() *HistoricalEventCollectionJourney {
+	return &HistoricalEventCollectionJourney{
+		Ordinal: -1,
+	}
+}
 func (x *HistoricalEventCollectionJourney) Type() string                { return "journey" }
 func (x *HistoricalEventCollectionJourney) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionJourney) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventCollectionJourney) CheckFields() {
+}
+
+func (x *HistoricalEventCollectionJourney) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCollectionOccasion struct {
@@ -3872,6 +5661,13 @@ type HistoricalEventCollectionOccasion struct {
 	Ordinal    int `json:"ordinal" legend:"base"`    // ordinal
 }
 
+func NewHistoricalEventCollectionOccasion() *HistoricalEventCollectionOccasion {
+	return &HistoricalEventCollectionOccasion{
+		CivId:      -1,
+		OccasionId: -1,
+		Ordinal:    -1,
+	}
+}
 func (x *HistoricalEventCollectionOccasion) Type() string                { return "occasion" }
 func (x *HistoricalEventCollectionOccasion) RelatedToEntity(id int) bool { return x.CivId == id }
 func (x *HistoricalEventCollectionOccasion) RelatedToHf(id int) bool     { return false }
@@ -3879,15 +5675,42 @@ func (x *HistoricalEventCollectionOccasion) RelatedToHf(id int) bool     { retur
 func (x *HistoricalEventCollectionOccasion) CheckFields() {
 }
 
+func (x *HistoricalEventCollectionOccasion) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.OccasionId != -1 {
+		d["occasionId"] = x.OccasionId
+	}
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventCollectionPerformance struct {
 	Ordinal int `json:"ordinal" legend:"base"` // ordinal
 }
 
+func NewHistoricalEventCollectionPerformance() *HistoricalEventCollectionPerformance {
+	return &HistoricalEventCollectionPerformance{
+		Ordinal: -1,
+	}
+}
 func (x *HistoricalEventCollectionPerformance) Type() string                { return "performance" }
 func (x *HistoricalEventCollectionPerformance) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionPerformance) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventCollectionPerformance) CheckFields() {
+}
+
+func (x *HistoricalEventCollectionPerformance) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCollectionPersecution struct {
@@ -3896,6 +5719,13 @@ type HistoricalEventCollectionPersecution struct {
 	TargetEntityId int `json:"targetEntityId" legend:"base"` // target_entity_id
 }
 
+func NewHistoricalEventCollectionPersecution() *HistoricalEventCollectionPersecution {
+	return &HistoricalEventCollectionPersecution{
+		Ordinal:        -1,
+		SiteId:         -1,
+		TargetEntityId: -1,
+	}
+}
 func (x *HistoricalEventCollectionPersecution) Type() string { return "persecution" }
 func (x *HistoricalEventCollectionPersecution) RelatedToEntity(id int) bool {
 	return x.TargetEntityId == id
@@ -3905,15 +5735,42 @@ func (x *HistoricalEventCollectionPersecution) RelatedToHf(id int) bool { return
 func (x *HistoricalEventCollectionPersecution) CheckFields() {
 }
 
+func (x *HistoricalEventCollectionPersecution) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.TargetEntityId != -1 {
+		d["targetEntityId"] = x.TargetEntityId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventCollectionProcession struct {
 	Ordinal int `json:"ordinal" legend:"base"` // ordinal
 }
 
+func NewHistoricalEventCollectionProcession() *HistoricalEventCollectionProcession {
+	return &HistoricalEventCollectionProcession{
+		Ordinal: -1,
+	}
+}
 func (x *HistoricalEventCollectionProcession) Type() string                { return "procession" }
 func (x *HistoricalEventCollectionProcession) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionProcession) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventCollectionProcession) CheckFields() {
+}
+
+func (x *HistoricalEventCollectionProcession) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCollectionPurgeAdjective int
@@ -3949,11 +5806,31 @@ type HistoricalEventCollectionPurge struct {
 	SiteId    int                                     `json:"siteId" legend:"base"`    // site_id
 }
 
+func NewHistoricalEventCollectionPurge() *HistoricalEventCollectionPurge {
+	return &HistoricalEventCollectionPurge{
+		Ordinal: -1,
+		SiteId:  -1,
+	}
+}
 func (x *HistoricalEventCollectionPurge) Type() string                { return "purge" }
 func (x *HistoricalEventCollectionPurge) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionPurge) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventCollectionPurge) CheckFields() {
+}
+
+func (x *HistoricalEventCollectionPurge) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Adjective != 0 {
+		d["adjective"] = x.Adjective
+	}
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCollectionRaid struct {
@@ -3967,11 +5844,49 @@ type HistoricalEventCollectionRaid struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventCollectionRaid() *HistoricalEventCollectionRaid {
+	return &HistoricalEventCollectionRaid{
+		AttackingEnid:  -1,
+		DefendingEnid:  -1,
+		FeatureLayerId: -1,
+		Ordinal:        -1,
+		ParentEventcol: -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventCollectionRaid) Type() string                { return "raid" }
 func (x *HistoricalEventCollectionRaid) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionRaid) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventCollectionRaid) CheckFields() {
+}
+
+func (x *HistoricalEventCollectionRaid) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackingEnid != -1 {
+		d["attackingEnid"] = x.AttackingEnid
+	}
+	d["coords"] = x.Coords
+	if x.DefendingEnid != -1 {
+		d["defendingEnid"] = x.DefendingEnid
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	if x.ParentEventcol != -1 {
+		d["parentEventcol"] = x.ParentEventcol
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCollectionSiteConquered struct {
@@ -3982,11 +5897,40 @@ type HistoricalEventCollectionSiteConquered struct {
 	WarEventcol   int `json:"warEventcol" legend:"base"`   // war_eventcol
 }
 
+func NewHistoricalEventCollectionSiteConquered() *HistoricalEventCollectionSiteConquered {
+	return &HistoricalEventCollectionSiteConquered{
+		AttackingEnid: -1,
+		DefendingEnid: -1,
+		Ordinal:       -1,
+		SiteId:        -1,
+		WarEventcol:   -1,
+	}
+}
 func (x *HistoricalEventCollectionSiteConquered) Type() string                { return "site conquered" }
 func (x *HistoricalEventCollectionSiteConquered) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionSiteConquered) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventCollectionSiteConquered) CheckFields() {
+}
+
+func (x *HistoricalEventCollectionSiteConquered) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackingEnid != -1 {
+		d["attackingEnid"] = x.AttackingEnid
+	}
+	if x.DefendingEnid != -1 {
+		d["defendingEnid"] = x.DefendingEnid
+	}
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.WarEventcol != -1 {
+		d["warEventcol"] = x.WarEventcol
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCollectionTheft struct {
@@ -4000,11 +5944,49 @@ type HistoricalEventCollectionTheft struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventCollectionTheft() *HistoricalEventCollectionTheft {
+	return &HistoricalEventCollectionTheft{
+		AttackingEnid:  -1,
+		DefendingEnid:  -1,
+		FeatureLayerId: -1,
+		Ordinal:        -1,
+		ParentEventcol: -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventCollectionTheft) Type() string                { return "theft" }
 func (x *HistoricalEventCollectionTheft) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionTheft) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventCollectionTheft) CheckFields() {
+}
+
+func (x *HistoricalEventCollectionTheft) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackingEnid != -1 {
+		d["attackingEnid"] = x.AttackingEnid
+	}
+	d["coords"] = x.Coords
+	if x.DefendingEnid != -1 {
+		d["defendingEnid"] = x.DefendingEnid
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Ordinal != -1 {
+		d["ordinal"] = x.Ordinal
+	}
+	if x.ParentEventcol != -1 {
+		d["parentEventcol"] = x.ParentEventcol
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCollectionWar struct {
@@ -4013,12 +5995,30 @@ type HistoricalEventCollectionWar struct {
 	Name_          string `json:"name" legend:"base"`           // name
 }
 
+func NewHistoricalEventCollectionWar() *HistoricalEventCollectionWar {
+	return &HistoricalEventCollectionWar{
+		AggressorEntId: -1,
+		DefenderEntId:  -1,
+	}
+}
 func (x *HistoricalEventCollectionWar) Name() string                { return x.Name_ }
 func (x *HistoricalEventCollectionWar) Type() string                { return "war" }
 func (x *HistoricalEventCollectionWar) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCollectionWar) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventCollectionWar) CheckFields() {
+}
+
+func (x *HistoricalEventCollectionWar) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AggressorEntId != -1 {
+		d["aggressorEntId"] = x.AggressorEntId
+	}
+	if x.DefenderEntId != -1 {
+		d["defenderEntId"] = x.DefenderEntId
+	}
+	d["name"] = x.Name_
+	return json.Marshal(d)
 }
 
 type HistoricalEventCompetition struct {
@@ -4032,6 +6032,17 @@ type HistoricalEventCompetition struct {
 	WinnerHfid     int   `json:"winnerHfid" legend:"base"`     // winner_hfid
 }
 
+func NewHistoricalEventCompetition() *HistoricalEventCompetition {
+	return &HistoricalEventCompetition{
+		CivId:          -1,
+		FeatureLayerId: -1,
+		OccasionId:     -1,
+		ScheduleId:     -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+		WinnerHfid:     -1,
+	}
+}
 func (x *HistoricalEventCompetition) Type() string                { return "competition" }
 func (x *HistoricalEventCompetition) RelatedToEntity(id int) bool { return x.CivId == id }
 func (x *HistoricalEventCompetition) RelatedToHf(id int) bool {
@@ -4039,6 +6050,33 @@ func (x *HistoricalEventCompetition) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventCompetition) CheckFields() {
+}
+
+func (x *HistoricalEventCompetition) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	d["competitorHfid"] = x.CompetitorHfid
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.OccasionId != -1 {
+		d["occasionId"] = x.OccasionId
+	}
+	if x.ScheduleId != -1 {
+		d["scheduleId"] = x.ScheduleId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	if x.WinnerHfid != -1 {
+		d["winnerHfid"] = x.WinnerHfid
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCreateEntityPositionReason int
@@ -4096,11 +6134,36 @@ type HistoricalEventCreateEntityPosition struct {
 	SiteCiv  int                                       `json:"siteCiv" legend:"plus"`  // site_civ
 }
 
+func NewHistoricalEventCreateEntityPosition() *HistoricalEventCreateEntityPosition {
+	return &HistoricalEventCreateEntityPosition{
+		Civ:     -1,
+		Histfig: -1,
+		SiteCiv: -1,
+	}
+}
 func (x *HistoricalEventCreateEntityPosition) Type() string                { return "create entity position" }
 func (x *HistoricalEventCreateEntityPosition) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventCreateEntityPosition) RelatedToHf(id int) bool     { return x.Histfig == id }
 
 func (x *HistoricalEventCreateEntityPosition) CheckFields() {
+}
+
+func (x *HistoricalEventCreateEntityPosition) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Civ != -1 {
+		d["civ"] = x.Civ
+	}
+	if x.Histfig != -1 {
+		d["histfig"] = x.Histfig
+	}
+	d["position"] = x.Position
+	if x.Reason != 0 {
+		d["reason"] = x.Reason
+	}
+	if x.SiteCiv != -1 {
+		d["siteCiv"] = x.SiteCiv
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCreatedSite struct {
@@ -4111,6 +6174,15 @@ type HistoricalEventCreatedSite struct {
 	SiteId        int `json:"siteId" legend:"base"`        // site_id
 }
 
+func NewHistoricalEventCreatedSite() *HistoricalEventCreatedSite {
+	return &HistoricalEventCreatedSite{
+		BuilderHfid:   -1,
+		CivId:         -1,
+		ResidentCivId: -1,
+		SiteCivId:     -1,
+		SiteId:        -1,
+	}
+}
 func (x *HistoricalEventCreatedSite) Type() string { return "created site" }
 func (x *HistoricalEventCreatedSite) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.ResidentCivId == id || x.SiteCivId == id
@@ -4118,6 +6190,26 @@ func (x *HistoricalEventCreatedSite) RelatedToEntity(id int) bool {
 func (x *HistoricalEventCreatedSite) RelatedToHf(id int) bool { return x.BuilderHfid == id }
 
 func (x *HistoricalEventCreatedSite) CheckFields() {
+}
+
+func (x *HistoricalEventCreatedSite) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.BuilderHfid != -1 {
+		d["builderHfid"] = x.BuilderHfid
+	}
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.ResidentCivId != -1 {
+		d["residentCivId"] = x.ResidentCivId
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCreatedStructureRebuild int
@@ -4163,6 +6255,16 @@ type HistoricalEventCreatedStructure struct {
 	StructureId int                                    `json:"structureId" legend:"base"` // structure_id
 }
 
+func NewHistoricalEventCreatedStructure() *HistoricalEventCreatedStructure {
+	return &HistoricalEventCreatedStructure{
+		BuilderHfid: -1,
+		CivId:       -1,
+		SiteCivId:   -1,
+		SiteId:      -1,
+		Structure:   -1,
+		StructureId: -1,
+	}
+}
 func (x *HistoricalEventCreatedStructure) Type() string { return "created structure" }
 func (x *HistoricalEventCreatedStructure) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
@@ -4187,6 +6289,33 @@ func (x *HistoricalEventCreatedStructure) CheckFields() {
 	}
 }
 
+func (x *HistoricalEventCreatedStructure) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.BuilderHfid != -1 {
+		d["builderHfid"] = x.BuilderHfid
+	}
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.Rebuild != 0 {
+		d["rebuild"] = x.Rebuild
+	}
+	d["rebuilt"] = x.Rebuilt
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.Structure != -1 {
+		d["structure"] = x.Structure
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventCreatedWorldConstruction struct {
 	CivId      int `json:"civId" legend:"base"`      // civ_id
 	MasterWcid int `json:"masterWcid" legend:"base"` // master_wcid
@@ -4196,6 +6325,16 @@ type HistoricalEventCreatedWorldConstruction struct {
 	Wcid       int `json:"wcid" legend:"base"`       // wcid
 }
 
+func NewHistoricalEventCreatedWorldConstruction() *HistoricalEventCreatedWorldConstruction {
+	return &HistoricalEventCreatedWorldConstruction{
+		CivId:      -1,
+		MasterWcid: -1,
+		SiteCivId:  -1,
+		SiteId1:    -1,
+		SiteId2:    -1,
+		Wcid:       -1,
+	}
+}
 func (x *HistoricalEventCreatedWorldConstruction) Type() string { return "created world construction" }
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
@@ -4203,6 +6342,29 @@ func (x *HistoricalEventCreatedWorldConstruction) RelatedToEntity(id int) bool {
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToHf(id int) bool { return false }
 
 func (x *HistoricalEventCreatedWorldConstruction) CheckFields() {
+}
+
+func (x *HistoricalEventCreatedWorldConstruction) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.MasterWcid != -1 {
+		d["masterWcid"] = x.MasterWcid
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId1 != -1 {
+		d["siteId1"] = x.SiteId1
+	}
+	if x.SiteId2 != -1 {
+		d["siteId2"] = x.SiteId2
+	}
+	if x.Wcid != -1 {
+		d["wcid"] = x.Wcid
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventCreatureDevoured struct {
@@ -4216,6 +6378,16 @@ type HistoricalEventCreatureDevoured struct {
 	Victim         int    `json:"victim" legend:"plus"`         // victim
 }
 
+func NewHistoricalEventCreatureDevoured() *HistoricalEventCreatureDevoured {
+	return &HistoricalEventCreatureDevoured{
+		Eater:          -1,
+		Entity:         -1,
+		FeatureLayerId: -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+		Victim:         -1,
+	}
+}
 func (x *HistoricalEventCreatureDevoured) Type() string                { return "creature devoured" }
 func (x *HistoricalEventCreatureDevoured) RelatedToEntity(id int) bool { return x.Entity == id }
 func (x *HistoricalEventCreatureDevoured) RelatedToHf(id int) bool     { return false }
@@ -4248,6 +6420,31 @@ func (x *HistoricalEventCreatureDevoured) CheckFields() {
 	if x.Victim != x.SubregionId && x.Victim != 0 && x.SubregionId != 0 {
 		sameFields["HistoricalEventCreatureDevoured"]["Victim"]["SubregionId"] = false
 	}
+}
+
+func (x *HistoricalEventCreatureDevoured) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["caste"] = x.Caste
+	if x.Eater != -1 {
+		d["eater"] = x.Eater
+	}
+	if x.Entity != -1 {
+		d["entity"] = x.Entity
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	d["race"] = x.Race
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	if x.Victim != -1 {
+		d["victim"] = x.Victim
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventDanceFormCreatedCircumstance int
@@ -4329,11 +6526,46 @@ type HistoricalEventDanceFormCreated struct {
 	SiteId         int                                         `json:"siteId" legend:"base"`         // site_id
 }
 
+func NewHistoricalEventDanceFormCreated() *HistoricalEventDanceFormCreated {
+	return &HistoricalEventDanceFormCreated{
+		CircumstanceId: -1,
+		FormId:         -1,
+		HistFigureId:   -1,
+		ReasonId:       -1,
+		SiteId:         -1,
+	}
+}
 func (x *HistoricalEventDanceFormCreated) Type() string                { return "dance form created" }
 func (x *HistoricalEventDanceFormCreated) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventDanceFormCreated) RelatedToHf(id int) bool     { return x.HistFigureId == id }
 
 func (x *HistoricalEventDanceFormCreated) CheckFields() {
+}
+
+func (x *HistoricalEventDanceFormCreated) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Circumstance != 0 {
+		d["circumstance"] = x.Circumstance
+	}
+	if x.CircumstanceId != -1 {
+		d["circumstanceId"] = x.CircumstanceId
+	}
+	if x.FormId != -1 {
+		d["formId"] = x.FormId
+	}
+	if x.HistFigureId != -1 {
+		d["histFigureId"] = x.HistFigureId
+	}
+	if x.Reason != 0 {
+		d["reason"] = x.Reason
+	}
+	if x.ReasonId != -1 {
+		d["reasonId"] = x.ReasonId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventDestroyedSite struct {
@@ -4344,6 +6576,14 @@ type HistoricalEventDestroyedSite struct {
 	SiteId          int  `json:"siteId" legend:"base"`          // site_id
 }
 
+func NewHistoricalEventDestroyedSite() *HistoricalEventDestroyedSite {
+	return &HistoricalEventDestroyedSite{
+		AttackerCivId: -1,
+		DefenderCivId: -1,
+		SiteCivId:     -1,
+		SiteId:        -1,
+	}
+}
 func (x *HistoricalEventDestroyedSite) Type() string { return "destroyed site" }
 func (x *HistoricalEventDestroyedSite) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
@@ -4353,6 +6593,24 @@ func (x *HistoricalEventDestroyedSite) RelatedToHf(id int) bool { return false }
 func (x *HistoricalEventDestroyedSite) CheckFields() {
 }
 
+func (x *HistoricalEventDestroyedSite) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackerCivId != -1 {
+		d["attackerCivId"] = x.AttackerCivId
+	}
+	if x.DefenderCivId != -1 {
+		d["defenderCivId"] = x.DefenderCivId
+	}
+	d["noDefeatMention"] = x.NoDefeatMention
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventDiplomatLost struct {
 	Entity   int `json:"entity" legend:"plus"`   // entity
 	Involved int `json:"involved" legend:"plus"` // involved
@@ -4360,6 +6618,14 @@ type HistoricalEventDiplomatLost struct {
 	SiteId   int `json:"siteId" legend:"base"`   // site_id
 }
 
+func NewHistoricalEventDiplomatLost() *HistoricalEventDiplomatLost {
+	return &HistoricalEventDiplomatLost{
+		Entity:   -1,
+		Involved: -1,
+		Site:     -1,
+		SiteId:   -1,
+	}
+}
 func (x *HistoricalEventDiplomatLost) Type() string                { return "diplomat lost" }
 func (x *HistoricalEventDiplomatLost) RelatedToEntity(id int) bool { return x.Entity == id }
 func (x *HistoricalEventDiplomatLost) RelatedToHf(id int) bool     { return false }
@@ -4376,16 +6642,47 @@ func (x *HistoricalEventDiplomatLost) CheckFields() {
 	}
 }
 
+func (x *HistoricalEventDiplomatLost) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Entity != -1 {
+		d["entity"] = x.Entity
+	}
+	if x.Involved != -1 {
+		d["involved"] = x.Involved
+	}
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventEntityAllianceFormed struct {
 	InitiatingEnid int   `json:"initiatingEnid" legend:"base"` // initiating_enid
 	JoiningEnid    []int `json:"joiningEnid" legend:"base"`    // joining_enid
 }
 
+func NewHistoricalEventEntityAllianceFormed() *HistoricalEventEntityAllianceFormed {
+	return &HistoricalEventEntityAllianceFormed{
+		InitiatingEnid: -1,
+	}
+}
 func (x *HistoricalEventEntityAllianceFormed) Type() string                { return "entity alliance formed" }
 func (x *HistoricalEventEntityAllianceFormed) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventEntityAllianceFormed) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventEntityAllianceFormed) CheckFields() {
+}
+
+func (x *HistoricalEventEntityAllianceFormed) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.InitiatingEnid != -1 {
+		d["initiatingEnid"] = x.InitiatingEnid
+	}
+	d["joiningEnid"] = x.JoiningEnid
+	return json.Marshal(d)
 }
 
 type HistoricalEventEntityBreachFeatureLayer struct {
@@ -4395,6 +6692,14 @@ type HistoricalEventEntityBreachFeatureLayer struct {
 	SiteId         int `json:"siteId" legend:"base"`         // site_id
 }
 
+func NewHistoricalEventEntityBreachFeatureLayer() *HistoricalEventEntityBreachFeatureLayer {
+	return &HistoricalEventEntityBreachFeatureLayer{
+		CivEntityId:    -1,
+		FeatureLayerId: -1,
+		SiteEntityId:   -1,
+		SiteId:         -1,
+	}
+}
 func (x *HistoricalEventEntityBreachFeatureLayer) Type() string { return "entity breach feature layer" }
 func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToEntity(id int) bool {
 	return x.CivEntityId == id || x.SiteEntityId == id
@@ -4404,6 +6709,23 @@ func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToHf(id int) bool { ret
 func (x *HistoricalEventEntityBreachFeatureLayer) CheckFields() {
 }
 
+func (x *HistoricalEventEntityBreachFeatureLayer) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CivEntityId != -1 {
+		d["civEntityId"] = x.CivEntityId
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.SiteEntityId != -1 {
+		d["siteEntityId"] = x.SiteEntityId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventEntityCreated struct {
 	CreatorHfid int `json:"creatorHfid" legend:"base"` // creator_hfid
 	EntityId    int `json:"entityId" legend:"base"`    // entity_id
@@ -4411,11 +6733,36 @@ type HistoricalEventEntityCreated struct {
 	StructureId int `json:"structureId" legend:"base"` // structure_id
 }
 
+func NewHistoricalEventEntityCreated() *HistoricalEventEntityCreated {
+	return &HistoricalEventEntityCreated{
+		CreatorHfid: -1,
+		EntityId:    -1,
+		SiteId:      -1,
+		StructureId: -1,
+	}
+}
 func (x *HistoricalEventEntityCreated) Type() string                { return "entity created" }
 func (x *HistoricalEventEntityCreated) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *HistoricalEventEntityCreated) RelatedToHf(id int) bool     { return x.CreatorHfid == id }
 
 func (x *HistoricalEventEntityCreated) CheckFields() {
+}
+
+func (x *HistoricalEventEntityCreated) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CreatorHfid != -1 {
+		d["creatorHfid"] = x.CreatorHfid
+	}
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventEntityDissolvedReason int
@@ -4455,11 +6802,27 @@ type HistoricalEventEntityDissolved struct {
 	Reason   HistoricalEventEntityDissolvedReason `json:"reason" legend:"base"`   // reason
 }
 
+func NewHistoricalEventEntityDissolved() *HistoricalEventEntityDissolved {
+	return &HistoricalEventEntityDissolved{
+		EntityId: -1,
+	}
+}
 func (x *HistoricalEventEntityDissolved) Type() string                { return "entity dissolved" }
 func (x *HistoricalEventEntityDissolved) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *HistoricalEventEntityDissolved) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventEntityDissolved) CheckFields() {
+}
+
+func (x *HistoricalEventEntityDissolved) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.Reason != 0 {
+		d["reason"] = x.Reason
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventEntityEquipmentPurchase struct {
@@ -4468,6 +6831,12 @@ type HistoricalEventEntityEquipmentPurchase struct {
 	NewEquipmentLevel int   `json:"newEquipmentLevel" legend:"base"` // new_equipment_level
 }
 
+func NewHistoricalEventEntityEquipmentPurchase() *HistoricalEventEntityEquipmentPurchase {
+	return &HistoricalEventEntityEquipmentPurchase{
+		EntityId:          -1,
+		NewEquipmentLevel: -1,
+	}
+}
 func (x *HistoricalEventEntityEquipmentPurchase) Type() string { return "entity equipment purchase" }
 func (x *HistoricalEventEntityEquipmentPurchase) RelatedToEntity(id int) bool {
 	return x.EntityId == id
@@ -4479,12 +6848,31 @@ func (x *HistoricalEventEntityEquipmentPurchase) RelatedToHf(id int) bool {
 func (x *HistoricalEventEntityEquipmentPurchase) CheckFields() {
 }
 
+func (x *HistoricalEventEntityEquipmentPurchase) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	d["hfid"] = x.Hfid
+	if x.NewEquipmentLevel != -1 {
+		d["newEquipmentLevel"] = x.NewEquipmentLevel
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventEntityExpelsHf struct {
 	EntityId int `json:"entityId" legend:"base"` // entity_id
 	Hfid     int `json:"hfid" legend:"base"`     // hfid
 	SiteId   int `json:"siteId" legend:"base"`   // site_id
 }
 
+func NewHistoricalEventEntityExpelsHf() *HistoricalEventEntityExpelsHf {
+	return &HistoricalEventEntityExpelsHf{
+		EntityId: -1,
+		Hfid:     -1,
+		SiteId:   -1,
+	}
+}
 func (x *HistoricalEventEntityExpelsHf) Type() string                { return "entity expels hf" }
 func (x *HistoricalEventEntityExpelsHf) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *HistoricalEventEntityExpelsHf) RelatedToHf(id int) bool     { return x.Hfid == id }
@@ -4492,16 +6880,47 @@ func (x *HistoricalEventEntityExpelsHf) RelatedToHf(id int) bool     { return x.
 func (x *HistoricalEventEntityExpelsHf) CheckFields() {
 }
 
+func (x *HistoricalEventEntityExpelsHf) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventEntityFledSite struct {
 	FledCivId int `json:"fledCivId" legend:"base"` // fled_civ_id
 	SiteId    int `json:"siteId" legend:"base"`    // site_id
 }
 
+func NewHistoricalEventEntityFledSite() *HistoricalEventEntityFledSite {
+	return &HistoricalEventEntityFledSite{
+		FledCivId: -1,
+		SiteId:    -1,
+	}
+}
 func (x *HistoricalEventEntityFledSite) Type() string                { return "entity fled site" }
 func (x *HistoricalEventEntityFledSite) RelatedToEntity(id int) bool { return x.FledCivId == id }
 func (x *HistoricalEventEntityFledSite) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventEntityFledSite) CheckFields() {
+}
+
+func (x *HistoricalEventEntityFledSite) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.FledCivId != -1 {
+		d["fledCivId"] = x.FledCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventEntityIncorporated struct {
@@ -4512,6 +6931,14 @@ type HistoricalEventEntityIncorporated struct {
 	SiteId               int  `json:"siteId" legend:"base"`               // site_id
 }
 
+func NewHistoricalEventEntityIncorporated() *HistoricalEventEntityIncorporated {
+	return &HistoricalEventEntityIncorporated{
+		JoinedEntityId: -1,
+		JoinerEntityId: -1,
+		LeaderHfid:     -1,
+		SiteId:         -1,
+	}
+}
 func (x *HistoricalEventEntityIncorporated) Type() string { return "entity incorporated" }
 func (x *HistoricalEventEntityIncorporated) RelatedToEntity(id int) bool {
 	return x.JoinedEntityId == id || x.JoinerEntityId == id
@@ -4519,6 +6946,24 @@ func (x *HistoricalEventEntityIncorporated) RelatedToEntity(id int) bool {
 func (x *HistoricalEventEntityIncorporated) RelatedToHf(id int) bool { return x.LeaderHfid == id }
 
 func (x *HistoricalEventEntityIncorporated) CheckFields() {
+}
+
+func (x *HistoricalEventEntityIncorporated) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.JoinedEntityId != -1 {
+		d["joinedEntityId"] = x.JoinedEntityId
+	}
+	if x.JoinerEntityId != -1 {
+		d["joinerEntityId"] = x.JoinerEntityId
+	}
+	if x.LeaderHfid != -1 {
+		d["leaderHfid"] = x.LeaderHfid
+	}
+	d["partialIncorporation"] = x.PartialIncorporation
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventEntityLawLawAdd int
@@ -4582,11 +7027,34 @@ type HistoricalEventEntityLaw struct {
 	LawRemove    HistoricalEventEntityLawLawRemove `json:"lawRemove" legend:"base"`    // law_remove
 }
 
+func NewHistoricalEventEntityLaw() *HistoricalEventEntityLaw {
+	return &HistoricalEventEntityLaw{
+		EntityId:     -1,
+		HistFigureId: -1,
+	}
+}
 func (x *HistoricalEventEntityLaw) Type() string                { return "entity law" }
 func (x *HistoricalEventEntityLaw) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *HistoricalEventEntityLaw) RelatedToHf(id int) bool     { return x.HistFigureId == id }
 
 func (x *HistoricalEventEntityLaw) CheckFields() {
+}
+
+func (x *HistoricalEventEntityLaw) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.HistFigureId != -1 {
+		d["histFigureId"] = x.HistFigureId
+	}
+	if x.LawAdd != 0 {
+		d["lawAdd"] = x.LawAdd
+	}
+	if x.LawRemove != 0 {
+		d["lawRemove"] = x.LawRemove
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventEntityOverthrown struct {
@@ -4599,6 +7067,16 @@ type HistoricalEventEntityOverthrown struct {
 	SiteId            int   `json:"siteId" legend:"base"`            // site_id
 }
 
+func NewHistoricalEventEntityOverthrown() *HistoricalEventEntityOverthrown {
+	return &HistoricalEventEntityOverthrown{
+		EntityId:          -1,
+		InstigatorHfid:    -1,
+		OverthrownHfid:    -1,
+		PosTakerHfid:      -1,
+		PositionProfileId: -1,
+		SiteId:            -1,
+	}
+}
 func (x *HistoricalEventEntityOverthrown) Type() string                { return "entity overthrown" }
 func (x *HistoricalEventEntityOverthrown) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *HistoricalEventEntityOverthrown) RelatedToHf(id int) bool {
@@ -4606,6 +7084,30 @@ func (x *HistoricalEventEntityOverthrown) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventEntityOverthrown) CheckFields() {
+}
+
+func (x *HistoricalEventEntityOverthrown) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["conspiratorHfid"] = x.ConspiratorHfid
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.InstigatorHfid != -1 {
+		d["instigatorHfid"] = x.InstigatorHfid
+	}
+	if x.OverthrownHfid != -1 {
+		d["overthrownHfid"] = x.OverthrownHfid
+	}
+	if x.PosTakerHfid != -1 {
+		d["posTakerHfid"] = x.PosTakerHfid
+	}
+	if x.PositionProfileId != -1 {
+		d["positionProfileId"] = x.PositionProfileId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventEntityPersecuted struct {
@@ -4622,6 +7124,16 @@ type HistoricalEventEntityPersecuted struct {
 	TargetEnid                  int   `json:"targetEnid" legend:"base"`                  // target_enid
 }
 
+func NewHistoricalEventEntityPersecuted() *HistoricalEventEntityPersecuted {
+	return &HistoricalEventEntityPersecuted{
+		DestroyedStructureId:  -1,
+		PersecutorEnid:        -1,
+		PersecutorHfid:        -1,
+		ShrineAmountDestroyed: -1,
+		SiteId:                -1,
+		TargetEnid:            -1,
+	}
+}
 func (x *HistoricalEventEntityPersecuted) Type() string                { return "entity persecuted" }
 func (x *HistoricalEventEntityPersecuted) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventEntityPersecuted) RelatedToHf(id int) bool {
@@ -4629,6 +7141,34 @@ func (x *HistoricalEventEntityPersecuted) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventEntityPersecuted) CheckFields() {
+}
+
+func (x *HistoricalEventEntityPersecuted) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.DestroyedStructureId != -1 {
+		d["destroyedStructureId"] = x.DestroyedStructureId
+	}
+	d["expelledCreature"] = x.ExpelledCreature
+	d["expelledHfid"] = x.ExpelledHfid
+	d["expelledNumber"] = x.ExpelledNumber
+	d["expelledPopId"] = x.ExpelledPopId
+	if x.PersecutorEnid != -1 {
+		d["persecutorEnid"] = x.PersecutorEnid
+	}
+	if x.PersecutorHfid != -1 {
+		d["persecutorHfid"] = x.PersecutorHfid
+	}
+	d["propertyConfiscatedFromHfid"] = x.PropertyConfiscatedFromHfid
+	if x.ShrineAmountDestroyed != -1 {
+		d["shrineAmountDestroyed"] = x.ShrineAmountDestroyed
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.TargetEnid != -1 {
+		d["targetEnid"] = x.TargetEnid
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventEntityPrimaryCriminalsAction int
@@ -4665,6 +7205,13 @@ type HistoricalEventEntityPrimaryCriminals struct {
 	StructureId int                                         `json:"structureId" legend:"base"` // structure_id
 }
 
+func NewHistoricalEventEntityPrimaryCriminals() *HistoricalEventEntityPrimaryCriminals {
+	return &HistoricalEventEntityPrimaryCriminals{
+		EntityId:    -1,
+		SiteId:      -1,
+		StructureId: -1,
+	}
+}
 func (x *HistoricalEventEntityPrimaryCriminals) Type() string                { return "entity primary criminals" }
 func (x *HistoricalEventEntityPrimaryCriminals) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *HistoricalEventEntityPrimaryCriminals) RelatedToHf(id int) bool     { return false }
@@ -4672,11 +7219,34 @@ func (x *HistoricalEventEntityPrimaryCriminals) RelatedToHf(id int) bool     { r
 func (x *HistoricalEventEntityPrimaryCriminals) CheckFields() {
 }
 
+func (x *HistoricalEventEntityPrimaryCriminals) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Action != 0 {
+		d["action"] = x.Action
+	}
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventEntityRampagedInSite struct {
 	RampageCivId int `json:"rampageCivId" legend:"base"` // rampage_civ_id
 	SiteId       int `json:"siteId" legend:"base"`       // site_id
 }
 
+func NewHistoricalEventEntityRampagedInSite() *HistoricalEventEntityRampagedInSite {
+	return &HistoricalEventEntityRampagedInSite{
+		RampageCivId: -1,
+		SiteId:       -1,
+	}
+}
 func (x *HistoricalEventEntityRampagedInSite) Type() string { return "entity rampaged in site" }
 func (x *HistoricalEventEntityRampagedInSite) RelatedToEntity(id int) bool {
 	return x.RampageCivId == id
@@ -4684,6 +7254,17 @@ func (x *HistoricalEventEntityRampagedInSite) RelatedToEntity(id int) bool {
 func (x *HistoricalEventEntityRampagedInSite) RelatedToHf(id int) bool { return false }
 
 func (x *HistoricalEventEntityRampagedInSite) CheckFields() {
+}
+
+func (x *HistoricalEventEntityRampagedInSite) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.RampageCivId != -1 {
+		d["rampageCivId"] = x.RampageCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventEntityRelocateAction int
@@ -4720,11 +7301,35 @@ type HistoricalEventEntityRelocate struct {
 	StructureId int                                 `json:"structureId" legend:"base"` // structure_id
 }
 
+func NewHistoricalEventEntityRelocate() *HistoricalEventEntityRelocate {
+	return &HistoricalEventEntityRelocate{
+		EntityId:    -1,
+		SiteId:      -1,
+		StructureId: -1,
+	}
+}
 func (x *HistoricalEventEntityRelocate) Type() string                { return "entity relocate" }
 func (x *HistoricalEventEntityRelocate) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *HistoricalEventEntityRelocate) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventEntityRelocate) CheckFields() {
+}
+
+func (x *HistoricalEventEntityRelocate) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Action != 0 {
+		d["action"] = x.Action
+	}
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventEntitySearchedSiteResult int
@@ -4760,6 +7365,12 @@ type HistoricalEventEntitySearchedSite struct {
 	SiteId        int                                     `json:"siteId" legend:"base"`        // site_id
 }
 
+func NewHistoricalEventEntitySearchedSite() *HistoricalEventEntitySearchedSite {
+	return &HistoricalEventEntitySearchedSite{
+		SearcherCivId: -1,
+		SiteId:        -1,
+	}
+}
 func (x *HistoricalEventEntitySearchedSite) Type() string { return "entity searched site" }
 func (x *HistoricalEventEntitySearchedSite) RelatedToEntity(id int) bool {
 	return x.SearcherCivId == id
@@ -4767,6 +7378,20 @@ func (x *HistoricalEventEntitySearchedSite) RelatedToEntity(id int) bool {
 func (x *HistoricalEventEntitySearchedSite) RelatedToHf(id int) bool { return false }
 
 func (x *HistoricalEventEntitySearchedSite) CheckFields() {
+}
+
+func (x *HistoricalEventEntitySearchedSite) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Result != 0 {
+		d["result"] = x.Result
+	}
+	if x.SearcherCivId != -1 {
+		d["searcherCivId"] = x.SearcherCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventFailedFrameAttemptCrime int
@@ -4805,6 +7430,15 @@ type HistoricalEventFailedFrameAttempt struct {
 	TargetHfid    int                                    `json:"targetHfid" legend:"base"`    // target_hfid
 }
 
+func NewHistoricalEventFailedFrameAttempt() *HistoricalEventFailedFrameAttempt {
+	return &HistoricalEventFailedFrameAttempt{
+		ConvicterEnid: -1,
+		FooledHfid:    -1,
+		FramerHfid:    -1,
+		PlotterHfid:   -1,
+		TargetHfid:    -1,
+	}
+}
 func (x *HistoricalEventFailedFrameAttempt) Type() string                { return "failed frame attempt" }
 func (x *HistoricalEventFailedFrameAttempt) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventFailedFrameAttempt) RelatedToHf(id int) bool {
@@ -4812,6 +7446,29 @@ func (x *HistoricalEventFailedFrameAttempt) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventFailedFrameAttempt) CheckFields() {
+}
+
+func (x *HistoricalEventFailedFrameAttempt) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ConvicterEnid != -1 {
+		d["convicterEnid"] = x.ConvicterEnid
+	}
+	if x.Crime != 0 {
+		d["crime"] = x.Crime
+	}
+	if x.FooledHfid != -1 {
+		d["fooledHfid"] = x.FooledHfid
+	}
+	if x.FramerHfid != -1 {
+		d["framerHfid"] = x.FramerHfid
+	}
+	if x.PlotterHfid != -1 {
+		d["plotterHfid"] = x.PlotterHfid
+	}
+	if x.TargetHfid != -1 {
+		d["targetHfid"] = x.TargetHfid
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventFailedIntrigueCorruptionAction int
@@ -5102,6 +7759,29 @@ type HistoricalEventFailedIntrigueCorruption struct {
 	TopValueRating            int                                                          `json:"topValueRating" legend:"base"`            // top_value_rating
 }
 
+func NewHistoricalEventFailedIntrigueCorruption() *HistoricalEventFailedIntrigueCorruption {
+	return &HistoricalEventFailedIntrigueCorruption{
+		AllyDefenseBonus:          -1,
+		CoconspiratorBonus:        -1,
+		CorruptorHfid:             -1,
+		CorruptorIdentity:         -1,
+		FeatureLayerId:            -1,
+		LureHfid:                  -1,
+		RelevantEntityId:          -1,
+		RelevantIdForMethod:       -1,
+		RelevantPositionProfileId: -1,
+		SiteId:                    -1,
+		SubregionId:               -1,
+		TargetHfid:                -1,
+		TargetIdentity:            -1,
+		TopFacetModifier:          -1,
+		TopFacetRating:            -1,
+		TopRelationshipModifier:   -1,
+		TopRelationshipRating:     -1,
+		TopValueModifier:          -1,
+		TopValueRating:            -1,
+	}
+}
 func (x *HistoricalEventFailedIntrigueCorruption) Type() string { return "failed intrigue corruption" }
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToEntity(id int) bool {
 	return x.CorruptorIdentity == id || x.RelevantEntityId == id || x.TargetIdentity == id
@@ -5111,6 +7791,84 @@ func (x *HistoricalEventFailedIntrigueCorruption) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventFailedIntrigueCorruption) CheckFields() {
+}
+
+func (x *HistoricalEventFailedIntrigueCorruption) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Action != 0 {
+		d["action"] = x.Action
+	}
+	if x.AllyDefenseBonus != -1 {
+		d["allyDefenseBonus"] = x.AllyDefenseBonus
+	}
+	if x.CoconspiratorBonus != -1 {
+		d["coconspiratorBonus"] = x.CoconspiratorBonus
+	}
+	if x.CorruptorHfid != -1 {
+		d["corruptorHfid"] = x.CorruptorHfid
+	}
+	if x.CorruptorIdentity != -1 {
+		d["corruptorIdentity"] = x.CorruptorIdentity
+	}
+	d["failedJudgmentTest"] = x.FailedJudgmentTest
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.LureHfid != -1 {
+		d["lureHfid"] = x.LureHfid
+	}
+	if x.Method != 0 {
+		d["method"] = x.Method
+	}
+	if x.RelevantEntityId != -1 {
+		d["relevantEntityId"] = x.RelevantEntityId
+	}
+	if x.RelevantIdForMethod != -1 {
+		d["relevantIdForMethod"] = x.RelevantIdForMethod
+	}
+	if x.RelevantPositionProfileId != -1 {
+		d["relevantPositionProfileId"] = x.RelevantPositionProfileId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	if x.TargetHfid != -1 {
+		d["targetHfid"] = x.TargetHfid
+	}
+	if x.TargetIdentity != -1 {
+		d["targetIdentity"] = x.TargetIdentity
+	}
+	if x.TopFacet != 0 {
+		d["topFacet"] = x.TopFacet
+	}
+	if x.TopFacetModifier != -1 {
+		d["topFacetModifier"] = x.TopFacetModifier
+	}
+	if x.TopFacetRating != -1 {
+		d["topFacetRating"] = x.TopFacetRating
+	}
+	if x.TopRelationshipFactor != 0 {
+		d["topRelationshipFactor"] = x.TopRelationshipFactor
+	}
+	if x.TopRelationshipModifier != -1 {
+		d["topRelationshipModifier"] = x.TopRelationshipModifier
+	}
+	if x.TopRelationshipRating != -1 {
+		d["topRelationshipRating"] = x.TopRelationshipRating
+	}
+	if x.TopValue != 0 {
+		d["topValue"] = x.TopValue
+	}
+	if x.TopValueModifier != -1 {
+		d["topValueModifier"] = x.TopValueModifier
+	}
+	if x.TopValueRating != -1 {
+		d["topValueRating"] = x.TopValueRating
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventFieldBattle struct {
@@ -5127,6 +7885,20 @@ type HistoricalEventFieldBattle struct {
 	SubregionId         int    `json:"subregionId" legend:"base"`         // subregion_id
 }
 
+func NewHistoricalEventFieldBattle() *HistoricalEventFieldBattle {
+	return &HistoricalEventFieldBattle{
+		ASupportMercEnid:    -1,
+		AttackerCivId:       -1,
+		AttackerGeneralHfid: -1,
+		AttackerMercEnid:    -1,
+		DSupportMercEnid:    -1,
+		DefenderCivId:       -1,
+		DefenderGeneralHfid: -1,
+		DefenderMercEnid:    -1,
+		FeatureLayerId:      -1,
+		SubregionId:         -1,
+	}
+}
 func (x *HistoricalEventFieldBattle) Type() string { return "field battle" }
 func (x *HistoricalEventFieldBattle) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id
@@ -5138,17 +7910,74 @@ func (x *HistoricalEventFieldBattle) RelatedToHf(id int) bool {
 func (x *HistoricalEventFieldBattle) CheckFields() {
 }
 
+func (x *HistoricalEventFieldBattle) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ASupportMercEnid != -1 {
+		d["aSupportMercEnid"] = x.ASupportMercEnid
+	}
+	if x.AttackerCivId != -1 {
+		d["attackerCivId"] = x.AttackerCivId
+	}
+	if x.AttackerGeneralHfid != -1 {
+		d["attackerGeneralHfid"] = x.AttackerGeneralHfid
+	}
+	if x.AttackerMercEnid != -1 {
+		d["attackerMercEnid"] = x.AttackerMercEnid
+	}
+	d["coords"] = x.Coords
+	if x.DSupportMercEnid != -1 {
+		d["dSupportMercEnid"] = x.DSupportMercEnid
+	}
+	if x.DefenderCivId != -1 {
+		d["defenderCivId"] = x.DefenderCivId
+	}
+	if x.DefenderGeneralHfid != -1 {
+		d["defenderGeneralHfid"] = x.DefenderGeneralHfid
+	}
+	if x.DefenderMercEnid != -1 {
+		d["defenderMercEnid"] = x.DefenderMercEnid
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventFirstContact struct {
 	ContactedEnid int `json:"contactedEnid" legend:"base"` // contacted_enid
 	ContactorEnid int `json:"contactorEnid" legend:"base"` // contactor_enid
 	SiteId        int `json:"siteId" legend:"base"`        // site_id
 }
 
+func NewHistoricalEventFirstContact() *HistoricalEventFirstContact {
+	return &HistoricalEventFirstContact{
+		ContactedEnid: -1,
+		ContactorEnid: -1,
+		SiteId:        -1,
+	}
+}
 func (x *HistoricalEventFirstContact) Type() string                { return "first contact" }
 func (x *HistoricalEventFirstContact) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventFirstContact) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventFirstContact) CheckFields() {
+}
+
+func (x *HistoricalEventFirstContact) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ContactedEnid != -1 {
+		d["contactedEnid"] = x.ContactedEnid
+	}
+	if x.ContactorEnid != -1 {
+		d["contactorEnid"] = x.ContactorEnid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventGamble struct {
@@ -5159,11 +7988,40 @@ type HistoricalEventGamble struct {
 	StructureId int `json:"structureId" legend:"base"` // structure_id
 }
 
+func NewHistoricalEventGamble() *HistoricalEventGamble {
+	return &HistoricalEventGamble{
+		GamblerHfid: -1,
+		NewAccount:  -1,
+		OldAccount:  -1,
+		SiteId:      -1,
+		StructureId: -1,
+	}
+}
 func (x *HistoricalEventGamble) Type() string                { return "gamble" }
 func (x *HistoricalEventGamble) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventGamble) RelatedToHf(id int) bool     { return x.GamblerHfid == id }
 
 func (x *HistoricalEventGamble) CheckFields() {
+}
+
+func (x *HistoricalEventGamble) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.GamblerHfid != -1 {
+		d["gamblerHfid"] = x.GamblerHfid
+	}
+	if x.NewAccount != -1 {
+		d["newAccount"] = x.NewAccount
+	}
+	if x.OldAccount != -1 {
+		d["oldAccount"] = x.OldAccount
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfAbducted struct {
@@ -5174,6 +8032,15 @@ type HistoricalEventHfAbducted struct {
 	TargetHfid     int `json:"targetHfid" legend:"base"`     // target_hfid
 }
 
+func NewHistoricalEventHfAbducted() *HistoricalEventHfAbducted {
+	return &HistoricalEventHfAbducted{
+		FeatureLayerId: -1,
+		SiteId:         -1,
+		SnatcherHfid:   -1,
+		SubregionId:    -1,
+		TargetHfid:     -1,
+	}
+}
 func (x *HistoricalEventHfAbducted) Type() string                { return "hf abducted" }
 func (x *HistoricalEventHfAbducted) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfAbducted) RelatedToHf(id int) bool {
@@ -5183,6 +8050,26 @@ func (x *HistoricalEventHfAbducted) RelatedToHf(id int) bool {
 func (x *HistoricalEventHfAbducted) CheckFields() {
 }
 
+func (x *HistoricalEventHfAbducted) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SnatcherHfid != -1 {
+		d["snatcherHfid"] = x.SnatcherHfid
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	if x.TargetHfid != -1 {
+		d["targetHfid"] = x.TargetHfid
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventHfAttackedSite struct {
 	AttackerHfid  int `json:"attackerHfid" legend:"base"`  // attacker_hfid
 	DefenderCivId int `json:"defenderCivId" legend:"base"` // defender_civ_id
@@ -5190,6 +8077,14 @@ type HistoricalEventHfAttackedSite struct {
 	SiteId        int `json:"siteId" legend:"base"`        // site_id
 }
 
+func NewHistoricalEventHfAttackedSite() *HistoricalEventHfAttackedSite {
+	return &HistoricalEventHfAttackedSite{
+		AttackerHfid:  -1,
+		DefenderCivId: -1,
+		SiteCivId:     -1,
+		SiteId:        -1,
+	}
+}
 func (x *HistoricalEventHfAttackedSite) Type() string { return "hf attacked site" }
 func (x *HistoricalEventHfAttackedSite) RelatedToEntity(id int) bool {
 	return x.DefenderCivId == id || x.SiteCivId == id
@@ -5197,6 +8092,23 @@ func (x *HistoricalEventHfAttackedSite) RelatedToEntity(id int) bool {
 func (x *HistoricalEventHfAttackedSite) RelatedToHf(id int) bool { return x.AttackerHfid == id }
 
 func (x *HistoricalEventHfAttackedSite) CheckFields() {
+}
+
+func (x *HistoricalEventHfAttackedSite) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackerHfid != -1 {
+		d["attackerHfid"] = x.AttackerHfid
+	}
+	if x.DefenderCivId != -1 {
+		d["defenderCivId"] = x.DefenderCivId
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfConfrontedReason int
@@ -5268,11 +8180,41 @@ type HistoricalEventHfConfronted struct {
 	SubregionId    int                                  `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventHfConfronted() *HistoricalEventHfConfronted {
+	return &HistoricalEventHfConfronted{
+		FeatureLayerId: -1,
+		Hfid:           -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventHfConfronted) Type() string                { return "hf confronted" }
 func (x *HistoricalEventHfConfronted) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfConfronted) RelatedToHf(id int) bool     { return x.Hfid == id }
 
 func (x *HistoricalEventHfConfronted) CheckFields() {
+}
+
+func (x *HistoricalEventHfConfronted) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["coords"] = x.Coords
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	d["reason"] = x.Reason
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.Situation != 0 {
+		d["situation"] = x.Situation
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfConvictedCrime int
@@ -5387,6 +8329,23 @@ type HistoricalEventHfConvicted struct {
 	WrongfulConviction             bool                            `json:"wrongfulConviction" legend:"base"`             // wrongful_conviction
 }
 
+func NewHistoricalEventHfConvicted() *HistoricalEventHfConvicted {
+	return &HistoricalEventHfConvicted{
+		CoconspiratorHfid:           -1,
+		ConfessedAfterApbArrestEnid: -1,
+		ContactHfid:                 -1,
+		ConvictedHfid:               -1,
+		ConvicterEnid:               -1,
+		CorruptConvicterHfid:        -1,
+		FooledHfid:                  -1,
+		FramerHfid:                  -1,
+		Hammerstrokes:               -1,
+		InterrogatorHfid:            -1,
+		PlotterHfid:                 -1,
+		PrisonMonths:                -1,
+		TargetHfid:                  -1,
+	}
+}
 func (x *HistoricalEventHfConvicted) Type() string                { return "hf convicted" }
 func (x *HistoricalEventHfConvicted) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfConvicted) RelatedToHf(id int) bool {
@@ -5396,6 +8355,66 @@ func (x *HistoricalEventHfConvicted) RelatedToHf(id int) bool {
 func (x *HistoricalEventHfConvicted) CheckFields() {
 }
 
+func (x *HistoricalEventHfConvicted) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["beating"] = x.Beating
+	if x.CoconspiratorHfid != -1 {
+		d["coconspiratorHfid"] = x.CoconspiratorHfid
+	}
+	if x.ConfessedAfterApbArrestEnid != -1 {
+		d["confessedAfterApbArrestEnid"] = x.ConfessedAfterApbArrestEnid
+	}
+	if x.ContactHfid != -1 {
+		d["contactHfid"] = x.ContactHfid
+	}
+	d["convictIsContact"] = x.ConvictIsContact
+	if x.ConvictedHfid != -1 {
+		d["convictedHfid"] = x.ConvictedHfid
+	}
+	if x.ConvicterEnid != -1 {
+		d["convicterEnid"] = x.ConvicterEnid
+	}
+	if x.CorruptConvicterHfid != -1 {
+		d["corruptConvicterHfid"] = x.CorruptConvicterHfid
+	}
+	if x.Crime != 0 {
+		d["crime"] = x.Crime
+	}
+	d["deathPenalty"] = x.DeathPenalty
+	d["didNotRevealAllInInterrogation"] = x.DidNotRevealAllInInterrogation
+	d["exiled"] = x.Exiled
+	if x.FooledHfid != -1 {
+		d["fooledHfid"] = x.FooledHfid
+	}
+	if x.FramerHfid != -1 {
+		d["framerHfid"] = x.FramerHfid
+	}
+	if x.Hammerstrokes != -1 {
+		d["hammerstrokes"] = x.Hammerstrokes
+	}
+	d["heldFirmInInterrogation"] = x.HeldFirmInInterrogation
+	d["implicatedHfid"] = x.ImplicatedHfid
+	if x.InterrogatorHfid != -1 {
+		d["interrogatorHfid"] = x.InterrogatorHfid
+	}
+	d["noPrisonAvailable"] = x.NoPrisonAvailable
+	if x.PlotterHfid != -1 {
+		d["plotterHfid"] = x.PlotterHfid
+	}
+	if x.PrisonMonths != -1 {
+		d["prisonMonths"] = x.PrisonMonths
+	}
+	d["surveiledCoconspirator"] = x.SurveiledCoconspirator
+	d["surveiledContact"] = x.SurveiledContact
+	d["surveiledConvicted"] = x.SurveiledConvicted
+	d["surveiledTarget"] = x.SurveiledTarget
+	if x.TargetHfid != -1 {
+		d["targetHfid"] = x.TargetHfid
+	}
+	d["wrongfulConviction"] = x.WrongfulConviction
+	return json.Marshal(d)
+}
+
 type HistoricalEventHfDestroyedSite struct {
 	AttackerHfid  int `json:"attackerHfid" legend:"base"`  // attacker_hfid
 	DefenderCivId int `json:"defenderCivId" legend:"base"` // defender_civ_id
@@ -5403,6 +8422,14 @@ type HistoricalEventHfDestroyedSite struct {
 	SiteId        int `json:"siteId" legend:"base"`        // site_id
 }
 
+func NewHistoricalEventHfDestroyedSite() *HistoricalEventHfDestroyedSite {
+	return &HistoricalEventHfDestroyedSite{
+		AttackerHfid:  -1,
+		DefenderCivId: -1,
+		SiteCivId:     -1,
+		SiteId:        -1,
+	}
+}
 func (x *HistoricalEventHfDestroyedSite) Type() string { return "hf destroyed site" }
 func (x *HistoricalEventHfDestroyedSite) RelatedToEntity(id int) bool {
 	return x.DefenderCivId == id || x.SiteCivId == id
@@ -5410,6 +8437,23 @@ func (x *HistoricalEventHfDestroyedSite) RelatedToEntity(id int) bool {
 func (x *HistoricalEventHfDestroyedSite) RelatedToHf(id int) bool { return x.AttackerHfid == id }
 
 func (x *HistoricalEventHfDestroyedSite) CheckFields() {
+}
+
+func (x *HistoricalEventHfDestroyedSite) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackerHfid != -1 {
+		d["attackerHfid"] = x.AttackerHfid
+	}
+	if x.DefenderCivId != -1 {
+		d["defenderCivId"] = x.DefenderCivId
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfDiedDeathCause int
@@ -5692,11 +8736,63 @@ type HistoricalEventHfDied struct {
 	SubregionId         int                              `json:"subregionId" legend:"base"`         // subregion_id
 }
 
+func NewHistoricalEventHfDied() *HistoricalEventHfDied {
+	return &HistoricalEventHfDied{
+		FeatureLayerId:      -1,
+		Hfid:                -1,
+		SiteId:              -1,
+		SlayerHfid:          -1,
+		SlayerItemId:        -1,
+		SlayerShooterItemId: -1,
+		SubregionId:         -1,
+	}
+}
 func (x *HistoricalEventHfDied) Type() string                { return "hf died" }
 func (x *HistoricalEventHfDied) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfDied) RelatedToHf(id int) bool     { return x.Hfid == id || x.SlayerHfid == id }
 
 func (x *HistoricalEventHfDied) CheckFields() {
+}
+
+func (x *HistoricalEventHfDied) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["cause"] = x.Cause
+	if x.DeathCause != 0 {
+		d["deathCause"] = x.DeathCause
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.ItemSubtype != 0 {
+		d["itemSubtype"] = x.ItemSubtype
+	}
+	if x.ItemType != 0 {
+		d["itemType"] = x.ItemType
+	}
+	if x.Mat != 0 {
+		d["mat"] = x.Mat
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	d["slayerCaste"] = x.SlayerCaste
+	if x.SlayerHfid != -1 {
+		d["slayerHfid"] = x.SlayerHfid
+	}
+	if x.SlayerItemId != -1 {
+		d["slayerItemId"] = x.SlayerItemId
+	}
+	d["slayerRace"] = x.SlayerRace
+	if x.SlayerShooterItemId != -1 {
+		d["slayerShooterItemId"] = x.SlayerShooterItemId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfDisturbedStructureAction int
@@ -5733,11 +8829,35 @@ type HistoricalEventHfDisturbedStructure struct {
 	StructureId int                                       `json:"structureId" legend:"base"` // structure_id
 }
 
+func NewHistoricalEventHfDisturbedStructure() *HistoricalEventHfDisturbedStructure {
+	return &HistoricalEventHfDisturbedStructure{
+		HistFigId:   -1,
+		SiteId:      -1,
+		StructureId: -1,
+	}
+}
 func (x *HistoricalEventHfDisturbedStructure) Type() string                { return "hf disturbed structure" }
 func (x *HistoricalEventHfDisturbedStructure) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfDisturbedStructure) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventHfDisturbedStructure) CheckFields() {
+}
+
+func (x *HistoricalEventHfDisturbedStructure) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Action != 0 {
+		d["action"] = x.Action
+	}
+	if x.HistFigId != -1 {
+		d["histFigId"] = x.HistFigId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfDoesInteraction struct {
@@ -5750,6 +8870,15 @@ type HistoricalEventHfDoesInteraction struct {
 	TargetHfid        int    `json:"targetHfid" legend:"base"`        // target_hfid
 }
 
+func NewHistoricalEventHfDoesInteraction() *HistoricalEventHfDoesInteraction {
+	return &HistoricalEventHfDoesInteraction{
+		DoerHfid:   -1,
+		Region:     -1,
+		Site:       -1,
+		Source:     -1,
+		TargetHfid: -1,
+	}
+}
 func (x *HistoricalEventHfDoesInteraction) Type() string                { return "hf does interaction" }
 func (x *HistoricalEventHfDoesInteraction) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfDoesInteraction) RelatedToHf(id int) bool {
@@ -5780,6 +8909,28 @@ func (x *HistoricalEventHfDoesInteraction) CheckFields() {
 	}
 }
 
+func (x *HistoricalEventHfDoesInteraction) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.DoerHfid != -1 {
+		d["doerHfid"] = x.DoerHfid
+	}
+	d["interaction"] = x.Interaction
+	d["interactionAction"] = x.InteractionAction
+	if x.Region != -1 {
+		d["region"] = x.Region
+	}
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
+	if x.Source != -1 {
+		d["source"] = x.Source
+	}
+	if x.TargetHfid != -1 {
+		d["targetHfid"] = x.TargetHfid
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventHfEnslaved struct {
 	EnslavedHfid  int `json:"enslavedHfid" legend:"base"`  // enslaved_hfid
 	MovedToSiteId int `json:"movedToSiteId" legend:"base"` // moved_to_site_id
@@ -5787,6 +8938,14 @@ type HistoricalEventHfEnslaved struct {
 	SellerHfid    int `json:"sellerHfid" legend:"base"`    // seller_hfid
 }
 
+func NewHistoricalEventHfEnslaved() *HistoricalEventHfEnslaved {
+	return &HistoricalEventHfEnslaved{
+		EnslavedHfid:  -1,
+		MovedToSiteId: -1,
+		PayerEntityId: -1,
+		SellerHfid:    -1,
+	}
+}
 func (x *HistoricalEventHfEnslaved) Type() string                { return "hf enslaved" }
 func (x *HistoricalEventHfEnslaved) RelatedToEntity(id int) bool { return x.PayerEntityId == id }
 func (x *HistoricalEventHfEnslaved) RelatedToHf(id int) bool {
@@ -5794,6 +8953,23 @@ func (x *HistoricalEventHfEnslaved) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventHfEnslaved) CheckFields() {
+}
+
+func (x *HistoricalEventHfEnslaved) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EnslavedHfid != -1 {
+		d["enslavedHfid"] = x.EnslavedHfid
+	}
+	if x.MovedToSiteId != -1 {
+		d["movedToSiteId"] = x.MovedToSiteId
+	}
+	if x.PayerEntityId != -1 {
+		d["payerEntityId"] = x.PayerEntityId
+	}
+	if x.SellerHfid != -1 {
+		d["sellerHfid"] = x.SellerHfid
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfEquipmentPurchase struct {
@@ -5805,11 +8981,44 @@ type HistoricalEventHfEquipmentPurchase struct {
 	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventHfEquipmentPurchase() *HistoricalEventHfEquipmentPurchase {
+	return &HistoricalEventHfEquipmentPurchase{
+		FeatureLayerId: -1,
+		GroupHfid:      -1,
+		Quality:        -1,
+		SiteId:         -1,
+		StructureId:    -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventHfEquipmentPurchase) Type() string                { return "hf equipment purchase" }
 func (x *HistoricalEventHfEquipmentPurchase) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfEquipmentPurchase) RelatedToHf(id int) bool     { return x.GroupHfid == id }
 
 func (x *HistoricalEventHfEquipmentPurchase) CheckFields() {
+}
+
+func (x *HistoricalEventHfEquipmentPurchase) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.GroupHfid != -1 {
+		d["groupHfid"] = x.GroupHfid
+	}
+	if x.Quality != -1 {
+		d["quality"] = x.Quality
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfFreed struct {
@@ -5820,6 +9029,15 @@ type HistoricalEventHfFreed struct {
 	SiteId       int `json:"siteId" legend:"base"`       // site_id
 }
 
+func NewHistoricalEventHfFreed() *HistoricalEventHfFreed {
+	return &HistoricalEventHfFreed{
+		FreeingHfid:  -1,
+		HoldingCivId: -1,
+		RescuedHfid:  -1,
+		SiteCivId:    -1,
+		SiteId:       -1,
+	}
+}
 func (x *HistoricalEventHfFreed) Type() string { return "hf freed" }
 func (x *HistoricalEventHfFreed) RelatedToEntity(id int) bool {
 	return x.HoldingCivId == id || x.SiteCivId == id
@@ -5829,6 +9047,26 @@ func (x *HistoricalEventHfFreed) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventHfFreed) CheckFields() {
+}
+
+func (x *HistoricalEventHfFreed) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.FreeingHfid != -1 {
+		d["freeingHfid"] = x.FreeingHfid
+	}
+	if x.HoldingCivId != -1 {
+		d["holdingCivId"] = x.HoldingCivId
+	}
+	if x.RescuedHfid != -1 {
+		d["rescuedHfid"] = x.RescuedHfid
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfGainsSecretGoalSecretGoal int
@@ -5863,11 +9101,27 @@ type HistoricalEventHfGainsSecretGoal struct {
 	SecretGoal HistoricalEventHfGainsSecretGoalSecretGoal `json:"secretGoal" legend:"base"` // secret_goal
 }
 
+func NewHistoricalEventHfGainsSecretGoal() *HistoricalEventHfGainsSecretGoal {
+	return &HistoricalEventHfGainsSecretGoal{
+		Hfid: -1,
+	}
+}
 func (x *HistoricalEventHfGainsSecretGoal) Type() string                { return "hf gains secret goal" }
 func (x *HistoricalEventHfGainsSecretGoal) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfGainsSecretGoal) RelatedToHf(id int) bool     { return x.Hfid == id }
 
 func (x *HistoricalEventHfGainsSecretGoal) CheckFields() {
+}
+
+func (x *HistoricalEventHfGainsSecretGoal) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.SecretGoal != 0 {
+		d["secretGoal"] = x.SecretGoal
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfInterrogated struct {
@@ -5879,6 +9133,14 @@ type HistoricalEventHfInterrogated struct {
 	WantedAndRecognized     bool `json:"wantedAndRecognized" legend:"base"`     // wanted_and_recognized
 }
 
+func NewHistoricalEventHfInterrogated() *HistoricalEventHfInterrogated {
+	return &HistoricalEventHfInterrogated{
+		ArrestingEnid:    -1,
+		ImplicatedHfid:   -1,
+		InterrogatorHfid: -1,
+		TargetHfid:       -1,
+	}
+}
 func (x *HistoricalEventHfInterrogated) Type() string                { return "hf interrogated" }
 func (x *HistoricalEventHfInterrogated) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfInterrogated) RelatedToHf(id int) bool {
@@ -5886,6 +9148,25 @@ func (x *HistoricalEventHfInterrogated) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventHfInterrogated) CheckFields() {
+}
+
+func (x *HistoricalEventHfInterrogated) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArrestingEnid != -1 {
+		d["arrestingEnid"] = x.ArrestingEnid
+	}
+	d["heldFirmInInterrogation"] = x.HeldFirmInInterrogation
+	if x.ImplicatedHfid != -1 {
+		d["implicatedHfid"] = x.ImplicatedHfid
+	}
+	if x.InterrogatorHfid != -1 {
+		d["interrogatorHfid"] = x.InterrogatorHfid
+	}
+	if x.TargetHfid != -1 {
+		d["targetHfid"] = x.TargetHfid
+	}
+	d["wantedAndRecognized"] = x.WantedAndRecognized
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfLearnsSecretSecretText int
@@ -5923,6 +9204,13 @@ type HistoricalEventHfLearnsSecret struct {
 	TeacherHfid int                                     `json:"teacherHfid" legend:"base"` // teacher_hfid
 }
 
+func NewHistoricalEventHfLearnsSecret() *HistoricalEventHfLearnsSecret {
+	return &HistoricalEventHfLearnsSecret{
+		ArtifactId:  -1,
+		StudentHfid: -1,
+		TeacherHfid: -1,
+	}
+}
 func (x *HistoricalEventHfLearnsSecret) Type() string                { return "hf learns secret" }
 func (x *HistoricalEventHfLearnsSecret) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfLearnsSecret) RelatedToHf(id int) bool {
@@ -5930,6 +9218,24 @@ func (x *HistoricalEventHfLearnsSecret) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventHfLearnsSecret) CheckFields() {
+}
+
+func (x *HistoricalEventHfLearnsSecret) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	d["interaction"] = x.Interaction
+	if x.SecretText != 0 {
+		d["secretText"] = x.SecretText
+	}
+	if x.StudentHfid != -1 {
+		d["studentHfid"] = x.StudentHfid
+	}
+	if x.TeacherHfid != -1 {
+		d["teacherHfid"] = x.TeacherHfid
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfNewPet struct {
@@ -5941,6 +9247,14 @@ type HistoricalEventHfNewPet struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventHfNewPet() *HistoricalEventHfNewPet {
+	return &HistoricalEventHfNewPet{
+		FeatureLayerId: -1,
+		GroupHfid:      -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventHfNewPet) Type() string                { return "hf new pet" }
 func (x *HistoricalEventHfNewPet) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfNewPet) RelatedToHf(id int) bool     { return x.GroupHfid == id }
@@ -5951,6 +9265,25 @@ func (x *HistoricalEventHfNewPet) CheckFields() {
 	}
 }
 
+func (x *HistoricalEventHfNewPet) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["coords"] = x.Coords
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.GroupHfid != -1 {
+		d["groupHfid"] = x.GroupHfid
+	}
+	d["pets"] = x.Pets
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventHfPerformedHorribleExperiments struct {
 	FeatureLayerId int `json:"featureLayerId" legend:"base"` // feature_layer_id
 	GroupHfid      int `json:"groupHfid" legend:"base"`      // group_hfid
@@ -5959,6 +9292,15 @@ type HistoricalEventHfPerformedHorribleExperiments struct {
 	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventHfPerformedHorribleExperiments() *HistoricalEventHfPerformedHorribleExperiments {
+	return &HistoricalEventHfPerformedHorribleExperiments{
+		FeatureLayerId: -1,
+		GroupHfid:      -1,
+		SiteId:         -1,
+		StructureId:    -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventHfPerformedHorribleExperiments) Type() string {
 	return "hf performed horrible experiments"
 }
@@ -5968,6 +9310,26 @@ func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToHf(id int) bool
 }
 
 func (x *HistoricalEventHfPerformedHorribleExperiments) CheckFields() {
+}
+
+func (x *HistoricalEventHfPerformedHorribleExperiments) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.GroupHfid != -1 {
+		d["groupHfid"] = x.GroupHfid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfPrayedInsideStructureAction int
@@ -6004,11 +9366,35 @@ type HistoricalEventHfPrayedInsideStructure struct {
 	StructureId int                                          `json:"structureId" legend:"base"` // structure_id
 }
 
+func NewHistoricalEventHfPrayedInsideStructure() *HistoricalEventHfPrayedInsideStructure {
+	return &HistoricalEventHfPrayedInsideStructure{
+		HistFigId:   -1,
+		SiteId:      -1,
+		StructureId: -1,
+	}
+}
 func (x *HistoricalEventHfPrayedInsideStructure) Type() string                { return "hf prayed inside structure" }
 func (x *HistoricalEventHfPrayedInsideStructure) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfPrayedInsideStructure) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventHfPrayedInsideStructure) CheckFields() {
+}
+
+func (x *HistoricalEventHfPrayedInsideStructure) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Action != 0 {
+		d["action"] = x.Action
+	}
+	if x.HistFigId != -1 {
+		d["histFigId"] = x.HistFigId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfPreachTopic int
@@ -6051,6 +9437,14 @@ type HistoricalEventHfPreach struct {
 	Topic       HistoricalEventHfPreachTopic `json:"topic" legend:"base"`       // topic
 }
 
+func NewHistoricalEventHfPreach() *HistoricalEventHfPreach {
+	return &HistoricalEventHfPreach{
+		Entity1:     -1,
+		Entity2:     -1,
+		SiteHfid:    -1,
+		SpeakerHfid: -1,
+	}
+}
 func (x *HistoricalEventHfPreach) Type() string { return "hf preach" }
 func (x *HistoricalEventHfPreach) RelatedToEntity(id int) bool {
 	return x.Entity1 == id || x.Entity2 == id
@@ -6060,6 +9454,26 @@ func (x *HistoricalEventHfPreach) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventHfPreach) CheckFields() {
+}
+
+func (x *HistoricalEventHfPreach) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Entity1 != -1 {
+		d["entity1"] = x.Entity1
+	}
+	if x.Entity2 != -1 {
+		d["entity2"] = x.Entity2
+	}
+	if x.SiteHfid != -1 {
+		d["siteHfid"] = x.SiteHfid
+	}
+	if x.SpeakerHfid != -1 {
+		d["speakerHfid"] = x.SpeakerHfid
+	}
+	if x.Topic != 0 {
+		d["topic"] = x.Topic
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfProfanedStructureAction int
@@ -6096,11 +9510,35 @@ type HistoricalEventHfProfanedStructure struct {
 	StructureId int                                      `json:"structureId" legend:"base"` // structure_id
 }
 
+func NewHistoricalEventHfProfanedStructure() *HistoricalEventHfProfanedStructure {
+	return &HistoricalEventHfProfanedStructure{
+		HistFigId:   -1,
+		SiteId:      -1,
+		StructureId: -1,
+	}
+}
 func (x *HistoricalEventHfProfanedStructure) Type() string                { return "hf profaned structure" }
 func (x *HistoricalEventHfProfanedStructure) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfProfanedStructure) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventHfProfanedStructure) CheckFields() {
+}
+
+func (x *HistoricalEventHfProfanedStructure) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Action != 0 {
+		d["action"] = x.Action
+	}
+	if x.HistFigId != -1 {
+		d["histFigId"] = x.HistFigId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfRansomed struct {
@@ -6111,6 +9549,15 @@ type HistoricalEventHfRansomed struct {
 	RansomerHfid  int `json:"ransomerHfid" legend:"base"`  // ransomer_hfid
 }
 
+func NewHistoricalEventHfRansomed() *HistoricalEventHfRansomed {
+	return &HistoricalEventHfRansomed{
+		MovedToSiteId: -1,
+		PayerEntityId: -1,
+		PayerHfid:     -1,
+		RansomedHfid:  -1,
+		RansomerHfid:  -1,
+	}
+}
 func (x *HistoricalEventHfRansomed) Type() string                { return "hf ransomed" }
 func (x *HistoricalEventHfRansomed) RelatedToEntity(id int) bool { return x.PayerEntityId == id }
 func (x *HistoricalEventHfRansomed) RelatedToHf(id int) bool {
@@ -6120,6 +9567,26 @@ func (x *HistoricalEventHfRansomed) RelatedToHf(id int) bool {
 func (x *HistoricalEventHfRansomed) CheckFields() {
 }
 
+func (x *HistoricalEventHfRansomed) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.MovedToSiteId != -1 {
+		d["movedToSiteId"] = x.MovedToSiteId
+	}
+	if x.PayerEntityId != -1 {
+		d["payerEntityId"] = x.PayerEntityId
+	}
+	if x.PayerHfid != -1 {
+		d["payerHfid"] = x.PayerHfid
+	}
+	if x.RansomedHfid != -1 {
+		d["ransomedHfid"] = x.RansomedHfid
+	}
+	if x.RansomerHfid != -1 {
+		d["ransomerHfid"] = x.RansomerHfid
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventHfReachSummit struct {
 	Coords         string `json:"coords" legend:"base"`         // coords
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
@@ -6127,11 +9594,30 @@ type HistoricalEventHfReachSummit struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventHfReachSummit() *HistoricalEventHfReachSummit {
+	return &HistoricalEventHfReachSummit{
+		FeatureLayerId: -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventHfReachSummit) Type() string                { return "hf reach summit" }
 func (x *HistoricalEventHfReachSummit) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfReachSummit) RelatedToHf(id int) bool     { return containsInt(x.GroupHfid, id) }
 
 func (x *HistoricalEventHfReachSummit) CheckFields() {
+}
+
+func (x *HistoricalEventHfReachSummit) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["coords"] = x.Coords
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	d["groupHfid"] = x.GroupHfid
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfRecruitedUnitTypeForEntityUnitType int
@@ -6170,6 +9656,15 @@ type HistoricalEventHfRecruitedUnitTypeForEntity struct {
 	UnitType       HistoricalEventHfRecruitedUnitTypeForEntityUnitType `json:"unitType" legend:"base"`       // unit_type
 }
 
+func NewHistoricalEventHfRecruitedUnitTypeForEntity() *HistoricalEventHfRecruitedUnitTypeForEntity {
+	return &HistoricalEventHfRecruitedUnitTypeForEntity{
+		EntityId:       -1,
+		FeatureLayerId: -1,
+		Hfid:           -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) Type() string {
 	return "hf recruited unit type for entity"
 }
@@ -6179,6 +9674,29 @@ func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToEntity(id int) bo
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToHf(id int) bool { return x.Hfid == id }
 
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) CheckFields() {
+}
+
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	if x.UnitType != 0 {
+		d["unitType"] = x.UnitType
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfRelationshipDeniedReason int
@@ -6251,6 +9769,16 @@ type HistoricalEventHfRelationshipDenied struct {
 	TargetHfid     int                                             `json:"targetHfid" legend:"base"`     // target_hfid
 }
 
+func NewHistoricalEventHfRelationshipDenied() *HistoricalEventHfRelationshipDenied {
+	return &HistoricalEventHfRelationshipDenied{
+		FeatureLayerId: -1,
+		ReasonId:       -1,
+		SeekerHfid:     -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+		TargetHfid:     -1,
+	}
+}
 func (x *HistoricalEventHfRelationshipDenied) Type() string                { return "hf relationship denied" }
 func (x *HistoricalEventHfRelationshipDenied) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfRelationshipDenied) RelatedToHf(id int) bool {
@@ -6258,6 +9786,35 @@ func (x *HistoricalEventHfRelationshipDenied) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventHfRelationshipDenied) CheckFields() {
+}
+
+func (x *HistoricalEventHfRelationshipDenied) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Reason != 0 {
+		d["reason"] = x.Reason
+	}
+	if x.ReasonId != -1 {
+		d["reasonId"] = x.ReasonId
+	}
+	if x.Relationship != 0 {
+		d["relationship"] = x.Relationship
+	}
+	if x.SeekerHfid != -1 {
+		d["seekerHfid"] = x.SeekerHfid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	if x.TargetHfid != -1 {
+		d["targetHfid"] = x.TargetHfid
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfReunion struct {
@@ -6268,6 +9825,14 @@ type HistoricalEventHfReunion struct {
 	SubregionId    int   `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventHfReunion() *HistoricalEventHfReunion {
+	return &HistoricalEventHfReunion{
+		FeatureLayerId: -1,
+		Group1Hfid:     -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventHfReunion) Type() string                { return "hf reunion" }
 func (x *HistoricalEventHfReunion) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfReunion) RelatedToHf(id int) bool {
@@ -6275,6 +9840,24 @@ func (x *HistoricalEventHfReunion) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventHfReunion) CheckFields() {
+}
+
+func (x *HistoricalEventHfReunion) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Group1Hfid != -1 {
+		d["group1Hfid"] = x.Group1Hfid
+	}
+	d["group2Hfid"] = x.Group2Hfid
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfRevivedGhost int
@@ -6360,11 +9943,45 @@ type HistoricalEventHfRevived struct {
 	SubregionId    int                           `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventHfRevived() *HistoricalEventHfRevived {
+	return &HistoricalEventHfRevived{
+		ActorHfid:      -1,
+		FeatureLayerId: -1,
+		Hfid:           -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventHfRevived) Type() string                { return "hf revived" }
 func (x *HistoricalEventHfRevived) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfRevived) RelatedToHf(id int) bool     { return x.ActorHfid == id || x.Hfid == id }
 
 func (x *HistoricalEventHfRevived) CheckFields() {
+}
+
+func (x *HistoricalEventHfRevived) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ActorHfid != -1 {
+		d["actorHfid"] = x.ActorHfid
+	}
+	d["disturbance"] = x.Disturbance
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Ghost != 0 {
+		d["ghost"] = x.Ghost
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	d["raisedBefore"] = x.RaisedBefore
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfSimpleBattleEventSubtype int
@@ -6458,6 +10075,15 @@ type HistoricalEventHfSimpleBattleEvent struct {
 	Subtype        HistoricalEventHfSimpleBattleEventSubtype `json:"subtype" legend:"base"`        // subtype
 }
 
+func NewHistoricalEventHfSimpleBattleEvent() *HistoricalEventHfSimpleBattleEvent {
+	return &HistoricalEventHfSimpleBattleEvent{
+		FeatureLayerId: -1,
+		Group1Hfid:     -1,
+		Group2Hfid:     -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventHfSimpleBattleEvent) Type() string                { return "hf simple battle event" }
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToHf(id int) bool {
@@ -6465,6 +10091,29 @@ func (x *HistoricalEventHfSimpleBattleEvent) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventHfSimpleBattleEvent) CheckFields() {
+}
+
+func (x *HistoricalEventHfSimpleBattleEvent) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.Group1Hfid != -1 {
+		d["group1Hfid"] = x.Group1Hfid
+	}
+	if x.Group2Hfid != -1 {
+		d["group2Hfid"] = x.Group2Hfid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	if x.Subtype != 0 {
+		d["subtype"] = x.Subtype
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfTravel struct {
@@ -6476,11 +10125,35 @@ type HistoricalEventHfTravel struct {
 	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventHfTravel() *HistoricalEventHfTravel {
+	return &HistoricalEventHfTravel{
+		FeatureLayerId: -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventHfTravel) Type() string                { return "hf travel" }
 func (x *HistoricalEventHfTravel) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfTravel) RelatedToHf(id int) bool     { return containsInt(x.GroupHfid, id) }
 
 func (x *HistoricalEventHfTravel) CheckFields() {
+}
+
+func (x *HistoricalEventHfTravel) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["coords"] = x.Coords
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	d["groupHfid"] = x.GroupHfid
+	d["return"] = x.Return
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfViewedArtifact struct {
@@ -6490,11 +10163,36 @@ type HistoricalEventHfViewedArtifact struct {
 	StructureId int `json:"structureId" legend:"base"` // structure_id
 }
 
+func NewHistoricalEventHfViewedArtifact() *HistoricalEventHfViewedArtifact {
+	return &HistoricalEventHfViewedArtifact{
+		ArtifactId:  -1,
+		HistFigId:   -1,
+		SiteId:      -1,
+		StructureId: -1,
+	}
+}
 func (x *HistoricalEventHfViewedArtifact) Type() string                { return "hf viewed artifact" }
 func (x *HistoricalEventHfViewedArtifact) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfViewedArtifact) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventHfViewedArtifact) CheckFields() {
+}
+
+func (x *HistoricalEventHfViewedArtifact) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	if x.HistFigId != -1 {
+		d["histFigId"] = x.HistFigId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfWoundedInjuryType int
@@ -6585,6 +10283,18 @@ type HistoricalEventHfWounded struct {
 	WounderHfid    int                                `json:"wounderHfid" legend:"base"`    // wounder_hfid
 }
 
+func NewHistoricalEventHfWounded() *HistoricalEventHfWounded {
+	return &HistoricalEventHfWounded{
+		BodyPart:       -1,
+		FeatureLayerId: -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+		WoundeeCaste:   -1,
+		WoundeeHfid:    -1,
+		WoundeeRace:    -1,
+		WounderHfid:    -1,
+	}
+}
 func (x *HistoricalEventHfWounded) Type() string                { return "hf wounded" }
 func (x *HistoricalEventHfWounded) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfWounded) RelatedToHf(id int) bool {
@@ -6637,6 +10347,42 @@ func (x *HistoricalEventHfWounded) CheckFields() {
 	if x.WoundeeRace != x.WounderHfid && x.WoundeeRace != 0 && x.WounderHfid != 0 {
 		sameFields["HistoricalEventHfWounded"]["WoundeeRace"]["WounderHfid"] = false
 	}
+}
+
+func (x *HistoricalEventHfWounded) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.BodyPart != -1 {
+		d["bodyPart"] = x.BodyPart
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.InjuryType != 0 {
+		d["injuryType"] = x.InjuryType
+	}
+	if x.PartLost != 0 {
+		d["partLost"] = x.PartLost
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	d["wasTorture"] = x.WasTorture
+	if x.WoundeeCaste != -1 {
+		d["woundeeCaste"] = x.WoundeeCaste
+	}
+	if x.WoundeeHfid != -1 {
+		d["woundeeHfid"] = x.WoundeeHfid
+	}
+	if x.WoundeeRace != -1 {
+		d["woundeeRace"] = x.WoundeeRace
+	}
+	if x.WounderHfid != -1 {
+		d["wounderHfid"] = x.WounderHfid
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfsFormedIntrigueRelationshipAction int
@@ -7008,6 +10754,30 @@ type HistoricalEventHfsFormedIntrigueRelationship struct {
 	TopValueRating            int                                                               `json:"topValueRating" legend:"base"`            // top_value_rating
 }
 
+func NewHistoricalEventHfsFormedIntrigueRelationship() *HistoricalEventHfsFormedIntrigueRelationship {
+	return &HistoricalEventHfsFormedIntrigueRelationship{
+		AllyDefenseBonus:          -1,
+		CircumstanceId:            -1,
+		CoconspiratorBonus:        -1,
+		CorruptorHfid:             -1,
+		CorruptorIdentity:         -1,
+		FeatureLayerId:            -1,
+		LureHfid:                  -1,
+		RelevantEntityId:          -1,
+		RelevantIdForMethod:       -1,
+		RelevantPositionProfileId: -1,
+		SiteId:                    -1,
+		SubregionId:               -1,
+		TargetHfid:                -1,
+		TargetIdentity:            -1,
+		TopFacetModifier:          -1,
+		TopFacetRating:            -1,
+		TopRelationshipModifier:   -1,
+		TopRelationshipRating:     -1,
+		TopValueModifier:          -1,
+		TopValueRating:            -1,
+	}
+}
 func (x *HistoricalEventHfsFormedIntrigueRelationship) Type() string {
 	return "hfs formed intrigue relationship"
 }
@@ -7019,6 +10789,97 @@ func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToHf(id int) bool 
 }
 
 func (x *HistoricalEventHfsFormedIntrigueRelationship) CheckFields() {
+}
+
+func (x *HistoricalEventHfsFormedIntrigueRelationship) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Action != 0 {
+		d["action"] = x.Action
+	}
+	if x.AllyDefenseBonus != -1 {
+		d["allyDefenseBonus"] = x.AllyDefenseBonus
+	}
+	if x.Circumstance != 0 {
+		d["circumstance"] = x.Circumstance
+	}
+	if x.CircumstanceId != -1 {
+		d["circumstanceId"] = x.CircumstanceId
+	}
+	if x.CoconspiratorBonus != -1 {
+		d["coconspiratorBonus"] = x.CoconspiratorBonus
+	}
+	if x.CorruptorHfid != -1 {
+		d["corruptorHfid"] = x.CorruptorHfid
+	}
+	if x.CorruptorIdentity != -1 {
+		d["corruptorIdentity"] = x.CorruptorIdentity
+	}
+	if x.CorruptorSeenAs != 0 {
+		d["corruptorSeenAs"] = x.CorruptorSeenAs
+	}
+	d["failedJudgmentTest"] = x.FailedJudgmentTest
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.LureHfid != -1 {
+		d["lureHfid"] = x.LureHfid
+	}
+	if x.Method != 0 {
+		d["method"] = x.Method
+	}
+	if x.RelevantEntityId != -1 {
+		d["relevantEntityId"] = x.RelevantEntityId
+	}
+	if x.RelevantIdForMethod != -1 {
+		d["relevantIdForMethod"] = x.RelevantIdForMethod
+	}
+	if x.RelevantPositionProfileId != -1 {
+		d["relevantPositionProfileId"] = x.RelevantPositionProfileId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	d["successful"] = x.Successful
+	if x.TargetHfid != -1 {
+		d["targetHfid"] = x.TargetHfid
+	}
+	if x.TargetIdentity != -1 {
+		d["targetIdentity"] = x.TargetIdentity
+	}
+	if x.TargetSeenAs != 0 {
+		d["targetSeenAs"] = x.TargetSeenAs
+	}
+	if x.TopFacet != 0 {
+		d["topFacet"] = x.TopFacet
+	}
+	if x.TopFacetModifier != -1 {
+		d["topFacetModifier"] = x.TopFacetModifier
+	}
+	if x.TopFacetRating != -1 {
+		d["topFacetRating"] = x.TopFacetRating
+	}
+	if x.TopRelationshipFactor != 0 {
+		d["topRelationshipFactor"] = x.TopRelationshipFactor
+	}
+	if x.TopRelationshipModifier != -1 {
+		d["topRelationshipModifier"] = x.TopRelationshipModifier
+	}
+	if x.TopRelationshipRating != -1 {
+		d["topRelationshipRating"] = x.TopRelationshipRating
+	}
+	if x.TopValue != 0 {
+		d["topValue"] = x.TopValue
+	}
+	if x.TopValueModifier != -1 {
+		d["topValueModifier"] = x.TopValueModifier
+	}
+	if x.TopValueRating != -1 {
+		d["topValueRating"] = x.TopValueRating
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventHfsFormedReputationRelationshipHfRep1Of2 int
@@ -7092,6 +10953,17 @@ type HistoricalEventHfsFormedReputationRelationship struct {
 	SubregionId    int                                                     `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventHfsFormedReputationRelationship() *HistoricalEventHfsFormedReputationRelationship {
+	return &HistoricalEventHfsFormedReputationRelationship{
+		FeatureLayerId: -1,
+		Hfid1:          -1,
+		Hfid2:          -1,
+		IdentityId1:    -1,
+		IdentityId2:    -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventHfsFormedReputationRelationship) Type() string {
 	return "hfs formed reputation relationship"
 }
@@ -7105,16 +10977,65 @@ func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToHf(id int) boo
 func (x *HistoricalEventHfsFormedReputationRelationship) CheckFields() {
 }
 
+func (x *HistoricalEventHfsFormedReputationRelationship) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.HfRep1Of2 != 0 {
+		d["hfRep1Of2"] = x.HfRep1Of2
+	}
+	if x.HfRep2Of1 != 0 {
+		d["hfRep2Of1"] = x.HfRep2Of1
+	}
+	if x.Hfid1 != -1 {
+		d["hfid1"] = x.Hfid1
+	}
+	if x.Hfid2 != -1 {
+		d["hfid2"] = x.Hfid2
+	}
+	if x.IdentityId1 != -1 {
+		d["identityId1"] = x.IdentityId1
+	}
+	if x.IdentityId2 != -1 {
+		d["identityId2"] = x.IdentityId2
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventHolyCityDeclaration struct {
 	ReligionId int `json:"religionId" legend:"base"` // religion_id
 	SiteId     int `json:"siteId" legend:"base"`     // site_id
 }
 
+func NewHistoricalEventHolyCityDeclaration() *HistoricalEventHolyCityDeclaration {
+	return &HistoricalEventHolyCityDeclaration{
+		ReligionId: -1,
+		SiteId:     -1,
+	}
+}
 func (x *HistoricalEventHolyCityDeclaration) Type() string                { return "holy city declaration" }
 func (x *HistoricalEventHolyCityDeclaration) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHolyCityDeclaration) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventHolyCityDeclaration) CheckFields() {
+}
+
+func (x *HistoricalEventHolyCityDeclaration) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ReligionId != -1 {
+		d["religionId"] = x.ReligionId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventInsurrectionStartedOutcome int
@@ -7155,11 +11076,31 @@ type HistoricalEventInsurrectionStarted struct {
 	TargetCivId int                                       `json:"targetCivId" legend:"base"` // target_civ_id
 }
 
+func NewHistoricalEventInsurrectionStarted() *HistoricalEventInsurrectionStarted {
+	return &HistoricalEventInsurrectionStarted{
+		SiteId:      -1,
+		TargetCivId: -1,
+	}
+}
 func (x *HistoricalEventInsurrectionStarted) Type() string                { return "insurrection started" }
 func (x *HistoricalEventInsurrectionStarted) RelatedToEntity(id int) bool { return x.TargetCivId == id }
 func (x *HistoricalEventInsurrectionStarted) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventInsurrectionStarted) CheckFields() {
+}
+
+func (x *HistoricalEventInsurrectionStarted) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Outcome != 0 {
+		d["outcome"] = x.Outcome
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.TargetCivId != -1 {
+		d["targetCivId"] = x.TargetCivId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventItemStolenTheftMethod int
@@ -7221,6 +11162,19 @@ type HistoricalEventItemStolen struct {
 	TheftMethod    HistoricalEventItemStolenTheftMethod   `json:"theftMethod" legend:"plus"`    // theft_method
 }
 
+func NewHistoricalEventItemStolen() *HistoricalEventItemStolen {
+	return &HistoricalEventItemStolen{
+		CircumstanceId: -1,
+		Entity:         -1,
+		Histfig:        -1,
+		Item:           -1,
+		Matindex:       -1,
+		Mattype:        -1,
+		Site:           -1,
+		StashSite:      -1,
+		Structure:      -1,
+	}
+}
 func (x *HistoricalEventItemStolen) Type() string                { return "item stolen" }
 func (x *HistoricalEventItemStolen) RelatedToEntity(id int) bool { return x.Entity == id }
 func (x *HistoricalEventItemStolen) RelatedToHf(id int) bool     { return x.Histfig == id }
@@ -7250,6 +11204,45 @@ func (x *HistoricalEventItemStolen) CheckFields() {
 	if x.Structure != x.CircumstanceId && x.Structure != 0 && x.CircumstanceId != 0 {
 		sameFields["HistoricalEventItemStolen"]["Structure"]["CircumstanceId"] = false
 	}
+}
+
+func (x *HistoricalEventItemStolen) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["circumstance"] = x.Circumstance
+	if x.CircumstanceId != -1 {
+		d["circumstanceId"] = x.CircumstanceId
+	}
+	if x.Entity != -1 {
+		d["entity"] = x.Entity
+	}
+	if x.Histfig != -1 {
+		d["histfig"] = x.Histfig
+	}
+	if x.Item != -1 {
+		d["item"] = x.Item
+	}
+	d["itemSubtype"] = x.ItemSubtype
+	d["itemType"] = x.ItemType
+	d["mat"] = x.Mat
+	if x.Matindex != -1 {
+		d["matindex"] = x.Matindex
+	}
+	if x.Mattype != -1 {
+		d["mattype"] = x.Mattype
+	}
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
+	if x.StashSite != -1 {
+		d["stashSite"] = x.StashSite
+	}
+	if x.Structure != -1 {
+		d["structure"] = x.Structure
+	}
+	if x.TheftMethod != 0 {
+		d["theftMethod"] = x.TheftMethod
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventItemStolenCircumstanceType int
@@ -7296,10 +11289,34 @@ type HistoricalEventItemStolenCircumstance struct {
 	Type                HistoricalEventItemStolenCircumstanceType `json:"type" legend:"plus"`                // type
 }
 
+func NewHistoricalEventItemStolenCircumstance() *HistoricalEventItemStolenCircumstance {
+	return &HistoricalEventItemStolenCircumstance{
+		Defeated:            -1,
+		HistEventCollection: -1,
+		Murdered:            -1,
+	}
+}
 func (x *HistoricalEventItemStolenCircumstance) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventItemStolenCircumstance) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventItemStolenCircumstance) CheckFields() {
+}
+
+func (x *HistoricalEventItemStolenCircumstance) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Defeated != -1 {
+		d["defeated"] = x.Defeated
+	}
+	if x.HistEventCollection != -1 {
+		d["histEventCollection"] = x.HistEventCollection
+	}
+	if x.Murdered != -1 {
+		d["murdered"] = x.Murdered
+	}
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventKnowledgeDiscovered struct {
@@ -7308,11 +11325,26 @@ type HistoricalEventKnowledgeDiscovered struct {
 	Knowledge string `json:"knowledge" legend:"base"` // knowledge
 }
 
+func NewHistoricalEventKnowledgeDiscovered() *HistoricalEventKnowledgeDiscovered {
+	return &HistoricalEventKnowledgeDiscovered{
+		Hfid: -1,
+	}
+}
 func (x *HistoricalEventKnowledgeDiscovered) Type() string                { return "knowledge discovered" }
 func (x *HistoricalEventKnowledgeDiscovered) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventKnowledgeDiscovered) RelatedToHf(id int) bool     { return x.Hfid == id }
 
 func (x *HistoricalEventKnowledgeDiscovered) CheckFields() {
+}
+
+func (x *HistoricalEventKnowledgeDiscovered) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["first"] = x.First
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	d["knowledge"] = x.Knowledge
+	return json.Marshal(d)
 }
 
 type HistoricalEventMasterpieceArchConstructedBuildingSubtype int
@@ -7435,6 +11467,18 @@ type HistoricalEventMasterpieceArchConstructed struct {
 	Unk2            int                                                      `json:"unk2" legend:"plus"`            // unk_2
 }
 
+func NewHistoricalEventMasterpieceArchConstructed() *HistoricalEventMasterpieceArchConstructed {
+	return &HistoricalEventMasterpieceArchConstructed{
+		BuildingCustom: -1,
+		EntityId:       -1,
+		Hfid:           -1,
+		Maker:          -1,
+		MakerEntity:    -1,
+		Site:           -1,
+		SiteId:         -1,
+		Unk2:           -1,
+	}
+}
 func (x *HistoricalEventMasterpieceArchConstructed) Type() string {
 	return "masterpiece arch constructed"
 }
@@ -7489,6 +11533,44 @@ func (x *HistoricalEventMasterpieceArchConstructed) CheckFields() {
 	if x.Unk2 != x.SiteId && x.Unk2 != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["Unk2"]["SiteId"] = false
 	}
+}
+
+func (x *HistoricalEventMasterpieceArchConstructed) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.BuildingCustom != -1 {
+		d["buildingCustom"] = x.BuildingCustom
+	}
+	if x.BuildingSubtype != 0 {
+		d["buildingSubtype"] = x.BuildingSubtype
+	}
+	if x.BuildingType != 0 {
+		d["buildingType"] = x.BuildingType
+	}
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.Maker != -1 {
+		d["maker"] = x.Maker
+	}
+	if x.MakerEntity != -1 {
+		d["makerEntity"] = x.MakerEntity
+	}
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SkillAtTime != 0 {
+		d["skillAtTime"] = x.SkillAtTime
+	}
+	if x.Unk2 != -1 {
+		d["unk2"] = x.Unk2
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventMasterpieceEngravingSkillAtTime int
@@ -7575,6 +11657,18 @@ type HistoricalEventMasterpieceEngraving struct {
 	SkillAtTime HistoricalEventMasterpieceEngravingSkillAtTime `json:"skillAtTime" legend:"both"` // skill_at_time
 }
 
+func NewHistoricalEventMasterpieceEngraving() *HistoricalEventMasterpieceEngraving {
+	return &HistoricalEventMasterpieceEngraving{
+		ArtId:       -1,
+		ArtSubid:    -1,
+		EntityId:    -1,
+		Hfid:        -1,
+		Maker:       -1,
+		MakerEntity: -1,
+		Site:        -1,
+		SiteId:      -1,
+	}
+}
 func (x *HistoricalEventMasterpieceEngraving) Type() string { return "masterpiece engraving" }
 func (x *HistoricalEventMasterpieceEngraving) RelatedToEntity(id int) bool {
 	return x.EntityId == id || x.MakerEntity == id
@@ -7629,6 +11723,38 @@ func (x *HistoricalEventMasterpieceEngraving) CheckFields() {
 	}
 }
 
+func (x *HistoricalEventMasterpieceEngraving) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtId != -1 {
+		d["artId"] = x.ArtId
+	}
+	if x.ArtSubid != -1 {
+		d["artSubid"] = x.ArtSubid
+	}
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.Maker != -1 {
+		d["maker"] = x.Maker
+	}
+	if x.MakerEntity != -1 {
+		d["makerEntity"] = x.MakerEntity
+	}
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SkillAtTime != 0 {
+		d["skillAtTime"] = x.SkillAtTime
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventMasterpieceFood struct {
 	EntityId    int `json:"entityId" legend:"base"`    // entity_id
 	Hfid        int `json:"hfid" legend:"base"`        // hfid
@@ -7636,11 +11762,36 @@ type HistoricalEventMasterpieceFood struct {
 	SkillAtTime int `json:"skillAtTime" legend:"base"` // skill_at_time
 }
 
+func NewHistoricalEventMasterpieceFood() *HistoricalEventMasterpieceFood {
+	return &HistoricalEventMasterpieceFood{
+		EntityId:    -1,
+		Hfid:        -1,
+		SiteId:      -1,
+		SkillAtTime: -1,
+	}
+}
 func (x *HistoricalEventMasterpieceFood) Type() string                { return "masterpiece food" }
 func (x *HistoricalEventMasterpieceFood) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *HistoricalEventMasterpieceFood) RelatedToHf(id int) bool     { return x.Hfid == id }
 
 func (x *HistoricalEventMasterpieceFood) CheckFields() {
+}
+
+func (x *HistoricalEventMasterpieceFood) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SkillAtTime != -1 {
+		d["skillAtTime"] = x.SkillAtTime
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventMasterpieceItemItemSubtype int
@@ -7941,6 +12092,17 @@ type HistoricalEventMasterpieceItem struct {
 	SkillAtTime string                                    `json:"skillAtTime" legend:"both"` // skill_at_time
 }
 
+func NewHistoricalEventMasterpieceItem() *HistoricalEventMasterpieceItem {
+	return &HistoricalEventMasterpieceItem{
+		EntityId:    -1,
+		Hfid:        -1,
+		ItemId:      -1,
+		Maker:       -1,
+		MakerEntity: -1,
+		Site:        -1,
+		SiteId:      -1,
+	}
+}
 func (x *HistoricalEventMasterpieceItem) Type() string { return "masterpiece item" }
 func (x *HistoricalEventMasterpieceItem) RelatedToEntity(id int) bool {
 	return x.EntityId == id || x.MakerEntity == id
@@ -7986,6 +12148,40 @@ func (x *HistoricalEventMasterpieceItem) CheckFields() {
 	}
 }
 
+func (x *HistoricalEventMasterpieceItem) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.ItemId != -1 {
+		d["itemId"] = x.ItemId
+	}
+	if x.ItemSubtype != 0 {
+		d["itemSubtype"] = x.ItemSubtype
+	}
+	if x.ItemType != 0 {
+		d["itemType"] = x.ItemType
+	}
+	if x.Maker != -1 {
+		d["maker"] = x.Maker
+	}
+	if x.MakerEntity != -1 {
+		d["makerEntity"] = x.MakerEntity
+	}
+	d["mat"] = x.Mat
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	d["skillAtTime"] = x.SkillAtTime
+	return json.Marshal(d)
+}
+
 type HistoricalEventMasterpieceItemImprovement struct {
 	EntityId    int `json:"entityId" legend:"base"`    // entity_id
 	Hfid        int `json:"hfid" legend:"base"`        // hfid
@@ -7993,6 +12189,14 @@ type HistoricalEventMasterpieceItemImprovement struct {
 	SkillAtTime int `json:"skillAtTime" legend:"base"` // skill_at_time
 }
 
+func NewHistoricalEventMasterpieceItemImprovement() *HistoricalEventMasterpieceItemImprovement {
+	return &HistoricalEventMasterpieceItemImprovement{
+		EntityId:    -1,
+		Hfid:        -1,
+		SiteId:      -1,
+		SkillAtTime: -1,
+	}
+}
 func (x *HistoricalEventMasterpieceItemImprovement) Type() string {
 	return "masterpiece item improvement"
 }
@@ -8002,6 +12206,23 @@ func (x *HistoricalEventMasterpieceItemImprovement) RelatedToEntity(id int) bool
 func (x *HistoricalEventMasterpieceItemImprovement) RelatedToHf(id int) bool { return x.Hfid == id }
 
 func (x *HistoricalEventMasterpieceItemImprovement) CheckFields() {
+}
+
+func (x *HistoricalEventMasterpieceItemImprovement) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SkillAtTime != -1 {
+		d["skillAtTime"] = x.SkillAtTime
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventMasterpieceLostMethod int
@@ -8038,11 +12259,35 @@ type HistoricalEventMasterpieceLost struct {
 	Site          int                                  `json:"site" legend:"plus"`          // site
 }
 
+func NewHistoricalEventMasterpieceLost() *HistoricalEventMasterpieceLost {
+	return &HistoricalEventMasterpieceLost{
+		CreationEvent: -1,
+		Histfig:       -1,
+		Site:          -1,
+	}
+}
 func (x *HistoricalEventMasterpieceLost) Type() string                { return "masterpiece lost" }
 func (x *HistoricalEventMasterpieceLost) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventMasterpieceLost) RelatedToHf(id int) bool     { return x.Histfig == id }
 
 func (x *HistoricalEventMasterpieceLost) CheckFields() {
+}
+
+func (x *HistoricalEventMasterpieceLost) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CreationEvent != -1 {
+		d["creationEvent"] = x.CreationEvent
+	}
+	if x.Histfig != -1 {
+		d["histfig"] = x.Histfig
+	}
+	if x.Method != 0 {
+		d["method"] = x.Method
+	}
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventMerchant struct {
@@ -8056,6 +12301,16 @@ type HistoricalEventMerchant struct {
 	TraderEntityId int  `json:"traderEntityId" legend:"base"` // trader_entity_id
 }
 
+func NewHistoricalEventMerchant() *HistoricalEventMerchant {
+	return &HistoricalEventMerchant{
+		DepotEntityId:  -1,
+		Destination:    -1,
+		Site:           -1,
+		SiteId:         -1,
+		Source:         -1,
+		TraderEntityId: -1,
+	}
+}
 func (x *HistoricalEventMerchant) Type() string { return "merchant" }
 func (x *HistoricalEventMerchant) RelatedToEntity(id int) bool {
 	return x.DepotEntityId == id || x.TraderEntityId == id
@@ -8090,6 +12345,31 @@ func (x *HistoricalEventMerchant) CheckFields() {
 	if x.Source != x.TraderEntityId && x.Source != 0 && x.TraderEntityId != 0 {
 		sameFields["HistoricalEventMerchant"]["Source"]["TraderEntityId"] = false
 	}
+}
+
+func (x *HistoricalEventMerchant) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.DepotEntityId != -1 {
+		d["depotEntityId"] = x.DepotEntityId
+	}
+	if x.Destination != -1 {
+		d["destination"] = x.Destination
+	}
+	d["hardship"] = x.Hardship
+	d["lostValue"] = x.LostValue
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.Source != -1 {
+		d["source"] = x.Source
+	}
+	if x.TraderEntityId != -1 {
+		d["traderEntityId"] = x.TraderEntityId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventModifiedBuildingModification int
@@ -8141,11 +12421,35 @@ type HistoricalEventModifiedBuilding struct {
 	StructureId  int                                         `json:"structureId" legend:"base"`  // structure_id
 }
 
+func NewHistoricalEventModifiedBuilding() *HistoricalEventModifiedBuilding {
+	return &HistoricalEventModifiedBuilding{
+		ModifierHfid: -1,
+		SiteId:       -1,
+		StructureId:  -1,
+	}
+}
 func (x *HistoricalEventModifiedBuilding) Type() string                { return "modified building" }
 func (x *HistoricalEventModifiedBuilding) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventModifiedBuilding) RelatedToHf(id int) bool     { return x.ModifierHfid == id }
 
 func (x *HistoricalEventModifiedBuilding) CheckFields() {
+}
+
+func (x *HistoricalEventModifiedBuilding) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Modification != 0 {
+		d["modification"] = x.Modification
+	}
+	if x.ModifierHfid != -1 {
+		d["modifierHfid"] = x.ModifierHfid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventMusicalFormCreatedCircumstance int
@@ -8227,11 +12531,46 @@ type HistoricalEventMusicalFormCreated struct {
 	SiteId         int                                           `json:"siteId" legend:"base"`         // site_id
 }
 
+func NewHistoricalEventMusicalFormCreated() *HistoricalEventMusicalFormCreated {
+	return &HistoricalEventMusicalFormCreated{
+		CircumstanceId: -1,
+		FormId:         -1,
+		HistFigureId:   -1,
+		ReasonId:       -1,
+		SiteId:         -1,
+	}
+}
 func (x *HistoricalEventMusicalFormCreated) Type() string                { return "musical form created" }
 func (x *HistoricalEventMusicalFormCreated) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventMusicalFormCreated) RelatedToHf(id int) bool     { return x.HistFigureId == id }
 
 func (x *HistoricalEventMusicalFormCreated) CheckFields() {
+}
+
+func (x *HistoricalEventMusicalFormCreated) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Circumstance != 0 {
+		d["circumstance"] = x.Circumstance
+	}
+	if x.CircumstanceId != -1 {
+		d["circumstanceId"] = x.CircumstanceId
+	}
+	if x.FormId != -1 {
+		d["formId"] = x.FormId
+	}
+	if x.HistFigureId != -1 {
+		d["histFigureId"] = x.HistFigureId
+	}
+	if x.Reason != 0 {
+		d["reason"] = x.Reason
+	}
+	if x.ReasonId != -1 {
+		d["reasonId"] = x.ReasonId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventNewSiteLeader struct {
@@ -8243,6 +12582,16 @@ type HistoricalEventNewSiteLeader struct {
 	SiteId        int `json:"siteId" legend:"base"`        // site_id
 }
 
+func NewHistoricalEventNewSiteLeader() *HistoricalEventNewSiteLeader {
+	return &HistoricalEventNewSiteLeader{
+		AttackerCivId: -1,
+		DefenderCivId: -1,
+		NewLeaderHfid: -1,
+		NewSiteCivId:  -1,
+		SiteCivId:     -1,
+		SiteId:        -1,
+	}
+}
 func (x *HistoricalEventNewSiteLeader) Type() string { return "new site leader" }
 func (x *HistoricalEventNewSiteLeader) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.NewSiteCivId == id || x.SiteCivId == id
@@ -8250,6 +12599,29 @@ func (x *HistoricalEventNewSiteLeader) RelatedToEntity(id int) bool {
 func (x *HistoricalEventNewSiteLeader) RelatedToHf(id int) bool { return x.NewLeaderHfid == id }
 
 func (x *HistoricalEventNewSiteLeader) CheckFields() {
+}
+
+func (x *HistoricalEventNewSiteLeader) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackerCivId != -1 {
+		d["attackerCivId"] = x.AttackerCivId
+	}
+	if x.DefenderCivId != -1 {
+		d["defenderCivId"] = x.DefenderCivId
+	}
+	if x.NewLeaderHfid != -1 {
+		d["newLeaderHfid"] = x.NewLeaderHfid
+	}
+	if x.NewSiteCivId != -1 {
+		d["newSiteCivId"] = x.NewSiteCivId
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventPeaceAcceptedTopic int
@@ -8286,6 +12658,13 @@ type HistoricalEventPeaceAccepted struct {
 	Topic       HistoricalEventPeaceAcceptedTopic `json:"topic" legend:"plus"`       // topic
 }
 
+func NewHistoricalEventPeaceAccepted() *HistoricalEventPeaceAccepted {
+	return &HistoricalEventPeaceAccepted{
+		Destination: -1,
+		SiteId:      -1,
+		Source:      -1,
+	}
+}
 func (x *HistoricalEventPeaceAccepted) Type() string                { return "peace accepted" }
 func (x *HistoricalEventPeaceAccepted) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventPeaceAccepted) RelatedToHf(id int) bool     { return false }
@@ -8297,6 +12676,23 @@ func (x *HistoricalEventPeaceAccepted) CheckFields() {
 	if x.Source != x.SiteId && x.Source != 0 && x.SiteId != 0 {
 		sameFields["HistoricalEventPeaceAccepted"]["Source"]["SiteId"] = false
 	}
+}
+
+func (x *HistoricalEventPeaceAccepted) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Destination != -1 {
+		d["destination"] = x.Destination
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.Source != -1 {
+		d["source"] = x.Source
+	}
+	if x.Topic != 0 {
+		d["topic"] = x.Topic
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventPeaceRejectedTopic int
@@ -8333,6 +12729,13 @@ type HistoricalEventPeaceRejected struct {
 	Topic       HistoricalEventPeaceRejectedTopic `json:"topic" legend:"plus"`       // topic
 }
 
+func NewHistoricalEventPeaceRejected() *HistoricalEventPeaceRejected {
+	return &HistoricalEventPeaceRejected{
+		Destination: -1,
+		SiteId:      -1,
+		Source:      -1,
+	}
+}
 func (x *HistoricalEventPeaceRejected) Type() string                { return "peace rejected" }
 func (x *HistoricalEventPeaceRejected) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventPeaceRejected) RelatedToHf(id int) bool     { return false }
@@ -8346,6 +12749,23 @@ func (x *HistoricalEventPeaceRejected) CheckFields() {
 	}
 }
 
+func (x *HistoricalEventPeaceRejected) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Destination != -1 {
+		d["destination"] = x.Destination
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.Source != -1 {
+		d["source"] = x.Source
+	}
+	if x.Topic != 0 {
+		d["topic"] = x.Topic
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventPerformance struct {
 	CivId          int `json:"civId" legend:"base"`          // civ_id
 	FeatureLayerId int `json:"featureLayerId" legend:"base"` // feature_layer_id
@@ -8355,11 +12775,44 @@ type HistoricalEventPerformance struct {
 	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventPerformance() *HistoricalEventPerformance {
+	return &HistoricalEventPerformance{
+		CivId:          -1,
+		FeatureLayerId: -1,
+		OccasionId:     -1,
+		ScheduleId:     -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventPerformance) Type() string                { return "performance" }
 func (x *HistoricalEventPerformance) RelatedToEntity(id int) bool { return x.CivId == id }
 func (x *HistoricalEventPerformance) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventPerformance) CheckFields() {
+}
+
+func (x *HistoricalEventPerformance) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.OccasionId != -1 {
+		d["occasionId"] = x.OccasionId
+	}
+	if x.ScheduleId != -1 {
+		d["scheduleId"] = x.ScheduleId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventPlunderedSite struct {
@@ -8374,6 +12827,14 @@ type HistoricalEventPlunderedSite struct {
 	WasRaid         bool `json:"wasRaid" legend:"base"`         // was_raid
 }
 
+func NewHistoricalEventPlunderedSite() *HistoricalEventPlunderedSite {
+	return &HistoricalEventPlunderedSite{
+		AttackerCivId: -1,
+		DefenderCivId: -1,
+		SiteCivId:     -1,
+		SiteId:        -1,
+	}
+}
 func (x *HistoricalEventPlunderedSite) Type() string { return "plundered site" }
 func (x *HistoricalEventPlunderedSite) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
@@ -8381,6 +12842,28 @@ func (x *HistoricalEventPlunderedSite) RelatedToEntity(id int) bool {
 func (x *HistoricalEventPlunderedSite) RelatedToHf(id int) bool { return false }
 
 func (x *HistoricalEventPlunderedSite) CheckFields() {
+}
+
+func (x *HistoricalEventPlunderedSite) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackerCivId != -1 {
+		d["attackerCivId"] = x.AttackerCivId
+	}
+	if x.DefenderCivId != -1 {
+		d["defenderCivId"] = x.DefenderCivId
+	}
+	d["detected"] = x.Detected
+	d["noDefeatMention"] = x.NoDefeatMention
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	d["tookItems"] = x.TookItems
+	d["tookLivestock"] = x.TookLivestock
+	d["wasRaid"] = x.WasRaid
+	return json.Marshal(d)
 }
 
 type HistoricalEventPoeticFormCreatedCircumstance int
@@ -8422,11 +12905,35 @@ type HistoricalEventPoeticFormCreated struct {
 	SiteId       int                                          `json:"siteId" legend:"base"`       // site_id
 }
 
+func NewHistoricalEventPoeticFormCreated() *HistoricalEventPoeticFormCreated {
+	return &HistoricalEventPoeticFormCreated{
+		FormId:       -1,
+		HistFigureId: -1,
+		SiteId:       -1,
+	}
+}
 func (x *HistoricalEventPoeticFormCreated) Type() string                { return "poetic form created" }
 func (x *HistoricalEventPoeticFormCreated) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventPoeticFormCreated) RelatedToHf(id int) bool     { return x.HistFigureId == id }
 
 func (x *HistoricalEventPoeticFormCreated) CheckFields() {
+}
+
+func (x *HistoricalEventPoeticFormCreated) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Circumstance != 0 {
+		d["circumstance"] = x.Circumstance
+	}
+	if x.FormId != -1 {
+		d["formId"] = x.FormId
+	}
+	if x.HistFigureId != -1 {
+		d["histFigureId"] = x.HistFigureId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventProcession struct {
@@ -8438,11 +12945,44 @@ type HistoricalEventProcession struct {
 	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventProcession() *HistoricalEventProcession {
+	return &HistoricalEventProcession{
+		CivId:          -1,
+		FeatureLayerId: -1,
+		OccasionId:     -1,
+		ScheduleId:     -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventProcession) Type() string                { return "procession" }
 func (x *HistoricalEventProcession) RelatedToEntity(id int) bool { return x.CivId == id }
 func (x *HistoricalEventProcession) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventProcession) CheckFields() {
+}
+
+func (x *HistoricalEventProcession) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.OccasionId != -1 {
+		d["occasionId"] = x.OccasionId
+	}
+	if x.ScheduleId != -1 {
+		d["scheduleId"] = x.ScheduleId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventRazedStructure struct {
@@ -8451,11 +12991,32 @@ type HistoricalEventRazedStructure struct {
 	StructureId int `json:"structureId" legend:"base"` // structure_id
 }
 
+func NewHistoricalEventRazedStructure() *HistoricalEventRazedStructure {
+	return &HistoricalEventRazedStructure{
+		CivId:       -1,
+		SiteId:      -1,
+		StructureId: -1,
+	}
+}
 func (x *HistoricalEventRazedStructure) Type() string                { return "razed structure" }
 func (x *HistoricalEventRazedStructure) RelatedToEntity(id int) bool { return x.CivId == id }
 func (x *HistoricalEventRazedStructure) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventRazedStructure) CheckFields() {
+}
+
+func (x *HistoricalEventRazedStructure) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventReclaimSite struct {
@@ -8465,6 +13026,13 @@ type HistoricalEventReclaimSite struct {
 	Unretire  bool `json:"unretire" legend:"base"`  // unretire
 }
 
+func NewHistoricalEventReclaimSite() *HistoricalEventReclaimSite {
+	return &HistoricalEventReclaimSite{
+		CivId:     -1,
+		SiteCivId: -1,
+		SiteId:    -1,
+	}
+}
 func (x *HistoricalEventReclaimSite) Type() string { return "reclaim site" }
 func (x *HistoricalEventReclaimSite) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
@@ -8472,6 +13040,21 @@ func (x *HistoricalEventReclaimSite) RelatedToEntity(id int) bool {
 func (x *HistoricalEventReclaimSite) RelatedToHf(id int) bool { return false }
 
 func (x *HistoricalEventReclaimSite) CheckFields() {
+}
+
+func (x *HistoricalEventReclaimSite) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	d["unretire"] = x.Unretire
+	return json.Marshal(d)
 }
 
 type HistoricalEventRegionpopIncorporatedIntoEntity struct {
@@ -8483,6 +13066,16 @@ type HistoricalEventRegionpopIncorporatedIntoEntity struct {
 	SiteId         int `json:"siteId" legend:"base"`         // site_id
 }
 
+func NewHistoricalEventRegionpopIncorporatedIntoEntity() *HistoricalEventRegionpopIncorporatedIntoEntity {
+	return &HistoricalEventRegionpopIncorporatedIntoEntity{
+		JoinEntityId:   -1,
+		PopFlid:        -1,
+		PopNumberMoved: -1,
+		PopRace:        -1,
+		PopSrid:        -1,
+		SiteId:         -1,
+	}
+}
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) Type() string {
 	return "regionpop incorporated into entity"
 }
@@ -8492,6 +13085,29 @@ func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToEntity(id int)
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToHf(id int) bool { return false }
 
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) CheckFields() {
+}
+
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.JoinEntityId != -1 {
+		d["joinEntityId"] = x.JoinEntityId
+	}
+	if x.PopFlid != -1 {
+		d["popFlid"] = x.PopFlid
+	}
+	if x.PopNumberMoved != -1 {
+		d["popNumberMoved"] = x.PopNumberMoved
+	}
+	if x.PopRace != -1 {
+		d["popRace"] = x.PopRace
+	}
+	if x.PopSrid != -1 {
+		d["popSrid"] = x.PopSrid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventRelationshipRelationship int
@@ -8604,12 +13220,40 @@ type HistoricalEventRelationship struct {
 	Year         int                                     `json:"year" legend:"plus"`         // year
 }
 
+func NewHistoricalEventRelationship() *HistoricalEventRelationship {
+	return &HistoricalEventRelationship{
+		Event:    -1,
+		SourceHf: -1,
+		TargetHf: -1,
+		Year:     -1,
+	}
+}
 func (x *HistoricalEventRelationship) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventRelationship) RelatedToHf(id int) bool {
 	return x.SourceHf == id || x.TargetHf == id
 }
 
 func (x *HistoricalEventRelationship) CheckFields() {
+}
+
+func (x *HistoricalEventRelationship) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Event != -1 {
+		d["event"] = x.Event
+	}
+	if x.Relationship != 0 {
+		d["relationship"] = x.Relationship
+	}
+	if x.SourceHf != -1 {
+		d["sourceHf"] = x.SourceHf
+	}
+	if x.TargetHf != -1 {
+		d["targetHf"] = x.TargetHf
+	}
+	if x.Year != -1 {
+		d["year"] = x.Year
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventRelationshipSupplement struct {
@@ -8619,10 +13263,35 @@ type HistoricalEventRelationshipSupplement struct {
 	Unk1         int `json:"unk1" legend:"plus"`         // unk_1
 }
 
+func NewHistoricalEventRelationshipSupplement() *HistoricalEventRelationshipSupplement {
+	return &HistoricalEventRelationshipSupplement{
+		Event:        -1,
+		OccasionType: -1,
+		Site:         -1,
+		Unk1:         -1,
+	}
+}
 func (x *HistoricalEventRelationshipSupplement) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventRelationshipSupplement) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalEventRelationshipSupplement) CheckFields() {
+}
+
+func (x *HistoricalEventRelationshipSupplement) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Event != -1 {
+		d["event"] = x.Event
+	}
+	if x.OccasionType != -1 {
+		d["occasionType"] = x.OccasionType
+	}
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
+	if x.Unk1 != -1 {
+		d["unk1"] = x.Unk1
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventRemoveHfEntityLinkLink int
@@ -8717,6 +13386,13 @@ type HistoricalEventRemoveHfEntityLink struct {
 	PositionId int                                   `json:"positionId" legend:"base"` // position_id
 }
 
+func NewHistoricalEventRemoveHfEntityLink() *HistoricalEventRemoveHfEntityLink {
+	return &HistoricalEventRemoveHfEntityLink{
+		CivId:      -1,
+		Hfid:       -1,
+		PositionId: -1,
+	}
+}
 func (x *HistoricalEventRemoveHfEntityLink) Type() string                { return "remove hf entity link" }
 func (x *HistoricalEventRemoveHfEntityLink) RelatedToEntity(id int) bool { return x.CivId == id }
 func (x *HistoricalEventRemoveHfEntityLink) RelatedToHf(id int) bool     { return x.Hfid == id }
@@ -8724,11 +13400,35 @@ func (x *HistoricalEventRemoveHfEntityLink) RelatedToHf(id int) bool     { retur
 func (x *HistoricalEventRemoveHfEntityLink) CheckFields() {
 }
 
+func (x *HistoricalEventRemoveHfEntityLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.Link != 0 {
+		d["link"] = x.Link
+	}
+	d["position"] = x.Position
+	if x.PositionId != -1 {
+		d["positionId"] = x.PositionId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventRemoveHfHfLink struct {
 	Hfid       int `json:"hfid" legend:"base"`       // hfid
 	HfidTarget int `json:"hfidTarget" legend:"base"` // hfid_target
 }
 
+func NewHistoricalEventRemoveHfHfLink() *HistoricalEventRemoveHfHfLink {
+	return &HistoricalEventRemoveHfHfLink{
+		Hfid:       -1,
+		HfidTarget: -1,
+	}
+}
 func (x *HistoricalEventRemoveHfHfLink) Type() string                { return "remove hf hf link" }
 func (x *HistoricalEventRemoveHfHfLink) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventRemoveHfHfLink) RelatedToHf(id int) bool {
@@ -8736,6 +13436,17 @@ func (x *HistoricalEventRemoveHfHfLink) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventRemoveHfHfLink) CheckFields() {
+}
+
+func (x *HistoricalEventRemoveHfHfLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.HfidTarget != -1 {
+		d["hfidTarget"] = x.HfidTarget
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventRemoveHfSiteLinkLinkType int
@@ -8783,6 +13494,14 @@ type HistoricalEventRemoveHfSiteLink struct {
 	Structure int                                     `json:"structure" legend:"plus"` // structure
 }
 
+func NewHistoricalEventRemoveHfSiteLink() *HistoricalEventRemoveHfSiteLink {
+	return &HistoricalEventRemoveHfSiteLink{
+		Civ:       -1,
+		Histfig:   -1,
+		SiteId:    -1,
+		Structure: -1,
+	}
+}
 func (x *HistoricalEventRemoveHfSiteLink) Type() string                { return "remove hf site link" }
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToHf(id int) bool     { return x.Histfig == id }
@@ -8799,6 +13518,26 @@ func (x *HistoricalEventRemoveHfSiteLink) CheckFields() {
 	}
 }
 
+func (x *HistoricalEventRemoveHfSiteLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Civ != -1 {
+		d["civ"] = x.Civ
+	}
+	if x.Histfig != -1 {
+		d["histfig"] = x.Histfig
+	}
+	if x.LinkType != 0 {
+		d["linkType"] = x.LinkType
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.Structure != -1 {
+		d["structure"] = x.Structure
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventReplacedStructure struct {
 	Civ          int `json:"civ" legend:"plus"`          // civ
 	CivId        int `json:"civId" legend:"base"`        // civ_id
@@ -8812,6 +13551,20 @@ type HistoricalEventReplacedStructure struct {
 	SiteId       int `json:"siteId" legend:"base"`       // site_id
 }
 
+func NewHistoricalEventReplacedStructure() *HistoricalEventReplacedStructure {
+	return &HistoricalEventReplacedStructure{
+		Civ:          -1,
+		CivId:        -1,
+		NewAbId:      -1,
+		NewStructure: -1,
+		OldAbId:      -1,
+		OldStructure: -1,
+		Site:         -1,
+		SiteCiv:      -1,
+		SiteCivId:    -1,
+		SiteId:       -1,
+	}
+}
 func (x *HistoricalEventReplacedStructure) Type() string { return "replaced structure" }
 func (x *HistoricalEventReplacedStructure) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
@@ -8896,6 +13649,41 @@ func (x *HistoricalEventReplacedStructure) CheckFields() {
 	}
 }
 
+func (x *HistoricalEventReplacedStructure) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Civ != -1 {
+		d["civ"] = x.Civ
+	}
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.NewAbId != -1 {
+		d["newAbId"] = x.NewAbId
+	}
+	if x.NewStructure != -1 {
+		d["newStructure"] = x.NewStructure
+	}
+	if x.OldAbId != -1 {
+		d["oldAbId"] = x.OldAbId
+	}
+	if x.OldStructure != -1 {
+		d["oldStructure"] = x.OldStructure
+	}
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
+	if x.SiteCiv != -1 {
+		d["siteCiv"] = x.SiteCiv
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventSiteDied struct {
 	Abandoned bool `json:"abandoned" legend:"base"` // abandoned
 	CivId     int  `json:"civId" legend:"base"`     // civ_id
@@ -8903,6 +13691,13 @@ type HistoricalEventSiteDied struct {
 	SiteId    int  `json:"siteId" legend:"base"`    // site_id
 }
 
+func NewHistoricalEventSiteDied() *HistoricalEventSiteDied {
+	return &HistoricalEventSiteDied{
+		CivId:     -1,
+		SiteCivId: -1,
+		SiteId:    -1,
+	}
+}
 func (x *HistoricalEventSiteDied) Type() string { return "site died" }
 func (x *HistoricalEventSiteDied) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
@@ -8910,6 +13705,21 @@ func (x *HistoricalEventSiteDied) RelatedToEntity(id int) bool {
 func (x *HistoricalEventSiteDied) RelatedToHf(id int) bool { return false }
 
 func (x *HistoricalEventSiteDied) CheckFields() {
+}
+
+func (x *HistoricalEventSiteDied) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["abandoned"] = x.Abandoned
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventSiteDisputeDispute int
@@ -8972,6 +13782,14 @@ type HistoricalEventSiteDispute struct {
 	SiteId2   int                               `json:"siteId2" legend:"base"`   // site_id_2
 }
 
+func NewHistoricalEventSiteDispute() *HistoricalEventSiteDispute {
+	return &HistoricalEventSiteDispute{
+		EntityId1: -1,
+		EntityId2: -1,
+		SiteId1:   -1,
+		SiteId2:   -1,
+	}
+}
 func (x *HistoricalEventSiteDispute) Type() string { return "site dispute" }
 func (x *HistoricalEventSiteDispute) RelatedToEntity(id int) bool {
 	return x.EntityId1 == id || x.EntityId2 == id
@@ -8981,6 +13799,26 @@ func (x *HistoricalEventSiteDispute) RelatedToHf(id int) bool { return false }
 func (x *HistoricalEventSiteDispute) CheckFields() {
 }
 
+func (x *HistoricalEventSiteDispute) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Dispute != 0 {
+		d["dispute"] = x.Dispute
+	}
+	if x.EntityId1 != -1 {
+		d["entityId1"] = x.EntityId1
+	}
+	if x.EntityId2 != -1 {
+		d["entityId2"] = x.EntityId2
+	}
+	if x.SiteId1 != -1 {
+		d["siteId1"] = x.SiteId1
+	}
+	if x.SiteId2 != -1 {
+		d["siteId2"] = x.SiteId2
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventSiteRetired struct {
 	CivId     int  `json:"civId" legend:"base"`     // civ_id
 	First     bool `json:"first" legend:"base"`     // first
@@ -8988,6 +13826,13 @@ type HistoricalEventSiteRetired struct {
 	SiteId    int  `json:"siteId" legend:"base"`    // site_id
 }
 
+func NewHistoricalEventSiteRetired() *HistoricalEventSiteRetired {
+	return &HistoricalEventSiteRetired{
+		CivId:     -1,
+		SiteCivId: -1,
+		SiteId:    -1,
+	}
+}
 func (x *HistoricalEventSiteRetired) Type() string { return "site retired" }
 func (x *HistoricalEventSiteRetired) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
@@ -8997,6 +13842,21 @@ func (x *HistoricalEventSiteRetired) RelatedToHf(id int) bool { return false }
 func (x *HistoricalEventSiteRetired) CheckFields() {
 }
 
+func (x *HistoricalEventSiteRetired) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	d["first"] = x.First
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventSiteSurrendered struct {
 	AttackerCivId int `json:"attackerCivId" legend:"base"` // attacker_civ_id
 	DefenderCivId int `json:"defenderCivId" legend:"base"` // defender_civ_id
@@ -9004,6 +13864,14 @@ type HistoricalEventSiteSurrendered struct {
 	SiteId        int `json:"siteId" legend:"base"`        // site_id
 }
 
+func NewHistoricalEventSiteSurrendered() *HistoricalEventSiteSurrendered {
+	return &HistoricalEventSiteSurrendered{
+		AttackerCivId: -1,
+		DefenderCivId: -1,
+		SiteCivId:     -1,
+		SiteId:        -1,
+	}
+}
 func (x *HistoricalEventSiteSurrendered) Type() string { return "site surrendered" }
 func (x *HistoricalEventSiteSurrendered) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
@@ -9011,6 +13879,23 @@ func (x *HistoricalEventSiteSurrendered) RelatedToEntity(id int) bool {
 func (x *HistoricalEventSiteSurrendered) RelatedToHf(id int) bool { return false }
 
 func (x *HistoricalEventSiteSurrendered) CheckFields() {
+}
+
+func (x *HistoricalEventSiteSurrendered) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackerCivId != -1 {
+		d["attackerCivId"] = x.AttackerCivId
+	}
+	if x.DefenderCivId != -1 {
+		d["defenderCivId"] = x.DefenderCivId
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventSiteTakenOver struct {
@@ -9021,6 +13906,15 @@ type HistoricalEventSiteTakenOver struct {
 	SiteId        int `json:"siteId" legend:"base"`        // site_id
 }
 
+func NewHistoricalEventSiteTakenOver() *HistoricalEventSiteTakenOver {
+	return &HistoricalEventSiteTakenOver{
+		AttackerCivId: -1,
+		DefenderCivId: -1,
+		NewSiteCivId:  -1,
+		SiteCivId:     -1,
+		SiteId:        -1,
+	}
+}
 func (x *HistoricalEventSiteTakenOver) Type() string { return "site taken over" }
 func (x *HistoricalEventSiteTakenOver) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.NewSiteCivId == id || x.SiteCivId == id
@@ -9028,6 +13922,26 @@ func (x *HistoricalEventSiteTakenOver) RelatedToEntity(id int) bool {
 func (x *HistoricalEventSiteTakenOver) RelatedToHf(id int) bool { return false }
 
 func (x *HistoricalEventSiteTakenOver) CheckFields() {
+}
+
+func (x *HistoricalEventSiteTakenOver) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackerCivId != -1 {
+		d["attackerCivId"] = x.AttackerCivId
+	}
+	if x.DefenderCivId != -1 {
+		d["defenderCivId"] = x.DefenderCivId
+	}
+	if x.NewSiteCivId != -1 {
+		d["newSiteCivId"] = x.NewSiteCivId
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventSiteTributeForcedSeason int
@@ -9070,6 +13984,14 @@ type HistoricalEventSiteTributeForced struct {
 	SiteId        int                                    `json:"siteId" legend:"base"`        // site_id
 }
 
+func NewHistoricalEventSiteTributeForced() *HistoricalEventSiteTributeForced {
+	return &HistoricalEventSiteTributeForced{
+		AttackerCivId: -1,
+		DefenderCivId: -1,
+		SiteCivId:     -1,
+		SiteId:        -1,
+	}
+}
 func (x *HistoricalEventSiteTributeForced) Type() string { return "site tribute forced" }
 func (x *HistoricalEventSiteTributeForced) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
@@ -9079,6 +14001,26 @@ func (x *HistoricalEventSiteTributeForced) RelatedToHf(id int) bool { return fal
 func (x *HistoricalEventSiteTributeForced) CheckFields() {
 }
 
+func (x *HistoricalEventSiteTributeForced) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackerCivId != -1 {
+		d["attackerCivId"] = x.AttackerCivId
+	}
+	if x.DefenderCivId != -1 {
+		d["defenderCivId"] = x.DefenderCivId
+	}
+	if x.Season != 0 {
+		d["season"] = x.Season
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventSneakIntoSite struct {
 	AttackerCivId int `json:"attackerCivId" legend:"base"` // attacker_civ_id
 	DefenderCivId int `json:"defenderCivId" legend:"base"` // defender_civ_id
@@ -9086,6 +14028,14 @@ type HistoricalEventSneakIntoSite struct {
 	SiteId        int `json:"siteId" legend:"base"`        // site_id
 }
 
+func NewHistoricalEventSneakIntoSite() *HistoricalEventSneakIntoSite {
+	return &HistoricalEventSneakIntoSite{
+		AttackerCivId: -1,
+		DefenderCivId: -1,
+		SiteCivId:     -1,
+		SiteId:        -1,
+	}
+}
 func (x *HistoricalEventSneakIntoSite) Type() string { return "sneak into site" }
 func (x *HistoricalEventSneakIntoSite) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
@@ -9095,6 +14045,23 @@ func (x *HistoricalEventSneakIntoSite) RelatedToHf(id int) bool { return false }
 func (x *HistoricalEventSneakIntoSite) CheckFields() {
 }
 
+func (x *HistoricalEventSneakIntoSite) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AttackerCivId != -1 {
+		d["attackerCivId"] = x.AttackerCivId
+	}
+	if x.DefenderCivId != -1 {
+		d["defenderCivId"] = x.DefenderCivId
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventSpottedLeavingSite struct {
 	LeaverCivId int `json:"leaverCivId" legend:"base"` // leaver_civ_id
 	SiteCivId   int `json:"siteCivId" legend:"base"`   // site_civ_id
@@ -9102,6 +14069,14 @@ type HistoricalEventSpottedLeavingSite struct {
 	SpotterHfid int `json:"spotterHfid" legend:"base"` // spotter_hfid
 }
 
+func NewHistoricalEventSpottedLeavingSite() *HistoricalEventSpottedLeavingSite {
+	return &HistoricalEventSpottedLeavingSite{
+		LeaverCivId: -1,
+		SiteCivId:   -1,
+		SiteId:      -1,
+		SpotterHfid: -1,
+	}
+}
 func (x *HistoricalEventSpottedLeavingSite) Type() string { return "spotted leaving site" }
 func (x *HistoricalEventSpottedLeavingSite) RelatedToEntity(id int) bool {
 	return x.LeaverCivId == id || x.SiteCivId == id
@@ -9109,6 +14084,23 @@ func (x *HistoricalEventSpottedLeavingSite) RelatedToEntity(id int) bool {
 func (x *HistoricalEventSpottedLeavingSite) RelatedToHf(id int) bool { return x.SpotterHfid == id }
 
 func (x *HistoricalEventSpottedLeavingSite) CheckFields() {
+}
+
+func (x *HistoricalEventSpottedLeavingSite) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.LeaverCivId != -1 {
+		d["leaverCivId"] = x.LeaverCivId
+	}
+	if x.SiteCivId != -1 {
+		d["siteCivId"] = x.SiteCivId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SpotterHfid != -1 {
+		d["spotterHfid"] = x.SpotterHfid
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventSquadVsSquad struct {
@@ -9131,6 +14123,25 @@ type HistoricalEventSquadVsSquad struct {
 	SubregionId     int   `json:"subregionId" legend:"base"`     // subregion_id
 }
 
+func NewHistoricalEventSquadVsSquad() *HistoricalEventSquadVsSquad {
+	return &HistoricalEventSquadVsSquad{
+		ALeaderHfid:     -1,
+		ALeadershipRoll: -1,
+		ASquadId:        -1,
+		DEffect:         -1,
+		DInteraction:    -1,
+		DLeaderHfid:     -1,
+		DLeadershipRoll: -1,
+		DNumber:         -1,
+		DRace:           -1,
+		DSlain:          -1,
+		DSquadId:        -1,
+		FeatureLayerId:  -1,
+		SiteId:          -1,
+		StructureId:     -1,
+		SubregionId:     -1,
+	}
+}
 func (x *HistoricalEventSquadVsSquad) Type() string                { return "squad vs squad" }
 func (x *HistoricalEventSquadVsSquad) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventSquadVsSquad) RelatedToHf(id int) bool {
@@ -9138,6 +14149,58 @@ func (x *HistoricalEventSquadVsSquad) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventSquadVsSquad) CheckFields() {
+}
+
+func (x *HistoricalEventSquadVsSquad) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["aHfid"] = x.AHfid
+	if x.ALeaderHfid != -1 {
+		d["aLeaderHfid"] = x.ALeaderHfid
+	}
+	if x.ALeadershipRoll != -1 {
+		d["aLeadershipRoll"] = x.ALeadershipRoll
+	}
+	if x.ASquadId != -1 {
+		d["aSquadId"] = x.ASquadId
+	}
+	if x.DEffect != -1 {
+		d["dEffect"] = x.DEffect
+	}
+	d["dHfid"] = x.DHfid
+	if x.DInteraction != -1 {
+		d["dInteraction"] = x.DInteraction
+	}
+	if x.DLeaderHfid != -1 {
+		d["dLeaderHfid"] = x.DLeaderHfid
+	}
+	if x.DLeadershipRoll != -1 {
+		d["dLeadershipRoll"] = x.DLeadershipRoll
+	}
+	if x.DNumber != -1 {
+		d["dNumber"] = x.DNumber
+	}
+	if x.DRace != -1 {
+		d["dRace"] = x.DRace
+	}
+	if x.DSlain != -1 {
+		d["dSlain"] = x.DSlain
+	}
+	if x.DSquadId != -1 {
+		d["dSquadId"] = x.DSquadId
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventTacticalSituationSituation int
@@ -9205,6 +14268,18 @@ type HistoricalEventTacticalSituation struct {
 	SubregionId    int                                       `json:"subregionId" legend:"base"`    // subregion_id
 }
 
+func NewHistoricalEventTacticalSituation() *HistoricalEventTacticalSituation {
+	return &HistoricalEventTacticalSituation{
+		ATacticianHfid: -1,
+		ATacticsRoll:   -1,
+		DTacticianHfid: -1,
+		DTacticsRoll:   -1,
+		FeatureLayerId: -1,
+		SiteId:         -1,
+		StructureId:    -1,
+		SubregionId:    -1,
+	}
+}
 func (x *HistoricalEventTacticalSituation) Type() string                { return "tactical situation" }
 func (x *HistoricalEventTacticalSituation) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventTacticalSituation) RelatedToHf(id int) bool {
@@ -9212,6 +14287,39 @@ func (x *HistoricalEventTacticalSituation) RelatedToHf(id int) bool {
 }
 
 func (x *HistoricalEventTacticalSituation) CheckFields() {
+}
+
+func (x *HistoricalEventTacticalSituation) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ATacticianHfid != -1 {
+		d["aTacticianHfid"] = x.ATacticianHfid
+	}
+	if x.ATacticsRoll != -1 {
+		d["aTacticsRoll"] = x.ATacticsRoll
+	}
+	if x.DTacticianHfid != -1 {
+		d["dTacticianHfid"] = x.DTacticianHfid
+	}
+	if x.DTacticsRoll != -1 {
+		d["dTacticsRoll"] = x.DTacticsRoll
+	}
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.Situation != 0 {
+		d["situation"] = x.Situation
+	}
+	d["start"] = x.Start
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventTrade struct {
@@ -9225,11 +14333,52 @@ type HistoricalEventTrade struct {
 	TraderHfid       int `json:"traderHfid" legend:"base"`       // trader_hfid
 }
 
+func NewHistoricalEventTrade() *HistoricalEventTrade {
+	return &HistoricalEventTrade{
+		AccountShift:     -1,
+		Allotment:        -1,
+		AllotmentIndex:   -1,
+		DestSiteId:       -1,
+		ProductionZoneId: -1,
+		SourceSiteId:     -1,
+		TraderEntityId:   -1,
+		TraderHfid:       -1,
+	}
+}
 func (x *HistoricalEventTrade) Type() string                { return "trade" }
 func (x *HistoricalEventTrade) RelatedToEntity(id int) bool { return x.TraderEntityId == id }
 func (x *HistoricalEventTrade) RelatedToHf(id int) bool     { return x.TraderHfid == id }
 
 func (x *HistoricalEventTrade) CheckFields() {
+}
+
+func (x *HistoricalEventTrade) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AccountShift != -1 {
+		d["accountShift"] = x.AccountShift
+	}
+	if x.Allotment != -1 {
+		d["allotment"] = x.Allotment
+	}
+	if x.AllotmentIndex != -1 {
+		d["allotmentIndex"] = x.AllotmentIndex
+	}
+	if x.DestSiteId != -1 {
+		d["destSiteId"] = x.DestSiteId
+	}
+	if x.ProductionZoneId != -1 {
+		d["productionZoneId"] = x.ProductionZoneId
+	}
+	if x.SourceSiteId != -1 {
+		d["sourceSiteId"] = x.SourceSiteId
+	}
+	if x.TraderEntityId != -1 {
+		d["traderEntityId"] = x.TraderEntityId
+	}
+	if x.TraderHfid != -1 {
+		d["traderHfid"] = x.TraderHfid
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalEventWrittenContentComposedCircumstance int
@@ -9312,11 +14461,50 @@ type HistoricalEventWrittenContentComposed struct {
 	WcId           int                                               `json:"wcId" legend:"base"`           // wc_id
 }
 
+func NewHistoricalEventWrittenContentComposed() *HistoricalEventWrittenContentComposed {
+	return &HistoricalEventWrittenContentComposed{
+		CircumstanceId: -1,
+		HistFigureId:   -1,
+		ReasonId:       -1,
+		SiteId:         -1,
+		SubregionId:    -1,
+		WcId:           -1,
+	}
+}
 func (x *HistoricalEventWrittenContentComposed) Type() string                { return "written content composed" }
 func (x *HistoricalEventWrittenContentComposed) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventWrittenContentComposed) RelatedToHf(id int) bool     { return x.HistFigureId == id }
 
 func (x *HistoricalEventWrittenContentComposed) CheckFields() {
+}
+
+func (x *HistoricalEventWrittenContentComposed) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Circumstance != 0 {
+		d["circumstance"] = x.Circumstance
+	}
+	if x.CircumstanceId != -1 {
+		d["circumstanceId"] = x.CircumstanceId
+	}
+	if x.HistFigureId != -1 {
+		d["histFigureId"] = x.HistFigureId
+	}
+	if x.Reason != 0 {
+		d["reason"] = x.Reason
+	}
+	if x.ReasonId != -1 {
+		d["reasonId"] = x.ReasonId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
+	if x.WcId != -1 {
+		d["wcId"] = x.WcId
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalFigureGoal int
@@ -9458,6 +14646,20 @@ type HistoricalFigure struct {
 	VagueRelationship               []*VagueRelationship               `json:"vagueRelationship" legend:"base"`               // vague_relationship
 }
 
+func NewHistoricalFigure() *HistoricalFigure {
+	return &HistoricalFigure{
+		Appeared:          -1,
+		BirthSeconds72:    -1,
+		BirthYear:         -1,
+		BreedId:           -1,
+		CurrentIdentityId: -1,
+		DeathSeconds72:    -1,
+		DeathYear:         -1,
+		EntPopId:          -1,
+		Id_:               -1,
+		Sex:               -1,
+	}
+}
 func (x *HistoricalFigure) Id() int      { return x.Id_ }
 func (x *HistoricalFigure) Name() string { return x.Name_ }
 func (x *HistoricalFigure) RelatedToEntity(id int) bool {
@@ -9490,6 +14692,75 @@ func (x *HistoricalFigure) CheckFields() {
 	if x.Sex != x.EntPopId && x.Sex != 0 && x.EntPopId != 0 {
 		sameFields["HistoricalFigure"]["Sex"]["EntPopId"] = false
 	}
+}
+
+func (x *HistoricalFigure) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["activeInteraction"] = x.ActiveInteraction
+	d["adventurer"] = x.Adventurer
+	d["animated"] = x.Animated
+	d["animatedString"] = x.AnimatedString
+	if x.Appeared != -1 {
+		d["appeared"] = x.Appeared
+	}
+	d["associatedType"] = x.AssociatedType
+	if x.BirthSeconds72 != -1 {
+		d["birthSeconds72"] = x.BirthSeconds72
+	}
+	if x.BirthYear != -1 {
+		d["birthYear"] = x.BirthYear
+	}
+	if x.BreedId != -1 {
+		d["breedId"] = x.BreedId
+	}
+	d["caste"] = x.Caste
+	if x.CurrentIdentityId != -1 {
+		d["currentIdentityId"] = x.CurrentIdentityId
+	}
+	if x.DeathSeconds72 != -1 {
+		d["deathSeconds72"] = x.DeathSeconds72
+	}
+	if x.DeathYear != -1 {
+		d["deathYear"] = x.DeathYear
+	}
+	d["deity"] = x.Deity
+	if x.EntPopId != -1 {
+		d["entPopId"] = x.EntPopId
+	}
+	d["entityFormerPositionLink"] = x.EntityFormerPositionLink
+	d["entityFormerSquadLink"] = x.EntityFormerSquadLink
+	d["entityLink"] = x.EntityLink
+	d["entityPositionLink"] = x.EntityPositionLink
+	d["entityReputation"] = x.EntityReputation
+	d["entitySquadLink"] = x.EntitySquadLink
+	d["force"] = x.Force
+	d["ghost"] = x.Ghost
+	d["goal"] = x.Goal
+	d["hfLink"] = x.HfLink
+	d["hfSkill"] = x.HfSkill
+	d["holdsArtifact"] = x.HoldsArtifact
+	d["honorEntity"] = x.HonorEntity
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["interactionKnowledge"] = x.InteractionKnowledge
+	d["intrigueActor"] = x.IntrigueActor
+	d["intriguePlot"] = x.IntriguePlot
+	d["journeyPet"] = x.JourneyPet
+	d["name"] = x.Name_
+	d["race"] = x.Race
+	d["relationshipProfileHfHistorical"] = x.RelationshipProfileHfHistorical
+	d["relationshipProfileHfIdentity"] = x.RelationshipProfileHfIdentity
+	d["relationshipProfileHfVisual"] = x.RelationshipProfileHfVisual
+	if x.Sex != -1 {
+		d["sex"] = x.Sex
+	}
+	d["siteLink"] = x.SiteLink
+	d["siteProperty"] = x.SiteProperty
+	d["sphere"] = x.Sphere
+	d["usedIdentityId"] = x.UsedIdentityId
+	d["vagueRelationship"] = x.VagueRelationship
+	return json.Marshal(d)
 }
 
 type HistoricalFigureEntityLinkLinkType int
@@ -9560,10 +14831,30 @@ type HistoricalFigureEntityLink struct {
 	LinkType     HistoricalFigureEntityLinkLinkType `json:"linkType" legend:"base"`     // link_type
 }
 
+func NewHistoricalFigureEntityLink() *HistoricalFigureEntityLink {
+	return &HistoricalFigureEntityLink{
+		EntityId:     -1,
+		LinkStrength: -1,
+	}
+}
 func (x *HistoricalFigureEntityLink) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *HistoricalFigureEntityLink) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalFigureEntityLink) CheckFields() {
+}
+
+func (x *HistoricalFigureEntityLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.LinkStrength != -1 {
+		d["linkStrength"] = x.LinkStrength
+	}
+	if x.LinkType != 0 {
+		d["linkType"] = x.LinkType
+	}
+	return json.Marshal(d)
 }
 
 type HistoricalFigureSiteProperty struct {
@@ -9571,10 +14862,27 @@ type HistoricalFigureSiteProperty struct {
 	SiteId     int `json:"siteId" legend:"base"`     // site_id
 }
 
+func NewHistoricalFigureSiteProperty() *HistoricalFigureSiteProperty {
+	return &HistoricalFigureSiteProperty{
+		PropertyId: -1,
+		SiteId:     -1,
+	}
+}
 func (x *HistoricalFigureSiteProperty) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalFigureSiteProperty) RelatedToHf(id int) bool     { return false }
 
 func (x *HistoricalFigureSiteProperty) CheckFields() {
+}
+
+func (x *HistoricalFigureSiteProperty) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.PropertyId != -1 {
+		d["propertyId"] = x.PropertyId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
 }
 
 type HonorRequiredSkill int
@@ -9644,12 +14952,59 @@ type Honor struct {
 	RequiresAnyMeleeOrRangedSkill bool               `json:"requiresAnyMeleeOrRangedSkill" legend:"base"` // requires_any_melee_or_ranged_skill
 }
 
+func NewHonor() *Honor {
+	return &Honor{
+		ExemptEpid:           -1,
+		ExemptFormerEpid:     -1,
+		GivesPrecedence:      -1,
+		Id_:                  -1,
+		RequiredBattles:      -1,
+		RequiredKills:        -1,
+		RequiredSkillIpTotal: -1,
+		RequiredYears:        -1,
+	}
+}
 func (x *Honor) Id() int                     { return x.Id_ }
 func (x *Honor) Name() string                { return x.Name_ }
 func (x *Honor) RelatedToEntity(id int) bool { return false }
 func (x *Honor) RelatedToHf(id int) bool     { return false }
 
 func (x *Honor) CheckFields() {
+}
+
+func (x *Honor) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ExemptEpid != -1 {
+		d["exemptEpid"] = x.ExemptEpid
+	}
+	if x.ExemptFormerEpid != -1 {
+		d["exemptFormerEpid"] = x.ExemptFormerEpid
+	}
+	if x.GivesPrecedence != -1 {
+		d["givesPrecedence"] = x.GivesPrecedence
+	}
+	d["grantedToEverybody"] = x.GrantedToEverybody
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["name"] = x.Name_
+	if x.RequiredBattles != -1 {
+		d["requiredBattles"] = x.RequiredBattles
+	}
+	if x.RequiredKills != -1 {
+		d["requiredKills"] = x.RequiredKills
+	}
+	if x.RequiredSkill != 0 {
+		d["requiredSkill"] = x.RequiredSkill
+	}
+	if x.RequiredSkillIpTotal != -1 {
+		d["requiredSkillIpTotal"] = x.RequiredSkillIpTotal
+	}
+	if x.RequiredYears != -1 {
+		d["requiredYears"] = x.RequiredYears
+	}
+	d["requiresAnyMeleeOrRangedSkill"] = x.RequiresAnyMeleeOrRangedSkill
+	return json.Marshal(d)
 }
 
 type HonorEntity struct {
@@ -9659,10 +15014,32 @@ type HonorEntity struct {
 	Kills   int   `json:"kills" legend:"base"`   // kills
 }
 
+func NewHonorEntity() *HonorEntity {
+	return &HonorEntity{
+		Battles: -1,
+		Entity:  -1,
+		Kills:   -1,
+	}
+}
 func (x *HonorEntity) RelatedToEntity(id int) bool { return x.Entity == id }
 func (x *HonorEntity) RelatedToHf(id int) bool     { return false }
 
 func (x *HonorEntity) CheckFields() {
+}
+
+func (x *HonorEntity) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Battles != -1 {
+		d["battles"] = x.Battles
+	}
+	if x.Entity != -1 {
+		d["entity"] = x.Entity
+	}
+	d["honorId"] = x.HonorId
+	if x.Kills != -1 {
+		d["kills"] = x.Kills
+	}
+	return json.Marshal(d)
 }
 
 type IdentityProfession int
@@ -9770,12 +15147,51 @@ type Identity struct {
 	Race        string             `json:"race" legend:"plus"`        // race
 }
 
+func NewIdentity() *Identity {
+	return &Identity{
+		BirthSecond: -1,
+		BirthYear:   -1,
+		EntityId:    -1,
+		HistfigId:   -1,
+		Id_:         -1,
+		NemesisId:   -1,
+	}
+}
 func (x *Identity) Id() int                     { return x.Id_ }
 func (x *Identity) Name() string                { return x.Name_ }
 func (x *Identity) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *Identity) RelatedToHf(id int) bool     { return x.HistfigId == id }
 
 func (x *Identity) CheckFields() {
+}
+
+func (x *Identity) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.BirthSecond != -1 {
+		d["birthSecond"] = x.BirthSecond
+	}
+	if x.BirthYear != -1 {
+		d["birthYear"] = x.BirthYear
+	}
+	d["caste"] = x.Caste
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.HistfigId != -1 {
+		d["histfigId"] = x.HistfigId
+	}
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["name"] = x.Name_
+	if x.NemesisId != -1 {
+		d["nemesisId"] = x.NemesisId
+	}
+	if x.Profession != 0 {
+		d["profession"] = x.Profession
+	}
+	d["race"] = x.Race
+	return json.Marshal(d)
 }
 
 type IntrigueActorRole int
@@ -9970,10 +15386,51 @@ type IntrigueActor struct {
 	StrategyEppid            int                   `json:"strategyEppid" legend:"base"`            // strategy_eppid
 }
 
+func NewIntrigueActor() *IntrigueActor {
+	return &IntrigueActor{
+		EntityId:      -1,
+		HandleActorId: -1,
+		Hfid:          -1,
+		LocalId:       -1,
+		StrategyEnid:  -1,
+		StrategyEppid: -1,
+	}
+}
 func (x *IntrigueActor) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *IntrigueActor) RelatedToHf(id int) bool     { return x.Hfid == id }
 
 func (x *IntrigueActor) CheckFields() {
+}
+
+func (x *IntrigueActor) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.HandleActorId != -1 {
+		d["handleActorId"] = x.HandleActorId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.LocalId != -1 {
+		d["localId"] = x.LocalId
+	}
+	d["promisedActorImmortality"] = x.PromisedActorImmortality
+	d["promisedMeImmortality"] = x.PromisedMeImmortality
+	if x.Role != 0 {
+		d["role"] = x.Role
+	}
+	if x.Strategy != 0 {
+		d["strategy"] = x.Strategy
+	}
+	if x.StrategyEnid != -1 {
+		d["strategyEnid"] = x.StrategyEnid
+	}
+	if x.StrategyEppid != -1 {
+		d["strategyEppid"] = x.StrategyEppid
+	}
+	return json.Marshal(d)
 }
 
 type IntriguePlotType int
@@ -10087,12 +15544,58 @@ type IntriguePlot struct {
 	Type              IntriguePlotType `json:"type" legend:"base"`              // type
 }
 
+func NewIntriguePlot() *IntriguePlot {
+	return &IntriguePlot{
+		ActorId:           -1,
+		ArtifactId:        -1,
+		DelegatedPlotHfid: -1,
+		DelegatedPlotId:   -1,
+		EntityId:          -1,
+		LocalId:           -1,
+		ParentPlotHfid:    -1,
+		ParentPlotId:      -1,
+	}
+}
 func (x *IntriguePlot) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *IntriguePlot) RelatedToHf(id int) bool {
 	return x.DelegatedPlotHfid == id || x.ParentPlotHfid == id
 }
 
 func (x *IntriguePlot) CheckFields() {
+}
+
+func (x *IntriguePlot) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ActorId != -1 {
+		d["actorId"] = x.ActorId
+	}
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	if x.DelegatedPlotHfid != -1 {
+		d["delegatedPlotHfid"] = x.DelegatedPlotHfid
+	}
+	if x.DelegatedPlotId != -1 {
+		d["delegatedPlotId"] = x.DelegatedPlotId
+	}
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.LocalId != -1 {
+		d["localId"] = x.LocalId
+	}
+	d["onHold"] = x.OnHold
+	if x.ParentPlotHfid != -1 {
+		d["parentPlotHfid"] = x.ParentPlotHfid
+	}
+	if x.ParentPlotId != -1 {
+		d["parentPlotId"] = x.ParentPlotId
+	}
+	d["plotActor"] = x.PlotActor
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	return json.Marshal(d)
 }
 
 type Item struct {
@@ -10102,10 +15605,32 @@ type Item struct {
 	WritingWrittenContentId int    `json:"writingWrittenContentId" legend:"base"` // writing_written_content_id
 }
 
+func NewItem() *Item {
+	return &Item{
+		PageNumber:              -1,
+		PageWrittenContentId:    -1,
+		WritingWrittenContentId: -1,
+	}
+}
 func (x *Item) RelatedToEntity(id int) bool { return false }
 func (x *Item) RelatedToHf(id int) bool     { return false }
 
 func (x *Item) CheckFields() {
+}
+
+func (x *Item) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["nameString"] = x.NameString
+	if x.PageNumber != -1 {
+		d["pageNumber"] = x.PageNumber
+	}
+	if x.PageWrittenContentId != -1 {
+		d["pageWrittenContentId"] = x.PageWrittenContentId
+	}
+	if x.WritingWrittenContentId != -1 {
+		d["writingWrittenContentId"] = x.WritingWrittenContentId
+	}
+	return json.Marshal(d)
 }
 
 type Landmass struct {
@@ -10115,12 +15640,28 @@ type Landmass struct {
 	Name_  string `json:"name" legend:"plus"`   // name
 }
 
+func NewLandmass() *Landmass {
+	return &Landmass{
+		Id_: -1,
+	}
+}
 func (x *Landmass) Id() int                     { return x.Id_ }
 func (x *Landmass) Name() string                { return x.Name_ }
 func (x *Landmass) RelatedToEntity(id int) bool { return false }
 func (x *Landmass) RelatedToHf(id int) bool     { return false }
 
 func (x *Landmass) CheckFields() {
+}
+
+func (x *Landmass) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["coord1"] = x.Coord1
+	d["coord2"] = x.Coord2
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["name"] = x.Name_
+	return json.Marshal(d)
 }
 
 type MountainPeak struct {
@@ -10131,6 +15672,12 @@ type MountainPeak struct {
 	Name_     string `json:"name" legend:"plus"`      // name
 }
 
+func NewMountainPeak() *MountainPeak {
+	return &MountainPeak{
+		Height: -1,
+		Id_:    -1,
+	}
+}
 func (x *MountainPeak) Id() int                     { return x.Id_ }
 func (x *MountainPeak) Name() string                { return x.Name_ }
 func (x *MountainPeak) RelatedToEntity(id int) bool { return false }
@@ -10139,18 +15686,47 @@ func (x *MountainPeak) RelatedToHf(id int) bool     { return false }
 func (x *MountainPeak) CheckFields() {
 }
 
+func (x *MountainPeak) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["coords"] = x.Coords
+	if x.Height != -1 {
+		d["height"] = x.Height
+	}
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["isVolcano"] = x.IsVolcano
+	d["name"] = x.Name_
+	return json.Marshal(d)
+}
+
 type MusicalForm struct {
 	Description string `json:"description" legend:"base"` // description
 	Id_         int    `json:"id" legend:"both"`          // id
 	Name_       string `json:"name" legend:"plus"`        // name
 }
 
+func NewMusicalForm() *MusicalForm {
+	return &MusicalForm{
+		Id_: -1,
+	}
+}
 func (x *MusicalForm) Id() int                     { return x.Id_ }
 func (x *MusicalForm) Name() string                { return x.Name_ }
 func (x *MusicalForm) RelatedToEntity(id int) bool { return false }
 func (x *MusicalForm) RelatedToHf(id int) bool     { return false }
 
 func (x *MusicalForm) CheckFields() {
+}
+
+func (x *MusicalForm) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["description"] = x.Description
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["name"] = x.Name_
+	return json.Marshal(d)
 }
 
 type Occasion struct {
@@ -10160,12 +15736,31 @@ type Occasion struct {
 	Schedule []*Schedule `json:"schedule" legend:"plus"` // schedule
 }
 
+func NewOccasion() *Occasion {
+	return &Occasion{
+		Event: -1,
+		Id_:   -1,
+	}
+}
 func (x *Occasion) Id() int                     { return x.Id_ }
 func (x *Occasion) Name() string                { return x.Name_ }
 func (x *Occasion) RelatedToEntity(id int) bool { return false }
 func (x *Occasion) RelatedToHf(id int) bool     { return false }
 
 func (x *Occasion) CheckFields() {
+}
+
+func (x *Occasion) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Event != -1 {
+		d["event"] = x.Event
+	}
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["name"] = x.Name_
+	d["schedule"] = x.Schedule
+	return json.Marshal(d)
 }
 
 type PlotActorPlotRole int
@@ -10212,10 +15807,31 @@ type PlotActor struct {
 	PlotRole              PlotActorPlotRole `json:"plotRole" legend:"base"`              // plot_role
 }
 
+func NewPlotActor() *PlotActor {
+	return &PlotActor{
+		ActorId:     -1,
+		AgreementId: -1,
+	}
+}
 func (x *PlotActor) RelatedToEntity(id int) bool { return false }
 func (x *PlotActor) RelatedToHf(id int) bool     { return false }
 
 func (x *PlotActor) CheckFields() {
+}
+
+func (x *PlotActor) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ActorId != -1 {
+		d["actorId"] = x.ActorId
+	}
+	d["agreementHasMessenger"] = x.AgreementHasMessenger
+	if x.AgreementId != -1 {
+		d["agreementId"] = x.AgreementId
+	}
+	if x.PlotRole != 0 {
+		d["plotRole"] = x.PlotRole
+	}
+	return json.Marshal(d)
 }
 
 type PoeticForm struct {
@@ -10224,12 +15840,27 @@ type PoeticForm struct {
 	Name_       string `json:"name" legend:"plus"`        // name
 }
 
+func NewPoeticForm() *PoeticForm {
+	return &PoeticForm{
+		Id_: -1,
+	}
+}
 func (x *PoeticForm) Id() int                     { return x.Id_ }
 func (x *PoeticForm) Name() string                { return x.Name_ }
 func (x *PoeticForm) RelatedToEntity(id int) bool { return false }
 func (x *PoeticForm) RelatedToHf(id int) bool     { return false }
 
 func (x *PoeticForm) CheckFields() {
+}
+
+func (x *PoeticForm) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["description"] = x.Description
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["name"] = x.Name_
+	return json.Marshal(d)
 }
 
 type ReferenceType int
@@ -10334,11 +15965,27 @@ type Reference struct {
 	Type ReferenceType `json:"type" legend:"plus"` // type
 }
 
+func NewReference() *Reference {
+	return &Reference{
+		Id_: -1,
+	}
+}
 func (x *Reference) Id() int                     { return x.Id_ }
 func (x *Reference) RelatedToEntity(id int) bool { return false }
 func (x *Reference) RelatedToHf(id int) bool     { return false }
 
 func (x *Reference) CheckFields() {
+}
+
+func (x *Reference) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	return json.Marshal(d)
 }
 
 type RegionEvilness int
@@ -10459,12 +16106,37 @@ type Region struct {
 	Type     RegionType     `json:"type" legend:"base"`     // type
 }
 
+func NewRegion() *Region {
+	return &Region{
+		ForceId: -1,
+		Id_:     -1,
+	}
+}
 func (x *Region) Id() int                     { return x.Id_ }
 func (x *Region) Name() string                { return x.Name_ }
 func (x *Region) RelatedToEntity(id int) bool { return false }
 func (x *Region) RelatedToHf(id int) bool     { return false }
 
 func (x *Region) CheckFields() {
+}
+
+func (x *Region) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["coords"] = x.Coords
+	if x.Evilness != 0 {
+		d["evilness"] = x.Evilness
+	}
+	if x.ForceId != -1 {
+		d["forceId"] = x.ForceId
+	}
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["name"] = x.Name_
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	return json.Marshal(d)
 }
 
 type RelationshipProfileHfHistorical struct {
@@ -10483,10 +16155,71 @@ type RelationshipProfileHfHistorical struct {
 	Trust           int `json:"trust" legend:"base"`           // trust
 }
 
+func NewRelationshipProfileHfHistorical() *RelationshipProfileHfHistorical {
+	return &RelationshipProfileHfHistorical{
+		Fear:            -1,
+		HfId:            -1,
+		Love:            -1,
+		Loyalty:         -1,
+		RepEnemyFighter: -1,
+		RepHero:         -1,
+		RepHunter:       -1,
+		RepKiller:       -1,
+		RepPsychopath:   -1,
+		RepStoryteller:  -1,
+		RepViolent:      -1,
+		Respect:         -1,
+		Trust:           -1,
+	}
+}
 func (x *RelationshipProfileHfHistorical) RelatedToEntity(id int) bool { return false }
 func (x *RelationshipProfileHfHistorical) RelatedToHf(id int) bool     { return x.HfId == id }
 
 func (x *RelationshipProfileHfHistorical) CheckFields() {
+}
+
+func (x *RelationshipProfileHfHistorical) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Fear != -1 {
+		d["fear"] = x.Fear
+	}
+	if x.HfId != -1 {
+		d["hfId"] = x.HfId
+	}
+	if x.Love != -1 {
+		d["love"] = x.Love
+	}
+	if x.Loyalty != -1 {
+		d["loyalty"] = x.Loyalty
+	}
+	if x.RepEnemyFighter != -1 {
+		d["repEnemyFighter"] = x.RepEnemyFighter
+	}
+	if x.RepHero != -1 {
+		d["repHero"] = x.RepHero
+	}
+	if x.RepHunter != -1 {
+		d["repHunter"] = x.RepHunter
+	}
+	if x.RepKiller != -1 {
+		d["repKiller"] = x.RepKiller
+	}
+	if x.RepPsychopath != -1 {
+		d["repPsychopath"] = x.RepPsychopath
+	}
+	if x.RepStoryteller != -1 {
+		d["repStoryteller"] = x.RepStoryteller
+	}
+	if x.RepViolent != -1 {
+		d["repViolent"] = x.RepViolent
+	}
+	if x.Respect != -1 {
+		d["respect"] = x.Respect
+	}
+	if x.Trust != -1 {
+		d["trust"] = x.Trust
+	}
+	return json.Marshal(d)
 }
 
 type RelationshipProfileHfIdentity struct {
@@ -10499,11 +16232,48 @@ type RelationshipProfileHfIdentity struct {
 	Trust         int `json:"trust" legend:"base"`         // trust
 }
 
+func NewRelationshipProfileHfIdentity() *RelationshipProfileHfIdentity {
+	return &RelationshipProfileHfIdentity{
+		Fear:          -1,
+		Id_:           -1,
+		Love:          -1,
+		Loyalty:       -1,
+		RepPsychopath: -1,
+		Respect:       -1,
+		Trust:         -1,
+	}
+}
 func (x *RelationshipProfileHfIdentity) Id() int                     { return x.Id_ }
 func (x *RelationshipProfileHfIdentity) RelatedToEntity(id int) bool { return false }
 func (x *RelationshipProfileHfIdentity) RelatedToHf(id int) bool     { return false }
 
 func (x *RelationshipProfileHfIdentity) CheckFields() {
+}
+
+func (x *RelationshipProfileHfIdentity) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Fear != -1 {
+		d["fear"] = x.Fear
+	}
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	if x.Love != -1 {
+		d["love"] = x.Love
+	}
+	if x.Loyalty != -1 {
+		d["loyalty"] = x.Loyalty
+	}
+	if x.RepPsychopath != -1 {
+		d["repPsychopath"] = x.RepPsychopath
+	}
+	if x.Respect != -1 {
+		d["respect"] = x.Respect
+	}
+	if x.Trust != -1 {
+		d["trust"] = x.Trust
+	}
+	return json.Marshal(d)
 }
 
 type RelationshipProfileHfVisual struct {
@@ -10530,10 +16300,103 @@ type RelationshipProfileHfVisual struct {
 	Trust                int `json:"trust" legend:"base"`                // trust
 }
 
+func NewRelationshipProfileHfVisual() *RelationshipProfileHfVisual {
+	return &RelationshipProfileHfVisual{
+		Fear:                 -1,
+		HfId:                 -1,
+		KnownIdentityId:      -1,
+		LastMeetSeconds72:    -1,
+		LastMeetYear:         -1,
+		Love:                 -1,
+		Loyalty:              -1,
+		MeetCount:            -1,
+		RepBonded:            -1,
+		RepComrade:           -1,
+		RepFlatterer:         -1,
+		RepFriendly:          -1,
+		RepHero:              -1,
+		RepHunter:            -1,
+		RepInformationSource: -1,
+		RepKiller:            -1,
+		RepPsychopath:        -1,
+		RepQuarreler:         -1,
+		RepTradePartner:      -1,
+		Respect:              -1,
+		Trust:                -1,
+	}
+}
 func (x *RelationshipProfileHfVisual) RelatedToEntity(id int) bool { return x.KnownIdentityId == id }
 func (x *RelationshipProfileHfVisual) RelatedToHf(id int) bool     { return x.HfId == id }
 
 func (x *RelationshipProfileHfVisual) CheckFields() {
+}
+
+func (x *RelationshipProfileHfVisual) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Fear != -1 {
+		d["fear"] = x.Fear
+	}
+	if x.HfId != -1 {
+		d["hfId"] = x.HfId
+	}
+	if x.KnownIdentityId != -1 {
+		d["knownIdentityId"] = x.KnownIdentityId
+	}
+	if x.LastMeetSeconds72 != -1 {
+		d["lastMeetSeconds72"] = x.LastMeetSeconds72
+	}
+	if x.LastMeetYear != -1 {
+		d["lastMeetYear"] = x.LastMeetYear
+	}
+	if x.Love != -1 {
+		d["love"] = x.Love
+	}
+	if x.Loyalty != -1 {
+		d["loyalty"] = x.Loyalty
+	}
+	if x.MeetCount != -1 {
+		d["meetCount"] = x.MeetCount
+	}
+	if x.RepBonded != -1 {
+		d["repBonded"] = x.RepBonded
+	}
+	if x.RepComrade != -1 {
+		d["repComrade"] = x.RepComrade
+	}
+	if x.RepFlatterer != -1 {
+		d["repFlatterer"] = x.RepFlatterer
+	}
+	if x.RepFriendly != -1 {
+		d["repFriendly"] = x.RepFriendly
+	}
+	if x.RepHero != -1 {
+		d["repHero"] = x.RepHero
+	}
+	if x.RepHunter != -1 {
+		d["repHunter"] = x.RepHunter
+	}
+	if x.RepInformationSource != -1 {
+		d["repInformationSource"] = x.RepInformationSource
+	}
+	if x.RepKiller != -1 {
+		d["repKiller"] = x.RepKiller
+	}
+	if x.RepPsychopath != -1 {
+		d["repPsychopath"] = x.RepPsychopath
+	}
+	if x.RepQuarreler != -1 {
+		d["repQuarreler"] = x.RepQuarreler
+	}
+	if x.RepTradePartner != -1 {
+		d["repTradePartner"] = x.RepTradePartner
+	}
+	if x.Respect != -1 {
+		d["respect"] = x.Respect
+	}
+	if x.Trust != -1 {
+		d["trust"] = x.Trust
+	}
+	return json.Marshal(d)
 }
 
 type River struct {
@@ -10542,11 +16405,22 @@ type River struct {
 	Path   string `json:"path" legend:"plus"`   // path
 }
 
+func NewRiver() *River {
+	return &River{}
+}
 func (x *River) Name() string                { return x.Name_ }
 func (x *River) RelatedToEntity(id int) bool { return false }
 func (x *River) RelatedToHf(id int) bool     { return false }
 
 func (x *River) CheckFields() {
+}
+
+func (x *River) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["endPos"] = x.EndPos
+	d["name"] = x.Name_
+	d["path"] = x.Path
+	return json.Marshal(d)
 }
 
 type ScheduleItemSubtype int
@@ -10780,11 +16654,42 @@ type Schedule struct {
 	Type        ScheduleType        `json:"type" legend:"plus"`        // type
 }
 
+func NewSchedule() *Schedule {
+	return &Schedule{
+		Id_:        -1,
+		Reference:  -1,
+		Reference2: -1,
+	}
+}
 func (x *Schedule) Id() int                     { return x.Id_ }
 func (x *Schedule) RelatedToEntity(id int) bool { return false }
 func (x *Schedule) RelatedToHf(id int) bool     { return false }
 
 func (x *Schedule) CheckFields() {
+}
+
+func (x *Schedule) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["feature"] = x.Feature
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	if x.ItemSubtype != 0 {
+		d["itemSubtype"] = x.ItemSubtype
+	}
+	if x.ItemType != 0 {
+		d["itemType"] = x.ItemType
+	}
+	if x.Reference != -1 {
+		d["reference"] = x.Reference
+	}
+	if x.Reference2 != -1 {
+		d["reference2"] = x.Reference2
+	}
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	return json.Marshal(d)
 }
 
 type SiteType int
@@ -10921,12 +16826,43 @@ type Site struct {
 	Type           SiteType                  `json:"type" legend:"base"`           // type
 }
 
+func NewSite() *Site {
+	return &Site{
+		CivId:          -1,
+		CurOwnerId:     -1,
+		Id_:            -1,
+		SiteProperties: make(map[int]*SiteSiteProperty),
+		Structures:     make(map[int]*Structure),
+	}
+}
 func (x *Site) Id() int                     { return x.Id_ }
 func (x *Site) Name() string                { return x.Name_ }
 func (x *Site) RelatedToEntity(id int) bool { return x.CivId == id }
 func (x *Site) RelatedToHf(id int) bool     { return false }
 
 func (x *Site) CheckFields() {
+}
+
+func (x *Site) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.CivId != -1 {
+		d["civId"] = x.CivId
+	}
+	d["coords"] = x.Coords
+	if x.CurOwnerId != -1 {
+		d["curOwnerId"] = x.CurOwnerId
+	}
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["name"] = x.Name_
+	d["rectangle"] = x.Rectangle
+	d["siteProperties"] = x.SiteProperties
+	d["structures"] = x.Structures
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	return json.Marshal(d)
 }
 
 type SiteLinkLinkType int
@@ -10999,10 +16935,38 @@ type SiteLink struct {
 	SubId        int              `json:"subId" legend:"base"`        // sub_id
 }
 
+func NewSiteLink() *SiteLink {
+	return &SiteLink{
+		EntityId:     -1,
+		OccupationId: -1,
+		SiteId:       -1,
+		SubId:        -1,
+	}
+}
 func (x *SiteLink) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *SiteLink) RelatedToHf(id int) bool     { return false }
 
 func (x *SiteLink) CheckFields() {
+}
+
+func (x *SiteLink) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.LinkType != 0 {
+		d["linkType"] = x.LinkType
+	}
+	if x.OccupationId != -1 {
+		d["occupationId"] = x.OccupationId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SubId != -1 {
+		d["subId"] = x.SubId
+	}
+	return json.Marshal(d)
 }
 
 type SiteSitePropertyType int
@@ -11039,11 +17003,35 @@ type SiteSiteProperty struct {
 	Type        SiteSitePropertyType `json:"type" legend:"base"`        // type
 }
 
+func NewSiteSiteProperty() *SiteSiteProperty {
+	return &SiteSiteProperty{
+		Id_:         -1,
+		OwnerHfid:   -1,
+		StructureId: -1,
+	}
+}
 func (x *SiteSiteProperty) Id() int                     { return x.Id_ }
 func (x *SiteSiteProperty) RelatedToEntity(id int) bool { return false }
 func (x *SiteSiteProperty) RelatedToHf(id int) bool     { return x.OwnerHfid == id }
 
 func (x *SiteSiteProperty) CheckFields() {
+}
+
+func (x *SiteSiteProperty) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	if x.OwnerHfid != -1 {
+		d["ownerHfid"] = x.OwnerHfid
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	return json.Marshal(d)
 }
 
 type StructureSubtype int
@@ -11185,6 +17173,18 @@ type Structure struct {
 	WorshipHfid      int              `json:"worshipHfid" legend:"base"`      // worship_hfid
 }
 
+func NewStructure() *Structure {
+	return &Structure{
+		Deity:       -1,
+		DeityType:   -1,
+		DungeonType: -1,
+		EntityId:    -1,
+		Id_:         -1,
+		LocalId:     -1,
+		Religion:    -1,
+		WorshipHfid: -1,
+	}
+}
 func (x *Structure) Id() int                     { return x.Id_ }
 func (x *Structure) Name() string                { return x.Name_ }
 func (x *Structure) RelatedToEntity(id int) bool { return x.EntityId == id }
@@ -11227,6 +17227,45 @@ func (x *Structure) CheckFields() {
 	if x.Religion != x.WorshipHfid && x.Religion != 0 && x.WorshipHfid != 0 {
 		sameFields["Structure"]["Religion"]["WorshipHfid"] = false
 	}
+}
+
+func (x *Structure) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["copiedArtifactId"] = x.CopiedArtifactId
+	if x.Deity != -1 {
+		d["deity"] = x.Deity
+	}
+	if x.DeityType != -1 {
+		d["deityType"] = x.DeityType
+	}
+	if x.DungeonType != -1 {
+		d["dungeonType"] = x.DungeonType
+	}
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["inhabitant"] = x.Inhabitant
+	if x.LocalId != -1 {
+		d["localId"] = x.LocalId
+	}
+	d["name"] = x.Name_
+	d["name2"] = x.Name2
+	if x.Religion != -1 {
+		d["religion"] = x.Religion
+	}
+	if x.Subtype != 0 {
+		d["subtype"] = x.Subtype
+	}
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	if x.WorshipHfid != -1 {
+		d["worshipHfid"] = x.WorshipHfid
+	}
+	return json.Marshal(d)
 }
 
 type UndergroundRegionType int
@@ -11273,11 +17312,32 @@ type UndergroundRegion struct {
 	Type   UndergroundRegionType `json:"type" legend:"base"`   // type
 }
 
+func NewUndergroundRegion() *UndergroundRegion {
+	return &UndergroundRegion{
+		Depth: -1,
+		Id_:   -1,
+	}
+}
 func (x *UndergroundRegion) Id() int                     { return x.Id_ }
 func (x *UndergroundRegion) RelatedToEntity(id int) bool { return false }
 func (x *UndergroundRegion) RelatedToHf(id int) bool     { return false }
 
 func (x *UndergroundRegion) CheckFields() {
+}
+
+func (x *UndergroundRegion) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["coords"] = x.Coords
+	if x.Depth != -1 {
+		d["depth"] = x.Depth
+	}
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	return json.Marshal(d)
 }
 
 type VagueRelationship struct {
@@ -11297,10 +17357,36 @@ type VagueRelationship struct {
 	WarBuddy                   bool `json:"warBuddy" legend:"base"`                   // war_buddy
 }
 
+func NewVagueRelationship() *VagueRelationship {
+	return &VagueRelationship{
+		Hfid: -1,
+	}
+}
 func (x *VagueRelationship) RelatedToEntity(id int) bool { return false }
 func (x *VagueRelationship) RelatedToHf(id int) bool     { return x.Hfid == id }
 
 func (x *VagueRelationship) CheckFields() {
+}
+
+func (x *VagueRelationship) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["artisticBuddy"] = x.ArtisticBuddy
+	d["atheleticRival"] = x.AtheleticRival
+	d["athleteBuddy"] = x.AthleteBuddy
+	d["businessRival"] = x.BusinessRival
+	d["childhoodFriend"] = x.ChildhoodFriend
+	d["grudge"] = x.Grudge
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	d["jealousObsession"] = x.JealousObsession
+	d["jealousRelationshipGrudge"] = x.JealousRelationshipGrudge
+	d["persecutionGrudge"] = x.PersecutionGrudge
+	d["religiousPersecutionGrudge"] = x.ReligiousPersecutionGrudge
+	d["scholarBuddy"] = x.ScholarBuddy
+	d["supernaturalGrudge"] = x.SupernaturalGrudge
+	d["warBuddy"] = x.WarBuddy
+	return json.Marshal(d)
 }
 
 type WorldConstructionType int
@@ -11347,12 +17433,30 @@ type WorldConstruction struct {
 	Type   WorldConstructionType `json:"type" legend:"plus"`   // type
 }
 
+func NewWorldConstruction() *WorldConstruction {
+	return &WorldConstruction{
+		Id_: -1,
+	}
+}
 func (x *WorldConstruction) Id() int                     { return x.Id_ }
 func (x *WorldConstruction) Name() string                { return x.Name_ }
 func (x *WorldConstruction) RelatedToEntity(id int) bool { return false }
 func (x *WorldConstruction) RelatedToHf(id int) bool     { return false }
 
 func (x *WorldConstruction) CheckFields() {
+}
+
+func (x *WorldConstruction) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["coords"] = x.Coords
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	d["name"] = x.Name_
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	return json.Marshal(d)
 }
 
 type WrittenContentForm int
@@ -11663,6 +17767,16 @@ type WrittenContent struct {
 	Type       WrittenContentType `json:"type" legend:"plus"`       // type
 }
 
+func NewWrittenContent() *WrittenContent {
+	return &WrittenContent{
+		AuthorHfid: -1,
+		AuthorRoll: -1,
+		FormId:     -1,
+		Id_:        -1,
+		PageEnd:    -1,
+		PageStart:  -1,
+	}
+}
 func (x *WrittenContent) Id() int                     { return x.Id_ }
 func (x *WrittenContent) RelatedToEntity(id int) bool { return false }
 func (x *WrittenContent) RelatedToHf(id int) bool     { return x.AuthorHfid == id }
@@ -11688,11 +17802,41 @@ func (x *WrittenContent) CheckFields() {
 	}
 }
 
+func (x *WrittenContent) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.AuthorHfid != -1 {
+		d["authorHfid"] = x.AuthorHfid
+	}
+	if x.AuthorRoll != -1 {
+		d["authorRoll"] = x.AuthorRoll
+	}
+	if x.Form != 0 {
+		d["form"] = x.Form
+	}
+	if x.FormId != -1 {
+		d["formId"] = x.FormId
+	}
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
+	if x.PageEnd != -1 {
+		d["pageEnd"] = x.PageEnd
+	}
+	if x.PageStart != -1 {
+		d["pageStart"] = x.PageStart
+	}
+	d["reference"] = x.Reference
+	d["style"] = x.Style
+	d["title"] = x.Title
+	if x.Type != 0 {
+		d["type"] = x.Type
+	}
+	return json.Marshal(d)
+}
+
 // Parser
 func parseArtifact(p *util.XMLParser) (*Artifact, error) {
-	var (
-		obj = &Artifact{}
-	)
+	var obj = NewArtifact()
 
 	for {
 		t, n, err := p.Token()
@@ -11771,9 +17915,8 @@ func parseArtifact(p *util.XMLParser) (*Artifact, error) {
 	}
 }
 func parseArtifactPlus(p *util.XMLParser, obj *Artifact) (*Artifact, error) {
-	var ()
 	if obj == nil {
-		obj = &Artifact{}
+		obj = NewArtifact()
 	}
 
 	for {
@@ -11838,9 +17981,7 @@ func parseArtifactPlus(p *util.XMLParser, obj *Artifact) (*Artifact, error) {
 	}
 }
 func parseCreature(p *util.XMLParser) (*Creature, error) {
-	var (
-		obj = &Creature{}
-	)
+	var obj = NewCreature()
 
 	for {
 		t, n, err := p.Token()
@@ -11862,9 +18003,8 @@ func parseCreature(p *util.XMLParser) (*Creature, error) {
 	}
 }
 func parseCreaturePlus(p *util.XMLParser, obj *Creature) (*Creature, error) {
-	var ()
 	if obj == nil {
-		obj = &Creature{}
+		obj = NewCreature()
 	}
 
 	for {
@@ -12601,9 +18741,7 @@ func parseCreaturePlus(p *util.XMLParser, obj *Creature) (*Creature, error) {
 	}
 }
 func parseDanceForm(p *util.XMLParser) (*DanceForm, error) {
-	var (
-		obj = &DanceForm{}
-	)
+	var obj = NewDanceForm()
 
 	for {
 		t, n, err := p.Token()
@@ -12637,9 +18775,8 @@ func parseDanceForm(p *util.XMLParser) (*DanceForm, error) {
 	}
 }
 func parseDanceFormPlus(p *util.XMLParser, obj *DanceForm) (*DanceForm, error) {
-	var ()
 	if obj == nil {
-		obj = &DanceForm{}
+		obj = NewDanceForm()
 	}
 
 	for {
@@ -12674,32 +18811,7 @@ func parseDanceFormPlus(p *util.XMLParser, obj *DanceForm) (*DanceForm, error) {
 	}
 }
 func parseDfWorld(p *util.XMLParser) (*DfWorld, error) {
-	var (
-		obj = &DfWorld{}
-	)
-
-	obj.Artifacts = make(map[int]*Artifact)
-
-	obj.DanceForms = make(map[int]*DanceForm)
-	obj.Entities = make(map[int]*Entity)
-	obj.EntityPopulations = make(map[int]*EntityPopulation)
-
-	obj.HistoricalEventCollections = make(map[int]*HistoricalEventCollection)
-
-	obj.HistoricalEvents = make(map[int]*HistoricalEvent)
-	obj.HistoricalFigures = make(map[int]*HistoricalFigure)
-	obj.Identities = make(map[int]*Identity)
-	obj.Landmasses = make(map[int]*Landmass)
-	obj.MountainPeaks = make(map[int]*MountainPeak)
-	obj.MusicalForms = make(map[int]*MusicalForm)
-
-	obj.PoeticForms = make(map[int]*PoeticForm)
-	obj.Regions = make(map[int]*Region)
-
-	obj.Sites = make(map[int]*Site)
-	obj.UndergroundRegions = make(map[int]*UndergroundRegion)
-	obj.WorldConstructions = make(map[int]*WorldConstruction)
-	obj.WrittenContents = make(map[int]*WrittenContent)
+	var obj = NewDfWorld()
 
 	for {
 		t, n, err := p.Token()
@@ -12751,9 +18863,8 @@ func parseDfWorld(p *util.XMLParser) (*DfWorld, error) {
 	}
 }
 func parseDfWorldPlus(p *util.XMLParser, obj *DfWorld) (*DfWorld, error) {
-	var ()
 	if obj == nil {
-		obj = &DfWorld{}
+		obj = NewDfWorld()
 	}
 
 	for {
@@ -12832,9 +18943,7 @@ func parseDfWorldPlus(p *util.XMLParser, obj *DfWorld) (*DfWorld, error) {
 	}
 }
 func parseEntity(p *util.XMLParser) (*Entity, error) {
-	var (
-		obj = &Entity{}
-	)
+	var obj = NewEntity()
 
 	for {
 		t, n, err := p.Token()
@@ -12871,9 +18980,8 @@ func parseEntity(p *util.XMLParser) (*Entity, error) {
 	}
 }
 func parseEntityPlus(p *util.XMLParser, obj *Entity) (*Entity, error) {
-	var ()
 	if obj == nil {
-		obj = &Entity{}
+		obj = NewEntity()
 	}
 
 	for {
@@ -12962,9 +19070,7 @@ func parseEntityPlus(p *util.XMLParser, obj *Entity) (*Entity, error) {
 	}
 }
 func parseEntityEntityLink(p *util.XMLParser) (*EntityEntityLink, error) {
-	var (
-		obj = &EntityEntityLink{}
-	)
+	var obj = NewEntityEntityLink()
 
 	for {
 		t, n, err := p.Token()
@@ -12986,9 +19092,8 @@ func parseEntityEntityLink(p *util.XMLParser) (*EntityEntityLink, error) {
 	}
 }
 func parseEntityEntityLinkPlus(p *util.XMLParser, obj *EntityEntityLink) (*EntityEntityLink, error) {
-	var ()
 	if obj == nil {
-		obj = &EntityEntityLink{}
+		obj = NewEntityEntityLink()
 	}
 
 	for {
@@ -13029,9 +19134,7 @@ func parseEntityEntityLinkPlus(p *util.XMLParser, obj *EntityEntityLink) (*Entit
 	}
 }
 func parseEntityFormerPositionLink(p *util.XMLParser) (*EntityFormerPositionLink, error) {
-	var (
-		obj = &EntityFormerPositionLink{}
-	)
+	var obj = NewEntityFormerPositionLink()
 
 	for {
 		t, n, err := p.Token()
@@ -13077,9 +19180,8 @@ func parseEntityFormerPositionLink(p *util.XMLParser) (*EntityFormerPositionLink
 	}
 }
 func parseEntityFormerPositionLinkPlus(p *util.XMLParser, obj *EntityFormerPositionLink) (*EntityFormerPositionLink, error) {
-	var ()
 	if obj == nil {
-		obj = &EntityFormerPositionLink{}
+		obj = NewEntityFormerPositionLink()
 	}
 
 	for {
@@ -13102,9 +19204,7 @@ func parseEntityFormerPositionLinkPlus(p *util.XMLParser, obj *EntityFormerPosit
 	}
 }
 func parseEntityFormerSquadLink(p *util.XMLParser) (*EntityFormerSquadLink, error) {
-	var (
-		obj = &EntityFormerSquadLink{}
-	)
+	var obj = NewEntityFormerSquadLink()
 
 	for {
 		t, n, err := p.Token()
@@ -13150,9 +19250,8 @@ func parseEntityFormerSquadLink(p *util.XMLParser) (*EntityFormerSquadLink, erro
 	}
 }
 func parseEntityFormerSquadLinkPlus(p *util.XMLParser, obj *EntityFormerSquadLink) (*EntityFormerSquadLink, error) {
-	var ()
 	if obj == nil {
-		obj = &EntityFormerSquadLink{}
+		obj = NewEntityFormerSquadLink()
 	}
 
 	for {
@@ -13175,9 +19274,7 @@ func parseEntityFormerSquadLinkPlus(p *util.XMLParser, obj *EntityFormerSquadLin
 	}
 }
 func parseEntityPopulation(p *util.XMLParser) (*EntityPopulation, error) {
-	var (
-		obj = &EntityPopulation{}
-	)
+	var obj = NewEntityPopulation()
 
 	for {
 		t, n, err := p.Token()
@@ -13205,9 +19302,8 @@ func parseEntityPopulation(p *util.XMLParser) (*EntityPopulation, error) {
 	}
 }
 func parseEntityPopulationPlus(p *util.XMLParser, obj *EntityPopulation) (*EntityPopulation, error) {
-	var ()
 	if obj == nil {
-		obj = &EntityPopulation{}
+		obj = NewEntityPopulation()
 	}
 
 	for {
@@ -13248,9 +19344,7 @@ func parseEntityPopulationPlus(p *util.XMLParser, obj *EntityPopulation) (*Entit
 	}
 }
 func parseEntityPosition(p *util.XMLParser) (*EntityPosition, error) {
-	var (
-		obj = &EntityPosition{}
-	)
+	var obj = NewEntityPosition()
 
 	for {
 		t, n, err := p.Token()
@@ -13272,9 +19366,8 @@ func parseEntityPosition(p *util.XMLParser) (*EntityPosition, error) {
 	}
 }
 func parseEntityPositionPlus(p *util.XMLParser, obj *EntityPosition) (*EntityPosition, error) {
-	var ()
 	if obj == nil {
-		obj = &EntityPosition{}
+		obj = NewEntityPosition()
 	}
 
 	for {
@@ -13339,9 +19432,7 @@ func parseEntityPositionPlus(p *util.XMLParser, obj *EntityPosition) (*EntityPos
 	}
 }
 func parseEntityPositionAssignment(p *util.XMLParser) (*EntityPositionAssignment, error) {
-	var (
-		obj = &EntityPositionAssignment{}
-	)
+	var obj = NewEntityPositionAssignment()
 
 	for {
 		t, n, err := p.Token()
@@ -13363,9 +19454,8 @@ func parseEntityPositionAssignment(p *util.XMLParser) (*EntityPositionAssignment
 	}
 }
 func parseEntityPositionAssignmentPlus(p *util.XMLParser, obj *EntityPositionAssignment) (*EntityPositionAssignment, error) {
-	var ()
 	if obj == nil {
-		obj = &EntityPositionAssignment{}
+		obj = NewEntityPositionAssignment()
 	}
 
 	for {
@@ -13412,9 +19502,7 @@ func parseEntityPositionAssignmentPlus(p *util.XMLParser, obj *EntityPositionAss
 	}
 }
 func parseEntityPositionLink(p *util.XMLParser) (*EntityPositionLink, error) {
-	var (
-		obj = &EntityPositionLink{}
-	)
+	var obj = NewEntityPositionLink()
 
 	for {
 		t, n, err := p.Token()
@@ -13454,9 +19542,8 @@ func parseEntityPositionLink(p *util.XMLParser) (*EntityPositionLink, error) {
 	}
 }
 func parseEntityPositionLinkPlus(p *util.XMLParser, obj *EntityPositionLink) (*EntityPositionLink, error) {
-	var ()
 	if obj == nil {
-		obj = &EntityPositionLink{}
+		obj = NewEntityPositionLink()
 	}
 
 	for {
@@ -13479,9 +19566,7 @@ func parseEntityPositionLinkPlus(p *util.XMLParser, obj *EntityPositionLink) (*E
 	}
 }
 func parseEntityReputation(p *util.XMLParser) (*EntityReputation, error) {
-	var (
-		obj = &EntityReputation{}
-	)
+	var obj = NewEntityReputation()
 
 	for {
 		t, n, err := p.Token()
@@ -13593,9 +19678,8 @@ func parseEntityReputation(p *util.XMLParser) (*EntityReputation, error) {
 	}
 }
 func parseEntityReputationPlus(p *util.XMLParser, obj *EntityReputation) (*EntityReputation, error) {
-	var ()
 	if obj == nil {
-		obj = &EntityReputation{}
+		obj = NewEntityReputation()
 	}
 
 	for {
@@ -13618,9 +19702,7 @@ func parseEntityReputationPlus(p *util.XMLParser, obj *EntityReputation) (*Entit
 	}
 }
 func parseEntitySquadLink(p *util.XMLParser) (*EntitySquadLink, error) {
-	var (
-		obj = &EntitySquadLink{}
-	)
+	var obj = NewEntitySquadLink()
 
 	for {
 		t, n, err := p.Token()
@@ -13666,9 +19748,8 @@ func parseEntitySquadLink(p *util.XMLParser) (*EntitySquadLink, error) {
 	}
 }
 func parseEntitySquadLinkPlus(p *util.XMLParser, obj *EntitySquadLink) (*EntitySquadLink, error) {
-	var ()
 	if obj == nil {
-		obj = &EntitySquadLink{}
+		obj = NewEntitySquadLink()
 	}
 
 	for {
@@ -13691,9 +19772,7 @@ func parseEntitySquadLinkPlus(p *util.XMLParser, obj *EntitySquadLink) (*EntityS
 	}
 }
 func parseFeature(p *util.XMLParser) (*Feature, error) {
-	var (
-		obj = &Feature{}
-	)
+	var obj = NewFeature()
 
 	for {
 		t, n, err := p.Token()
@@ -13715,9 +19794,8 @@ func parseFeature(p *util.XMLParser) (*Feature, error) {
 	}
 }
 func parseFeaturePlus(p *util.XMLParser, obj *Feature) (*Feature, error) {
-	var ()
 	if obj == nil {
-		obj = &Feature{}
+		obj = NewFeature()
 	}
 
 	for {
@@ -13752,9 +19830,7 @@ func parseFeaturePlus(p *util.XMLParser, obj *Feature) (*Feature, error) {
 	}
 }
 func parseHfLink(p *util.XMLParser) (*HfLink, error) {
-	var (
-		obj = &HfLink{}
-	)
+	var obj = NewHfLink()
 
 	for {
 		t, n, err := p.Token()
@@ -13794,9 +19870,8 @@ func parseHfLink(p *util.XMLParser) (*HfLink, error) {
 	}
 }
 func parseHfLinkPlus(p *util.XMLParser, obj *HfLink) (*HfLink, error) {
-	var ()
 	if obj == nil {
-		obj = &HfLink{}
+		obj = NewHfLink()
 	}
 
 	for {
@@ -13819,9 +19894,7 @@ func parseHfLinkPlus(p *util.XMLParser, obj *HfLink) (*HfLink, error) {
 	}
 }
 func parseHfSkill(p *util.XMLParser) (*HfSkill, error) {
-	var (
-		obj = &HfSkill{}
-	)
+	var obj = NewHfSkill()
 
 	for {
 		t, n, err := p.Token()
@@ -13855,9 +19928,8 @@ func parseHfSkill(p *util.XMLParser) (*HfSkill, error) {
 	}
 }
 func parseHfSkillPlus(p *util.XMLParser, obj *HfSkill) (*HfSkill, error) {
-	var ()
 	if obj == nil {
-		obj = &HfSkill{}
+		obj = NewHfSkill()
 	}
 
 	for {
@@ -13880,9 +19952,7 @@ func parseHfSkillPlus(p *util.XMLParser, obj *HfSkill) (*HfSkill, error) {
 	}
 }
 func parseHistoricalEra(p *util.XMLParser) (*HistoricalEra, error) {
-	var (
-		obj = &HistoricalEra{}
-	)
+	var obj = NewHistoricalEra()
 
 	for {
 		t, n, err := p.Token()
@@ -13916,9 +19986,8 @@ func parseHistoricalEra(p *util.XMLParser) (*HistoricalEra, error) {
 	}
 }
 func parseHistoricalEraPlus(p *util.XMLParser, obj *HistoricalEra) (*HistoricalEra, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEra{}
+		obj = NewHistoricalEra()
 	}
 
 	for {
@@ -13941,9 +20010,7 @@ func parseHistoricalEraPlus(p *util.XMLParser, obj *HistoricalEra) (*HistoricalE
 	}
 }
 func parseHistoricalEvent(p *util.XMLParser) (*HistoricalEvent, error) {
-	var (
-		obj = &HistoricalEvent{}
-	)
+	var obj = NewHistoricalEvent()
 
 	for {
 		t, n, err := p.Token()
@@ -14248,9 +20315,8 @@ func parseHistoricalEvent(p *util.XMLParser) (*HistoricalEvent, error) {
 	}
 }
 func parseHistoricalEventPlus(p *util.XMLParser, obj *HistoricalEvent) (*HistoricalEvent, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEvent{}
+		obj = NewHistoricalEvent()
 	}
 
 	for {
@@ -14372,9 +20438,7 @@ func parseHistoricalEventPlus(p *util.XMLParser, obj *HistoricalEvent) (*Histori
 	}
 }
 func parseHistoricalEventAddHfEntityHonor(p *util.XMLParser) (*HistoricalEventAddHfEntityHonor, error) {
-	var (
-		obj = &HistoricalEventAddHfEntityHonor{}
-	)
+	var obj = NewHistoricalEventAddHfEntityHonor()
 
 	for {
 		t, n, err := p.Token()
@@ -14414,9 +20478,8 @@ func parseHistoricalEventAddHfEntityHonor(p *util.XMLParser) (*HistoricalEventAd
 	}
 }
 func parseHistoricalEventAddHfEntityHonorPlus(p *util.XMLParser, obj *HistoricalEventAddHfEntityHonor) (*HistoricalEventAddHfEntityHonor, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventAddHfEntityHonor{}
+		obj = NewHistoricalEventAddHfEntityHonor()
 	}
 
 	for {
@@ -14439,9 +20502,7 @@ func parseHistoricalEventAddHfEntityHonorPlus(p *util.XMLParser, obj *Historical
 	}
 }
 func parseHistoricalEventAddHfEntityLink(p *util.XMLParser) (*HistoricalEventAddHfEntityLink, error) {
-	var (
-		obj = &HistoricalEventAddHfEntityLink{}
-	)
+	var obj = NewHistoricalEventAddHfEntityLink()
 
 	for {
 		t, n, err := p.Token()
@@ -14499,9 +20560,8 @@ func parseHistoricalEventAddHfEntityLink(p *util.XMLParser) (*HistoricalEventAdd
 	}
 }
 func parseHistoricalEventAddHfEntityLinkPlus(p *util.XMLParser, obj *HistoricalEventAddHfEntityLink) (*HistoricalEventAddHfEntityLink, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventAddHfEntityLink{}
+		obj = NewHistoricalEventAddHfEntityLink()
 	}
 
 	for {
@@ -14560,9 +20620,7 @@ func parseHistoricalEventAddHfEntityLinkPlus(p *util.XMLParser, obj *HistoricalE
 	}
 }
 func parseHistoricalEventAddHfHfLink(p *util.XMLParser) (*HistoricalEventAddHfHfLink, error) {
-	var (
-		obj = &HistoricalEventAddHfHfLink{}
-	)
+	var obj = NewHistoricalEventAddHfHfLink()
 
 	for {
 		t, n, err := p.Token()
@@ -14596,9 +20654,8 @@ func parseHistoricalEventAddHfHfLink(p *util.XMLParser) (*HistoricalEventAddHfHf
 	}
 }
 func parseHistoricalEventAddHfHfLinkPlus(p *util.XMLParser, obj *HistoricalEventAddHfHfLink) (*HistoricalEventAddHfHfLink, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventAddHfHfLink{}
+		obj = NewHistoricalEventAddHfHfLink()
 	}
 
 	for {
@@ -14639,9 +20696,7 @@ func parseHistoricalEventAddHfHfLinkPlus(p *util.XMLParser, obj *HistoricalEvent
 	}
 }
 func parseHistoricalEventAddHfSiteLink(p *util.XMLParser) (*HistoricalEventAddHfSiteLink, error) {
-	var (
-		obj = &HistoricalEventAddHfSiteLink{}
-	)
+	var obj = NewHistoricalEventAddHfSiteLink()
 
 	for {
 		t, n, err := p.Token()
@@ -14669,9 +20724,8 @@ func parseHistoricalEventAddHfSiteLink(p *util.XMLParser) (*HistoricalEventAddHf
 	}
 }
 func parseHistoricalEventAddHfSiteLinkPlus(p *util.XMLParser, obj *HistoricalEventAddHfSiteLink) (*HistoricalEventAddHfSiteLink, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventAddHfSiteLink{}
+		obj = NewHistoricalEventAddHfSiteLink()
 	}
 
 	for {
@@ -14724,9 +20778,7 @@ func parseHistoricalEventAddHfSiteLinkPlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventAgreementFormed(p *util.XMLParser) (*HistoricalEventAgreementFormed, error) {
-	var (
-		obj = &HistoricalEventAgreementFormed{}
-	)
+	var obj = NewHistoricalEventAgreementFormed()
 
 	for {
 		t, n, err := p.Token()
@@ -14886,9 +20938,8 @@ func parseHistoricalEventAgreementFormed(p *util.XMLParser) (*HistoricalEventAgr
 	}
 }
 func parseHistoricalEventAgreementFormedPlus(p *util.XMLParser, obj *HistoricalEventAgreementFormed) (*HistoricalEventAgreementFormed, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventAgreementFormed{}
+		obj = NewHistoricalEventAgreementFormed()
 	}
 
 	for {
@@ -14911,9 +20962,7 @@ func parseHistoricalEventAgreementFormedPlus(p *util.XMLParser, obj *HistoricalE
 	}
 }
 func parseHistoricalEventAgreementMade(p *util.XMLParser) (*HistoricalEventAgreementMade, error) {
-	var (
-		obj = &HistoricalEventAgreementMade{}
-	)
+	var obj = NewHistoricalEventAgreementMade()
 
 	for {
 		t, n, err := p.Token()
@@ -14941,9 +20990,8 @@ func parseHistoricalEventAgreementMade(p *util.XMLParser) (*HistoricalEventAgree
 	}
 }
 func parseHistoricalEventAgreementMadePlus(p *util.XMLParser, obj *HistoricalEventAgreementMade) (*HistoricalEventAgreementMade, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventAgreementMade{}
+		obj = NewHistoricalEventAgreementMade()
 	}
 
 	for {
@@ -14966,9 +21014,7 @@ func parseHistoricalEventAgreementMadePlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventAgreementRejected(p *util.XMLParser) (*HistoricalEventAgreementRejected, error) {
-	var (
-		obj = &HistoricalEventAgreementRejected{}
-	)
+	var obj = NewHistoricalEventAgreementRejected()
 
 	for {
 		t, n, err := p.Token()
@@ -14996,9 +21042,8 @@ func parseHistoricalEventAgreementRejected(p *util.XMLParser) (*HistoricalEventA
 	}
 }
 func parseHistoricalEventAgreementRejectedPlus(p *util.XMLParser, obj *HistoricalEventAgreementRejected) (*HistoricalEventAgreementRejected, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventAgreementRejected{}
+		obj = NewHistoricalEventAgreementRejected()
 	}
 
 	for {
@@ -15021,9 +21066,7 @@ func parseHistoricalEventAgreementRejectedPlus(p *util.XMLParser, obj *Historica
 	}
 }
 func parseHistoricalEventArtifactClaimFormed(p *util.XMLParser) (*HistoricalEventArtifactClaimFormed, error) {
-	var (
-		obj = &HistoricalEventArtifactClaimFormed{}
-	)
+	var obj = NewHistoricalEventArtifactClaimFormed()
 
 	for {
 		t, n, err := p.Token()
@@ -15081,9 +21124,8 @@ func parseHistoricalEventArtifactClaimFormed(p *util.XMLParser) (*HistoricalEven
 	}
 }
 func parseHistoricalEventArtifactClaimFormedPlus(p *util.XMLParser, obj *HistoricalEventArtifactClaimFormed) (*HistoricalEventArtifactClaimFormed, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventArtifactClaimFormed{}
+		obj = NewHistoricalEventArtifactClaimFormed()
 	}
 
 	for {
@@ -15106,9 +21148,7 @@ func parseHistoricalEventArtifactClaimFormedPlus(p *util.XMLParser, obj *Histori
 	}
 }
 func parseHistoricalEventArtifactCopied(p *util.XMLParser) (*HistoricalEventArtifactCopied, error) {
-	var (
-		obj = &HistoricalEventArtifactCopied{}
-	)
+	var obj = NewHistoricalEventArtifactCopied()
 
 	for {
 		t, n, err := p.Token()
@@ -15178,9 +21218,8 @@ func parseHistoricalEventArtifactCopied(p *util.XMLParser) (*HistoricalEventArti
 	}
 }
 func parseHistoricalEventArtifactCopiedPlus(p *util.XMLParser, obj *HistoricalEventArtifactCopied) (*HistoricalEventArtifactCopied, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventArtifactCopied{}
+		obj = NewHistoricalEventArtifactCopied()
 	}
 
 	for {
@@ -15203,9 +21242,7 @@ func parseHistoricalEventArtifactCopiedPlus(p *util.XMLParser, obj *HistoricalEv
 	}
 }
 func parseHistoricalEventArtifactCreated(p *util.XMLParser) (*HistoricalEventArtifactCreated, error) {
-	var (
-		obj = &HistoricalEventArtifactCreated{}
-	)
+	var obj = NewHistoricalEventArtifactCreated()
 
 	for {
 		t, n, err := p.Token()
@@ -15257,9 +21294,8 @@ func parseHistoricalEventArtifactCreated(p *util.XMLParser) (*HistoricalEventArt
 	}
 }
 func parseHistoricalEventArtifactCreatedPlus(p *util.XMLParser, obj *HistoricalEventArtifactCreated) (*HistoricalEventArtifactCreated, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventArtifactCreated{}
+		obj = NewHistoricalEventArtifactCreated()
 	}
 
 	for {
@@ -15321,9 +21357,7 @@ func parseHistoricalEventArtifactCreatedPlus(p *util.XMLParser, obj *HistoricalE
 	}
 }
 func parseHistoricalEventArtifactCreatedCircumstance(p *util.XMLParser) (*HistoricalEventArtifactCreatedCircumstance, error) {
-	var (
-		obj = &HistoricalEventArtifactCreatedCircumstance{}
-	)
+	var obj = NewHistoricalEventArtifactCreatedCircumstance()
 
 	for {
 		t, n, err := p.Token()
@@ -15345,9 +21379,8 @@ func parseHistoricalEventArtifactCreatedCircumstance(p *util.XMLParser) (*Histor
 	}
 }
 func parseHistoricalEventArtifactCreatedCircumstancePlus(p *util.XMLParser, obj *HistoricalEventArtifactCreatedCircumstance) (*HistoricalEventArtifactCreatedCircumstance, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventArtifactCreatedCircumstance{}
+		obj = NewHistoricalEventArtifactCreatedCircumstance()
 	}
 
 	for {
@@ -15382,9 +21415,7 @@ func parseHistoricalEventArtifactCreatedCircumstancePlus(p *util.XMLParser, obj 
 	}
 }
 func parseHistoricalEventArtifactDestroyed(p *util.XMLParser) (*HistoricalEventArtifactDestroyed, error) {
-	var (
-		obj = &HistoricalEventArtifactDestroyed{}
-	)
+	var obj = NewHistoricalEventArtifactDestroyed()
 
 	for {
 		t, n, err := p.Token()
@@ -15424,9 +21455,8 @@ func parseHistoricalEventArtifactDestroyed(p *util.XMLParser) (*HistoricalEventA
 	}
 }
 func parseHistoricalEventArtifactDestroyedPlus(p *util.XMLParser, obj *HistoricalEventArtifactDestroyed) (*HistoricalEventArtifactDestroyed, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventArtifactDestroyed{}
+		obj = NewHistoricalEventArtifactDestroyed()
 	}
 
 	for {
@@ -15449,9 +21479,7 @@ func parseHistoricalEventArtifactDestroyedPlus(p *util.XMLParser, obj *Historica
 	}
 }
 func parseHistoricalEventArtifactFound(p *util.XMLParser) (*HistoricalEventArtifactFound, error) {
-	var (
-		obj = &HistoricalEventArtifactFound{}
-	)
+	var obj = NewHistoricalEventArtifactFound()
 
 	for {
 		t, n, err := p.Token()
@@ -15497,9 +21525,8 @@ func parseHistoricalEventArtifactFound(p *util.XMLParser) (*HistoricalEventArtif
 	}
 }
 func parseHistoricalEventArtifactFoundPlus(p *util.XMLParser, obj *HistoricalEventArtifactFound) (*HistoricalEventArtifactFound, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventArtifactFound{}
+		obj = NewHistoricalEventArtifactFound()
 	}
 
 	for {
@@ -15522,9 +21549,7 @@ func parseHistoricalEventArtifactFoundPlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventArtifactGiven(p *util.XMLParser) (*HistoricalEventArtifactGiven, error) {
-	var (
-		obj = &HistoricalEventArtifactGiven{}
-	)
+	var obj = NewHistoricalEventArtifactGiven()
 
 	for {
 		t, n, err := p.Token()
@@ -15582,9 +21607,8 @@ func parseHistoricalEventArtifactGiven(p *util.XMLParser) (*HistoricalEventArtif
 	}
 }
 func parseHistoricalEventArtifactGivenPlus(p *util.XMLParser, obj *HistoricalEventArtifactGiven) (*HistoricalEventArtifactGiven, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventArtifactGiven{}
+		obj = NewHistoricalEventArtifactGiven()
 	}
 
 	for {
@@ -15607,9 +21631,7 @@ func parseHistoricalEventArtifactGivenPlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventArtifactLost(p *util.XMLParser) (*HistoricalEventArtifactLost, error) {
-	var (
-		obj = &HistoricalEventArtifactLost{}
-	)
+	var obj = NewHistoricalEventArtifactLost()
 
 	for {
 		t, n, err := p.Token()
@@ -15661,9 +21683,8 @@ func parseHistoricalEventArtifactLost(p *util.XMLParser) (*HistoricalEventArtifa
 	}
 }
 func parseHistoricalEventArtifactLostPlus(p *util.XMLParser, obj *HistoricalEventArtifactLost) (*HistoricalEventArtifactLost, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventArtifactLost{}
+		obj = NewHistoricalEventArtifactLost()
 	}
 
 	for {
@@ -15686,9 +21707,7 @@ func parseHistoricalEventArtifactLostPlus(p *util.XMLParser, obj *HistoricalEven
 	}
 }
 func parseHistoricalEventArtifactPossessed(p *util.XMLParser) (*HistoricalEventArtifactPossessed, error) {
-	var (
-		obj = &HistoricalEventArtifactPossessed{}
-	)
+	var obj = NewHistoricalEventArtifactPossessed()
 
 	for {
 		t, n, err := p.Token()
@@ -15770,9 +21789,8 @@ func parseHistoricalEventArtifactPossessed(p *util.XMLParser) (*HistoricalEventA
 	}
 }
 func parseHistoricalEventArtifactPossessedPlus(p *util.XMLParser, obj *HistoricalEventArtifactPossessed) (*HistoricalEventArtifactPossessed, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventArtifactPossessed{}
+		obj = NewHistoricalEventArtifactPossessed()
 	}
 
 	for {
@@ -15795,9 +21813,7 @@ func parseHistoricalEventArtifactPossessedPlus(p *util.XMLParser, obj *Historica
 	}
 }
 func parseHistoricalEventArtifactRecovered(p *util.XMLParser) (*HistoricalEventArtifactRecovered, error) {
-	var (
-		obj = &HistoricalEventArtifactRecovered{}
-	)
+	var obj = NewHistoricalEventArtifactRecovered()
 
 	for {
 		t, n, err := p.Token()
@@ -15861,9 +21877,8 @@ func parseHistoricalEventArtifactRecovered(p *util.XMLParser) (*HistoricalEventA
 	}
 }
 func parseHistoricalEventArtifactRecoveredPlus(p *util.XMLParser, obj *HistoricalEventArtifactRecovered) (*HistoricalEventArtifactRecovered, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventArtifactRecovered{}
+		obj = NewHistoricalEventArtifactRecovered()
 	}
 
 	for {
@@ -15886,9 +21901,7 @@ func parseHistoricalEventArtifactRecoveredPlus(p *util.XMLParser, obj *Historica
 	}
 }
 func parseHistoricalEventArtifactStored(p *util.XMLParser) (*HistoricalEventArtifactStored, error) {
-	var (
-		obj = &HistoricalEventArtifactStored{}
-	)
+	var obj = NewHistoricalEventArtifactStored()
 
 	for {
 		t, n, err := p.Token()
@@ -15934,9 +21947,8 @@ func parseHistoricalEventArtifactStored(p *util.XMLParser) (*HistoricalEventArti
 	}
 }
 func parseHistoricalEventArtifactStoredPlus(p *util.XMLParser, obj *HistoricalEventArtifactStored) (*HistoricalEventArtifactStored, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventArtifactStored{}
+		obj = NewHistoricalEventArtifactStored()
 	}
 
 	for {
@@ -15959,9 +21971,7 @@ func parseHistoricalEventArtifactStoredPlus(p *util.XMLParser, obj *HistoricalEv
 	}
 }
 func parseHistoricalEventArtifactTransformed(p *util.XMLParser) (*HistoricalEventArtifactTransformed, error) {
-	var (
-		obj = &HistoricalEventArtifactTransformed{}
-	)
+	var obj = NewHistoricalEventArtifactTransformed()
 
 	for {
 		t, n, err := p.Token()
@@ -16013,9 +22023,8 @@ func parseHistoricalEventArtifactTransformed(p *util.XMLParser) (*HistoricalEven
 	}
 }
 func parseHistoricalEventArtifactTransformedPlus(p *util.XMLParser, obj *HistoricalEventArtifactTransformed) (*HistoricalEventArtifactTransformed, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventArtifactTransformed{}
+		obj = NewHistoricalEventArtifactTransformed()
 	}
 
 	for {
@@ -16038,9 +22047,7 @@ func parseHistoricalEventArtifactTransformedPlus(p *util.XMLParser, obj *Histori
 	}
 }
 func parseHistoricalEventAssumeIdentity(p *util.XMLParser) (*HistoricalEventAssumeIdentity, error) {
-	var (
-		obj = &HistoricalEventAssumeIdentity{}
-	)
+	var obj = NewHistoricalEventAssumeIdentity()
 
 	for {
 		t, n, err := p.Token()
@@ -16080,9 +22087,8 @@ func parseHistoricalEventAssumeIdentity(p *util.XMLParser) (*HistoricalEventAssu
 	}
 }
 func parseHistoricalEventAssumeIdentityPlus(p *util.XMLParser, obj *HistoricalEventAssumeIdentity) (*HistoricalEventAssumeIdentity, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventAssumeIdentity{}
+		obj = NewHistoricalEventAssumeIdentity()
 	}
 
 	for {
@@ -16147,9 +22153,7 @@ func parseHistoricalEventAssumeIdentityPlus(p *util.XMLParser, obj *HistoricalEv
 	}
 }
 func parseHistoricalEventAttackedSite(p *util.XMLParser) (*HistoricalEventAttackedSite, error) {
-	var (
-		obj = &HistoricalEventAttackedSite{}
-	)
+	var obj = NewHistoricalEventAttackedSite()
 
 	for {
 		t, n, err := p.Token()
@@ -16231,9 +22235,8 @@ func parseHistoricalEventAttackedSite(p *util.XMLParser) (*HistoricalEventAttack
 	}
 }
 func parseHistoricalEventAttackedSitePlus(p *util.XMLParser, obj *HistoricalEventAttackedSite) (*HistoricalEventAttackedSite, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventAttackedSite{}
+		obj = NewHistoricalEventAttackedSite()
 	}
 
 	for {
@@ -16256,9 +22259,7 @@ func parseHistoricalEventAttackedSitePlus(p *util.XMLParser, obj *HistoricalEven
 	}
 }
 func parseHistoricalEventBodyAbused(p *util.XMLParser) (*HistoricalEventBodyAbused, error) {
-	var (
-		obj = &HistoricalEventBodyAbused{}
-	)
+	var obj = NewHistoricalEventBodyAbused()
 
 	for {
 		t, n, err := p.Token()
@@ -16304,9 +22305,8 @@ func parseHistoricalEventBodyAbused(p *util.XMLParser) (*HistoricalEventBodyAbus
 	}
 }
 func parseHistoricalEventBodyAbusedPlus(p *util.XMLParser, obj *HistoricalEventBodyAbused) (*HistoricalEventBodyAbused, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventBodyAbused{}
+		obj = NewHistoricalEventBodyAbused()
 	}
 
 	for {
@@ -16407,9 +22407,7 @@ func parseHistoricalEventBodyAbusedPlus(p *util.XMLParser, obj *HistoricalEventB
 	}
 }
 func parseHistoricalEventBuildingProfileAcquired(p *util.XMLParser) (*HistoricalEventBuildingProfileAcquired, error) {
-	var (
-		obj = &HistoricalEventBuildingProfileAcquired{}
-	)
+	var obj = NewHistoricalEventBuildingProfileAcquired()
 
 	for {
 		t, n, err := p.Token()
@@ -16479,9 +22477,8 @@ func parseHistoricalEventBuildingProfileAcquired(p *util.XMLParser) (*Historical
 	}
 }
 func parseHistoricalEventBuildingProfileAcquiredPlus(p *util.XMLParser, obj *HistoricalEventBuildingProfileAcquired) (*HistoricalEventBuildingProfileAcquired, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventBuildingProfileAcquired{}
+		obj = NewHistoricalEventBuildingProfileAcquired()
 	}
 
 	for {
@@ -16504,9 +22501,7 @@ func parseHistoricalEventBuildingProfileAcquiredPlus(p *util.XMLParser, obj *His
 	}
 }
 func parseHistoricalEventCeremony(p *util.XMLParser) (*HistoricalEventCeremony, error) {
-	var (
-		obj = &HistoricalEventCeremony{}
-	)
+	var obj = NewHistoricalEventCeremony()
 
 	for {
 		t, n, err := p.Token()
@@ -16564,9 +22559,8 @@ func parseHistoricalEventCeremony(p *util.XMLParser) (*HistoricalEventCeremony, 
 	}
 }
 func parseHistoricalEventCeremonyPlus(p *util.XMLParser, obj *HistoricalEventCeremony) (*HistoricalEventCeremony, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCeremony{}
+		obj = NewHistoricalEventCeremony()
 	}
 
 	for {
@@ -16589,9 +22583,7 @@ func parseHistoricalEventCeremonyPlus(p *util.XMLParser, obj *HistoricalEventCer
 	}
 }
 func parseHistoricalEventChangeHfBodyState(p *util.XMLParser) (*HistoricalEventChangeHfBodyState, error) {
-	var (
-		obj = &HistoricalEventChangeHfBodyState{}
-	)
+	var obj = NewHistoricalEventChangeHfBodyState()
 
 	for {
 		t, n, err := p.Token()
@@ -16655,9 +22647,8 @@ func parseHistoricalEventChangeHfBodyState(p *util.XMLParser) (*HistoricalEventC
 	}
 }
 func parseHistoricalEventChangeHfBodyStatePlus(p *util.XMLParser, obj *HistoricalEventChangeHfBodyState) (*HistoricalEventChangeHfBodyState, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventChangeHfBodyState{}
+		obj = NewHistoricalEventChangeHfBodyState()
 	}
 
 	for {
@@ -16680,9 +22671,7 @@ func parseHistoricalEventChangeHfBodyStatePlus(p *util.XMLParser, obj *Historica
 	}
 }
 func parseHistoricalEventChangeHfJob(p *util.XMLParser) (*HistoricalEventChangeHfJob, error) {
-	var (
-		obj = &HistoricalEventChangeHfJob{}
-	)
+	var obj = NewHistoricalEventChangeHfJob()
 
 	for {
 		t, n, err := p.Token()
@@ -16728,9 +22717,8 @@ func parseHistoricalEventChangeHfJob(p *util.XMLParser) (*HistoricalEventChangeH
 	}
 }
 func parseHistoricalEventChangeHfJobPlus(p *util.XMLParser, obj *HistoricalEventChangeHfJob) (*HistoricalEventChangeHfJob, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventChangeHfJob{}
+		obj = NewHistoricalEventChangeHfJob()
 	}
 
 	for {
@@ -16777,9 +22765,7 @@ func parseHistoricalEventChangeHfJobPlus(p *util.XMLParser, obj *HistoricalEvent
 	}
 }
 func parseHistoricalEventChangeHfState(p *util.XMLParser) (*HistoricalEventChangeHfState, error) {
-	var (
-		obj = &HistoricalEventChangeHfState{}
-	)
+	var obj = NewHistoricalEventChangeHfState()
 
 	for {
 		t, n, err := p.Token()
@@ -16849,9 +22835,8 @@ func parseHistoricalEventChangeHfState(p *util.XMLParser) (*HistoricalEventChang
 	}
 }
 func parseHistoricalEventChangeHfStatePlus(p *util.XMLParser, obj *HistoricalEventChangeHfState) (*HistoricalEventChangeHfState, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventChangeHfState{}
+		obj = NewHistoricalEventChangeHfState()
 	}
 
 	for {
@@ -16898,9 +22883,7 @@ func parseHistoricalEventChangeHfStatePlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventChangedCreatureType(p *util.XMLParser) (*HistoricalEventChangedCreatureType, error) {
-	var (
-		obj = &HistoricalEventChangedCreatureType{}
-	)
+	var obj = NewHistoricalEventChangedCreatureType()
 
 	for {
 		t, n, err := p.Token()
@@ -16958,9 +22941,8 @@ func parseHistoricalEventChangedCreatureType(p *util.XMLParser) (*HistoricalEven
 	}
 }
 func parseHistoricalEventChangedCreatureTypePlus(p *util.XMLParser, obj *HistoricalEventChangedCreatureType) (*HistoricalEventChangedCreatureType, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventChangedCreatureType{}
+		obj = NewHistoricalEventChangedCreatureType()
 	}
 
 	for {
@@ -17019,9 +23001,7 @@ func parseHistoricalEventChangedCreatureTypePlus(p *util.XMLParser, obj *Histori
 	}
 }
 func parseHistoricalEventCollection(p *util.XMLParser) (*HistoricalEventCollection, error) {
-	var (
-		obj = &HistoricalEventCollection{}
-	)
+	var obj = NewHistoricalEventCollection()
 
 	for {
 		t, n, err := p.Token()
@@ -17134,9 +23114,8 @@ func parseHistoricalEventCollection(p *util.XMLParser) (*HistoricalEventCollecti
 	}
 }
 func parseHistoricalEventCollectionPlus(p *util.XMLParser, obj *HistoricalEventCollection) (*HistoricalEventCollection, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollection{}
+		obj = NewHistoricalEventCollection()
 	}
 
 	for {
@@ -17159,9 +23138,7 @@ func parseHistoricalEventCollectionPlus(p *util.XMLParser, obj *HistoricalEventC
 	}
 }
 func parseHistoricalEventCollectionAbduction(p *util.XMLParser) (*HistoricalEventCollectionAbduction, error) {
-	var (
-		obj = &HistoricalEventCollectionAbduction{}
-	)
+	var obj = NewHistoricalEventCollectionAbduction()
 
 	for {
 		t, n, err := p.Token()
@@ -17231,9 +23208,8 @@ func parseHistoricalEventCollectionAbduction(p *util.XMLParser) (*HistoricalEven
 	}
 }
 func parseHistoricalEventCollectionAbductionPlus(p *util.XMLParser, obj *HistoricalEventCollectionAbduction) (*HistoricalEventCollectionAbduction, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionAbduction{}
+		obj = NewHistoricalEventCollectionAbduction()
 	}
 
 	for {
@@ -17256,9 +23232,7 @@ func parseHistoricalEventCollectionAbductionPlus(p *util.XMLParser, obj *Histori
 	}
 }
 func parseHistoricalEventCollectionBattle(p *util.XMLParser) (*HistoricalEventCollectionBattle, error) {
-	var (
-		obj = &HistoricalEventCollectionBattle{}
-	)
+	var obj = NewHistoricalEventCollectionBattle()
 
 	for {
 		t, n, err := p.Token()
@@ -17444,9 +23418,8 @@ func parseHistoricalEventCollectionBattle(p *util.XMLParser) (*HistoricalEventCo
 	}
 }
 func parseHistoricalEventCollectionBattlePlus(p *util.XMLParser, obj *HistoricalEventCollectionBattle) (*HistoricalEventCollectionBattle, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionBattle{}
+		obj = NewHistoricalEventCollectionBattle()
 	}
 
 	for {
@@ -17469,9 +23442,7 @@ func parseHistoricalEventCollectionBattlePlus(p *util.XMLParser, obj *Historical
 	}
 }
 func parseHistoricalEventCollectionBeastAttack(p *util.XMLParser) (*HistoricalEventCollectionBeastAttack, error) {
-	var (
-		obj = &HistoricalEventCollectionBeastAttack{}
-	)
+	var obj = NewHistoricalEventCollectionBeastAttack()
 
 	for {
 		t, n, err := p.Token()
@@ -17535,9 +23506,8 @@ func parseHistoricalEventCollectionBeastAttack(p *util.XMLParser) (*HistoricalEv
 	}
 }
 func parseHistoricalEventCollectionBeastAttackPlus(p *util.XMLParser, obj *HistoricalEventCollectionBeastAttack) (*HistoricalEventCollectionBeastAttack, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionBeastAttack{}
+		obj = NewHistoricalEventCollectionBeastAttack()
 	}
 
 	for {
@@ -17560,9 +23530,7 @@ func parseHistoricalEventCollectionBeastAttackPlus(p *util.XMLParser, obj *Histo
 	}
 }
 func parseHistoricalEventCollectionCeremony(p *util.XMLParser) (*HistoricalEventCollectionCeremony, error) {
-	var (
-		obj = &HistoricalEventCollectionCeremony{}
-	)
+	var obj = NewHistoricalEventCollectionCeremony()
 
 	for {
 		t, n, err := p.Token()
@@ -17590,9 +23558,8 @@ func parseHistoricalEventCollectionCeremony(p *util.XMLParser) (*HistoricalEvent
 	}
 }
 func parseHistoricalEventCollectionCeremonyPlus(p *util.XMLParser, obj *HistoricalEventCollectionCeremony) (*HistoricalEventCollectionCeremony, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionCeremony{}
+		obj = NewHistoricalEventCollectionCeremony()
 	}
 
 	for {
@@ -17615,9 +23582,7 @@ func parseHistoricalEventCollectionCeremonyPlus(p *util.XMLParser, obj *Historic
 	}
 }
 func parseHistoricalEventCollectionCompetition(p *util.XMLParser) (*HistoricalEventCollectionCompetition, error) {
-	var (
-		obj = &HistoricalEventCollectionCompetition{}
-	)
+	var obj = NewHistoricalEventCollectionCompetition()
 
 	for {
 		t, n, err := p.Token()
@@ -17645,9 +23610,8 @@ func parseHistoricalEventCollectionCompetition(p *util.XMLParser) (*HistoricalEv
 	}
 }
 func parseHistoricalEventCollectionCompetitionPlus(p *util.XMLParser, obj *HistoricalEventCollectionCompetition) (*HistoricalEventCollectionCompetition, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionCompetition{}
+		obj = NewHistoricalEventCollectionCompetition()
 	}
 
 	for {
@@ -17670,9 +23634,7 @@ func parseHistoricalEventCollectionCompetitionPlus(p *util.XMLParser, obj *Histo
 	}
 }
 func parseHistoricalEventCollectionDuel(p *util.XMLParser) (*HistoricalEventCollectionDuel, error) {
-	var (
-		obj = &HistoricalEventCollectionDuel{}
-	)
+	var obj = NewHistoricalEventCollectionDuel()
 
 	for {
 		t, n, err := p.Token()
@@ -17742,9 +23704,8 @@ func parseHistoricalEventCollectionDuel(p *util.XMLParser) (*HistoricalEventColl
 	}
 }
 func parseHistoricalEventCollectionDuelPlus(p *util.XMLParser, obj *HistoricalEventCollectionDuel) (*HistoricalEventCollectionDuel, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionDuel{}
+		obj = NewHistoricalEventCollectionDuel()
 	}
 
 	for {
@@ -17767,9 +23728,7 @@ func parseHistoricalEventCollectionDuelPlus(p *util.XMLParser, obj *HistoricalEv
 	}
 }
 func parseHistoricalEventCollectionEntityOverthrown(p *util.XMLParser) (*HistoricalEventCollectionEntityOverthrown, error) {
-	var (
-		obj = &HistoricalEventCollectionEntityOverthrown{}
-	)
+	var obj = NewHistoricalEventCollectionEntityOverthrown()
 
 	for {
 		t, n, err := p.Token()
@@ -17809,9 +23768,8 @@ func parseHistoricalEventCollectionEntityOverthrown(p *util.XMLParser) (*Histori
 	}
 }
 func parseHistoricalEventCollectionEntityOverthrownPlus(p *util.XMLParser, obj *HistoricalEventCollectionEntityOverthrown) (*HistoricalEventCollectionEntityOverthrown, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionEntityOverthrown{}
+		obj = NewHistoricalEventCollectionEntityOverthrown()
 	}
 
 	for {
@@ -17834,9 +23792,7 @@ func parseHistoricalEventCollectionEntityOverthrownPlus(p *util.XMLParser, obj *
 	}
 }
 func parseHistoricalEventCollectionInsurrection(p *util.XMLParser) (*HistoricalEventCollectionInsurrection, error) {
-	var (
-		obj = &HistoricalEventCollectionInsurrection{}
-	)
+	var obj = NewHistoricalEventCollectionInsurrection()
 
 	for {
 		t, n, err := p.Token()
@@ -17876,9 +23832,8 @@ func parseHistoricalEventCollectionInsurrection(p *util.XMLParser) (*HistoricalE
 	}
 }
 func parseHistoricalEventCollectionInsurrectionPlus(p *util.XMLParser, obj *HistoricalEventCollectionInsurrection) (*HistoricalEventCollectionInsurrection, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionInsurrection{}
+		obj = NewHistoricalEventCollectionInsurrection()
 	}
 
 	for {
@@ -17901,9 +23856,7 @@ func parseHistoricalEventCollectionInsurrectionPlus(p *util.XMLParser, obj *Hist
 	}
 }
 func parseHistoricalEventCollectionJourney(p *util.XMLParser) (*HistoricalEventCollectionJourney, error) {
-	var (
-		obj = &HistoricalEventCollectionJourney{}
-	)
+	var obj = NewHistoricalEventCollectionJourney()
 
 	for {
 		t, n, err := p.Token()
@@ -17931,9 +23884,8 @@ func parseHistoricalEventCollectionJourney(p *util.XMLParser) (*HistoricalEventC
 	}
 }
 func parseHistoricalEventCollectionJourneyPlus(p *util.XMLParser, obj *HistoricalEventCollectionJourney) (*HistoricalEventCollectionJourney, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionJourney{}
+		obj = NewHistoricalEventCollectionJourney()
 	}
 
 	for {
@@ -17956,9 +23908,7 @@ func parseHistoricalEventCollectionJourneyPlus(p *util.XMLParser, obj *Historica
 	}
 }
 func parseHistoricalEventCollectionOccasion(p *util.XMLParser) (*HistoricalEventCollectionOccasion, error) {
-	var (
-		obj = &HistoricalEventCollectionOccasion{}
-	)
+	var obj = NewHistoricalEventCollectionOccasion()
 
 	for {
 		t, n, err := p.Token()
@@ -17998,9 +23948,8 @@ func parseHistoricalEventCollectionOccasion(p *util.XMLParser) (*HistoricalEvent
 	}
 }
 func parseHistoricalEventCollectionOccasionPlus(p *util.XMLParser, obj *HistoricalEventCollectionOccasion) (*HistoricalEventCollectionOccasion, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionOccasion{}
+		obj = NewHistoricalEventCollectionOccasion()
 	}
 
 	for {
@@ -18023,9 +23972,7 @@ func parseHistoricalEventCollectionOccasionPlus(p *util.XMLParser, obj *Historic
 	}
 }
 func parseHistoricalEventCollectionPerformance(p *util.XMLParser) (*HistoricalEventCollectionPerformance, error) {
-	var (
-		obj = &HistoricalEventCollectionPerformance{}
-	)
+	var obj = NewHistoricalEventCollectionPerformance()
 
 	for {
 		t, n, err := p.Token()
@@ -18053,9 +24000,8 @@ func parseHistoricalEventCollectionPerformance(p *util.XMLParser) (*HistoricalEv
 	}
 }
 func parseHistoricalEventCollectionPerformancePlus(p *util.XMLParser, obj *HistoricalEventCollectionPerformance) (*HistoricalEventCollectionPerformance, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionPerformance{}
+		obj = NewHistoricalEventCollectionPerformance()
 	}
 
 	for {
@@ -18078,9 +24024,7 @@ func parseHistoricalEventCollectionPerformancePlus(p *util.XMLParser, obj *Histo
 	}
 }
 func parseHistoricalEventCollectionPersecution(p *util.XMLParser) (*HistoricalEventCollectionPersecution, error) {
-	var (
-		obj = &HistoricalEventCollectionPersecution{}
-	)
+	var obj = NewHistoricalEventCollectionPersecution()
 
 	for {
 		t, n, err := p.Token()
@@ -18120,9 +24064,8 @@ func parseHistoricalEventCollectionPersecution(p *util.XMLParser) (*HistoricalEv
 	}
 }
 func parseHistoricalEventCollectionPersecutionPlus(p *util.XMLParser, obj *HistoricalEventCollectionPersecution) (*HistoricalEventCollectionPersecution, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionPersecution{}
+		obj = NewHistoricalEventCollectionPersecution()
 	}
 
 	for {
@@ -18145,9 +24088,7 @@ func parseHistoricalEventCollectionPersecutionPlus(p *util.XMLParser, obj *Histo
 	}
 }
 func parseHistoricalEventCollectionProcession(p *util.XMLParser) (*HistoricalEventCollectionProcession, error) {
-	var (
-		obj = &HistoricalEventCollectionProcession{}
-	)
+	var obj = NewHistoricalEventCollectionProcession()
 
 	for {
 		t, n, err := p.Token()
@@ -18175,9 +24116,8 @@ func parseHistoricalEventCollectionProcession(p *util.XMLParser) (*HistoricalEve
 	}
 }
 func parseHistoricalEventCollectionProcessionPlus(p *util.XMLParser, obj *HistoricalEventCollectionProcession) (*HistoricalEventCollectionProcession, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionProcession{}
+		obj = NewHistoricalEventCollectionProcession()
 	}
 
 	for {
@@ -18200,9 +24140,7 @@ func parseHistoricalEventCollectionProcessionPlus(p *util.XMLParser, obj *Histor
 	}
 }
 func parseHistoricalEventCollectionPurge(p *util.XMLParser) (*HistoricalEventCollectionPurge, error) {
-	var (
-		obj = &HistoricalEventCollectionPurge{}
-	)
+	var obj = NewHistoricalEventCollectionPurge()
 
 	for {
 		t, n, err := p.Token()
@@ -18242,9 +24180,8 @@ func parseHistoricalEventCollectionPurge(p *util.XMLParser) (*HistoricalEventCol
 	}
 }
 func parseHistoricalEventCollectionPurgePlus(p *util.XMLParser, obj *HistoricalEventCollectionPurge) (*HistoricalEventCollectionPurge, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionPurge{}
+		obj = NewHistoricalEventCollectionPurge()
 	}
 
 	for {
@@ -18267,9 +24204,7 @@ func parseHistoricalEventCollectionPurgePlus(p *util.XMLParser, obj *HistoricalE
 	}
 }
 func parseHistoricalEventCollectionRaid(p *util.XMLParser) (*HistoricalEventCollectionRaid, error) {
-	var (
-		obj = &HistoricalEventCollectionRaid{}
-	)
+	var obj = NewHistoricalEventCollectionRaid()
 
 	for {
 		t, n, err := p.Token()
@@ -18339,9 +24274,8 @@ func parseHistoricalEventCollectionRaid(p *util.XMLParser) (*HistoricalEventColl
 	}
 }
 func parseHistoricalEventCollectionRaidPlus(p *util.XMLParser, obj *HistoricalEventCollectionRaid) (*HistoricalEventCollectionRaid, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionRaid{}
+		obj = NewHistoricalEventCollectionRaid()
 	}
 
 	for {
@@ -18364,9 +24298,7 @@ func parseHistoricalEventCollectionRaidPlus(p *util.XMLParser, obj *HistoricalEv
 	}
 }
 func parseHistoricalEventCollectionSiteConquered(p *util.XMLParser) (*HistoricalEventCollectionSiteConquered, error) {
-	var (
-		obj = &HistoricalEventCollectionSiteConquered{}
-	)
+	var obj = NewHistoricalEventCollectionSiteConquered()
 
 	for {
 		t, n, err := p.Token()
@@ -18418,9 +24350,8 @@ func parseHistoricalEventCollectionSiteConquered(p *util.XMLParser) (*Historical
 	}
 }
 func parseHistoricalEventCollectionSiteConqueredPlus(p *util.XMLParser, obj *HistoricalEventCollectionSiteConquered) (*HistoricalEventCollectionSiteConquered, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionSiteConquered{}
+		obj = NewHistoricalEventCollectionSiteConquered()
 	}
 
 	for {
@@ -18443,9 +24374,7 @@ func parseHistoricalEventCollectionSiteConqueredPlus(p *util.XMLParser, obj *His
 	}
 }
 func parseHistoricalEventCollectionTheft(p *util.XMLParser) (*HistoricalEventCollectionTheft, error) {
-	var (
-		obj = &HistoricalEventCollectionTheft{}
-	)
+	var obj = NewHistoricalEventCollectionTheft()
 
 	for {
 		t, n, err := p.Token()
@@ -18515,9 +24444,8 @@ func parseHistoricalEventCollectionTheft(p *util.XMLParser) (*HistoricalEventCol
 	}
 }
 func parseHistoricalEventCollectionTheftPlus(p *util.XMLParser, obj *HistoricalEventCollectionTheft) (*HistoricalEventCollectionTheft, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionTheft{}
+		obj = NewHistoricalEventCollectionTheft()
 	}
 
 	for {
@@ -18540,9 +24468,7 @@ func parseHistoricalEventCollectionTheftPlus(p *util.XMLParser, obj *HistoricalE
 	}
 }
 func parseHistoricalEventCollectionWar(p *util.XMLParser) (*HistoricalEventCollectionWar, error) {
-	var (
-		obj = &HistoricalEventCollectionWar{}
-	)
+	var obj = NewHistoricalEventCollectionWar()
 
 	for {
 		t, n, err := p.Token()
@@ -18582,9 +24508,8 @@ func parseHistoricalEventCollectionWar(p *util.XMLParser) (*HistoricalEventColle
 	}
 }
 func parseHistoricalEventCollectionWarPlus(p *util.XMLParser, obj *HistoricalEventCollectionWar) (*HistoricalEventCollectionWar, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCollectionWar{}
+		obj = NewHistoricalEventCollectionWar()
 	}
 
 	for {
@@ -18607,9 +24532,7 @@ func parseHistoricalEventCollectionWarPlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventCompetition(p *util.XMLParser) (*HistoricalEventCompetition, error) {
-	var (
-		obj = &HistoricalEventCompetition{}
-	)
+	var obj = NewHistoricalEventCompetition()
 
 	for {
 		t, n, err := p.Token()
@@ -18679,9 +24602,8 @@ func parseHistoricalEventCompetition(p *util.XMLParser) (*HistoricalEventCompeti
 	}
 }
 func parseHistoricalEventCompetitionPlus(p *util.XMLParser, obj *HistoricalEventCompetition) (*HistoricalEventCompetition, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCompetition{}
+		obj = NewHistoricalEventCompetition()
 	}
 
 	for {
@@ -18704,9 +24626,7 @@ func parseHistoricalEventCompetitionPlus(p *util.XMLParser, obj *HistoricalEvent
 	}
 }
 func parseHistoricalEventCreateEntityPosition(p *util.XMLParser) (*HistoricalEventCreateEntityPosition, error) {
-	var (
-		obj = &HistoricalEventCreateEntityPosition{}
-	)
+	var obj = NewHistoricalEventCreateEntityPosition()
 
 	for {
 		t, n, err := p.Token()
@@ -18728,9 +24648,8 @@ func parseHistoricalEventCreateEntityPosition(p *util.XMLParser) (*HistoricalEve
 	}
 }
 func parseHistoricalEventCreateEntityPositionPlus(p *util.XMLParser, obj *HistoricalEventCreateEntityPosition) (*HistoricalEventCreateEntityPosition, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCreateEntityPosition{}
+		obj = NewHistoricalEventCreateEntityPosition()
 	}
 
 	for {
@@ -18783,9 +24702,7 @@ func parseHistoricalEventCreateEntityPositionPlus(p *util.XMLParser, obj *Histor
 	}
 }
 func parseHistoricalEventCreatedSite(p *util.XMLParser) (*HistoricalEventCreatedSite, error) {
-	var (
-		obj = &HistoricalEventCreatedSite{}
-	)
+	var obj = NewHistoricalEventCreatedSite()
 
 	for {
 		t, n, err := p.Token()
@@ -18837,9 +24754,8 @@ func parseHistoricalEventCreatedSite(p *util.XMLParser) (*HistoricalEventCreated
 	}
 }
 func parseHistoricalEventCreatedSitePlus(p *util.XMLParser, obj *HistoricalEventCreatedSite) (*HistoricalEventCreatedSite, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCreatedSite{}
+		obj = NewHistoricalEventCreatedSite()
 	}
 
 	for {
@@ -18862,9 +24778,7 @@ func parseHistoricalEventCreatedSitePlus(p *util.XMLParser, obj *HistoricalEvent
 	}
 }
 func parseHistoricalEventCreatedStructure(p *util.XMLParser) (*HistoricalEventCreatedStructure, error) {
-	var (
-		obj = &HistoricalEventCreatedStructure{}
-	)
+	var obj = NewHistoricalEventCreatedStructure()
 
 	for {
 		t, n, err := p.Token()
@@ -18922,9 +24836,8 @@ func parseHistoricalEventCreatedStructure(p *util.XMLParser) (*HistoricalEventCr
 	}
 }
 func parseHistoricalEventCreatedStructurePlus(p *util.XMLParser, obj *HistoricalEventCreatedStructure) (*HistoricalEventCreatedStructure, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCreatedStructure{}
+		obj = NewHistoricalEventCreatedStructure()
 	}
 
 	for {
@@ -18983,9 +24896,7 @@ func parseHistoricalEventCreatedStructurePlus(p *util.XMLParser, obj *Historical
 	}
 }
 func parseHistoricalEventCreatedWorldConstruction(p *util.XMLParser) (*HistoricalEventCreatedWorldConstruction, error) {
-	var (
-		obj = &HistoricalEventCreatedWorldConstruction{}
-	)
+	var obj = NewHistoricalEventCreatedWorldConstruction()
 
 	for {
 		t, n, err := p.Token()
@@ -19043,9 +24954,8 @@ func parseHistoricalEventCreatedWorldConstruction(p *util.XMLParser) (*Historica
 	}
 }
 func parseHistoricalEventCreatedWorldConstructionPlus(p *util.XMLParser, obj *HistoricalEventCreatedWorldConstruction) (*HistoricalEventCreatedWorldConstruction, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCreatedWorldConstruction{}
+		obj = NewHistoricalEventCreatedWorldConstruction()
 	}
 
 	for {
@@ -19068,9 +24978,7 @@ func parseHistoricalEventCreatedWorldConstructionPlus(p *util.XMLParser, obj *Hi
 	}
 }
 func parseHistoricalEventCreatureDevoured(p *util.XMLParser) (*HistoricalEventCreatureDevoured, error) {
-	var (
-		obj = &HistoricalEventCreatureDevoured{}
-	)
+	var obj = NewHistoricalEventCreatureDevoured()
 
 	for {
 		t, n, err := p.Token()
@@ -19110,9 +25018,8 @@ func parseHistoricalEventCreatureDevoured(p *util.XMLParser) (*HistoricalEventCr
 	}
 }
 func parseHistoricalEventCreatureDevouredPlus(p *util.XMLParser, obj *HistoricalEventCreatureDevoured) (*HistoricalEventCreatureDevoured, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventCreatureDevoured{}
+		obj = NewHistoricalEventCreatureDevoured()
 	}
 
 	for {
@@ -19171,9 +25078,7 @@ func parseHistoricalEventCreatureDevouredPlus(p *util.XMLParser, obj *Historical
 	}
 }
 func parseHistoricalEventDanceFormCreated(p *util.XMLParser) (*HistoricalEventDanceFormCreated, error) {
-	var (
-		obj = &HistoricalEventDanceFormCreated{}
-	)
+	var obj = NewHistoricalEventDanceFormCreated()
 
 	for {
 		t, n, err := p.Token()
@@ -19237,9 +25142,8 @@ func parseHistoricalEventDanceFormCreated(p *util.XMLParser) (*HistoricalEventDa
 	}
 }
 func parseHistoricalEventDanceFormCreatedPlus(p *util.XMLParser, obj *HistoricalEventDanceFormCreated) (*HistoricalEventDanceFormCreated, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventDanceFormCreated{}
+		obj = NewHistoricalEventDanceFormCreated()
 	}
 
 	for {
@@ -19262,9 +25166,7 @@ func parseHistoricalEventDanceFormCreatedPlus(p *util.XMLParser, obj *Historical
 	}
 }
 func parseHistoricalEventDestroyedSite(p *util.XMLParser) (*HistoricalEventDestroyedSite, error) {
-	var (
-		obj = &HistoricalEventDestroyedSite{}
-	)
+	var obj = NewHistoricalEventDestroyedSite()
 
 	for {
 		t, n, err := p.Token()
@@ -19316,9 +25218,8 @@ func parseHistoricalEventDestroyedSite(p *util.XMLParser) (*HistoricalEventDestr
 	}
 }
 func parseHistoricalEventDestroyedSitePlus(p *util.XMLParser, obj *HistoricalEventDestroyedSite) (*HistoricalEventDestroyedSite, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventDestroyedSite{}
+		obj = NewHistoricalEventDestroyedSite()
 	}
 
 	for {
@@ -19341,9 +25242,7 @@ func parseHistoricalEventDestroyedSitePlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventDiplomatLost(p *util.XMLParser) (*HistoricalEventDiplomatLost, error) {
-	var (
-		obj = &HistoricalEventDiplomatLost{}
-	)
+	var obj = NewHistoricalEventDiplomatLost()
 
 	for {
 		t, n, err := p.Token()
@@ -19371,9 +25270,8 @@ func parseHistoricalEventDiplomatLost(p *util.XMLParser) (*HistoricalEventDiplom
 	}
 }
 func parseHistoricalEventDiplomatLostPlus(p *util.XMLParser, obj *HistoricalEventDiplomatLost) (*HistoricalEventDiplomatLost, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventDiplomatLost{}
+		obj = NewHistoricalEventDiplomatLost()
 	}
 
 	for {
@@ -19414,9 +25312,7 @@ func parseHistoricalEventDiplomatLostPlus(p *util.XMLParser, obj *HistoricalEven
 	}
 }
 func parseHistoricalEventEntityAllianceFormed(p *util.XMLParser) (*HistoricalEventEntityAllianceFormed, error) {
-	var (
-		obj = &HistoricalEventEntityAllianceFormed{}
-	)
+	var obj = NewHistoricalEventEntityAllianceFormed()
 
 	for {
 		t, n, err := p.Token()
@@ -19450,9 +25346,8 @@ func parseHistoricalEventEntityAllianceFormed(p *util.XMLParser) (*HistoricalEve
 	}
 }
 func parseHistoricalEventEntityAllianceFormedPlus(p *util.XMLParser, obj *HistoricalEventEntityAllianceFormed) (*HistoricalEventEntityAllianceFormed, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityAllianceFormed{}
+		obj = NewHistoricalEventEntityAllianceFormed()
 	}
 
 	for {
@@ -19475,9 +25370,7 @@ func parseHistoricalEventEntityAllianceFormedPlus(p *util.XMLParser, obj *Histor
 	}
 }
 func parseHistoricalEventEntityBreachFeatureLayer(p *util.XMLParser) (*HistoricalEventEntityBreachFeatureLayer, error) {
-	var (
-		obj = &HistoricalEventEntityBreachFeatureLayer{}
-	)
+	var obj = NewHistoricalEventEntityBreachFeatureLayer()
 
 	for {
 		t, n, err := p.Token()
@@ -19523,9 +25416,8 @@ func parseHistoricalEventEntityBreachFeatureLayer(p *util.XMLParser) (*Historica
 	}
 }
 func parseHistoricalEventEntityBreachFeatureLayerPlus(p *util.XMLParser, obj *HistoricalEventEntityBreachFeatureLayer) (*HistoricalEventEntityBreachFeatureLayer, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityBreachFeatureLayer{}
+		obj = NewHistoricalEventEntityBreachFeatureLayer()
 	}
 
 	for {
@@ -19548,9 +25440,7 @@ func parseHistoricalEventEntityBreachFeatureLayerPlus(p *util.XMLParser, obj *Hi
 	}
 }
 func parseHistoricalEventEntityCreated(p *util.XMLParser) (*HistoricalEventEntityCreated, error) {
-	var (
-		obj = &HistoricalEventEntityCreated{}
-	)
+	var obj = NewHistoricalEventEntityCreated()
 
 	for {
 		t, n, err := p.Token()
@@ -19596,9 +25486,8 @@ func parseHistoricalEventEntityCreated(p *util.XMLParser) (*HistoricalEventEntit
 	}
 }
 func parseHistoricalEventEntityCreatedPlus(p *util.XMLParser, obj *HistoricalEventEntityCreated) (*HistoricalEventEntityCreated, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityCreated{}
+		obj = NewHistoricalEventEntityCreated()
 	}
 
 	for {
@@ -19621,9 +25510,7 @@ func parseHistoricalEventEntityCreatedPlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventEntityDissolved(p *util.XMLParser) (*HistoricalEventEntityDissolved, error) {
-	var (
-		obj = &HistoricalEventEntityDissolved{}
-	)
+	var obj = NewHistoricalEventEntityDissolved()
 
 	for {
 		t, n, err := p.Token()
@@ -19657,9 +25544,8 @@ func parseHistoricalEventEntityDissolved(p *util.XMLParser) (*HistoricalEventEnt
 	}
 }
 func parseHistoricalEventEntityDissolvedPlus(p *util.XMLParser, obj *HistoricalEventEntityDissolved) (*HistoricalEventEntityDissolved, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityDissolved{}
+		obj = NewHistoricalEventEntityDissolved()
 	}
 
 	for {
@@ -19682,9 +25568,7 @@ func parseHistoricalEventEntityDissolvedPlus(p *util.XMLParser, obj *HistoricalE
 	}
 }
 func parseHistoricalEventEntityEquipmentPurchase(p *util.XMLParser) (*HistoricalEventEntityEquipmentPurchase, error) {
-	var (
-		obj = &HistoricalEventEntityEquipmentPurchase{}
-	)
+	var obj = NewHistoricalEventEntityEquipmentPurchase()
 
 	for {
 		t, n, err := p.Token()
@@ -19724,9 +25608,8 @@ func parseHistoricalEventEntityEquipmentPurchase(p *util.XMLParser) (*Historical
 	}
 }
 func parseHistoricalEventEntityEquipmentPurchasePlus(p *util.XMLParser, obj *HistoricalEventEntityEquipmentPurchase) (*HistoricalEventEntityEquipmentPurchase, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityEquipmentPurchase{}
+		obj = NewHistoricalEventEntityEquipmentPurchase()
 	}
 
 	for {
@@ -19749,9 +25632,7 @@ func parseHistoricalEventEntityEquipmentPurchasePlus(p *util.XMLParser, obj *His
 	}
 }
 func parseHistoricalEventEntityExpelsHf(p *util.XMLParser) (*HistoricalEventEntityExpelsHf, error) {
-	var (
-		obj = &HistoricalEventEntityExpelsHf{}
-	)
+	var obj = NewHistoricalEventEntityExpelsHf()
 
 	for {
 		t, n, err := p.Token()
@@ -19791,9 +25672,8 @@ func parseHistoricalEventEntityExpelsHf(p *util.XMLParser) (*HistoricalEventEnti
 	}
 }
 func parseHistoricalEventEntityExpelsHfPlus(p *util.XMLParser, obj *HistoricalEventEntityExpelsHf) (*HistoricalEventEntityExpelsHf, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityExpelsHf{}
+		obj = NewHistoricalEventEntityExpelsHf()
 	}
 
 	for {
@@ -19816,9 +25696,7 @@ func parseHistoricalEventEntityExpelsHfPlus(p *util.XMLParser, obj *HistoricalEv
 	}
 }
 func parseHistoricalEventEntityFledSite(p *util.XMLParser) (*HistoricalEventEntityFledSite, error) {
-	var (
-		obj = &HistoricalEventEntityFledSite{}
-	)
+	var obj = NewHistoricalEventEntityFledSite()
 
 	for {
 		t, n, err := p.Token()
@@ -19852,9 +25730,8 @@ func parseHistoricalEventEntityFledSite(p *util.XMLParser) (*HistoricalEventEnti
 	}
 }
 func parseHistoricalEventEntityFledSitePlus(p *util.XMLParser, obj *HistoricalEventEntityFledSite) (*HistoricalEventEntityFledSite, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityFledSite{}
+		obj = NewHistoricalEventEntityFledSite()
 	}
 
 	for {
@@ -19877,9 +25754,7 @@ func parseHistoricalEventEntityFledSitePlus(p *util.XMLParser, obj *HistoricalEv
 	}
 }
 func parseHistoricalEventEntityIncorporated(p *util.XMLParser) (*HistoricalEventEntityIncorporated, error) {
-	var (
-		obj = &HistoricalEventEntityIncorporated{}
-	)
+	var obj = NewHistoricalEventEntityIncorporated()
 
 	for {
 		t, n, err := p.Token()
@@ -19931,9 +25806,8 @@ func parseHistoricalEventEntityIncorporated(p *util.XMLParser) (*HistoricalEvent
 	}
 }
 func parseHistoricalEventEntityIncorporatedPlus(p *util.XMLParser, obj *HistoricalEventEntityIncorporated) (*HistoricalEventEntityIncorporated, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityIncorporated{}
+		obj = NewHistoricalEventEntityIncorporated()
 	}
 
 	for {
@@ -19956,9 +25830,7 @@ func parseHistoricalEventEntityIncorporatedPlus(p *util.XMLParser, obj *Historic
 	}
 }
 func parseHistoricalEventEntityLaw(p *util.XMLParser) (*HistoricalEventEntityLaw, error) {
-	var (
-		obj = &HistoricalEventEntityLaw{}
-	)
+	var obj = NewHistoricalEventEntityLaw()
 
 	for {
 		t, n, err := p.Token()
@@ -20004,9 +25876,8 @@ func parseHistoricalEventEntityLaw(p *util.XMLParser) (*HistoricalEventEntityLaw
 	}
 }
 func parseHistoricalEventEntityLawPlus(p *util.XMLParser, obj *HistoricalEventEntityLaw) (*HistoricalEventEntityLaw, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityLaw{}
+		obj = NewHistoricalEventEntityLaw()
 	}
 
 	for {
@@ -20029,9 +25900,7 @@ func parseHistoricalEventEntityLawPlus(p *util.XMLParser, obj *HistoricalEventEn
 	}
 }
 func parseHistoricalEventEntityOverthrown(p *util.XMLParser) (*HistoricalEventEntityOverthrown, error) {
-	var (
-		obj = &HistoricalEventEntityOverthrown{}
-	)
+	var obj = NewHistoricalEventEntityOverthrown()
 
 	for {
 		t, n, err := p.Token()
@@ -20095,9 +25964,8 @@ func parseHistoricalEventEntityOverthrown(p *util.XMLParser) (*HistoricalEventEn
 	}
 }
 func parseHistoricalEventEntityOverthrownPlus(p *util.XMLParser, obj *HistoricalEventEntityOverthrown) (*HistoricalEventEntityOverthrown, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityOverthrown{}
+		obj = NewHistoricalEventEntityOverthrown()
 	}
 
 	for {
@@ -20120,9 +25988,7 @@ func parseHistoricalEventEntityOverthrownPlus(p *util.XMLParser, obj *Historical
 	}
 }
 func parseHistoricalEventEntityPersecuted(p *util.XMLParser) (*HistoricalEventEntityPersecuted, error) {
-	var (
-		obj = &HistoricalEventEntityPersecuted{}
-	)
+	var obj = NewHistoricalEventEntityPersecuted()
 
 	for {
 		t, n, err := p.Token()
@@ -20210,9 +26076,8 @@ func parseHistoricalEventEntityPersecuted(p *util.XMLParser) (*HistoricalEventEn
 	}
 }
 func parseHistoricalEventEntityPersecutedPlus(p *util.XMLParser, obj *HistoricalEventEntityPersecuted) (*HistoricalEventEntityPersecuted, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityPersecuted{}
+		obj = NewHistoricalEventEntityPersecuted()
 	}
 
 	for {
@@ -20235,9 +26100,7 @@ func parseHistoricalEventEntityPersecutedPlus(p *util.XMLParser, obj *Historical
 	}
 }
 func parseHistoricalEventEntityPrimaryCriminals(p *util.XMLParser) (*HistoricalEventEntityPrimaryCriminals, error) {
-	var (
-		obj = &HistoricalEventEntityPrimaryCriminals{}
-	)
+	var obj = NewHistoricalEventEntityPrimaryCriminals()
 
 	for {
 		t, n, err := p.Token()
@@ -20277,9 +26140,8 @@ func parseHistoricalEventEntityPrimaryCriminals(p *util.XMLParser) (*HistoricalE
 	}
 }
 func parseHistoricalEventEntityPrimaryCriminalsPlus(p *util.XMLParser, obj *HistoricalEventEntityPrimaryCriminals) (*HistoricalEventEntityPrimaryCriminals, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityPrimaryCriminals{}
+		obj = NewHistoricalEventEntityPrimaryCriminals()
 	}
 
 	for {
@@ -20326,9 +26188,7 @@ func parseHistoricalEventEntityPrimaryCriminalsPlus(p *util.XMLParser, obj *Hist
 	}
 }
 func parseHistoricalEventEntityRampagedInSite(p *util.XMLParser) (*HistoricalEventEntityRampagedInSite, error) {
-	var (
-		obj = &HistoricalEventEntityRampagedInSite{}
-	)
+	var obj = NewHistoricalEventEntityRampagedInSite()
 
 	for {
 		t, n, err := p.Token()
@@ -20362,9 +26222,8 @@ func parseHistoricalEventEntityRampagedInSite(p *util.XMLParser) (*HistoricalEve
 	}
 }
 func parseHistoricalEventEntityRampagedInSitePlus(p *util.XMLParser, obj *HistoricalEventEntityRampagedInSite) (*HistoricalEventEntityRampagedInSite, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityRampagedInSite{}
+		obj = NewHistoricalEventEntityRampagedInSite()
 	}
 
 	for {
@@ -20387,9 +26246,7 @@ func parseHistoricalEventEntityRampagedInSitePlus(p *util.XMLParser, obj *Histor
 	}
 }
 func parseHistoricalEventEntityRelocate(p *util.XMLParser) (*HistoricalEventEntityRelocate, error) {
-	var (
-		obj = &HistoricalEventEntityRelocate{}
-	)
+	var obj = NewHistoricalEventEntityRelocate()
 
 	for {
 		t, n, err := p.Token()
@@ -20429,9 +26286,8 @@ func parseHistoricalEventEntityRelocate(p *util.XMLParser) (*HistoricalEventEnti
 	}
 }
 func parseHistoricalEventEntityRelocatePlus(p *util.XMLParser, obj *HistoricalEventEntityRelocate) (*HistoricalEventEntityRelocate, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntityRelocate{}
+		obj = NewHistoricalEventEntityRelocate()
 	}
 
 	for {
@@ -20478,9 +26334,7 @@ func parseHistoricalEventEntityRelocatePlus(p *util.XMLParser, obj *HistoricalEv
 	}
 }
 func parseHistoricalEventEntitySearchedSite(p *util.XMLParser) (*HistoricalEventEntitySearchedSite, error) {
-	var (
-		obj = &HistoricalEventEntitySearchedSite{}
-	)
+	var obj = NewHistoricalEventEntitySearchedSite()
 
 	for {
 		t, n, err := p.Token()
@@ -20520,9 +26374,8 @@ func parseHistoricalEventEntitySearchedSite(p *util.XMLParser) (*HistoricalEvent
 	}
 }
 func parseHistoricalEventEntitySearchedSitePlus(p *util.XMLParser, obj *HistoricalEventEntitySearchedSite) (*HistoricalEventEntitySearchedSite, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventEntitySearchedSite{}
+		obj = NewHistoricalEventEntitySearchedSite()
 	}
 
 	for {
@@ -20545,9 +26398,7 @@ func parseHistoricalEventEntitySearchedSitePlus(p *util.XMLParser, obj *Historic
 	}
 }
 func parseHistoricalEventFailedFrameAttempt(p *util.XMLParser) (*HistoricalEventFailedFrameAttempt, error) {
-	var (
-		obj = &HistoricalEventFailedFrameAttempt{}
-	)
+	var obj = NewHistoricalEventFailedFrameAttempt()
 
 	for {
 		t, n, err := p.Token()
@@ -20605,9 +26456,8 @@ func parseHistoricalEventFailedFrameAttempt(p *util.XMLParser) (*HistoricalEvent
 	}
 }
 func parseHistoricalEventFailedFrameAttemptPlus(p *util.XMLParser, obj *HistoricalEventFailedFrameAttempt) (*HistoricalEventFailedFrameAttempt, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventFailedFrameAttempt{}
+		obj = NewHistoricalEventFailedFrameAttempt()
 	}
 
 	for {
@@ -20630,9 +26480,7 @@ func parseHistoricalEventFailedFrameAttemptPlus(p *util.XMLParser, obj *Historic
 	}
 }
 func parseHistoricalEventFailedIntrigueCorruption(p *util.XMLParser) (*HistoricalEventFailedIntrigueCorruption, error) {
-	var (
-		obj = &HistoricalEventFailedIntrigueCorruption{}
-	)
+	var obj = NewHistoricalEventFailedIntrigueCorruption()
 
 	for {
 		t, n, err := p.Token()
@@ -20804,9 +26652,8 @@ func parseHistoricalEventFailedIntrigueCorruption(p *util.XMLParser) (*Historica
 	}
 }
 func parseHistoricalEventFailedIntrigueCorruptionPlus(p *util.XMLParser, obj *HistoricalEventFailedIntrigueCorruption) (*HistoricalEventFailedIntrigueCorruption, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventFailedIntrigueCorruption{}
+		obj = NewHistoricalEventFailedIntrigueCorruption()
 	}
 
 	for {
@@ -20829,9 +26676,7 @@ func parseHistoricalEventFailedIntrigueCorruptionPlus(p *util.XMLParser, obj *Hi
 	}
 }
 func parseHistoricalEventFieldBattle(p *util.XMLParser) (*HistoricalEventFieldBattle, error) {
-	var (
-		obj = &HistoricalEventFieldBattle{}
-	)
+	var obj = NewHistoricalEventFieldBattle()
 
 	for {
 		t, n, err := p.Token()
@@ -20919,9 +26764,8 @@ func parseHistoricalEventFieldBattle(p *util.XMLParser) (*HistoricalEventFieldBa
 	}
 }
 func parseHistoricalEventFieldBattlePlus(p *util.XMLParser, obj *HistoricalEventFieldBattle) (*HistoricalEventFieldBattle, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventFieldBattle{}
+		obj = NewHistoricalEventFieldBattle()
 	}
 
 	for {
@@ -20944,9 +26788,7 @@ func parseHistoricalEventFieldBattlePlus(p *util.XMLParser, obj *HistoricalEvent
 	}
 }
 func parseHistoricalEventFirstContact(p *util.XMLParser) (*HistoricalEventFirstContact, error) {
-	var (
-		obj = &HistoricalEventFirstContact{}
-	)
+	var obj = NewHistoricalEventFirstContact()
 
 	for {
 		t, n, err := p.Token()
@@ -20986,9 +26828,8 @@ func parseHistoricalEventFirstContact(p *util.XMLParser) (*HistoricalEventFirstC
 	}
 }
 func parseHistoricalEventFirstContactPlus(p *util.XMLParser, obj *HistoricalEventFirstContact) (*HistoricalEventFirstContact, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventFirstContact{}
+		obj = NewHistoricalEventFirstContact()
 	}
 
 	for {
@@ -21011,9 +26852,7 @@ func parseHistoricalEventFirstContactPlus(p *util.XMLParser, obj *HistoricalEven
 	}
 }
 func parseHistoricalEventGamble(p *util.XMLParser) (*HistoricalEventGamble, error) {
-	var (
-		obj = &HistoricalEventGamble{}
-	)
+	var obj = NewHistoricalEventGamble()
 
 	for {
 		t, n, err := p.Token()
@@ -21065,9 +26904,8 @@ func parseHistoricalEventGamble(p *util.XMLParser) (*HistoricalEventGamble, erro
 	}
 }
 func parseHistoricalEventGamblePlus(p *util.XMLParser, obj *HistoricalEventGamble) (*HistoricalEventGamble, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventGamble{}
+		obj = NewHistoricalEventGamble()
 	}
 
 	for {
@@ -21090,9 +26928,7 @@ func parseHistoricalEventGamblePlus(p *util.XMLParser, obj *HistoricalEventGambl
 	}
 }
 func parseHistoricalEventHfAbducted(p *util.XMLParser) (*HistoricalEventHfAbducted, error) {
-	var (
-		obj = &HistoricalEventHfAbducted{}
-	)
+	var obj = NewHistoricalEventHfAbducted()
 
 	for {
 		t, n, err := p.Token()
@@ -21144,9 +26980,8 @@ func parseHistoricalEventHfAbducted(p *util.XMLParser) (*HistoricalEventHfAbduct
 	}
 }
 func parseHistoricalEventHfAbductedPlus(p *util.XMLParser, obj *HistoricalEventHfAbducted) (*HistoricalEventHfAbducted, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfAbducted{}
+		obj = NewHistoricalEventHfAbducted()
 	}
 
 	for {
@@ -21169,9 +27004,7 @@ func parseHistoricalEventHfAbductedPlus(p *util.XMLParser, obj *HistoricalEventH
 	}
 }
 func parseHistoricalEventHfAttackedSite(p *util.XMLParser) (*HistoricalEventHfAttackedSite, error) {
-	var (
-		obj = &HistoricalEventHfAttackedSite{}
-	)
+	var obj = NewHistoricalEventHfAttackedSite()
 
 	for {
 		t, n, err := p.Token()
@@ -21217,9 +27050,8 @@ func parseHistoricalEventHfAttackedSite(p *util.XMLParser) (*HistoricalEventHfAt
 	}
 }
 func parseHistoricalEventHfAttackedSitePlus(p *util.XMLParser, obj *HistoricalEventHfAttackedSite) (*HistoricalEventHfAttackedSite, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfAttackedSite{}
+		obj = NewHistoricalEventHfAttackedSite()
 	}
 
 	for {
@@ -21242,9 +27074,7 @@ func parseHistoricalEventHfAttackedSitePlus(p *util.XMLParser, obj *HistoricalEv
 	}
 }
 func parseHistoricalEventHfConfronted(p *util.XMLParser) (*HistoricalEventHfConfronted, error) {
-	var (
-		obj = &HistoricalEventHfConfronted{}
-	)
+	var obj = NewHistoricalEventHfConfronted()
 
 	for {
 		t, n, err := p.Token()
@@ -21308,9 +27138,8 @@ func parseHistoricalEventHfConfronted(p *util.XMLParser) (*HistoricalEventHfConf
 	}
 }
 func parseHistoricalEventHfConfrontedPlus(p *util.XMLParser, obj *HistoricalEventHfConfronted) (*HistoricalEventHfConfronted, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfConfronted{}
+		obj = NewHistoricalEventHfConfronted()
 	}
 
 	for {
@@ -21333,9 +27162,7 @@ func parseHistoricalEventHfConfrontedPlus(p *util.XMLParser, obj *HistoricalEven
 	}
 }
 func parseHistoricalEventHfConvicted(p *util.XMLParser) (*HistoricalEventHfConvicted, error) {
-	var (
-		obj = &HistoricalEventHfConvicted{}
-	)
+	var obj = NewHistoricalEventHfConvicted()
 
 	for {
 		t, n, err := p.Token()
@@ -21519,9 +27346,8 @@ func parseHistoricalEventHfConvicted(p *util.XMLParser) (*HistoricalEventHfConvi
 	}
 }
 func parseHistoricalEventHfConvictedPlus(p *util.XMLParser, obj *HistoricalEventHfConvicted) (*HistoricalEventHfConvicted, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfConvicted{}
+		obj = NewHistoricalEventHfConvicted()
 	}
 
 	for {
@@ -21544,9 +27370,7 @@ func parseHistoricalEventHfConvictedPlus(p *util.XMLParser, obj *HistoricalEvent
 	}
 }
 func parseHistoricalEventHfDestroyedSite(p *util.XMLParser) (*HistoricalEventHfDestroyedSite, error) {
-	var (
-		obj = &HistoricalEventHfDestroyedSite{}
-	)
+	var obj = NewHistoricalEventHfDestroyedSite()
 
 	for {
 		t, n, err := p.Token()
@@ -21592,9 +27416,8 @@ func parseHistoricalEventHfDestroyedSite(p *util.XMLParser) (*HistoricalEventHfD
 	}
 }
 func parseHistoricalEventHfDestroyedSitePlus(p *util.XMLParser, obj *HistoricalEventHfDestroyedSite) (*HistoricalEventHfDestroyedSite, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfDestroyedSite{}
+		obj = NewHistoricalEventHfDestroyedSite()
 	}
 
 	for {
@@ -21617,9 +27440,7 @@ func parseHistoricalEventHfDestroyedSitePlus(p *util.XMLParser, obj *HistoricalE
 	}
 }
 func parseHistoricalEventHfDied(p *util.XMLParser) (*HistoricalEventHfDied, error) {
-	var (
-		obj = &HistoricalEventHfDied{}
-	)
+	var obj = NewHistoricalEventHfDied()
 
 	for {
 		t, n, err := p.Token()
@@ -21701,9 +27522,8 @@ func parseHistoricalEventHfDied(p *util.XMLParser) (*HistoricalEventHfDied, erro
 	}
 }
 func parseHistoricalEventHfDiedPlus(p *util.XMLParser, obj *HistoricalEventHfDied) (*HistoricalEventHfDied, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfDied{}
+		obj = NewHistoricalEventHfDied()
 	}
 
 	for {
@@ -21792,9 +27612,7 @@ func parseHistoricalEventHfDiedPlus(p *util.XMLParser, obj *HistoricalEventHfDie
 	}
 }
 func parseHistoricalEventHfDisturbedStructure(p *util.XMLParser) (*HistoricalEventHfDisturbedStructure, error) {
-	var (
-		obj = &HistoricalEventHfDisturbedStructure{}
-	)
+	var obj = NewHistoricalEventHfDisturbedStructure()
 
 	for {
 		t, n, err := p.Token()
@@ -21834,9 +27652,8 @@ func parseHistoricalEventHfDisturbedStructure(p *util.XMLParser) (*HistoricalEve
 	}
 }
 func parseHistoricalEventHfDisturbedStructurePlus(p *util.XMLParser, obj *HistoricalEventHfDisturbedStructure) (*HistoricalEventHfDisturbedStructure, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfDisturbedStructure{}
+		obj = NewHistoricalEventHfDisturbedStructure()
 	}
 
 	for {
@@ -21883,9 +27700,7 @@ func parseHistoricalEventHfDisturbedStructurePlus(p *util.XMLParser, obj *Histor
 	}
 }
 func parseHistoricalEventHfDoesInteraction(p *util.XMLParser) (*HistoricalEventHfDoesInteraction, error) {
-	var (
-		obj = &HistoricalEventHfDoesInteraction{}
-	)
+	var obj = NewHistoricalEventHfDoesInteraction()
 
 	for {
 		t, n, err := p.Token()
@@ -21925,9 +27740,8 @@ func parseHistoricalEventHfDoesInteraction(p *util.XMLParser) (*HistoricalEventH
 	}
 }
 func parseHistoricalEventHfDoesInteractionPlus(p *util.XMLParser, obj *HistoricalEventHfDoesInteraction) (*HistoricalEventHfDoesInteraction, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfDoesInteraction{}
+		obj = NewHistoricalEventHfDoesInteraction()
 	}
 
 	for {
@@ -21986,9 +27800,7 @@ func parseHistoricalEventHfDoesInteractionPlus(p *util.XMLParser, obj *Historica
 	}
 }
 func parseHistoricalEventHfEnslaved(p *util.XMLParser) (*HistoricalEventHfEnslaved, error) {
-	var (
-		obj = &HistoricalEventHfEnslaved{}
-	)
+	var obj = NewHistoricalEventHfEnslaved()
 
 	for {
 		t, n, err := p.Token()
@@ -22034,9 +27846,8 @@ func parseHistoricalEventHfEnslaved(p *util.XMLParser) (*HistoricalEventHfEnslav
 	}
 }
 func parseHistoricalEventHfEnslavedPlus(p *util.XMLParser, obj *HistoricalEventHfEnslaved) (*HistoricalEventHfEnslaved, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfEnslaved{}
+		obj = NewHistoricalEventHfEnslaved()
 	}
 
 	for {
@@ -22059,9 +27870,7 @@ func parseHistoricalEventHfEnslavedPlus(p *util.XMLParser, obj *HistoricalEventH
 	}
 }
 func parseHistoricalEventHfEquipmentPurchase(p *util.XMLParser) (*HistoricalEventHfEquipmentPurchase, error) {
-	var (
-		obj = &HistoricalEventHfEquipmentPurchase{}
-	)
+	var obj = NewHistoricalEventHfEquipmentPurchase()
 
 	for {
 		t, n, err := p.Token()
@@ -22119,9 +27928,8 @@ func parseHistoricalEventHfEquipmentPurchase(p *util.XMLParser) (*HistoricalEven
 	}
 }
 func parseHistoricalEventHfEquipmentPurchasePlus(p *util.XMLParser, obj *HistoricalEventHfEquipmentPurchase) (*HistoricalEventHfEquipmentPurchase, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfEquipmentPurchase{}
+		obj = NewHistoricalEventHfEquipmentPurchase()
 	}
 
 	for {
@@ -22144,9 +27952,7 @@ func parseHistoricalEventHfEquipmentPurchasePlus(p *util.XMLParser, obj *Histori
 	}
 }
 func parseHistoricalEventHfFreed(p *util.XMLParser) (*HistoricalEventHfFreed, error) {
-	var (
-		obj = &HistoricalEventHfFreed{}
-	)
+	var obj = NewHistoricalEventHfFreed()
 
 	for {
 		t, n, err := p.Token()
@@ -22198,9 +28004,8 @@ func parseHistoricalEventHfFreed(p *util.XMLParser) (*HistoricalEventHfFreed, er
 	}
 }
 func parseHistoricalEventHfFreedPlus(p *util.XMLParser, obj *HistoricalEventHfFreed) (*HistoricalEventHfFreed, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfFreed{}
+		obj = NewHistoricalEventHfFreed()
 	}
 
 	for {
@@ -22223,9 +28028,7 @@ func parseHistoricalEventHfFreedPlus(p *util.XMLParser, obj *HistoricalEventHfFr
 	}
 }
 func parseHistoricalEventHfGainsSecretGoal(p *util.XMLParser) (*HistoricalEventHfGainsSecretGoal, error) {
-	var (
-		obj = &HistoricalEventHfGainsSecretGoal{}
-	)
+	var obj = NewHistoricalEventHfGainsSecretGoal()
 
 	for {
 		t, n, err := p.Token()
@@ -22259,9 +28062,8 @@ func parseHistoricalEventHfGainsSecretGoal(p *util.XMLParser) (*HistoricalEventH
 	}
 }
 func parseHistoricalEventHfGainsSecretGoalPlus(p *util.XMLParser, obj *HistoricalEventHfGainsSecretGoal) (*HistoricalEventHfGainsSecretGoal, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfGainsSecretGoal{}
+		obj = NewHistoricalEventHfGainsSecretGoal()
 	}
 
 	for {
@@ -22284,9 +28086,7 @@ func parseHistoricalEventHfGainsSecretGoalPlus(p *util.XMLParser, obj *Historica
 	}
 }
 func parseHistoricalEventHfInterrogated(p *util.XMLParser) (*HistoricalEventHfInterrogated, error) {
-	var (
-		obj = &HistoricalEventHfInterrogated{}
-	)
+	var obj = NewHistoricalEventHfInterrogated()
 
 	for {
 		t, n, err := p.Token()
@@ -22344,9 +28144,8 @@ func parseHistoricalEventHfInterrogated(p *util.XMLParser) (*HistoricalEventHfIn
 	}
 }
 func parseHistoricalEventHfInterrogatedPlus(p *util.XMLParser, obj *HistoricalEventHfInterrogated) (*HistoricalEventHfInterrogated, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfInterrogated{}
+		obj = NewHistoricalEventHfInterrogated()
 	}
 
 	for {
@@ -22369,9 +28168,7 @@ func parseHistoricalEventHfInterrogatedPlus(p *util.XMLParser, obj *HistoricalEv
 	}
 }
 func parseHistoricalEventHfLearnsSecret(p *util.XMLParser) (*HistoricalEventHfLearnsSecret, error) {
-	var (
-		obj = &HistoricalEventHfLearnsSecret{}
-	)
+	var obj = NewHistoricalEventHfLearnsSecret()
 
 	for {
 		t, n, err := p.Token()
@@ -22417,9 +28214,8 @@ func parseHistoricalEventHfLearnsSecret(p *util.XMLParser) (*HistoricalEventHfLe
 	}
 }
 func parseHistoricalEventHfLearnsSecretPlus(p *util.XMLParser, obj *HistoricalEventHfLearnsSecret) (*HistoricalEventHfLearnsSecret, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfLearnsSecret{}
+		obj = NewHistoricalEventHfLearnsSecret()
 	}
 
 	for {
@@ -22466,9 +28262,7 @@ func parseHistoricalEventHfLearnsSecretPlus(p *util.XMLParser, obj *HistoricalEv
 	}
 }
 func parseHistoricalEventHfNewPet(p *util.XMLParser) (*HistoricalEventHfNewPet, error) {
-	var (
-		obj = &HistoricalEventHfNewPet{}
-	)
+	var obj = NewHistoricalEventHfNewPet()
 
 	for {
 		t, n, err := p.Token()
@@ -22520,9 +28314,8 @@ func parseHistoricalEventHfNewPet(p *util.XMLParser) (*HistoricalEventHfNewPet, 
 	}
 }
 func parseHistoricalEventHfNewPetPlus(p *util.XMLParser, obj *HistoricalEventHfNewPet) (*HistoricalEventHfNewPet, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfNewPet{}
+		obj = NewHistoricalEventHfNewPet()
 	}
 
 	for {
@@ -22563,9 +28356,7 @@ func parseHistoricalEventHfNewPetPlus(p *util.XMLParser, obj *HistoricalEventHfN
 	}
 }
 func parseHistoricalEventHfPerformedHorribleExperiments(p *util.XMLParser) (*HistoricalEventHfPerformedHorribleExperiments, error) {
-	var (
-		obj = &HistoricalEventHfPerformedHorribleExperiments{}
-	)
+	var obj = NewHistoricalEventHfPerformedHorribleExperiments()
 
 	for {
 		t, n, err := p.Token()
@@ -22617,9 +28408,8 @@ func parseHistoricalEventHfPerformedHorribleExperiments(p *util.XMLParser) (*His
 	}
 }
 func parseHistoricalEventHfPerformedHorribleExperimentsPlus(p *util.XMLParser, obj *HistoricalEventHfPerformedHorribleExperiments) (*HistoricalEventHfPerformedHorribleExperiments, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfPerformedHorribleExperiments{}
+		obj = NewHistoricalEventHfPerformedHorribleExperiments()
 	}
 
 	for {
@@ -22642,9 +28432,7 @@ func parseHistoricalEventHfPerformedHorribleExperimentsPlus(p *util.XMLParser, o
 	}
 }
 func parseHistoricalEventHfPrayedInsideStructure(p *util.XMLParser) (*HistoricalEventHfPrayedInsideStructure, error) {
-	var (
-		obj = &HistoricalEventHfPrayedInsideStructure{}
-	)
+	var obj = NewHistoricalEventHfPrayedInsideStructure()
 
 	for {
 		t, n, err := p.Token()
@@ -22684,9 +28472,8 @@ func parseHistoricalEventHfPrayedInsideStructure(p *util.XMLParser) (*Historical
 	}
 }
 func parseHistoricalEventHfPrayedInsideStructurePlus(p *util.XMLParser, obj *HistoricalEventHfPrayedInsideStructure) (*HistoricalEventHfPrayedInsideStructure, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfPrayedInsideStructure{}
+		obj = NewHistoricalEventHfPrayedInsideStructure()
 	}
 
 	for {
@@ -22733,9 +28520,7 @@ func parseHistoricalEventHfPrayedInsideStructurePlus(p *util.XMLParser, obj *His
 	}
 }
 func parseHistoricalEventHfPreach(p *util.XMLParser) (*HistoricalEventHfPreach, error) {
-	var (
-		obj = &HistoricalEventHfPreach{}
-	)
+	var obj = NewHistoricalEventHfPreach()
 
 	for {
 		t, n, err := p.Token()
@@ -22787,9 +28572,8 @@ func parseHistoricalEventHfPreach(p *util.XMLParser) (*HistoricalEventHfPreach, 
 	}
 }
 func parseHistoricalEventHfPreachPlus(p *util.XMLParser, obj *HistoricalEventHfPreach) (*HistoricalEventHfPreach, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfPreach{}
+		obj = NewHistoricalEventHfPreach()
 	}
 
 	for {
@@ -22812,9 +28596,7 @@ func parseHistoricalEventHfPreachPlus(p *util.XMLParser, obj *HistoricalEventHfP
 	}
 }
 func parseHistoricalEventHfProfanedStructure(p *util.XMLParser) (*HistoricalEventHfProfanedStructure, error) {
-	var (
-		obj = &HistoricalEventHfProfanedStructure{}
-	)
+	var obj = NewHistoricalEventHfProfanedStructure()
 
 	for {
 		t, n, err := p.Token()
@@ -22854,9 +28636,8 @@ func parseHistoricalEventHfProfanedStructure(p *util.XMLParser) (*HistoricalEven
 	}
 }
 func parseHistoricalEventHfProfanedStructurePlus(p *util.XMLParser, obj *HistoricalEventHfProfanedStructure) (*HistoricalEventHfProfanedStructure, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfProfanedStructure{}
+		obj = NewHistoricalEventHfProfanedStructure()
 	}
 
 	for {
@@ -22903,9 +28684,7 @@ func parseHistoricalEventHfProfanedStructurePlus(p *util.XMLParser, obj *Histori
 	}
 }
 func parseHistoricalEventHfRansomed(p *util.XMLParser) (*HistoricalEventHfRansomed, error) {
-	var (
-		obj = &HistoricalEventHfRansomed{}
-	)
+	var obj = NewHistoricalEventHfRansomed()
 
 	for {
 		t, n, err := p.Token()
@@ -22957,9 +28736,8 @@ func parseHistoricalEventHfRansomed(p *util.XMLParser) (*HistoricalEventHfRansom
 	}
 }
 func parseHistoricalEventHfRansomedPlus(p *util.XMLParser, obj *HistoricalEventHfRansomed) (*HistoricalEventHfRansomed, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfRansomed{}
+		obj = NewHistoricalEventHfRansomed()
 	}
 
 	for {
@@ -22982,9 +28760,7 @@ func parseHistoricalEventHfRansomedPlus(p *util.XMLParser, obj *HistoricalEventH
 	}
 }
 func parseHistoricalEventHfReachSummit(p *util.XMLParser) (*HistoricalEventHfReachSummit, error) {
-	var (
-		obj = &HistoricalEventHfReachSummit{}
-	)
+	var obj = NewHistoricalEventHfReachSummit()
 
 	for {
 		t, n, err := p.Token()
@@ -23030,9 +28806,8 @@ func parseHistoricalEventHfReachSummit(p *util.XMLParser) (*HistoricalEventHfRea
 	}
 }
 func parseHistoricalEventHfReachSummitPlus(p *util.XMLParser, obj *HistoricalEventHfReachSummit) (*HistoricalEventHfReachSummit, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfReachSummit{}
+		obj = NewHistoricalEventHfReachSummit()
 	}
 
 	for {
@@ -23055,9 +28830,7 @@ func parseHistoricalEventHfReachSummitPlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventHfRecruitedUnitTypeForEntity(p *util.XMLParser) (*HistoricalEventHfRecruitedUnitTypeForEntity, error) {
-	var (
-		obj = &HistoricalEventHfRecruitedUnitTypeForEntity{}
-	)
+	var obj = NewHistoricalEventHfRecruitedUnitTypeForEntity()
 
 	for {
 		t, n, err := p.Token()
@@ -23115,9 +28888,8 @@ func parseHistoricalEventHfRecruitedUnitTypeForEntity(p *util.XMLParser) (*Histo
 	}
 }
 func parseHistoricalEventHfRecruitedUnitTypeForEntityPlus(p *util.XMLParser, obj *HistoricalEventHfRecruitedUnitTypeForEntity) (*HistoricalEventHfRecruitedUnitTypeForEntity, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfRecruitedUnitTypeForEntity{}
+		obj = NewHistoricalEventHfRecruitedUnitTypeForEntity()
 	}
 
 	for {
@@ -23140,9 +28912,7 @@ func parseHistoricalEventHfRecruitedUnitTypeForEntityPlus(p *util.XMLParser, obj
 	}
 }
 func parseHistoricalEventHfRelationshipDenied(p *util.XMLParser) (*HistoricalEventHfRelationshipDenied, error) {
-	var (
-		obj = &HistoricalEventHfRelationshipDenied{}
-	)
+	var obj = NewHistoricalEventHfRelationshipDenied()
 
 	for {
 		t, n, err := p.Token()
@@ -23212,9 +28982,8 @@ func parseHistoricalEventHfRelationshipDenied(p *util.XMLParser) (*HistoricalEve
 	}
 }
 func parseHistoricalEventHfRelationshipDeniedPlus(p *util.XMLParser, obj *HistoricalEventHfRelationshipDenied) (*HistoricalEventHfRelationshipDenied, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfRelationshipDenied{}
+		obj = NewHistoricalEventHfRelationshipDenied()
 	}
 
 	for {
@@ -23237,9 +29006,7 @@ func parseHistoricalEventHfRelationshipDeniedPlus(p *util.XMLParser, obj *Histor
 	}
 }
 func parseHistoricalEventHfReunion(p *util.XMLParser) (*HistoricalEventHfReunion, error) {
-	var (
-		obj = &HistoricalEventHfReunion{}
-	)
+	var obj = NewHistoricalEventHfReunion()
 
 	for {
 		t, n, err := p.Token()
@@ -23291,9 +29058,8 @@ func parseHistoricalEventHfReunion(p *util.XMLParser) (*HistoricalEventHfReunion
 	}
 }
 func parseHistoricalEventHfReunionPlus(p *util.XMLParser, obj *HistoricalEventHfReunion) (*HistoricalEventHfReunion, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfReunion{}
+		obj = NewHistoricalEventHfReunion()
 	}
 
 	for {
@@ -23316,9 +29082,7 @@ func parseHistoricalEventHfReunionPlus(p *util.XMLParser, obj *HistoricalEventHf
 	}
 }
 func parseHistoricalEventHfRevived(p *util.XMLParser) (*HistoricalEventHfRevived, error) {
-	var (
-		obj = &HistoricalEventHfRevived{}
-	)
+	var obj = NewHistoricalEventHfRevived()
 
 	for {
 		t, n, err := p.Token()
@@ -23388,9 +29152,8 @@ func parseHistoricalEventHfRevived(p *util.XMLParser) (*HistoricalEventHfRevived
 	}
 }
 func parseHistoricalEventHfRevivedPlus(p *util.XMLParser, obj *HistoricalEventHfRevived) (*HistoricalEventHfRevived, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfRevived{}
+		obj = NewHistoricalEventHfRevived()
 	}
 
 	for {
@@ -23413,9 +29176,7 @@ func parseHistoricalEventHfRevivedPlus(p *util.XMLParser, obj *HistoricalEventHf
 	}
 }
 func parseHistoricalEventHfSimpleBattleEvent(p *util.XMLParser) (*HistoricalEventHfSimpleBattleEvent, error) {
-	var (
-		obj = &HistoricalEventHfSimpleBattleEvent{}
-	)
+	var obj = NewHistoricalEventHfSimpleBattleEvent()
 
 	for {
 		t, n, err := p.Token()
@@ -23473,9 +29234,8 @@ func parseHistoricalEventHfSimpleBattleEvent(p *util.XMLParser) (*HistoricalEven
 	}
 }
 func parseHistoricalEventHfSimpleBattleEventPlus(p *util.XMLParser, obj *HistoricalEventHfSimpleBattleEvent) (*HistoricalEventHfSimpleBattleEvent, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfSimpleBattleEvent{}
+		obj = NewHistoricalEventHfSimpleBattleEvent()
 	}
 
 	for {
@@ -23498,9 +29258,7 @@ func parseHistoricalEventHfSimpleBattleEventPlus(p *util.XMLParser, obj *Histori
 	}
 }
 func parseHistoricalEventHfTravel(p *util.XMLParser) (*HistoricalEventHfTravel, error) {
-	var (
-		obj = &HistoricalEventHfTravel{}
-	)
+	var obj = NewHistoricalEventHfTravel()
 
 	for {
 		t, n, err := p.Token()
@@ -23558,9 +29316,8 @@ func parseHistoricalEventHfTravel(p *util.XMLParser) (*HistoricalEventHfTravel, 
 	}
 }
 func parseHistoricalEventHfTravelPlus(p *util.XMLParser, obj *HistoricalEventHfTravel) (*HistoricalEventHfTravel, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfTravel{}
+		obj = NewHistoricalEventHfTravel()
 	}
 
 	for {
@@ -23583,9 +29340,7 @@ func parseHistoricalEventHfTravelPlus(p *util.XMLParser, obj *HistoricalEventHfT
 	}
 }
 func parseHistoricalEventHfViewedArtifact(p *util.XMLParser) (*HistoricalEventHfViewedArtifact, error) {
-	var (
-		obj = &HistoricalEventHfViewedArtifact{}
-	)
+	var obj = NewHistoricalEventHfViewedArtifact()
 
 	for {
 		t, n, err := p.Token()
@@ -23631,9 +29386,8 @@ func parseHistoricalEventHfViewedArtifact(p *util.XMLParser) (*HistoricalEventHf
 	}
 }
 func parseHistoricalEventHfViewedArtifactPlus(p *util.XMLParser, obj *HistoricalEventHfViewedArtifact) (*HistoricalEventHfViewedArtifact, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfViewedArtifact{}
+		obj = NewHistoricalEventHfViewedArtifact()
 	}
 
 	for {
@@ -23656,9 +29410,7 @@ func parseHistoricalEventHfViewedArtifactPlus(p *util.XMLParser, obj *Historical
 	}
 }
 func parseHistoricalEventHfWounded(p *util.XMLParser) (*HistoricalEventHfWounded, error) {
-	var (
-		obj = &HistoricalEventHfWounded{}
-	)
+	var obj = NewHistoricalEventHfWounded()
 
 	for {
 		t, n, err := p.Token()
@@ -23716,9 +29468,8 @@ func parseHistoricalEventHfWounded(p *util.XMLParser) (*HistoricalEventHfWounded
 	}
 }
 func parseHistoricalEventHfWoundedPlus(p *util.XMLParser, obj *HistoricalEventHfWounded) (*HistoricalEventHfWounded, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfWounded{}
+		obj = NewHistoricalEventHfWounded()
 	}
 
 	for {
@@ -23789,9 +29540,7 @@ func parseHistoricalEventHfWoundedPlus(p *util.XMLParser, obj *HistoricalEventHf
 	}
 }
 func parseHistoricalEventHfsFormedIntrigueRelationship(p *util.XMLParser) (*HistoricalEventHfsFormedIntrigueRelationship, error) {
-	var (
-		obj = &HistoricalEventHfsFormedIntrigueRelationship{}
-	)
+	var obj = NewHistoricalEventHfsFormedIntrigueRelationship()
 
 	for {
 		t, n, err := p.Token()
@@ -23993,9 +29742,8 @@ func parseHistoricalEventHfsFormedIntrigueRelationship(p *util.XMLParser) (*Hist
 	}
 }
 func parseHistoricalEventHfsFormedIntrigueRelationshipPlus(p *util.XMLParser, obj *HistoricalEventHfsFormedIntrigueRelationship) (*HistoricalEventHfsFormedIntrigueRelationship, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfsFormedIntrigueRelationship{}
+		obj = NewHistoricalEventHfsFormedIntrigueRelationship()
 	}
 
 	for {
@@ -24018,9 +29766,7 @@ func parseHistoricalEventHfsFormedIntrigueRelationshipPlus(p *util.XMLParser, ob
 	}
 }
 func parseHistoricalEventHfsFormedReputationRelationship(p *util.XMLParser) (*HistoricalEventHfsFormedReputationRelationship, error) {
-	var (
-		obj = &HistoricalEventHfsFormedReputationRelationship{}
-	)
+	var obj = NewHistoricalEventHfsFormedReputationRelationship()
 
 	for {
 		t, n, err := p.Token()
@@ -24096,9 +29842,8 @@ func parseHistoricalEventHfsFormedReputationRelationship(p *util.XMLParser) (*Hi
 	}
 }
 func parseHistoricalEventHfsFormedReputationRelationshipPlus(p *util.XMLParser, obj *HistoricalEventHfsFormedReputationRelationship) (*HistoricalEventHfsFormedReputationRelationship, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHfsFormedReputationRelationship{}
+		obj = NewHistoricalEventHfsFormedReputationRelationship()
 	}
 
 	for {
@@ -24121,9 +29866,7 @@ func parseHistoricalEventHfsFormedReputationRelationshipPlus(p *util.XMLParser, 
 	}
 }
 func parseHistoricalEventHolyCityDeclaration(p *util.XMLParser) (*HistoricalEventHolyCityDeclaration, error) {
-	var (
-		obj = &HistoricalEventHolyCityDeclaration{}
-	)
+	var obj = NewHistoricalEventHolyCityDeclaration()
 
 	for {
 		t, n, err := p.Token()
@@ -24157,9 +29900,8 @@ func parseHistoricalEventHolyCityDeclaration(p *util.XMLParser) (*HistoricalEven
 	}
 }
 func parseHistoricalEventHolyCityDeclarationPlus(p *util.XMLParser, obj *HistoricalEventHolyCityDeclaration) (*HistoricalEventHolyCityDeclaration, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventHolyCityDeclaration{}
+		obj = NewHistoricalEventHolyCityDeclaration()
 	}
 
 	for {
@@ -24182,9 +29924,7 @@ func parseHistoricalEventHolyCityDeclarationPlus(p *util.XMLParser, obj *Histori
 	}
 }
 func parseHistoricalEventInsurrectionStarted(p *util.XMLParser) (*HistoricalEventInsurrectionStarted, error) {
-	var (
-		obj = &HistoricalEventInsurrectionStarted{}
-	)
+	var obj = NewHistoricalEventInsurrectionStarted()
 
 	for {
 		t, n, err := p.Token()
@@ -24224,9 +29964,8 @@ func parseHistoricalEventInsurrectionStarted(p *util.XMLParser) (*HistoricalEven
 	}
 }
 func parseHistoricalEventInsurrectionStartedPlus(p *util.XMLParser, obj *HistoricalEventInsurrectionStarted) (*HistoricalEventInsurrectionStarted, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventInsurrectionStarted{}
+		obj = NewHistoricalEventInsurrectionStarted()
 	}
 
 	for {
@@ -24249,9 +29988,7 @@ func parseHistoricalEventInsurrectionStartedPlus(p *util.XMLParser, obj *Histori
 	}
 }
 func parseHistoricalEventItemStolen(p *util.XMLParser) (*HistoricalEventItemStolen, error) {
-	var (
-		obj = &HistoricalEventItemStolen{}
-	)
+	var obj = NewHistoricalEventItemStolen()
 
 	for {
 		t, n, err := p.Token()
@@ -24282,9 +30019,8 @@ func parseHistoricalEventItemStolen(p *util.XMLParser) (*HistoricalEventItemStol
 	}
 }
 func parseHistoricalEventItemStolenPlus(p *util.XMLParser, obj *HistoricalEventItemStolen) (*HistoricalEventItemStolen, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventItemStolen{}
+		obj = NewHistoricalEventItemStolen()
 	}
 
 	for {
@@ -24382,9 +30118,7 @@ func parseHistoricalEventItemStolenPlus(p *util.XMLParser, obj *HistoricalEventI
 	}
 }
 func parseHistoricalEventItemStolenCircumstance(p *util.XMLParser) (*HistoricalEventItemStolenCircumstance, error) {
-	var (
-		obj = &HistoricalEventItemStolenCircumstance{}
-	)
+	var obj = NewHistoricalEventItemStolenCircumstance()
 
 	for {
 		t, n, err := p.Token()
@@ -24406,9 +30140,8 @@ func parseHistoricalEventItemStolenCircumstance(p *util.XMLParser) (*HistoricalE
 	}
 }
 func parseHistoricalEventItemStolenCircumstancePlus(p *util.XMLParser, obj *HistoricalEventItemStolenCircumstance) (*HistoricalEventItemStolenCircumstance, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventItemStolenCircumstance{}
+		obj = NewHistoricalEventItemStolenCircumstance()
 	}
 
 	for {
@@ -24455,9 +30188,7 @@ func parseHistoricalEventItemStolenCircumstancePlus(p *util.XMLParser, obj *Hist
 	}
 }
 func parseHistoricalEventKnowledgeDiscovered(p *util.XMLParser) (*HistoricalEventKnowledgeDiscovered, error) {
-	var (
-		obj = &HistoricalEventKnowledgeDiscovered{}
-	)
+	var obj = NewHistoricalEventKnowledgeDiscovered()
 
 	for {
 		t, n, err := p.Token()
@@ -24497,9 +30228,8 @@ func parseHistoricalEventKnowledgeDiscovered(p *util.XMLParser) (*HistoricalEven
 	}
 }
 func parseHistoricalEventKnowledgeDiscoveredPlus(p *util.XMLParser, obj *HistoricalEventKnowledgeDiscovered) (*HistoricalEventKnowledgeDiscovered, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventKnowledgeDiscovered{}
+		obj = NewHistoricalEventKnowledgeDiscovered()
 	}
 
 	for {
@@ -24522,9 +30252,7 @@ func parseHistoricalEventKnowledgeDiscoveredPlus(p *util.XMLParser, obj *Histori
 	}
 }
 func parseHistoricalEventMasterpieceArchConstructed(p *util.XMLParser) (*HistoricalEventMasterpieceArchConstructed, error) {
-	var (
-		obj = &HistoricalEventMasterpieceArchConstructed{}
-	)
+	var obj = NewHistoricalEventMasterpieceArchConstructed()
 
 	for {
 		t, n, err := p.Token()
@@ -24570,9 +30298,8 @@ func parseHistoricalEventMasterpieceArchConstructed(p *util.XMLParser) (*Histori
 	}
 }
 func parseHistoricalEventMasterpieceArchConstructedPlus(p *util.XMLParser, obj *HistoricalEventMasterpieceArchConstructed) (*HistoricalEventMasterpieceArchConstructed, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventMasterpieceArchConstructed{}
+		obj = NewHistoricalEventMasterpieceArchConstructed()
 	}
 
 	for {
@@ -24643,9 +30370,7 @@ func parseHistoricalEventMasterpieceArchConstructedPlus(p *util.XMLParser, obj *
 	}
 }
 func parseHistoricalEventMasterpieceEngraving(p *util.XMLParser) (*HistoricalEventMasterpieceEngraving, error) {
-	var (
-		obj = &HistoricalEventMasterpieceEngraving{}
-	)
+	var obj = NewHistoricalEventMasterpieceEngraving()
 
 	for {
 		t, n, err := p.Token()
@@ -24691,9 +30416,8 @@ func parseHistoricalEventMasterpieceEngraving(p *util.XMLParser) (*HistoricalEve
 	}
 }
 func parseHistoricalEventMasterpieceEngravingPlus(p *util.XMLParser, obj *HistoricalEventMasterpieceEngraving) (*HistoricalEventMasterpieceEngraving, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventMasterpieceEngraving{}
+		obj = NewHistoricalEventMasterpieceEngraving()
 	}
 
 	for {
@@ -24752,9 +30476,7 @@ func parseHistoricalEventMasterpieceEngravingPlus(p *util.XMLParser, obj *Histor
 	}
 }
 func parseHistoricalEventMasterpieceFood(p *util.XMLParser) (*HistoricalEventMasterpieceFood, error) {
-	var (
-		obj = &HistoricalEventMasterpieceFood{}
-	)
+	var obj = NewHistoricalEventMasterpieceFood()
 
 	for {
 		t, n, err := p.Token()
@@ -24800,9 +30522,8 @@ func parseHistoricalEventMasterpieceFood(p *util.XMLParser) (*HistoricalEventMas
 	}
 }
 func parseHistoricalEventMasterpieceFoodPlus(p *util.XMLParser, obj *HistoricalEventMasterpieceFood) (*HistoricalEventMasterpieceFood, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventMasterpieceFood{}
+		obj = NewHistoricalEventMasterpieceFood()
 	}
 
 	for {
@@ -24825,9 +30546,7 @@ func parseHistoricalEventMasterpieceFoodPlus(p *util.XMLParser, obj *HistoricalE
 	}
 }
 func parseHistoricalEventMasterpieceItem(p *util.XMLParser) (*HistoricalEventMasterpieceItem, error) {
-	var (
-		obj = &HistoricalEventMasterpieceItem{}
-	)
+	var obj = NewHistoricalEventMasterpieceItem()
 
 	for {
 		t, n, err := p.Token()
@@ -24873,9 +30592,8 @@ func parseHistoricalEventMasterpieceItem(p *util.XMLParser) (*HistoricalEventMas
 	}
 }
 func parseHistoricalEventMasterpieceItemPlus(p *util.XMLParser, obj *HistoricalEventMasterpieceItem) (*HistoricalEventMasterpieceItem, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventMasterpieceItem{}
+		obj = NewHistoricalEventMasterpieceItem()
 	}
 
 	for {
@@ -24946,9 +30664,7 @@ func parseHistoricalEventMasterpieceItemPlus(p *util.XMLParser, obj *HistoricalE
 	}
 }
 func parseHistoricalEventMasterpieceItemImprovement(p *util.XMLParser) (*HistoricalEventMasterpieceItemImprovement, error) {
-	var (
-		obj = &HistoricalEventMasterpieceItemImprovement{}
-	)
+	var obj = NewHistoricalEventMasterpieceItemImprovement()
 
 	for {
 		t, n, err := p.Token()
@@ -24994,9 +30710,8 @@ func parseHistoricalEventMasterpieceItemImprovement(p *util.XMLParser) (*Histori
 	}
 }
 func parseHistoricalEventMasterpieceItemImprovementPlus(p *util.XMLParser, obj *HistoricalEventMasterpieceItemImprovement) (*HistoricalEventMasterpieceItemImprovement, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventMasterpieceItemImprovement{}
+		obj = NewHistoricalEventMasterpieceItemImprovement()
 	}
 
 	for {
@@ -25019,9 +30734,7 @@ func parseHistoricalEventMasterpieceItemImprovementPlus(p *util.XMLParser, obj *
 	}
 }
 func parseHistoricalEventMasterpieceLost(p *util.XMLParser) (*HistoricalEventMasterpieceLost, error) {
-	var (
-		obj = &HistoricalEventMasterpieceLost{}
-	)
+	var obj = NewHistoricalEventMasterpieceLost()
 
 	for {
 		t, n, err := p.Token()
@@ -25043,9 +30756,8 @@ func parseHistoricalEventMasterpieceLost(p *util.XMLParser) (*HistoricalEventMas
 	}
 }
 func parseHistoricalEventMasterpieceLostPlus(p *util.XMLParser, obj *HistoricalEventMasterpieceLost) (*HistoricalEventMasterpieceLost, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventMasterpieceLost{}
+		obj = NewHistoricalEventMasterpieceLost()
 	}
 
 	for {
@@ -25092,9 +30804,7 @@ func parseHistoricalEventMasterpieceLostPlus(p *util.XMLParser, obj *HistoricalE
 	}
 }
 func parseHistoricalEventMerchant(p *util.XMLParser) (*HistoricalEventMerchant, error) {
-	var (
-		obj = &HistoricalEventMerchant{}
-	)
+	var obj = NewHistoricalEventMerchant()
 
 	for {
 		t, n, err := p.Token()
@@ -25146,9 +30856,8 @@ func parseHistoricalEventMerchant(p *util.XMLParser) (*HistoricalEventMerchant, 
 	}
 }
 func parseHistoricalEventMerchantPlus(p *util.XMLParser, obj *HistoricalEventMerchant) (*HistoricalEventMerchant, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventMerchant{}
+		obj = NewHistoricalEventMerchant()
 	}
 
 	for {
@@ -25189,9 +30898,7 @@ func parseHistoricalEventMerchantPlus(p *util.XMLParser, obj *HistoricalEventMer
 	}
 }
 func parseHistoricalEventModifiedBuilding(p *util.XMLParser) (*HistoricalEventModifiedBuilding, error) {
-	var (
-		obj = &HistoricalEventModifiedBuilding{}
-	)
+	var obj = NewHistoricalEventModifiedBuilding()
 
 	for {
 		t, n, err := p.Token()
@@ -25237,9 +30944,8 @@ func parseHistoricalEventModifiedBuilding(p *util.XMLParser) (*HistoricalEventMo
 	}
 }
 func parseHistoricalEventModifiedBuildingPlus(p *util.XMLParser, obj *HistoricalEventModifiedBuilding) (*HistoricalEventModifiedBuilding, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventModifiedBuilding{}
+		obj = NewHistoricalEventModifiedBuilding()
 	}
 
 	for {
@@ -25262,9 +30968,7 @@ func parseHistoricalEventModifiedBuildingPlus(p *util.XMLParser, obj *Historical
 	}
 }
 func parseHistoricalEventMusicalFormCreated(p *util.XMLParser) (*HistoricalEventMusicalFormCreated, error) {
-	var (
-		obj = &HistoricalEventMusicalFormCreated{}
-	)
+	var obj = NewHistoricalEventMusicalFormCreated()
 
 	for {
 		t, n, err := p.Token()
@@ -25328,9 +31032,8 @@ func parseHistoricalEventMusicalFormCreated(p *util.XMLParser) (*HistoricalEvent
 	}
 }
 func parseHistoricalEventMusicalFormCreatedPlus(p *util.XMLParser, obj *HistoricalEventMusicalFormCreated) (*HistoricalEventMusicalFormCreated, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventMusicalFormCreated{}
+		obj = NewHistoricalEventMusicalFormCreated()
 	}
 
 	for {
@@ -25353,9 +31056,7 @@ func parseHistoricalEventMusicalFormCreatedPlus(p *util.XMLParser, obj *Historic
 	}
 }
 func parseHistoricalEventNewSiteLeader(p *util.XMLParser) (*HistoricalEventNewSiteLeader, error) {
-	var (
-		obj = &HistoricalEventNewSiteLeader{}
-	)
+	var obj = NewHistoricalEventNewSiteLeader()
 
 	for {
 		t, n, err := p.Token()
@@ -25413,9 +31114,8 @@ func parseHistoricalEventNewSiteLeader(p *util.XMLParser) (*HistoricalEventNewSi
 	}
 }
 func parseHistoricalEventNewSiteLeaderPlus(p *util.XMLParser, obj *HistoricalEventNewSiteLeader) (*HistoricalEventNewSiteLeader, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventNewSiteLeader{}
+		obj = NewHistoricalEventNewSiteLeader()
 	}
 
 	for {
@@ -25438,9 +31138,7 @@ func parseHistoricalEventNewSiteLeaderPlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventPeaceAccepted(p *util.XMLParser) (*HistoricalEventPeaceAccepted, error) {
-	var (
-		obj = &HistoricalEventPeaceAccepted{}
-	)
+	var obj = NewHistoricalEventPeaceAccepted()
 
 	for {
 		t, n, err := p.Token()
@@ -25468,9 +31166,8 @@ func parseHistoricalEventPeaceAccepted(p *util.XMLParser) (*HistoricalEventPeace
 	}
 }
 func parseHistoricalEventPeaceAcceptedPlus(p *util.XMLParser, obj *HistoricalEventPeaceAccepted) (*HistoricalEventPeaceAccepted, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventPeaceAccepted{}
+		obj = NewHistoricalEventPeaceAccepted()
 	}
 
 	for {
@@ -25517,9 +31214,7 @@ func parseHistoricalEventPeaceAcceptedPlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventPeaceRejected(p *util.XMLParser) (*HistoricalEventPeaceRejected, error) {
-	var (
-		obj = &HistoricalEventPeaceRejected{}
-	)
+	var obj = NewHistoricalEventPeaceRejected()
 
 	for {
 		t, n, err := p.Token()
@@ -25547,9 +31242,8 @@ func parseHistoricalEventPeaceRejected(p *util.XMLParser) (*HistoricalEventPeace
 	}
 }
 func parseHistoricalEventPeaceRejectedPlus(p *util.XMLParser, obj *HistoricalEventPeaceRejected) (*HistoricalEventPeaceRejected, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventPeaceRejected{}
+		obj = NewHistoricalEventPeaceRejected()
 	}
 
 	for {
@@ -25596,9 +31290,7 @@ func parseHistoricalEventPeaceRejectedPlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventPerformance(p *util.XMLParser) (*HistoricalEventPerformance, error) {
-	var (
-		obj = &HistoricalEventPerformance{}
-	)
+	var obj = NewHistoricalEventPerformance()
 
 	for {
 		t, n, err := p.Token()
@@ -25656,9 +31348,8 @@ func parseHistoricalEventPerformance(p *util.XMLParser) (*HistoricalEventPerform
 	}
 }
 func parseHistoricalEventPerformancePlus(p *util.XMLParser, obj *HistoricalEventPerformance) (*HistoricalEventPerformance, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventPerformance{}
+		obj = NewHistoricalEventPerformance()
 	}
 
 	for {
@@ -25681,9 +31372,7 @@ func parseHistoricalEventPerformancePlus(p *util.XMLParser, obj *HistoricalEvent
 	}
 }
 func parseHistoricalEventPlunderedSite(p *util.XMLParser) (*HistoricalEventPlunderedSite, error) {
-	var (
-		obj = &HistoricalEventPlunderedSite{}
-	)
+	var obj = NewHistoricalEventPlunderedSite()
 
 	for {
 		t, n, err := p.Token()
@@ -25759,9 +31448,8 @@ func parseHistoricalEventPlunderedSite(p *util.XMLParser) (*HistoricalEventPlund
 	}
 }
 func parseHistoricalEventPlunderedSitePlus(p *util.XMLParser, obj *HistoricalEventPlunderedSite) (*HistoricalEventPlunderedSite, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventPlunderedSite{}
+		obj = NewHistoricalEventPlunderedSite()
 	}
 
 	for {
@@ -25784,9 +31472,7 @@ func parseHistoricalEventPlunderedSitePlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventPoeticFormCreated(p *util.XMLParser) (*HistoricalEventPoeticFormCreated, error) {
-	var (
-		obj = &HistoricalEventPoeticFormCreated{}
-	)
+	var obj = NewHistoricalEventPoeticFormCreated()
 
 	for {
 		t, n, err := p.Token()
@@ -25832,9 +31518,8 @@ func parseHistoricalEventPoeticFormCreated(p *util.XMLParser) (*HistoricalEventP
 	}
 }
 func parseHistoricalEventPoeticFormCreatedPlus(p *util.XMLParser, obj *HistoricalEventPoeticFormCreated) (*HistoricalEventPoeticFormCreated, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventPoeticFormCreated{}
+		obj = NewHistoricalEventPoeticFormCreated()
 	}
 
 	for {
@@ -25857,9 +31542,7 @@ func parseHistoricalEventPoeticFormCreatedPlus(p *util.XMLParser, obj *Historica
 	}
 }
 func parseHistoricalEventProcession(p *util.XMLParser) (*HistoricalEventProcession, error) {
-	var (
-		obj = &HistoricalEventProcession{}
-	)
+	var obj = NewHistoricalEventProcession()
 
 	for {
 		t, n, err := p.Token()
@@ -25917,9 +31600,8 @@ func parseHistoricalEventProcession(p *util.XMLParser) (*HistoricalEventProcessi
 	}
 }
 func parseHistoricalEventProcessionPlus(p *util.XMLParser, obj *HistoricalEventProcession) (*HistoricalEventProcession, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventProcession{}
+		obj = NewHistoricalEventProcession()
 	}
 
 	for {
@@ -25942,9 +31624,7 @@ func parseHistoricalEventProcessionPlus(p *util.XMLParser, obj *HistoricalEventP
 	}
 }
 func parseHistoricalEventRazedStructure(p *util.XMLParser) (*HistoricalEventRazedStructure, error) {
-	var (
-		obj = &HistoricalEventRazedStructure{}
-	)
+	var obj = NewHistoricalEventRazedStructure()
 
 	for {
 		t, n, err := p.Token()
@@ -25984,9 +31664,8 @@ func parseHistoricalEventRazedStructure(p *util.XMLParser) (*HistoricalEventRaze
 	}
 }
 func parseHistoricalEventRazedStructurePlus(p *util.XMLParser, obj *HistoricalEventRazedStructure) (*HistoricalEventRazedStructure, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventRazedStructure{}
+		obj = NewHistoricalEventRazedStructure()
 	}
 
 	for {
@@ -26009,9 +31688,7 @@ func parseHistoricalEventRazedStructurePlus(p *util.XMLParser, obj *HistoricalEv
 	}
 }
 func parseHistoricalEventReclaimSite(p *util.XMLParser) (*HistoricalEventReclaimSite, error) {
-	var (
-		obj = &HistoricalEventReclaimSite{}
-	)
+	var obj = NewHistoricalEventReclaimSite()
 
 	for {
 		t, n, err := p.Token()
@@ -26057,9 +31734,8 @@ func parseHistoricalEventReclaimSite(p *util.XMLParser) (*HistoricalEventReclaim
 	}
 }
 func parseHistoricalEventReclaimSitePlus(p *util.XMLParser, obj *HistoricalEventReclaimSite) (*HistoricalEventReclaimSite, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventReclaimSite{}
+		obj = NewHistoricalEventReclaimSite()
 	}
 
 	for {
@@ -26082,9 +31758,7 @@ func parseHistoricalEventReclaimSitePlus(p *util.XMLParser, obj *HistoricalEvent
 	}
 }
 func parseHistoricalEventRegionpopIncorporatedIntoEntity(p *util.XMLParser) (*HistoricalEventRegionpopIncorporatedIntoEntity, error) {
-	var (
-		obj = &HistoricalEventRegionpopIncorporatedIntoEntity{}
-	)
+	var obj = NewHistoricalEventRegionpopIncorporatedIntoEntity()
 
 	for {
 		t, n, err := p.Token()
@@ -26142,9 +31816,8 @@ func parseHistoricalEventRegionpopIncorporatedIntoEntity(p *util.XMLParser) (*Hi
 	}
 }
 func parseHistoricalEventRegionpopIncorporatedIntoEntityPlus(p *util.XMLParser, obj *HistoricalEventRegionpopIncorporatedIntoEntity) (*HistoricalEventRegionpopIncorporatedIntoEntity, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventRegionpopIncorporatedIntoEntity{}
+		obj = NewHistoricalEventRegionpopIncorporatedIntoEntity()
 	}
 
 	for {
@@ -26167,9 +31840,7 @@ func parseHistoricalEventRegionpopIncorporatedIntoEntityPlus(p *util.XMLParser, 
 	}
 }
 func parseHistoricalEventRelationship(p *util.XMLParser) (*HistoricalEventRelationship, error) {
-	var (
-		obj = &HistoricalEventRelationship{}
-	)
+	var obj = NewHistoricalEventRelationship()
 
 	for {
 		t, n, err := p.Token()
@@ -26191,9 +31862,8 @@ func parseHistoricalEventRelationship(p *util.XMLParser) (*HistoricalEventRelati
 	}
 }
 func parseHistoricalEventRelationshipPlus(p *util.XMLParser, obj *HistoricalEventRelationship) (*HistoricalEventRelationship, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventRelationship{}
+		obj = NewHistoricalEventRelationship()
 	}
 
 	for {
@@ -26246,9 +31916,7 @@ func parseHistoricalEventRelationshipPlus(p *util.XMLParser, obj *HistoricalEven
 	}
 }
 func parseHistoricalEventRelationshipSupplement(p *util.XMLParser) (*HistoricalEventRelationshipSupplement, error) {
-	var (
-		obj = &HistoricalEventRelationshipSupplement{}
-	)
+	var obj = NewHistoricalEventRelationshipSupplement()
 
 	for {
 		t, n, err := p.Token()
@@ -26270,9 +31938,8 @@ func parseHistoricalEventRelationshipSupplement(p *util.XMLParser) (*HistoricalE
 	}
 }
 func parseHistoricalEventRelationshipSupplementPlus(p *util.XMLParser, obj *HistoricalEventRelationshipSupplement) (*HistoricalEventRelationshipSupplement, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventRelationshipSupplement{}
+		obj = NewHistoricalEventRelationshipSupplement()
 	}
 
 	for {
@@ -26319,9 +31986,7 @@ func parseHistoricalEventRelationshipSupplementPlus(p *util.XMLParser, obj *Hist
 	}
 }
 func parseHistoricalEventRemoveHfEntityLink(p *util.XMLParser) (*HistoricalEventRemoveHfEntityLink, error) {
-	var (
-		obj = &HistoricalEventRemoveHfEntityLink{}
-	)
+	var obj = NewHistoricalEventRemoveHfEntityLink()
 
 	for {
 		t, n, err := p.Token()
@@ -26367,9 +32032,8 @@ func parseHistoricalEventRemoveHfEntityLink(p *util.XMLParser) (*HistoricalEvent
 	}
 }
 func parseHistoricalEventRemoveHfEntityLinkPlus(p *util.XMLParser, obj *HistoricalEventRemoveHfEntityLink) (*HistoricalEventRemoveHfEntityLink, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventRemoveHfEntityLink{}
+		obj = NewHistoricalEventRemoveHfEntityLink()
 	}
 
 	for {
@@ -26416,9 +32080,7 @@ func parseHistoricalEventRemoveHfEntityLinkPlus(p *util.XMLParser, obj *Historic
 	}
 }
 func parseHistoricalEventRemoveHfHfLink(p *util.XMLParser) (*HistoricalEventRemoveHfHfLink, error) {
-	var (
-		obj = &HistoricalEventRemoveHfHfLink{}
-	)
+	var obj = NewHistoricalEventRemoveHfHfLink()
 
 	for {
 		t, n, err := p.Token()
@@ -26452,9 +32114,8 @@ func parseHistoricalEventRemoveHfHfLink(p *util.XMLParser) (*HistoricalEventRemo
 	}
 }
 func parseHistoricalEventRemoveHfHfLinkPlus(p *util.XMLParser, obj *HistoricalEventRemoveHfHfLink) (*HistoricalEventRemoveHfHfLink, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventRemoveHfHfLink{}
+		obj = NewHistoricalEventRemoveHfHfLink()
 	}
 
 	for {
@@ -26477,9 +32138,7 @@ func parseHistoricalEventRemoveHfHfLinkPlus(p *util.XMLParser, obj *HistoricalEv
 	}
 }
 func parseHistoricalEventRemoveHfSiteLink(p *util.XMLParser) (*HistoricalEventRemoveHfSiteLink, error) {
-	var (
-		obj = &HistoricalEventRemoveHfSiteLink{}
-	)
+	var obj = NewHistoricalEventRemoveHfSiteLink()
 
 	for {
 		t, n, err := p.Token()
@@ -26507,9 +32166,8 @@ func parseHistoricalEventRemoveHfSiteLink(p *util.XMLParser) (*HistoricalEventRe
 	}
 }
 func parseHistoricalEventRemoveHfSiteLinkPlus(p *util.XMLParser, obj *HistoricalEventRemoveHfSiteLink) (*HistoricalEventRemoveHfSiteLink, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventRemoveHfSiteLink{}
+		obj = NewHistoricalEventRemoveHfSiteLink()
 	}
 
 	for {
@@ -26562,9 +32220,7 @@ func parseHistoricalEventRemoveHfSiteLinkPlus(p *util.XMLParser, obj *Historical
 	}
 }
 func parseHistoricalEventReplacedStructure(p *util.XMLParser) (*HistoricalEventReplacedStructure, error) {
-	var (
-		obj = &HistoricalEventReplacedStructure{}
-	)
+	var obj = NewHistoricalEventReplacedStructure()
 
 	for {
 		t, n, err := p.Token()
@@ -26616,9 +32272,8 @@ func parseHistoricalEventReplacedStructure(p *util.XMLParser) (*HistoricalEventR
 	}
 }
 func parseHistoricalEventReplacedStructurePlus(p *util.XMLParser, obj *HistoricalEventReplacedStructure) (*HistoricalEventReplacedStructure, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventReplacedStructure{}
+		obj = NewHistoricalEventReplacedStructure()
 	}
 
 	for {
@@ -26671,9 +32326,7 @@ func parseHistoricalEventReplacedStructurePlus(p *util.XMLParser, obj *Historica
 	}
 }
 func parseHistoricalEventSiteDied(p *util.XMLParser) (*HistoricalEventSiteDied, error) {
-	var (
-		obj = &HistoricalEventSiteDied{}
-	)
+	var obj = NewHistoricalEventSiteDied()
 
 	for {
 		t, n, err := p.Token()
@@ -26719,9 +32372,8 @@ func parseHistoricalEventSiteDied(p *util.XMLParser) (*HistoricalEventSiteDied, 
 	}
 }
 func parseHistoricalEventSiteDiedPlus(p *util.XMLParser, obj *HistoricalEventSiteDied) (*HistoricalEventSiteDied, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventSiteDied{}
+		obj = NewHistoricalEventSiteDied()
 	}
 
 	for {
@@ -26744,9 +32396,7 @@ func parseHistoricalEventSiteDiedPlus(p *util.XMLParser, obj *HistoricalEventSit
 	}
 }
 func parseHistoricalEventSiteDispute(p *util.XMLParser) (*HistoricalEventSiteDispute, error) {
-	var (
-		obj = &HistoricalEventSiteDispute{}
-	)
+	var obj = NewHistoricalEventSiteDispute()
 
 	for {
 		t, n, err := p.Token()
@@ -26798,9 +32448,8 @@ func parseHistoricalEventSiteDispute(p *util.XMLParser) (*HistoricalEventSiteDis
 	}
 }
 func parseHistoricalEventSiteDisputePlus(p *util.XMLParser, obj *HistoricalEventSiteDispute) (*HistoricalEventSiteDispute, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventSiteDispute{}
+		obj = NewHistoricalEventSiteDispute()
 	}
 
 	for {
@@ -26823,9 +32472,7 @@ func parseHistoricalEventSiteDisputePlus(p *util.XMLParser, obj *HistoricalEvent
 	}
 }
 func parseHistoricalEventSiteRetired(p *util.XMLParser) (*HistoricalEventSiteRetired, error) {
-	var (
-		obj = &HistoricalEventSiteRetired{}
-	)
+	var obj = NewHistoricalEventSiteRetired()
 
 	for {
 		t, n, err := p.Token()
@@ -26871,9 +32518,8 @@ func parseHistoricalEventSiteRetired(p *util.XMLParser) (*HistoricalEventSiteRet
 	}
 }
 func parseHistoricalEventSiteRetiredPlus(p *util.XMLParser, obj *HistoricalEventSiteRetired) (*HistoricalEventSiteRetired, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventSiteRetired{}
+		obj = NewHistoricalEventSiteRetired()
 	}
 
 	for {
@@ -26896,9 +32542,7 @@ func parseHistoricalEventSiteRetiredPlus(p *util.XMLParser, obj *HistoricalEvent
 	}
 }
 func parseHistoricalEventSiteSurrendered(p *util.XMLParser) (*HistoricalEventSiteSurrendered, error) {
-	var (
-		obj = &HistoricalEventSiteSurrendered{}
-	)
+	var obj = NewHistoricalEventSiteSurrendered()
 
 	for {
 		t, n, err := p.Token()
@@ -26944,9 +32588,8 @@ func parseHistoricalEventSiteSurrendered(p *util.XMLParser) (*HistoricalEventSit
 	}
 }
 func parseHistoricalEventSiteSurrenderedPlus(p *util.XMLParser, obj *HistoricalEventSiteSurrendered) (*HistoricalEventSiteSurrendered, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventSiteSurrendered{}
+		obj = NewHistoricalEventSiteSurrendered()
 	}
 
 	for {
@@ -26969,9 +32612,7 @@ func parseHistoricalEventSiteSurrenderedPlus(p *util.XMLParser, obj *HistoricalE
 	}
 }
 func parseHistoricalEventSiteTakenOver(p *util.XMLParser) (*HistoricalEventSiteTakenOver, error) {
-	var (
-		obj = &HistoricalEventSiteTakenOver{}
-	)
+	var obj = NewHistoricalEventSiteTakenOver()
 
 	for {
 		t, n, err := p.Token()
@@ -27023,9 +32664,8 @@ func parseHistoricalEventSiteTakenOver(p *util.XMLParser) (*HistoricalEventSiteT
 	}
 }
 func parseHistoricalEventSiteTakenOverPlus(p *util.XMLParser, obj *HistoricalEventSiteTakenOver) (*HistoricalEventSiteTakenOver, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventSiteTakenOver{}
+		obj = NewHistoricalEventSiteTakenOver()
 	}
 
 	for {
@@ -27048,9 +32688,7 @@ func parseHistoricalEventSiteTakenOverPlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventSiteTributeForced(p *util.XMLParser) (*HistoricalEventSiteTributeForced, error) {
-	var (
-		obj = &HistoricalEventSiteTributeForced{}
-	)
+	var obj = NewHistoricalEventSiteTributeForced()
 
 	for {
 		t, n, err := p.Token()
@@ -27102,9 +32740,8 @@ func parseHistoricalEventSiteTributeForced(p *util.XMLParser) (*HistoricalEventS
 	}
 }
 func parseHistoricalEventSiteTributeForcedPlus(p *util.XMLParser, obj *HistoricalEventSiteTributeForced) (*HistoricalEventSiteTributeForced, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventSiteTributeForced{}
+		obj = NewHistoricalEventSiteTributeForced()
 	}
 
 	for {
@@ -27127,9 +32764,7 @@ func parseHistoricalEventSiteTributeForcedPlus(p *util.XMLParser, obj *Historica
 	}
 }
 func parseHistoricalEventSneakIntoSite(p *util.XMLParser) (*HistoricalEventSneakIntoSite, error) {
-	var (
-		obj = &HistoricalEventSneakIntoSite{}
-	)
+	var obj = NewHistoricalEventSneakIntoSite()
 
 	for {
 		t, n, err := p.Token()
@@ -27175,9 +32810,8 @@ func parseHistoricalEventSneakIntoSite(p *util.XMLParser) (*HistoricalEventSneak
 	}
 }
 func parseHistoricalEventSneakIntoSitePlus(p *util.XMLParser, obj *HistoricalEventSneakIntoSite) (*HistoricalEventSneakIntoSite, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventSneakIntoSite{}
+		obj = NewHistoricalEventSneakIntoSite()
 	}
 
 	for {
@@ -27200,9 +32834,7 @@ func parseHistoricalEventSneakIntoSitePlus(p *util.XMLParser, obj *HistoricalEve
 	}
 }
 func parseHistoricalEventSpottedLeavingSite(p *util.XMLParser) (*HistoricalEventSpottedLeavingSite, error) {
-	var (
-		obj = &HistoricalEventSpottedLeavingSite{}
-	)
+	var obj = NewHistoricalEventSpottedLeavingSite()
 
 	for {
 		t, n, err := p.Token()
@@ -27248,9 +32880,8 @@ func parseHistoricalEventSpottedLeavingSite(p *util.XMLParser) (*HistoricalEvent
 	}
 }
 func parseHistoricalEventSpottedLeavingSitePlus(p *util.XMLParser, obj *HistoricalEventSpottedLeavingSite) (*HistoricalEventSpottedLeavingSite, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventSpottedLeavingSite{}
+		obj = NewHistoricalEventSpottedLeavingSite()
 	}
 
 	for {
@@ -27273,9 +32904,7 @@ func parseHistoricalEventSpottedLeavingSitePlus(p *util.XMLParser, obj *Historic
 	}
 }
 func parseHistoricalEventSquadVsSquad(p *util.XMLParser) (*HistoricalEventSquadVsSquad, error) {
-	var (
-		obj = &HistoricalEventSquadVsSquad{}
-	)
+	var obj = NewHistoricalEventSquadVsSquad()
 
 	for {
 		t, n, err := p.Token()
@@ -27399,9 +33028,8 @@ func parseHistoricalEventSquadVsSquad(p *util.XMLParser) (*HistoricalEventSquadV
 	}
 }
 func parseHistoricalEventSquadVsSquadPlus(p *util.XMLParser, obj *HistoricalEventSquadVsSquad) (*HistoricalEventSquadVsSquad, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventSquadVsSquad{}
+		obj = NewHistoricalEventSquadVsSquad()
 	}
 
 	for {
@@ -27424,9 +33052,7 @@ func parseHistoricalEventSquadVsSquadPlus(p *util.XMLParser, obj *HistoricalEven
 	}
 }
 func parseHistoricalEventTacticalSituation(p *util.XMLParser) (*HistoricalEventTacticalSituation, error) {
-	var (
-		obj = &HistoricalEventTacticalSituation{}
-	)
+	var obj = NewHistoricalEventTacticalSituation()
 
 	for {
 		t, n, err := p.Token()
@@ -27508,9 +33134,8 @@ func parseHistoricalEventTacticalSituation(p *util.XMLParser) (*HistoricalEventT
 	}
 }
 func parseHistoricalEventTacticalSituationPlus(p *util.XMLParser, obj *HistoricalEventTacticalSituation) (*HistoricalEventTacticalSituation, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventTacticalSituation{}
+		obj = NewHistoricalEventTacticalSituation()
 	}
 
 	for {
@@ -27533,9 +33158,7 @@ func parseHistoricalEventTacticalSituationPlus(p *util.XMLParser, obj *Historica
 	}
 }
 func parseHistoricalEventTrade(p *util.XMLParser) (*HistoricalEventTrade, error) {
-	var (
-		obj = &HistoricalEventTrade{}
-	)
+	var obj = NewHistoricalEventTrade()
 
 	for {
 		t, n, err := p.Token()
@@ -27605,9 +33228,8 @@ func parseHistoricalEventTrade(p *util.XMLParser) (*HistoricalEventTrade, error)
 	}
 }
 func parseHistoricalEventTradePlus(p *util.XMLParser, obj *HistoricalEventTrade) (*HistoricalEventTrade, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventTrade{}
+		obj = NewHistoricalEventTrade()
 	}
 
 	for {
@@ -27630,9 +33252,7 @@ func parseHistoricalEventTradePlus(p *util.XMLParser, obj *HistoricalEventTrade)
 	}
 }
 func parseHistoricalEventWrittenContentComposed(p *util.XMLParser) (*HistoricalEventWrittenContentComposed, error) {
-	var (
-		obj = &HistoricalEventWrittenContentComposed{}
-	)
+	var obj = NewHistoricalEventWrittenContentComposed()
 
 	for {
 		t, n, err := p.Token()
@@ -27702,9 +33322,8 @@ func parseHistoricalEventWrittenContentComposed(p *util.XMLParser) (*HistoricalE
 	}
 }
 func parseHistoricalEventWrittenContentComposedPlus(p *util.XMLParser, obj *HistoricalEventWrittenContentComposed) (*HistoricalEventWrittenContentComposed, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalEventWrittenContentComposed{}
+		obj = NewHistoricalEventWrittenContentComposed()
 	}
 
 	for {
@@ -27727,9 +33346,7 @@ func parseHistoricalEventWrittenContentComposedPlus(p *util.XMLParser, obj *Hist
 	}
 }
 func parseHistoricalFigure(p *util.XMLParser) (*HistoricalFigure, error) {
-	var (
-		obj = &HistoricalFigure{}
-	)
+	var obj = NewHistoricalFigure()
 
 	for {
 		t, n, err := p.Token()
@@ -27958,9 +33575,8 @@ func parseHistoricalFigure(p *util.XMLParser) (*HistoricalFigure, error) {
 	}
 }
 func parseHistoricalFigurePlus(p *util.XMLParser, obj *HistoricalFigure) (*HistoricalFigure, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalFigure{}
+		obj = NewHistoricalFigure()
 	}
 
 	for {
@@ -28001,9 +33617,7 @@ func parseHistoricalFigurePlus(p *util.XMLParser, obj *HistoricalFigure) (*Histo
 	}
 }
 func parseHistoricalFigureEntityLink(p *util.XMLParser) (*HistoricalFigureEntityLink, error) {
-	var (
-		obj = &HistoricalFigureEntityLink{}
-	)
+	var obj = NewHistoricalFigureEntityLink()
 
 	for {
 		t, n, err := p.Token()
@@ -28043,9 +33657,8 @@ func parseHistoricalFigureEntityLink(p *util.XMLParser) (*HistoricalFigureEntity
 	}
 }
 func parseHistoricalFigureEntityLinkPlus(p *util.XMLParser, obj *HistoricalFigureEntityLink) (*HistoricalFigureEntityLink, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalFigureEntityLink{}
+		obj = NewHistoricalFigureEntityLink()
 	}
 
 	for {
@@ -28068,9 +33681,7 @@ func parseHistoricalFigureEntityLinkPlus(p *util.XMLParser, obj *HistoricalFigur
 	}
 }
 func parseHistoricalFigureSiteProperty(p *util.XMLParser) (*HistoricalFigureSiteProperty, error) {
-	var (
-		obj = &HistoricalFigureSiteProperty{}
-	)
+	var obj = NewHistoricalFigureSiteProperty()
 
 	for {
 		t, n, err := p.Token()
@@ -28104,9 +33715,8 @@ func parseHistoricalFigureSiteProperty(p *util.XMLParser) (*HistoricalFigureSite
 	}
 }
 func parseHistoricalFigureSitePropertyPlus(p *util.XMLParser, obj *HistoricalFigureSiteProperty) (*HistoricalFigureSiteProperty, error) {
-	var ()
 	if obj == nil {
-		obj = &HistoricalFigureSiteProperty{}
+		obj = NewHistoricalFigureSiteProperty()
 	}
 
 	for {
@@ -28129,9 +33739,7 @@ func parseHistoricalFigureSitePropertyPlus(p *util.XMLParser, obj *HistoricalFig
 	}
 }
 func parseHonor(p *util.XMLParser) (*Honor, error) {
-	var (
-		obj = &Honor{}
-	)
+	var obj = NewHonor()
 
 	for {
 		t, n, err := p.Token()
@@ -28225,9 +33833,8 @@ func parseHonor(p *util.XMLParser) (*Honor, error) {
 	}
 }
 func parseHonorPlus(p *util.XMLParser, obj *Honor) (*Honor, error) {
-	var ()
 	if obj == nil {
-		obj = &Honor{}
+		obj = NewHonor()
 	}
 
 	for {
@@ -28250,9 +33857,7 @@ func parseHonorPlus(p *util.XMLParser, obj *Honor) (*Honor, error) {
 	}
 }
 func parseHonorEntity(p *util.XMLParser) (*HonorEntity, error) {
-	var (
-		obj = &HonorEntity{}
-	)
+	var obj = NewHonorEntity()
 
 	for {
 		t, n, err := p.Token()
@@ -28298,9 +33903,8 @@ func parseHonorEntity(p *util.XMLParser) (*HonorEntity, error) {
 	}
 }
 func parseHonorEntityPlus(p *util.XMLParser, obj *HonorEntity) (*HonorEntity, error) {
-	var ()
 	if obj == nil {
-		obj = &HonorEntity{}
+		obj = NewHonorEntity()
 	}
 
 	for {
@@ -28323,9 +33927,7 @@ func parseHonorEntityPlus(p *util.XMLParser, obj *HonorEntity) (*HonorEntity, er
 	}
 }
 func parseIdentity(p *util.XMLParser) (*Identity, error) {
-	var (
-		obj = &Identity{}
-	)
+	var obj = NewIdentity()
 
 	for {
 		t, n, err := p.Token()
@@ -28347,9 +33949,8 @@ func parseIdentity(p *util.XMLParser) (*Identity, error) {
 	}
 }
 func parseIdentityPlus(p *util.XMLParser, obj *Identity) (*Identity, error) {
-	var ()
 	if obj == nil {
-		obj = &Identity{}
+		obj = NewIdentity()
 	}
 
 	for {
@@ -28432,9 +34033,7 @@ func parseIdentityPlus(p *util.XMLParser, obj *Identity) (*Identity, error) {
 	}
 }
 func parseIntrigueActor(p *util.XMLParser) (*IntrigueActor, error) {
-	var (
-		obj = &IntrigueActor{}
-	)
+	var obj = NewIntrigueActor()
 
 	for {
 		t, n, err := p.Token()
@@ -28516,9 +34115,8 @@ func parseIntrigueActor(p *util.XMLParser) (*IntrigueActor, error) {
 	}
 }
 func parseIntrigueActorPlus(p *util.XMLParser, obj *IntrigueActor) (*IntrigueActor, error) {
-	var ()
 	if obj == nil {
-		obj = &IntrigueActor{}
+		obj = NewIntrigueActor()
 	}
 
 	for {
@@ -28541,9 +34139,7 @@ func parseIntrigueActorPlus(p *util.XMLParser, obj *IntrigueActor) (*IntrigueAct
 	}
 }
 func parseIntriguePlot(p *util.XMLParser) (*IntriguePlot, error) {
-	var (
-		obj = &IntriguePlot{}
-	)
+	var obj = NewIntriguePlot()
 
 	for {
 		t, n, err := p.Token()
@@ -28628,9 +34224,8 @@ func parseIntriguePlot(p *util.XMLParser) (*IntriguePlot, error) {
 	}
 }
 func parseIntriguePlotPlus(p *util.XMLParser, obj *IntriguePlot) (*IntriguePlot, error) {
-	var ()
 	if obj == nil {
-		obj = &IntriguePlot{}
+		obj = NewIntriguePlot()
 	}
 
 	for {
@@ -28653,9 +34248,7 @@ func parseIntriguePlotPlus(p *util.XMLParser, obj *IntriguePlot) (*IntriguePlot,
 	}
 }
 func parseItem(p *util.XMLParser) (*Item, error) {
-	var (
-		obj = &Item{}
-	)
+	var obj = NewItem()
 
 	for {
 		t, n, err := p.Token()
@@ -28701,9 +34294,8 @@ func parseItem(p *util.XMLParser) (*Item, error) {
 	}
 }
 func parseItemPlus(p *util.XMLParser, obj *Item) (*Item, error) {
-	var ()
 	if obj == nil {
-		obj = &Item{}
+		obj = NewItem()
 	}
 
 	for {
@@ -28726,9 +34318,7 @@ func parseItemPlus(p *util.XMLParser, obj *Item) (*Item, error) {
 	}
 }
 func parseLandmass(p *util.XMLParser) (*Landmass, error) {
-	var (
-		obj = &Landmass{}
-	)
+	var obj = NewLandmass()
 
 	for {
 		t, n, err := p.Token()
@@ -28750,9 +34340,8 @@ func parseLandmass(p *util.XMLParser) (*Landmass, error) {
 	}
 }
 func parseLandmassPlus(p *util.XMLParser, obj *Landmass) (*Landmass, error) {
-	var ()
 	if obj == nil {
-		obj = &Landmass{}
+		obj = NewLandmass()
 	}
 
 	for {
@@ -28799,9 +34388,7 @@ func parseLandmassPlus(p *util.XMLParser, obj *Landmass) (*Landmass, error) {
 	}
 }
 func parseMountainPeak(p *util.XMLParser) (*MountainPeak, error) {
-	var (
-		obj = &MountainPeak{}
-	)
+	var obj = NewMountainPeak()
 
 	for {
 		t, n, err := p.Token()
@@ -28823,9 +34410,8 @@ func parseMountainPeak(p *util.XMLParser) (*MountainPeak, error) {
 	}
 }
 func parseMountainPeakPlus(p *util.XMLParser, obj *MountainPeak) (*MountainPeak, error) {
-	var ()
 	if obj == nil {
-		obj = &MountainPeak{}
+		obj = NewMountainPeak()
 	}
 
 	for {
@@ -28878,9 +34464,7 @@ func parseMountainPeakPlus(p *util.XMLParser, obj *MountainPeak) (*MountainPeak,
 	}
 }
 func parseMusicalForm(p *util.XMLParser) (*MusicalForm, error) {
-	var (
-		obj = &MusicalForm{}
-	)
+	var obj = NewMusicalForm()
 
 	for {
 		t, n, err := p.Token()
@@ -28914,9 +34498,8 @@ func parseMusicalForm(p *util.XMLParser) (*MusicalForm, error) {
 	}
 }
 func parseMusicalFormPlus(p *util.XMLParser, obj *MusicalForm) (*MusicalForm, error) {
-	var ()
 	if obj == nil {
-		obj = &MusicalForm{}
+		obj = NewMusicalForm()
 	}
 
 	for {
@@ -28951,9 +34534,7 @@ func parseMusicalFormPlus(p *util.XMLParser, obj *MusicalForm) (*MusicalForm, er
 	}
 }
 func parseOccasion(p *util.XMLParser) (*Occasion, error) {
-	var (
-		obj = &Occasion{}
-	)
+	var obj = NewOccasion()
 
 	for {
 		t, n, err := p.Token()
@@ -28975,9 +34556,8 @@ func parseOccasion(p *util.XMLParser) (*Occasion, error) {
 	}
 }
 func parseOccasionPlus(p *util.XMLParser, obj *Occasion) (*Occasion, error) {
-	var ()
 	if obj == nil {
-		obj = &Occasion{}
+		obj = NewOccasion()
 	}
 
 	for {
@@ -29021,9 +34601,7 @@ func parseOccasionPlus(p *util.XMLParser, obj *Occasion) (*Occasion, error) {
 	}
 }
 func parsePlotActor(p *util.XMLParser) (*PlotActor, error) {
-	var (
-		obj = &PlotActor{}
-	)
+	var obj = NewPlotActor()
 
 	for {
 		t, n, err := p.Token()
@@ -29069,9 +34647,8 @@ func parsePlotActor(p *util.XMLParser) (*PlotActor, error) {
 	}
 }
 func parsePlotActorPlus(p *util.XMLParser, obj *PlotActor) (*PlotActor, error) {
-	var ()
 	if obj == nil {
-		obj = &PlotActor{}
+		obj = NewPlotActor()
 	}
 
 	for {
@@ -29094,9 +34671,7 @@ func parsePlotActorPlus(p *util.XMLParser, obj *PlotActor) (*PlotActor, error) {
 	}
 }
 func parsePoeticForm(p *util.XMLParser) (*PoeticForm, error) {
-	var (
-		obj = &PoeticForm{}
-	)
+	var obj = NewPoeticForm()
 
 	for {
 		t, n, err := p.Token()
@@ -29130,9 +34705,8 @@ func parsePoeticForm(p *util.XMLParser) (*PoeticForm, error) {
 	}
 }
 func parsePoeticFormPlus(p *util.XMLParser, obj *PoeticForm) (*PoeticForm, error) {
-	var ()
 	if obj == nil {
-		obj = &PoeticForm{}
+		obj = NewPoeticForm()
 	}
 
 	for {
@@ -29167,9 +34741,7 @@ func parsePoeticFormPlus(p *util.XMLParser, obj *PoeticForm) (*PoeticForm, error
 	}
 }
 func parseReference(p *util.XMLParser) (*Reference, error) {
-	var (
-		obj = &Reference{}
-	)
+	var obj = NewReference()
 
 	for {
 		t, n, err := p.Token()
@@ -29191,9 +34763,8 @@ func parseReference(p *util.XMLParser) (*Reference, error) {
 	}
 }
 func parseReferencePlus(p *util.XMLParser, obj *Reference) (*Reference, error) {
-	var ()
 	if obj == nil {
-		obj = &Reference{}
+		obj = NewReference()
 	}
 
 	for {
@@ -29228,9 +34799,7 @@ func parseReferencePlus(p *util.XMLParser, obj *Reference) (*Reference, error) {
 	}
 }
 func parseRegion(p *util.XMLParser) (*Region, error) {
-	var (
-		obj = &Region{}
-	)
+	var obj = NewRegion()
 
 	for {
 		t, n, err := p.Token()
@@ -29270,9 +34839,8 @@ func parseRegion(p *util.XMLParser) (*Region, error) {
 	}
 }
 func parseRegionPlus(p *util.XMLParser, obj *Region) (*Region, error) {
-	var ()
 	if obj == nil {
-		obj = &Region{}
+		obj = NewRegion()
 	}
 
 	for {
@@ -29319,9 +34887,7 @@ func parseRegionPlus(p *util.XMLParser, obj *Region) (*Region, error) {
 	}
 }
 func parseRelationshipProfileHfHistorical(p *util.XMLParser) (*RelationshipProfileHfHistorical, error) {
-	var (
-		obj = &RelationshipProfileHfHistorical{}
-	)
+	var obj = NewRelationshipProfileHfHistorical()
 
 	for {
 		t, n, err := p.Token()
@@ -29421,9 +34987,8 @@ func parseRelationshipProfileHfHistorical(p *util.XMLParser) (*RelationshipProfi
 	}
 }
 func parseRelationshipProfileHfHistoricalPlus(p *util.XMLParser, obj *RelationshipProfileHfHistorical) (*RelationshipProfileHfHistorical, error) {
-	var ()
 	if obj == nil {
-		obj = &RelationshipProfileHfHistorical{}
+		obj = NewRelationshipProfileHfHistorical()
 	}
 
 	for {
@@ -29446,9 +35011,7 @@ func parseRelationshipProfileHfHistoricalPlus(p *util.XMLParser, obj *Relationsh
 	}
 }
 func parseRelationshipProfileHfIdentity(p *util.XMLParser) (*RelationshipProfileHfIdentity, error) {
-	var (
-		obj = &RelationshipProfileHfIdentity{}
-	)
+	var obj = NewRelationshipProfileHfIdentity()
 
 	for {
 		t, n, err := p.Token()
@@ -29512,9 +35075,8 @@ func parseRelationshipProfileHfIdentity(p *util.XMLParser) (*RelationshipProfile
 	}
 }
 func parseRelationshipProfileHfIdentityPlus(p *util.XMLParser, obj *RelationshipProfileHfIdentity) (*RelationshipProfileHfIdentity, error) {
-	var ()
 	if obj == nil {
-		obj = &RelationshipProfileHfIdentity{}
+		obj = NewRelationshipProfileHfIdentity()
 	}
 
 	for {
@@ -29537,9 +35099,7 @@ func parseRelationshipProfileHfIdentityPlus(p *util.XMLParser, obj *Relationship
 	}
 }
 func parseRelationshipProfileHfVisual(p *util.XMLParser) (*RelationshipProfileHfVisual, error) {
-	var (
-		obj = &RelationshipProfileHfVisual{}
-	)
+	var obj = NewRelationshipProfileHfVisual()
 
 	for {
 		t, n, err := p.Token()
@@ -29687,9 +35247,8 @@ func parseRelationshipProfileHfVisual(p *util.XMLParser) (*RelationshipProfileHf
 	}
 }
 func parseRelationshipProfileHfVisualPlus(p *util.XMLParser, obj *RelationshipProfileHfVisual) (*RelationshipProfileHfVisual, error) {
-	var ()
 	if obj == nil {
-		obj = &RelationshipProfileHfVisual{}
+		obj = NewRelationshipProfileHfVisual()
 	}
 
 	for {
@@ -29712,9 +35271,7 @@ func parseRelationshipProfileHfVisualPlus(p *util.XMLParser, obj *RelationshipPr
 	}
 }
 func parseRiver(p *util.XMLParser) (*River, error) {
-	var (
-		obj = &River{}
-	)
+	var obj = NewRiver()
 
 	for {
 		t, n, err := p.Token()
@@ -29736,9 +35293,8 @@ func parseRiver(p *util.XMLParser) (*River, error) {
 	}
 }
 func parseRiverPlus(p *util.XMLParser, obj *River) (*River, error) {
-	var ()
 	if obj == nil {
-		obj = &River{}
+		obj = NewRiver()
 	}
 
 	for {
@@ -29779,9 +35335,7 @@ func parseRiverPlus(p *util.XMLParser, obj *River) (*River, error) {
 	}
 }
 func parseSchedule(p *util.XMLParser) (*Schedule, error) {
-	var (
-		obj = &Schedule{}
-	)
+	var obj = NewSchedule()
 
 	for {
 		t, n, err := p.Token()
@@ -29803,9 +35357,8 @@ func parseSchedule(p *util.XMLParser) (*Schedule, error) {
 	}
 }
 func parseSchedulePlus(p *util.XMLParser, obj *Schedule) (*Schedule, error) {
-	var ()
 	if obj == nil {
-		obj = &Schedule{}
+		obj = NewSchedule()
 	}
 
 	for {
@@ -29867,12 +35420,7 @@ func parseSchedulePlus(p *util.XMLParser, obj *Schedule) (*Schedule, error) {
 	}
 }
 func parseSite(p *util.XMLParser) (*Site, error) {
-	var (
-		obj = &Site{}
-	)
-
-	obj.SiteProperties = make(map[int]*SiteSiteProperty)
-	obj.Structures = make(map[int]*Structure)
+	var obj = NewSite()
 
 	for {
 		t, n, err := p.Token()
@@ -29928,9 +35476,8 @@ func parseSite(p *util.XMLParser) (*Site, error) {
 	}
 }
 func parseSitePlus(p *util.XMLParser, obj *Site) (*Site, error) {
-	var ()
 	if obj == nil {
-		obj = &Site{}
+		obj = NewSite()
 	}
 
 	for {
@@ -29973,9 +35520,7 @@ func parseSitePlus(p *util.XMLParser, obj *Site) (*Site, error) {
 	}
 }
 func parseSiteLink(p *util.XMLParser) (*SiteLink, error) {
-	var (
-		obj = &SiteLink{}
-	)
+	var obj = NewSiteLink()
 
 	for {
 		t, n, err := p.Token()
@@ -30027,9 +35572,8 @@ func parseSiteLink(p *util.XMLParser) (*SiteLink, error) {
 	}
 }
 func parseSiteLinkPlus(p *util.XMLParser, obj *SiteLink) (*SiteLink, error) {
-	var ()
 	if obj == nil {
-		obj = &SiteLink{}
+		obj = NewSiteLink()
 	}
 
 	for {
@@ -30052,9 +35596,7 @@ func parseSiteLinkPlus(p *util.XMLParser, obj *SiteLink) (*SiteLink, error) {
 	}
 }
 func parseSiteSiteProperty(p *util.XMLParser) (*SiteSiteProperty, error) {
-	var (
-		obj = &SiteSiteProperty{}
-	)
+	var obj = NewSiteSiteProperty()
 
 	for {
 		t, n, err := p.Token()
@@ -30100,9 +35642,8 @@ func parseSiteSiteProperty(p *util.XMLParser) (*SiteSiteProperty, error) {
 	}
 }
 func parseSiteSitePropertyPlus(p *util.XMLParser, obj *SiteSiteProperty) (*SiteSiteProperty, error) {
-	var ()
 	if obj == nil {
-		obj = &SiteSiteProperty{}
+		obj = NewSiteSiteProperty()
 	}
 
 	for {
@@ -30125,9 +35666,7 @@ func parseSiteSitePropertyPlus(p *util.XMLParser, obj *SiteSiteProperty) (*SiteS
 	}
 }
 func parseStructure(p *util.XMLParser) (*Structure, error) {
-	var (
-		obj = &Structure{}
-	)
+	var obj = NewStructure()
 
 	for {
 		t, n, err := p.Token()
@@ -30191,9 +35730,8 @@ func parseStructure(p *util.XMLParser) (*Structure, error) {
 	}
 }
 func parseStructurePlus(p *util.XMLParser, obj *Structure) (*Structure, error) {
-	var ()
 	if obj == nil {
-		obj = &Structure{}
+		obj = NewStructure()
 	}
 
 	for {
@@ -30270,9 +35808,7 @@ func parseStructurePlus(p *util.XMLParser, obj *Structure) (*Structure, error) {
 	}
 }
 func parseUndergroundRegion(p *util.XMLParser) (*UndergroundRegion, error) {
-	var (
-		obj = &UndergroundRegion{}
-	)
+	var obj = NewUndergroundRegion()
 
 	for {
 		t, n, err := p.Token()
@@ -30312,9 +35848,8 @@ func parseUndergroundRegion(p *util.XMLParser) (*UndergroundRegion, error) {
 	}
 }
 func parseUndergroundRegionPlus(p *util.XMLParser, obj *UndergroundRegion) (*UndergroundRegion, error) {
-	var ()
 	if obj == nil {
-		obj = &UndergroundRegion{}
+		obj = NewUndergroundRegion()
 	}
 
 	for {
@@ -30349,9 +35884,7 @@ func parseUndergroundRegionPlus(p *util.XMLParser, obj *UndergroundRegion) (*Und
 	}
 }
 func parseVagueRelationship(p *util.XMLParser) (*VagueRelationship, error) {
-	var (
-		obj = &VagueRelationship{}
-	)
+	var obj = NewVagueRelationship()
 
 	for {
 		t, n, err := p.Token()
@@ -30457,9 +35990,8 @@ func parseVagueRelationship(p *util.XMLParser) (*VagueRelationship, error) {
 	}
 }
 func parseVagueRelationshipPlus(p *util.XMLParser, obj *VagueRelationship) (*VagueRelationship, error) {
-	var ()
 	if obj == nil {
-		obj = &VagueRelationship{}
+		obj = NewVagueRelationship()
 	}
 
 	for {
@@ -30482,9 +36014,7 @@ func parseVagueRelationshipPlus(p *util.XMLParser, obj *VagueRelationship) (*Vag
 	}
 }
 func parseWorldConstruction(p *util.XMLParser) (*WorldConstruction, error) {
-	var (
-		obj = &WorldConstruction{}
-	)
+	var obj = NewWorldConstruction()
 
 	for {
 		t, n, err := p.Token()
@@ -30506,9 +36036,8 @@ func parseWorldConstruction(p *util.XMLParser) (*WorldConstruction, error) {
 	}
 }
 func parseWorldConstructionPlus(p *util.XMLParser, obj *WorldConstruction) (*WorldConstruction, error) {
-	var ()
 	if obj == nil {
-		obj = &WorldConstruction{}
+		obj = NewWorldConstruction()
 	}
 
 	for {
@@ -30555,9 +36084,7 @@ func parseWorldConstructionPlus(p *util.XMLParser, obj *WorldConstruction) (*Wor
 	}
 }
 func parseWrittenContent(p *util.XMLParser) (*WrittenContent, error) {
-	var (
-		obj = &WrittenContent{}
-	)
+	var obj = NewWrittenContent()
 
 	for {
 		t, n, err := p.Token()
@@ -30621,9 +36148,8 @@ func parseWrittenContent(p *util.XMLParser) (*WrittenContent, error) {
 	}
 }
 func parseWrittenContentPlus(p *util.XMLParser, obj *WrittenContent) (*WrittenContent, error) {
-	var ()
 	if obj == nil {
-		obj = &WrittenContent{}
+		obj = NewWrittenContent()
 	}
 
 	for {
