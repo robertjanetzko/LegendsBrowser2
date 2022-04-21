@@ -2,7 +2,6 @@ package main
 
 import (
 	"embed"
-	"encoding/json"
 	"flag"
 	"fmt"
 	"html/template"
@@ -13,7 +12,6 @@ import (
 	"runtime"
 	"sort"
 	"strconv"
-	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/pkg/profile"
@@ -35,33 +33,14 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 
 	functions := template.FuncMap{
-		"json": func(obj any) string {
-			b, err := json.MarshalIndent(obj, "", "  ")
-			if err != nil {
-				fmt.Println(err)
-				return ""
-			}
-			return string(b)
-		},
+		"json": util.Json,
 		"check": func(condition bool, v any) any {
 			if condition {
 				return v
 			}
 			return nil
 		},
-		"title": func(input string) string {
-			words := strings.Split(input, " ")
-			smallwords := " a an on the to of "
-
-			for index, word := range words {
-				if strings.Contains(smallwords, " "+word+" ") && index > 0 {
-					words[index] = word
-				} else {
-					words[index] = strings.Title(word)
-				}
-			}
-			return strings.Join(words, " ")
-		},
+		"title":     util.Title,
 		"getHf":     func(id int) *model.HistoricalFigure { return world.HistoricalFigures[id] },
 		"getEntity": func(id int) *model.Entity { return world.Entities[id] },
 		"events": func(obj model.Identifiable) []*model.HistoricalEvent {

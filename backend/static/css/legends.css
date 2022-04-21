@@ -1,0 +1,87 @@
+a {
+    text-decoration: none;
+}
+
+.hf {
+    color: #3366CC;
+}
+
+.entity {
+    color: #CC33FF;
+}
+
+.site {
+    color: #FFCC00;
+}
+
+.structure {
+    color: #FFAA00;
+}
+
+.ruin {
+    color: #bbb;
+}
+
+.worldconstruction {
+    color: #777777;
+}
+
+.region {
+    color: #009933;
+}
+
+.artifact {
+    color: #993300;
+}
+
+.writtencontent {
+    color: #999999;
+}
+
+.artform {
+    color: #993399;
+}
+
+.occasion {
+    color: #993399;
+}
+
+.war {
+    color: #600000;
+}
+
+.battle {
+    color: #900000;
+}
+
+.json {
+    color: #ddd;
+    font-size: 50%;
+}
+
+/* 
+@media (prefers-color-scheme: dark) {
+    a {
+        color: #337ab7;
+    }
+
+    .artifact {
+        color: #ea4e00;
+    }
+
+    .historical-figure {
+        color: #5c93ff;
+    }
+
+    .war {
+        color: #a00000;
+    }
+
+    .battle {
+        color: #c70303;
+    }
+
+    .art-form {
+        color: #cc45cc;
+    }
+} */

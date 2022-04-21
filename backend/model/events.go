@@ -277,9 +277,18 @@ func (x *HistoricalEventArtifactTransformed) Html() string {
 	return fmt.Sprintf("%s was made from %s by %s in %s", artifact(x.NewArtifactId), artifact(x.OldArtifactId), hf(x.HistFigureId), site(x.SiteId, "")) // TODO wording
 }
 
-func (x *HistoricalEventAssumeIdentity) Html() string { return "UNKNWON HistoricalEventAssumeIdentity" }
-func (x *HistoricalEventAttackedSite) Html() string   { return "UNKNWON HistoricalEventAttackedSite" }
-func (x *HistoricalEventBodyAbused) Html() string     { return "UNKNWON HistoricalEventBodyAbused" }
+func (x *HistoricalEventAssumeIdentity) Html() string {
+	h := hf(x.TricksterHfid)
+	i := identity(x.IdentityId)
+	if x.TargetEnid == -1 {
+		return fmt.Sprintf(`%s assumed the identity "%s"`, h, i)
+	} else {
+		return fmt.Sprintf(`%s fooled %s into believing %s was "%s"`, h, entity(x.TargetEnid), pronoun(x.TricksterHfid), i)
+	}
+}
+
+func (x *HistoricalEventAttackedSite) Html() string { return "UNKNWON HistoricalEventAttackedSite" }
+func (x *HistoricalEventBodyAbused) Html() string   { return "UNKNWON HistoricalEventBodyAbused" }
 func (x *HistoricalEventBuildingProfileAcquired) Html() string {
 	return "UNKNWON HistoricalEventBuildingProfileAcquired"
 }
