@@ -101,6 +101,10 @@ func (x *HistoricalEventAddHfSiteLink) Html() string {
 		return h + " took up residence in " + b + c + " " + s
 	case HistoricalEventAddHfSiteLinkLinkType_Occupation:
 		return h + " started working at " + b + c + " " + s
+	case HistoricalEventAddHfSiteLinkLinkType_PrisonAbstractBuilding:
+		return h + " was imprisoned in " + b + c + " " + s
+	case HistoricalEventAddHfSiteLinkLinkType_PrisonSiteBuildingProfile:
+		return h + " was imprisoned in " + b + c + " " + s
 	case HistoricalEventAddHfSiteLinkLinkType_SeatOfPower:
 		return h + " ruled from " + b + c + " " + s
 	default:
@@ -112,7 +116,9 @@ func (x *HistoricalEventAgreementFormed) Html() string { // TODO
 	return "UNKNWON HistoricalEventAgreementFormed"
 }
 
-func (x *HistoricalEventAgreementMade) Html() string { return "UNKNWON HistoricalEventAgreementMade" } // TODO
+func (x *HistoricalEventAgreementMade) Html() string { // TODO
+	return "UNKNWON HistoricalEventAgreementMade"
+}
 
 func (x *HistoricalEventAgreementRejected) Html() string { // TODO
 	return "UNKNWON HistoricalEventAgreementRejected"
@@ -143,9 +149,9 @@ func (x *HistoricalEventArtifactClaimFormed) Html() string {
 
 func (x *HistoricalEventArtifactCopied) Html() string {
 	s := util.If(x.FromOriginal, "made a copy of the original", "aquired a copy of")
-	return fmt.Sprintf("%s %s %s from %s%s of %s, keeping it within %s%s",
-		entity(x.DestEntityId), s, artifact(x.ArtifactId), structure(x.SourceSiteId, x.SourceStructureId), site(x.SourceSiteId, " in "),
-		entity(x.SourceEntityId), structure(x.DestSiteId, x.DestStructureId), site(x.DestSiteId, " in "))
+	return fmt.Sprintf("%s %s %s %s of %s, keeping it%s",
+		entity(x.DestEntityId), s, artifact(x.ArtifactId), siteStructure(x.SourceSiteId, x.SourceStructureId, "from"),
+		entity(x.SourceEntityId), siteStructure(x.DestSiteId, x.DestStructureId, "within"))
 }
 
 func (x *HistoricalEventArtifactCreated) Html() string {
@@ -176,13 +182,22 @@ func (x *HistoricalEventArtifactCreated) Html() string {
 		return fmt.Sprintf("%s received its name%s from %s %s", a, s, h, c)
 	}
 }
+
 func (x *HistoricalEventArtifactDestroyed) Html() string {
 	return fmt.Sprintf("%s was destroyed by %s in %s", artifact(x.ArtifactId), entity(x.DestroyerEnid), site(x.SiteId, ""))
 }
 
 func (x *HistoricalEventArtifactFound) Html() string {
-	return fmt.Sprintf("%s was found in %s by %s", artifact(x.ArtifactId), site(x.SiteId, ""), hf(x.HistFigureId))
+	w := ""
+	if x.SiteId != -1 {
+		w = site(x.SiteId, "")
+		if x.SitePropertyId != -1 {
+			w = property(x.SiteId, x.SitePropertyId) + " in " + w
+		}
+	}
+	return fmt.Sprintf("%s was found in %s by %s", artifact(x.ArtifactId), w, util.If(x.HistFigureId != -1, hf(x.HistFigureId), "an unknown creature"))
 }
+
 func (x *HistoricalEventArtifactGiven) Html() string {
 	r := ""
 	if x.ReceiverHistFigureId != -1 {
@@ -216,6 +231,9 @@ func (x *HistoricalEventArtifactLost) Html() string {
 	}
 	if x.SiteId != -1 {
 		w = site(x.SiteId, "")
+		if x.SitePropertyId != -1 {
+			w = property(x.SiteId, x.SitePropertyId) + " in " + w
+		}
 	}
 	return fmt.Sprintf("%s was lost in %s", artifact(x.ArtifactId), w)
 }
@@ -255,14 +273,18 @@ func (x *HistoricalEventArtifactRecovered) Html() string {
 	if x.SiteId != -1 {
 		w = site(x.SiteId, "in ")
 		if x.StructureId != -1 {
-			w = "from " + structure(x.SiteId, x.StructureId) + " " + w
+			w = siteStructure(x.SiteId, x.StructureId, "from")
 		}
 	}
 	return fmt.Sprintf("%s was recovered %s by %s", a, w, h)
 }
 
-func (x *HistoricalEventArtifactStored) Html() string {
-	return fmt.Sprintf("%s stored %s in %s", hf(x.HistFigureId), artifact(x.ArtifactId), site(x.SiteId, ""))
+func (x *HistoricalEventArtifactStored) Html() string { // TODO export siteProperty
+	if x.HistFigureId != -1 {
+		return fmt.Sprintf("%s stored %s in %s", hf(x.HistFigureId), artifact(x.ArtifactId), site(x.SiteId, ""))
+	} else {
+		return fmt.Sprintf("%s was stored in %s", artifact(x.ArtifactId), site(x.SiteId, ""))
+	}
 }
 
 func (x *HistoricalEventArtifactTransformed) Html() string {
@@ -386,6 +408,7 @@ func (x *HistoricalEventChangeHfJob) Html() string {
 		return hf(x.Hfid) + " gave up being " + old + " to become a " + new + w
 	}
 }
+
 func (x *HistoricalEventChangeHfState) Html() string {
 	r := ""
 	switch x.Reason {
@@ -434,9 +457,11 @@ func (x *HistoricalEventChangeHfState) Html() string {
 		}
 	}
 
-	switch x.Mood { // TODO catatonic
+	switch x.Mood {
 	case HistoricalEventChangeHfStateMood_Berserk:
 		return hf(x.Hfid) + " went berserk " + site(x.SiteId, "in") + r
+	case HistoricalEventChangeHfStateMood_Catatonic:
+		return hf(x.Hfid) + " stopped responding to the outside world " + site(x.SiteId, "in") + r
 	case HistoricalEventChangeHfStateMood_Fell:
 		return hf(x.Hfid) + " was taken by a fell mood " + site(x.SiteId, "in") + r
 	case HistoricalEventChangeHfStateMood_Fey:
@@ -502,12 +527,12 @@ func (x *HistoricalEventCreatedSite) Html() string {
 
 }
 
-func (x *HistoricalEventCreatedStructure) Html() string { // TODO rebuild/rebuilt; Structure/StructureId
+func (x *HistoricalEventCreatedStructure) Html() string { // TODO rebuild/rebuilt
 	if x.BuilderHfid != -1 {
 		return hf(x.BuilderHfid) + " thrust a spire of slade up from the underworld, naming it " + structure(x.SiteId, x.StructureId) +
 			", and established a gateway between worlds in " + site(x.SiteId, "")
 	}
-	return siteCiv(x.SiteCivId, x.CivId) + util.If(x.Rebuilt, " rebuild ", " constructed ") + structure(x.SiteId, x.StructureId) + site(x.SiteId, " in")
+	return siteCiv(x.SiteCivId, x.CivId) + util.If(x.Rebuilt, " rebuild ", " constructed ") + siteStructure(x.SiteId, x.StructureId, "")
 }
 
 func (x *HistoricalEventCreatedWorldConstruction) Html() string {
@@ -539,22 +564,51 @@ func (x *HistoricalEventDanceFormCreated) Html() string {
 	case HistoricalEventDanceFormCreatedCircumstance_PrayToHf:
 		circumstance = " after praying to " + hf(x.CircumstanceId)
 	}
-	return danceForm(x.FormId) + " was created by " + hf(x.HistFigureId) + site(x.SiteId, " in") + reason + circumstance
+	return danceForm(x.FormId) + " was created by " + hf(x.HistFigureId) + location(x.SiteId, " in", x.SubregionId, " in") + reason + circumstance
 }
-func (x *HistoricalEventDestroyedSite) Html() string { return "UNKNWON HistoricalEventDestroyedSite" }
-func (x *HistoricalEventDiplomatLost) Html() string  { return "UNKNWON HistoricalEventDiplomatLost" }
+
+func (x *HistoricalEventDestroyedSite) Html() string { // TODO NoDefeatMention
+	return entity(x.AttackerCivId) + " defeated " + siteCiv(x.SiteCivId, x.DefenderCivId) + " and destroyed " + site(x.SiteId, "")
+}
+
+func (x *HistoricalEventDiplomatLost) Html() string { // TODO
+	return "UNKNWON HistoricalEventDiplomatLost"
+}
+
 func (x *HistoricalEventEntityAllianceFormed) Html() string {
-	return "UNKNWON HistoricalEventEntityAllianceFormed"
+	return entityList(x.JoiningEnid) + " swore to support " + entity(x.InitiatingEnid) + " in war if the latter did likewise"
 }
+
 func (x *HistoricalEventEntityBreachFeatureLayer) Html() string {
-	return "UNKNWON HistoricalEventEntityBreachFeatureLayer"
+	return siteCiv(x.SiteEntityId, x.CivEntityId) + " breached the Underworld at " + site(x.SiteId, "")
 }
-func (x *HistoricalEventEntityCreated) Html() string { return "UNKNWON HistoricalEventEntityCreated" }
+
+func (x *HistoricalEventEntityCreated) Html() string {
+	if x.CreatorHfid != -1 {
+		return hf(x.CreatorHfid) + " formed " + entity(x.EntityId) + siteStructure(x.SiteId, x.StructureId, "in")
+	} else {
+		return entity(x.EntityId) + " formed" + siteStructure(x.SiteId, x.StructureId, "in")
+	}
+}
+
 func (x *HistoricalEventEntityDissolved) Html() string {
-	return "UNKNWON HistoricalEventEntityDissolved"
+	return entity(x.EntityId) + " dissolved after " + x.Reason.String()
 }
-func (x *HistoricalEventEntityEquipmentPurchase) Html() string {
-	return "UNKNWON HistoricalEventEntityEquipmentPurchase"
+func (x *HistoricalEventEntityEquipmentPurchase) Html() string { // todo check hfid
+	l := ""
+	switch x.NewEquipmentLevel {
+	case 1:
+		l = "well-crafted"
+	case 2:
+		l = "finely-crafted"
+	case 3:
+		l = "superior quality"
+	case 4:
+		l = "exceptional"
+	case 5:
+		l = "masterwork"
+	}
+	return entity(x.EntityId) + " purchased " + l + " equipment"
 }
 func (x *HistoricalEventEntityExpelsHf) Html() string { return "UNKNWON HistoricalEventEntityExpelsHf" }
 func (x *HistoricalEventEntityFledSite) Html() string { return "UNKNWON HistoricalEventEntityFledSite" }
@@ -726,4 +780,11 @@ func (x *HistoricalEventTacticalSituation) Html() string {
 func (x *HistoricalEventTrade) Html() string { return "UNKNWON HistoricalEventTrade" }
 func (x *HistoricalEventWrittenContentComposed) Html() string {
 	return "UNKNWON HistoricalEventWrittenContentComposed"
+}
+
+func (x *HistoricalEventAgreementConcluded) Html() string {
+	return "UNKNWON HistoricalEventAgreementConcluded"
+}
+func (x *HistoricalEventMasterpieceDye) Html() string {
+	return "UNKNWON HistoricalEventMasterpieceDye"
 }

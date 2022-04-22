@@ -9,7 +9,10 @@
       "Values": {
         "The Cyclopean Domain": true,
         "The Enchanted Planets": true,
+        "The Infinite Plane": true,
         "The Legendary Plane": true,
+        "The Realm of Visions": true,
+        "The Universes of Myth": true,
         "The Windy Dimension": true
       },
       "Enum": true
@@ -1672,11 +1675,14 @@
       "Plus": false,
       "Values": {
         "AXE": true,
+        "BOW": true,
         "CROSSBOW": true,
         "HAMMER": true,
         "MACE": true,
+        "PIKE": true,
         "SPEAR": true,
-        "SWORD": true
+        "SWORD": true,
+        "WHIP": true
       },
       "Enum": true
     },
@@ -1834,9 +1840,15 @@
         "crossbow": true,
         "flail": true,
         "great axe": true,
+        "halberd": true,
+        "hive": true,
         "long sword": true,
         "mace": true,
         "maul": true,
+        "morningstar": true,
+        "pedestal": true,
+        "pike": true,
+        "quire": true,
         "rohir body": true,
         "scimitar": true,
         "short sword": true,
@@ -1914,11 +1926,26 @@
         "carpenter": true,
         "clothier": true,
         "craftsman": true,
+        "doctor": true,
+        "engineer": true,
+        "engraver": true,
+        "farmer": true,
+        "furnace_operator": true,
         "gem_cutter": true,
+        "glassmaker": true,
+        "leatherworker": true,
         "mason": true,
         "metalcrafter": true,
+        "metalsmith": true,
+        "miner": true,
+        "planter": true,
+        "pump_operator": true,
+        "ranger": true,
+        "stoneworker": true,
+        "tanner": true,
         "weaponsmith": true,
-        "weaver": true
+        "weaver": true,
+        "woodworker": true
       },
       "Enum": true
     },
@@ -1974,6 +2001,7 @@
       "Plus": true,
       "Values": {
         "battle axe": true,
+        "blowgun": true,
         "bow": true,
         "crossbow": true,
         "dagger": true,
@@ -2785,29 +2813,8 @@
       "Multiple": false,
       "Base": true,
       "Plus": false,
-      "Values": {
-        "15,22": true,
-        "15,99": true,
-        "16,25": true,
-        "17,100": true,
-        "23,2": true,
-        "23,27": true,
-        "26,137": true,
-        "28,27": true,
-        "31,39": true,
-        "34,145": true,
-        "34,67": true,
-        "35,144": true,
-        "37,113": true,
-        "37,209": true,
-        "38,36": true,
-        "40,182": true,
-        "44,126": true,
-        "44,209": true,
-        "54,81": true,
-        "8,145": true
-      },
-      "Enum": true
+      "Values": {},
+      "Enum": false
     },
     "df_world|historical_event_collections|historical_event_collection+Raid|defending_enid": {
       "IsString": false,
@@ -3349,7 +3356,8 @@
         "member": true,
         "position": true,
         "prisoner": true,
-        "slave": true
+        "slave": true,
+        "squad": true
       },
       "Enum": true
     },
@@ -3461,6 +3469,8 @@
       "Values": {
         "home_site_abstract_building": true,
         "occupation": true,
+        "prison_abstract_building": true,
+        "prison_site_building_profile": true,
         "seat_of_power": true
       },
       "Enum": true
@@ -3490,6 +3500,53 @@
       "Base": false,
       "Plus": true,
       "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+AgreementConcluded|destination": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+AgreementConcluded|result": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+AgreementConcluded|site": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+AgreementConcluded|source": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+AgreementConcluded|topic": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {
+        "treequota": true
+      },
       "Enum": true
     },
     "df_world|historical_events|historical_event+AgreementFormed|action": {
@@ -3683,6 +3740,7 @@
       "Values": {
         "fear": true,
         "love": true,
+        "loyalty": true,
         "respect": true,
         "trust": true
       },
@@ -3736,12 +3794,70 @@
       "Values": {},
       "Enum": true
     },
+    "df_world|historical_events|historical_event+AgreementMade|destination": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+AgreementMade|site": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
     "df_world|historical_events|historical_event+AgreementMade|site_id": {
       "IsString": false,
       "NoBool": true,
       "Multiple": false,
       "Base": true,
       "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+AgreementMade|source": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+AgreementMade|topic": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {
+        "becomelandholder": true,
+        "promotelandholder": true,
+        "treequota": true
+      },
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+AgreementRejected|destination": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+AgreementRejected|site": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
       "Values": {},
       "Enum": true
     },
@@ -3752,6 +3868,29 @@
       "Base": true,
       "Plus": false,
       "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+AgreementRejected|source": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+AgreementRejected|topic": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {
+        "becomelandholder": true,
+        "treequota": true,
+        "tributeagreement": true,
+        "unknown 10": true
+      },
       "Enum": true
     },
     "df_world|historical_events|historical_event+ArtifactClaimFormed|artifact_id": {
@@ -4056,6 +4195,15 @@
       "Enum": true
     },
     "df_world|historical_events|historical_event+ArtifactFound|site_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+ArtifactFound|site_property_id": {
       "IsString": false,
       "NoBool": true,
       "Multiple": false,
@@ -4420,6 +4568,7 @@
       "Base": false,
       "Plus": true,
       "Values": {
+        "default": true,
         "female": true,
         "male": true
       },
@@ -4468,11 +4617,20 @@
       "Base": false,
       "Plus": true,
       "Values": {
+        "bark_scorpion_man": true,
+        "capybara man": true,
         "dwarf": true,
         "elf": true,
         "goblin": true,
+        "gorlak": true,
         "hamster_man": true,
-        "human": true
+        "hfexp22553 e_hum_1": true,
+        "hfexp27531 e_hum_1": true,
+        "hfexp53367 e_hum_1": true,
+        "hfexp53373 e_hum_1": true,
+        "human": true,
+        "peregrine falcon man": true,
+        "wolf_man": true
       },
       "Enum": true
     },
@@ -5060,6 +5218,7 @@
       "Plus": false,
       "Values": {
         "berserk": true,
+        "catatonic": true,
         "fell": true,
         "fey": true,
         "insane": true,
@@ -5214,14 +5373,23 @@
       "Plus": true,
       "Values": {
         "AMPHIBIAN_MAN": true,
+        "CAVE_DRAGON": true,
+        "CAVE_FISH_MAN": true,
         "DWARF": true,
         "ELF": true,
         "GOBLIN": true,
         "HUMAN": true,
+        "KOBOLD": true,
+        "REPTILE_MAN": true,
+        "amphibian man": true,
+        "cave dragon": true,
+        "cave fish man": true,
         "dwarf": true,
         "elf": true,
         "goblin": true,
-        "human": true
+        "human": true,
+        "kobold": true,
+        "reptile man": true
       },
       "Enum": true
     },
@@ -5705,6 +5873,15 @@
       "Enum": true
     },
     "df_world|historical_events|historical_event+DanceFormCreated|site_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+DanceFormCreated|subregion_id": {
       "IsString": false,
       "NoBool": true,
       "Multiple": false,
@@ -6664,6 +6841,7 @@
       "Values": {
         "fear": true,
         "love": true,
+        "loyalty": true,
         "respect": true,
         "trust": true
       },
@@ -7353,31 +7531,8 @@
       "Multiple": false,
       "Base": false,
       "Plus": true,
-      "Values": {
-        "behead": true,
-        "bleed": true,
-        "burn_alive": true,
-        "bury_alive": true,
-        "cavein": true,
-        "crucify": true,
-        "drown": true,
-        "drown_alt": true,
-        "drown_alt2": true,
-        "execution_generic": true,
-        "feed_to_beasts": true,
-        "hack_to_pieces": true,
-        "heat": true,
-        "infection": true,
-        "leapt_from_height": true,
-        "memorialize": true,
-        "murder": true,
-        "old_age": true,
-        "shot": true,
-        "struck_down": true,
-        "suffocate": true,
-        "thirst": true
-      },
-      "Enum": true
+      "Values": {},
+      "Enum": false
     },
     "df_world|historical_events|historical_event+HfDied|feature_layer_id": {
       "IsString": false,
@@ -7412,15 +7567,8 @@
       "Multiple": false,
       "Base": false,
       "Plus": true,
-      "Values": {
-        "battle axe": true,
-        "buckler": true,
-        "pick": true,
-        "shield": true,
-        "spear": true,
-        "war hammer": true
-      },
-      "Enum": true
+      "Values": {},
+      "Enum": false
     },
     "df_world|historical_events|historical_event+HfDied|item_type": {
       "IsString": true,
@@ -7428,12 +7576,8 @@
       "Multiple": false,
       "Base": false,
       "Plus": true,
-      "Values": {
-        "none": true,
-        "shield": true,
-        "weapon": true
-      },
-      "Enum": true
+      "Values": {},
+      "Enum": false
     },
     "df_world|historical_events|historical_event+HfDied|mat": {
       "IsString": true,
@@ -7441,11 +7585,65 @@
       "Multiple": false,
       "Base": false,
       "Plus": true,
+      "Values": {},
+      "Enum": false
+    },
+    "df_world|historical_events|historical_event+HfDied|shooter_artifact_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+HfDied|shooter_item": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+HfDied|shooter_item_subtype": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
       "Values": {
+        "bow": true,
+        "crossbow": true
+      },
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+HfDied|shooter_item_type": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {
+        "weapon": true
+      },
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+HfDied|shooter_mat": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {
+        "apple wood": true,
+        "bismuth bronze": true,
         "bronze": true,
+        "chestnut": true,
         "copper": true,
-        "silver": true,
-        "spore tree": true
+        "date palm wood": true,
+        "iron": true,
+        "steel": true
       },
       "Enum": true
     },
@@ -7641,33 +7839,8 @@
       "Multiple": false,
       "Base": false,
       "Plus": true,
-      "Values": {
-        "bit, passing on the bull monster curse": true,
-        "bit, passing on the chameleon monster curse": true,
-        "bit, passing on the elephant monster curse": true,
-        "bit, passing on the gila monster monster curse": true,
-        "bit, passing on the panther monster curse": true,
-        "cursed to assume the form of a ape-like monster every full moon": true,
-        "cursed to assume the form of a bull-like monster every full moon": true,
-        "cursed to assume the form of a capybara-like monster every full moon": true,
-        "cursed to assume the form of a chameleon-like monster every full moon": true,
-        "cursed to assume the form of a elephant-like monster every full moon": true,
-        "cursed to assume the form of a gecko-like monster every full moon": true,
-        "cursed to assume the form of a gila monster-like monster every full moon": true,
-        "cursed to assume the form of a iguana-like monster every full moon": true,
-        "cursed to assume the form of a lizard-like monster every full moon": true,
-        "cursed to assume the form of a mongoose-like monster every full moon": true,
-        "cursed to assume the form of a monitor-like monster every full moon": true,
-        "cursed to assume the form of a panther-like monster every full moon": true,
-        "cursed to assume the form of a skink-like monster every full moon": true,
-        "cursed to assume the form of a sloth-like monster every full moon": true,
-        "cursed to assume the form of a tortoise-like monster every full moon": true,
-        "cursed to assume the form of a wombat-like monster every full moon": true,
-        "cursed to assume the form of a zebra-like monster every full moon": true,
-        "cursed to prowl the night in search of blood": true,
-        "infected with a contagious ghoulish condition": true
-      },
-      "Enum": true
+      "Values": {},
+      "Enum": false
     },
     "df_world|historical_events|historical_event+HfDoesInteraction|region": {
       "IsString": false,
@@ -7804,6 +7977,15 @@
       "Values": {},
       "Enum": true
     },
+    "df_world|historical_events|historical_event+HfFreed|freeing_civ_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
     "df_world|historical_events|historical_event+HfFreed|freeing_hfid": {
       "IsString": false,
       "NoBool": true,
@@ -7825,7 +8007,7 @@
     "df_world|historical_events|historical_event+HfFreed|rescued_hfid": {
       "IsString": false,
       "NoBool": true,
-      "Multiple": false,
+      "Multiple": true,
       "Base": true,
       "Plus": false,
       "Values": {},
@@ -8369,6 +8551,15 @@
       "Values": {},
       "Enum": true
     },
+    "df_world|historical_events|historical_event+HfReachSummit|group": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": true,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
     "df_world|historical_events|historical_event+HfReachSummit|group_hfid": {
       "IsString": false,
       "NoBool": true,
@@ -8606,6 +8797,7 @@
         "moaning spirit": true,
         "murderous ghost": true,
         "restless haunt": true,
+        "sadistic ghost": true,
         "secretive poltergeist": true,
         "troublesome poltergeist": true,
         "violent ghost": true
@@ -9156,6 +9348,7 @@
       "Plus": false,
       "Values": {
         "ambition": true,
+        "anxiety propensity": true,
         "confidence": true,
         "envy propensity": true,
         "fearlessness": true,
@@ -9197,6 +9390,7 @@
         "fear": true,
         "love": true,
         "loyalty": true,
+        "respect": true,
         "trust": true
       },
       "Enum": true
@@ -9602,6 +9796,7 @@
       "Plus": true,
       "Values": {
         "magmasmelter": true,
+        "smelter": true,
         "woodfurnace": true
       },
       "Enum": true
@@ -9614,7 +9809,11 @@
       "Plus": true,
       "Values": {
         "bridge": true,
-        "furnace": true
+        "furnace": true,
+        "screwpump": true,
+        "tradedepot": true,
+        "waterwheel": true,
+        "well": true
       },
       "Enum": true
     },
@@ -9680,13 +9879,148 @@
       "Plus": true,
       "Values": {
         "accomplished": true,
+        "expert": true,
+        "highmaster": true,
+        "legendary3": true,
+        "legendary5": true,
         "master": true,
         "professional": true,
-        "unknown 21": true
+        "proficient": true,
+        "unknown 21": true,
+        "unknown 22": true,
+        "unknown 23": true,
+        "unknown 24": true,
+        "unknown 25": true,
+        "unknown 33": true
       },
       "Enum": true
     },
     "df_world|historical_events|historical_event+MasterpieceArchConstructed|unk_2": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceDye|dye_mat": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {
+        "dimple dye": true
+      },
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceDye|dye_mat_index": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceDye|entity_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceDye|hfid": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceDye|item_type": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {
+        "cloth": true
+      },
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceDye|maker": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceDye|maker_entity": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceDye|mat": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {
+        "pig tail": true
+      },
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceDye|mat_index": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceDye|site": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceDye|site_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceDye|skill_at_time": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": true,
+      "Values": {
+        "skilled": true
+      },
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceDye|unk_2": {
       "IsString": false,
       "NoBool": true,
       "Multiple": false,
@@ -9773,19 +10107,8 @@
       "Multiple": false,
       "Base": true,
       "Plus": true,
-      "Values": {
-        "accomplished": true,
-        "expert": true,
-        "grandmaster": true,
-        "great": true,
-        "highmaster": true,
-        "legendary": true,
-        "legendary4": true,
-        "master": true,
-        "professional": true,
-        "proficient": true
-      },
-      "Enum": true
+      "Values": {},
+      "Enum": false
     },
     "df_world|historical_events|historical_event+MasterpieceFood|entity_id": {
       "IsString": false,
@@ -9805,6 +10128,66 @@
       "Values": {},
       "Enum": true
     },
+    "df_world|historical_events|historical_event+MasterpieceFood|item_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceFood|item_subtype": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {
+        "biscuits": true,
+        "roast": true,
+        "stew": true
+      },
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceFood|item_type": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {
+        "food": true
+      },
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceFood|maker": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceFood|maker_entity": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceFood|site": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
     "df_world|historical_events|historical_event+MasterpieceFood|site_id": {
       "IsString": false,
       "NoBool": true,
@@ -9815,11 +10198,58 @@
       "Enum": true
     },
     "df_world|historical_events|historical_event+MasterpieceFood|skill_at_time": {
-      "IsString": false,
+      "IsString": true,
       "NoBool": true,
       "Multiple": false,
       "Base": true,
-      "Plus": false,
+      "Plus": true,
+      "Values": {
+        "accomplished": true,
+        "adept": true,
+        "competent": true,
+        "expert": true,
+        "grandmaster": true,
+        "great": true,
+        "highmaster": true,
+        "legendary": true,
+        "legendary1": true,
+        "legendary2": true,
+        "legendary3": true,
+        "legendary4": true,
+        "legendary5": true,
+        "master": true,
+        "professional": true,
+        "proficient": true,
+        "skilled": true,
+        "talented": true,
+        "unknown 21": true,
+        "unknown 22": true,
+        "unknown 23": true,
+        "unknown 24": true,
+        "unknown 25": true,
+        "unknown 26": true,
+        "unknown 27": true,
+        "unknown 28": true,
+        "unknown 29": true,
+        "unknown 30": true
+      },
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceItemImprovement|art_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceItemImprovement|art_subid": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
       "Values": {},
       "Enum": true
     },
@@ -9841,6 +10271,94 @@
       "Values": {},
       "Enum": true
     },
+    "df_world|historical_events|historical_event+MasterpieceItemImprovement|imp_mat": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": false
+    },
+    "df_world|historical_events|historical_event+MasterpieceItemImprovement|improvement_subtype": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceItemImprovement|improvement_type": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {
+        "art_image": true,
+        "bands": true,
+        "covered": true,
+        "itemspecific": true,
+        "rings_hanging": true,
+        "spikes": true
+      },
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceItemImprovement|item_subtype": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": false
+    },
+    "df_world|historical_events|historical_event+MasterpieceItemImprovement|item_type": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": false
+    },
+    "df_world|historical_events|historical_event+MasterpieceItemImprovement|maker": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceItemImprovement|maker_entity": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceItemImprovement|mat": {
+      "IsString": true,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": false
+    },
+    "df_world|historical_events|historical_event+MasterpieceItemImprovement|site": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
     "df_world|historical_events|historical_event+MasterpieceItemImprovement|site_id": {
       "IsString": false,
       "NoBool": true,
@@ -9851,11 +10369,46 @@
       "Enum": true
     },
     "df_world|historical_events|historical_event+MasterpieceItemImprovement|skill_at_time": {
-      "IsString": false,
+      "IsString": true,
       "NoBool": true,
       "Multiple": false,
       "Base": true,
-      "Plus": false,
+      "Plus": true,
+      "Values": {
+        "accomplished": true,
+        "adept": true,
+        "adequate": true,
+        "competent": true,
+        "expert": true,
+        "great": true,
+        "highmaster": true,
+        "legendary": true,
+        "legendary1": true,
+        "legendary2": true,
+        "legendary3": true,
+        "legendary4": true,
+        "legendary5": true,
+        "master": true,
+        "professional": true,
+        "proficient": true,
+        "skilled": true,
+        "talented": true,
+        "unknown 21": true,
+        "unknown 22": true,
+        "unknown 23": true,
+        "unknown 24": true,
+        "unknown 25": true,
+        "unknown 26": true,
+        "unknown 44": true
+      },
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceItemImprovement|unk_2": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
       "Values": {},
       "Enum": true
     },
@@ -9892,31 +10445,8 @@
       "Multiple": false,
       "Base": false,
       "Plus": true,
-      "Values": {
-        "bookcase": true,
-        "breastplate": true,
-        "cap": true,
-        "cloak": true,
-        "coat": true,
-        "corkscrew": true,
-        "gauntlet": true,
-        "glove": true,
-        "greaves": true,
-        "helm": true,
-        "high boot": true,
-        "hood": true,
-        "leggings": true,
-        "mail shirt": true,
-        "mitten": true,
-        "robe": true,
-        "scroll rollers": true,
-        "shield": true,
-        "shirt": true,
-        "shoe": true,
-        "sock": true,
-        "trousers": true
-      },
-      "Enum": true
+      "Values": {},
+      "Enum": false
     },
     "df_world|historical_events|historical_event+MasterpieceItem|item_type": {
       "IsString": true,
@@ -9924,35 +10454,8 @@
       "Multiple": false,
       "Base": false,
       "Plus": true,
-      "Values": {
-        "armor": true,
-        "armorstand": true,
-        "backpack": true,
-        "barrel": true,
-        "bed": true,
-        "box": true,
-        "bucket": true,
-        "cabinet": true,
-        "chair": true,
-        "cloth": true,
-        "coffin": true,
-        "crown": true,
-        "door": true,
-        "figurine": true,
-        "flask": true,
-        "floodgate": true,
-        "gloves": true,
-        "helm": true,
-        "pants": true,
-        "shield": true,
-        "shoes": true,
-        "slab": true,
-        "table": true,
-        "tool": true,
-        "totem": true,
-        "trapcomp": true
-      },
-      "Enum": true
+      "Values": {},
+      "Enum": false
     },
     "df_world|historical_events|historical_event+MasterpieceItem|maker": {
       "IsString": false,
@@ -9980,6 +10483,24 @@
       "Plus": true,
       "Values": {},
       "Enum": false
+    },
+    "df_world|historical_events|historical_event+MasterpieceItem|mat_index": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+MasterpieceItem|mat_type": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
+      "Values": {},
+      "Enum": true
     },
     "df_world|historical_events|historical_event+MasterpieceItem|site": {
       "IsString": false,
@@ -10032,10 +10553,8 @@
       "Multiple": false,
       "Base": false,
       "Plus": true,
-      "Values": {
-        "melt": true
-      },
-      "Enum": true
+      "Values": {},
+      "Enum": false
     },
     "df_world|historical_events|historical_event+MasterpieceLost|site": {
       "IsString": false,
@@ -10543,6 +11062,15 @@
       "Enum": true
     },
     "df_world|historical_events|historical_event+PoeticFormCreated|site_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+PoeticFormCreated|subregion_id": {
       "IsString": false,
       "NoBool": true,
       "Multiple": false,
@@ -11201,6 +11729,7 @@
       "Plus": false,
       "Values": {
         "Autumn": true,
+        "Spring": true,
         "Summer": true
       },
       "Enum": true
@@ -11839,6 +12368,7 @@
       "Plus": false,
       "Values": {
         "DEFAULT": true,
+        "DRONE": true,
         "FEMALE": true,
         "KING": true,
         "MALE": true,
@@ -12211,7 +12741,7 @@
     "df_world|historical_figures|historical_figure|entity_squad_link": {
       "IsString": false,
       "NoBool": false,
-      "Multiple": false,
+      "Multiple": true,
       "Base": true,
       "Plus": false,
       "Values": {},
@@ -12342,6 +12872,7 @@
         "master": true,
         "mother": true,
         "pet owner": true,
+        "prisoner": true,
         "spouse": true
       },
       "Enum": true
@@ -12724,6 +13255,7 @@
         "attain rank": true,
         "become immortal": true,
         "corrupt actor's government": true,
+        "corruptly punish actor": true,
         "counterintelligence": true,
         "direct war to actor": true,
         "frame actor": true,
@@ -12992,7 +13524,7 @@
     "df_world|historical_figures|historical_figure|relationship_profile_hf_visual|known_identity_id": {
       "IsString": false,
       "NoBool": true,
-      "Multiple": false,
+      "Multiple": true,
       "Base": true,
       "Plus": false,
       "Values": {},
@@ -13455,6 +13987,7 @@
       "Base": false,
       "Plus": true,
       "Values": {
+        "default": true,
         "female": true,
         "male": true
       },
@@ -13525,7 +14058,8 @@
         "poet": true,
         "prophet": true,
         "scholar": true,
-        "snatcher": true
+        "snatcher": true,
+        "standard": true
       },
       "Enum": true
     },
@@ -13536,11 +14070,20 @@
       "Base": false,
       "Plus": true,
       "Values": {
+        "bark_scorpion_man": true,
+        "capybara man": true,
         "dwarf": true,
         "elf": true,
         "goblin": true,
+        "gorlak": true,
         "hamster_man": true,
-        "human": true
+        "hfexp22553 e_hum_1": true,
+        "hfexp27531 e_hum_1": true,
+        "hfexp53367 e_hum_1": true,
+        "hfexp53373 e_hum_1": true,
+        "human": true,
+        "peregrine falcon man": true,
+        "wolf_man": true
       },
       "Enum": true
     },
@@ -13714,9 +14257,13 @@
       "Plus": true,
       "Values": {
         "Boldoludon": true,
+        "Camade Asada": true,
         "Gomathsil": true,
+        "Licevaathira": true,
         "Minbaznitom": true,
-        "Ospazosmlo": true
+        "Orid Xem": true,
+        "Ospazosmlo": true,
+        "rsil": true
       },
       "Enum": true
     },
@@ -14781,6 +15328,11 @@
         "base": "add hf site link",
         "plus": "add_hf_site_link"
       },
+      "AgreementConcluded": {
+        "name": "AgreementConcluded",
+        "base": "agreement concluded",
+        "plus": "topicagreement_concluded"
+      },
       "AgreementFormed": {
         "name": "AgreementFormed",
         "base": "agreement formed",
@@ -14789,12 +15341,12 @@
       "AgreementMade": {
         "name": "AgreementMade",
         "base": "agreement made",
-        "plus": ""
+        "plus": "topicagreement_made"
       },
       "AgreementRejected": {
         "name": "AgreementRejected",
         "base": "agreement rejected",
-        "plus": ""
+        "plus": "topicagreement_rejected"
       },
       "ArtifactClaimFormed": {
         "name": "ArtifactClaimFormed",
@@ -15144,7 +15696,7 @@
       "HfReachSummit": {
         "name": "HfReachSummit",
         "base": "hf reach summit",
-        "plus": ""
+        "plus": "hist_figure_reach_summit"
       },
       "HfRecruitedUnitTypeForEntity": {
         "name": "HfRecruitedUnitTypeForEntity",
@@ -15221,6 +15773,11 @@
         "base": "masterpiece arch constructed",
         "plus": "masterpiece_created_arch_construct"
       },
+      "MasterpieceDye": {
+        "name": "MasterpieceDye",
+        "base": "masterpiece dye",
+        "plus": "masterpiece_created_dye_item"
+      },
       "MasterpieceEngraving": {
         "name": "MasterpieceEngraving",
         "base": "masterpiece engraving",
@@ -15229,7 +15786,7 @@
       "MasterpieceFood": {
         "name": "MasterpieceFood",
         "base": "masterpiece food",
-        "plus": ""
+        "plus": "masterpiece_created_food"
       },
       "MasterpieceItem": {
         "name": "MasterpieceItem",
@@ -15239,7 +15796,7 @@
       "MasterpieceItemImprovement": {
         "name": "MasterpieceItemImprovement",
         "base": "masterpiece item improvement",
-        "plus": ""
+        "plus": "masterpiece_created_item_improvement"
       },
       "MasterpieceLost": {
         "name": "MasterpieceLost",

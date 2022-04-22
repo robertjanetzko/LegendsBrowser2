@@ -94,9 +94,32 @@ func InitSameFields() {
 				"SiteId": true,
 			},
 		},
-		"HistoricalEventAgreementFormed":     {},
-		"HistoricalEventAgreementMade":       {},
-		"HistoricalEventAgreementRejected":   {},
+		"HistoricalEventAgreementConcluded": {},
+		"HistoricalEventAgreementFormed":    {},
+		"HistoricalEventAgreementMade": {
+			"Destination": {
+				"SiteId": true,
+			},
+			"Site": {
+				"SiteId": true,
+			},
+			"Source": {
+				"SiteId": true,
+			},
+			"Topic": {},
+		},
+		"HistoricalEventAgreementRejected": {
+			"Destination": {
+				"SiteId": true,
+			},
+			"Site": {
+				"SiteId": true,
+			},
+			"Source": {
+				"SiteId": true,
+			},
+			"Topic": {},
+		},
 		"HistoricalEventArtifactClaimFormed": {},
 		"HistoricalEventArtifactCopied":      {},
 		"HistoricalEventArtifactCreated": {
@@ -397,7 +420,9 @@ func InitSameFields() {
 				"SlayerShooterItemId": true,
 				"SubregionId":         true,
 			},
-			"DeathCause": {},
+			"DeathCause": {
+				"Cause": true,
+			},
 			"Item": {
 				"FeatureLayerId":      true,
 				"Hfid":                true,
@@ -407,9 +432,38 @@ func InitSameFields() {
 				"SlayerShooterItemId": true,
 				"SubregionId":         true,
 			},
-			"ItemSubtype": {},
-			"ItemType":    {},
-			"Mat":         {},
+			"ItemSubtype": {
+				"Cause": true,
+			},
+			"ItemType": {
+				"Cause": true,
+			},
+			"Mat": {
+				"Cause": true,
+			},
+			"ShooterArtifactId": {
+				"FeatureLayerId":      true,
+				"Hfid":                true,
+				"SiteId":              true,
+				"SlayerHfid":          true,
+				"SlayerItemId":        true,
+				"SlayerShooterItemId": true,
+				"SubregionId":         true,
+			},
+			"ShooterItem": {
+				"FeatureLayerId":      true,
+				"Hfid":                true,
+				"SiteId":              true,
+				"SlayerHfid":          true,
+				"SlayerItemId":        true,
+				"SlayerShooterItemId": true,
+				"SubregionId":         true,
+			},
+			"ShooterItemSubtype": {},
+			"ShooterItemType":    {},
+			"ShooterMat": {
+				"Cause": true,
+			},
 			"Site": {
 				"FeatureLayerId":      true,
 				"Hfid":                true,
@@ -679,6 +733,41 @@ func InitSameFields() {
 				"SiteId":   true,
 			},
 		},
+		"HistoricalEventMasterpieceDye": {
+			"DyeMat": {},
+			"DyeMatIndex": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"ItemType": {},
+			"Maker": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"MakerEntity": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"Mat": {},
+			"MatIndex": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"Site": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"Unk2": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+		},
 		"HistoricalEventMasterpieceEngraving": {
 			"ArtId": {
 				"EntityId": true,
@@ -706,7 +795,30 @@ func InitSameFields() {
 				"SiteId":   true,
 			},
 		},
-		"HistoricalEventMasterpieceFood": {},
+		"HistoricalEventMasterpieceFood": {
+			"ItemId": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"ItemSubtype": {},
+			"ItemType":    {},
+			"Maker": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"MakerEntity": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"Site": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+		},
 		"HistoricalEventMasterpieceItem": {
 			"ItemId": {
 				"EntityId": true,
@@ -726,14 +838,65 @@ func InitSameFields() {
 				"SiteId":   true,
 			},
 			"Mat": {},
+			"MatIndex": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"MatType": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
 			"Site": {
 				"EntityId": true,
 				"Hfid":     true,
 				"SiteId":   true,
 			},
 		},
-		"HistoricalEventMasterpieceItemImprovement": {},
-		"HistoricalEventMasterpieceLost":            {},
+		"HistoricalEventMasterpieceItemImprovement": {
+			"ArtId": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"ArtSubid": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"ImpMat": {},
+			"ImprovementSubtype": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"ImprovementType": {},
+			"ItemSubtype":     {},
+			"ItemType":        {},
+			"Maker": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"MakerEntity": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"Mat": {},
+			"Site": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+			"Unk2": {
+				"EntityId": true,
+				"Hfid":     true,
+				"SiteId":   true,
+			},
+		},
+		"HistoricalEventMasterpieceLost": {},
 		"HistoricalEventMerchant": {
 			"Destination": {
 				"DepotEntityId":  true,
@@ -988,52 +1151,55 @@ func NewArtifact() *Artifact {
 		Writing:          -1,
 	}
 }
-func (x *Artifact) Id() int                     { return x.Id_ }
-func (x *Artifact) Name() string                { return x.Name_ }
-func (x *Artifact) RelatedToEntity(id int) bool { return false }
-func (x *Artifact) RelatedToHf(id int) bool     { return x.HolderHfid == id }
+func (x *Artifact) Id() int                       { return x.Id_ }
+func (x *Artifact) Name() string                  { return x.Name_ }
+func (x *Artifact) RelatedToEntity(id int) bool   { return false }
+func (x *Artifact) RelatedToHf(id int) bool       { return x.HolderHfid == id }
+func (x *Artifact) RelatedToArtifact(id int) bool { return false }
+func (x *Artifact) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *Artifact) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *Artifact) CheckFields() {
-	if x.PageCount != x.AbsTileX && x.PageCount != 0 && x.AbsTileX != 0 {
+	if x.PageCount != x.AbsTileX {
 		sameFields["Artifact"]["PageCount"]["AbsTileX"] = false
 	}
-	if x.PageCount != x.AbsTileY && x.PageCount != 0 && x.AbsTileY != 0 {
+	if x.PageCount != x.AbsTileY {
 		sameFields["Artifact"]["PageCount"]["AbsTileY"] = false
 	}
-	if x.PageCount != x.AbsTileZ && x.PageCount != 0 && x.AbsTileZ != 0 {
+	if x.PageCount != x.AbsTileZ {
 		sameFields["Artifact"]["PageCount"]["AbsTileZ"] = false
 	}
-	if x.PageCount != x.HolderHfid && x.PageCount != 0 && x.HolderHfid != 0 {
+	if x.PageCount != x.HolderHfid {
 		sameFields["Artifact"]["PageCount"]["HolderHfid"] = false
 	}
-	if x.PageCount != x.SiteId && x.PageCount != 0 && x.SiteId != 0 {
+	if x.PageCount != x.SiteId {
 		sameFields["Artifact"]["PageCount"]["SiteId"] = false
 	}
-	if x.PageCount != x.StructureLocalId && x.PageCount != 0 && x.StructureLocalId != 0 {
+	if x.PageCount != x.StructureLocalId {
 		sameFields["Artifact"]["PageCount"]["StructureLocalId"] = false
 	}
-	if x.PageCount != x.SubregionId && x.PageCount != 0 && x.SubregionId != 0 {
+	if x.PageCount != x.SubregionId {
 		sameFields["Artifact"]["PageCount"]["SubregionId"] = false
 	}
-	if x.Writing != x.AbsTileX && x.Writing != 0 && x.AbsTileX != 0 {
+	if x.Writing != x.AbsTileX {
 		sameFields["Artifact"]["Writing"]["AbsTileX"] = false
 	}
-	if x.Writing != x.AbsTileY && x.Writing != 0 && x.AbsTileY != 0 {
+	if x.Writing != x.AbsTileY {
 		sameFields["Artifact"]["Writing"]["AbsTileY"] = false
 	}
-	if x.Writing != x.AbsTileZ && x.Writing != 0 && x.AbsTileZ != 0 {
+	if x.Writing != x.AbsTileZ {
 		sameFields["Artifact"]["Writing"]["AbsTileZ"] = false
 	}
-	if x.Writing != x.HolderHfid && x.Writing != 0 && x.HolderHfid != 0 {
+	if x.Writing != x.HolderHfid {
 		sameFields["Artifact"]["Writing"]["HolderHfid"] = false
 	}
-	if x.Writing != x.SiteId && x.Writing != 0 && x.SiteId != 0 {
+	if x.Writing != x.SiteId {
 		sameFields["Artifact"]["Writing"]["SiteId"] = false
 	}
-	if x.Writing != x.StructureLocalId && x.Writing != 0 && x.StructureLocalId != 0 {
+	if x.Writing != x.StructureLocalId {
 		sameFields["Artifact"]["Writing"]["StructureLocalId"] = false
 	}
-	if x.Writing != x.SubregionId && x.Writing != 0 && x.SubregionId != 0 {
+	if x.Writing != x.SubregionId {
 		sameFields["Artifact"]["Writing"]["SubregionId"] = false
 	}
 }
@@ -1204,8 +1370,11 @@ type Creature struct {
 func NewCreature() *Creature {
 	return &Creature{}
 }
-func (x *Creature) RelatedToEntity(id int) bool { return false }
-func (x *Creature) RelatedToHf(id int) bool     { return false }
+func (x *Creature) RelatedToEntity(id int) bool   { return false }
+func (x *Creature) RelatedToHf(id int) bool       { return false }
+func (x *Creature) RelatedToArtifact(id int) bool { return false }
+func (x *Creature) RelatedToSite(id int) bool     { return false }
+func (x *Creature) RelatedToRegion(id int) bool   { return false }
 
 func (x *Creature) CheckFields() {
 }
@@ -1345,10 +1514,13 @@ func NewDanceForm() *DanceForm {
 		Id_: -1,
 	}
 }
-func (x *DanceForm) Id() int                     { return x.Id_ }
-func (x *DanceForm) Name() string                { return x.Name_ }
-func (x *DanceForm) RelatedToEntity(id int) bool { return false }
-func (x *DanceForm) RelatedToHf(id int) bool     { return false }
+func (x *DanceForm) Id() int                       { return x.Id_ }
+func (x *DanceForm) Name() string                  { return x.Name_ }
+func (x *DanceForm) RelatedToEntity(id int) bool   { return false }
+func (x *DanceForm) RelatedToHf(id int) bool       { return false }
+func (x *DanceForm) RelatedToArtifact(id int) bool { return false }
+func (x *DanceForm) RelatedToSite(id int) bool     { return false }
+func (x *DanceForm) RelatedToRegion(id int) bool   { return false }
 
 func (x *DanceForm) CheckFields() {
 }
@@ -1411,9 +1583,12 @@ func NewDfWorld() *DfWorld {
 		WrittenContents:            make(map[int]*WrittenContent),
 	}
 }
-func (x *DfWorld) Name() string                { return x.Name_ }
-func (x *DfWorld) RelatedToEntity(id int) bool { return false }
-func (x *DfWorld) RelatedToHf(id int) bool     { return false }
+func (x *DfWorld) Name() string                  { return x.Name_ }
+func (x *DfWorld) RelatedToEntity(id int) bool   { return false }
+func (x *DfWorld) RelatedToHf(id int) bool       { return false }
+func (x *DfWorld) RelatedToArtifact(id int) bool { return false }
+func (x *DfWorld) RelatedToSite(id int) bool     { return false }
+func (x *DfWorld) RelatedToRegion(id int) bool   { return false }
 
 func (x *DfWorld) CheckFields() {
 }
@@ -1458,11 +1633,26 @@ const (
 	EntityProfession_Carpenter
 	EntityProfession_Clothier
 	EntityProfession_Craftsman
+	EntityProfession_Doctor
+	EntityProfession_Engineer
+	EntityProfession_Engraver
+	EntityProfession_Farmer
+	EntityProfession_FurnaceOperator
 	EntityProfession_GemCutter
+	EntityProfession_Glassmaker
+	EntityProfession_Leatherworker
 	EntityProfession_Mason
 	EntityProfession_Metalcrafter
+	EntityProfession_Metalsmith
+	EntityProfession_Miner
+	EntityProfession_Planter
+	EntityProfession_PumpOperator
+	EntityProfession_Ranger
+	EntityProfession_Stoneworker
+	EntityProfession_Tanner
 	EntityProfession_Weaponsmith
 	EntityProfession_Weaver
+	EntityProfession_Woodworker
 )
 
 func parseEntityProfession(s string) EntityProfession {
@@ -1481,16 +1671,46 @@ func parseEntityProfession(s string) EntityProfession {
 		return EntityProfession_Clothier
 	case "craftsman":
 		return EntityProfession_Craftsman
+	case "doctor":
+		return EntityProfession_Doctor
+	case "engineer":
+		return EntityProfession_Engineer
+	case "engraver":
+		return EntityProfession_Engraver
+	case "farmer":
+		return EntityProfession_Farmer
+	case "furnace_operator":
+		return EntityProfession_FurnaceOperator
 	case "gem_cutter":
 		return EntityProfession_GemCutter
+	case "glassmaker":
+		return EntityProfession_Glassmaker
+	case "leatherworker":
+		return EntityProfession_Leatherworker
 	case "mason":
 		return EntityProfession_Mason
 	case "metalcrafter":
 		return EntityProfession_Metalcrafter
+	case "metalsmith":
+		return EntityProfession_Metalsmith
+	case "miner":
+		return EntityProfession_Miner
+	case "planter":
+		return EntityProfession_Planter
+	case "pump_operator":
+		return EntityProfession_PumpOperator
+	case "ranger":
+		return EntityProfession_Ranger
+	case "stoneworker":
+		return EntityProfession_Stoneworker
+	case "tanner":
+		return EntityProfession_Tanner
 	case "weaponsmith":
 		return EntityProfession_Weaponsmith
 	case "weaver":
 		return EntityProfession_Weaver
+	case "woodworker":
+		return EntityProfession_Woodworker
 	}
 	return EntityProfession_Unknown
 }
@@ -1511,16 +1731,46 @@ func (s EntityProfession) String() string {
 		return "clothier"
 	case EntityProfession_Craftsman:
 		return "craftsman"
+	case EntityProfession_Doctor:
+		return "doctor"
+	case EntityProfession_Engineer:
+		return "engineer"
+	case EntityProfession_Engraver:
+		return "engraver"
+	case EntityProfession_Farmer:
+		return "farmer"
+	case EntityProfession_FurnaceOperator:
+		return "furnace operator"
 	case EntityProfession_GemCutter:
 		return "gem cutter"
+	case EntityProfession_Glassmaker:
+		return "glassmaker"
+	case EntityProfession_Leatherworker:
+		return "leatherworker"
 	case EntityProfession_Mason:
 		return "mason"
 	case EntityProfession_Metalcrafter:
 		return "metalcrafter"
+	case EntityProfession_Metalsmith:
+		return "metalsmith"
+	case EntityProfession_Miner:
+		return "miner"
+	case EntityProfession_Planter:
+		return "planter"
+	case EntityProfession_PumpOperator:
+		return "pump operator"
+	case EntityProfession_Ranger:
+		return "ranger"
+	case EntityProfession_Stoneworker:
+		return "stoneworker"
+	case EntityProfession_Tanner:
+		return "tanner"
 	case EntityProfession_Weaponsmith:
 		return "weaponsmith"
 	case EntityProfession_Weaver:
 		return "weaver"
+	case EntityProfession_Woodworker:
+		return "woodworker"
 	}
 	return "unknown"
 }
@@ -1606,6 +1856,7 @@ type EntityWeapon int
 const (
 	EntityWeapon_Unknown EntityWeapon = iota
 	EntityWeapon_BattleAxe
+	EntityWeapon_Blowgun
 	EntityWeapon_Bow
 	EntityWeapon_Crossbow
 	EntityWeapon_Dagger
@@ -1630,6 +1881,8 @@ func parseEntityWeapon(s string) EntityWeapon {
 	switch s {
 	case "battle axe":
 		return EntityWeapon_BattleAxe
+	case "blowgun":
+		return EntityWeapon_Blowgun
 	case "bow":
 		return EntityWeapon_Bow
 	case "crossbow":
@@ -1674,6 +1927,8 @@ func (s EntityWeapon) String() string {
 	switch s {
 	case EntityWeapon_BattleAxe:
 		return "battle axe"
+	case EntityWeapon_Blowgun:
+		return "blowgun"
 	case EntityWeapon_Bow:
 		return "bow"
 	case EntityWeapon_Crossbow:
@@ -1741,10 +1996,13 @@ func NewEntity() *Entity {
 		Id_: -1,
 	}
 }
-func (x *Entity) Id() int                     { return x.Id_ }
-func (x *Entity) Name() string                { return x.Name_ }
-func (x *Entity) RelatedToEntity(id int) bool { return false }
-func (x *Entity) RelatedToHf(id int) bool     { return containsInt(x.HistfigId, id) }
+func (x *Entity) Id() int                       { return x.Id_ }
+func (x *Entity) Name() string                  { return x.Name_ }
+func (x *Entity) RelatedToEntity(id int) bool   { return false }
+func (x *Entity) RelatedToHf(id int) bool       { return containsInt(x.HistfigId, id) }
+func (x *Entity) RelatedToArtifact(id int) bool { return false }
+func (x *Entity) RelatedToSite(id int) bool     { return false }
+func (x *Entity) RelatedToRegion(id int) bool   { return false }
 
 func (x *Entity) CheckFields() {
 }
@@ -1824,8 +2082,11 @@ func NewEntityEntityLink() *EntityEntityLink {
 		Target:   -1,
 	}
 }
-func (x *EntityEntityLink) RelatedToEntity(id int) bool { return false }
-func (x *EntityEntityLink) RelatedToHf(id int) bool     { return false }
+func (x *EntityEntityLink) RelatedToEntity(id int) bool   { return false }
+func (x *EntityEntityLink) RelatedToHf(id int) bool       { return false }
+func (x *EntityEntityLink) RelatedToArtifact(id int) bool { return false }
+func (x *EntityEntityLink) RelatedToSite(id int) bool     { return false }
+func (x *EntityEntityLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *EntityEntityLink) CheckFields() {
 }
@@ -1859,8 +2120,11 @@ func NewEntityFormerPositionLink() *EntityFormerPositionLink {
 		StartYear:         -1,
 	}
 }
-func (x *EntityFormerPositionLink) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *EntityFormerPositionLink) RelatedToHf(id int) bool     { return false }
+func (x *EntityFormerPositionLink) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *EntityFormerPositionLink) RelatedToHf(id int) bool       { return false }
+func (x *EntityFormerPositionLink) RelatedToArtifact(id int) bool { return false }
+func (x *EntityFormerPositionLink) RelatedToSite(id int) bool     { return false }
+func (x *EntityFormerPositionLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *EntityFormerPositionLink) CheckFields() {
 }
@@ -1897,8 +2161,11 @@ func NewEntityFormerSquadLink() *EntityFormerSquadLink {
 		StartYear: -1,
 	}
 }
-func (x *EntityFormerSquadLink) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *EntityFormerSquadLink) RelatedToHf(id int) bool     { return false }
+func (x *EntityFormerSquadLink) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *EntityFormerSquadLink) RelatedToHf(id int) bool       { return false }
+func (x *EntityFormerSquadLink) RelatedToArtifact(id int) bool { return false }
+func (x *EntityFormerSquadLink) RelatedToSite(id int) bool     { return false }
+func (x *EntityFormerSquadLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *EntityFormerSquadLink) CheckFields() {
 }
@@ -1932,9 +2199,12 @@ func NewEntityPopulation() *EntityPopulation {
 		Id_:   -1,
 	}
 }
-func (x *EntityPopulation) Id() int                     { return x.Id_ }
-func (x *EntityPopulation) RelatedToEntity(id int) bool { return x.CivId == id }
-func (x *EntityPopulation) RelatedToHf(id int) bool     { return false }
+func (x *EntityPopulation) Id() int                       { return x.Id_ }
+func (x *EntityPopulation) RelatedToEntity(id int) bool   { return x.CivId == id }
+func (x *EntityPopulation) RelatedToHf(id int) bool       { return false }
+func (x *EntityPopulation) RelatedToArtifact(id int) bool { return false }
+func (x *EntityPopulation) RelatedToSite(id int) bool     { return false }
+func (x *EntityPopulation) RelatedToRegion(id int) bool   { return false }
 
 func (x *EntityPopulation) CheckFields() {
 }
@@ -1966,10 +2236,13 @@ func NewEntityPosition() *EntityPosition {
 		Id_: -1,
 	}
 }
-func (x *EntityPosition) Id() int                     { return x.Id_ }
-func (x *EntityPosition) Name() string                { return x.Name_ }
-func (x *EntityPosition) RelatedToEntity(id int) bool { return false }
-func (x *EntityPosition) RelatedToHf(id int) bool     { return false }
+func (x *EntityPosition) Id() int                       { return x.Id_ }
+func (x *EntityPosition) Name() string                  { return x.Name_ }
+func (x *EntityPosition) RelatedToEntity(id int) bool   { return false }
+func (x *EntityPosition) RelatedToHf(id int) bool       { return false }
+func (x *EntityPosition) RelatedToArtifact(id int) bool { return false }
+func (x *EntityPosition) RelatedToSite(id int) bool     { return false }
+func (x *EntityPosition) RelatedToRegion(id int) bool   { return false }
 
 func (x *EntityPosition) CheckFields() {
 }
@@ -2003,9 +2276,12 @@ func NewEntityPositionAssignment() *EntityPositionAssignment {
 		SquadId:    -1,
 	}
 }
-func (x *EntityPositionAssignment) Id() int                     { return x.Id_ }
-func (x *EntityPositionAssignment) RelatedToEntity(id int) bool { return false }
-func (x *EntityPositionAssignment) RelatedToHf(id int) bool     { return x.Histfig == id }
+func (x *EntityPositionAssignment) Id() int                       { return x.Id_ }
+func (x *EntityPositionAssignment) RelatedToEntity(id int) bool   { return false }
+func (x *EntityPositionAssignment) RelatedToHf(id int) bool       { return x.Histfig == id }
+func (x *EntityPositionAssignment) RelatedToArtifact(id int) bool { return false }
+func (x *EntityPositionAssignment) RelatedToSite(id int) bool     { return false }
+func (x *EntityPositionAssignment) RelatedToRegion(id int) bool   { return false }
 
 func (x *EntityPositionAssignment) CheckFields() {
 }
@@ -2040,8 +2316,11 @@ func NewEntityPositionLink() *EntityPositionLink {
 		StartYear:         -1,
 	}
 }
-func (x *EntityPositionLink) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *EntityPositionLink) RelatedToHf(id int) bool     { return false }
+func (x *EntityPositionLink) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *EntityPositionLink) RelatedToHf(id int) bool       { return false }
+func (x *EntityPositionLink) RelatedToArtifact(id int) bool { return false }
+func (x *EntityPositionLink) RelatedToSite(id int) bool     { return false }
+func (x *EntityPositionLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *EntityPositionLink) CheckFields() {
 }
@@ -2097,8 +2376,11 @@ func NewEntityReputation() *EntityReputation {
 		UnsolvedMurders:         -1,
 	}
 }
-func (x *EntityReputation) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *EntityReputation) RelatedToHf(id int) bool     { return false }
+func (x *EntityReputation) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *EntityReputation) RelatedToHf(id int) bool       { return false }
+func (x *EntityReputation) RelatedToArtifact(id int) bool { return false }
+func (x *EntityReputation) RelatedToSite(id int) bool     { return false }
+func (x *EntityReputation) RelatedToRegion(id int) bool   { return false }
 
 func (x *EntityReputation) CheckFields() {
 }
@@ -2168,8 +2450,11 @@ func NewEntitySquadLink() *EntitySquadLink {
 		StartYear:     -1,
 	}
 }
-func (x *EntitySquadLink) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *EntitySquadLink) RelatedToHf(id int) bool     { return false }
+func (x *EntitySquadLink) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *EntitySquadLink) RelatedToHf(id int) bool       { return false }
+func (x *EntitySquadLink) RelatedToArtifact(id int) bool { return false }
+func (x *EntitySquadLink) RelatedToSite(id int) bool     { return false }
+func (x *EntitySquadLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *EntitySquadLink) CheckFields() {
 }
@@ -2293,8 +2578,11 @@ func NewFeature() *Feature {
 		Reference: -1,
 	}
 }
-func (x *Feature) RelatedToEntity(id int) bool { return false }
-func (x *Feature) RelatedToHf(id int) bool     { return false }
+func (x *Feature) RelatedToEntity(id int) bool   { return false }
+func (x *Feature) RelatedToHf(id int) bool       { return false }
+func (x *Feature) RelatedToArtifact(id int) bool { return false }
+func (x *Feature) RelatedToSite(id int) bool     { return false }
+func (x *Feature) RelatedToRegion(id int) bool   { return false }
 
 func (x *Feature) CheckFields() {
 }
@@ -2327,6 +2615,7 @@ const (
 	HfLinkLinkType_Master
 	HfLinkLinkType_Mother
 	HfLinkLinkType_PetOwner
+	HfLinkLinkType_Prisoner
 	HfLinkLinkType_Spouse
 )
 
@@ -2358,6 +2647,8 @@ func parseHfLinkLinkType(s string) HfLinkLinkType {
 		return HfLinkLinkType_Mother
 	case "pet owner":
 		return HfLinkLinkType_PetOwner
+	case "prisoner":
+		return HfLinkLinkType_Prisoner
 	case "spouse":
 		return HfLinkLinkType_Spouse
 	}
@@ -2392,6 +2683,8 @@ func (s HfLinkLinkType) String() string {
 		return "mother"
 	case HfLinkLinkType_PetOwner:
 		return "pet owner"
+	case HfLinkLinkType_Prisoner:
+		return "prisoner"
 	case HfLinkLinkType_Spouse:
 		return "spouse"
 	}
@@ -2414,8 +2707,11 @@ func NewHfLink() *HfLink {
 		LinkStrength: -1,
 	}
 }
-func (x *HfLink) RelatedToEntity(id int) bool { return false }
-func (x *HfLink) RelatedToHf(id int) bool     { return x.Hfid == id }
+func (x *HfLink) RelatedToEntity(id int) bool   { return false }
+func (x *HfLink) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HfLink) RelatedToArtifact(id int) bool { return false }
+func (x *HfLink) RelatedToSite(id int) bool     { return false }
+func (x *HfLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *HfLink) CheckFields() {
 }
@@ -2444,8 +2740,11 @@ func NewHfSkill() *HfSkill {
 		TotalIp: -1,
 	}
 }
-func (x *HfSkill) RelatedToEntity(id int) bool { return false }
-func (x *HfSkill) RelatedToHf(id int) bool     { return false }
+func (x *HfSkill) RelatedToEntity(id int) bool   { return false }
+func (x *HfSkill) RelatedToHf(id int) bool       { return false }
+func (x *HfSkill) RelatedToArtifact(id int) bool { return false }
+func (x *HfSkill) RelatedToSite(id int) bool     { return false }
+func (x *HfSkill) RelatedToRegion(id int) bool   { return false }
 
 func (x *HfSkill) CheckFields() {
 }
@@ -2469,9 +2768,12 @@ func NewHistoricalEra() *HistoricalEra {
 		StartYear: -1,
 	}
 }
-func (x *HistoricalEra) Name() string                { return x.Name_ }
-func (x *HistoricalEra) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEra) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEra) Name() string                  { return x.Name_ }
+func (x *HistoricalEra) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEra) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEra) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEra) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEra) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEra) CheckFields() {
 }
@@ -2499,9 +2801,12 @@ func NewHistoricalEvent() *HistoricalEvent {
 		Year:      -1,
 	}
 }
-func (x *HistoricalEvent) Id() int                     { return x.Id_ }
-func (x *HistoricalEvent) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEvent) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEvent) Id() int                       { return x.Id_ }
+func (x *HistoricalEvent) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEvent) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEvent) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEvent) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEvent) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEvent) CheckFields() {
 }
@@ -2533,9 +2838,12 @@ func NewHistoricalEventAddHfEntityHonor() *HistoricalEventAddHfEntityHonor {
 		HonorId:  -1,
 	}
 }
-func (x *HistoricalEventAddHfEntityHonor) Type() string                { return "add hf entity honor" }
-func (x *HistoricalEventAddHfEntityHonor) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *HistoricalEventAddHfEntityHonor) RelatedToHf(id int) bool     { return x.Hfid == id }
+func (x *HistoricalEventAddHfEntityHonor) Type() string                  { return "add hf entity honor" }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventAddHfEntityHonor) CheckFields() {
 }
@@ -2615,6 +2923,7 @@ const (
 	HistoricalEventAddHfEntityLinkLinkType_Position
 	HistoricalEventAddHfEntityLinkLinkType_Prisoner
 	HistoricalEventAddHfEntityLinkLinkType_Slave
+	HistoricalEventAddHfEntityLinkLinkType_Squad
 )
 
 func parseHistoricalEventAddHfEntityLinkLinkType(s string) HistoricalEventAddHfEntityLinkLinkType {
@@ -2629,6 +2938,8 @@ func parseHistoricalEventAddHfEntityLinkLinkType(s string) HistoricalEventAddHfE
 		return HistoricalEventAddHfEntityLinkLinkType_Prisoner
 	case "slave":
 		return HistoricalEventAddHfEntityLinkLinkType_Slave
+	case "squad":
+		return HistoricalEventAddHfEntityLinkLinkType_Squad
 	}
 	return HistoricalEventAddHfEntityLinkLinkType_Unknown
 }
@@ -2645,6 +2956,8 @@ func (s HistoricalEventAddHfEntityLinkLinkType) String() string {
 		return "prisoner"
 	case HistoricalEventAddHfEntityLinkLinkType_Slave:
 		return "slave"
+	case HistoricalEventAddHfEntityLinkLinkType_Squad:
+		return "squad"
 	}
 	return "unknown"
 }
@@ -2677,6 +2990,9 @@ func (x *HistoricalEventAddHfEntityLink) RelatedToEntity(id int) bool { return x
 func (x *HistoricalEventAddHfEntityLink) RelatedToHf(id int) bool {
 	return x.AppointerHfid == id || x.Hfid == id || x.PromiseToHfid == id
 }
+func (x *HistoricalEventAddHfEntityLink) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventAddHfEntityLink) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventAddHfEntityLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventAddHfEntityLink) CheckFields() {
 }
@@ -2784,6 +3100,9 @@ func (x *HistoricalEventAddHfHfLink) RelatedToEntity(id int) bool { return false
 func (x *HistoricalEventAddHfHfLink) RelatedToHf(id int) bool {
 	return x.Hfid == id || x.HfidTarget == id
 }
+func (x *HistoricalEventAddHfHfLink) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventAddHfHfLink) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventAddHfHfLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventAddHfHfLink) CheckFields() {
 }
@@ -2808,6 +3127,8 @@ const (
 	HistoricalEventAddHfSiteLinkLinkType_Unknown HistoricalEventAddHfSiteLinkLinkType = iota
 	HistoricalEventAddHfSiteLinkLinkType_HomeSiteAbstractBuilding
 	HistoricalEventAddHfSiteLinkLinkType_Occupation
+	HistoricalEventAddHfSiteLinkLinkType_PrisonAbstractBuilding
+	HistoricalEventAddHfSiteLinkLinkType_PrisonSiteBuildingProfile
 	HistoricalEventAddHfSiteLinkLinkType_SeatOfPower
 )
 
@@ -2817,6 +3138,10 @@ func parseHistoricalEventAddHfSiteLinkLinkType(s string) HistoricalEventAddHfSit
 		return HistoricalEventAddHfSiteLinkLinkType_HomeSiteAbstractBuilding
 	case "occupation":
 		return HistoricalEventAddHfSiteLinkLinkType_Occupation
+	case "prison_abstract_building":
+		return HistoricalEventAddHfSiteLinkLinkType_PrisonAbstractBuilding
+	case "prison_site_building_profile":
+		return HistoricalEventAddHfSiteLinkLinkType_PrisonSiteBuildingProfile
 	case "seat_of_power":
 		return HistoricalEventAddHfSiteLinkLinkType_SeatOfPower
 	}
@@ -2829,6 +3154,10 @@ func (s HistoricalEventAddHfSiteLinkLinkType) String() string {
 		return "home site abstract building"
 	case HistoricalEventAddHfSiteLinkLinkType_Occupation:
 		return "occupation"
+	case HistoricalEventAddHfSiteLinkLinkType_PrisonAbstractBuilding:
+		return "prison abstract building"
+	case HistoricalEventAddHfSiteLinkLinkType_PrisonSiteBuildingProfile:
+		return "prison site building profile"
 	case HistoricalEventAddHfSiteLinkLinkType_SeatOfPower:
 		return "seat of power"
 	}
@@ -2855,18 +3184,21 @@ func NewHistoricalEventAddHfSiteLink() *HistoricalEventAddHfSiteLink {
 		Structure: -1,
 	}
 }
-func (x *HistoricalEventAddHfSiteLink) Type() string                { return "add hf site link" }
-func (x *HistoricalEventAddHfSiteLink) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventAddHfSiteLink) RelatedToHf(id int) bool     { return x.Histfig == id }
+func (x *HistoricalEventAddHfSiteLink) Type() string                  { return "add hf site link" }
+func (x *HistoricalEventAddHfSiteLink) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventAddHfSiteLink) RelatedToHf(id int) bool       { return x.Histfig == id }
+func (x *HistoricalEventAddHfSiteLink) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventAddHfSiteLink) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventAddHfSiteLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventAddHfSiteLink) CheckFields() {
-	if x.Civ != x.SiteId && x.Civ != 0 && x.SiteId != 0 {
+	if x.Civ != x.SiteId {
 		sameFields["HistoricalEventAddHfSiteLink"]["Civ"]["SiteId"] = false
 	}
-	if x.Histfig != x.SiteId && x.Histfig != 0 && x.SiteId != 0 {
+	if x.Histfig != x.SiteId {
 		sameFields["HistoricalEventAddHfSiteLink"]["Histfig"]["SiteId"] = false
 	}
-	if x.Structure != x.SiteId && x.Structure != 0 && x.SiteId != 0 {
+	if x.Structure != x.SiteId {
 		sameFields["HistoricalEventAddHfSiteLink"]["Structure"]["SiteId"] = false
 	}
 }
@@ -2887,6 +3219,79 @@ func (x *HistoricalEventAddHfSiteLink) MarshalJSON() ([]byte, error) {
 	}
 	if x.Structure != -1 {
 		d["structure"] = x.Structure
+	}
+	return json.Marshal(d)
+}
+
+type HistoricalEventAgreementConcludedTopic int
+
+const (
+	HistoricalEventAgreementConcludedTopic_Unknown HistoricalEventAgreementConcludedTopic = iota
+	HistoricalEventAgreementConcludedTopic_Treequota
+)
+
+func parseHistoricalEventAgreementConcludedTopic(s string) HistoricalEventAgreementConcludedTopic {
+	switch s {
+	case "treequota":
+		return HistoricalEventAgreementConcludedTopic_Treequota
+	}
+	return HistoricalEventAgreementConcludedTopic_Unknown
+}
+
+func (s HistoricalEventAgreementConcludedTopic) String() string {
+	switch s {
+	case HistoricalEventAgreementConcludedTopic_Treequota:
+		return "treequota"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventAgreementConcludedTopic) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventAgreementConcluded struct {
+	Destination int                                    `json:"destination" legend:"plus"` // destination
+	Result      int                                    `json:"result" legend:"plus"`      // result
+	Site        int                                    `json:"site" legend:"plus"`        // site
+	Source      int                                    `json:"source" legend:"plus"`      // source
+	Topic       HistoricalEventAgreementConcludedTopic `json:"topic" legend:"plus"`       // topic
+}
+
+func NewHistoricalEventAgreementConcluded() *HistoricalEventAgreementConcluded {
+	return &HistoricalEventAgreementConcluded{
+		Destination: -1,
+		Result:      -1,
+		Site:        -1,
+		Source:      -1,
+	}
+}
+func (x *HistoricalEventAgreementConcluded) Type() string                  { return "agreement concluded" }
+func (x *HistoricalEventAgreementConcluded) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToRegion(id int) bool   { return false }
+
+func (x *HistoricalEventAgreementConcluded) CheckFields() {
+}
+
+func (x *HistoricalEventAgreementConcluded) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.Destination != -1 {
+		d["destination"] = x.Destination
+	}
+	if x.Result != -1 {
+		d["result"] = x.Result
+	}
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
+	if x.Source != -1 {
+		d["source"] = x.Source
+	}
+	if x.Topic != 0 {
+		d["topic"] = x.Topic
 	}
 	return json.Marshal(d)
 }
@@ -3110,6 +3515,7 @@ const (
 	HistoricalEventAgreementFormedTopRelationshipFactor_Unknown HistoricalEventAgreementFormedTopRelationshipFactor = iota
 	HistoricalEventAgreementFormedTopRelationshipFactor_Fear
 	HistoricalEventAgreementFormedTopRelationshipFactor_Love
+	HistoricalEventAgreementFormedTopRelationshipFactor_Loyalty
 	HistoricalEventAgreementFormedTopRelationshipFactor_Respect
 	HistoricalEventAgreementFormedTopRelationshipFactor_Trust
 )
@@ -3120,6 +3526,8 @@ func parseHistoricalEventAgreementFormedTopRelationshipFactor(s string) Historic
 		return HistoricalEventAgreementFormedTopRelationshipFactor_Fear
 	case "love":
 		return HistoricalEventAgreementFormedTopRelationshipFactor_Love
+	case "loyalty":
+		return HistoricalEventAgreementFormedTopRelationshipFactor_Loyalty
 	case "respect":
 		return HistoricalEventAgreementFormedTopRelationshipFactor_Respect
 	case "trust":
@@ -3134,6 +3542,8 @@ func (s HistoricalEventAgreementFormedTopRelationshipFactor) String() string {
 		return "fear"
 	case HistoricalEventAgreementFormedTopRelationshipFactor_Love:
 		return "love"
+	case HistoricalEventAgreementFormedTopRelationshipFactor_Loyalty:
+		return "loyalty"
 	case HistoricalEventAgreementFormedTopRelationshipFactor_Respect:
 		return "respect"
 	case HistoricalEventAgreementFormedTopRelationshipFactor_Trust:
@@ -3226,7 +3636,10 @@ func (x *HistoricalEventAgreementFormed) Type() string { return "agreement forme
 func (x *HistoricalEventAgreementFormed) RelatedToEntity(id int) bool {
 	return x.RelevantEntityId == id
 }
-func (x *HistoricalEventAgreementFormed) RelatedToHf(id int) bool { return x.ConcluderHfid == id }
+func (x *HistoricalEventAgreementFormed) RelatedToHf(id int) bool       { return x.ConcluderHfid == id }
+func (x *HistoricalEventAgreementFormed) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventAgreementFormed) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventAgreementFormed) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventAgreementFormed) CheckFields() {
 }
@@ -3299,50 +3712,191 @@ func (x *HistoricalEventAgreementFormed) MarshalJSON() ([]byte, error) {
 	return json.Marshal(d)
 }
 
+type HistoricalEventAgreementMadeTopic int
+
+const (
+	HistoricalEventAgreementMadeTopic_Unknown HistoricalEventAgreementMadeTopic = iota
+	HistoricalEventAgreementMadeTopic_Becomelandholder
+	HistoricalEventAgreementMadeTopic_Promotelandholder
+	HistoricalEventAgreementMadeTopic_Treequota
+)
+
+func parseHistoricalEventAgreementMadeTopic(s string) HistoricalEventAgreementMadeTopic {
+	switch s {
+	case "becomelandholder":
+		return HistoricalEventAgreementMadeTopic_Becomelandholder
+	case "promotelandholder":
+		return HistoricalEventAgreementMadeTopic_Promotelandholder
+	case "treequota":
+		return HistoricalEventAgreementMadeTopic_Treequota
+	}
+	return HistoricalEventAgreementMadeTopic_Unknown
+}
+
+func (s HistoricalEventAgreementMadeTopic) String() string {
+	switch s {
+	case HistoricalEventAgreementMadeTopic_Becomelandholder:
+		return "becomelandholder"
+	case HistoricalEventAgreementMadeTopic_Promotelandholder:
+		return "promotelandholder"
+	case HistoricalEventAgreementMadeTopic_Treequota:
+		return "treequota"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventAgreementMadeTopic) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventAgreementMade struct {
-	SiteId int `json:"siteId" legend:"base"` // site_id
+	Destination int                               `json:"destination" legend:"plus"` // destination
+	Site        int                               `json:"site" legend:"plus"`        // site
+	SiteId      int                               `json:"siteId" legend:"base"`      // site_id
+	Source      int                               `json:"source" legend:"plus"`      // source
+	Topic       HistoricalEventAgreementMadeTopic `json:"topic" legend:"plus"`       // topic
 }
 
 func NewHistoricalEventAgreementMade() *HistoricalEventAgreementMade {
 	return &HistoricalEventAgreementMade{
-		SiteId: -1,
+		Destination: -1,
+		Site:        -1,
+		SiteId:      -1,
+		Source:      -1,
 	}
 }
-func (x *HistoricalEventAgreementMade) Type() string                { return "agreement made" }
-func (x *HistoricalEventAgreementMade) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventAgreementMade) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventAgreementMade) Type() string                  { return "agreement made" }
+func (x *HistoricalEventAgreementMade) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventAgreementMade) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventAgreementMade) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventAgreementMade) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventAgreementMade) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventAgreementMade) CheckFields() {
+	if x.Destination != x.SiteId {
+		sameFields["HistoricalEventAgreementMade"]["Destination"]["SiteId"] = false
+	}
+	if x.Site != x.SiteId {
+		sameFields["HistoricalEventAgreementMade"]["Site"]["SiteId"] = false
+	}
+	if x.Source != x.SiteId {
+		sameFields["HistoricalEventAgreementMade"]["Source"]["SiteId"] = false
+	}
 }
 
 func (x *HistoricalEventAgreementMade) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
+	if x.Destination != -1 {
+		d["destination"] = x.Destination
+	}
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
+	}
+	if x.Source != -1 {
+		d["source"] = x.Source
+	}
+	if x.Topic != 0 {
+		d["topic"] = x.Topic
 	}
 	return json.Marshal(d)
 }
 
+type HistoricalEventAgreementRejectedTopic int
+
+const (
+	HistoricalEventAgreementRejectedTopic_Unknown HistoricalEventAgreementRejectedTopic = iota
+	HistoricalEventAgreementRejectedTopic_Becomelandholder
+	HistoricalEventAgreementRejectedTopic_Treequota
+	HistoricalEventAgreementRejectedTopic_Tributeagreement
+	HistoricalEventAgreementRejectedTopic_Unknown10
+)
+
+func parseHistoricalEventAgreementRejectedTopic(s string) HistoricalEventAgreementRejectedTopic {
+	switch s {
+	case "becomelandholder":
+		return HistoricalEventAgreementRejectedTopic_Becomelandholder
+	case "treequota":
+		return HistoricalEventAgreementRejectedTopic_Treequota
+	case "tributeagreement":
+		return HistoricalEventAgreementRejectedTopic_Tributeagreement
+	case "unknown 10":
+		return HistoricalEventAgreementRejectedTopic_Unknown10
+	}
+	return HistoricalEventAgreementRejectedTopic_Unknown
+}
+
+func (s HistoricalEventAgreementRejectedTopic) String() string {
+	switch s {
+	case HistoricalEventAgreementRejectedTopic_Becomelandholder:
+		return "becomelandholder"
+	case HistoricalEventAgreementRejectedTopic_Treequota:
+		return "treequota"
+	case HistoricalEventAgreementRejectedTopic_Tributeagreement:
+		return "tributeagreement"
+	case HistoricalEventAgreementRejectedTopic_Unknown10:
+		return "unknown 10"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventAgreementRejectedTopic) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventAgreementRejected struct {
-	SiteId int `json:"siteId" legend:"base"` // site_id
+	Destination int                                   `json:"destination" legend:"plus"` // destination
+	Site        int                                   `json:"site" legend:"plus"`        // site
+	SiteId      int                                   `json:"siteId" legend:"base"`      // site_id
+	Source      int                                   `json:"source" legend:"plus"`      // source
+	Topic       HistoricalEventAgreementRejectedTopic `json:"topic" legend:"plus"`       // topic
 }
 
 func NewHistoricalEventAgreementRejected() *HistoricalEventAgreementRejected {
 	return &HistoricalEventAgreementRejected{
-		SiteId: -1,
+		Destination: -1,
+		Site:        -1,
+		SiteId:      -1,
+		Source:      -1,
 	}
 }
-func (x *HistoricalEventAgreementRejected) Type() string                { return "agreement rejected" }
-func (x *HistoricalEventAgreementRejected) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventAgreementRejected) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventAgreementRejected) Type() string                  { return "agreement rejected" }
+func (x *HistoricalEventAgreementRejected) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventAgreementRejected) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventAgreementRejected) CheckFields() {
+	if x.Destination != x.SiteId {
+		sameFields["HistoricalEventAgreementRejected"]["Destination"]["SiteId"] = false
+	}
+	if x.Site != x.SiteId {
+		sameFields["HistoricalEventAgreementRejected"]["Site"]["SiteId"] = false
+	}
+	if x.Source != x.SiteId {
+		sameFields["HistoricalEventAgreementRejected"]["Source"]["SiteId"] = false
+	}
 }
 
 func (x *HistoricalEventAgreementRejected) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
+	if x.Destination != -1 {
+		d["destination"] = x.Destination
+	}
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
+	}
+	if x.Source != -1 {
+		d["source"] = x.Source
+	}
+	if x.Topic != 0 {
+		d["topic"] = x.Topic
 	}
 	return json.Marshal(d)
 }
@@ -3436,6 +3990,11 @@ func NewHistoricalEventArtifactClaimFormed() *HistoricalEventArtifactClaimFormed
 func (x *HistoricalEventArtifactClaimFormed) Type() string                { return "artifact claim formed" }
 func (x *HistoricalEventArtifactClaimFormed) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *HistoricalEventArtifactClaimFormed) RelatedToHf(id int) bool     { return x.HistFigureId == id }
+func (x *HistoricalEventArtifactClaimFormed) RelatedToArtifact(id int) bool {
+	return x.ArtifactId == id
+}
+func (x *HistoricalEventArtifactClaimFormed) RelatedToSite(id int) bool   { return false }
+func (x *HistoricalEventArtifactClaimFormed) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventArtifactClaimFormed) CheckFields() {
 }
@@ -3489,7 +4048,12 @@ func (x *HistoricalEventArtifactCopied) Type() string { return "artifact copied"
 func (x *HistoricalEventArtifactCopied) RelatedToEntity(id int) bool {
 	return x.DestEntityId == id || x.SourceEntityId == id
 }
-func (x *HistoricalEventArtifactCopied) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventArtifactCopied) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventArtifactCopied) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactCopied) RelatedToSite(id int) bool {
+	return x.DestSiteId == id || x.SourceSiteId == id
+}
+func (x *HistoricalEventArtifactCopied) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventArtifactCopied) CheckFields() {
 }
@@ -3573,15 +4137,18 @@ func (x *HistoricalEventArtifactCreated) RelatedToEntity(id int) bool { return f
 func (x *HistoricalEventArtifactCreated) RelatedToHf(id int) bool {
 	return x.HistFigureId == id || x.SanctifyHf == id
 }
+func (x *HistoricalEventArtifactCreated) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactCreated) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventArtifactCreated) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventArtifactCreated) CheckFields() {
-	if x.SanctifyHf != x.HistFigureId && x.SanctifyHf != 0 && x.HistFigureId != 0 {
+	if x.SanctifyHf != x.HistFigureId {
 		sameFields["HistoricalEventArtifactCreated"]["SanctifyHf"]["HistFigureId"] = false
 	}
-	if x.SanctifyHf != x.SiteId && x.SanctifyHf != 0 && x.SiteId != 0 {
+	if x.SanctifyHf != x.SiteId {
 		sameFields["HistoricalEventArtifactCreated"]["SanctifyHf"]["SiteId"] = false
 	}
-	if x.SanctifyHf != x.UnitId && x.SanctifyHf != 0 && x.UnitId != 0 {
+	if x.SanctifyHf != x.UnitId {
 		sameFields["HistoricalEventArtifactCreated"]["SanctifyHf"]["UnitId"] = false
 	}
 }
@@ -3658,8 +4225,11 @@ func NewHistoricalEventArtifactCreatedCircumstance() *HistoricalEventArtifactCre
 		Defeated: -1,
 	}
 }
-func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventArtifactCreatedCircumstance) CheckFields() {
 }
@@ -3688,9 +4258,12 @@ func NewHistoricalEventArtifactDestroyed() *HistoricalEventArtifactDestroyed {
 		SiteId:        -1,
 	}
 }
-func (x *HistoricalEventArtifactDestroyed) Type() string                { return "artifact destroyed" }
-func (x *HistoricalEventArtifactDestroyed) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventArtifactDestroyed) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventArtifactDestroyed) Type() string                  { return "artifact destroyed" }
+func (x *HistoricalEventArtifactDestroyed) RelatedToEntity(id int) bool   { return x.DestroyerEnid == id }
+func (x *HistoricalEventArtifactDestroyed) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventArtifactDestroyed) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactDestroyed) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventArtifactDestroyed) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventArtifactDestroyed) CheckFields() {
 }
@@ -3710,23 +4283,28 @@ func (x *HistoricalEventArtifactDestroyed) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventArtifactFound struct {
-	ArtifactId   int `json:"artifactId" legend:"base"`   // artifact_id
-	HistFigureId int `json:"histFigureId" legend:"base"` // hist_figure_id
-	SiteId       int `json:"siteId" legend:"base"`       // site_id
-	UnitId       int `json:"unitId" legend:"base"`       // unit_id
+	ArtifactId     int `json:"artifactId" legend:"base"`     // artifact_id
+	HistFigureId   int `json:"histFigureId" legend:"base"`   // hist_figure_id
+	SiteId         int `json:"siteId" legend:"base"`         // site_id
+	SitePropertyId int `json:"sitePropertyId" legend:"base"` // site_property_id
+	UnitId         int `json:"unitId" legend:"base"`         // unit_id
 }
 
 func NewHistoricalEventArtifactFound() *HistoricalEventArtifactFound {
 	return &HistoricalEventArtifactFound{
-		ArtifactId:   -1,
-		HistFigureId: -1,
-		SiteId:       -1,
-		UnitId:       -1,
+		ArtifactId:     -1,
+		HistFigureId:   -1,
+		SiteId:         -1,
+		SitePropertyId: -1,
+		UnitId:         -1,
 	}
 }
-func (x *HistoricalEventArtifactFound) Type() string                { return "artifact found" }
-func (x *HistoricalEventArtifactFound) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventArtifactFound) RelatedToHf(id int) bool     { return x.HistFigureId == id }
+func (x *HistoricalEventArtifactFound) Type() string                  { return "artifact found" }
+func (x *HistoricalEventArtifactFound) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventArtifactFound) RelatedToHf(id int) bool       { return x.HistFigureId == id }
+func (x *HistoricalEventArtifactFound) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactFound) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventArtifactFound) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventArtifactFound) CheckFields() {
 }
@@ -3741,6 +4319,9 @@ func (x *HistoricalEventArtifactFound) MarshalJSON() ([]byte, error) {
 	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
+	}
+	if x.SitePropertyId != -1 {
+		d["sitePropertyId"] = x.SitePropertyId
 	}
 	if x.UnitId != -1 {
 		d["unitId"] = x.UnitId
@@ -3800,6 +4381,9 @@ func (x *HistoricalEventArtifactGiven) RelatedToEntity(id int) bool {
 func (x *HistoricalEventArtifactGiven) RelatedToHf(id int) bool {
 	return x.GiverHistFigureId == id || x.ReceiverHistFigureId == id
 }
+func (x *HistoricalEventArtifactGiven) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactGiven) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventArtifactGiven) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventArtifactGiven) CheckFields() {
 }
@@ -3844,9 +4428,12 @@ func NewHistoricalEventArtifactLost() *HistoricalEventArtifactLost {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventArtifactLost) Type() string                { return "artifact lost" }
-func (x *HistoricalEventArtifactLost) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventArtifactLost) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventArtifactLost) Type() string                  { return "artifact lost" }
+func (x *HistoricalEventArtifactLost) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventArtifactLost) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventArtifactLost) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactLost) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventArtifactLost) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventArtifactLost) CheckFields() {
 }
@@ -3955,9 +4542,12 @@ func NewHistoricalEventArtifactPossessed() *HistoricalEventArtifactPossessed {
 		UnitId:         -1,
 	}
 }
-func (x *HistoricalEventArtifactPossessed) Type() string                { return "artifact possessed" }
-func (x *HistoricalEventArtifactPossessed) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventArtifactPossessed) RelatedToHf(id int) bool     { return x.HistFigureId == id }
+func (x *HistoricalEventArtifactPossessed) Type() string                  { return "artifact possessed" }
+func (x *HistoricalEventArtifactPossessed) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventArtifactPossessed) RelatedToHf(id int) bool       { return x.HistFigureId == id }
+func (x *HistoricalEventArtifactPossessed) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactPossessed) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventArtifactPossessed) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventArtifactPossessed) CheckFields() {
 }
@@ -4018,9 +4608,12 @@ func NewHistoricalEventArtifactRecovered() *HistoricalEventArtifactRecovered {
 		UnitId:         -1,
 	}
 }
-func (x *HistoricalEventArtifactRecovered) Type() string                { return "artifact recovered" }
-func (x *HistoricalEventArtifactRecovered) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventArtifactRecovered) RelatedToHf(id int) bool     { return x.HistFigureId == id }
+func (x *HistoricalEventArtifactRecovered) Type() string                  { return "artifact recovered" }
+func (x *HistoricalEventArtifactRecovered) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventArtifactRecovered) RelatedToHf(id int) bool       { return x.HistFigureId == id }
+func (x *HistoricalEventArtifactRecovered) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactRecovered) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventArtifactRecovered) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventArtifactRecovered) CheckFields() {
 }
@@ -4066,9 +4659,12 @@ func NewHistoricalEventArtifactStored() *HistoricalEventArtifactStored {
 		UnitId:       -1,
 	}
 }
-func (x *HistoricalEventArtifactStored) Type() string                { return "artifact stored" }
-func (x *HistoricalEventArtifactStored) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventArtifactStored) RelatedToHf(id int) bool     { return x.HistFigureId == id }
+func (x *HistoricalEventArtifactStored) Type() string                  { return "artifact stored" }
+func (x *HistoricalEventArtifactStored) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventArtifactStored) RelatedToHf(id int) bool       { return x.HistFigureId == id }
+func (x *HistoricalEventArtifactStored) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactStored) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventArtifactStored) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventArtifactStored) CheckFields() {
 }
@@ -4110,6 +4706,11 @@ func NewHistoricalEventArtifactTransformed() *HistoricalEventArtifactTransformed
 func (x *HistoricalEventArtifactTransformed) Type() string                { return "artifact transformed" }
 func (x *HistoricalEventArtifactTransformed) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventArtifactTransformed) RelatedToHf(id int) bool     { return x.HistFigureId == id }
+func (x *HistoricalEventArtifactTransformed) RelatedToArtifact(id int) bool {
+	return x.NewArtifactId == id || x.OldArtifactId == id
+}
+func (x *HistoricalEventArtifactTransformed) RelatedToSite(id int) bool   { return x.SiteId == id }
+func (x *HistoricalEventArtifactTransformed) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventArtifactTransformed) CheckFields() {
 }
@@ -4150,9 +4751,14 @@ func NewHistoricalEventAssumeIdentity() *HistoricalEventAssumeIdentity {
 		TricksterHfid: -1,
 	}
 }
-func (x *HistoricalEventAssumeIdentity) Type() string                { return "assume identity" }
-func (x *HistoricalEventAssumeIdentity) RelatedToEntity(id int) bool { return x.IdentityId == id }
-func (x *HistoricalEventAssumeIdentity) RelatedToHf(id int) bool     { return x.TricksterHfid == id }
+func (x *HistoricalEventAssumeIdentity) Type() string { return "assume identity" }
+func (x *HistoricalEventAssumeIdentity) RelatedToEntity(id int) bool {
+	return x.IdentityId == id || x.TargetEnid == id
+}
+func (x *HistoricalEventAssumeIdentity) RelatedToHf(id int) bool       { return x.TricksterHfid == id }
+func (x *HistoricalEventAssumeIdentity) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventAssumeIdentity) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventAssumeIdentity) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventAssumeIdentity) CheckFields() {
 }
@@ -4203,11 +4809,14 @@ func NewHistoricalEventAttackedSite() *HistoricalEventAttackedSite {
 }
 func (x *HistoricalEventAttackedSite) Type() string { return "attacked site" }
 func (x *HistoricalEventAttackedSite) RelatedToEntity(id int) bool {
-	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
+	return x.ASupportMercEnid == id || x.AttackerCivId == id || x.AttackerMercEnid == id || x.DSupportMercEnid == id || x.DefenderCivId == id || x.DefenderMercEnid == id || x.SiteCivId == id
 }
 func (x *HistoricalEventAttackedSite) RelatedToHf(id int) bool {
 	return x.AttackerGeneralHfid == id || x.DefenderGeneralHfid == id
 }
+func (x *HistoricalEventAttackedSite) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventAttackedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventAttackedSite) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventAttackedSite) CheckFields() {
 }
@@ -4432,63 +5041,66 @@ func (x *HistoricalEventBodyAbused) RelatedToEntity(id int) bool { return x.Vict
 func (x *HistoricalEventBodyAbused) RelatedToHf(id int) bool {
 	return containsInt(x.Bodies, id) || x.Histfig == id
 }
+func (x *HistoricalEventBodyAbused) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventBodyAbused) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventBodyAbused) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventBodyAbused) CheckFields() {
-	if x.Civ != x.FeatureLayerId && x.Civ != 0 && x.FeatureLayerId != 0 {
+	if x.Civ != x.FeatureLayerId {
 		sameFields["HistoricalEventBodyAbused"]["Civ"]["FeatureLayerId"] = false
 	}
-	if x.Civ != x.SiteId && x.Civ != 0 && x.SiteId != 0 {
+	if x.Civ != x.SiteId {
 		sameFields["HistoricalEventBodyAbused"]["Civ"]["SiteId"] = false
 	}
-	if x.Civ != x.SubregionId && x.Civ != 0 && x.SubregionId != 0 {
+	if x.Civ != x.SubregionId {
 		sameFields["HistoricalEventBodyAbused"]["Civ"]["SubregionId"] = false
 	}
-	if x.Histfig != x.FeatureLayerId && x.Histfig != 0 && x.FeatureLayerId != 0 {
+	if x.Histfig != x.FeatureLayerId {
 		sameFields["HistoricalEventBodyAbused"]["Histfig"]["FeatureLayerId"] = false
 	}
-	if x.Histfig != x.SiteId && x.Histfig != 0 && x.SiteId != 0 {
+	if x.Histfig != x.SiteId {
 		sameFields["HistoricalEventBodyAbused"]["Histfig"]["SiteId"] = false
 	}
-	if x.Histfig != x.SubregionId && x.Histfig != 0 && x.SubregionId != 0 {
+	if x.Histfig != x.SubregionId {
 		sameFields["HistoricalEventBodyAbused"]["Histfig"]["SubregionId"] = false
 	}
-	if x.Interaction != x.FeatureLayerId && x.Interaction != 0 && x.FeatureLayerId != 0 {
+	if x.Interaction != x.FeatureLayerId {
 		sameFields["HistoricalEventBodyAbused"]["Interaction"]["FeatureLayerId"] = false
 	}
-	if x.Interaction != x.SiteId && x.Interaction != 0 && x.SiteId != 0 {
+	if x.Interaction != x.SiteId {
 		sameFields["HistoricalEventBodyAbused"]["Interaction"]["SiteId"] = false
 	}
-	if x.Interaction != x.SubregionId && x.Interaction != 0 && x.SubregionId != 0 {
+	if x.Interaction != x.SubregionId {
 		sameFields["HistoricalEventBodyAbused"]["Interaction"]["SubregionId"] = false
 	}
 	if x.ItemMat != x.Coords && x.ItemMat != "" && x.Coords != "" {
 		sameFields["HistoricalEventBodyAbused"]["ItemMat"]["Coords"] = false
 	}
-	if x.Structure != x.FeatureLayerId && x.Structure != 0 && x.FeatureLayerId != 0 {
+	if x.Structure != x.FeatureLayerId {
 		sameFields["HistoricalEventBodyAbused"]["Structure"]["FeatureLayerId"] = false
 	}
-	if x.Structure != x.SiteId && x.Structure != 0 && x.SiteId != 0 {
+	if x.Structure != x.SiteId {
 		sameFields["HistoricalEventBodyAbused"]["Structure"]["SiteId"] = false
 	}
-	if x.Structure != x.SubregionId && x.Structure != 0 && x.SubregionId != 0 {
+	if x.Structure != x.SubregionId {
 		sameFields["HistoricalEventBodyAbused"]["Structure"]["SubregionId"] = false
 	}
-	if x.Tree != x.FeatureLayerId && x.Tree != 0 && x.FeatureLayerId != 0 {
+	if x.Tree != x.FeatureLayerId {
 		sameFields["HistoricalEventBodyAbused"]["Tree"]["FeatureLayerId"] = false
 	}
-	if x.Tree != x.SiteId && x.Tree != 0 && x.SiteId != 0 {
+	if x.Tree != x.SiteId {
 		sameFields["HistoricalEventBodyAbused"]["Tree"]["SiteId"] = false
 	}
-	if x.Tree != x.SubregionId && x.Tree != 0 && x.SubregionId != 0 {
+	if x.Tree != x.SubregionId {
 		sameFields["HistoricalEventBodyAbused"]["Tree"]["SubregionId"] = false
 	}
-	if x.VictimEntity != x.FeatureLayerId && x.VictimEntity != 0 && x.FeatureLayerId != 0 {
+	if x.VictimEntity != x.FeatureLayerId {
 		sameFields["HistoricalEventBodyAbused"]["VictimEntity"]["FeatureLayerId"] = false
 	}
-	if x.VictimEntity != x.SiteId && x.VictimEntity != 0 && x.SiteId != 0 {
+	if x.VictimEntity != x.SiteId {
 		sameFields["HistoricalEventBodyAbused"]["VictimEntity"]["SiteId"] = false
 	}
-	if x.VictimEntity != x.SubregionId && x.VictimEntity != 0 && x.SubregionId != 0 {
+	if x.VictimEntity != x.SubregionId {
 		sameFields["HistoricalEventBodyAbused"]["VictimEntity"]["SubregionId"] = false
 	}
 }
@@ -4560,11 +5172,16 @@ func NewHistoricalEventBuildingProfileAcquired() *HistoricalEventBuildingProfile
 		SiteId:            -1,
 	}
 }
-func (x *HistoricalEventBuildingProfileAcquired) Type() string                { return "building profile acquired" }
-func (x *HistoricalEventBuildingProfileAcquired) RelatedToEntity(id int) bool { return false }
+func (x *HistoricalEventBuildingProfileAcquired) Type() string { return "building profile acquired" }
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToEntity(id int) bool {
+	return x.AcquirerEnid == id
+}
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToHf(id int) bool {
 	return x.AcquirerHfid == id || x.LastOwnerHfid == id
 }
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventBuildingProfileAcquired) CheckFields() {
 }
@@ -4611,9 +5228,12 @@ func NewHistoricalEventCeremony() *HistoricalEventCeremony {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventCeremony) Type() string                { return "ceremony" }
-func (x *HistoricalEventCeremony) RelatedToEntity(id int) bool { return x.CivId == id }
-func (x *HistoricalEventCeremony) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCeremony) Type() string                  { return "ceremony" }
+func (x *HistoricalEventCeremony) RelatedToEntity(id int) bool   { return x.CivId == id }
+func (x *HistoricalEventCeremony) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCeremony) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCeremony) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCeremony) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventCeremony) CheckFields() {
 }
@@ -4687,9 +5307,12 @@ func NewHistoricalEventChangeHfBodyState() *HistoricalEventChangeHfBodyState {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventChangeHfBodyState) Type() string                { return "change hf body state" }
-func (x *HistoricalEventChangeHfBodyState) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventChangeHfBodyState) RelatedToHf(id int) bool     { return x.Hfid == id }
+func (x *HistoricalEventChangeHfBodyState) Type() string                  { return "change hf body state" }
+func (x *HistoricalEventChangeHfBodyState) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventChangeHfBodyState) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventChangeHfBodyState) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventChangeHfBodyState) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventChangeHfBodyState) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventChangeHfBodyState) CheckFields() {
 }
@@ -4735,9 +5358,12 @@ func NewHistoricalEventChangeHfJob() *HistoricalEventChangeHfJob {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventChangeHfJob) Type() string                { return "change hf job" }
-func (x *HistoricalEventChangeHfJob) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventChangeHfJob) RelatedToHf(id int) bool     { return x.Hfid == id }
+func (x *HistoricalEventChangeHfJob) Type() string                  { return "change hf job" }
+func (x *HistoricalEventChangeHfJob) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventChangeHfJob) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventChangeHfJob) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventChangeHfJob) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventChangeHfJob) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventChangeHfJob) CheckFields() {
 }
@@ -4766,6 +5392,7 @@ type HistoricalEventChangeHfStateMood int
 const (
 	HistoricalEventChangeHfStateMood_Unknown HistoricalEventChangeHfStateMood = iota
 	HistoricalEventChangeHfStateMood_Berserk
+	HistoricalEventChangeHfStateMood_Catatonic
 	HistoricalEventChangeHfStateMood_Fell
 	HistoricalEventChangeHfStateMood_Fey
 	HistoricalEventChangeHfStateMood_Insane
@@ -4779,6 +5406,8 @@ func parseHistoricalEventChangeHfStateMood(s string) HistoricalEventChangeHfStat
 	switch s {
 	case "berserk":
 		return HistoricalEventChangeHfStateMood_Berserk
+	case "catatonic":
+		return HistoricalEventChangeHfStateMood_Catatonic
 	case "fell":
 		return HistoricalEventChangeHfStateMood_Fell
 	case "fey":
@@ -4801,6 +5430,8 @@ func (s HistoricalEventChangeHfStateMood) String() string {
 	switch s {
 	case HistoricalEventChangeHfStateMood_Berserk:
 		return "berserk"
+	case HistoricalEventChangeHfStateMood_Catatonic:
+		return "catatonic"
 	case HistoricalEventChangeHfStateMood_Fell:
 		return "fell"
 	case HistoricalEventChangeHfStateMood_Fey:
@@ -4972,9 +5603,12 @@ func NewHistoricalEventChangeHfState() *HistoricalEventChangeHfState {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventChangeHfState) Type() string                { return "change hf state" }
-func (x *HistoricalEventChangeHfState) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventChangeHfState) RelatedToHf(id int) bool     { return x.Hfid == id }
+func (x *HistoricalEventChangeHfState) Type() string                  { return "change hf state" }
+func (x *HistoricalEventChangeHfState) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventChangeHfState) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventChangeHfState) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventChangeHfState) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventChangeHfState) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventChangeHfState) CheckFields() {
 }
@@ -5026,6 +5660,9 @@ func (x *HistoricalEventChangedCreatureType) RelatedToEntity(id int) bool { retu
 func (x *HistoricalEventChangedCreatureType) RelatedToHf(id int) bool {
 	return x.ChangeeHfid == id || x.ChangerHfid == id
 }
+func (x *HistoricalEventChangedCreatureType) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventChangedCreatureType) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventChangedCreatureType) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventChangedCreatureType) CheckFields() {
 }
@@ -5177,9 +5814,12 @@ func NewHistoricalEventCollection() *HistoricalEventCollection {
 		StartYear:      -1,
 	}
 }
-func (x *HistoricalEventCollection) Id() int                     { return x.Id_ }
-func (x *HistoricalEventCollection) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollection) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollection) Id() int                       { return x.Id_ }
+func (x *HistoricalEventCollection) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventCollection) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollection) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollection) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventCollection) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCollection) CheckFields() {
 }
@@ -5228,9 +5868,14 @@ func NewHistoricalEventCollectionAbduction() *HistoricalEventCollectionAbduction
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventCollectionAbduction) Type() string                { return "abduction" }
-func (x *HistoricalEventCollectionAbduction) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollectionAbduction) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionAbduction) Type() string { return "abduction" }
+func (x *HistoricalEventCollectionAbduction) RelatedToEntity(id int) bool {
+	return x.AttackingEnid == id || x.DefendingEnid == id
+}
+func (x *HistoricalEventCollectionAbduction) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionAbduction) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionAbduction) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCollectionAbduction) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventCollectionAbduction) CheckFields() {
 }
@@ -5342,11 +5987,14 @@ func NewHistoricalEventCollectionBattle() *HistoricalEventCollectionBattle {
 func (x *HistoricalEventCollectionBattle) Name() string { return x.Name_ }
 func (x *HistoricalEventCollectionBattle) Type() string { return "battle" }
 func (x *HistoricalEventCollectionBattle) RelatedToEntity(id int) bool {
-	return containsInt(x.AttackingSquadEntityPop, id) || containsInt(x.DefendingSquadEntityPop, id)
+	return containsInt(x.AttackingSquadEntityPop, id) || containsInt(x.DefendingSquadEntityPop, id) || x.ASupportMercEnid == id || x.AttackingMercEnid == id || x.DSupportMercEnid == id || x.DefendingMercEnid == id
 }
 func (x *HistoricalEventCollectionBattle) RelatedToHf(id int) bool {
 	return containsInt(x.ASupportMercHfid, id) || containsInt(x.AttackingHfid, id) || containsInt(x.DSupportMercHfid, id) || containsInt(x.DefendingHfid, id) || containsInt(x.NoncomHfid, id)
 }
+func (x *HistoricalEventCollectionBattle) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionBattle) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCollectionBattle) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventCollectionBattle) CheckFields() {
 }
@@ -5424,9 +6072,16 @@ func NewHistoricalEventCollectionBeastAttack() *HistoricalEventCollectionBeastAt
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventCollectionBeastAttack) Type() string                { return "beast attack" }
-func (x *HistoricalEventCollectionBeastAttack) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollectionBeastAttack) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionBeastAttack) Type() string { return "beast attack" }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToEntity(id int) bool {
+	return x.DefendingEnid == id
+}
+func (x *HistoricalEventCollectionBeastAttack) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToRegion(id int) bool {
+	return x.SubregionId == id
+}
 
 func (x *HistoricalEventCollectionBeastAttack) CheckFields() {
 }
@@ -5464,9 +6119,12 @@ func NewHistoricalEventCollectionCeremony() *HistoricalEventCollectionCeremony {
 		Ordinal: -1,
 	}
 }
-func (x *HistoricalEventCollectionCeremony) Type() string                { return "ceremony" }
-func (x *HistoricalEventCollectionCeremony) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollectionCeremony) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionCeremony) Type() string                  { return "ceremony" }
+func (x *HistoricalEventCollectionCeremony) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCollectionCeremony) CheckFields() {
 }
@@ -5488,9 +6146,12 @@ func NewHistoricalEventCollectionCompetition() *HistoricalEventCollectionCompeti
 		Ordinal: -1,
 	}
 }
-func (x *HistoricalEventCollectionCompetition) Type() string                { return "competition" }
-func (x *HistoricalEventCollectionCompetition) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollectionCompetition) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionCompetition) Type() string                  { return "competition" }
+func (x *HistoricalEventCollectionCompetition) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCollectionCompetition) CheckFields() {
 }
@@ -5530,6 +6191,9 @@ func (x *HistoricalEventCollectionDuel) RelatedToEntity(id int) bool { return fa
 func (x *HistoricalEventCollectionDuel) RelatedToHf(id int) bool {
 	return x.AttackingHfid == id || x.DefendingHfid == id
 }
+func (x *HistoricalEventCollectionDuel) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionDuel) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCollectionDuel) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventCollectionDuel) CheckFields() {
 }
@@ -5578,7 +6242,10 @@ func (x *HistoricalEventCollectionEntityOverthrown) Type() string { return "enti
 func (x *HistoricalEventCollectionEntityOverthrown) RelatedToEntity(id int) bool {
 	return x.TargetEntityId == id
 }
-func (x *HistoricalEventCollectionEntityOverthrown) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCollectionEntityOverthrown) CheckFields() {
 }
@@ -5610,9 +6277,14 @@ func NewHistoricalEventCollectionInsurrection() *HistoricalEventCollectionInsurr
 		TargetEnid: -1,
 	}
 }
-func (x *HistoricalEventCollectionInsurrection) Type() string                { return "insurrection" }
-func (x *HistoricalEventCollectionInsurrection) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollectionInsurrection) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionInsurrection) Type() string { return "insurrection" }
+func (x *HistoricalEventCollectionInsurrection) RelatedToEntity(id int) bool {
+	return x.TargetEnid == id
+}
+func (x *HistoricalEventCollectionInsurrection) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionInsurrection) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionInsurrection) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCollectionInsurrection) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCollectionInsurrection) CheckFields() {
 }
@@ -5640,9 +6312,12 @@ func NewHistoricalEventCollectionJourney() *HistoricalEventCollectionJourney {
 		Ordinal: -1,
 	}
 }
-func (x *HistoricalEventCollectionJourney) Type() string                { return "journey" }
-func (x *HistoricalEventCollectionJourney) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollectionJourney) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionJourney) Type() string                  { return "journey" }
+func (x *HistoricalEventCollectionJourney) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCollectionJourney) CheckFields() {
 }
@@ -5668,9 +6343,12 @@ func NewHistoricalEventCollectionOccasion() *HistoricalEventCollectionOccasion {
 		Ordinal:    -1,
 	}
 }
-func (x *HistoricalEventCollectionOccasion) Type() string                { return "occasion" }
-func (x *HistoricalEventCollectionOccasion) RelatedToEntity(id int) bool { return x.CivId == id }
-func (x *HistoricalEventCollectionOccasion) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionOccasion) Type() string                  { return "occasion" }
+func (x *HistoricalEventCollectionOccasion) RelatedToEntity(id int) bool   { return x.CivId == id }
+func (x *HistoricalEventCollectionOccasion) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCollectionOccasion) CheckFields() {
 }
@@ -5698,9 +6376,12 @@ func NewHistoricalEventCollectionPerformance() *HistoricalEventCollectionPerform
 		Ordinal: -1,
 	}
 }
-func (x *HistoricalEventCollectionPerformance) Type() string                { return "performance" }
-func (x *HistoricalEventCollectionPerformance) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollectionPerformance) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionPerformance) Type() string                  { return "performance" }
+func (x *HistoricalEventCollectionPerformance) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCollectionPerformance) CheckFields() {
 }
@@ -5730,7 +6411,10 @@ func (x *HistoricalEventCollectionPersecution) Type() string { return "persecuti
 func (x *HistoricalEventCollectionPersecution) RelatedToEntity(id int) bool {
 	return x.TargetEntityId == id
 }
-func (x *HistoricalEventCollectionPersecution) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCollectionPersecution) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCollectionPersecution) CheckFields() {
 }
@@ -5758,9 +6442,12 @@ func NewHistoricalEventCollectionProcession() *HistoricalEventCollectionProcessi
 		Ordinal: -1,
 	}
 }
-func (x *HistoricalEventCollectionProcession) Type() string                { return "procession" }
-func (x *HistoricalEventCollectionProcession) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollectionProcession) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionProcession) Type() string                  { return "procession" }
+func (x *HistoricalEventCollectionProcession) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCollectionProcession) CheckFields() {
 }
@@ -5812,9 +6499,12 @@ func NewHistoricalEventCollectionPurge() *HistoricalEventCollectionPurge {
 		SiteId:  -1,
 	}
 }
-func (x *HistoricalEventCollectionPurge) Type() string                { return "purge" }
-func (x *HistoricalEventCollectionPurge) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollectionPurge) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionPurge) Type() string                  { return "purge" }
+func (x *HistoricalEventCollectionPurge) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCollectionPurge) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCollectionPurge) CheckFields() {
 }
@@ -5855,9 +6545,14 @@ func NewHistoricalEventCollectionRaid() *HistoricalEventCollectionRaid {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventCollectionRaid) Type() string                { return "raid" }
-func (x *HistoricalEventCollectionRaid) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollectionRaid) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionRaid) Type() string { return "raid" }
+func (x *HistoricalEventCollectionRaid) RelatedToEntity(id int) bool {
+	return x.AttackingEnid == id || x.DefendingEnid == id
+}
+func (x *HistoricalEventCollectionRaid) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionRaid) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionRaid) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCollectionRaid) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventCollectionRaid) CheckFields() {
 }
@@ -5906,9 +6601,14 @@ func NewHistoricalEventCollectionSiteConquered() *HistoricalEventCollectionSiteC
 		WarEventcol:   -1,
 	}
 }
-func (x *HistoricalEventCollectionSiteConquered) Type() string                { return "site conquered" }
-func (x *HistoricalEventCollectionSiteConquered) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollectionSiteConquered) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionSiteConquered) Type() string { return "site conquered" }
+func (x *HistoricalEventCollectionSiteConquered) RelatedToEntity(id int) bool {
+	return x.AttackingEnid == id || x.DefendingEnid == id
+}
+func (x *HistoricalEventCollectionSiteConquered) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionSiteConquered) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionSiteConquered) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCollectionSiteConquered) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCollectionSiteConquered) CheckFields() {
 }
@@ -5955,9 +6655,14 @@ func NewHistoricalEventCollectionTheft() *HistoricalEventCollectionTheft {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventCollectionTheft) Type() string                { return "theft" }
-func (x *HistoricalEventCollectionTheft) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollectionTheft) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionTheft) Type() string { return "theft" }
+func (x *HistoricalEventCollectionTheft) RelatedToEntity(id int) bool {
+	return x.AttackingEnid == id || x.DefendingEnid == id
+}
+func (x *HistoricalEventCollectionTheft) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionTheft) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionTheft) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCollectionTheft) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventCollectionTheft) CheckFields() {
 }
@@ -6001,10 +6706,13 @@ func NewHistoricalEventCollectionWar() *HistoricalEventCollectionWar {
 		DefenderEntId:  -1,
 	}
 }
-func (x *HistoricalEventCollectionWar) Name() string                { return x.Name_ }
-func (x *HistoricalEventCollectionWar) Type() string                { return "war" }
-func (x *HistoricalEventCollectionWar) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCollectionWar) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCollectionWar) Name() string                  { return x.Name_ }
+func (x *HistoricalEventCollectionWar) Type() string                  { return "war" }
+func (x *HistoricalEventCollectionWar) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventCollectionWar) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCollectionWar) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCollectionWar) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventCollectionWar) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCollectionWar) CheckFields() {
 }
@@ -6048,6 +6756,9 @@ func (x *HistoricalEventCompetition) RelatedToEntity(id int) bool { return x.Civ
 func (x *HistoricalEventCompetition) RelatedToHf(id int) bool {
 	return containsInt(x.CompetitorHfid, id) || x.WinnerHfid == id
 }
+func (x *HistoricalEventCompetition) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCompetition) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCompetition) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventCompetition) CheckFields() {
 }
@@ -6141,9 +6852,12 @@ func NewHistoricalEventCreateEntityPosition() *HistoricalEventCreateEntityPositi
 		SiteCiv: -1,
 	}
 }
-func (x *HistoricalEventCreateEntityPosition) Type() string                { return "create entity position" }
-func (x *HistoricalEventCreateEntityPosition) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventCreateEntityPosition) RelatedToHf(id int) bool     { return x.Histfig == id }
+func (x *HistoricalEventCreateEntityPosition) Type() string                  { return "create entity position" }
+func (x *HistoricalEventCreateEntityPosition) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToHf(id int) bool       { return x.Histfig == id }
+func (x *HistoricalEventCreateEntityPosition) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCreateEntityPosition) CheckFields() {
 }
@@ -6187,7 +6901,10 @@ func (x *HistoricalEventCreatedSite) Type() string { return "created site" }
 func (x *HistoricalEventCreatedSite) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.ResidentCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventCreatedSite) RelatedToHf(id int) bool { return x.BuilderHfid == id }
+func (x *HistoricalEventCreatedSite) RelatedToHf(id int) bool       { return x.BuilderHfid == id }
+func (x *HistoricalEventCreatedSite) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCreatedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCreatedSite) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCreatedSite) CheckFields() {
 }
@@ -6251,7 +6968,6 @@ type HistoricalEventCreatedStructure struct {
 	Rebuilt     bool                                   `json:"rebuilt" legend:"base"`     // rebuilt
 	SiteCivId   int                                    `json:"siteCivId" legend:"base"`   // site_civ_id
 	SiteId      int                                    `json:"siteId" legend:"base"`      // site_id
-	Structure   int                                    `json:"structure" legend:"plus"`   // structure
 	StructureId int                                    `json:"structureId" legend:"base"` // structure_id
 }
 
@@ -6261,7 +6977,6 @@ func NewHistoricalEventCreatedStructure() *HistoricalEventCreatedStructure {
 		CivId:       -1,
 		SiteCivId:   -1,
 		SiteId:      -1,
-		Structure:   -1,
 		StructureId: -1,
 	}
 }
@@ -6269,24 +6984,12 @@ func (x *HistoricalEventCreatedStructure) Type() string { return "created struct
 func (x *HistoricalEventCreatedStructure) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventCreatedStructure) RelatedToHf(id int) bool { return x.BuilderHfid == id }
+func (x *HistoricalEventCreatedStructure) RelatedToHf(id int) bool       { return x.BuilderHfid == id }
+func (x *HistoricalEventCreatedStructure) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCreatedStructure) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCreatedStructure) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventCreatedStructure) CheckFields() {
-	if x.Structure != x.BuilderHfid && x.Structure != 0 && x.BuilderHfid != 0 {
-		sameFields["HistoricalEventCreatedStructure"]["Structure"]["BuilderHfid"] = false
-	}
-	if x.Structure != x.CivId && x.Structure != 0 && x.CivId != 0 {
-		sameFields["HistoricalEventCreatedStructure"]["Structure"]["CivId"] = false
-	}
-	if x.Structure != x.SiteCivId && x.Structure != 0 && x.SiteCivId != 0 {
-		sameFields["HistoricalEventCreatedStructure"]["Structure"]["SiteCivId"] = false
-	}
-	if x.Structure != x.SiteId && x.Structure != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventCreatedStructure"]["Structure"]["SiteId"] = false
-	}
-	if x.Structure != x.StructureId && x.Structure != 0 && x.StructureId != 0 {
-		sameFields["HistoricalEventCreatedStructure"]["Structure"]["StructureId"] = false
-	}
 }
 
 func (x *HistoricalEventCreatedStructure) MarshalJSON() ([]byte, error) {
@@ -6306,9 +7009,6 @@ func (x *HistoricalEventCreatedStructure) MarshalJSON() ([]byte, error) {
 	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
-	}
-	if x.Structure != -1 {
-		d["structure"] = x.Structure
 	}
 	if x.StructureId != -1 {
 		d["structureId"] = x.StructureId
@@ -6339,7 +7039,12 @@ func (x *HistoricalEventCreatedWorldConstruction) Type() string { return "create
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventCreatedWorldConstruction) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventCreatedWorldConstruction) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCreatedWorldConstruction) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCreatedWorldConstruction) RelatedToSite(id int) bool {
+	return x.SiteId1 == id || x.SiteId2 == id
+}
+func (x *HistoricalEventCreatedWorldConstruction) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventCreatedWorldConstruction) CheckFields() {
 }
@@ -6388,36 +7093,39 @@ func NewHistoricalEventCreatureDevoured() *HistoricalEventCreatureDevoured {
 		Victim:         -1,
 	}
 }
-func (x *HistoricalEventCreatureDevoured) Type() string                { return "creature devoured" }
-func (x *HistoricalEventCreatureDevoured) RelatedToEntity(id int) bool { return x.Entity == id }
-func (x *HistoricalEventCreatureDevoured) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventCreatureDevoured) Type() string                  { return "creature devoured" }
+func (x *HistoricalEventCreatureDevoured) RelatedToEntity(id int) bool   { return x.Entity == id }
+func (x *HistoricalEventCreatureDevoured) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventCreatureDevoured) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventCreatureDevoured) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCreatureDevoured) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventCreatureDevoured) CheckFields() {
-	if x.Eater != x.FeatureLayerId && x.Eater != 0 && x.FeatureLayerId != 0 {
+	if x.Eater != x.FeatureLayerId {
 		sameFields["HistoricalEventCreatureDevoured"]["Eater"]["FeatureLayerId"] = false
 	}
-	if x.Eater != x.SiteId && x.Eater != 0 && x.SiteId != 0 {
+	if x.Eater != x.SiteId {
 		sameFields["HistoricalEventCreatureDevoured"]["Eater"]["SiteId"] = false
 	}
-	if x.Eater != x.SubregionId && x.Eater != 0 && x.SubregionId != 0 {
+	if x.Eater != x.SubregionId {
 		sameFields["HistoricalEventCreatureDevoured"]["Eater"]["SubregionId"] = false
 	}
-	if x.Entity != x.FeatureLayerId && x.Entity != 0 && x.FeatureLayerId != 0 {
+	if x.Entity != x.FeatureLayerId {
 		sameFields["HistoricalEventCreatureDevoured"]["Entity"]["FeatureLayerId"] = false
 	}
-	if x.Entity != x.SiteId && x.Entity != 0 && x.SiteId != 0 {
+	if x.Entity != x.SiteId {
 		sameFields["HistoricalEventCreatureDevoured"]["Entity"]["SiteId"] = false
 	}
-	if x.Entity != x.SubregionId && x.Entity != 0 && x.SubregionId != 0 {
+	if x.Entity != x.SubregionId {
 		sameFields["HistoricalEventCreatureDevoured"]["Entity"]["SubregionId"] = false
 	}
-	if x.Victim != x.FeatureLayerId && x.Victim != 0 && x.FeatureLayerId != 0 {
+	if x.Victim != x.FeatureLayerId {
 		sameFields["HistoricalEventCreatureDevoured"]["Victim"]["FeatureLayerId"] = false
 	}
-	if x.Victim != x.SiteId && x.Victim != 0 && x.SiteId != 0 {
+	if x.Victim != x.SiteId {
 		sameFields["HistoricalEventCreatureDevoured"]["Victim"]["SiteId"] = false
 	}
-	if x.Victim != x.SubregionId && x.Victim != 0 && x.SubregionId != 0 {
+	if x.Victim != x.SubregionId {
 		sameFields["HistoricalEventCreatureDevoured"]["Victim"]["SubregionId"] = false
 	}
 }
@@ -6524,6 +7232,7 @@ type HistoricalEventDanceFormCreated struct {
 	Reason         HistoricalEventDanceFormCreatedReason       `json:"reason" legend:"base"`         // reason
 	ReasonId       int                                         `json:"reasonId" legend:"base"`       // reason_id
 	SiteId         int                                         `json:"siteId" legend:"base"`         // site_id
+	SubregionId    int                                         `json:"subregionId" legend:"base"`    // subregion_id
 }
 
 func NewHistoricalEventDanceFormCreated() *HistoricalEventDanceFormCreated {
@@ -6533,11 +7242,15 @@ func NewHistoricalEventDanceFormCreated() *HistoricalEventDanceFormCreated {
 		HistFigureId:   -1,
 		ReasonId:       -1,
 		SiteId:         -1,
+		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventDanceFormCreated) Type() string                { return "dance form created" }
-func (x *HistoricalEventDanceFormCreated) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventDanceFormCreated) RelatedToHf(id int) bool     { return x.HistFigureId == id }
+func (x *HistoricalEventDanceFormCreated) Type() string                  { return "dance form created" }
+func (x *HistoricalEventDanceFormCreated) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventDanceFormCreated) RelatedToHf(id int) bool       { return x.HistFigureId == id }
+func (x *HistoricalEventDanceFormCreated) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventDanceFormCreated) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventDanceFormCreated) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventDanceFormCreated) CheckFields() {
 }
@@ -6565,6 +7278,9 @@ func (x *HistoricalEventDanceFormCreated) MarshalJSON() ([]byte, error) {
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
 	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
+	}
 	return json.Marshal(d)
 }
 
@@ -6588,7 +7304,10 @@ func (x *HistoricalEventDestroyedSite) Type() string { return "destroyed site" }
 func (x *HistoricalEventDestroyedSite) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventDestroyedSite) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventDestroyedSite) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventDestroyedSite) CheckFields() {
 }
@@ -6614,7 +7333,6 @@ func (x *HistoricalEventDestroyedSite) MarshalJSON() ([]byte, error) {
 type HistoricalEventDiplomatLost struct {
 	Entity   int `json:"entity" legend:"plus"`   // entity
 	Involved int `json:"involved" legend:"plus"` // involved
-	Site     int `json:"site" legend:"plus"`     // site
 	SiteId   int `json:"siteId" legend:"base"`   // site_id
 }
 
@@ -6622,23 +7340,22 @@ func NewHistoricalEventDiplomatLost() *HistoricalEventDiplomatLost {
 	return &HistoricalEventDiplomatLost{
 		Entity:   -1,
 		Involved: -1,
-		Site:     -1,
 		SiteId:   -1,
 	}
 }
-func (x *HistoricalEventDiplomatLost) Type() string                { return "diplomat lost" }
-func (x *HistoricalEventDiplomatLost) RelatedToEntity(id int) bool { return x.Entity == id }
-func (x *HistoricalEventDiplomatLost) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventDiplomatLost) Type() string                  { return "diplomat lost" }
+func (x *HistoricalEventDiplomatLost) RelatedToEntity(id int) bool   { return x.Entity == id }
+func (x *HistoricalEventDiplomatLost) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventDiplomatLost) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventDiplomatLost) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventDiplomatLost) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventDiplomatLost) CheckFields() {
-	if x.Entity != x.SiteId && x.Entity != 0 && x.SiteId != 0 {
+	if x.Entity != x.SiteId {
 		sameFields["HistoricalEventDiplomatLost"]["Entity"]["SiteId"] = false
 	}
-	if x.Involved != x.SiteId && x.Involved != 0 && x.SiteId != 0 {
+	if x.Involved != x.SiteId {
 		sameFields["HistoricalEventDiplomatLost"]["Involved"]["SiteId"] = false
-	}
-	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventDiplomatLost"]["Site"]["SiteId"] = false
 	}
 }
 
@@ -6649,9 +7366,6 @@ func (x *HistoricalEventDiplomatLost) MarshalJSON() ([]byte, error) {
 	}
 	if x.Involved != -1 {
 		d["involved"] = x.Involved
-	}
-	if x.Site != -1 {
-		d["site"] = x.Site
 	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
@@ -6669,9 +7383,14 @@ func NewHistoricalEventEntityAllianceFormed() *HistoricalEventEntityAllianceForm
 		InitiatingEnid: -1,
 	}
 }
-func (x *HistoricalEventEntityAllianceFormed) Type() string                { return "entity alliance formed" }
-func (x *HistoricalEventEntityAllianceFormed) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventEntityAllianceFormed) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventEntityAllianceFormed) Type() string { return "entity alliance formed" }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToEntity(id int) bool {
+	return containsInt(x.JoiningEnid, id) || x.InitiatingEnid == id
+}
+func (x *HistoricalEventEntityAllianceFormed) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityAllianceFormed) CheckFields() {
 }
@@ -6704,7 +7423,10 @@ func (x *HistoricalEventEntityBreachFeatureLayer) Type() string { return "entity
 func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToEntity(id int) bool {
 	return x.CivEntityId == id || x.SiteEntityId == id
 }
-func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityBreachFeatureLayer) CheckFields() {
 }
@@ -6741,9 +7463,12 @@ func NewHistoricalEventEntityCreated() *HistoricalEventEntityCreated {
 		StructureId: -1,
 	}
 }
-func (x *HistoricalEventEntityCreated) Type() string                { return "entity created" }
-func (x *HistoricalEventEntityCreated) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *HistoricalEventEntityCreated) RelatedToHf(id int) bool     { return x.CreatorHfid == id }
+func (x *HistoricalEventEntityCreated) Type() string                  { return "entity created" }
+func (x *HistoricalEventEntityCreated) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *HistoricalEventEntityCreated) RelatedToHf(id int) bool       { return x.CreatorHfid == id }
+func (x *HistoricalEventEntityCreated) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityCreated) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventEntityCreated) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityCreated) CheckFields() {
 }
@@ -6807,9 +7532,12 @@ func NewHistoricalEventEntityDissolved() *HistoricalEventEntityDissolved {
 		EntityId: -1,
 	}
 }
-func (x *HistoricalEventEntityDissolved) Type() string                { return "entity dissolved" }
-func (x *HistoricalEventEntityDissolved) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *HistoricalEventEntityDissolved) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventEntityDissolved) Type() string                  { return "entity dissolved" }
+func (x *HistoricalEventEntityDissolved) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *HistoricalEventEntityDissolved) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityDissolved) CheckFields() {
 }
@@ -6844,6 +7572,9 @@ func (x *HistoricalEventEntityEquipmentPurchase) RelatedToEntity(id int) bool {
 func (x *HistoricalEventEntityEquipmentPurchase) RelatedToHf(id int) bool {
 	return containsInt(x.Hfid, id)
 }
+func (x *HistoricalEventEntityEquipmentPurchase) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityEquipmentPurchase) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventEntityEquipmentPurchase) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityEquipmentPurchase) CheckFields() {
 }
@@ -6873,9 +7604,12 @@ func NewHistoricalEventEntityExpelsHf() *HistoricalEventEntityExpelsHf {
 		SiteId:   -1,
 	}
 }
-func (x *HistoricalEventEntityExpelsHf) Type() string                { return "entity expels hf" }
-func (x *HistoricalEventEntityExpelsHf) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *HistoricalEventEntityExpelsHf) RelatedToHf(id int) bool     { return x.Hfid == id }
+func (x *HistoricalEventEntityExpelsHf) Type() string                  { return "entity expels hf" }
+func (x *HistoricalEventEntityExpelsHf) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *HistoricalEventEntityExpelsHf) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventEntityExpelsHf) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityExpelsHf) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventEntityExpelsHf) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityExpelsHf) CheckFields() {
 }
@@ -6905,9 +7639,12 @@ func NewHistoricalEventEntityFledSite() *HistoricalEventEntityFledSite {
 		SiteId:    -1,
 	}
 }
-func (x *HistoricalEventEntityFledSite) Type() string                { return "entity fled site" }
-func (x *HistoricalEventEntityFledSite) RelatedToEntity(id int) bool { return x.FledCivId == id }
-func (x *HistoricalEventEntityFledSite) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventEntityFledSite) Type() string                  { return "entity fled site" }
+func (x *HistoricalEventEntityFledSite) RelatedToEntity(id int) bool   { return x.FledCivId == id }
+func (x *HistoricalEventEntityFledSite) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventEntityFledSite) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityFledSite) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventEntityFledSite) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityFledSite) CheckFields() {
 }
@@ -6943,7 +7680,10 @@ func (x *HistoricalEventEntityIncorporated) Type() string { return "entity incor
 func (x *HistoricalEventEntityIncorporated) RelatedToEntity(id int) bool {
 	return x.JoinedEntityId == id || x.JoinerEntityId == id
 }
-func (x *HistoricalEventEntityIncorporated) RelatedToHf(id int) bool { return x.LeaderHfid == id }
+func (x *HistoricalEventEntityIncorporated) RelatedToHf(id int) bool       { return x.LeaderHfid == id }
+func (x *HistoricalEventEntityIncorporated) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityIncorporated) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventEntityIncorporated) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityIncorporated) CheckFields() {
 }
@@ -7033,9 +7773,12 @@ func NewHistoricalEventEntityLaw() *HistoricalEventEntityLaw {
 		HistFigureId: -1,
 	}
 }
-func (x *HistoricalEventEntityLaw) Type() string                { return "entity law" }
-func (x *HistoricalEventEntityLaw) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *HistoricalEventEntityLaw) RelatedToHf(id int) bool     { return x.HistFigureId == id }
+func (x *HistoricalEventEntityLaw) Type() string                  { return "entity law" }
+func (x *HistoricalEventEntityLaw) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *HistoricalEventEntityLaw) RelatedToHf(id int) bool       { return x.HistFigureId == id }
+func (x *HistoricalEventEntityLaw) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityLaw) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventEntityLaw) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityLaw) CheckFields() {
 }
@@ -7082,6 +7825,9 @@ func (x *HistoricalEventEntityOverthrown) RelatedToEntity(id int) bool { return 
 func (x *HistoricalEventEntityOverthrown) RelatedToHf(id int) bool {
 	return containsInt(x.ConspiratorHfid, id) || x.InstigatorHfid == id || x.OverthrownHfid == id || x.PosTakerHfid == id
 }
+func (x *HistoricalEventEntityOverthrown) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityOverthrown) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventEntityOverthrown) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityOverthrown) CheckFields() {
 }
@@ -7134,11 +7880,16 @@ func NewHistoricalEventEntityPersecuted() *HistoricalEventEntityPersecuted {
 		TargetEnid:            -1,
 	}
 }
-func (x *HistoricalEventEntityPersecuted) Type() string                { return "entity persecuted" }
-func (x *HistoricalEventEntityPersecuted) RelatedToEntity(id int) bool { return false }
+func (x *HistoricalEventEntityPersecuted) Type() string { return "entity persecuted" }
+func (x *HistoricalEventEntityPersecuted) RelatedToEntity(id int) bool {
+	return x.PersecutorEnid == id || x.TargetEnid == id
+}
 func (x *HistoricalEventEntityPersecuted) RelatedToHf(id int) bool {
 	return containsInt(x.ExpelledHfid, id) || containsInt(x.PropertyConfiscatedFromHfid, id) || x.PersecutorHfid == id
 }
+func (x *HistoricalEventEntityPersecuted) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityPersecuted) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventEntityPersecuted) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityPersecuted) CheckFields() {
 }
@@ -7212,9 +7963,12 @@ func NewHistoricalEventEntityPrimaryCriminals() *HistoricalEventEntityPrimaryCri
 		StructureId: -1,
 	}
 }
-func (x *HistoricalEventEntityPrimaryCriminals) Type() string                { return "entity primary criminals" }
-func (x *HistoricalEventEntityPrimaryCriminals) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *HistoricalEventEntityPrimaryCriminals) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventEntityPrimaryCriminals) Type() string                  { return "entity primary criminals" }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityPrimaryCriminals) CheckFields() {
 }
@@ -7251,7 +8005,10 @@ func (x *HistoricalEventEntityRampagedInSite) Type() string { return "entity ram
 func (x *HistoricalEventEntityRampagedInSite) RelatedToEntity(id int) bool {
 	return x.RampageCivId == id
 }
-func (x *HistoricalEventEntityRampagedInSite) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityRampagedInSite) CheckFields() {
 }
@@ -7308,9 +8065,12 @@ func NewHistoricalEventEntityRelocate() *HistoricalEventEntityRelocate {
 		StructureId: -1,
 	}
 }
-func (x *HistoricalEventEntityRelocate) Type() string                { return "entity relocate" }
-func (x *HistoricalEventEntityRelocate) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *HistoricalEventEntityRelocate) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventEntityRelocate) Type() string                  { return "entity relocate" }
+func (x *HistoricalEventEntityRelocate) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *HistoricalEventEntityRelocate) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventEntityRelocate) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntityRelocate) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventEntityRelocate) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntityRelocate) CheckFields() {
 }
@@ -7375,7 +8135,10 @@ func (x *HistoricalEventEntitySearchedSite) Type() string { return "entity searc
 func (x *HistoricalEventEntitySearchedSite) RelatedToEntity(id int) bool {
 	return x.SearcherCivId == id
 }
-func (x *HistoricalEventEntitySearchedSite) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventEntitySearchedSite) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventEntitySearchedSite) CheckFields() {
 }
@@ -7439,11 +8202,16 @@ func NewHistoricalEventFailedFrameAttempt() *HistoricalEventFailedFrameAttempt {
 		TargetHfid:    -1,
 	}
 }
-func (x *HistoricalEventFailedFrameAttempt) Type() string                { return "failed frame attempt" }
-func (x *HistoricalEventFailedFrameAttempt) RelatedToEntity(id int) bool { return false }
+func (x *HistoricalEventFailedFrameAttempt) Type() string { return "failed frame attempt" }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToEntity(id int) bool {
+	return x.ConvicterEnid == id
+}
 func (x *HistoricalEventFailedFrameAttempt) RelatedToHf(id int) bool {
 	return x.FooledHfid == id || x.FramerHfid == id || x.PlotterHfid == id || x.TargetHfid == id
 }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventFailedFrameAttempt) CheckFields() {
 }
@@ -7663,6 +8431,7 @@ const (
 	HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Unknown HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor = iota
 	HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Fear
 	HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Love
+	HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Loyalty
 	HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Respect
 	HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Trust
 )
@@ -7673,6 +8442,8 @@ func parseHistoricalEventFailedIntrigueCorruptionTopRelationshipFactor(s string)
 		return HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Fear
 	case "love":
 		return HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Love
+	case "loyalty":
+		return HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Loyalty
 	case "respect":
 		return HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Respect
 	case "trust":
@@ -7687,6 +8458,8 @@ func (s HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor) String() s
 		return "fear"
 	case HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Love:
 		return "love"
+	case HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Loyalty:
+		return "loyalty"
 	case HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Respect:
 		return "respect"
 	case HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor_Trust:
@@ -7788,6 +8561,11 @@ func (x *HistoricalEventFailedIntrigueCorruption) RelatedToEntity(id int) bool {
 }
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToHf(id int) bool {
 	return x.CorruptorHfid == id || x.LureHfid == id || x.TargetHfid == id
+}
+func (x *HistoricalEventFailedIntrigueCorruption) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventFailedIntrigueCorruption) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventFailedIntrigueCorruption) RelatedToRegion(id int) bool {
+	return x.SubregionId == id
 }
 
 func (x *HistoricalEventFailedIntrigueCorruption) CheckFields() {
@@ -7901,11 +8679,14 @@ func NewHistoricalEventFieldBattle() *HistoricalEventFieldBattle {
 }
 func (x *HistoricalEventFieldBattle) Type() string { return "field battle" }
 func (x *HistoricalEventFieldBattle) RelatedToEntity(id int) bool {
-	return x.AttackerCivId == id || x.DefenderCivId == id
+	return x.ASupportMercEnid == id || x.AttackerCivId == id || x.AttackerMercEnid == id || x.DSupportMercEnid == id || x.DefenderCivId == id || x.DefenderMercEnid == id
 }
 func (x *HistoricalEventFieldBattle) RelatedToHf(id int) bool {
 	return x.AttackerGeneralHfid == id || x.DefenderGeneralHfid == id
 }
+func (x *HistoricalEventFieldBattle) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventFieldBattle) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventFieldBattle) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventFieldBattle) CheckFields() {
 }
@@ -7959,9 +8740,14 @@ func NewHistoricalEventFirstContact() *HistoricalEventFirstContact {
 		SiteId:        -1,
 	}
 }
-func (x *HistoricalEventFirstContact) Type() string                { return "first contact" }
-func (x *HistoricalEventFirstContact) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventFirstContact) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventFirstContact) Type() string { return "first contact" }
+func (x *HistoricalEventFirstContact) RelatedToEntity(id int) bool {
+	return x.ContactedEnid == id || x.ContactorEnid == id
+}
+func (x *HistoricalEventFirstContact) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventFirstContact) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventFirstContact) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventFirstContact) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventFirstContact) CheckFields() {
 }
@@ -7997,9 +8783,12 @@ func NewHistoricalEventGamble() *HistoricalEventGamble {
 		StructureId: -1,
 	}
 }
-func (x *HistoricalEventGamble) Type() string                { return "gamble" }
-func (x *HistoricalEventGamble) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventGamble) RelatedToHf(id int) bool     { return x.GamblerHfid == id }
+func (x *HistoricalEventGamble) Type() string                  { return "gamble" }
+func (x *HistoricalEventGamble) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventGamble) RelatedToHf(id int) bool       { return x.GamblerHfid == id }
+func (x *HistoricalEventGamble) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventGamble) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventGamble) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventGamble) CheckFields() {
 }
@@ -8046,6 +8835,9 @@ func (x *HistoricalEventHfAbducted) RelatedToEntity(id int) bool { return false 
 func (x *HistoricalEventHfAbducted) RelatedToHf(id int) bool {
 	return x.SnatcherHfid == id || x.TargetHfid == id
 }
+func (x *HistoricalEventHfAbducted) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfAbducted) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfAbducted) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventHfAbducted) CheckFields() {
 }
@@ -8089,7 +8881,10 @@ func (x *HistoricalEventHfAttackedSite) Type() string { return "hf attacked site
 func (x *HistoricalEventHfAttackedSite) RelatedToEntity(id int) bool {
 	return x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventHfAttackedSite) RelatedToHf(id int) bool { return x.AttackerHfid == id }
+func (x *HistoricalEventHfAttackedSite) RelatedToHf(id int) bool       { return x.AttackerHfid == id }
+func (x *HistoricalEventHfAttackedSite) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfAttackedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfAttackedSite) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfAttackedSite) CheckFields() {
 }
@@ -8188,9 +8983,12 @@ func NewHistoricalEventHfConfronted() *HistoricalEventHfConfronted {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventHfConfronted) Type() string                { return "hf confronted" }
-func (x *HistoricalEventHfConfronted) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfConfronted) RelatedToHf(id int) bool     { return x.Hfid == id }
+func (x *HistoricalEventHfConfronted) Type() string                  { return "hf confronted" }
+func (x *HistoricalEventHfConfronted) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHfConfronted) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventHfConfronted) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfConfronted) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfConfronted) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventHfConfronted) CheckFields() {
 }
@@ -8346,11 +9144,16 @@ func NewHistoricalEventHfConvicted() *HistoricalEventHfConvicted {
 		TargetHfid:                  -1,
 	}
 }
-func (x *HistoricalEventHfConvicted) Type() string                { return "hf convicted" }
-func (x *HistoricalEventHfConvicted) RelatedToEntity(id int) bool { return false }
+func (x *HistoricalEventHfConvicted) Type() string { return "hf convicted" }
+func (x *HistoricalEventHfConvicted) RelatedToEntity(id int) bool {
+	return x.ConfessedAfterApbArrestEnid == id || x.ConvicterEnid == id
+}
 func (x *HistoricalEventHfConvicted) RelatedToHf(id int) bool {
 	return containsInt(x.ImplicatedHfid, id) || x.CoconspiratorHfid == id || x.ContactHfid == id || x.ConvictedHfid == id || x.CorruptConvicterHfid == id || x.FooledHfid == id || x.FramerHfid == id || x.InterrogatorHfid == id || x.PlotterHfid == id || x.TargetHfid == id
 }
+func (x *HistoricalEventHfConvicted) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfConvicted) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventHfConvicted) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfConvicted) CheckFields() {
 }
@@ -8434,7 +9237,10 @@ func (x *HistoricalEventHfDestroyedSite) Type() string { return "hf destroyed si
 func (x *HistoricalEventHfDestroyedSite) RelatedToEntity(id int) bool {
 	return x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventHfDestroyedSite) RelatedToHf(id int) bool { return x.AttackerHfid == id }
+func (x *HistoricalEventHfDestroyedSite) RelatedToHf(id int) bool       { return x.AttackerHfid == id }
+func (x *HistoricalEventHfDestroyedSite) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfDestroyedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfDestroyedSite) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfDestroyedSite) CheckFields() {
 }
@@ -8456,290 +9262,93 @@ func (x *HistoricalEventHfDestroyedSite) MarshalJSON() ([]byte, error) {
 	return json.Marshal(d)
 }
 
-type HistoricalEventHfDiedDeathCause int
+type HistoricalEventHfDiedShooterItemSubtype int
 
 const (
-	HistoricalEventHfDiedDeathCause_Unknown HistoricalEventHfDiedDeathCause = iota
-	HistoricalEventHfDiedDeathCause_Behead
-	HistoricalEventHfDiedDeathCause_Bleed
-	HistoricalEventHfDiedDeathCause_BurnAlive
-	HistoricalEventHfDiedDeathCause_BuryAlive
-	HistoricalEventHfDiedDeathCause_Cavein
-	HistoricalEventHfDiedDeathCause_Crucify
-	HistoricalEventHfDiedDeathCause_Drown
-	HistoricalEventHfDiedDeathCause_DrownAlt
-	HistoricalEventHfDiedDeathCause_DrownAltTwo
-	HistoricalEventHfDiedDeathCause_ExecutionGeneric
-	HistoricalEventHfDiedDeathCause_FeedToBeasts
-	HistoricalEventHfDiedDeathCause_HackToPieces
-	HistoricalEventHfDiedDeathCause_Heat
-	HistoricalEventHfDiedDeathCause_Infection
-	HistoricalEventHfDiedDeathCause_LeaptFromHeight
-	HistoricalEventHfDiedDeathCause_Memorialize
-	HistoricalEventHfDiedDeathCause_Murder
-	HistoricalEventHfDiedDeathCause_OldAge
-	HistoricalEventHfDiedDeathCause_Shot
-	HistoricalEventHfDiedDeathCause_StruckDown
-	HistoricalEventHfDiedDeathCause_Suffocate
-	HistoricalEventHfDiedDeathCause_Thirst
+	HistoricalEventHfDiedShooterItemSubtype_Unknown HistoricalEventHfDiedShooterItemSubtype = iota
+	HistoricalEventHfDiedShooterItemSubtype_Bow
+	HistoricalEventHfDiedShooterItemSubtype_Crossbow
 )
 
-func parseHistoricalEventHfDiedDeathCause(s string) HistoricalEventHfDiedDeathCause {
+func parseHistoricalEventHfDiedShooterItemSubtype(s string) HistoricalEventHfDiedShooterItemSubtype {
 	switch s {
-	case "behead":
-		return HistoricalEventHfDiedDeathCause_Behead
-	case "bleed":
-		return HistoricalEventHfDiedDeathCause_Bleed
-	case "burn_alive":
-		return HistoricalEventHfDiedDeathCause_BurnAlive
-	case "bury_alive":
-		return HistoricalEventHfDiedDeathCause_BuryAlive
-	case "cavein":
-		return HistoricalEventHfDiedDeathCause_Cavein
-	case "crucify":
-		return HistoricalEventHfDiedDeathCause_Crucify
-	case "drown":
-		return HistoricalEventHfDiedDeathCause_Drown
-	case "drown_alt":
-		return HistoricalEventHfDiedDeathCause_DrownAlt
-	case "drown_alt2":
-		return HistoricalEventHfDiedDeathCause_DrownAltTwo
-	case "execution_generic":
-		return HistoricalEventHfDiedDeathCause_ExecutionGeneric
-	case "feed_to_beasts":
-		return HistoricalEventHfDiedDeathCause_FeedToBeasts
-	case "hack_to_pieces":
-		return HistoricalEventHfDiedDeathCause_HackToPieces
-	case "heat":
-		return HistoricalEventHfDiedDeathCause_Heat
-	case "infection":
-		return HistoricalEventHfDiedDeathCause_Infection
-	case "leapt_from_height":
-		return HistoricalEventHfDiedDeathCause_LeaptFromHeight
-	case "memorialize":
-		return HistoricalEventHfDiedDeathCause_Memorialize
-	case "murder":
-		return HistoricalEventHfDiedDeathCause_Murder
-	case "old_age":
-		return HistoricalEventHfDiedDeathCause_OldAge
-	case "shot":
-		return HistoricalEventHfDiedDeathCause_Shot
-	case "struck_down":
-		return HistoricalEventHfDiedDeathCause_StruckDown
-	case "suffocate":
-		return HistoricalEventHfDiedDeathCause_Suffocate
-	case "thirst":
-		return HistoricalEventHfDiedDeathCause_Thirst
+	case "bow":
+		return HistoricalEventHfDiedShooterItemSubtype_Bow
+	case "crossbow":
+		return HistoricalEventHfDiedShooterItemSubtype_Crossbow
 	}
-	return HistoricalEventHfDiedDeathCause_Unknown
+	return HistoricalEventHfDiedShooterItemSubtype_Unknown
 }
 
-func (s HistoricalEventHfDiedDeathCause) String() string {
+func (s HistoricalEventHfDiedShooterItemSubtype) String() string {
 	switch s {
-	case HistoricalEventHfDiedDeathCause_Behead:
-		return "behead"
-	case HistoricalEventHfDiedDeathCause_Bleed:
-		return "bleed"
-	case HistoricalEventHfDiedDeathCause_BurnAlive:
-		return "burn alive"
-	case HistoricalEventHfDiedDeathCause_BuryAlive:
-		return "bury alive"
-	case HistoricalEventHfDiedDeathCause_Cavein:
-		return "cavein"
-	case HistoricalEventHfDiedDeathCause_Crucify:
-		return "crucify"
-	case HistoricalEventHfDiedDeathCause_Drown:
-		return "drown"
-	case HistoricalEventHfDiedDeathCause_DrownAlt:
-		return "drown alt"
-	case HistoricalEventHfDiedDeathCause_DrownAltTwo:
-		return "drown alt two"
-	case HistoricalEventHfDiedDeathCause_ExecutionGeneric:
-		return "execution generic"
-	case HistoricalEventHfDiedDeathCause_FeedToBeasts:
-		return "feed to beasts"
-	case HistoricalEventHfDiedDeathCause_HackToPieces:
-		return "hack to pieces"
-	case HistoricalEventHfDiedDeathCause_Heat:
-		return "heat"
-	case HistoricalEventHfDiedDeathCause_Infection:
-		return "infection"
-	case HistoricalEventHfDiedDeathCause_LeaptFromHeight:
-		return "leapt from height"
-	case HistoricalEventHfDiedDeathCause_Memorialize:
-		return "memorialize"
-	case HistoricalEventHfDiedDeathCause_Murder:
-		return "murder"
-	case HistoricalEventHfDiedDeathCause_OldAge:
-		return "old age"
-	case HistoricalEventHfDiedDeathCause_Shot:
-		return "shot"
-	case HistoricalEventHfDiedDeathCause_StruckDown:
-		return "struck down"
-	case HistoricalEventHfDiedDeathCause_Suffocate:
-		return "suffocate"
-	case HistoricalEventHfDiedDeathCause_Thirst:
-		return "thirst"
+	case HistoricalEventHfDiedShooterItemSubtype_Bow:
+		return "bow"
+	case HistoricalEventHfDiedShooterItemSubtype_Crossbow:
+		return "crossbow"
 	}
 	return "unknown"
 }
 
-func (s HistoricalEventHfDiedDeathCause) MarshalJSON() ([]byte, error) {
+func (s HistoricalEventHfDiedShooterItemSubtype) MarshalJSON() ([]byte, error) {
 	return json.Marshal(s.String())
 }
 
-type HistoricalEventHfDiedItemSubtype int
+type HistoricalEventHfDiedShooterItemType int
 
 const (
-	HistoricalEventHfDiedItemSubtype_Unknown HistoricalEventHfDiedItemSubtype = iota
-	HistoricalEventHfDiedItemSubtype_BattleAxe
-	HistoricalEventHfDiedItemSubtype_Buckler
-	HistoricalEventHfDiedItemSubtype_Pick
-	HistoricalEventHfDiedItemSubtype_Shield
-	HistoricalEventHfDiedItemSubtype_Spear
-	HistoricalEventHfDiedItemSubtype_WarHammer
+	HistoricalEventHfDiedShooterItemType_Unknown HistoricalEventHfDiedShooterItemType = iota
+	HistoricalEventHfDiedShooterItemType_Weapon
 )
 
-func parseHistoricalEventHfDiedItemSubtype(s string) HistoricalEventHfDiedItemSubtype {
+func parseHistoricalEventHfDiedShooterItemType(s string) HistoricalEventHfDiedShooterItemType {
 	switch s {
-	case "battle axe":
-		return HistoricalEventHfDiedItemSubtype_BattleAxe
-	case "buckler":
-		return HistoricalEventHfDiedItemSubtype_Buckler
-	case "pick":
-		return HistoricalEventHfDiedItemSubtype_Pick
-	case "shield":
-		return HistoricalEventHfDiedItemSubtype_Shield
-	case "spear":
-		return HistoricalEventHfDiedItemSubtype_Spear
-	case "war hammer":
-		return HistoricalEventHfDiedItemSubtype_WarHammer
-	}
-	return HistoricalEventHfDiedItemSubtype_Unknown
-}
-
-func (s HistoricalEventHfDiedItemSubtype) String() string {
-	switch s {
-	case HistoricalEventHfDiedItemSubtype_BattleAxe:
-		return "battle axe"
-	case HistoricalEventHfDiedItemSubtype_Buckler:
-		return "buckler"
-	case HistoricalEventHfDiedItemSubtype_Pick:
-		return "pick"
-	case HistoricalEventHfDiedItemSubtype_Shield:
-		return "shield"
-	case HistoricalEventHfDiedItemSubtype_Spear:
-		return "spear"
-	case HistoricalEventHfDiedItemSubtype_WarHammer:
-		return "war hammer"
-	}
-	return "unknown"
-}
-
-func (s HistoricalEventHfDiedItemSubtype) MarshalJSON() ([]byte, error) {
-	return json.Marshal(s.String())
-}
-
-type HistoricalEventHfDiedItemType int
-
-const (
-	HistoricalEventHfDiedItemType_Unknown HistoricalEventHfDiedItemType = iota
-	HistoricalEventHfDiedItemType_None
-	HistoricalEventHfDiedItemType_Shield
-	HistoricalEventHfDiedItemType_Weapon
-)
-
-func parseHistoricalEventHfDiedItemType(s string) HistoricalEventHfDiedItemType {
-	switch s {
-	case "none":
-		return HistoricalEventHfDiedItemType_None
-	case "shield":
-		return HistoricalEventHfDiedItemType_Shield
 	case "weapon":
-		return HistoricalEventHfDiedItemType_Weapon
+		return HistoricalEventHfDiedShooterItemType_Weapon
 	}
-	return HistoricalEventHfDiedItemType_Unknown
+	return HistoricalEventHfDiedShooterItemType_Unknown
 }
 
-func (s HistoricalEventHfDiedItemType) String() string {
+func (s HistoricalEventHfDiedShooterItemType) String() string {
 	switch s {
-	case HistoricalEventHfDiedItemType_None:
-		return "none"
-	case HistoricalEventHfDiedItemType_Shield:
-		return "shield"
-	case HistoricalEventHfDiedItemType_Weapon:
+	case HistoricalEventHfDiedShooterItemType_Weapon:
 		return "weapon"
 	}
 	return "unknown"
 }
 
-func (s HistoricalEventHfDiedItemType) MarshalJSON() ([]byte, error) {
-	return json.Marshal(s.String())
-}
-
-type HistoricalEventHfDiedMat int
-
-const (
-	HistoricalEventHfDiedMat_Unknown HistoricalEventHfDiedMat = iota
-	HistoricalEventHfDiedMat_Bronze
-	HistoricalEventHfDiedMat_Copper
-	HistoricalEventHfDiedMat_Silver
-	HistoricalEventHfDiedMat_SporeTree
-)
-
-func parseHistoricalEventHfDiedMat(s string) HistoricalEventHfDiedMat {
-	switch s {
-	case "bronze":
-		return HistoricalEventHfDiedMat_Bronze
-	case "copper":
-		return HistoricalEventHfDiedMat_Copper
-	case "silver":
-		return HistoricalEventHfDiedMat_Silver
-	case "spore tree":
-		return HistoricalEventHfDiedMat_SporeTree
-	}
-	return HistoricalEventHfDiedMat_Unknown
-}
-
-func (s HistoricalEventHfDiedMat) String() string {
-	switch s {
-	case HistoricalEventHfDiedMat_Bronze:
-		return "bronze"
-	case HistoricalEventHfDiedMat_Copper:
-		return "copper"
-	case HistoricalEventHfDiedMat_Silver:
-		return "silver"
-	case HistoricalEventHfDiedMat_SporeTree:
-		return "spore tree"
-	}
-	return "unknown"
-}
-
-func (s HistoricalEventHfDiedMat) MarshalJSON() ([]byte, error) {
+func (s HistoricalEventHfDiedShooterItemType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(s.String())
 }
 
 type HistoricalEventHfDied struct {
-	Cause               string                           `json:"cause" legend:"base"`               // cause
-	DeathCause          HistoricalEventHfDiedDeathCause  `json:"deathCause" legend:"plus"`          // death_cause
-	FeatureLayerId      int                              `json:"featureLayerId" legend:"base"`      // feature_layer_id
-	Hfid                int                              `json:"hfid" legend:"base"`                // hfid
-	ItemSubtype         HistoricalEventHfDiedItemSubtype `json:"itemSubtype" legend:"plus"`         // item_subtype
-	ItemType            HistoricalEventHfDiedItemType    `json:"itemType" legend:"plus"`            // item_type
-	Mat                 HistoricalEventHfDiedMat         `json:"mat" legend:"plus"`                 // mat
-	SiteId              int                              `json:"siteId" legend:"base"`              // site_id
-	SlayerCaste         string                           `json:"slayerCaste" legend:"both"`         // slayer_caste
-	SlayerHfid          int                              `json:"slayerHfid" legend:"base"`          // slayer_hfid
-	SlayerItemId        int                              `json:"slayerItemId" legend:"base"`        // slayer_item_id
-	SlayerRace          string                           `json:"slayerRace" legend:"both"`          // slayer_race
-	SlayerShooterItemId int                              `json:"slayerShooterItemId" legend:"base"` // slayer_shooter_item_id
-	SubregionId         int                              `json:"subregionId" legend:"base"`         // subregion_id
+	Cause               string                                  `json:"cause" legend:"base"`               // cause
+	DeathCause          string                                  `json:"deathCause" legend:"plus"`          // death_cause
+	FeatureLayerId      int                                     `json:"featureLayerId" legend:"base"`      // feature_layer_id
+	Hfid                int                                     `json:"hfid" legend:"base"`                // hfid
+	ItemSubtype         string                                  `json:"itemSubtype" legend:"plus"`         // item_subtype
+	ItemType            string                                  `json:"itemType" legend:"plus"`            // item_type
+	Mat                 string                                  `json:"mat" legend:"plus"`                 // mat
+	ShooterArtifactId   int                                     `json:"shooterArtifactId" legend:"plus"`   // shooter_artifact_id
+	ShooterItem         int                                     `json:"shooterItem" legend:"plus"`         // shooter_item
+	ShooterItemSubtype  HistoricalEventHfDiedShooterItemSubtype `json:"shooterItemSubtype" legend:"plus"`  // shooter_item_subtype
+	ShooterItemType     HistoricalEventHfDiedShooterItemType    `json:"shooterItemType" legend:"plus"`     // shooter_item_type
+	ShooterMat          string                                  `json:"shooterMat" legend:"plus"`          // shooter_mat
+	SiteId              int                                     `json:"siteId" legend:"base"`              // site_id
+	SlayerCaste         string                                  `json:"slayerCaste" legend:"both"`         // slayer_caste
+	SlayerHfid          int                                     `json:"slayerHfid" legend:"base"`          // slayer_hfid
+	SlayerItemId        int                                     `json:"slayerItemId" legend:"base"`        // slayer_item_id
+	SlayerRace          string                                  `json:"slayerRace" legend:"both"`          // slayer_race
+	SlayerShooterItemId int                                     `json:"slayerShooterItemId" legend:"base"` // slayer_shooter_item_id
+	SubregionId         int                                     `json:"subregionId" legend:"base"`         // subregion_id
 }
 
 func NewHistoricalEventHfDied() *HistoricalEventHfDied {
 	return &HistoricalEventHfDied{
 		FeatureLayerId:      -1,
 		Hfid:                -1,
+		ShooterArtifactId:   -1,
+		ShooterItem:         -1,
 		SiteId:              -1,
 		SlayerHfid:          -1,
 		SlayerItemId:        -1,
@@ -8747,34 +9356,99 @@ func NewHistoricalEventHfDied() *HistoricalEventHfDied {
 		SubregionId:         -1,
 	}
 }
-func (x *HistoricalEventHfDied) Type() string                { return "hf died" }
-func (x *HistoricalEventHfDied) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfDied) RelatedToHf(id int) bool     { return x.Hfid == id || x.SlayerHfid == id }
+func (x *HistoricalEventHfDied) Type() string                  { return "hf died" }
+func (x *HistoricalEventHfDied) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHfDied) RelatedToHf(id int) bool       { return x.Hfid == id || x.SlayerHfid == id }
+func (x *HistoricalEventHfDied) RelatedToArtifact(id int) bool { return x.ShooterArtifactId == id }
+func (x *HistoricalEventHfDied) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfDied) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventHfDied) CheckFields() {
+	if x.DeathCause != x.Cause && x.DeathCause != "" && x.Cause != "" {
+		sameFields["HistoricalEventHfDied"]["DeathCause"]["Cause"] = false
+	}
+	if x.ItemSubtype != x.Cause && x.ItemSubtype != "" && x.Cause != "" {
+		sameFields["HistoricalEventHfDied"]["ItemSubtype"]["Cause"] = false
+	}
+	if x.ItemType != x.Cause && x.ItemType != "" && x.Cause != "" {
+		sameFields["HistoricalEventHfDied"]["ItemType"]["Cause"] = false
+	}
+	if x.Mat != x.Cause && x.Mat != "" && x.Cause != "" {
+		sameFields["HistoricalEventHfDied"]["Mat"]["Cause"] = false
+	}
+	if x.ShooterArtifactId != x.FeatureLayerId {
+		sameFields["HistoricalEventHfDied"]["ShooterArtifactId"]["FeatureLayerId"] = false
+	}
+	if x.ShooterArtifactId != x.Hfid {
+		sameFields["HistoricalEventHfDied"]["ShooterArtifactId"]["Hfid"] = false
+	}
+	if x.ShooterArtifactId != x.SiteId {
+		sameFields["HistoricalEventHfDied"]["ShooterArtifactId"]["SiteId"] = false
+	}
+	if x.ShooterArtifactId != x.SlayerHfid {
+		sameFields["HistoricalEventHfDied"]["ShooterArtifactId"]["SlayerHfid"] = false
+	}
+	if x.ShooterArtifactId != x.SlayerItemId {
+		sameFields["HistoricalEventHfDied"]["ShooterArtifactId"]["SlayerItemId"] = false
+	}
+	if x.ShooterArtifactId != x.SlayerShooterItemId {
+		sameFields["HistoricalEventHfDied"]["ShooterArtifactId"]["SlayerShooterItemId"] = false
+	}
+	if x.ShooterArtifactId != x.SubregionId {
+		sameFields["HistoricalEventHfDied"]["ShooterArtifactId"]["SubregionId"] = false
+	}
+	if x.ShooterItem != x.FeatureLayerId {
+		sameFields["HistoricalEventHfDied"]["ShooterItem"]["FeatureLayerId"] = false
+	}
+	if x.ShooterItem != x.Hfid {
+		sameFields["HistoricalEventHfDied"]["ShooterItem"]["Hfid"] = false
+	}
+	if x.ShooterItem != x.SiteId {
+		sameFields["HistoricalEventHfDied"]["ShooterItem"]["SiteId"] = false
+	}
+	if x.ShooterItem != x.SlayerHfid {
+		sameFields["HistoricalEventHfDied"]["ShooterItem"]["SlayerHfid"] = false
+	}
+	if x.ShooterItem != x.SlayerItemId {
+		sameFields["HistoricalEventHfDied"]["ShooterItem"]["SlayerItemId"] = false
+	}
+	if x.ShooterItem != x.SlayerShooterItemId {
+		sameFields["HistoricalEventHfDied"]["ShooterItem"]["SlayerShooterItemId"] = false
+	}
+	if x.ShooterItem != x.SubregionId {
+		sameFields["HistoricalEventHfDied"]["ShooterItem"]["SubregionId"] = false
+	}
+	if x.ShooterMat != x.Cause && x.ShooterMat != "" && x.Cause != "" {
+		sameFields["HistoricalEventHfDied"]["ShooterMat"]["Cause"] = false
+	}
 }
 
 func (x *HistoricalEventHfDied) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
 	d["cause"] = x.Cause
-	if x.DeathCause != 0 {
-		d["deathCause"] = x.DeathCause
-	}
+	d["deathCause"] = x.DeathCause
 	if x.FeatureLayerId != -1 {
 		d["featureLayerId"] = x.FeatureLayerId
 	}
 	if x.Hfid != -1 {
 		d["hfid"] = x.Hfid
 	}
-	if x.ItemSubtype != 0 {
-		d["itemSubtype"] = x.ItemSubtype
+	d["itemSubtype"] = x.ItemSubtype
+	d["itemType"] = x.ItemType
+	d["mat"] = x.Mat
+	if x.ShooterArtifactId != -1 {
+		d["shooterArtifactId"] = x.ShooterArtifactId
 	}
-	if x.ItemType != 0 {
-		d["itemType"] = x.ItemType
+	if x.ShooterItem != -1 {
+		d["shooterItem"] = x.ShooterItem
 	}
-	if x.Mat != 0 {
-		d["mat"] = x.Mat
+	if x.ShooterItemSubtype != 0 {
+		d["shooterItemSubtype"] = x.ShooterItemSubtype
 	}
+	if x.ShooterItemType != 0 {
+		d["shooterItemType"] = x.ShooterItemType
+	}
+	d["shooterMat"] = x.ShooterMat
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
 	}
@@ -8836,9 +9510,12 @@ func NewHistoricalEventHfDisturbedStructure() *HistoricalEventHfDisturbedStructu
 		StructureId: -1,
 	}
 }
-func (x *HistoricalEventHfDisturbedStructure) Type() string                { return "hf disturbed structure" }
-func (x *HistoricalEventHfDisturbedStructure) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfDisturbedStructure) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventHfDisturbedStructure) Type() string                  { return "hf disturbed structure" }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfDisturbedStructure) CheckFields() {
 }
@@ -8884,27 +9561,30 @@ func (x *HistoricalEventHfDoesInteraction) RelatedToEntity(id int) bool { return
 func (x *HistoricalEventHfDoesInteraction) RelatedToHf(id int) bool {
 	return x.DoerHfid == id || x.TargetHfid == id
 }
+func (x *HistoricalEventHfDoesInteraction) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfDoesInteraction) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventHfDoesInteraction) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfDoesInteraction) CheckFields() {
 	if x.InteractionAction != x.Interaction && x.InteractionAction != "" && x.Interaction != "" {
 		sameFields["HistoricalEventHfDoesInteraction"]["InteractionAction"]["Interaction"] = false
 	}
-	if x.Region != x.DoerHfid && x.Region != 0 && x.DoerHfid != 0 {
+	if x.Region != x.DoerHfid {
 		sameFields["HistoricalEventHfDoesInteraction"]["Region"]["DoerHfid"] = false
 	}
-	if x.Region != x.TargetHfid && x.Region != 0 && x.TargetHfid != 0 {
+	if x.Region != x.TargetHfid {
 		sameFields["HistoricalEventHfDoesInteraction"]["Region"]["TargetHfid"] = false
 	}
-	if x.Site != x.DoerHfid && x.Site != 0 && x.DoerHfid != 0 {
+	if x.Site != x.DoerHfid {
 		sameFields["HistoricalEventHfDoesInteraction"]["Site"]["DoerHfid"] = false
 	}
-	if x.Site != x.TargetHfid && x.Site != 0 && x.TargetHfid != 0 {
+	if x.Site != x.TargetHfid {
 		sameFields["HistoricalEventHfDoesInteraction"]["Site"]["TargetHfid"] = false
 	}
-	if x.Source != x.DoerHfid && x.Source != 0 && x.DoerHfid != 0 {
+	if x.Source != x.DoerHfid {
 		sameFields["HistoricalEventHfDoesInteraction"]["Source"]["DoerHfid"] = false
 	}
-	if x.Source != x.TargetHfid && x.Source != 0 && x.TargetHfid != 0 {
+	if x.Source != x.TargetHfid {
 		sameFields["HistoricalEventHfDoesInteraction"]["Source"]["TargetHfid"] = false
 	}
 }
@@ -8951,6 +9631,9 @@ func (x *HistoricalEventHfEnslaved) RelatedToEntity(id int) bool { return x.Paye
 func (x *HistoricalEventHfEnslaved) RelatedToHf(id int) bool {
 	return x.EnslavedHfid == id || x.SellerHfid == id
 }
+func (x *HistoricalEventHfEnslaved) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfEnslaved) RelatedToSite(id int) bool     { return x.MovedToSiteId == id }
+func (x *HistoricalEventHfEnslaved) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfEnslaved) CheckFields() {
 }
@@ -8991,9 +9674,12 @@ func NewHistoricalEventHfEquipmentPurchase() *HistoricalEventHfEquipmentPurchase
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventHfEquipmentPurchase) Type() string                { return "hf equipment purchase" }
-func (x *HistoricalEventHfEquipmentPurchase) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfEquipmentPurchase) RelatedToHf(id int) bool     { return x.GroupHfid == id }
+func (x *HistoricalEventHfEquipmentPurchase) Type() string                  { return "hf equipment purchase" }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToHf(id int) bool       { return x.GroupHfid == id }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventHfEquipmentPurchase) CheckFields() {
 }
@@ -9022,44 +9708,49 @@ func (x *HistoricalEventHfEquipmentPurchase) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfFreed struct {
-	FreeingHfid  int `json:"freeingHfid" legend:"base"`  // freeing_hfid
-	HoldingCivId int `json:"holdingCivId" legend:"base"` // holding_civ_id
-	RescuedHfid  int `json:"rescuedHfid" legend:"base"`  // rescued_hfid
-	SiteCivId    int `json:"siteCivId" legend:"base"`    // site_civ_id
-	SiteId       int `json:"siteId" legend:"base"`       // site_id
+	FreeingCivId int   `json:"freeingCivId" legend:"base"` // freeing_civ_id
+	FreeingHfid  int   `json:"freeingHfid" legend:"base"`  // freeing_hfid
+	HoldingCivId int   `json:"holdingCivId" legend:"base"` // holding_civ_id
+	RescuedHfid  []int `json:"rescuedHfid" legend:"base"`  // rescued_hfid
+	SiteCivId    int   `json:"siteCivId" legend:"base"`    // site_civ_id
+	SiteId       int   `json:"siteId" legend:"base"`       // site_id
 }
 
 func NewHistoricalEventHfFreed() *HistoricalEventHfFreed {
 	return &HistoricalEventHfFreed{
+		FreeingCivId: -1,
 		FreeingHfid:  -1,
 		HoldingCivId: -1,
-		RescuedHfid:  -1,
 		SiteCivId:    -1,
 		SiteId:       -1,
 	}
 }
 func (x *HistoricalEventHfFreed) Type() string { return "hf freed" }
 func (x *HistoricalEventHfFreed) RelatedToEntity(id int) bool {
-	return x.HoldingCivId == id || x.SiteCivId == id
+	return x.FreeingCivId == id || x.HoldingCivId == id || x.SiteCivId == id
 }
 func (x *HistoricalEventHfFreed) RelatedToHf(id int) bool {
-	return x.FreeingHfid == id || x.RescuedHfid == id
+	return containsInt(x.RescuedHfid, id) || x.FreeingHfid == id
 }
+func (x *HistoricalEventHfFreed) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfFreed) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfFreed) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfFreed) CheckFields() {
 }
 
 func (x *HistoricalEventHfFreed) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
+	if x.FreeingCivId != -1 {
+		d["freeingCivId"] = x.FreeingCivId
+	}
 	if x.FreeingHfid != -1 {
 		d["freeingHfid"] = x.FreeingHfid
 	}
 	if x.HoldingCivId != -1 {
 		d["holdingCivId"] = x.HoldingCivId
 	}
-	if x.RescuedHfid != -1 {
-		d["rescuedHfid"] = x.RescuedHfid
-	}
+	d["rescuedHfid"] = x.RescuedHfid
 	if x.SiteCivId != -1 {
 		d["siteCivId"] = x.SiteCivId
 	}
@@ -9106,9 +9797,12 @@ func NewHistoricalEventHfGainsSecretGoal() *HistoricalEventHfGainsSecretGoal {
 		Hfid: -1,
 	}
 }
-func (x *HistoricalEventHfGainsSecretGoal) Type() string                { return "hf gains secret goal" }
-func (x *HistoricalEventHfGainsSecretGoal) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfGainsSecretGoal) RelatedToHf(id int) bool     { return x.Hfid == id }
+func (x *HistoricalEventHfGainsSecretGoal) Type() string                  { return "hf gains secret goal" }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfGainsSecretGoal) CheckFields() {
 }
@@ -9142,10 +9836,13 @@ func NewHistoricalEventHfInterrogated() *HistoricalEventHfInterrogated {
 	}
 }
 func (x *HistoricalEventHfInterrogated) Type() string                { return "hf interrogated" }
-func (x *HistoricalEventHfInterrogated) RelatedToEntity(id int) bool { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToEntity(id int) bool { return x.ArrestingEnid == id }
 func (x *HistoricalEventHfInterrogated) RelatedToHf(id int) bool {
 	return x.ImplicatedHfid == id || x.InterrogatorHfid == id || x.TargetHfid == id
 }
+func (x *HistoricalEventHfInterrogated) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfInterrogated) CheckFields() {
 }
@@ -9216,6 +9913,9 @@ func (x *HistoricalEventHfLearnsSecret) RelatedToEntity(id int) bool { return fa
 func (x *HistoricalEventHfLearnsSecret) RelatedToHf(id int) bool {
 	return x.StudentHfid == id || x.TeacherHfid == id
 }
+func (x *HistoricalEventHfLearnsSecret) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
+func (x *HistoricalEventHfLearnsSecret) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventHfLearnsSecret) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfLearnsSecret) CheckFields() {
 }
@@ -9255,9 +9955,12 @@ func NewHistoricalEventHfNewPet() *HistoricalEventHfNewPet {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventHfNewPet) Type() string                { return "hf new pet" }
-func (x *HistoricalEventHfNewPet) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfNewPet) RelatedToHf(id int) bool     { return x.GroupHfid == id }
+func (x *HistoricalEventHfNewPet) Type() string                  { return "hf new pet" }
+func (x *HistoricalEventHfNewPet) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHfNewPet) RelatedToHf(id int) bool       { return x.GroupHfid == id }
+func (x *HistoricalEventHfNewPet) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfNewPet) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfNewPet) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventHfNewPet) CheckFields() {
 	if x.Pets != x.Coords && x.Pets != "" && x.Coords != "" {
@@ -9307,6 +10010,13 @@ func (x *HistoricalEventHfPerformedHorribleExperiments) Type() string {
 func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToHf(id int) bool {
 	return x.GroupHfid == id
+}
+func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToSite(id int) bool {
+	return x.SiteId == id
+}
+func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToRegion(id int) bool {
+	return x.SubregionId == id
 }
 
 func (x *HistoricalEventHfPerformedHorribleExperiments) CheckFields() {
@@ -9373,9 +10083,12 @@ func NewHistoricalEventHfPrayedInsideStructure() *HistoricalEventHfPrayedInsideS
 		StructureId: -1,
 	}
 }
-func (x *HistoricalEventHfPrayedInsideStructure) Type() string                { return "hf prayed inside structure" }
-func (x *HistoricalEventHfPrayedInsideStructure) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfPrayedInsideStructure) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventHfPrayedInsideStructure) Type() string                  { return "hf prayed inside structure" }
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfPrayedInsideStructure) CheckFields() {
 }
@@ -9452,6 +10165,9 @@ func (x *HistoricalEventHfPreach) RelatedToEntity(id int) bool {
 func (x *HistoricalEventHfPreach) RelatedToHf(id int) bool {
 	return x.SiteHfid == id || x.SpeakerHfid == id
 }
+func (x *HistoricalEventHfPreach) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfPreach) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventHfPreach) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfPreach) CheckFields() {
 }
@@ -9517,9 +10233,12 @@ func NewHistoricalEventHfProfanedStructure() *HistoricalEventHfProfanedStructure
 		StructureId: -1,
 	}
 }
-func (x *HistoricalEventHfProfanedStructure) Type() string                { return "hf profaned structure" }
-func (x *HistoricalEventHfProfanedStructure) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfProfanedStructure) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventHfProfanedStructure) Type() string                  { return "hf profaned structure" }
+func (x *HistoricalEventHfProfanedStructure) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHfProfanedStructure) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventHfProfanedStructure) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfProfanedStructure) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfProfanedStructure) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfProfanedStructure) CheckFields() {
 }
@@ -9563,6 +10282,9 @@ func (x *HistoricalEventHfRansomed) RelatedToEntity(id int) bool { return x.Paye
 func (x *HistoricalEventHfRansomed) RelatedToHf(id int) bool {
 	return x.PayerHfid == id || x.RansomedHfid == id || x.RansomerHfid == id
 }
+func (x *HistoricalEventHfRansomed) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfRansomed) RelatedToSite(id int) bool     { return x.MovedToSiteId == id }
+func (x *HistoricalEventHfRansomed) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfRansomed) CheckFields() {
 }
@@ -9590,6 +10312,7 @@ func (x *HistoricalEventHfRansomed) MarshalJSON() ([]byte, error) {
 type HistoricalEventHfReachSummit struct {
 	Coords         string `json:"coords" legend:"base"`         // coords
 	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
+	Group          []int  `json:"group" legend:"plus"`          // group
 	GroupHfid      []int  `json:"groupHfid" legend:"base"`      // group_hfid
 	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
 }
@@ -9600,9 +10323,12 @@ func NewHistoricalEventHfReachSummit() *HistoricalEventHfReachSummit {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventHfReachSummit) Type() string                { return "hf reach summit" }
-func (x *HistoricalEventHfReachSummit) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfReachSummit) RelatedToHf(id int) bool     { return containsInt(x.GroupHfid, id) }
+func (x *HistoricalEventHfReachSummit) Type() string                  { return "hf reach summit" }
+func (x *HistoricalEventHfReachSummit) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHfReachSummit) RelatedToHf(id int) bool       { return containsInt(x.GroupHfid, id) }
+func (x *HistoricalEventHfReachSummit) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfReachSummit) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventHfReachSummit) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventHfReachSummit) CheckFields() {
 }
@@ -9613,6 +10339,7 @@ func (x *HistoricalEventHfReachSummit) MarshalJSON() ([]byte, error) {
 	if x.FeatureLayerId != -1 {
 		d["featureLayerId"] = x.FeatureLayerId
 	}
+	d["group"] = x.Group
 	d["groupHfid"] = x.GroupHfid
 	if x.SubregionId != -1 {
 		d["subregionId"] = x.SubregionId
@@ -9671,7 +10398,14 @@ func (x *HistoricalEventHfRecruitedUnitTypeForEntity) Type() string {
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToEntity(id int) bool {
 	return x.EntityId == id
 }
-func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToHf(id int) bool { return x.Hfid == id }
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToSite(id int) bool {
+	return x.SiteId == id
+}
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToRegion(id int) bool {
+	return x.SubregionId == id
+}
 
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) CheckFields() {
 }
@@ -9784,6 +10518,11 @@ func (x *HistoricalEventHfRelationshipDenied) RelatedToEntity(id int) bool { ret
 func (x *HistoricalEventHfRelationshipDenied) RelatedToHf(id int) bool {
 	return x.SeekerHfid == id || x.TargetHfid == id
 }
+func (x *HistoricalEventHfRelationshipDenied) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfRelationshipDenied) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfRelationshipDenied) RelatedToRegion(id int) bool {
+	return x.SubregionId == id
+}
 
 func (x *HistoricalEventHfRelationshipDenied) CheckFields() {
 }
@@ -9838,6 +10577,9 @@ func (x *HistoricalEventHfReunion) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfReunion) RelatedToHf(id int) bool {
 	return containsInt(x.Group2Hfid, id) || x.Group1Hfid == id
 }
+func (x *HistoricalEventHfReunion) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfReunion) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfReunion) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventHfReunion) CheckFields() {
 }
@@ -9871,6 +10613,7 @@ const (
 	HistoricalEventHfRevivedGhost_MoaningSpirit
 	HistoricalEventHfRevivedGhost_MurderousGhost
 	HistoricalEventHfRevivedGhost_RestlessHaunt
+	HistoricalEventHfRevivedGhost_SadisticGhost
 	HistoricalEventHfRevivedGhost_SecretivePoltergeist
 	HistoricalEventHfRevivedGhost_TroublesomePoltergeist
 	HistoricalEventHfRevivedGhost_ViolentGhost
@@ -9892,6 +10635,8 @@ func parseHistoricalEventHfRevivedGhost(s string) HistoricalEventHfRevivedGhost 
 		return HistoricalEventHfRevivedGhost_MurderousGhost
 	case "restless haunt":
 		return HistoricalEventHfRevivedGhost_RestlessHaunt
+	case "sadistic ghost":
+		return HistoricalEventHfRevivedGhost_SadisticGhost
 	case "secretive poltergeist":
 		return HistoricalEventHfRevivedGhost_SecretivePoltergeist
 	case "troublesome poltergeist":
@@ -9918,6 +10663,8 @@ func (s HistoricalEventHfRevivedGhost) String() string {
 		return "murderous ghost"
 	case HistoricalEventHfRevivedGhost_RestlessHaunt:
 		return "restless haunt"
+	case HistoricalEventHfRevivedGhost_SadisticGhost:
+		return "sadistic ghost"
 	case HistoricalEventHfRevivedGhost_SecretivePoltergeist:
 		return "secretive poltergeist"
 	case HistoricalEventHfRevivedGhost_TroublesomePoltergeist:
@@ -9952,9 +10699,12 @@ func NewHistoricalEventHfRevived() *HistoricalEventHfRevived {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventHfRevived) Type() string                { return "hf revived" }
-func (x *HistoricalEventHfRevived) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfRevived) RelatedToHf(id int) bool     { return x.ActorHfid == id || x.Hfid == id }
+func (x *HistoricalEventHfRevived) Type() string                  { return "hf revived" }
+func (x *HistoricalEventHfRevived) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHfRevived) RelatedToHf(id int) bool       { return x.ActorHfid == id || x.Hfid == id }
+func (x *HistoricalEventHfRevived) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfRevived) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfRevived) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventHfRevived) CheckFields() {
 }
@@ -10089,6 +10839,9 @@ func (x *HistoricalEventHfSimpleBattleEvent) RelatedToEntity(id int) bool { retu
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToHf(id int) bool {
 	return x.Group1Hfid == id || x.Group2Hfid == id
 }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventHfSimpleBattleEvent) CheckFields() {
 }
@@ -10132,9 +10885,12 @@ func NewHistoricalEventHfTravel() *HistoricalEventHfTravel {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventHfTravel) Type() string                { return "hf travel" }
-func (x *HistoricalEventHfTravel) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfTravel) RelatedToHf(id int) bool     { return containsInt(x.GroupHfid, id) }
+func (x *HistoricalEventHfTravel) Type() string                  { return "hf travel" }
+func (x *HistoricalEventHfTravel) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHfTravel) RelatedToHf(id int) bool       { return containsInt(x.GroupHfid, id) }
+func (x *HistoricalEventHfTravel) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfTravel) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfTravel) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventHfTravel) CheckFields() {
 }
@@ -10171,9 +10927,12 @@ func NewHistoricalEventHfViewedArtifact() *HistoricalEventHfViewedArtifact {
 		StructureId: -1,
 	}
 }
-func (x *HistoricalEventHfViewedArtifact) Type() string                { return "hf viewed artifact" }
-func (x *HistoricalEventHfViewedArtifact) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHfViewedArtifact) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventHfViewedArtifact) Type() string                  { return "hf viewed artifact" }
+func (x *HistoricalEventHfViewedArtifact) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHfViewedArtifact) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventHfViewedArtifact) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
+func (x *HistoricalEventHfViewedArtifact) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfViewedArtifact) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHfViewedArtifact) CheckFields() {
 }
@@ -10300,51 +11059,54 @@ func (x *HistoricalEventHfWounded) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfWounded) RelatedToHf(id int) bool {
 	return x.WoundeeHfid == id || x.WounderHfid == id
 }
+func (x *HistoricalEventHfWounded) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfWounded) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfWounded) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventHfWounded) CheckFields() {
-	if x.BodyPart != x.FeatureLayerId && x.BodyPart != 0 && x.FeatureLayerId != 0 {
+	if x.BodyPart != x.FeatureLayerId {
 		sameFields["HistoricalEventHfWounded"]["BodyPart"]["FeatureLayerId"] = false
 	}
-	if x.BodyPart != x.SiteId && x.BodyPart != 0 && x.SiteId != 0 {
+	if x.BodyPart != x.SiteId {
 		sameFields["HistoricalEventHfWounded"]["BodyPart"]["SiteId"] = false
 	}
-	if x.BodyPart != x.SubregionId && x.BodyPart != 0 && x.SubregionId != 0 {
+	if x.BodyPart != x.SubregionId {
 		sameFields["HistoricalEventHfWounded"]["BodyPart"]["SubregionId"] = false
 	}
-	if x.BodyPart != x.WoundeeHfid && x.BodyPart != 0 && x.WoundeeHfid != 0 {
+	if x.BodyPart != x.WoundeeHfid {
 		sameFields["HistoricalEventHfWounded"]["BodyPart"]["WoundeeHfid"] = false
 	}
-	if x.BodyPart != x.WounderHfid && x.BodyPart != 0 && x.WounderHfid != 0 {
+	if x.BodyPart != x.WounderHfid {
 		sameFields["HistoricalEventHfWounded"]["BodyPart"]["WounderHfid"] = false
 	}
-	if x.WoundeeCaste != x.FeatureLayerId && x.WoundeeCaste != 0 && x.FeatureLayerId != 0 {
+	if x.WoundeeCaste != x.FeatureLayerId {
 		sameFields["HistoricalEventHfWounded"]["WoundeeCaste"]["FeatureLayerId"] = false
 	}
-	if x.WoundeeCaste != x.SiteId && x.WoundeeCaste != 0 && x.SiteId != 0 {
+	if x.WoundeeCaste != x.SiteId {
 		sameFields["HistoricalEventHfWounded"]["WoundeeCaste"]["SiteId"] = false
 	}
-	if x.WoundeeCaste != x.SubregionId && x.WoundeeCaste != 0 && x.SubregionId != 0 {
+	if x.WoundeeCaste != x.SubregionId {
 		sameFields["HistoricalEventHfWounded"]["WoundeeCaste"]["SubregionId"] = false
 	}
-	if x.WoundeeCaste != x.WoundeeHfid && x.WoundeeCaste != 0 && x.WoundeeHfid != 0 {
+	if x.WoundeeCaste != x.WoundeeHfid {
 		sameFields["HistoricalEventHfWounded"]["WoundeeCaste"]["WoundeeHfid"] = false
 	}
-	if x.WoundeeCaste != x.WounderHfid && x.WoundeeCaste != 0 && x.WounderHfid != 0 {
+	if x.WoundeeCaste != x.WounderHfid {
 		sameFields["HistoricalEventHfWounded"]["WoundeeCaste"]["WounderHfid"] = false
 	}
-	if x.WoundeeRace != x.FeatureLayerId && x.WoundeeRace != 0 && x.FeatureLayerId != 0 {
+	if x.WoundeeRace != x.FeatureLayerId {
 		sameFields["HistoricalEventHfWounded"]["WoundeeRace"]["FeatureLayerId"] = false
 	}
-	if x.WoundeeRace != x.SiteId && x.WoundeeRace != 0 && x.SiteId != 0 {
+	if x.WoundeeRace != x.SiteId {
 		sameFields["HistoricalEventHfWounded"]["WoundeeRace"]["SiteId"] = false
 	}
-	if x.WoundeeRace != x.SubregionId && x.WoundeeRace != 0 && x.SubregionId != 0 {
+	if x.WoundeeRace != x.SubregionId {
 		sameFields["HistoricalEventHfWounded"]["WoundeeRace"]["SubregionId"] = false
 	}
-	if x.WoundeeRace != x.WoundeeHfid && x.WoundeeRace != 0 && x.WoundeeHfid != 0 {
+	if x.WoundeeRace != x.WoundeeHfid {
 		sameFields["HistoricalEventHfWounded"]["WoundeeRace"]["WoundeeHfid"] = false
 	}
-	if x.WoundeeRace != x.WounderHfid && x.WoundeeRace != 0 && x.WounderHfid != 0 {
+	if x.WoundeeRace != x.WounderHfid {
 		sameFields["HistoricalEventHfWounded"]["WoundeeRace"]["WounderHfid"] = false
 	}
 }
@@ -10575,6 +11337,7 @@ type HistoricalEventHfsFormedIntrigueRelationshipTopFacet int
 const (
 	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Unknown HistoricalEventHfsFormedIntrigueRelationshipTopFacet = iota
 	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Ambition
+	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_AnxietyPropensity
 	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Confidence
 	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_EnvyPropensity
 	HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Fearlessness
@@ -10591,6 +11354,8 @@ func parseHistoricalEventHfsFormedIntrigueRelationshipTopFacet(s string) Histori
 	switch s {
 	case "ambition":
 		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Ambition
+	case "anxiety propensity":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_AnxietyPropensity
 	case "confidence":
 		return HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Confidence
 	case "envy propensity":
@@ -10619,6 +11384,8 @@ func (s HistoricalEventHfsFormedIntrigueRelationshipTopFacet) String() string {
 	switch s {
 	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Ambition:
 		return "ambition"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_AnxietyPropensity:
+		return "anxiety propensity"
 	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Confidence:
 		return "confidence"
 	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_EnvyPropensity:
@@ -10654,6 +11421,7 @@ const (
 	HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Fear
 	HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Love
 	HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Loyalty
+	HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Respect
 	HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Trust
 )
 
@@ -10665,6 +11433,8 @@ func parseHistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor(s st
 		return HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Love
 	case "loyalty":
 		return HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Loyalty
+	case "respect":
+		return HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Respect
 	case "trust":
 		return HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Trust
 	}
@@ -10679,6 +11449,8 @@ func (s HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor) Strin
 		return "love"
 	case HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Loyalty:
 		return "loyalty"
+	case HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Respect:
+		return "respect"
 	case HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor_Trust:
 		return "trust"
 	}
@@ -10786,6 +11558,13 @@ func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToEntity(id int) b
 }
 func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToHf(id int) bool {
 	return x.CorruptorHfid == id || x.LureHfid == id || x.TargetHfid == id
+}
+func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToSite(id int) bool {
+	return x.SiteId == id
+}
+func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToRegion(id int) bool {
+	return x.SubregionId == id
 }
 
 func (x *HistoricalEventHfsFormedIntrigueRelationship) CheckFields() {
@@ -10973,6 +11752,13 @@ func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToEntity(id int)
 func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToHf(id int) bool {
 	return x.Hfid1 == id || x.Hfid2 == id
 }
+func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToSite(id int) bool {
+	return x.SiteId == id
+}
+func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToRegion(id int) bool {
+	return x.SubregionId == id
+}
 
 func (x *HistoricalEventHfsFormedReputationRelationship) CheckFields() {
 }
@@ -11020,9 +11806,12 @@ func NewHistoricalEventHolyCityDeclaration() *HistoricalEventHolyCityDeclaration
 		SiteId:     -1,
 	}
 }
-func (x *HistoricalEventHolyCityDeclaration) Type() string                { return "holy city declaration" }
-func (x *HistoricalEventHolyCityDeclaration) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventHolyCityDeclaration) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventHolyCityDeclaration) Type() string                  { return "holy city declaration" }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventHolyCityDeclaration) CheckFields() {
 }
@@ -11082,9 +11871,12 @@ func NewHistoricalEventInsurrectionStarted() *HistoricalEventInsurrectionStarted
 		TargetCivId: -1,
 	}
 }
-func (x *HistoricalEventInsurrectionStarted) Type() string                { return "insurrection started" }
-func (x *HistoricalEventInsurrectionStarted) RelatedToEntity(id int) bool { return x.TargetCivId == id }
-func (x *HistoricalEventInsurrectionStarted) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventInsurrectionStarted) Type() string                  { return "insurrection started" }
+func (x *HistoricalEventInsurrectionStarted) RelatedToEntity(id int) bool   { return x.TargetCivId == id }
+func (x *HistoricalEventInsurrectionStarted) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventInsurrectionStarted) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventInsurrectionStarted) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventInsurrectionStarted) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventInsurrectionStarted) CheckFields() {
 }
@@ -11175,33 +11967,36 @@ func NewHistoricalEventItemStolen() *HistoricalEventItemStolen {
 		Structure:      -1,
 	}
 }
-func (x *HistoricalEventItemStolen) Type() string                { return "item stolen" }
-func (x *HistoricalEventItemStolen) RelatedToEntity(id int) bool { return x.Entity == id }
-func (x *HistoricalEventItemStolen) RelatedToHf(id int) bool     { return x.Histfig == id }
+func (x *HistoricalEventItemStolen) Type() string                  { return "item stolen" }
+func (x *HistoricalEventItemStolen) RelatedToEntity(id int) bool   { return x.Entity == id }
+func (x *HistoricalEventItemStolen) RelatedToHf(id int) bool       { return x.Histfig == id }
+func (x *HistoricalEventItemStolen) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventItemStolen) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventItemStolen) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventItemStolen) CheckFields() {
-	if x.Entity != x.CircumstanceId && x.Entity != 0 && x.CircumstanceId != 0 {
+	if x.Entity != x.CircumstanceId {
 		sameFields["HistoricalEventItemStolen"]["Entity"]["CircumstanceId"] = false
 	}
-	if x.Histfig != x.CircumstanceId && x.Histfig != 0 && x.CircumstanceId != 0 {
+	if x.Histfig != x.CircumstanceId {
 		sameFields["HistoricalEventItemStolen"]["Histfig"]["CircumstanceId"] = false
 	}
-	if x.Item != x.CircumstanceId && x.Item != 0 && x.CircumstanceId != 0 {
+	if x.Item != x.CircumstanceId {
 		sameFields["HistoricalEventItemStolen"]["Item"]["CircumstanceId"] = false
 	}
-	if x.Matindex != x.CircumstanceId && x.Matindex != 0 && x.CircumstanceId != 0 {
+	if x.Matindex != x.CircumstanceId {
 		sameFields["HistoricalEventItemStolen"]["Matindex"]["CircumstanceId"] = false
 	}
-	if x.Mattype != x.CircumstanceId && x.Mattype != 0 && x.CircumstanceId != 0 {
+	if x.Mattype != x.CircumstanceId {
 		sameFields["HistoricalEventItemStolen"]["Mattype"]["CircumstanceId"] = false
 	}
-	if x.Site != x.CircumstanceId && x.Site != 0 && x.CircumstanceId != 0 {
+	if x.Site != x.CircumstanceId {
 		sameFields["HistoricalEventItemStolen"]["Site"]["CircumstanceId"] = false
 	}
-	if x.StashSite != x.CircumstanceId && x.StashSite != 0 && x.CircumstanceId != 0 {
+	if x.StashSite != x.CircumstanceId {
 		sameFields["HistoricalEventItemStolen"]["StashSite"]["CircumstanceId"] = false
 	}
-	if x.Structure != x.CircumstanceId && x.Structure != 0 && x.CircumstanceId != 0 {
+	if x.Structure != x.CircumstanceId {
 		sameFields["HistoricalEventItemStolen"]["Structure"]["CircumstanceId"] = false
 	}
 }
@@ -11296,8 +12091,11 @@ func NewHistoricalEventItemStolenCircumstance() *HistoricalEventItemStolenCircum
 		Murdered:            -1,
 	}
 }
-func (x *HistoricalEventItemStolenCircumstance) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventItemStolenCircumstance) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventItemStolenCircumstance) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventItemStolenCircumstance) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventItemStolenCircumstance) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventItemStolenCircumstance) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventItemStolenCircumstance) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventItemStolenCircumstance) CheckFields() {
 }
@@ -11330,9 +12128,12 @@ func NewHistoricalEventKnowledgeDiscovered() *HistoricalEventKnowledgeDiscovered
 		Hfid: -1,
 	}
 }
-func (x *HistoricalEventKnowledgeDiscovered) Type() string                { return "knowledge discovered" }
-func (x *HistoricalEventKnowledgeDiscovered) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventKnowledgeDiscovered) RelatedToHf(id int) bool     { return x.Hfid == id }
+func (x *HistoricalEventKnowledgeDiscovered) Type() string                  { return "knowledge discovered" }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventKnowledgeDiscovered) CheckFields() {
 }
@@ -11352,6 +12153,7 @@ type HistoricalEventMasterpieceArchConstructedBuildingSubtype int
 const (
 	HistoricalEventMasterpieceArchConstructedBuildingSubtype_Unknown HistoricalEventMasterpieceArchConstructedBuildingSubtype = iota
 	HistoricalEventMasterpieceArchConstructedBuildingSubtype_Magmasmelter
+	HistoricalEventMasterpieceArchConstructedBuildingSubtype_Smelter
 	HistoricalEventMasterpieceArchConstructedBuildingSubtype_Woodfurnace
 )
 
@@ -11359,6 +12161,8 @@ func parseHistoricalEventMasterpieceArchConstructedBuildingSubtype(s string) His
 	switch s {
 	case "magmasmelter":
 		return HistoricalEventMasterpieceArchConstructedBuildingSubtype_Magmasmelter
+	case "smelter":
+		return HistoricalEventMasterpieceArchConstructedBuildingSubtype_Smelter
 	case "woodfurnace":
 		return HistoricalEventMasterpieceArchConstructedBuildingSubtype_Woodfurnace
 	}
@@ -11369,6 +12173,8 @@ func (s HistoricalEventMasterpieceArchConstructedBuildingSubtype) String() strin
 	switch s {
 	case HistoricalEventMasterpieceArchConstructedBuildingSubtype_Magmasmelter:
 		return "magmasmelter"
+	case HistoricalEventMasterpieceArchConstructedBuildingSubtype_Smelter:
+		return "smelter"
 	case HistoricalEventMasterpieceArchConstructedBuildingSubtype_Woodfurnace:
 		return "woodfurnace"
 	}
@@ -11385,6 +12191,10 @@ const (
 	HistoricalEventMasterpieceArchConstructedBuildingType_Unknown HistoricalEventMasterpieceArchConstructedBuildingType = iota
 	HistoricalEventMasterpieceArchConstructedBuildingType_Bridge
 	HistoricalEventMasterpieceArchConstructedBuildingType_Furnace
+	HistoricalEventMasterpieceArchConstructedBuildingType_Screwpump
+	HistoricalEventMasterpieceArchConstructedBuildingType_Tradedepot
+	HistoricalEventMasterpieceArchConstructedBuildingType_Waterwheel
+	HistoricalEventMasterpieceArchConstructedBuildingType_Well
 )
 
 func parseHistoricalEventMasterpieceArchConstructedBuildingType(s string) HistoricalEventMasterpieceArchConstructedBuildingType {
@@ -11393,6 +12203,14 @@ func parseHistoricalEventMasterpieceArchConstructedBuildingType(s string) Histor
 		return HistoricalEventMasterpieceArchConstructedBuildingType_Bridge
 	case "furnace":
 		return HistoricalEventMasterpieceArchConstructedBuildingType_Furnace
+	case "screwpump":
+		return HistoricalEventMasterpieceArchConstructedBuildingType_Screwpump
+	case "tradedepot":
+		return HistoricalEventMasterpieceArchConstructedBuildingType_Tradedepot
+	case "waterwheel":
+		return HistoricalEventMasterpieceArchConstructedBuildingType_Waterwheel
+	case "well":
+		return HistoricalEventMasterpieceArchConstructedBuildingType_Well
 	}
 	return HistoricalEventMasterpieceArchConstructedBuildingType_Unknown
 }
@@ -11403,6 +12221,14 @@ func (s HistoricalEventMasterpieceArchConstructedBuildingType) String() string {
 		return "bridge"
 	case HistoricalEventMasterpieceArchConstructedBuildingType_Furnace:
 		return "furnace"
+	case HistoricalEventMasterpieceArchConstructedBuildingType_Screwpump:
+		return "screwpump"
+	case HistoricalEventMasterpieceArchConstructedBuildingType_Tradedepot:
+		return "tradedepot"
+	case HistoricalEventMasterpieceArchConstructedBuildingType_Waterwheel:
+		return "waterwheel"
+	case HistoricalEventMasterpieceArchConstructedBuildingType_Well:
+		return "well"
 	}
 	return "unknown"
 }
@@ -11416,21 +12242,51 @@ type HistoricalEventMasterpieceArchConstructedSkillAtTime int
 const (
 	HistoricalEventMasterpieceArchConstructedSkillAtTime_Unknown HistoricalEventMasterpieceArchConstructedSkillAtTime = iota
 	HistoricalEventMasterpieceArchConstructedSkillAtTime_Accomplished
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_Expert
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_Highmaster
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_Legendary3
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_Legendary5
 	HistoricalEventMasterpieceArchConstructedSkillAtTime_Master
 	HistoricalEventMasterpieceArchConstructedSkillAtTime_Professional
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_Proficient
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_Unknown33
 	HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo1
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo3
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo4
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo5
+	HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwoTwo
 )
 
 func parseHistoricalEventMasterpieceArchConstructedSkillAtTime(s string) HistoricalEventMasterpieceArchConstructedSkillAtTime {
 	switch s {
 	case "accomplished":
 		return HistoricalEventMasterpieceArchConstructedSkillAtTime_Accomplished
+	case "expert":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_Expert
+	case "highmaster":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_Highmaster
+	case "legendary3":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_Legendary3
+	case "legendary5":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_Legendary5
 	case "master":
 		return HistoricalEventMasterpieceArchConstructedSkillAtTime_Master
 	case "professional":
 		return HistoricalEventMasterpieceArchConstructedSkillAtTime_Professional
+	case "proficient":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_Proficient
 	case "unknown 21":
 		return HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo1
+	case "unknown 22":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwoTwo
+	case "unknown 23":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo3
+	case "unknown 24":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo4
+	case "unknown 25":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo5
+	case "unknown 33":
+		return HistoricalEventMasterpieceArchConstructedSkillAtTime_Unknown33
 	}
 	return HistoricalEventMasterpieceArchConstructedSkillAtTime_Unknown
 }
@@ -11439,12 +12295,32 @@ func (s HistoricalEventMasterpieceArchConstructedSkillAtTime) String() string {
 	switch s {
 	case HistoricalEventMasterpieceArchConstructedSkillAtTime_Accomplished:
 		return "accomplished"
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_Expert:
+		return "expert"
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_Highmaster:
+		return "highmaster"
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_Legendary3:
+		return "legendary 3"
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_Legendary5:
+		return "legendary 5"
 	case HistoricalEventMasterpieceArchConstructedSkillAtTime_Master:
 		return "master"
 	case HistoricalEventMasterpieceArchConstructedSkillAtTime_Professional:
 		return "professional"
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_Proficient:
+		return "proficient"
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_Unknown33:
+		return "unknown 33"
 	case HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo1:
 		return "unknown two 1"
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo3:
+		return "unknown two 3"
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo4:
+		return "unknown two 4"
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwo5:
+		return "unknown two 5"
+	case HistoricalEventMasterpieceArchConstructedSkillAtTime_UnknownTwoTwo:
+		return "unknown two two"
 	}
 	return "unknown"
 }
@@ -11485,52 +12361,55 @@ func (x *HistoricalEventMasterpieceArchConstructed) Type() string {
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToEntity(id int) bool {
 	return x.EntityId == id || x.MakerEntity == id
 }
-func (x *HistoricalEventMasterpieceArchConstructed) RelatedToHf(id int) bool { return x.Hfid == id }
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventMasterpieceArchConstructed) CheckFields() {
-	if x.BuildingCustom != x.EntityId && x.BuildingCustom != 0 && x.EntityId != 0 {
+	if x.BuildingCustom != x.EntityId {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["BuildingCustom"]["EntityId"] = false
 	}
-	if x.BuildingCustom != x.Hfid && x.BuildingCustom != 0 && x.Hfid != 0 {
+	if x.BuildingCustom != x.Hfid {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["BuildingCustom"]["Hfid"] = false
 	}
-	if x.BuildingCustom != x.SiteId && x.BuildingCustom != 0 && x.SiteId != 0 {
+	if x.BuildingCustom != x.SiteId {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["BuildingCustom"]["SiteId"] = false
 	}
-	if x.Maker != x.EntityId && x.Maker != 0 && x.EntityId != 0 {
+	if x.Maker != x.EntityId {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["Maker"]["EntityId"] = false
 	}
-	if x.Maker != x.Hfid && x.Maker != 0 && x.Hfid != 0 {
+	if x.Maker != x.Hfid {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["Maker"]["Hfid"] = false
 	}
-	if x.Maker != x.SiteId && x.Maker != 0 && x.SiteId != 0 {
+	if x.Maker != x.SiteId {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["Maker"]["SiteId"] = false
 	}
-	if x.MakerEntity != x.EntityId && x.MakerEntity != 0 && x.EntityId != 0 {
+	if x.MakerEntity != x.EntityId {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["MakerEntity"]["EntityId"] = false
 	}
-	if x.MakerEntity != x.Hfid && x.MakerEntity != 0 && x.Hfid != 0 {
+	if x.MakerEntity != x.Hfid {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["MakerEntity"]["Hfid"] = false
 	}
-	if x.MakerEntity != x.SiteId && x.MakerEntity != 0 && x.SiteId != 0 {
+	if x.MakerEntity != x.SiteId {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["MakerEntity"]["SiteId"] = false
 	}
-	if x.Site != x.EntityId && x.Site != 0 && x.EntityId != 0 {
+	if x.Site != x.EntityId {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["Site"]["EntityId"] = false
 	}
-	if x.Site != x.Hfid && x.Site != 0 && x.Hfid != 0 {
+	if x.Site != x.Hfid {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["Site"]["Hfid"] = false
 	}
-	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
+	if x.Site != x.SiteId {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["Site"]["SiteId"] = false
 	}
-	if x.Unk2 != x.EntityId && x.Unk2 != 0 && x.EntityId != 0 {
+	if x.Unk2 != x.EntityId {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["Unk2"]["EntityId"] = false
 	}
-	if x.Unk2 != x.Hfid && x.Unk2 != 0 && x.Hfid != 0 {
+	if x.Unk2 != x.Hfid {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["Unk2"]["Hfid"] = false
 	}
-	if x.Unk2 != x.SiteId && x.Unk2 != 0 && x.SiteId != 0 {
+	if x.Unk2 != x.SiteId {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["Unk2"]["SiteId"] = false
 	}
 }
@@ -11573,153 +12452,267 @@ func (x *HistoricalEventMasterpieceArchConstructed) MarshalJSON() ([]byte, error
 	return json.Marshal(d)
 }
 
-type HistoricalEventMasterpieceEngravingSkillAtTime int
+type HistoricalEventMasterpieceDyeItemType int
 
 const (
-	HistoricalEventMasterpieceEngravingSkillAtTime_Unknown HistoricalEventMasterpieceEngravingSkillAtTime = iota
-	HistoricalEventMasterpieceEngravingSkillAtTime_Accomplished
-	HistoricalEventMasterpieceEngravingSkillAtTime_Expert
-	HistoricalEventMasterpieceEngravingSkillAtTime_Grandmaster
-	HistoricalEventMasterpieceEngravingSkillAtTime_Great
-	HistoricalEventMasterpieceEngravingSkillAtTime_Highmaster
-	HistoricalEventMasterpieceEngravingSkillAtTime_Legendary
-	HistoricalEventMasterpieceEngravingSkillAtTime_Legendary4
-	HistoricalEventMasterpieceEngravingSkillAtTime_Master
-	HistoricalEventMasterpieceEngravingSkillAtTime_Professional
-	HistoricalEventMasterpieceEngravingSkillAtTime_Proficient
+	HistoricalEventMasterpieceDyeItemType_Unknown HistoricalEventMasterpieceDyeItemType = iota
+	HistoricalEventMasterpieceDyeItemType_Cloth
 )
 
-func parseHistoricalEventMasterpieceEngravingSkillAtTime(s string) HistoricalEventMasterpieceEngravingSkillAtTime {
+func parseHistoricalEventMasterpieceDyeItemType(s string) HistoricalEventMasterpieceDyeItemType {
 	switch s {
-	case "accomplished":
-		return HistoricalEventMasterpieceEngravingSkillAtTime_Accomplished
-	case "expert":
-		return HistoricalEventMasterpieceEngravingSkillAtTime_Expert
-	case "grandmaster":
-		return HistoricalEventMasterpieceEngravingSkillAtTime_Grandmaster
-	case "great":
-		return HistoricalEventMasterpieceEngravingSkillAtTime_Great
-	case "highmaster":
-		return HistoricalEventMasterpieceEngravingSkillAtTime_Highmaster
-	case "legendary":
-		return HistoricalEventMasterpieceEngravingSkillAtTime_Legendary
-	case "legendary4":
-		return HistoricalEventMasterpieceEngravingSkillAtTime_Legendary4
-	case "master":
-		return HistoricalEventMasterpieceEngravingSkillAtTime_Master
-	case "professional":
-		return HistoricalEventMasterpieceEngravingSkillAtTime_Professional
-	case "proficient":
-		return HistoricalEventMasterpieceEngravingSkillAtTime_Proficient
+	case "cloth":
+		return HistoricalEventMasterpieceDyeItemType_Cloth
 	}
-	return HistoricalEventMasterpieceEngravingSkillAtTime_Unknown
+	return HistoricalEventMasterpieceDyeItemType_Unknown
 }
 
-func (s HistoricalEventMasterpieceEngravingSkillAtTime) String() string {
+func (s HistoricalEventMasterpieceDyeItemType) String() string {
 	switch s {
-	case HistoricalEventMasterpieceEngravingSkillAtTime_Accomplished:
-		return "accomplished"
-	case HistoricalEventMasterpieceEngravingSkillAtTime_Expert:
-		return "expert"
-	case HistoricalEventMasterpieceEngravingSkillAtTime_Grandmaster:
-		return "grandmaster"
-	case HistoricalEventMasterpieceEngravingSkillAtTime_Great:
-		return "great"
-	case HistoricalEventMasterpieceEngravingSkillAtTime_Highmaster:
-		return "highmaster"
-	case HistoricalEventMasterpieceEngravingSkillAtTime_Legendary:
-		return "legendary"
-	case HistoricalEventMasterpieceEngravingSkillAtTime_Legendary4:
-		return "legendary 4"
-	case HistoricalEventMasterpieceEngravingSkillAtTime_Master:
-		return "master"
-	case HistoricalEventMasterpieceEngravingSkillAtTime_Professional:
-		return "professional"
-	case HistoricalEventMasterpieceEngravingSkillAtTime_Proficient:
-		return "proficient"
+	case HistoricalEventMasterpieceDyeItemType_Cloth:
+		return "cloth"
 	}
 	return "unknown"
 }
 
-func (s HistoricalEventMasterpieceEngravingSkillAtTime) MarshalJSON() ([]byte, error) {
+func (s HistoricalEventMasterpieceDyeItemType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(s.String())
 }
 
-type HistoricalEventMasterpieceEngraving struct {
-	ArtId       int                                            `json:"artId" legend:"plus"`       // art_id
-	ArtSubid    int                                            `json:"artSubid" legend:"plus"`    // art_subid
-	EntityId    int                                            `json:"entityId" legend:"base"`    // entity_id
-	Hfid        int                                            `json:"hfid" legend:"base"`        // hfid
-	Maker       int                                            `json:"maker" legend:"plus"`       // maker
-	MakerEntity int                                            `json:"makerEntity" legend:"plus"` // maker_entity
-	Site        int                                            `json:"site" legend:"plus"`        // site
-	SiteId      int                                            `json:"siteId" legend:"base"`      // site_id
-	SkillAtTime HistoricalEventMasterpieceEngravingSkillAtTime `json:"skillAtTime" legend:"both"` // skill_at_time
+type HistoricalEventMasterpieceDyeMat int
+
+const (
+	HistoricalEventMasterpieceDyeMat_Unknown HistoricalEventMasterpieceDyeMat = iota
+	HistoricalEventMasterpieceDyeMat_PigTail
+)
+
+func parseHistoricalEventMasterpieceDyeMat(s string) HistoricalEventMasterpieceDyeMat {
+	switch s {
+	case "pig tail":
+		return HistoricalEventMasterpieceDyeMat_PigTail
+	}
+	return HistoricalEventMasterpieceDyeMat_Unknown
 }
 
-func NewHistoricalEventMasterpieceEngraving() *HistoricalEventMasterpieceEngraving {
-	return &HistoricalEventMasterpieceEngraving{
-		ArtId:       -1,
-		ArtSubid:    -1,
+func (s HistoricalEventMasterpieceDyeMat) String() string {
+	switch s {
+	case HistoricalEventMasterpieceDyeMat_PigTail:
+		return "pig tail"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceDyeMat) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventMasterpieceDyeSkillAtTime int
+
+const (
+	HistoricalEventMasterpieceDyeSkillAtTime_Unknown HistoricalEventMasterpieceDyeSkillAtTime = iota
+	HistoricalEventMasterpieceDyeSkillAtTime_Skilled
+)
+
+func parseHistoricalEventMasterpieceDyeSkillAtTime(s string) HistoricalEventMasterpieceDyeSkillAtTime {
+	switch s {
+	case "skilled":
+		return HistoricalEventMasterpieceDyeSkillAtTime_Skilled
+	}
+	return HistoricalEventMasterpieceDyeSkillAtTime_Unknown
+}
+
+func (s HistoricalEventMasterpieceDyeSkillAtTime) String() string {
+	switch s {
+	case HistoricalEventMasterpieceDyeSkillAtTime_Skilled:
+		return "skilled"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceDyeSkillAtTime) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventMasterpieceDye struct {
+	DyeMat      string                                   `json:"dyeMat" legend:"plus"`      // dye_mat
+	DyeMatIndex int                                      `json:"dyeMatIndex" legend:"plus"` // dye_mat_index
+	EntityId    int                                      `json:"entityId" legend:"base"`    // entity_id
+	Hfid        int                                      `json:"hfid" legend:"base"`        // hfid
+	ItemType    HistoricalEventMasterpieceDyeItemType    `json:"itemType" legend:"plus"`    // item_type
+	Maker       int                                      `json:"maker" legend:"plus"`       // maker
+	MakerEntity int                                      `json:"makerEntity" legend:"plus"` // maker_entity
+	Mat         HistoricalEventMasterpieceDyeMat         `json:"mat" legend:"plus"`         // mat
+	MatIndex    int                                      `json:"matIndex" legend:"plus"`    // mat_index
+	Site        int                                      `json:"site" legend:"plus"`        // site
+	SiteId      int                                      `json:"siteId" legend:"base"`      // site_id
+	SkillAtTime HistoricalEventMasterpieceDyeSkillAtTime `json:"skillAtTime" legend:"both"` // skill_at_time
+	Unk2        int                                      `json:"unk2" legend:"plus"`        // unk_2
+}
+
+func NewHistoricalEventMasterpieceDye() *HistoricalEventMasterpieceDye {
+	return &HistoricalEventMasterpieceDye{
+		DyeMatIndex: -1,
 		EntityId:    -1,
 		Hfid:        -1,
 		Maker:       -1,
 		MakerEntity: -1,
+		MatIndex:    -1,
 		Site:        -1,
 		SiteId:      -1,
+		Unk2:        -1,
 	}
 }
-func (x *HistoricalEventMasterpieceEngraving) Type() string { return "masterpiece engraving" }
-func (x *HistoricalEventMasterpieceEngraving) RelatedToEntity(id int) bool {
+func (x *HistoricalEventMasterpieceDye) Type() string { return "masterpiece dye" }
+func (x *HistoricalEventMasterpieceDye) RelatedToEntity(id int) bool {
 	return x.EntityId == id || x.MakerEntity == id
 }
-func (x *HistoricalEventMasterpieceEngraving) RelatedToHf(id int) bool { return x.Hfid == id }
+func (x *HistoricalEventMasterpieceDye) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventMasterpieceDye) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventMasterpieceDye) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventMasterpieceDye) RelatedToRegion(id int) bool   { return false }
+
+func (x *HistoricalEventMasterpieceDye) CheckFields() {
+	if x.DyeMatIndex != x.EntityId {
+		sameFields["HistoricalEventMasterpieceDye"]["DyeMatIndex"]["EntityId"] = false
+	}
+	if x.DyeMatIndex != x.Hfid {
+		sameFields["HistoricalEventMasterpieceDye"]["DyeMatIndex"]["Hfid"] = false
+	}
+	if x.DyeMatIndex != x.SiteId {
+		sameFields["HistoricalEventMasterpieceDye"]["DyeMatIndex"]["SiteId"] = false
+	}
+	if x.Maker != x.EntityId {
+		sameFields["HistoricalEventMasterpieceDye"]["Maker"]["EntityId"] = false
+	}
+	if x.Maker != x.Hfid {
+		sameFields["HistoricalEventMasterpieceDye"]["Maker"]["Hfid"] = false
+	}
+	if x.Maker != x.SiteId {
+		sameFields["HistoricalEventMasterpieceDye"]["Maker"]["SiteId"] = false
+	}
+	if x.MakerEntity != x.EntityId {
+		sameFields["HistoricalEventMasterpieceDye"]["MakerEntity"]["EntityId"] = false
+	}
+	if x.MakerEntity != x.Hfid {
+		sameFields["HistoricalEventMasterpieceDye"]["MakerEntity"]["Hfid"] = false
+	}
+	if x.MakerEntity != x.SiteId {
+		sameFields["HistoricalEventMasterpieceDye"]["MakerEntity"]["SiteId"] = false
+	}
+	if x.MatIndex != x.EntityId {
+		sameFields["HistoricalEventMasterpieceDye"]["MatIndex"]["EntityId"] = false
+	}
+	if x.MatIndex != x.Hfid {
+		sameFields["HistoricalEventMasterpieceDye"]["MatIndex"]["Hfid"] = false
+	}
+	if x.MatIndex != x.SiteId {
+		sameFields["HistoricalEventMasterpieceDye"]["MatIndex"]["SiteId"] = false
+	}
+	if x.Site != x.EntityId {
+		sameFields["HistoricalEventMasterpieceDye"]["Site"]["EntityId"] = false
+	}
+	if x.Site != x.Hfid {
+		sameFields["HistoricalEventMasterpieceDye"]["Site"]["Hfid"] = false
+	}
+	if x.Site != x.SiteId {
+		sameFields["HistoricalEventMasterpieceDye"]["Site"]["SiteId"] = false
+	}
+	if x.Unk2 != x.EntityId {
+		sameFields["HistoricalEventMasterpieceDye"]["Unk2"]["EntityId"] = false
+	}
+	if x.Unk2 != x.Hfid {
+		sameFields["HistoricalEventMasterpieceDye"]["Unk2"]["Hfid"] = false
+	}
+	if x.Unk2 != x.SiteId {
+		sameFields["HistoricalEventMasterpieceDye"]["Unk2"]["SiteId"] = false
+	}
+}
+
+func (x *HistoricalEventMasterpieceDye) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	d["dyeMat"] = x.DyeMat
+	if x.DyeMatIndex != -1 {
+		d["dyeMatIndex"] = x.DyeMatIndex
+	}
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.ItemType != 0 {
+		d["itemType"] = x.ItemType
+	}
+	if x.Maker != -1 {
+		d["maker"] = x.Maker
+	}
+	if x.MakerEntity != -1 {
+		d["makerEntity"] = x.MakerEntity
+	}
+	if x.Mat != 0 {
+		d["mat"] = x.Mat
+	}
+	if x.MatIndex != -1 {
+		d["matIndex"] = x.MatIndex
+	}
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SkillAtTime != 0 {
+		d["skillAtTime"] = x.SkillAtTime
+	}
+	if x.Unk2 != -1 {
+		d["unk2"] = x.Unk2
+	}
+	return json.Marshal(d)
+}
+
+type HistoricalEventMasterpieceEngraving struct {
+	ArtId       int    `json:"artId" legend:"plus"`       // art_id
+	ArtSubid    int    `json:"artSubid" legend:"plus"`    // art_subid
+	EntityId    int    `json:"entityId" legend:"base"`    // entity_id
+	Hfid        int    `json:"hfid" legend:"base"`        // hfid
+	SiteId      int    `json:"siteId" legend:"base"`      // site_id
+	SkillAtTime string `json:"skillAtTime" legend:"both"` // skill_at_time
+}
+
+func NewHistoricalEventMasterpieceEngraving() *HistoricalEventMasterpieceEngraving {
+	return &HistoricalEventMasterpieceEngraving{
+		ArtId:    -1,
+		ArtSubid: -1,
+		EntityId: -1,
+		Hfid:     -1,
+		SiteId:   -1,
+	}
+}
+func (x *HistoricalEventMasterpieceEngraving) Type() string                  { return "masterpiece engraving" }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventMasterpieceEngraving) CheckFields() {
-	if x.ArtId != x.EntityId && x.ArtId != 0 && x.EntityId != 0 {
+	if x.ArtId != x.EntityId {
 		sameFields["HistoricalEventMasterpieceEngraving"]["ArtId"]["EntityId"] = false
 	}
-	if x.ArtId != x.Hfid && x.ArtId != 0 && x.Hfid != 0 {
+	if x.ArtId != x.Hfid {
 		sameFields["HistoricalEventMasterpieceEngraving"]["ArtId"]["Hfid"] = false
 	}
-	if x.ArtId != x.SiteId && x.ArtId != 0 && x.SiteId != 0 {
+	if x.ArtId != x.SiteId {
 		sameFields["HistoricalEventMasterpieceEngraving"]["ArtId"]["SiteId"] = false
 	}
-	if x.ArtSubid != x.EntityId && x.ArtSubid != 0 && x.EntityId != 0 {
+	if x.ArtSubid != x.EntityId {
 		sameFields["HistoricalEventMasterpieceEngraving"]["ArtSubid"]["EntityId"] = false
 	}
-	if x.ArtSubid != x.Hfid && x.ArtSubid != 0 && x.Hfid != 0 {
+	if x.ArtSubid != x.Hfid {
 		sameFields["HistoricalEventMasterpieceEngraving"]["ArtSubid"]["Hfid"] = false
 	}
-	if x.ArtSubid != x.SiteId && x.ArtSubid != 0 && x.SiteId != 0 {
+	if x.ArtSubid != x.SiteId {
 		sameFields["HistoricalEventMasterpieceEngraving"]["ArtSubid"]["SiteId"] = false
-	}
-	if x.Maker != x.EntityId && x.Maker != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["Maker"]["EntityId"] = false
-	}
-	if x.Maker != x.Hfid && x.Maker != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["Maker"]["Hfid"] = false
-	}
-	if x.Maker != x.SiteId && x.Maker != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["Maker"]["SiteId"] = false
-	}
-	if x.MakerEntity != x.EntityId && x.MakerEntity != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["MakerEntity"]["EntityId"] = false
-	}
-	if x.MakerEntity != x.Hfid && x.MakerEntity != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["MakerEntity"]["Hfid"] = false
-	}
-	if x.MakerEntity != x.SiteId && x.MakerEntity != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["MakerEntity"]["SiteId"] = false
-	}
-	if x.Site != x.EntityId && x.Site != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["Site"]["EntityId"] = false
-	}
-	if x.Site != x.Hfid && x.Site != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["Site"]["Hfid"] = false
-	}
-	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceEngraving"]["Site"]["SiteId"] = false
 	}
 }
 
@@ -11737,363 +12730,254 @@ func (x *HistoricalEventMasterpieceEngraving) MarshalJSON() ([]byte, error) {
 	if x.Hfid != -1 {
 		d["hfid"] = x.Hfid
 	}
-	if x.Maker != -1 {
-		d["maker"] = x.Maker
-	}
-	if x.MakerEntity != -1 {
-		d["makerEntity"] = x.MakerEntity
-	}
-	if x.Site != -1 {
-		d["site"] = x.Site
-	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
 	}
-	if x.SkillAtTime != 0 {
-		d["skillAtTime"] = x.SkillAtTime
-	}
+	d["skillAtTime"] = x.SkillAtTime
 	return json.Marshal(d)
 }
 
+type HistoricalEventMasterpieceFoodItemSubtype int
+
+const (
+	HistoricalEventMasterpieceFoodItemSubtype_Unknown HistoricalEventMasterpieceFoodItemSubtype = iota
+	HistoricalEventMasterpieceFoodItemSubtype_Biscuits
+	HistoricalEventMasterpieceFoodItemSubtype_Roast
+	HistoricalEventMasterpieceFoodItemSubtype_Stew
+)
+
+func parseHistoricalEventMasterpieceFoodItemSubtype(s string) HistoricalEventMasterpieceFoodItemSubtype {
+	switch s {
+	case "biscuits":
+		return HistoricalEventMasterpieceFoodItemSubtype_Biscuits
+	case "roast":
+		return HistoricalEventMasterpieceFoodItemSubtype_Roast
+	case "stew":
+		return HistoricalEventMasterpieceFoodItemSubtype_Stew
+	}
+	return HistoricalEventMasterpieceFoodItemSubtype_Unknown
+}
+
+func (s HistoricalEventMasterpieceFoodItemSubtype) String() string {
+	switch s {
+	case HistoricalEventMasterpieceFoodItemSubtype_Biscuits:
+		return "biscuits"
+	case HistoricalEventMasterpieceFoodItemSubtype_Roast:
+		return "roast"
+	case HistoricalEventMasterpieceFoodItemSubtype_Stew:
+		return "stew"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceFoodItemSubtype) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventMasterpieceFoodItemType int
+
+const (
+	HistoricalEventMasterpieceFoodItemType_Unknown HistoricalEventMasterpieceFoodItemType = iota
+	HistoricalEventMasterpieceFoodItemType_Food
+)
+
+func parseHistoricalEventMasterpieceFoodItemType(s string) HistoricalEventMasterpieceFoodItemType {
+	switch s {
+	case "food":
+		return HistoricalEventMasterpieceFoodItemType_Food
+	}
+	return HistoricalEventMasterpieceFoodItemType_Unknown
+}
+
+func (s HistoricalEventMasterpieceFoodItemType) String() string {
+	switch s {
+	case HistoricalEventMasterpieceFoodItemType_Food:
+		return "food"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceFoodItemType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventMasterpieceFoodSkillAtTime int
+
+const (
+	HistoricalEventMasterpieceFoodSkillAtTime_Unknown HistoricalEventMasterpieceFoodSkillAtTime = iota
+	HistoricalEventMasterpieceFoodSkillAtTime_Accomplished
+	HistoricalEventMasterpieceFoodSkillAtTime_Adept
+	HistoricalEventMasterpieceFoodSkillAtTime_Competent
+	HistoricalEventMasterpieceFoodSkillAtTime_Expert
+	HistoricalEventMasterpieceFoodSkillAtTime_Grandmaster
+	HistoricalEventMasterpieceFoodSkillAtTime_Great
+	HistoricalEventMasterpieceFoodSkillAtTime_Highmaster
+	HistoricalEventMasterpieceFoodSkillAtTime_Legendary
+	HistoricalEventMasterpieceFoodSkillAtTime_Legendary1
+	HistoricalEventMasterpieceFoodSkillAtTime_Legendary3
+	HistoricalEventMasterpieceFoodSkillAtTime_Legendary4
+	HistoricalEventMasterpieceFoodSkillAtTime_Legendary5
+	HistoricalEventMasterpieceFoodSkillAtTime_LegendaryTwo
+	HistoricalEventMasterpieceFoodSkillAtTime_Master
+	HistoricalEventMasterpieceFoodSkillAtTime_Professional
+	HistoricalEventMasterpieceFoodSkillAtTime_Proficient
+	HistoricalEventMasterpieceFoodSkillAtTime_Skilled
+	HistoricalEventMasterpieceFoodSkillAtTime_Talented
+	HistoricalEventMasterpieceFoodSkillAtTime_Unknown30
+	HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo1
+	HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo3
+	HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo4
+	HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo5
+	HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo6
+	HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo7
+	HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo8
+	HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo9
+	HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwoTwo
+)
+
+func parseHistoricalEventMasterpieceFoodSkillAtTime(s string) HistoricalEventMasterpieceFoodSkillAtTime {
+	switch s {
+	case "accomplished":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Accomplished
+	case "adept":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Adept
+	case "competent":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Competent
+	case "expert":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Expert
+	case "grandmaster":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Grandmaster
+	case "great":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Great
+	case "highmaster":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Highmaster
+	case "legendary":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Legendary
+	case "legendary1":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Legendary1
+	case "legendary2":
+		return HistoricalEventMasterpieceFoodSkillAtTime_LegendaryTwo
+	case "legendary3":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Legendary3
+	case "legendary4":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Legendary4
+	case "legendary5":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Legendary5
+	case "master":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Master
+	case "professional":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Professional
+	case "proficient":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Proficient
+	case "skilled":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Skilled
+	case "talented":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Talented
+	case "unknown 21":
+		return HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo1
+	case "unknown 22":
+		return HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwoTwo
+	case "unknown 23":
+		return HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo3
+	case "unknown 24":
+		return HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo4
+	case "unknown 25":
+		return HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo5
+	case "unknown 26":
+		return HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo6
+	case "unknown 27":
+		return HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo7
+	case "unknown 28":
+		return HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo8
+	case "unknown 29":
+		return HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo9
+	case "unknown 30":
+		return HistoricalEventMasterpieceFoodSkillAtTime_Unknown30
+	}
+	return HistoricalEventMasterpieceFoodSkillAtTime_Unknown
+}
+
+func (s HistoricalEventMasterpieceFoodSkillAtTime) String() string {
+	switch s {
+	case HistoricalEventMasterpieceFoodSkillAtTime_Accomplished:
+		return "accomplished"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Adept:
+		return "adept"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Competent:
+		return "competent"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Expert:
+		return "expert"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Grandmaster:
+		return "grandmaster"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Great:
+		return "great"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Highmaster:
+		return "highmaster"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Legendary:
+		return "legendary"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Legendary1:
+		return "legendary 1"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Legendary3:
+		return "legendary 3"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Legendary4:
+		return "legendary 4"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Legendary5:
+		return "legendary 5"
+	case HistoricalEventMasterpieceFoodSkillAtTime_LegendaryTwo:
+		return "legendary two"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Master:
+		return "master"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Professional:
+		return "professional"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Proficient:
+		return "proficient"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Skilled:
+		return "skilled"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Talented:
+		return "talented"
+	case HistoricalEventMasterpieceFoodSkillAtTime_Unknown30:
+		return "unknown 30"
+	case HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo1:
+		return "unknown two 1"
+	case HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo3:
+		return "unknown two 3"
+	case HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo4:
+		return "unknown two 4"
+	case HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo5:
+		return "unknown two 5"
+	case HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo6:
+		return "unknown two 6"
+	case HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo7:
+		return "unknown two 7"
+	case HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo8:
+		return "unknown two 8"
+	case HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwo9:
+		return "unknown two 9"
+	case HistoricalEventMasterpieceFoodSkillAtTime_UnknownTwoTwo:
+		return "unknown two two"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceFoodSkillAtTime) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventMasterpieceFood struct {
-	EntityId    int `json:"entityId" legend:"base"`    // entity_id
-	Hfid        int `json:"hfid" legend:"base"`        // hfid
-	SiteId      int `json:"siteId" legend:"base"`      // site_id
-	SkillAtTime int `json:"skillAtTime" legend:"base"` // skill_at_time
+	EntityId    int                                       `json:"entityId" legend:"base"`    // entity_id
+	Hfid        int                                       `json:"hfid" legend:"base"`        // hfid
+	ItemId      int                                       `json:"itemId" legend:"plus"`      // item_id
+	ItemSubtype HistoricalEventMasterpieceFoodItemSubtype `json:"itemSubtype" legend:"plus"` // item_subtype
+	ItemType    HistoricalEventMasterpieceFoodItemType    `json:"itemType" legend:"plus"`    // item_type
+	Maker       int                                       `json:"maker" legend:"plus"`       // maker
+	MakerEntity int                                       `json:"makerEntity" legend:"plus"` // maker_entity
+	Site        int                                       `json:"site" legend:"plus"`        // site
+	SiteId      int                                       `json:"siteId" legend:"base"`      // site_id
+	SkillAtTime HistoricalEventMasterpieceFoodSkillAtTime `json:"skillAtTime" legend:"both"` // skill_at_time
 }
 
 func NewHistoricalEventMasterpieceFood() *HistoricalEventMasterpieceFood {
 	return &HistoricalEventMasterpieceFood{
-		EntityId:    -1,
-		Hfid:        -1,
-		SiteId:      -1,
-		SkillAtTime: -1,
-	}
-}
-func (x *HistoricalEventMasterpieceFood) Type() string                { return "masterpiece food" }
-func (x *HistoricalEventMasterpieceFood) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *HistoricalEventMasterpieceFood) RelatedToHf(id int) bool     { return x.Hfid == id }
-
-func (x *HistoricalEventMasterpieceFood) CheckFields() {
-}
-
-func (x *HistoricalEventMasterpieceFood) MarshalJSON() ([]byte, error) {
-	d := make(map[string]any)
-	if x.EntityId != -1 {
-		d["entityId"] = x.EntityId
-	}
-	if x.Hfid != -1 {
-		d["hfid"] = x.Hfid
-	}
-	if x.SiteId != -1 {
-		d["siteId"] = x.SiteId
-	}
-	if x.SkillAtTime != -1 {
-		d["skillAtTime"] = x.SkillAtTime
-	}
-	return json.Marshal(d)
-}
-
-type HistoricalEventMasterpieceItemItemSubtype int
-
-const (
-	HistoricalEventMasterpieceItemItemSubtype_Unknown HistoricalEventMasterpieceItemItemSubtype = iota
-	HistoricalEventMasterpieceItemItemSubtype_Bookcase
-	HistoricalEventMasterpieceItemItemSubtype_Breastplate
-	HistoricalEventMasterpieceItemItemSubtype_Cap
-	HistoricalEventMasterpieceItemItemSubtype_Cloak
-	HistoricalEventMasterpieceItemItemSubtype_Coat
-	HistoricalEventMasterpieceItemItemSubtype_Corkscrew
-	HistoricalEventMasterpieceItemItemSubtype_Gauntlet
-	HistoricalEventMasterpieceItemItemSubtype_Glove
-	HistoricalEventMasterpieceItemItemSubtype_Greaves
-	HistoricalEventMasterpieceItemItemSubtype_Helm
-	HistoricalEventMasterpieceItemItemSubtype_HighBoot
-	HistoricalEventMasterpieceItemItemSubtype_Hood
-	HistoricalEventMasterpieceItemItemSubtype_Leggings
-	HistoricalEventMasterpieceItemItemSubtype_MailShirt
-	HistoricalEventMasterpieceItemItemSubtype_Mitten
-	HistoricalEventMasterpieceItemItemSubtype_Robe
-	HistoricalEventMasterpieceItemItemSubtype_ScrollRollers
-	HistoricalEventMasterpieceItemItemSubtype_Shield
-	HistoricalEventMasterpieceItemItemSubtype_Shirt
-	HistoricalEventMasterpieceItemItemSubtype_Shoe
-	HistoricalEventMasterpieceItemItemSubtype_Sock
-	HistoricalEventMasterpieceItemItemSubtype_Trousers
-)
-
-func parseHistoricalEventMasterpieceItemItemSubtype(s string) HistoricalEventMasterpieceItemItemSubtype {
-	switch s {
-	case "bookcase":
-		return HistoricalEventMasterpieceItemItemSubtype_Bookcase
-	case "breastplate":
-		return HistoricalEventMasterpieceItemItemSubtype_Breastplate
-	case "cap":
-		return HistoricalEventMasterpieceItemItemSubtype_Cap
-	case "cloak":
-		return HistoricalEventMasterpieceItemItemSubtype_Cloak
-	case "coat":
-		return HistoricalEventMasterpieceItemItemSubtype_Coat
-	case "corkscrew":
-		return HistoricalEventMasterpieceItemItemSubtype_Corkscrew
-	case "gauntlet":
-		return HistoricalEventMasterpieceItemItemSubtype_Gauntlet
-	case "glove":
-		return HistoricalEventMasterpieceItemItemSubtype_Glove
-	case "greaves":
-		return HistoricalEventMasterpieceItemItemSubtype_Greaves
-	case "helm":
-		return HistoricalEventMasterpieceItemItemSubtype_Helm
-	case "high boot":
-		return HistoricalEventMasterpieceItemItemSubtype_HighBoot
-	case "hood":
-		return HistoricalEventMasterpieceItemItemSubtype_Hood
-	case "leggings":
-		return HistoricalEventMasterpieceItemItemSubtype_Leggings
-	case "mail shirt":
-		return HistoricalEventMasterpieceItemItemSubtype_MailShirt
-	case "mitten":
-		return HistoricalEventMasterpieceItemItemSubtype_Mitten
-	case "robe":
-		return HistoricalEventMasterpieceItemItemSubtype_Robe
-	case "scroll rollers":
-		return HistoricalEventMasterpieceItemItemSubtype_ScrollRollers
-	case "shield":
-		return HistoricalEventMasterpieceItemItemSubtype_Shield
-	case "shirt":
-		return HistoricalEventMasterpieceItemItemSubtype_Shirt
-	case "shoe":
-		return HistoricalEventMasterpieceItemItemSubtype_Shoe
-	case "sock":
-		return HistoricalEventMasterpieceItemItemSubtype_Sock
-	case "trousers":
-		return HistoricalEventMasterpieceItemItemSubtype_Trousers
-	}
-	return HistoricalEventMasterpieceItemItemSubtype_Unknown
-}
-
-func (s HistoricalEventMasterpieceItemItemSubtype) String() string {
-	switch s {
-	case HistoricalEventMasterpieceItemItemSubtype_Bookcase:
-		return "bookcase"
-	case HistoricalEventMasterpieceItemItemSubtype_Breastplate:
-		return "breastplate"
-	case HistoricalEventMasterpieceItemItemSubtype_Cap:
-		return "cap"
-	case HistoricalEventMasterpieceItemItemSubtype_Cloak:
-		return "cloak"
-	case HistoricalEventMasterpieceItemItemSubtype_Coat:
-		return "coat"
-	case HistoricalEventMasterpieceItemItemSubtype_Corkscrew:
-		return "corkscrew"
-	case HistoricalEventMasterpieceItemItemSubtype_Gauntlet:
-		return "gauntlet"
-	case HistoricalEventMasterpieceItemItemSubtype_Glove:
-		return "glove"
-	case HistoricalEventMasterpieceItemItemSubtype_Greaves:
-		return "greaves"
-	case HistoricalEventMasterpieceItemItemSubtype_Helm:
-		return "helm"
-	case HistoricalEventMasterpieceItemItemSubtype_HighBoot:
-		return "high boot"
-	case HistoricalEventMasterpieceItemItemSubtype_Hood:
-		return "hood"
-	case HistoricalEventMasterpieceItemItemSubtype_Leggings:
-		return "leggings"
-	case HistoricalEventMasterpieceItemItemSubtype_MailShirt:
-		return "mail shirt"
-	case HistoricalEventMasterpieceItemItemSubtype_Mitten:
-		return "mitten"
-	case HistoricalEventMasterpieceItemItemSubtype_Robe:
-		return "robe"
-	case HistoricalEventMasterpieceItemItemSubtype_ScrollRollers:
-		return "scroll rollers"
-	case HistoricalEventMasterpieceItemItemSubtype_Shield:
-		return "shield"
-	case HistoricalEventMasterpieceItemItemSubtype_Shirt:
-		return "shirt"
-	case HistoricalEventMasterpieceItemItemSubtype_Shoe:
-		return "shoe"
-	case HistoricalEventMasterpieceItemItemSubtype_Sock:
-		return "sock"
-	case HistoricalEventMasterpieceItemItemSubtype_Trousers:
-		return "trousers"
-	}
-	return "unknown"
-}
-
-func (s HistoricalEventMasterpieceItemItemSubtype) MarshalJSON() ([]byte, error) {
-	return json.Marshal(s.String())
-}
-
-type HistoricalEventMasterpieceItemItemType int
-
-const (
-	HistoricalEventMasterpieceItemItemType_Unknown HistoricalEventMasterpieceItemItemType = iota
-	HistoricalEventMasterpieceItemItemType_Armor
-	HistoricalEventMasterpieceItemItemType_Armorstand
-	HistoricalEventMasterpieceItemItemType_Backpack
-	HistoricalEventMasterpieceItemItemType_Barrel
-	HistoricalEventMasterpieceItemItemType_Bed
-	HistoricalEventMasterpieceItemItemType_Box
-	HistoricalEventMasterpieceItemItemType_Bucket
-	HistoricalEventMasterpieceItemItemType_Cabinet
-	HistoricalEventMasterpieceItemItemType_Chair
-	HistoricalEventMasterpieceItemItemType_Cloth
-	HistoricalEventMasterpieceItemItemType_Coffin
-	HistoricalEventMasterpieceItemItemType_Crown
-	HistoricalEventMasterpieceItemItemType_Door
-	HistoricalEventMasterpieceItemItemType_Figurine
-	HistoricalEventMasterpieceItemItemType_Flask
-	HistoricalEventMasterpieceItemItemType_Floodgate
-	HistoricalEventMasterpieceItemItemType_Gloves
-	HistoricalEventMasterpieceItemItemType_Helm
-	HistoricalEventMasterpieceItemItemType_Pants
-	HistoricalEventMasterpieceItemItemType_Shield
-	HistoricalEventMasterpieceItemItemType_Shoes
-	HistoricalEventMasterpieceItemItemType_Slab
-	HistoricalEventMasterpieceItemItemType_Table
-	HistoricalEventMasterpieceItemItemType_Tool
-	HistoricalEventMasterpieceItemItemType_Totem
-	HistoricalEventMasterpieceItemItemType_Trapcomp
-)
-
-func parseHistoricalEventMasterpieceItemItemType(s string) HistoricalEventMasterpieceItemItemType {
-	switch s {
-	case "armor":
-		return HistoricalEventMasterpieceItemItemType_Armor
-	case "armorstand":
-		return HistoricalEventMasterpieceItemItemType_Armorstand
-	case "backpack":
-		return HistoricalEventMasterpieceItemItemType_Backpack
-	case "barrel":
-		return HistoricalEventMasterpieceItemItemType_Barrel
-	case "bed":
-		return HistoricalEventMasterpieceItemItemType_Bed
-	case "box":
-		return HistoricalEventMasterpieceItemItemType_Box
-	case "bucket":
-		return HistoricalEventMasterpieceItemItemType_Bucket
-	case "cabinet":
-		return HistoricalEventMasterpieceItemItemType_Cabinet
-	case "chair":
-		return HistoricalEventMasterpieceItemItemType_Chair
-	case "cloth":
-		return HistoricalEventMasterpieceItemItemType_Cloth
-	case "coffin":
-		return HistoricalEventMasterpieceItemItemType_Coffin
-	case "crown":
-		return HistoricalEventMasterpieceItemItemType_Crown
-	case "door":
-		return HistoricalEventMasterpieceItemItemType_Door
-	case "figurine":
-		return HistoricalEventMasterpieceItemItemType_Figurine
-	case "flask":
-		return HistoricalEventMasterpieceItemItemType_Flask
-	case "floodgate":
-		return HistoricalEventMasterpieceItemItemType_Floodgate
-	case "gloves":
-		return HistoricalEventMasterpieceItemItemType_Gloves
-	case "helm":
-		return HistoricalEventMasterpieceItemItemType_Helm
-	case "pants":
-		return HistoricalEventMasterpieceItemItemType_Pants
-	case "shield":
-		return HistoricalEventMasterpieceItemItemType_Shield
-	case "shoes":
-		return HistoricalEventMasterpieceItemItemType_Shoes
-	case "slab":
-		return HistoricalEventMasterpieceItemItemType_Slab
-	case "table":
-		return HistoricalEventMasterpieceItemItemType_Table
-	case "tool":
-		return HistoricalEventMasterpieceItemItemType_Tool
-	case "totem":
-		return HistoricalEventMasterpieceItemItemType_Totem
-	case "trapcomp":
-		return HistoricalEventMasterpieceItemItemType_Trapcomp
-	}
-	return HistoricalEventMasterpieceItemItemType_Unknown
-}
-
-func (s HistoricalEventMasterpieceItemItemType) String() string {
-	switch s {
-	case HistoricalEventMasterpieceItemItemType_Armor:
-		return "armor"
-	case HistoricalEventMasterpieceItemItemType_Armorstand:
-		return "armorstand"
-	case HistoricalEventMasterpieceItemItemType_Backpack:
-		return "backpack"
-	case HistoricalEventMasterpieceItemItemType_Barrel:
-		return "barrel"
-	case HistoricalEventMasterpieceItemItemType_Bed:
-		return "bed"
-	case HistoricalEventMasterpieceItemItemType_Box:
-		return "box"
-	case HistoricalEventMasterpieceItemItemType_Bucket:
-		return "bucket"
-	case HistoricalEventMasterpieceItemItemType_Cabinet:
-		return "cabinet"
-	case HistoricalEventMasterpieceItemItemType_Chair:
-		return "chair"
-	case HistoricalEventMasterpieceItemItemType_Cloth:
-		return "cloth"
-	case HistoricalEventMasterpieceItemItemType_Coffin:
-		return "coffin"
-	case HistoricalEventMasterpieceItemItemType_Crown:
-		return "crown"
-	case HistoricalEventMasterpieceItemItemType_Door:
-		return "door"
-	case HistoricalEventMasterpieceItemItemType_Figurine:
-		return "figurine"
-	case HistoricalEventMasterpieceItemItemType_Flask:
-		return "flask"
-	case HistoricalEventMasterpieceItemItemType_Floodgate:
-		return "floodgate"
-	case HistoricalEventMasterpieceItemItemType_Gloves:
-		return "gloves"
-	case HistoricalEventMasterpieceItemItemType_Helm:
-		return "helm"
-	case HistoricalEventMasterpieceItemItemType_Pants:
-		return "pants"
-	case HistoricalEventMasterpieceItemItemType_Shield:
-		return "shield"
-	case HistoricalEventMasterpieceItemItemType_Shoes:
-		return "shoes"
-	case HistoricalEventMasterpieceItemItemType_Slab:
-		return "slab"
-	case HistoricalEventMasterpieceItemItemType_Table:
-		return "table"
-	case HistoricalEventMasterpieceItemItemType_Tool:
-		return "tool"
-	case HistoricalEventMasterpieceItemItemType_Totem:
-		return "totem"
-	case HistoricalEventMasterpieceItemItemType_Trapcomp:
-		return "trapcomp"
-	}
-	return "unknown"
-}
-
-func (s HistoricalEventMasterpieceItemItemType) MarshalJSON() ([]byte, error) {
-	return json.Marshal(s.String())
-}
-
-type HistoricalEventMasterpieceItem struct {
-	EntityId    int                                       `json:"entityId" legend:"base"`    // entity_id
-	Hfid        int                                       `json:"hfid" legend:"base"`        // hfid
-	ItemId      int                                       `json:"itemId" legend:"plus"`      // item_id
-	ItemSubtype HistoricalEventMasterpieceItemItemSubtype `json:"itemSubtype" legend:"plus"` // item_subtype
-	ItemType    HistoricalEventMasterpieceItemItemType    `json:"itemType" legend:"plus"`    // item_type
-	Maker       int                                       `json:"maker" legend:"plus"`       // maker
-	MakerEntity int                                       `json:"makerEntity" legend:"plus"` // maker_entity
-	Mat         string                                    `json:"mat" legend:"plus"`         // mat
-	Site        int                                       `json:"site" legend:"plus"`        // site
-	SiteId      int                                       `json:"siteId" legend:"base"`      // site_id
-	SkillAtTime string                                    `json:"skillAtTime" legend:"both"` // skill_at_time
-}
-
-func NewHistoricalEventMasterpieceItem() *HistoricalEventMasterpieceItem {
-	return &HistoricalEventMasterpieceItem{
 		EntityId:    -1,
 		Hfid:        -1,
 		ItemId:      -1,
@@ -12103,52 +12987,55 @@ func NewHistoricalEventMasterpieceItem() *HistoricalEventMasterpieceItem {
 		SiteId:      -1,
 	}
 }
-func (x *HistoricalEventMasterpieceItem) Type() string { return "masterpiece item" }
-func (x *HistoricalEventMasterpieceItem) RelatedToEntity(id int) bool {
+func (x *HistoricalEventMasterpieceFood) Type() string { return "masterpiece food" }
+func (x *HistoricalEventMasterpieceFood) RelatedToEntity(id int) bool {
 	return x.EntityId == id || x.MakerEntity == id
 }
-func (x *HistoricalEventMasterpieceItem) RelatedToHf(id int) bool { return x.Hfid == id }
+func (x *HistoricalEventMasterpieceFood) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventMasterpieceFood) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventMasterpieceFood) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventMasterpieceFood) RelatedToRegion(id int) bool   { return false }
 
-func (x *HistoricalEventMasterpieceItem) CheckFields() {
-	if x.ItemId != x.EntityId && x.ItemId != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["ItemId"]["EntityId"] = false
+func (x *HistoricalEventMasterpieceFood) CheckFields() {
+	if x.ItemId != x.EntityId {
+		sameFields["HistoricalEventMasterpieceFood"]["ItemId"]["EntityId"] = false
 	}
-	if x.ItemId != x.Hfid && x.ItemId != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["ItemId"]["Hfid"] = false
+	if x.ItemId != x.Hfid {
+		sameFields["HistoricalEventMasterpieceFood"]["ItemId"]["Hfid"] = false
 	}
-	if x.ItemId != x.SiteId && x.ItemId != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["ItemId"]["SiteId"] = false
+	if x.ItemId != x.SiteId {
+		sameFields["HistoricalEventMasterpieceFood"]["ItemId"]["SiteId"] = false
 	}
-	if x.Maker != x.EntityId && x.Maker != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["Maker"]["EntityId"] = false
+	if x.Maker != x.EntityId {
+		sameFields["HistoricalEventMasterpieceFood"]["Maker"]["EntityId"] = false
 	}
-	if x.Maker != x.Hfid && x.Maker != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["Maker"]["Hfid"] = false
+	if x.Maker != x.Hfid {
+		sameFields["HistoricalEventMasterpieceFood"]["Maker"]["Hfid"] = false
 	}
-	if x.Maker != x.SiteId && x.Maker != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["Maker"]["SiteId"] = false
+	if x.Maker != x.SiteId {
+		sameFields["HistoricalEventMasterpieceFood"]["Maker"]["SiteId"] = false
 	}
-	if x.MakerEntity != x.EntityId && x.MakerEntity != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["MakerEntity"]["EntityId"] = false
+	if x.MakerEntity != x.EntityId {
+		sameFields["HistoricalEventMasterpieceFood"]["MakerEntity"]["EntityId"] = false
 	}
-	if x.MakerEntity != x.Hfid && x.MakerEntity != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["MakerEntity"]["Hfid"] = false
+	if x.MakerEntity != x.Hfid {
+		sameFields["HistoricalEventMasterpieceFood"]["MakerEntity"]["Hfid"] = false
 	}
-	if x.MakerEntity != x.SiteId && x.MakerEntity != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["MakerEntity"]["SiteId"] = false
+	if x.MakerEntity != x.SiteId {
+		sameFields["HistoricalEventMasterpieceFood"]["MakerEntity"]["SiteId"] = false
 	}
-	if x.Site != x.EntityId && x.Site != 0 && x.EntityId != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["Site"]["EntityId"] = false
+	if x.Site != x.EntityId {
+		sameFields["HistoricalEventMasterpieceFood"]["Site"]["EntityId"] = false
 	}
-	if x.Site != x.Hfid && x.Site != 0 && x.Hfid != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["Site"]["Hfid"] = false
+	if x.Site != x.Hfid {
+		sameFields["HistoricalEventMasterpieceFood"]["Site"]["Hfid"] = false
 	}
-	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMasterpieceItem"]["Site"]["SiteId"] = false
+	if x.Site != x.SiteId {
+		sameFields["HistoricalEventMasterpieceFood"]["Site"]["SiteId"] = false
 	}
 }
 
-func (x *HistoricalEventMasterpieceItem) MarshalJSON() ([]byte, error) {
+func (x *HistoricalEventMasterpieceFood) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
 	if x.EntityId != -1 {
 		d["entityId"] = x.EntityId
@@ -12171,9 +13058,97 @@ func (x *HistoricalEventMasterpieceItem) MarshalJSON() ([]byte, error) {
 	if x.MakerEntity != -1 {
 		d["makerEntity"] = x.MakerEntity
 	}
-	d["mat"] = x.Mat
 	if x.Site != -1 {
 		d["site"] = x.Site
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.SkillAtTime != 0 {
+		d["skillAtTime"] = x.SkillAtTime
+	}
+	return json.Marshal(d)
+}
+
+type HistoricalEventMasterpieceItem struct {
+	EntityId    int    `json:"entityId" legend:"base"`    // entity_id
+	Hfid        int    `json:"hfid" legend:"base"`        // hfid
+	ItemId      int    `json:"itemId" legend:"plus"`      // item_id
+	ItemSubtype string `json:"itemSubtype" legend:"plus"` // item_subtype
+	ItemType    string `json:"itemType" legend:"plus"`    // item_type
+	Mat         string `json:"mat" legend:"plus"`         // mat
+	MatIndex    int    `json:"matIndex" legend:"plus"`    // mat_index
+	MatType     int    `json:"matType" legend:"plus"`     // mat_type
+	SiteId      int    `json:"siteId" legend:"base"`      // site_id
+	SkillAtTime string `json:"skillAtTime" legend:"both"` // skill_at_time
+}
+
+func NewHistoricalEventMasterpieceItem() *HistoricalEventMasterpieceItem {
+	return &HistoricalEventMasterpieceItem{
+		EntityId: -1,
+		Hfid:     -1,
+		ItemId:   -1,
+		MatIndex: -1,
+		MatType:  -1,
+		SiteId:   -1,
+	}
+}
+func (x *HistoricalEventMasterpieceItem) Type() string                  { return "masterpiece item" }
+func (x *HistoricalEventMasterpieceItem) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *HistoricalEventMasterpieceItem) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventMasterpieceItem) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventMasterpieceItem) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventMasterpieceItem) RelatedToRegion(id int) bool   { return false }
+
+func (x *HistoricalEventMasterpieceItem) CheckFields() {
+	if x.ItemId != x.EntityId {
+		sameFields["HistoricalEventMasterpieceItem"]["ItemId"]["EntityId"] = false
+	}
+	if x.ItemId != x.Hfid {
+		sameFields["HistoricalEventMasterpieceItem"]["ItemId"]["Hfid"] = false
+	}
+	if x.ItemId != x.SiteId {
+		sameFields["HistoricalEventMasterpieceItem"]["ItemId"]["SiteId"] = false
+	}
+	if x.MatIndex != x.EntityId {
+		sameFields["HistoricalEventMasterpieceItem"]["MatIndex"]["EntityId"] = false
+	}
+	if x.MatIndex != x.Hfid {
+		sameFields["HistoricalEventMasterpieceItem"]["MatIndex"]["Hfid"] = false
+	}
+	if x.MatIndex != x.SiteId {
+		sameFields["HistoricalEventMasterpieceItem"]["MatIndex"]["SiteId"] = false
+	}
+	if x.MatType != x.EntityId {
+		sameFields["HistoricalEventMasterpieceItem"]["MatType"]["EntityId"] = false
+	}
+	if x.MatType != x.Hfid {
+		sameFields["HistoricalEventMasterpieceItem"]["MatType"]["Hfid"] = false
+	}
+	if x.MatType != x.SiteId {
+		sameFields["HistoricalEventMasterpieceItem"]["MatType"]["SiteId"] = false
+	}
+}
+
+func (x *HistoricalEventMasterpieceItem) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
+	if x.Hfid != -1 {
+		d["hfid"] = x.Hfid
+	}
+	if x.ItemId != -1 {
+		d["itemId"] = x.ItemId
+	}
+	d["itemSubtype"] = x.ItemSubtype
+	d["itemType"] = x.ItemType
+	d["mat"] = x.Mat
+	if x.MatIndex != -1 {
+		d["matIndex"] = x.MatIndex
+	}
+	if x.MatType != -1 {
+		d["matType"] = x.MatType
 	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
@@ -12182,81 +13157,365 @@ func (x *HistoricalEventMasterpieceItem) MarshalJSON() ([]byte, error) {
 	return json.Marshal(d)
 }
 
+type HistoricalEventMasterpieceItemImprovementImprovementType int
+
+const (
+	HistoricalEventMasterpieceItemImprovementImprovementType_Unknown HistoricalEventMasterpieceItemImprovementImprovementType = iota
+	HistoricalEventMasterpieceItemImprovementImprovementType_ArtImage
+	HistoricalEventMasterpieceItemImprovementImprovementType_Bands
+	HistoricalEventMasterpieceItemImprovementImprovementType_Covered
+	HistoricalEventMasterpieceItemImprovementImprovementType_Itemspecific
+	HistoricalEventMasterpieceItemImprovementImprovementType_RingsHanging
+	HistoricalEventMasterpieceItemImprovementImprovementType_Spikes
+)
+
+func parseHistoricalEventMasterpieceItemImprovementImprovementType(s string) HistoricalEventMasterpieceItemImprovementImprovementType {
+	switch s {
+	case "art_image":
+		return HistoricalEventMasterpieceItemImprovementImprovementType_ArtImage
+	case "bands":
+		return HistoricalEventMasterpieceItemImprovementImprovementType_Bands
+	case "covered":
+		return HistoricalEventMasterpieceItemImprovementImprovementType_Covered
+	case "itemspecific":
+		return HistoricalEventMasterpieceItemImprovementImprovementType_Itemspecific
+	case "rings_hanging":
+		return HistoricalEventMasterpieceItemImprovementImprovementType_RingsHanging
+	case "spikes":
+		return HistoricalEventMasterpieceItemImprovementImprovementType_Spikes
+	}
+	return HistoricalEventMasterpieceItemImprovementImprovementType_Unknown
+}
+
+func (s HistoricalEventMasterpieceItemImprovementImprovementType) String() string {
+	switch s {
+	case HistoricalEventMasterpieceItemImprovementImprovementType_ArtImage:
+		return "art image"
+	case HistoricalEventMasterpieceItemImprovementImprovementType_Bands:
+		return "bands"
+	case HistoricalEventMasterpieceItemImprovementImprovementType_Covered:
+		return "covered"
+	case HistoricalEventMasterpieceItemImprovementImprovementType_Itemspecific:
+		return "itemspecific"
+	case HistoricalEventMasterpieceItemImprovementImprovementType_RingsHanging:
+		return "rings hanging"
+	case HistoricalEventMasterpieceItemImprovementImprovementType_Spikes:
+		return "spikes"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceItemImprovementImprovementType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventMasterpieceItemImprovementSkillAtTime int
+
+const (
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Unknown HistoricalEventMasterpieceItemImprovementSkillAtTime = iota
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Accomplished
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Adept
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Adequate
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Competent
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Expert
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Great
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Highmaster
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary1
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary3
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary4
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary5
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_LegendaryTwo
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Master
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Professional
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Proficient
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Skilled
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Talented
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_Unknown44
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo1
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo3
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo4
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo5
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo6
+	HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwoTwo
+)
+
+func parseHistoricalEventMasterpieceItemImprovementSkillAtTime(s string) HistoricalEventMasterpieceItemImprovementSkillAtTime {
+	switch s {
+	case "accomplished":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Accomplished
+	case "adept":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Adept
+	case "adequate":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Adequate
+	case "competent":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Competent
+	case "expert":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Expert
+	case "great":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Great
+	case "highmaster":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Highmaster
+	case "legendary":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary
+	case "legendary1":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary1
+	case "legendary2":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_LegendaryTwo
+	case "legendary3":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary3
+	case "legendary4":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary4
+	case "legendary5":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary5
+	case "master":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Master
+	case "professional":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Professional
+	case "proficient":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Proficient
+	case "skilled":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Skilled
+	case "talented":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Talented
+	case "unknown 21":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo1
+	case "unknown 22":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwoTwo
+	case "unknown 23":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo3
+	case "unknown 24":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo4
+	case "unknown 25":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo5
+	case "unknown 26":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo6
+	case "unknown 44":
+		return HistoricalEventMasterpieceItemImprovementSkillAtTime_Unknown44
+	}
+	return HistoricalEventMasterpieceItemImprovementSkillAtTime_Unknown
+}
+
+func (s HistoricalEventMasterpieceItemImprovementSkillAtTime) String() string {
+	switch s {
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Accomplished:
+		return "accomplished"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Adept:
+		return "adept"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Adequate:
+		return "adequate"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Competent:
+		return "competent"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Expert:
+		return "expert"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Great:
+		return "great"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Highmaster:
+		return "highmaster"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary:
+		return "legendary"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary1:
+		return "legendary 1"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary3:
+		return "legendary 3"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary4:
+		return "legendary 4"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Legendary5:
+		return "legendary 5"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_LegendaryTwo:
+		return "legendary two"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Master:
+		return "master"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Professional:
+		return "professional"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Proficient:
+		return "proficient"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Skilled:
+		return "skilled"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Talented:
+		return "talented"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_Unknown44:
+		return "unknown 44"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo1:
+		return "unknown two 1"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo3:
+		return "unknown two 3"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo4:
+		return "unknown two 4"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo5:
+		return "unknown two 5"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwo6:
+		return "unknown two 6"
+	case HistoricalEventMasterpieceItemImprovementSkillAtTime_UnknownTwoTwo:
+		return "unknown two two"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventMasterpieceItemImprovementSkillAtTime) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventMasterpieceItemImprovement struct {
-	EntityId    int `json:"entityId" legend:"base"`    // entity_id
-	Hfid        int `json:"hfid" legend:"base"`        // hfid
-	SiteId      int `json:"siteId" legend:"base"`      // site_id
-	SkillAtTime int `json:"skillAtTime" legend:"base"` // skill_at_time
+	ArtId              int                                                      `json:"artId" legend:"plus"`              // art_id
+	ArtSubid           int                                                      `json:"artSubid" legend:"plus"`           // art_subid
+	EntityId           int                                                      `json:"entityId" legend:"base"`           // entity_id
+	Hfid               int                                                      `json:"hfid" legend:"base"`               // hfid
+	ImpMat             string                                                   `json:"impMat" legend:"plus"`             // imp_mat
+	ImprovementSubtype int                                                      `json:"improvementSubtype" legend:"plus"` // improvement_subtype
+	ImprovementType    HistoricalEventMasterpieceItemImprovementImprovementType `json:"improvementType" legend:"plus"`    // improvement_type
+	ItemSubtype        string                                                   `json:"itemSubtype" legend:"plus"`        // item_subtype
+	ItemType           string                                                   `json:"itemType" legend:"plus"`           // item_type
+	Maker              int                                                      `json:"maker" legend:"plus"`              // maker
+	MakerEntity        int                                                      `json:"makerEntity" legend:"plus"`        // maker_entity
+	Mat                string                                                   `json:"mat" legend:"plus"`                // mat
+	Site               int                                                      `json:"site" legend:"plus"`               // site
+	SiteId             int                                                      `json:"siteId" legend:"base"`             // site_id
+	SkillAtTime        HistoricalEventMasterpieceItemImprovementSkillAtTime     `json:"skillAtTime" legend:"both"`        // skill_at_time
+	Unk2               int                                                      `json:"unk2" legend:"plus"`               // unk_2
 }
 
 func NewHistoricalEventMasterpieceItemImprovement() *HistoricalEventMasterpieceItemImprovement {
 	return &HistoricalEventMasterpieceItemImprovement{
-		EntityId:    -1,
-		Hfid:        -1,
-		SiteId:      -1,
-		SkillAtTime: -1,
+		ArtId:              -1,
+		ArtSubid:           -1,
+		EntityId:           -1,
+		Hfid:               -1,
+		ImprovementSubtype: -1,
+		Maker:              -1,
+		MakerEntity:        -1,
+		Site:               -1,
+		SiteId:             -1,
+		Unk2:               -1,
 	}
 }
 func (x *HistoricalEventMasterpieceItemImprovement) Type() string {
 	return "masterpiece item improvement"
 }
 func (x *HistoricalEventMasterpieceItemImprovement) RelatedToEntity(id int) bool {
-	return x.EntityId == id
+	return x.EntityId == id || x.MakerEntity == id
 }
-func (x *HistoricalEventMasterpieceItemImprovement) RelatedToHf(id int) bool { return x.Hfid == id }
+func (x *HistoricalEventMasterpieceItemImprovement) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventMasterpieceItemImprovement) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventMasterpieceItemImprovement) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventMasterpieceItemImprovement) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventMasterpieceItemImprovement) CheckFields() {
+	if x.ArtId != x.EntityId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["ArtId"]["EntityId"] = false
+	}
+	if x.ArtId != x.Hfid {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["ArtId"]["Hfid"] = false
+	}
+	if x.ArtId != x.SiteId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["ArtId"]["SiteId"] = false
+	}
+	if x.ArtSubid != x.EntityId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["ArtSubid"]["EntityId"] = false
+	}
+	if x.ArtSubid != x.Hfid {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["ArtSubid"]["Hfid"] = false
+	}
+	if x.ArtSubid != x.SiteId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["ArtSubid"]["SiteId"] = false
+	}
+	if x.ImprovementSubtype != x.EntityId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["ImprovementSubtype"]["EntityId"] = false
+	}
+	if x.ImprovementSubtype != x.Hfid {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["ImprovementSubtype"]["Hfid"] = false
+	}
+	if x.ImprovementSubtype != x.SiteId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["ImprovementSubtype"]["SiteId"] = false
+	}
+	if x.Maker != x.EntityId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["Maker"]["EntityId"] = false
+	}
+	if x.Maker != x.Hfid {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["Maker"]["Hfid"] = false
+	}
+	if x.Maker != x.SiteId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["Maker"]["SiteId"] = false
+	}
+	if x.MakerEntity != x.EntityId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["MakerEntity"]["EntityId"] = false
+	}
+	if x.MakerEntity != x.Hfid {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["MakerEntity"]["Hfid"] = false
+	}
+	if x.MakerEntity != x.SiteId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["MakerEntity"]["SiteId"] = false
+	}
+	if x.Site != x.EntityId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["Site"]["EntityId"] = false
+	}
+	if x.Site != x.Hfid {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["Site"]["Hfid"] = false
+	}
+	if x.Site != x.SiteId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["Site"]["SiteId"] = false
+	}
+	if x.Unk2 != x.EntityId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["Unk2"]["EntityId"] = false
+	}
+	if x.Unk2 != x.Hfid {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["Unk2"]["Hfid"] = false
+	}
+	if x.Unk2 != x.SiteId {
+		sameFields["HistoricalEventMasterpieceItemImprovement"]["Unk2"]["SiteId"] = false
+	}
 }
 
 func (x *HistoricalEventMasterpieceItemImprovement) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
+	if x.ArtId != -1 {
+		d["artId"] = x.ArtId
+	}
+	if x.ArtSubid != -1 {
+		d["artSubid"] = x.ArtSubid
+	}
 	if x.EntityId != -1 {
 		d["entityId"] = x.EntityId
 	}
 	if x.Hfid != -1 {
 		d["hfid"] = x.Hfid
 	}
+	d["impMat"] = x.ImpMat
+	if x.ImprovementSubtype != -1 {
+		d["improvementSubtype"] = x.ImprovementSubtype
+	}
+	if x.ImprovementType != 0 {
+		d["improvementType"] = x.ImprovementType
+	}
+	d["itemSubtype"] = x.ItemSubtype
+	d["itemType"] = x.ItemType
+	if x.Maker != -1 {
+		d["maker"] = x.Maker
+	}
+	if x.MakerEntity != -1 {
+		d["makerEntity"] = x.MakerEntity
+	}
+	d["mat"] = x.Mat
+	if x.Site != -1 {
+		d["site"] = x.Site
+	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
 	}
-	if x.SkillAtTime != -1 {
+	if x.SkillAtTime != 0 {
 		d["skillAtTime"] = x.SkillAtTime
+	}
+	if x.Unk2 != -1 {
+		d["unk2"] = x.Unk2
 	}
 	return json.Marshal(d)
 }
 
-type HistoricalEventMasterpieceLostMethod int
-
-const (
-	HistoricalEventMasterpieceLostMethod_Unknown HistoricalEventMasterpieceLostMethod = iota
-	HistoricalEventMasterpieceLostMethod_Melt
-)
-
-func parseHistoricalEventMasterpieceLostMethod(s string) HistoricalEventMasterpieceLostMethod {
-	switch s {
-	case "melt":
-		return HistoricalEventMasterpieceLostMethod_Melt
-	}
-	return HistoricalEventMasterpieceLostMethod_Unknown
-}
-
-func (s HistoricalEventMasterpieceLostMethod) String() string {
-	switch s {
-	case HistoricalEventMasterpieceLostMethod_Melt:
-		return "melt"
-	}
-	return "unknown"
-}
-
-func (s HistoricalEventMasterpieceLostMethod) MarshalJSON() ([]byte, error) {
-	return json.Marshal(s.String())
-}
-
 type HistoricalEventMasterpieceLost struct {
-	CreationEvent int                                  `json:"creationEvent" legend:"plus"` // creation_event
-	Histfig       int                                  `json:"histfig" legend:"plus"`       // histfig
-	Method        HistoricalEventMasterpieceLostMethod `json:"method" legend:"plus"`        // method
-	Site          int                                  `json:"site" legend:"plus"`          // site
+	CreationEvent int    `json:"creationEvent" legend:"plus"` // creation_event
+	Histfig       int    `json:"histfig" legend:"plus"`       // histfig
+	Method        string `json:"method" legend:"plus"`        // method
+	Site          int    `json:"site" legend:"plus"`          // site
 }
 
 func NewHistoricalEventMasterpieceLost() *HistoricalEventMasterpieceLost {
@@ -12266,9 +13525,12 @@ func NewHistoricalEventMasterpieceLost() *HistoricalEventMasterpieceLost {
 		Site:          -1,
 	}
 }
-func (x *HistoricalEventMasterpieceLost) Type() string                { return "masterpiece lost" }
-func (x *HistoricalEventMasterpieceLost) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventMasterpieceLost) RelatedToHf(id int) bool     { return x.Histfig == id }
+func (x *HistoricalEventMasterpieceLost) Type() string                  { return "masterpiece lost" }
+func (x *HistoricalEventMasterpieceLost) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventMasterpieceLost) RelatedToHf(id int) bool       { return x.Histfig == id }
+func (x *HistoricalEventMasterpieceLost) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventMasterpieceLost) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventMasterpieceLost) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventMasterpieceLost) CheckFields() {
 }
@@ -12281,9 +13543,7 @@ func (x *HistoricalEventMasterpieceLost) MarshalJSON() ([]byte, error) {
 	if x.Histfig != -1 {
 		d["histfig"] = x.Histfig
 	}
-	if x.Method != 0 {
-		d["method"] = x.Method
-	}
+	d["method"] = x.Method
 	if x.Site != -1 {
 		d["site"] = x.Site
 	}
@@ -12292,22 +13552,16 @@ func (x *HistoricalEventMasterpieceLost) MarshalJSON() ([]byte, error) {
 
 type HistoricalEventMerchant struct {
 	DepotEntityId  int  `json:"depotEntityId" legend:"base"`  // depot_entity_id
-	Destination    int  `json:"destination" legend:"plus"`    // destination
 	Hardship       bool `json:"hardship" legend:"base"`       // hardship
 	LostValue      bool `json:"lostValue" legend:"base"`      // lost_value
-	Site           int  `json:"site" legend:"plus"`           // site
 	SiteId         int  `json:"siteId" legend:"base"`         // site_id
-	Source         int  `json:"source" legend:"plus"`         // source
 	TraderEntityId int  `json:"traderEntityId" legend:"base"` // trader_entity_id
 }
 
 func NewHistoricalEventMerchant() *HistoricalEventMerchant {
 	return &HistoricalEventMerchant{
 		DepotEntityId:  -1,
-		Destination:    -1,
-		Site:           -1,
 		SiteId:         -1,
-		Source:         -1,
 		TraderEntityId: -1,
 	}
 }
@@ -12315,36 +13569,12 @@ func (x *HistoricalEventMerchant) Type() string { return "merchant" }
 func (x *HistoricalEventMerchant) RelatedToEntity(id int) bool {
 	return x.DepotEntityId == id || x.TraderEntityId == id
 }
-func (x *HistoricalEventMerchant) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventMerchant) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventMerchant) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventMerchant) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventMerchant) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventMerchant) CheckFields() {
-	if x.Destination != x.DepotEntityId && x.Destination != 0 && x.DepotEntityId != 0 {
-		sameFields["HistoricalEventMerchant"]["Destination"]["DepotEntityId"] = false
-	}
-	if x.Destination != x.SiteId && x.Destination != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMerchant"]["Destination"]["SiteId"] = false
-	}
-	if x.Destination != x.TraderEntityId && x.Destination != 0 && x.TraderEntityId != 0 {
-		sameFields["HistoricalEventMerchant"]["Destination"]["TraderEntityId"] = false
-	}
-	if x.Site != x.DepotEntityId && x.Site != 0 && x.DepotEntityId != 0 {
-		sameFields["HistoricalEventMerchant"]["Site"]["DepotEntityId"] = false
-	}
-	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMerchant"]["Site"]["SiteId"] = false
-	}
-	if x.Site != x.TraderEntityId && x.Site != 0 && x.TraderEntityId != 0 {
-		sameFields["HistoricalEventMerchant"]["Site"]["TraderEntityId"] = false
-	}
-	if x.Source != x.DepotEntityId && x.Source != 0 && x.DepotEntityId != 0 {
-		sameFields["HistoricalEventMerchant"]["Source"]["DepotEntityId"] = false
-	}
-	if x.Source != x.SiteId && x.Source != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventMerchant"]["Source"]["SiteId"] = false
-	}
-	if x.Source != x.TraderEntityId && x.Source != 0 && x.TraderEntityId != 0 {
-		sameFields["HistoricalEventMerchant"]["Source"]["TraderEntityId"] = false
-	}
 }
 
 func (x *HistoricalEventMerchant) MarshalJSON() ([]byte, error) {
@@ -12352,19 +13582,10 @@ func (x *HistoricalEventMerchant) MarshalJSON() ([]byte, error) {
 	if x.DepotEntityId != -1 {
 		d["depotEntityId"] = x.DepotEntityId
 	}
-	if x.Destination != -1 {
-		d["destination"] = x.Destination
-	}
 	d["hardship"] = x.Hardship
 	d["lostValue"] = x.LostValue
-	if x.Site != -1 {
-		d["site"] = x.Site
-	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
-	}
-	if x.Source != -1 {
-		d["source"] = x.Source
 	}
 	if x.TraderEntityId != -1 {
 		d["traderEntityId"] = x.TraderEntityId
@@ -12428,9 +13649,12 @@ func NewHistoricalEventModifiedBuilding() *HistoricalEventModifiedBuilding {
 		StructureId:  -1,
 	}
 }
-func (x *HistoricalEventModifiedBuilding) Type() string                { return "modified building" }
-func (x *HistoricalEventModifiedBuilding) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventModifiedBuilding) RelatedToHf(id int) bool     { return x.ModifierHfid == id }
+func (x *HistoricalEventModifiedBuilding) Type() string                  { return "modified building" }
+func (x *HistoricalEventModifiedBuilding) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventModifiedBuilding) RelatedToHf(id int) bool       { return x.ModifierHfid == id }
+func (x *HistoricalEventModifiedBuilding) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventModifiedBuilding) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventModifiedBuilding) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventModifiedBuilding) CheckFields() {
 }
@@ -12540,9 +13764,12 @@ func NewHistoricalEventMusicalFormCreated() *HistoricalEventMusicalFormCreated {
 		SiteId:         -1,
 	}
 }
-func (x *HistoricalEventMusicalFormCreated) Type() string                { return "musical form created" }
-func (x *HistoricalEventMusicalFormCreated) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventMusicalFormCreated) RelatedToHf(id int) bool     { return x.HistFigureId == id }
+func (x *HistoricalEventMusicalFormCreated) Type() string                  { return "musical form created" }
+func (x *HistoricalEventMusicalFormCreated) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventMusicalFormCreated) RelatedToHf(id int) bool       { return x.HistFigureId == id }
+func (x *HistoricalEventMusicalFormCreated) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventMusicalFormCreated) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventMusicalFormCreated) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventMusicalFormCreated) CheckFields() {
 }
@@ -12596,7 +13823,10 @@ func (x *HistoricalEventNewSiteLeader) Type() string { return "new site leader" 
 func (x *HistoricalEventNewSiteLeader) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.NewSiteCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventNewSiteLeader) RelatedToHf(id int) bool { return x.NewLeaderHfid == id }
+func (x *HistoricalEventNewSiteLeader) RelatedToHf(id int) bool       { return x.NewLeaderHfid == id }
+func (x *HistoricalEventNewSiteLeader) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventNewSiteLeader) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventNewSiteLeader) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventNewSiteLeader) CheckFields() {
 }
@@ -12665,15 +13895,18 @@ func NewHistoricalEventPeaceAccepted() *HistoricalEventPeaceAccepted {
 		Source:      -1,
 	}
 }
-func (x *HistoricalEventPeaceAccepted) Type() string                { return "peace accepted" }
-func (x *HistoricalEventPeaceAccepted) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventPeaceAccepted) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventPeaceAccepted) Type() string                  { return "peace accepted" }
+func (x *HistoricalEventPeaceAccepted) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventPeaceAccepted) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventPeaceAccepted) CheckFields() {
-	if x.Destination != x.SiteId && x.Destination != 0 && x.SiteId != 0 {
+	if x.Destination != x.SiteId {
 		sameFields["HistoricalEventPeaceAccepted"]["Destination"]["SiteId"] = false
 	}
-	if x.Source != x.SiteId && x.Source != 0 && x.SiteId != 0 {
+	if x.Source != x.SiteId {
 		sameFields["HistoricalEventPeaceAccepted"]["Source"]["SiteId"] = false
 	}
 }
@@ -12736,15 +13969,18 @@ func NewHistoricalEventPeaceRejected() *HistoricalEventPeaceRejected {
 		Source:      -1,
 	}
 }
-func (x *HistoricalEventPeaceRejected) Type() string                { return "peace rejected" }
-func (x *HistoricalEventPeaceRejected) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventPeaceRejected) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventPeaceRejected) Type() string                  { return "peace rejected" }
+func (x *HistoricalEventPeaceRejected) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventPeaceRejected) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventPeaceRejected) CheckFields() {
-	if x.Destination != x.SiteId && x.Destination != 0 && x.SiteId != 0 {
+	if x.Destination != x.SiteId {
 		sameFields["HistoricalEventPeaceRejected"]["Destination"]["SiteId"] = false
 	}
-	if x.Source != x.SiteId && x.Source != 0 && x.SiteId != 0 {
+	if x.Source != x.SiteId {
 		sameFields["HistoricalEventPeaceRejected"]["Source"]["SiteId"] = false
 	}
 }
@@ -12785,9 +14021,12 @@ func NewHistoricalEventPerformance() *HistoricalEventPerformance {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventPerformance) Type() string                { return "performance" }
-func (x *HistoricalEventPerformance) RelatedToEntity(id int) bool { return x.CivId == id }
-func (x *HistoricalEventPerformance) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventPerformance) Type() string                  { return "performance" }
+func (x *HistoricalEventPerformance) RelatedToEntity(id int) bool   { return x.CivId == id }
+func (x *HistoricalEventPerformance) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventPerformance) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventPerformance) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventPerformance) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventPerformance) CheckFields() {
 }
@@ -12839,7 +14078,10 @@ func (x *HistoricalEventPlunderedSite) Type() string { return "plundered site" }
 func (x *HistoricalEventPlunderedSite) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventPlunderedSite) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventPlunderedSite) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventPlunderedSite) CheckFields() {
 }
@@ -12903,6 +14145,7 @@ type HistoricalEventPoeticFormCreated struct {
 	FormId       int                                          `json:"formId" legend:"base"`       // form_id
 	HistFigureId int                                          `json:"histFigureId" legend:"base"` // hist_figure_id
 	SiteId       int                                          `json:"siteId" legend:"base"`       // site_id
+	SubregionId  int                                          `json:"subregionId" legend:"base"`  // subregion_id
 }
 
 func NewHistoricalEventPoeticFormCreated() *HistoricalEventPoeticFormCreated {
@@ -12910,11 +14153,15 @@ func NewHistoricalEventPoeticFormCreated() *HistoricalEventPoeticFormCreated {
 		FormId:       -1,
 		HistFigureId: -1,
 		SiteId:       -1,
+		SubregionId:  -1,
 	}
 }
-func (x *HistoricalEventPoeticFormCreated) Type() string                { return "poetic form created" }
-func (x *HistoricalEventPoeticFormCreated) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventPoeticFormCreated) RelatedToHf(id int) bool     { return x.HistFigureId == id }
+func (x *HistoricalEventPoeticFormCreated) Type() string                  { return "poetic form created" }
+func (x *HistoricalEventPoeticFormCreated) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventPoeticFormCreated) RelatedToHf(id int) bool       { return x.HistFigureId == id }
+func (x *HistoricalEventPoeticFormCreated) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventPoeticFormCreated) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventPoeticFormCreated) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventPoeticFormCreated) CheckFields() {
 }
@@ -12932,6 +14179,9 @@ func (x *HistoricalEventPoeticFormCreated) MarshalJSON() ([]byte, error) {
 	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
 	}
 	return json.Marshal(d)
 }
@@ -12955,9 +14205,12 @@ func NewHistoricalEventProcession() *HistoricalEventProcession {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventProcession) Type() string                { return "procession" }
-func (x *HistoricalEventProcession) RelatedToEntity(id int) bool { return x.CivId == id }
-func (x *HistoricalEventProcession) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventProcession) Type() string                  { return "procession" }
+func (x *HistoricalEventProcession) RelatedToEntity(id int) bool   { return x.CivId == id }
+func (x *HistoricalEventProcession) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventProcession) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventProcession) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventProcession) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventProcession) CheckFields() {
 }
@@ -12998,9 +14251,12 @@ func NewHistoricalEventRazedStructure() *HistoricalEventRazedStructure {
 		StructureId: -1,
 	}
 }
-func (x *HistoricalEventRazedStructure) Type() string                { return "razed structure" }
-func (x *HistoricalEventRazedStructure) RelatedToEntity(id int) bool { return x.CivId == id }
-func (x *HistoricalEventRazedStructure) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventRazedStructure) Type() string                  { return "razed structure" }
+func (x *HistoricalEventRazedStructure) RelatedToEntity(id int) bool   { return x.CivId == id }
+func (x *HistoricalEventRazedStructure) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventRazedStructure) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventRazedStructure) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventRazedStructure) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventRazedStructure) CheckFields() {
 }
@@ -13037,7 +14293,10 @@ func (x *HistoricalEventReclaimSite) Type() string { return "reclaim site" }
 func (x *HistoricalEventReclaimSite) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventReclaimSite) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventReclaimSite) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventReclaimSite) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventReclaimSite) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventReclaimSite) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventReclaimSite) CheckFields() {
 }
@@ -13082,7 +14341,12 @@ func (x *HistoricalEventRegionpopIncorporatedIntoEntity) Type() string {
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToEntity(id int) bool {
 	return x.JoinEntityId == id
 }
-func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToSite(id int) bool {
+	return x.SiteId == id
+}
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) CheckFields() {
 }
@@ -13232,6 +14496,9 @@ func (x *HistoricalEventRelationship) RelatedToEntity(id int) bool { return fals
 func (x *HistoricalEventRelationship) RelatedToHf(id int) bool {
 	return x.SourceHf == id || x.TargetHf == id
 }
+func (x *HistoricalEventRelationship) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventRelationship) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventRelationship) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventRelationship) CheckFields() {
 }
@@ -13271,8 +14538,11 @@ func NewHistoricalEventRelationshipSupplement() *HistoricalEventRelationshipSupp
 		Unk1:         -1,
 	}
 }
-func (x *HistoricalEventRelationshipSupplement) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventRelationshipSupplement) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventRelationshipSupplement) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventRelationshipSupplement) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventRelationshipSupplement) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventRelationshipSupplement) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventRelationshipSupplement) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventRelationshipSupplement) CheckFields() {
 }
@@ -13393,9 +14663,12 @@ func NewHistoricalEventRemoveHfEntityLink() *HistoricalEventRemoveHfEntityLink {
 		PositionId: -1,
 	}
 }
-func (x *HistoricalEventRemoveHfEntityLink) Type() string                { return "remove hf entity link" }
-func (x *HistoricalEventRemoveHfEntityLink) RelatedToEntity(id int) bool { return x.CivId == id }
-func (x *HistoricalEventRemoveHfEntityLink) RelatedToHf(id int) bool     { return x.Hfid == id }
+func (x *HistoricalEventRemoveHfEntityLink) Type() string                  { return "remove hf entity link" }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToEntity(id int) bool   { return x.CivId == id }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventRemoveHfEntityLink) CheckFields() {
 }
@@ -13434,6 +14707,9 @@ func (x *HistoricalEventRemoveHfHfLink) RelatedToEntity(id int) bool { return fa
 func (x *HistoricalEventRemoveHfHfLink) RelatedToHf(id int) bool {
 	return x.Hfid == id || x.HfidTarget == id
 }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventRemoveHfHfLink) CheckFields() {
 }
@@ -13502,18 +14778,21 @@ func NewHistoricalEventRemoveHfSiteLink() *HistoricalEventRemoveHfSiteLink {
 		Structure: -1,
 	}
 }
-func (x *HistoricalEventRemoveHfSiteLink) Type() string                { return "remove hf site link" }
-func (x *HistoricalEventRemoveHfSiteLink) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventRemoveHfSiteLink) RelatedToHf(id int) bool     { return x.Histfig == id }
+func (x *HistoricalEventRemoveHfSiteLink) Type() string                  { return "remove hf site link" }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToHf(id int) bool       { return x.Histfig == id }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventRemoveHfSiteLink) CheckFields() {
-	if x.Civ != x.SiteId && x.Civ != 0 && x.SiteId != 0 {
+	if x.Civ != x.SiteId {
 		sameFields["HistoricalEventRemoveHfSiteLink"]["Civ"]["SiteId"] = false
 	}
-	if x.Histfig != x.SiteId && x.Histfig != 0 && x.SiteId != 0 {
+	if x.Histfig != x.SiteId {
 		sameFields["HistoricalEventRemoveHfSiteLink"]["Histfig"]["SiteId"] = false
 	}
-	if x.Structure != x.SiteId && x.Structure != 0 && x.SiteId != 0 {
+	if x.Structure != x.SiteId {
 		sameFields["HistoricalEventRemoveHfSiteLink"]["Structure"]["SiteId"] = false
 	}
 }
@@ -13539,141 +14818,44 @@ func (x *HistoricalEventRemoveHfSiteLink) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventReplacedStructure struct {
-	Civ          int `json:"civ" legend:"plus"`          // civ
-	CivId        int `json:"civId" legend:"base"`        // civ_id
-	NewAbId      int `json:"newAbId" legend:"base"`      // new_ab_id
-	NewStructure int `json:"newStructure" legend:"plus"` // new_structure
-	OldAbId      int `json:"oldAbId" legend:"base"`      // old_ab_id
-	OldStructure int `json:"oldStructure" legend:"plus"` // old_structure
-	Site         int `json:"site" legend:"plus"`         // site
-	SiteCiv      int `json:"siteCiv" legend:"plus"`      // site_civ
-	SiteCivId    int `json:"siteCivId" legend:"base"`    // site_civ_id
-	SiteId       int `json:"siteId" legend:"base"`       // site_id
+	CivId     int `json:"civId" legend:"base"`     // civ_id
+	NewAbId   int `json:"newAbId" legend:"base"`   // new_ab_id
+	OldAbId   int `json:"oldAbId" legend:"base"`   // old_ab_id
+	SiteCivId int `json:"siteCivId" legend:"base"` // site_civ_id
+	SiteId    int `json:"siteId" legend:"base"`    // site_id
 }
 
 func NewHistoricalEventReplacedStructure() *HistoricalEventReplacedStructure {
 	return &HistoricalEventReplacedStructure{
-		Civ:          -1,
-		CivId:        -1,
-		NewAbId:      -1,
-		NewStructure: -1,
-		OldAbId:      -1,
-		OldStructure: -1,
-		Site:         -1,
-		SiteCiv:      -1,
-		SiteCivId:    -1,
-		SiteId:       -1,
+		CivId:     -1,
+		NewAbId:   -1,
+		OldAbId:   -1,
+		SiteCivId: -1,
+		SiteId:    -1,
 	}
 }
 func (x *HistoricalEventReplacedStructure) Type() string { return "replaced structure" }
 func (x *HistoricalEventReplacedStructure) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventReplacedStructure) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventReplacedStructure) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventReplacedStructure) CheckFields() {
-	if x.Civ != x.CivId && x.Civ != 0 && x.CivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Civ"]["CivId"] = false
-	}
-	if x.Civ != x.NewAbId && x.Civ != 0 && x.NewAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Civ"]["NewAbId"] = false
-	}
-	if x.Civ != x.OldAbId && x.Civ != 0 && x.OldAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Civ"]["OldAbId"] = false
-	}
-	if x.Civ != x.SiteCivId && x.Civ != 0 && x.SiteCivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Civ"]["SiteCivId"] = false
-	}
-	if x.Civ != x.SiteId && x.Civ != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Civ"]["SiteId"] = false
-	}
-	if x.NewStructure != x.CivId && x.NewStructure != 0 && x.CivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["NewStructure"]["CivId"] = false
-	}
-	if x.NewStructure != x.NewAbId && x.NewStructure != 0 && x.NewAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["NewStructure"]["NewAbId"] = false
-	}
-	if x.NewStructure != x.OldAbId && x.NewStructure != 0 && x.OldAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["NewStructure"]["OldAbId"] = false
-	}
-	if x.NewStructure != x.SiteCivId && x.NewStructure != 0 && x.SiteCivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["NewStructure"]["SiteCivId"] = false
-	}
-	if x.NewStructure != x.SiteId && x.NewStructure != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["NewStructure"]["SiteId"] = false
-	}
-	if x.OldStructure != x.CivId && x.OldStructure != 0 && x.CivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["OldStructure"]["CivId"] = false
-	}
-	if x.OldStructure != x.NewAbId && x.OldStructure != 0 && x.NewAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["OldStructure"]["NewAbId"] = false
-	}
-	if x.OldStructure != x.OldAbId && x.OldStructure != 0 && x.OldAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["OldStructure"]["OldAbId"] = false
-	}
-	if x.OldStructure != x.SiteCivId && x.OldStructure != 0 && x.SiteCivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["OldStructure"]["SiteCivId"] = false
-	}
-	if x.OldStructure != x.SiteId && x.OldStructure != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["OldStructure"]["SiteId"] = false
-	}
-	if x.Site != x.CivId && x.Site != 0 && x.CivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Site"]["CivId"] = false
-	}
-	if x.Site != x.NewAbId && x.Site != 0 && x.NewAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Site"]["NewAbId"] = false
-	}
-	if x.Site != x.OldAbId && x.Site != 0 && x.OldAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Site"]["OldAbId"] = false
-	}
-	if x.Site != x.SiteCivId && x.Site != 0 && x.SiteCivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Site"]["SiteCivId"] = false
-	}
-	if x.Site != x.SiteId && x.Site != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["Site"]["SiteId"] = false
-	}
-	if x.SiteCiv != x.CivId && x.SiteCiv != 0 && x.CivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["SiteCiv"]["CivId"] = false
-	}
-	if x.SiteCiv != x.NewAbId && x.SiteCiv != 0 && x.NewAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["SiteCiv"]["NewAbId"] = false
-	}
-	if x.SiteCiv != x.OldAbId && x.SiteCiv != 0 && x.OldAbId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["SiteCiv"]["OldAbId"] = false
-	}
-	if x.SiteCiv != x.SiteCivId && x.SiteCiv != 0 && x.SiteCivId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["SiteCiv"]["SiteCivId"] = false
-	}
-	if x.SiteCiv != x.SiteId && x.SiteCiv != 0 && x.SiteId != 0 {
-		sameFields["HistoricalEventReplacedStructure"]["SiteCiv"]["SiteId"] = false
-	}
 }
 
 func (x *HistoricalEventReplacedStructure) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
-	if x.Civ != -1 {
-		d["civ"] = x.Civ
-	}
 	if x.CivId != -1 {
 		d["civId"] = x.CivId
 	}
 	if x.NewAbId != -1 {
 		d["newAbId"] = x.NewAbId
 	}
-	if x.NewStructure != -1 {
-		d["newStructure"] = x.NewStructure
-	}
 	if x.OldAbId != -1 {
 		d["oldAbId"] = x.OldAbId
-	}
-	if x.OldStructure != -1 {
-		d["oldStructure"] = x.OldStructure
-	}
-	if x.Site != -1 {
-		d["site"] = x.Site
-	}
-	if x.SiteCiv != -1 {
-		d["siteCiv"] = x.SiteCiv
 	}
 	if x.SiteCivId != -1 {
 		d["siteCivId"] = x.SiteCivId
@@ -13702,7 +14884,10 @@ func (x *HistoricalEventSiteDied) Type() string { return "site died" }
 func (x *HistoricalEventSiteDied) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSiteDied) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventSiteDied) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventSiteDied) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventSiteDied) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventSiteDied) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventSiteDied) CheckFields() {
 }
@@ -13794,7 +14979,12 @@ func (x *HistoricalEventSiteDispute) Type() string { return "site dispute" }
 func (x *HistoricalEventSiteDispute) RelatedToEntity(id int) bool {
 	return x.EntityId1 == id || x.EntityId2 == id
 }
-func (x *HistoricalEventSiteDispute) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventSiteDispute) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventSiteDispute) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventSiteDispute) RelatedToSite(id int) bool {
+	return x.SiteId1 == id || x.SiteId2 == id
+}
+func (x *HistoricalEventSiteDispute) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventSiteDispute) CheckFields() {
 }
@@ -13837,7 +15027,10 @@ func (x *HistoricalEventSiteRetired) Type() string { return "site retired" }
 func (x *HistoricalEventSiteRetired) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSiteRetired) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventSiteRetired) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventSiteRetired) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventSiteRetired) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventSiteRetired) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventSiteRetired) CheckFields() {
 }
@@ -13876,7 +15069,10 @@ func (x *HistoricalEventSiteSurrendered) Type() string { return "site surrendere
 func (x *HistoricalEventSiteSurrendered) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSiteSurrendered) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventSiteSurrendered) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventSiteSurrendered) CheckFields() {
 }
@@ -13919,7 +15115,10 @@ func (x *HistoricalEventSiteTakenOver) Type() string { return "site taken over" 
 func (x *HistoricalEventSiteTakenOver) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.NewSiteCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSiteTakenOver) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventSiteTakenOver) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventSiteTakenOver) CheckFields() {
 }
@@ -13949,6 +15148,7 @@ type HistoricalEventSiteTributeForcedSeason int
 const (
 	HistoricalEventSiteTributeForcedSeason_Unknown HistoricalEventSiteTributeForcedSeason = iota
 	HistoricalEventSiteTributeForcedSeason_Autumn
+	HistoricalEventSiteTributeForcedSeason_Spring
 	HistoricalEventSiteTributeForcedSeason_Summer
 )
 
@@ -13956,6 +15156,8 @@ func parseHistoricalEventSiteTributeForcedSeason(s string) HistoricalEventSiteTr
 	switch s {
 	case "Autumn":
 		return HistoricalEventSiteTributeForcedSeason_Autumn
+	case "Spring":
+		return HistoricalEventSiteTributeForcedSeason_Spring
 	case "Summer":
 		return HistoricalEventSiteTributeForcedSeason_Summer
 	}
@@ -13966,6 +15168,8 @@ func (s HistoricalEventSiteTributeForcedSeason) String() string {
 	switch s {
 	case HistoricalEventSiteTributeForcedSeason_Autumn:
 		return "autumn"
+	case HistoricalEventSiteTributeForcedSeason_Spring:
+		return "spring"
 	case HistoricalEventSiteTributeForcedSeason_Summer:
 		return "summer"
 	}
@@ -13996,7 +15200,10 @@ func (x *HistoricalEventSiteTributeForced) Type() string { return "site tribute 
 func (x *HistoricalEventSiteTributeForced) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSiteTributeForced) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventSiteTributeForced) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventSiteTributeForced) CheckFields() {
 }
@@ -14040,7 +15247,10 @@ func (x *HistoricalEventSneakIntoSite) Type() string { return "sneak into site" 
 func (x *HistoricalEventSneakIntoSite) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSneakIntoSite) RelatedToHf(id int) bool { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventSneakIntoSite) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventSneakIntoSite) CheckFields() {
 }
@@ -14081,7 +15291,10 @@ func (x *HistoricalEventSpottedLeavingSite) Type() string { return "spotted leav
 func (x *HistoricalEventSpottedLeavingSite) RelatedToEntity(id int) bool {
 	return x.LeaverCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSpottedLeavingSite) RelatedToHf(id int) bool { return x.SpotterHfid == id }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToHf(id int) bool       { return x.SpotterHfid == id }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventSpottedLeavingSite) CheckFields() {
 }
@@ -14147,6 +15360,9 @@ func (x *HistoricalEventSquadVsSquad) RelatedToEntity(id int) bool { return fals
 func (x *HistoricalEventSquadVsSquad) RelatedToHf(id int) bool {
 	return containsInt(x.AHfid, id) || containsInt(x.DHfid, id) || x.ALeaderHfid == id || x.DLeaderHfid == id
 }
+func (x *HistoricalEventSquadVsSquad) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventSquadVsSquad) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventSquadVsSquad) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventSquadVsSquad) CheckFields() {
 }
@@ -14285,6 +15501,9 @@ func (x *HistoricalEventTacticalSituation) RelatedToEntity(id int) bool { return
 func (x *HistoricalEventTacticalSituation) RelatedToHf(id int) bool {
 	return x.ATacticianHfid == id || x.DTacticianHfid == id
 }
+func (x *HistoricalEventTacticalSituation) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventTacticalSituation) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventTacticalSituation) RelatedToRegion(id int) bool   { return x.SubregionId == id }
 
 func (x *HistoricalEventTacticalSituation) CheckFields() {
 }
@@ -14345,9 +15564,14 @@ func NewHistoricalEventTrade() *HistoricalEventTrade {
 		TraderHfid:       -1,
 	}
 }
-func (x *HistoricalEventTrade) Type() string                { return "trade" }
-func (x *HistoricalEventTrade) RelatedToEntity(id int) bool { return x.TraderEntityId == id }
-func (x *HistoricalEventTrade) RelatedToHf(id int) bool     { return x.TraderHfid == id }
+func (x *HistoricalEventTrade) Type() string                  { return "trade" }
+func (x *HistoricalEventTrade) RelatedToEntity(id int) bool   { return x.TraderEntityId == id }
+func (x *HistoricalEventTrade) RelatedToHf(id int) bool       { return x.TraderHfid == id }
+func (x *HistoricalEventTrade) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventTrade) RelatedToSite(id int) bool {
+	return x.DestSiteId == id || x.SourceSiteId == id
+}
+func (x *HistoricalEventTrade) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventTrade) CheckFields() {
 }
@@ -14471,9 +15695,14 @@ func NewHistoricalEventWrittenContentComposed() *HistoricalEventWrittenContentCo
 		WcId:           -1,
 	}
 }
-func (x *HistoricalEventWrittenContentComposed) Type() string                { return "written content composed" }
-func (x *HistoricalEventWrittenContentComposed) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventWrittenContentComposed) RelatedToHf(id int) bool     { return x.HistFigureId == id }
+func (x *HistoricalEventWrittenContentComposed) Type() string                  { return "written content composed" }
+func (x *HistoricalEventWrittenContentComposed) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventWrittenContentComposed) RelatedToHf(id int) bool       { return x.HistFigureId == id }
+func (x *HistoricalEventWrittenContentComposed) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventWrittenContentComposed) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventWrittenContentComposed) RelatedToRegion(id int) bool {
+	return x.SubregionId == id
+}
 
 func (x *HistoricalEventWrittenContentComposed) CheckFields() {
 }
@@ -14620,7 +15849,7 @@ type HistoricalFigure struct {
 	EntityLink                      []*HistoricalFigureEntityLink      `json:"entityLink" legend:"base"`                      // entity_link
 	EntityPositionLink              []*EntityPositionLink              `json:"entityPositionLink" legend:"base"`              // entity_position_link
 	EntityReputation                []*EntityReputation                `json:"entityReputation" legend:"base"`                // entity_reputation
-	EntitySquadLink                 *EntitySquadLink                   `json:"entitySquadLink" legend:"base"`                 // entity_squad_link
+	EntitySquadLink                 []*EntitySquadLink                 `json:"entitySquadLink" legend:"base"`                 // entity_squad_link
 	Force                           bool                               `json:"force" legend:"base"`                           // force
 	Ghost                           bool                               `json:"ghost" legend:"base"`                           // ghost
 	Goal                            []HistoricalFigureGoal             `json:"goal" legend:"base"`                            // goal
@@ -14665,31 +15894,34 @@ func (x *HistoricalFigure) Name() string { return x.Name_ }
 func (x *HistoricalFigure) RelatedToEntity(id int) bool {
 	return containsInt(x.UsedIdentityId, id) || x.CurrentIdentityId == id
 }
-func (x *HistoricalFigure) RelatedToHf(id int) bool { return false }
+func (x *HistoricalFigure) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalFigure) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalFigure) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalFigure) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalFigure) CheckFields() {
-	if x.Sex != x.Appeared && x.Sex != 0 && x.Appeared != 0 {
+	if x.Sex != x.Appeared {
 		sameFields["HistoricalFigure"]["Sex"]["Appeared"] = false
 	}
-	if x.Sex != x.BirthSeconds72 && x.Sex != 0 && x.BirthSeconds72 != 0 {
+	if x.Sex != x.BirthSeconds72 {
 		sameFields["HistoricalFigure"]["Sex"]["BirthSeconds72"] = false
 	}
-	if x.Sex != x.BirthYear && x.Sex != 0 && x.BirthYear != 0 {
+	if x.Sex != x.BirthYear {
 		sameFields["HistoricalFigure"]["Sex"]["BirthYear"] = false
 	}
-	if x.Sex != x.BreedId && x.Sex != 0 && x.BreedId != 0 {
+	if x.Sex != x.BreedId {
 		sameFields["HistoricalFigure"]["Sex"]["BreedId"] = false
 	}
-	if x.Sex != x.CurrentIdentityId && x.Sex != 0 && x.CurrentIdentityId != 0 {
+	if x.Sex != x.CurrentIdentityId {
 		sameFields["HistoricalFigure"]["Sex"]["CurrentIdentityId"] = false
 	}
-	if x.Sex != x.DeathSeconds72 && x.Sex != 0 && x.DeathSeconds72 != 0 {
+	if x.Sex != x.DeathSeconds72 {
 		sameFields["HistoricalFigure"]["Sex"]["DeathSeconds72"] = false
 	}
-	if x.Sex != x.DeathYear && x.Sex != 0 && x.DeathYear != 0 {
+	if x.Sex != x.DeathYear {
 		sameFields["HistoricalFigure"]["Sex"]["DeathYear"] = false
 	}
-	if x.Sex != x.EntPopId && x.Sex != 0 && x.EntPopId != 0 {
+	if x.Sex != x.EntPopId {
 		sameFields["HistoricalFigure"]["Sex"]["EntPopId"] = false
 	}
 }
@@ -14837,8 +16069,11 @@ func NewHistoricalFigureEntityLink() *HistoricalFigureEntityLink {
 		LinkStrength: -1,
 	}
 }
-func (x *HistoricalFigureEntityLink) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *HistoricalFigureEntityLink) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalFigureEntityLink) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *HistoricalFigureEntityLink) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalFigureEntityLink) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalFigureEntityLink) RelatedToSite(id int) bool     { return false }
+func (x *HistoricalFigureEntityLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalFigureEntityLink) CheckFields() {
 }
@@ -14868,8 +16103,11 @@ func NewHistoricalFigureSiteProperty() *HistoricalFigureSiteProperty {
 		SiteId:     -1,
 	}
 }
-func (x *HistoricalFigureSiteProperty) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalFigureSiteProperty) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalFigureSiteProperty) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalFigureSiteProperty) RelatedToHf(id int) bool       { return false }
+func (x *HistoricalFigureSiteProperty) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalFigureSiteProperty) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalFigureSiteProperty) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalFigureSiteProperty) CheckFields() {
 }
@@ -14890,27 +16128,36 @@ type HonorRequiredSkill int
 const (
 	HonorRequiredSkill_Unknown HonorRequiredSkill = iota
 	HonorRequiredSkill_AXE
+	HonorRequiredSkill_BOW
 	HonorRequiredSkill_CROSSBOW
 	HonorRequiredSkill_HAMMER
 	HonorRequiredSkill_MACE
+	HonorRequiredSkill_PIKE
 	HonorRequiredSkill_SPEAR
 	HonorRequiredSkill_SWORD
+	HonorRequiredSkill_WHIP
 )
 
 func parseHonorRequiredSkill(s string) HonorRequiredSkill {
 	switch s {
 	case "AXE":
 		return HonorRequiredSkill_AXE
+	case "BOW":
+		return HonorRequiredSkill_BOW
 	case "CROSSBOW":
 		return HonorRequiredSkill_CROSSBOW
 	case "HAMMER":
 		return HonorRequiredSkill_HAMMER
 	case "MACE":
 		return HonorRequiredSkill_MACE
+	case "PIKE":
+		return HonorRequiredSkill_PIKE
 	case "SPEAR":
 		return HonorRequiredSkill_SPEAR
 	case "SWORD":
 		return HonorRequiredSkill_SWORD
+	case "WHIP":
+		return HonorRequiredSkill_WHIP
 	}
 	return HonorRequiredSkill_Unknown
 }
@@ -14919,16 +16166,22 @@ func (s HonorRequiredSkill) String() string {
 	switch s {
 	case HonorRequiredSkill_AXE:
 		return "axe"
+	case HonorRequiredSkill_BOW:
+		return "bow"
 	case HonorRequiredSkill_CROSSBOW:
 		return "crossbow"
 	case HonorRequiredSkill_HAMMER:
 		return "hammer"
 	case HonorRequiredSkill_MACE:
 		return "mace"
+	case HonorRequiredSkill_PIKE:
+		return "pike"
 	case HonorRequiredSkill_SPEAR:
 		return "spear"
 	case HonorRequiredSkill_SWORD:
 		return "sword"
+	case HonorRequiredSkill_WHIP:
+		return "whip"
 	}
 	return "unknown"
 }
@@ -14964,10 +16217,13 @@ func NewHonor() *Honor {
 		RequiredYears:        -1,
 	}
 }
-func (x *Honor) Id() int                     { return x.Id_ }
-func (x *Honor) Name() string                { return x.Name_ }
-func (x *Honor) RelatedToEntity(id int) bool { return false }
-func (x *Honor) RelatedToHf(id int) bool     { return false }
+func (x *Honor) Id() int                       { return x.Id_ }
+func (x *Honor) Name() string                  { return x.Name_ }
+func (x *Honor) RelatedToEntity(id int) bool   { return false }
+func (x *Honor) RelatedToHf(id int) bool       { return false }
+func (x *Honor) RelatedToArtifact(id int) bool { return false }
+func (x *Honor) RelatedToSite(id int) bool     { return false }
+func (x *Honor) RelatedToRegion(id int) bool   { return false }
 
 func (x *Honor) CheckFields() {
 }
@@ -15021,8 +16277,11 @@ func NewHonorEntity() *HonorEntity {
 		Kills:   -1,
 	}
 }
-func (x *HonorEntity) RelatedToEntity(id int) bool { return x.Entity == id }
-func (x *HonorEntity) RelatedToHf(id int) bool     { return false }
+func (x *HonorEntity) RelatedToEntity(id int) bool   { return x.Entity == id }
+func (x *HonorEntity) RelatedToHf(id int) bool       { return false }
+func (x *HonorEntity) RelatedToArtifact(id int) bool { return false }
+func (x *HonorEntity) RelatedToSite(id int) bool     { return false }
+func (x *HonorEntity) RelatedToRegion(id int) bool   { return false }
 
 func (x *HonorEntity) CheckFields() {
 }
@@ -15060,6 +16319,7 @@ const (
 	IdentityProfession_Prophet
 	IdentityProfession_Scholar
 	IdentityProfession_Snatcher
+	IdentityProfession_Standard
 )
 
 func parseIdentityProfession(s string) IdentityProfession {
@@ -15092,6 +16352,8 @@ func parseIdentityProfession(s string) IdentityProfession {
 		return IdentityProfession_Scholar
 	case "snatcher":
 		return IdentityProfession_Snatcher
+	case "standard":
+		return IdentityProfession_Standard
 	}
 	return IdentityProfession_Unknown
 }
@@ -15126,6 +16388,8 @@ func (s IdentityProfession) String() string {
 		return "scholar"
 	case IdentityProfession_Snatcher:
 		return "snatcher"
+	case IdentityProfession_Standard:
+		return "standard"
 	}
 	return "unknown"
 }
@@ -15157,10 +16421,13 @@ func NewIdentity() *Identity {
 		NemesisId:   -1,
 	}
 }
-func (x *Identity) Id() int                     { return x.Id_ }
-func (x *Identity) Name() string                { return x.Name_ }
-func (x *Identity) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *Identity) RelatedToHf(id int) bool     { return x.HistfigId == id }
+func (x *Identity) Id() int                       { return x.Id_ }
+func (x *Identity) Name() string                  { return x.Name_ }
+func (x *Identity) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *Identity) RelatedToHf(id int) bool       { return x.HistfigId == id }
+func (x *Identity) RelatedToArtifact(id int) bool { return false }
+func (x *Identity) RelatedToSite(id int) bool     { return false }
+func (x *Identity) RelatedToRegion(id int) bool   { return false }
 
 func (x *Identity) CheckFields() {
 }
@@ -15396,8 +16663,11 @@ func NewIntrigueActor() *IntrigueActor {
 		StrategyEppid: -1,
 	}
 }
-func (x *IntrigueActor) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *IntrigueActor) RelatedToHf(id int) bool     { return x.Hfid == id }
+func (x *IntrigueActor) RelatedToEntity(id int) bool   { return x.EntityId == id || x.StrategyEnid == id }
+func (x *IntrigueActor) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *IntrigueActor) RelatedToArtifact(id int) bool { return false }
+func (x *IntrigueActor) RelatedToSite(id int) bool     { return false }
+func (x *IntrigueActor) RelatedToRegion(id int) bool   { return false }
 
 func (x *IntrigueActor) CheckFields() {
 }
@@ -15442,6 +16712,7 @@ const (
 	IntriguePlotType_AttainRank
 	IntriguePlotType_BecomeImmortal
 	IntriguePlotType_CorruptActorsGovernment
+	IntriguePlotType_CorruptlyPunishActor
 	IntriguePlotType_Counterintelligence
 	IntriguePlotType_DirectWarToActor
 	IntriguePlotType_FrameActor
@@ -15466,6 +16737,8 @@ func parseIntriguePlotType(s string) IntriguePlotType {
 		return IntriguePlotType_BecomeImmortal
 	case "corrupt actor's government":
 		return IntriguePlotType_CorruptActorsGovernment
+	case "corruptly punish actor":
+		return IntriguePlotType_CorruptlyPunishActor
 	case "counterintelligence":
 		return IntriguePlotType_Counterintelligence
 	case "direct war to actor":
@@ -15502,6 +16775,8 @@ func (s IntriguePlotType) String() string {
 		return "become immortal"
 	case IntriguePlotType_CorruptActorsGovernment:
 		return "corrupt actors government"
+	case IntriguePlotType_CorruptlyPunishActor:
+		return "corruptly punish actor"
 	case IntriguePlotType_Counterintelligence:
 		return "counterintelligence"
 	case IntriguePlotType_DirectWarToActor:
@@ -15560,6 +16835,9 @@ func (x *IntriguePlot) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *IntriguePlot) RelatedToHf(id int) bool {
 	return x.DelegatedPlotHfid == id || x.ParentPlotHfid == id
 }
+func (x *IntriguePlot) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
+func (x *IntriguePlot) RelatedToSite(id int) bool     { return false }
+func (x *IntriguePlot) RelatedToRegion(id int) bool   { return false }
 
 func (x *IntriguePlot) CheckFields() {
 }
@@ -15612,8 +16890,11 @@ func NewItem() *Item {
 		WritingWrittenContentId: -1,
 	}
 }
-func (x *Item) RelatedToEntity(id int) bool { return false }
-func (x *Item) RelatedToHf(id int) bool     { return false }
+func (x *Item) RelatedToEntity(id int) bool   { return false }
+func (x *Item) RelatedToHf(id int) bool       { return false }
+func (x *Item) RelatedToArtifact(id int) bool { return false }
+func (x *Item) RelatedToSite(id int) bool     { return false }
+func (x *Item) RelatedToRegion(id int) bool   { return false }
 
 func (x *Item) CheckFields() {
 }
@@ -15645,10 +16926,13 @@ func NewLandmass() *Landmass {
 		Id_: -1,
 	}
 }
-func (x *Landmass) Id() int                     { return x.Id_ }
-func (x *Landmass) Name() string                { return x.Name_ }
-func (x *Landmass) RelatedToEntity(id int) bool { return false }
-func (x *Landmass) RelatedToHf(id int) bool     { return false }
+func (x *Landmass) Id() int                       { return x.Id_ }
+func (x *Landmass) Name() string                  { return x.Name_ }
+func (x *Landmass) RelatedToEntity(id int) bool   { return false }
+func (x *Landmass) RelatedToHf(id int) bool       { return false }
+func (x *Landmass) RelatedToArtifact(id int) bool { return false }
+func (x *Landmass) RelatedToSite(id int) bool     { return false }
+func (x *Landmass) RelatedToRegion(id int) bool   { return false }
 
 func (x *Landmass) CheckFields() {
 }
@@ -15678,10 +16962,13 @@ func NewMountainPeak() *MountainPeak {
 		Id_:    -1,
 	}
 }
-func (x *MountainPeak) Id() int                     { return x.Id_ }
-func (x *MountainPeak) Name() string                { return x.Name_ }
-func (x *MountainPeak) RelatedToEntity(id int) bool { return false }
-func (x *MountainPeak) RelatedToHf(id int) bool     { return false }
+func (x *MountainPeak) Id() int                       { return x.Id_ }
+func (x *MountainPeak) Name() string                  { return x.Name_ }
+func (x *MountainPeak) RelatedToEntity(id int) bool   { return false }
+func (x *MountainPeak) RelatedToHf(id int) bool       { return false }
+func (x *MountainPeak) RelatedToArtifact(id int) bool { return false }
+func (x *MountainPeak) RelatedToSite(id int) bool     { return false }
+func (x *MountainPeak) RelatedToRegion(id int) bool   { return false }
 
 func (x *MountainPeak) CheckFields() {
 }
@@ -15711,10 +16998,13 @@ func NewMusicalForm() *MusicalForm {
 		Id_: -1,
 	}
 }
-func (x *MusicalForm) Id() int                     { return x.Id_ }
-func (x *MusicalForm) Name() string                { return x.Name_ }
-func (x *MusicalForm) RelatedToEntity(id int) bool { return false }
-func (x *MusicalForm) RelatedToHf(id int) bool     { return false }
+func (x *MusicalForm) Id() int                       { return x.Id_ }
+func (x *MusicalForm) Name() string                  { return x.Name_ }
+func (x *MusicalForm) RelatedToEntity(id int) bool   { return false }
+func (x *MusicalForm) RelatedToHf(id int) bool       { return false }
+func (x *MusicalForm) RelatedToArtifact(id int) bool { return false }
+func (x *MusicalForm) RelatedToSite(id int) bool     { return false }
+func (x *MusicalForm) RelatedToRegion(id int) bool   { return false }
 
 func (x *MusicalForm) CheckFields() {
 }
@@ -15742,10 +17032,13 @@ func NewOccasion() *Occasion {
 		Id_:   -1,
 	}
 }
-func (x *Occasion) Id() int                     { return x.Id_ }
-func (x *Occasion) Name() string                { return x.Name_ }
-func (x *Occasion) RelatedToEntity(id int) bool { return false }
-func (x *Occasion) RelatedToHf(id int) bool     { return false }
+func (x *Occasion) Id() int                       { return x.Id_ }
+func (x *Occasion) Name() string                  { return x.Name_ }
+func (x *Occasion) RelatedToEntity(id int) bool   { return false }
+func (x *Occasion) RelatedToHf(id int) bool       { return false }
+func (x *Occasion) RelatedToArtifact(id int) bool { return false }
+func (x *Occasion) RelatedToSite(id int) bool     { return false }
+func (x *Occasion) RelatedToRegion(id int) bool   { return false }
 
 func (x *Occasion) CheckFields() {
 }
@@ -15813,8 +17106,11 @@ func NewPlotActor() *PlotActor {
 		AgreementId: -1,
 	}
 }
-func (x *PlotActor) RelatedToEntity(id int) bool { return false }
-func (x *PlotActor) RelatedToHf(id int) bool     { return false }
+func (x *PlotActor) RelatedToEntity(id int) bool   { return false }
+func (x *PlotActor) RelatedToHf(id int) bool       { return false }
+func (x *PlotActor) RelatedToArtifact(id int) bool { return false }
+func (x *PlotActor) RelatedToSite(id int) bool     { return false }
+func (x *PlotActor) RelatedToRegion(id int) bool   { return false }
 
 func (x *PlotActor) CheckFields() {
 }
@@ -15845,10 +17141,13 @@ func NewPoeticForm() *PoeticForm {
 		Id_: -1,
 	}
 }
-func (x *PoeticForm) Id() int                     { return x.Id_ }
-func (x *PoeticForm) Name() string                { return x.Name_ }
-func (x *PoeticForm) RelatedToEntity(id int) bool { return false }
-func (x *PoeticForm) RelatedToHf(id int) bool     { return false }
+func (x *PoeticForm) Id() int                       { return x.Id_ }
+func (x *PoeticForm) Name() string                  { return x.Name_ }
+func (x *PoeticForm) RelatedToEntity(id int) bool   { return false }
+func (x *PoeticForm) RelatedToHf(id int) bool       { return false }
+func (x *PoeticForm) RelatedToArtifact(id int) bool { return false }
+func (x *PoeticForm) RelatedToSite(id int) bool     { return false }
+func (x *PoeticForm) RelatedToRegion(id int) bool   { return false }
 
 func (x *PoeticForm) CheckFields() {
 }
@@ -15970,9 +17269,12 @@ func NewReference() *Reference {
 		Id_: -1,
 	}
 }
-func (x *Reference) Id() int                     { return x.Id_ }
-func (x *Reference) RelatedToEntity(id int) bool { return false }
-func (x *Reference) RelatedToHf(id int) bool     { return false }
+func (x *Reference) Id() int                       { return x.Id_ }
+func (x *Reference) RelatedToEntity(id int) bool   { return false }
+func (x *Reference) RelatedToHf(id int) bool       { return false }
+func (x *Reference) RelatedToArtifact(id int) bool { return false }
+func (x *Reference) RelatedToSite(id int) bool     { return false }
+func (x *Reference) RelatedToRegion(id int) bool   { return false }
 
 func (x *Reference) CheckFields() {
 }
@@ -16112,10 +17414,13 @@ func NewRegion() *Region {
 		Id_:     -1,
 	}
 }
-func (x *Region) Id() int                     { return x.Id_ }
-func (x *Region) Name() string                { return x.Name_ }
-func (x *Region) RelatedToEntity(id int) bool { return false }
-func (x *Region) RelatedToHf(id int) bool     { return false }
+func (x *Region) Id() int                       { return x.Id_ }
+func (x *Region) Name() string                  { return x.Name_ }
+func (x *Region) RelatedToEntity(id int) bool   { return false }
+func (x *Region) RelatedToHf(id int) bool       { return false }
+func (x *Region) RelatedToArtifact(id int) bool { return false }
+func (x *Region) RelatedToSite(id int) bool     { return false }
+func (x *Region) RelatedToRegion(id int) bool   { return false }
 
 func (x *Region) CheckFields() {
 }
@@ -16172,8 +17477,11 @@ func NewRelationshipProfileHfHistorical() *RelationshipProfileHfHistorical {
 		Trust:           -1,
 	}
 }
-func (x *RelationshipProfileHfHistorical) RelatedToEntity(id int) bool { return false }
-func (x *RelationshipProfileHfHistorical) RelatedToHf(id int) bool     { return x.HfId == id }
+func (x *RelationshipProfileHfHistorical) RelatedToEntity(id int) bool   { return false }
+func (x *RelationshipProfileHfHistorical) RelatedToHf(id int) bool       { return x.HfId == id }
+func (x *RelationshipProfileHfHistorical) RelatedToArtifact(id int) bool { return false }
+func (x *RelationshipProfileHfHistorical) RelatedToSite(id int) bool     { return false }
+func (x *RelationshipProfileHfHistorical) RelatedToRegion(id int) bool   { return false }
 
 func (x *RelationshipProfileHfHistorical) CheckFields() {
 }
@@ -16243,9 +17551,12 @@ func NewRelationshipProfileHfIdentity() *RelationshipProfileHfIdentity {
 		Trust:         -1,
 	}
 }
-func (x *RelationshipProfileHfIdentity) Id() int                     { return x.Id_ }
-func (x *RelationshipProfileHfIdentity) RelatedToEntity(id int) bool { return false }
-func (x *RelationshipProfileHfIdentity) RelatedToHf(id int) bool     { return false }
+func (x *RelationshipProfileHfIdentity) Id() int                       { return x.Id_ }
+func (x *RelationshipProfileHfIdentity) RelatedToEntity(id int) bool   { return false }
+func (x *RelationshipProfileHfIdentity) RelatedToHf(id int) bool       { return false }
+func (x *RelationshipProfileHfIdentity) RelatedToArtifact(id int) bool { return false }
+func (x *RelationshipProfileHfIdentity) RelatedToSite(id int) bool     { return false }
+func (x *RelationshipProfileHfIdentity) RelatedToRegion(id int) bool   { return false }
 
 func (x *RelationshipProfileHfIdentity) CheckFields() {
 }
@@ -16277,34 +17588,33 @@ func (x *RelationshipProfileHfIdentity) MarshalJSON() ([]byte, error) {
 }
 
 type RelationshipProfileHfVisual struct {
-	Fear                 int `json:"fear" legend:"base"`                 // fear
-	HfId                 int `json:"hfId" legend:"base"`                 // hf_id
-	KnownIdentityId      int `json:"knownIdentityId" legend:"base"`      // known_identity_id
-	LastMeetSeconds72    int `json:"lastMeetSeconds72" legend:"base"`    // last_meet_seconds72
-	LastMeetYear         int `json:"lastMeetYear" legend:"base"`         // last_meet_year
-	Love                 int `json:"love" legend:"base"`                 // love
-	Loyalty              int `json:"loyalty" legend:"base"`              // loyalty
-	MeetCount            int `json:"meetCount" legend:"base"`            // meet_count
-	RepBonded            int `json:"repBonded" legend:"base"`            // rep_bonded
-	RepComrade           int `json:"repComrade" legend:"base"`           // rep_comrade
-	RepFlatterer         int `json:"repFlatterer" legend:"base"`         // rep_flatterer
-	RepFriendly          int `json:"repFriendly" legend:"base"`          // rep_friendly
-	RepHero              int `json:"repHero" legend:"base"`              // rep_hero
-	RepHunter            int `json:"repHunter" legend:"base"`            // rep_hunter
-	RepInformationSource int `json:"repInformationSource" legend:"base"` // rep_information_source
-	RepKiller            int `json:"repKiller" legend:"base"`            // rep_killer
-	RepPsychopath        int `json:"repPsychopath" legend:"base"`        // rep_psychopath
-	RepQuarreler         int `json:"repQuarreler" legend:"base"`         // rep_quarreler
-	RepTradePartner      int `json:"repTradePartner" legend:"base"`      // rep_trade_partner
-	Respect              int `json:"respect" legend:"base"`              // respect
-	Trust                int `json:"trust" legend:"base"`                // trust
+	Fear                 int   `json:"fear" legend:"base"`                 // fear
+	HfId                 int   `json:"hfId" legend:"base"`                 // hf_id
+	KnownIdentityId      []int `json:"knownIdentityId" legend:"base"`      // known_identity_id
+	LastMeetSeconds72    int   `json:"lastMeetSeconds72" legend:"base"`    // last_meet_seconds72
+	LastMeetYear         int   `json:"lastMeetYear" legend:"base"`         // last_meet_year
+	Love                 int   `json:"love" legend:"base"`                 // love
+	Loyalty              int   `json:"loyalty" legend:"base"`              // loyalty
+	MeetCount            int   `json:"meetCount" legend:"base"`            // meet_count
+	RepBonded            int   `json:"repBonded" legend:"base"`            // rep_bonded
+	RepComrade           int   `json:"repComrade" legend:"base"`           // rep_comrade
+	RepFlatterer         int   `json:"repFlatterer" legend:"base"`         // rep_flatterer
+	RepFriendly          int   `json:"repFriendly" legend:"base"`          // rep_friendly
+	RepHero              int   `json:"repHero" legend:"base"`              // rep_hero
+	RepHunter            int   `json:"repHunter" legend:"base"`            // rep_hunter
+	RepInformationSource int   `json:"repInformationSource" legend:"base"` // rep_information_source
+	RepKiller            int   `json:"repKiller" legend:"base"`            // rep_killer
+	RepPsychopath        int   `json:"repPsychopath" legend:"base"`        // rep_psychopath
+	RepQuarreler         int   `json:"repQuarreler" legend:"base"`         // rep_quarreler
+	RepTradePartner      int   `json:"repTradePartner" legend:"base"`      // rep_trade_partner
+	Respect              int   `json:"respect" legend:"base"`              // respect
+	Trust                int   `json:"trust" legend:"base"`                // trust
 }
 
 func NewRelationshipProfileHfVisual() *RelationshipProfileHfVisual {
 	return &RelationshipProfileHfVisual{
 		Fear:                 -1,
 		HfId:                 -1,
-		KnownIdentityId:      -1,
 		LastMeetSeconds72:    -1,
 		LastMeetYear:         -1,
 		Love:                 -1,
@@ -16325,8 +17635,13 @@ func NewRelationshipProfileHfVisual() *RelationshipProfileHfVisual {
 		Trust:                -1,
 	}
 }
-func (x *RelationshipProfileHfVisual) RelatedToEntity(id int) bool { return x.KnownIdentityId == id }
-func (x *RelationshipProfileHfVisual) RelatedToHf(id int) bool     { return x.HfId == id }
+func (x *RelationshipProfileHfVisual) RelatedToEntity(id int) bool {
+	return containsInt(x.KnownIdentityId, id)
+}
+func (x *RelationshipProfileHfVisual) RelatedToHf(id int) bool       { return x.HfId == id }
+func (x *RelationshipProfileHfVisual) RelatedToArtifact(id int) bool { return false }
+func (x *RelationshipProfileHfVisual) RelatedToSite(id int) bool     { return false }
+func (x *RelationshipProfileHfVisual) RelatedToRegion(id int) bool   { return false }
 
 func (x *RelationshipProfileHfVisual) CheckFields() {
 }
@@ -16339,9 +17654,7 @@ func (x *RelationshipProfileHfVisual) MarshalJSON() ([]byte, error) {
 	if x.HfId != -1 {
 		d["hfId"] = x.HfId
 	}
-	if x.KnownIdentityId != -1 {
-		d["knownIdentityId"] = x.KnownIdentityId
-	}
+	d["knownIdentityId"] = x.KnownIdentityId
 	if x.LastMeetSeconds72 != -1 {
 		d["lastMeetSeconds72"] = x.LastMeetSeconds72
 	}
@@ -16408,9 +17721,12 @@ type River struct {
 func NewRiver() *River {
 	return &River{}
 }
-func (x *River) Name() string                { return x.Name_ }
-func (x *River) RelatedToEntity(id int) bool { return false }
-func (x *River) RelatedToHf(id int) bool     { return false }
+func (x *River) Name() string                  { return x.Name_ }
+func (x *River) RelatedToEntity(id int) bool   { return false }
+func (x *River) RelatedToHf(id int) bool       { return false }
+func (x *River) RelatedToArtifact(id int) bool { return false }
+func (x *River) RelatedToSite(id int) bool     { return false }
+func (x *River) RelatedToRegion(id int) bool   { return false }
 
 func (x *River) CheckFields() {
 }
@@ -16433,9 +17749,15 @@ const (
 	ScheduleItemSubtype_Crossbow
 	ScheduleItemSubtype_Flail
 	ScheduleItemSubtype_GreatAxe
+	ScheduleItemSubtype_Halberd
+	ScheduleItemSubtype_Hive
 	ScheduleItemSubtype_LongSword
 	ScheduleItemSubtype_Mace
 	ScheduleItemSubtype_Maul
+	ScheduleItemSubtype_Morningstar
+	ScheduleItemSubtype_Pedestal
+	ScheduleItemSubtype_Pike
+	ScheduleItemSubtype_Quire
 	ScheduleItemSubtype_RohirBody
 	ScheduleItemSubtype_Scimitar
 	ScheduleItemSubtype_ShortSword
@@ -16459,12 +17781,24 @@ func parseScheduleItemSubtype(s string) ScheduleItemSubtype {
 		return ScheduleItemSubtype_Flail
 	case "great axe":
 		return ScheduleItemSubtype_GreatAxe
+	case "halberd":
+		return ScheduleItemSubtype_Halberd
+	case "hive":
+		return ScheduleItemSubtype_Hive
 	case "long sword":
 		return ScheduleItemSubtype_LongSword
 	case "mace":
 		return ScheduleItemSubtype_Mace
 	case "maul":
 		return ScheduleItemSubtype_Maul
+	case "morningstar":
+		return ScheduleItemSubtype_Morningstar
+	case "pedestal":
+		return ScheduleItemSubtype_Pedestal
+	case "pike":
+		return ScheduleItemSubtype_Pike
+	case "quire":
+		return ScheduleItemSubtype_Quire
 	case "rohir body":
 		return ScheduleItemSubtype_RohirBody
 	case "scimitar":
@@ -16497,12 +17831,24 @@ func (s ScheduleItemSubtype) String() string {
 		return "flail"
 	case ScheduleItemSubtype_GreatAxe:
 		return "great axe"
+	case ScheduleItemSubtype_Halberd:
+		return "halberd"
+	case ScheduleItemSubtype_Hive:
+		return "hive"
 	case ScheduleItemSubtype_LongSword:
 		return "long sword"
 	case ScheduleItemSubtype_Mace:
 		return "mace"
 	case ScheduleItemSubtype_Maul:
 		return "maul"
+	case ScheduleItemSubtype_Morningstar:
+		return "morningstar"
+	case ScheduleItemSubtype_Pedestal:
+		return "pedestal"
+	case ScheduleItemSubtype_Pike:
+		return "pike"
+	case ScheduleItemSubtype_Quire:
+		return "quire"
 	case ScheduleItemSubtype_RohirBody:
 		return "rohir body"
 	case ScheduleItemSubtype_Scimitar:
@@ -16661,9 +18007,12 @@ func NewSchedule() *Schedule {
 		Reference2: -1,
 	}
 }
-func (x *Schedule) Id() int                     { return x.Id_ }
-func (x *Schedule) RelatedToEntity(id int) bool { return false }
-func (x *Schedule) RelatedToHf(id int) bool     { return false }
+func (x *Schedule) Id() int                       { return x.Id_ }
+func (x *Schedule) RelatedToEntity(id int) bool   { return false }
+func (x *Schedule) RelatedToHf(id int) bool       { return false }
+func (x *Schedule) RelatedToArtifact(id int) bool { return false }
+func (x *Schedule) RelatedToSite(id int) bool     { return false }
+func (x *Schedule) RelatedToRegion(id int) bool   { return false }
 
 func (x *Schedule) CheckFields() {
 }
@@ -16835,10 +18184,13 @@ func NewSite() *Site {
 		Structures:     make(map[int]*Structure),
 	}
 }
-func (x *Site) Id() int                     { return x.Id_ }
-func (x *Site) Name() string                { return x.Name_ }
-func (x *Site) RelatedToEntity(id int) bool { return x.CivId == id }
-func (x *Site) RelatedToHf(id int) bool     { return false }
+func (x *Site) Id() int                       { return x.Id_ }
+func (x *Site) Name() string                  { return x.Name_ }
+func (x *Site) RelatedToEntity(id int) bool   { return x.CivId == id }
+func (x *Site) RelatedToHf(id int) bool       { return false }
+func (x *Site) RelatedToArtifact(id int) bool { return false }
+func (x *Site) RelatedToSite(id int) bool     { return false }
+func (x *Site) RelatedToRegion(id int) bool   { return false }
 
 func (x *Site) CheckFields() {
 }
@@ -16943,8 +18295,11 @@ func NewSiteLink() *SiteLink {
 		SubId:        -1,
 	}
 }
-func (x *SiteLink) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *SiteLink) RelatedToHf(id int) bool     { return false }
+func (x *SiteLink) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *SiteLink) RelatedToHf(id int) bool       { return false }
+func (x *SiteLink) RelatedToArtifact(id int) bool { return false }
+func (x *SiteLink) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *SiteLink) RelatedToRegion(id int) bool   { return false }
 
 func (x *SiteLink) CheckFields() {
 }
@@ -17010,9 +18365,12 @@ func NewSiteSiteProperty() *SiteSiteProperty {
 		StructureId: -1,
 	}
 }
-func (x *SiteSiteProperty) Id() int                     { return x.Id_ }
-func (x *SiteSiteProperty) RelatedToEntity(id int) bool { return false }
-func (x *SiteSiteProperty) RelatedToHf(id int) bool     { return x.OwnerHfid == id }
+func (x *SiteSiteProperty) Id() int                       { return x.Id_ }
+func (x *SiteSiteProperty) RelatedToEntity(id int) bool   { return false }
+func (x *SiteSiteProperty) RelatedToHf(id int) bool       { return x.OwnerHfid == id }
+func (x *SiteSiteProperty) RelatedToArtifact(id int) bool { return false }
+func (x *SiteSiteProperty) RelatedToSite(id int) bool     { return false }
+func (x *SiteSiteProperty) RelatedToRegion(id int) bool   { return false }
 
 func (x *SiteSiteProperty) CheckFields() {
 }
@@ -17185,46 +18543,49 @@ func NewStructure() *Structure {
 		WorshipHfid: -1,
 	}
 }
-func (x *Structure) Id() int                     { return x.Id_ }
-func (x *Structure) Name() string                { return x.Name_ }
-func (x *Structure) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *Structure) RelatedToHf(id int) bool     { return x.WorshipHfid == id }
+func (x *Structure) Id() int                       { return x.Id_ }
+func (x *Structure) Name() string                  { return x.Name_ }
+func (x *Structure) RelatedToEntity(id int) bool   { return x.EntityId == id }
+func (x *Structure) RelatedToHf(id int) bool       { return x.WorshipHfid == id }
+func (x *Structure) RelatedToArtifact(id int) bool { return containsInt(x.CopiedArtifactId, id) }
+func (x *Structure) RelatedToSite(id int) bool     { return false }
+func (x *Structure) RelatedToRegion(id int) bool   { return false }
 
 func (x *Structure) CheckFields() {
-	if x.Deity != x.EntityId && x.Deity != 0 && x.EntityId != 0 {
+	if x.Deity != x.EntityId {
 		sameFields["Structure"]["Deity"]["EntityId"] = false
 	}
-	if x.Deity != x.LocalId && x.Deity != 0 && x.LocalId != 0 {
+	if x.Deity != x.LocalId {
 		sameFields["Structure"]["Deity"]["LocalId"] = false
 	}
-	if x.Deity != x.WorshipHfid && x.Deity != 0 && x.WorshipHfid != 0 {
+	if x.Deity != x.WorshipHfid {
 		sameFields["Structure"]["Deity"]["WorshipHfid"] = false
 	}
-	if x.DeityType != x.EntityId && x.DeityType != 0 && x.EntityId != 0 {
+	if x.DeityType != x.EntityId {
 		sameFields["Structure"]["DeityType"]["EntityId"] = false
 	}
-	if x.DeityType != x.LocalId && x.DeityType != 0 && x.LocalId != 0 {
+	if x.DeityType != x.LocalId {
 		sameFields["Structure"]["DeityType"]["LocalId"] = false
 	}
-	if x.DeityType != x.WorshipHfid && x.DeityType != 0 && x.WorshipHfid != 0 {
+	if x.DeityType != x.WorshipHfid {
 		sameFields["Structure"]["DeityType"]["WorshipHfid"] = false
 	}
-	if x.DungeonType != x.EntityId && x.DungeonType != 0 && x.EntityId != 0 {
+	if x.DungeonType != x.EntityId {
 		sameFields["Structure"]["DungeonType"]["EntityId"] = false
 	}
-	if x.DungeonType != x.LocalId && x.DungeonType != 0 && x.LocalId != 0 {
+	if x.DungeonType != x.LocalId {
 		sameFields["Structure"]["DungeonType"]["LocalId"] = false
 	}
-	if x.DungeonType != x.WorshipHfid && x.DungeonType != 0 && x.WorshipHfid != 0 {
+	if x.DungeonType != x.WorshipHfid {
 		sameFields["Structure"]["DungeonType"]["WorshipHfid"] = false
 	}
-	if x.Religion != x.EntityId && x.Religion != 0 && x.EntityId != 0 {
+	if x.Religion != x.EntityId {
 		sameFields["Structure"]["Religion"]["EntityId"] = false
 	}
-	if x.Religion != x.LocalId && x.Religion != 0 && x.LocalId != 0 {
+	if x.Religion != x.LocalId {
 		sameFields["Structure"]["Religion"]["LocalId"] = false
 	}
-	if x.Religion != x.WorshipHfid && x.Religion != 0 && x.WorshipHfid != 0 {
+	if x.Religion != x.WorshipHfid {
 		sameFields["Structure"]["Religion"]["WorshipHfid"] = false
 	}
 }
@@ -17318,9 +18679,12 @@ func NewUndergroundRegion() *UndergroundRegion {
 		Id_:   -1,
 	}
 }
-func (x *UndergroundRegion) Id() int                     { return x.Id_ }
-func (x *UndergroundRegion) RelatedToEntity(id int) bool { return false }
-func (x *UndergroundRegion) RelatedToHf(id int) bool     { return false }
+func (x *UndergroundRegion) Id() int                       { return x.Id_ }
+func (x *UndergroundRegion) RelatedToEntity(id int) bool   { return false }
+func (x *UndergroundRegion) RelatedToHf(id int) bool       { return false }
+func (x *UndergroundRegion) RelatedToArtifact(id int) bool { return false }
+func (x *UndergroundRegion) RelatedToSite(id int) bool     { return false }
+func (x *UndergroundRegion) RelatedToRegion(id int) bool   { return false }
 
 func (x *UndergroundRegion) CheckFields() {
 }
@@ -17362,8 +18726,11 @@ func NewVagueRelationship() *VagueRelationship {
 		Hfid: -1,
 	}
 }
-func (x *VagueRelationship) RelatedToEntity(id int) bool { return false }
-func (x *VagueRelationship) RelatedToHf(id int) bool     { return x.Hfid == id }
+func (x *VagueRelationship) RelatedToEntity(id int) bool   { return false }
+func (x *VagueRelationship) RelatedToHf(id int) bool       { return x.Hfid == id }
+func (x *VagueRelationship) RelatedToArtifact(id int) bool { return false }
+func (x *VagueRelationship) RelatedToSite(id int) bool     { return false }
+func (x *VagueRelationship) RelatedToRegion(id int) bool   { return false }
 
 func (x *VagueRelationship) CheckFields() {
 }
@@ -17438,10 +18805,13 @@ func NewWorldConstruction() *WorldConstruction {
 		Id_: -1,
 	}
 }
-func (x *WorldConstruction) Id() int                     { return x.Id_ }
-func (x *WorldConstruction) Name() string                { return x.Name_ }
-func (x *WorldConstruction) RelatedToEntity(id int) bool { return false }
-func (x *WorldConstruction) RelatedToHf(id int) bool     { return false }
+func (x *WorldConstruction) Id() int                       { return x.Id_ }
+func (x *WorldConstruction) Name() string                  { return x.Name_ }
+func (x *WorldConstruction) RelatedToEntity(id int) bool   { return false }
+func (x *WorldConstruction) RelatedToHf(id int) bool       { return false }
+func (x *WorldConstruction) RelatedToArtifact(id int) bool { return false }
+func (x *WorldConstruction) RelatedToSite(id int) bool     { return false }
+func (x *WorldConstruction) RelatedToRegion(id int) bool   { return false }
 
 func (x *WorldConstruction) CheckFields() {
 }
@@ -17777,27 +19147,30 @@ func NewWrittenContent() *WrittenContent {
 		PageStart:  -1,
 	}
 }
-func (x *WrittenContent) Id() int                     { return x.Id_ }
-func (x *WrittenContent) RelatedToEntity(id int) bool { return false }
-func (x *WrittenContent) RelatedToHf(id int) bool     { return x.AuthorHfid == id }
+func (x *WrittenContent) Id() int                       { return x.Id_ }
+func (x *WrittenContent) RelatedToEntity(id int) bool   { return false }
+func (x *WrittenContent) RelatedToHf(id int) bool       { return x.AuthorHfid == id }
+func (x *WrittenContent) RelatedToArtifact(id int) bool { return false }
+func (x *WrittenContent) RelatedToSite(id int) bool     { return false }
+func (x *WrittenContent) RelatedToRegion(id int) bool   { return false }
 
 func (x *WrittenContent) CheckFields() {
-	if x.PageEnd != x.AuthorHfid && x.PageEnd != 0 && x.AuthorHfid != 0 {
+	if x.PageEnd != x.AuthorHfid {
 		sameFields["WrittenContent"]["PageEnd"]["AuthorHfid"] = false
 	}
-	if x.PageEnd != x.AuthorRoll && x.PageEnd != 0 && x.AuthorRoll != 0 {
+	if x.PageEnd != x.AuthorRoll {
 		sameFields["WrittenContent"]["PageEnd"]["AuthorRoll"] = false
 	}
-	if x.PageEnd != x.FormId && x.PageEnd != 0 && x.FormId != 0 {
+	if x.PageEnd != x.FormId {
 		sameFields["WrittenContent"]["PageEnd"]["FormId"] = false
 	}
-	if x.PageStart != x.AuthorHfid && x.PageStart != 0 && x.AuthorHfid != 0 {
+	if x.PageStart != x.AuthorHfid {
 		sameFields["WrittenContent"]["PageStart"]["AuthorHfid"] = false
 	}
-	if x.PageStart != x.AuthorRoll && x.PageStart != 0 && x.AuthorRoll != 0 {
+	if x.PageStart != x.AuthorRoll {
 		sameFields["WrittenContent"]["PageStart"]["AuthorRoll"] = false
 	}
-	if x.PageStart != x.FormId && x.PageStart != 0 && x.FormId != 0 {
+	if x.PageStart != x.FormId {
 		sameFields["WrittenContent"]["PageStart"]["FormId"] = false
 	}
 }
@@ -20046,6 +21419,8 @@ func parseHistoricalEvent(p *util.XMLParser) (*HistoricalEvent, error) {
 					obj.Details, err = parseHistoricalEventAddHfHfLink(p)
 				case "add hf site link":
 					obj.Details, err = parseHistoricalEventAddHfSiteLink(p)
+				case "agreement concluded":
+					obj.Details, err = parseHistoricalEventAgreementConcluded(p)
 				case "agreement formed":
 					obj.Details, err = parseHistoricalEventAgreementFormed(p)
 				case "agreement made":
@@ -20222,6 +21597,8 @@ func parseHistoricalEvent(p *util.XMLParser) (*HistoricalEvent, error) {
 					obj.Details, err = parseHistoricalEventKnowledgeDiscovered(p)
 				case "masterpiece arch constructed":
 					obj.Details, err = parseHistoricalEventMasterpieceArchConstructed(p)
+				case "masterpiece dye":
+					obj.Details, err = parseHistoricalEventMasterpieceDye(p)
 				case "masterpiece engraving":
 					obj.Details, err = parseHistoricalEventMasterpieceEngraving(p)
 				case "masterpiece food":
@@ -20395,16 +21772,24 @@ func parseHistoricalEventPlus(p *util.XMLParser, obj *HistoricalEvent) (*Histori
 					obj.Details, err = parseHistoricalEventHfDiedPlus(p, obj.Details.(*HistoricalEventHfDied))
 				case "hist_figure_new_pet":
 					obj.Details, err = parseHistoricalEventHfNewPetPlus(p, obj.Details.(*HistoricalEventHfNewPet))
+				case "hist_figure_reach_summit":
+					obj.Details, err = parseHistoricalEventHfReachSummitPlus(p, obj.Details.(*HistoricalEventHfReachSummit))
 				case "hist_figure_wounded":
 					obj.Details, err = parseHistoricalEventHfWoundedPlus(p, obj.Details.(*HistoricalEventHfWounded))
 				case "item_stolen":
 					obj.Details, err = parseHistoricalEventItemStolenPlus(p, obj.Details.(*HistoricalEventItemStolen))
 				case "masterpiece_created_arch_construct":
 					obj.Details, err = parseHistoricalEventMasterpieceArchConstructedPlus(p, obj.Details.(*HistoricalEventMasterpieceArchConstructed))
+				case "masterpiece_created_dye_item":
+					obj.Details, err = parseHistoricalEventMasterpieceDyePlus(p, obj.Details.(*HistoricalEventMasterpieceDye))
 				case "masterpiece_created_engraving":
 					obj.Details, err = parseHistoricalEventMasterpieceEngravingPlus(p, obj.Details.(*HistoricalEventMasterpieceEngraving))
+				case "masterpiece_created_food":
+					obj.Details, err = parseHistoricalEventMasterpieceFoodPlus(p, obj.Details.(*HistoricalEventMasterpieceFood))
 				case "masterpiece_created_item":
 					obj.Details, err = parseHistoricalEventMasterpieceItemPlus(p, obj.Details.(*HistoricalEventMasterpieceItem))
+				case "masterpiece_created_item_improvement":
+					obj.Details, err = parseHistoricalEventMasterpieceItemImprovementPlus(p, obj.Details.(*HistoricalEventMasterpieceItemImprovement))
 				case "masterpiece_lost":
 					obj.Details, err = parseHistoricalEventMasterpieceLostPlus(p, obj.Details.(*HistoricalEventMasterpieceLost))
 				case "merchant":
@@ -20415,6 +21800,12 @@ func parseHistoricalEventPlus(p *util.XMLParser, obj *HistoricalEvent) (*Histori
 					obj.Details, err = parseHistoricalEventRemoveHfSiteLinkPlus(p, obj.Details.(*HistoricalEventRemoveHfSiteLink))
 				case "replaced_building":
 					obj.Details, err = parseHistoricalEventReplacedStructurePlus(p, obj.Details.(*HistoricalEventReplacedStructure))
+				case "topicagreement_concluded":
+					obj.Details, err = parseHistoricalEventAgreementConcludedPlus(p, obj.Details.(*HistoricalEventAgreementConcluded))
+				case "topicagreement_made":
+					obj.Details, err = parseHistoricalEventAgreementMadePlus(p, obj.Details.(*HistoricalEventAgreementMade))
+				case "topicagreement_rejected":
+					obj.Details, err = parseHistoricalEventAgreementRejectedPlus(p, obj.Details.(*HistoricalEventAgreementRejected))
 				case "war_peace_accepted":
 					obj.Details, err = parseHistoricalEventPeaceAcceptedPlus(p, obj.Details.(*HistoricalEventPeaceAccepted))
 				case "war_peace_rejected":
@@ -20777,6 +22168,82 @@ func parseHistoricalEventAddHfSiteLinkPlus(p *util.XMLParser, obj *HistoricalEve
 		}
 	}
 }
+func parseHistoricalEventAgreementConcluded(p *util.XMLParser) (*HistoricalEventAgreementConcluded, error) {
+	var obj = NewHistoricalEventAgreementConcluded()
+
+	for {
+		t, n, err := p.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t {
+		case util.StartElement:
+			switch n {
+			default:
+				// fmt.Println("unknown field", n)
+				p.Skip()
+			}
+
+		case util.EndElement:
+			obj.CheckFields()
+			return obj, nil
+		}
+	}
+}
+func parseHistoricalEventAgreementConcludedPlus(p *util.XMLParser, obj *HistoricalEventAgreementConcluded) (*HistoricalEventAgreementConcluded, error) {
+	if obj == nil {
+		obj = NewHistoricalEventAgreementConcluded()
+	}
+
+	for {
+		t, n, err := p.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t {
+		case util.StartElement:
+			switch n {
+			case "destination":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Destination = num(data)
+			case "result":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Result = num(data)
+			case "site":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Site = num(data)
+			case "source":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Source = num(data)
+			case "topic":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Topic = parseHistoricalEventAgreementConcludedTopic(txt(data))
+			default:
+				// fmt.Println("unknown field", n)
+				p.Skip()
+			}
+
+		case util.EndElement:
+			obj.CheckFields()
+			return obj, nil
+		}
+	}
+}
 func parseHistoricalEventAgreementFormed(p *util.XMLParser) (*HistoricalEventAgreementFormed, error) {
 	var obj = NewHistoricalEventAgreementFormed()
 
@@ -21002,6 +22469,30 @@ func parseHistoricalEventAgreementMadePlus(p *util.XMLParser, obj *HistoricalEve
 		switch t {
 		case util.StartElement:
 			switch n {
+			case "destination":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Destination = num(data)
+			case "site":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Site = num(data)
+			case "source":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Source = num(data)
+			case "topic":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Topic = parseHistoricalEventAgreementMadeTopic(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -21054,6 +22545,30 @@ func parseHistoricalEventAgreementRejectedPlus(p *util.XMLParser, obj *Historica
 		switch t {
 		case util.StartElement:
 			switch n {
+			case "destination":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Destination = num(data)
+			case "site":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Site = num(data)
+			case "source":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Source = num(data)
+			case "topic":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Topic = parseHistoricalEventAgreementRejectedTopic(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -21507,6 +23022,12 @@ func parseHistoricalEventArtifactFound(p *util.XMLParser) (*HistoricalEventArtif
 					return nil, err
 				}
 				obj.SiteId = num(data)
+			case "site_property_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SitePropertyId = num(data)
 			case "unit_id":
 				data, err := p.Value()
 				if err != nil {
@@ -24883,7 +26404,7 @@ func parseHistoricalEventCreatedStructurePlus(p *util.XMLParser, obj *Historical
 				if err != nil {
 					return nil, err
 				}
-				obj.Structure = num(data)
+				obj.StructureId = num(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -25130,6 +26651,12 @@ func parseHistoricalEventDanceFormCreated(p *util.XMLParser) (*HistoricalEventDa
 					return nil, err
 				}
 				obj.SiteId = num(data)
+			case "subregion_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SubregionId = num(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -25299,7 +26826,7 @@ func parseHistoricalEventDiplomatLostPlus(p *util.XMLParser, obj *HistoricalEven
 				if err != nil {
 					return nil, err
 				}
-				obj.Site = num(data)
+				obj.SiteId = num(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -27545,7 +29072,7 @@ func parseHistoricalEventHfDiedPlus(p *util.XMLParser, obj *HistoricalEventHfDie
 				if err != nil {
 					return nil, err
 				}
-				obj.DeathCause = parseHistoricalEventHfDiedDeathCause(txt(data))
+				obj.DeathCause = txt(data)
 			case "item":
 				data, err := p.Value()
 				if err != nil {
@@ -27557,19 +29084,49 @@ func parseHistoricalEventHfDiedPlus(p *util.XMLParser, obj *HistoricalEventHfDie
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemSubtype = parseHistoricalEventHfDiedItemSubtype(txt(data))
+				obj.ItemSubtype = txt(data)
 			case "item_type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemType = parseHistoricalEventHfDiedItemType(txt(data))
+				obj.ItemType = txt(data)
 			case "mat":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Mat = parseHistoricalEventHfDiedMat(txt(data))
+				obj.Mat = txt(data)
+			case "shooter_artifact_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ShooterArtifactId = num(data)
+			case "shooter_item":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ShooterItem = num(data)
+			case "shooter_item_subtype":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ShooterItemSubtype = parseHistoricalEventHfDiedShooterItemSubtype(txt(data))
+			case "shooter_item_type":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ShooterItemType = parseHistoricalEventHfDiedShooterItemType(txt(data))
+			case "shooter_mat":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ShooterMat = txt(data)
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -27962,6 +29519,12 @@ func parseHistoricalEventHfFreed(p *util.XMLParser) (*HistoricalEventHfFreed, er
 		switch t {
 		case util.StartElement:
 			switch n {
+			case "freeing_civ_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.FreeingCivId = num(data)
 			case "freeing_hfid":
 				data, err := p.Value()
 				if err != nil {
@@ -27979,7 +29542,7 @@ func parseHistoricalEventHfFreed(p *util.XMLParser) (*HistoricalEventHfFreed, er
 				if err != nil {
 					return nil, err
 				}
-				obj.RescuedHfid = num(data)
+				obj.RescuedHfid = append(obj.RescuedHfid, num(data))
 			case "site_civ_id":
 				data, err := p.Value()
 				if err != nil {
@@ -28818,6 +30381,12 @@ func parseHistoricalEventHfReachSummitPlus(p *util.XMLParser, obj *HistoricalEve
 		switch t {
 		case util.StartElement:
 			switch n {
+			case "group":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Group = append(obj.Group, num(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -30369,6 +31938,136 @@ func parseHistoricalEventMasterpieceArchConstructedPlus(p *util.XMLParser, obj *
 		}
 	}
 }
+func parseHistoricalEventMasterpieceDye(p *util.XMLParser) (*HistoricalEventMasterpieceDye, error) {
+	var obj = NewHistoricalEventMasterpieceDye()
+
+	for {
+		t, n, err := p.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t {
+		case util.StartElement:
+			switch n {
+			case "entity_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.EntityId = num(data)
+			case "hfid":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Hfid = num(data)
+			case "site_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SiteId = num(data)
+			case "skill_at_time":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SkillAtTime = parseHistoricalEventMasterpieceDyeSkillAtTime(txt(data))
+			default:
+				// fmt.Println("unknown field", n)
+				p.Skip()
+			}
+
+		case util.EndElement:
+			obj.CheckFields()
+			return obj, nil
+		}
+	}
+}
+func parseHistoricalEventMasterpieceDyePlus(p *util.XMLParser, obj *HistoricalEventMasterpieceDye) (*HistoricalEventMasterpieceDye, error) {
+	if obj == nil {
+		obj = NewHistoricalEventMasterpieceDye()
+	}
+
+	for {
+		t, n, err := p.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t {
+		case util.StartElement:
+			switch n {
+			case "dye_mat":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.DyeMat = txt(data)
+			case "dye_mat_index":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.DyeMatIndex = num(data)
+			case "item_type":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ItemType = parseHistoricalEventMasterpieceDyeItemType(txt(data))
+			case "maker":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Maker = num(data)
+			case "maker_entity":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.MakerEntity = num(data)
+			case "mat":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Mat = parseHistoricalEventMasterpieceDyeMat(txt(data))
+			case "mat_index":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.MatIndex = num(data)
+			case "site":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Site = num(data)
+			case "skill_at_time":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SkillAtTime = parseHistoricalEventMasterpieceDyeSkillAtTime(txt(data))
+			case "unk_2":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Unk2 = num(data)
+			default:
+				// fmt.Println("unknown field", n)
+				p.Skip()
+			}
+
+		case util.EndElement:
+			obj.CheckFields()
+			return obj, nil
+		}
+	}
+}
 func parseHistoricalEventMasterpieceEngraving(p *util.XMLParser) (*HistoricalEventMasterpieceEngraving, error) {
 	var obj = NewHistoricalEventMasterpieceEngraving()
 
@@ -30403,7 +32102,7 @@ func parseHistoricalEventMasterpieceEngraving(p *util.XMLParser) (*HistoricalEve
 				if err != nil {
 					return nil, err
 				}
-				obj.SkillAtTime = parseHistoricalEventMasterpieceEngravingSkillAtTime(txt(data))
+				obj.SkillAtTime = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -30445,25 +32144,25 @@ func parseHistoricalEventMasterpieceEngravingPlus(p *util.XMLParser, obj *Histor
 				if err != nil {
 					return nil, err
 				}
-				obj.Maker = num(data)
+				obj.Hfid = num(data)
 			case "maker_entity":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.MakerEntity = num(data)
+				obj.EntityId = num(data)
 			case "site":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Site = num(data)
+				obj.SiteId = num(data)
 			case "skill_at_time":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.SkillAtTime = parseHistoricalEventMasterpieceEngravingSkillAtTime(txt(data))
+				obj.SkillAtTime = txt(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -30509,7 +32208,7 @@ func parseHistoricalEventMasterpieceFood(p *util.XMLParser) (*HistoricalEventMas
 				if err != nil {
 					return nil, err
 				}
-				obj.SkillAtTime = num(data)
+				obj.SkillAtTime = parseHistoricalEventMasterpieceFoodSkillAtTime(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -30534,6 +32233,48 @@ func parseHistoricalEventMasterpieceFoodPlus(p *util.XMLParser, obj *HistoricalE
 		switch t {
 		case util.StartElement:
 			switch n {
+			case "item_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ItemId = num(data)
+			case "item_subtype":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ItemSubtype = parseHistoricalEventMasterpieceFoodItemSubtype(txt(data))
+			case "item_type":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ItemType = parseHistoricalEventMasterpieceFoodItemType(txt(data))
+			case "maker":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Maker = num(data)
+			case "maker_entity":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.MakerEntity = num(data)
+			case "site":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Site = num(data)
+			case "skill_at_time":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SkillAtTime = parseHistoricalEventMasterpieceFoodSkillAtTime(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -30615,37 +32356,49 @@ func parseHistoricalEventMasterpieceItemPlus(p *util.XMLParser, obj *HistoricalE
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemSubtype = parseHistoricalEventMasterpieceItemItemSubtype(txt(data))
+				obj.ItemSubtype = txt(data)
 			case "item_type":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.ItemType = parseHistoricalEventMasterpieceItemItemType(txt(data))
+				obj.ItemType = txt(data)
 			case "maker":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Maker = num(data)
+				obj.Hfid = num(data)
 			case "maker_entity":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.MakerEntity = num(data)
+				obj.EntityId = num(data)
 			case "mat":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
 				obj.Mat = txt(data)
+			case "mat_index":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.MatIndex = num(data)
+			case "mat_type":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.MatType = num(data)
 			case "site":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Site = num(data)
+				obj.SiteId = num(data)
 			case "skill_at_time":
 				data, err := p.Value()
 				if err != nil {
@@ -30697,7 +32450,7 @@ func parseHistoricalEventMasterpieceItemImprovement(p *util.XMLParser) (*Histori
 				if err != nil {
 					return nil, err
 				}
-				obj.SkillAtTime = num(data)
+				obj.SkillAtTime = parseHistoricalEventMasterpieceItemImprovementSkillAtTime(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -30722,6 +32475,84 @@ func parseHistoricalEventMasterpieceItemImprovementPlus(p *util.XMLParser, obj *
 		switch t {
 		case util.StartElement:
 			switch n {
+			case "art_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ArtId = num(data)
+			case "art_subid":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ArtSubid = num(data)
+			case "imp_mat":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ImpMat = txt(data)
+			case "improvement_subtype":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ImprovementSubtype = num(data)
+			case "improvement_type":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ImprovementType = parseHistoricalEventMasterpieceItemImprovementImprovementType(txt(data))
+			case "item_subtype":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ItemSubtype = txt(data)
+			case "item_type":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ItemType = txt(data)
+			case "maker":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Maker = num(data)
+			case "maker_entity":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.MakerEntity = num(data)
+			case "mat":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Mat = txt(data)
+			case "site":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Site = num(data)
+			case "skill_at_time":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SkillAtTime = parseHistoricalEventMasterpieceItemImprovementSkillAtTime(txt(data))
+			case "unk_2":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Unk2 = num(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -30785,7 +32616,7 @@ func parseHistoricalEventMasterpieceLostPlus(p *util.XMLParser, obj *HistoricalE
 				if err != nil {
 					return nil, err
 				}
-				obj.Method = parseHistoricalEventMasterpieceLostMethod(txt(data))
+				obj.Method = txt(data)
 			case "site":
 				data, err := p.Value()
 				if err != nil {
@@ -30873,19 +32704,19 @@ func parseHistoricalEventMerchantPlus(p *util.XMLParser, obj *HistoricalEventMer
 				if err != nil {
 					return nil, err
 				}
-				obj.Destination = num(data)
+				obj.DepotEntityId = num(data)
 			case "site":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Site = num(data)
+				obj.SiteId = num(data)
 			case "source":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Source = num(data)
+				obj.TraderEntityId = num(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -31506,6 +33337,12 @@ func parseHistoricalEventPoeticFormCreated(p *util.XMLParser) (*HistoricalEventP
 					return nil, err
 				}
 				obj.SiteId = num(data)
+			case "subregion_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SubregionId = num(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -32289,31 +34126,31 @@ func parseHistoricalEventReplacedStructurePlus(p *util.XMLParser, obj *Historica
 				if err != nil {
 					return nil, err
 				}
-				obj.Civ = num(data)
+				obj.CivId = num(data)
 			case "new_structure":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.NewStructure = num(data)
+				obj.NewAbId = num(data)
 			case "old_structure":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.OldStructure = num(data)
+				obj.OldAbId = num(data)
 			case "site":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Site = num(data)
+				obj.SiteId = num(data)
 			case "site_civ":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.SiteCiv = num(data)
+				obj.SiteCivId = num(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -33463,7 +35300,7 @@ func parseHistoricalFigure(p *util.XMLParser) (*HistoricalFigure, error) {
 				obj.EntityReputation = append(obj.EntityReputation, v)
 			case "entity_squad_link":
 				v, _ := parseEntitySquadLink(p)
-				obj.EntitySquadLink = v
+				obj.EntitySquadLink = append(obj.EntitySquadLink, v)
 			case "force":
 				_, err := p.Value()
 				if err != nil {
@@ -35126,7 +36963,7 @@ func parseRelationshipProfileHfVisual(p *util.XMLParser) (*RelationshipProfileHf
 				if err != nil {
 					return nil, err
 				}
-				obj.KnownIdentityId = num(data)
+				obj.KnownIdentityId = append(obj.KnownIdentityId, num(data))
 			case "last_meet_seconds72":
 				data, err := p.Value()
 				if err != nil {

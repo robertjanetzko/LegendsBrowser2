@@ -41,8 +41,14 @@ func main() {
 			return nil
 		},
 		"title":     util.Title,
+		"hf":        model.LinkHf,
 		"getHf":     func(id int) *model.HistoricalFigure { return world.HistoricalFigures[id] },
+		"entity":    model.LinkEntity,
 		"getEntity": func(id int) *model.Entity { return world.Entities[id] },
+		"site":      model.LinkSite,
+		"getSite":   func(id int) *model.Site { return world.Sites[id] },
+		"region":    model.LinkRegion,
+		"getRegion": func(id int) *model.Region { return world.Regions[id] },
 		"events": func(obj model.Identifiable) []*model.HistoricalEvent {
 			id := obj.Id()
 			var list []*model.HistoricalEvent
@@ -56,6 +62,24 @@ func main() {
 			case *model.HistoricalFigure:
 				for _, e := range world.HistoricalEvents {
 					if e.Details.RelatedToHf(id) {
+						list = append(list, e)
+					}
+				}
+			case *model.Artifact:
+				for _, e := range world.HistoricalEvents {
+					if e.Details.RelatedToArtifact(id) {
+						list = append(list, e)
+					}
+				}
+			case *model.Site:
+				for _, e := range world.HistoricalEvents {
+					if e.Details.RelatedToSite(id) {
+						list = append(list, e)
+					}
+				}
+			case *model.Region:
+				for _, e := range world.HistoricalEvents {
+					if e.Details.RelatedToRegion(id) {
 						list = append(list, e)
 					}
 				}
@@ -150,6 +174,9 @@ func main() {
 
 		RegisterResourcePage(router, "/entity/{id}", t, "entity.html", func(id int) any { return world.Entities[id] })
 		RegisterResourcePage(router, "/hf/{id}", t, "hf.html", func(id int) any { return world.HistoricalFigures[id] })
+		RegisterResourcePage(router, "/region/{id}", t, "region.html", func(id int) any { return world.Regions[id] })
+		RegisterResourcePage(router, "/site/{id}", t, "site.html", func(id int) any { return world.Sites[id] })
+		RegisterResourcePage(router, "/artifact/{id}", t, "artifact.html", func(id int) any { return world.Artifacts[id] })
 		RegisterPage(router, "/events", t, "eventTypes.html", func(p Parms) any { return allEventTypes() })
 		RegisterPage(router, "/events/{type}", t, "eventType.html", func(p Parms) any { return eventsOfType(p["type"]) })
 	}

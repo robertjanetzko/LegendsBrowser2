@@ -1,0 +1,13 @@
+{{template "layout.html" .}}
+
+{{define "title"}}{{ title .Name }}{{end}}
+
+{{define "content"}}
+<h1>{{ title .Name }}</h1>
+
+<h3>Events</h3>
+
+{{ template "events.html" events . }}
+
+<p>{{ json . }}</p>
+{{- end }}

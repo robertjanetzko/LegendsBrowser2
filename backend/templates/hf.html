@@ -12,13 +12,13 @@
 <ul>
     {{- range $i := .EntityFormerPositionLink }}
     <li>
-        {{ ((getEntity $i.EntityId).Position $i.PositionProfileId).Name }} of {{ template "entityLink.html" (getEntity $i.EntityId) }} ({{
+        {{ ((getEntity $i.EntityId).Position $i.PositionProfileId).Name }} of {{ entity $i.EntityId }} ({{
         $i.StartYear }} - {{ $i.EndYear }})
     </li>
     {{- end }}
     {{- range $i := .EntityPositionLink }}
     <li>
-        of {{ template "entityLink.html" (getEntity $i.EntityId) }}
+        of {{ entity $i.EntityId }}
     </li>
     {{- end }}
 </ul>
@@ -29,7 +29,7 @@
 <ul>
     {{- range $i := .HfLink }}
     <li>
-        {{ template "hfLink.html" (getHf $i.Hfid) }} ({{ $i.LinkType }})
+        {{ hf $i.Hfid }} ({{ $i.LinkType }})
     </li>
     {{- end }}
 </ul>
@@ -40,7 +40,7 @@
 <ul>
     {{- range $i := .EntityLink }}
     <li>
-        {{ template "entityLink.html" (getEntity $i.EntityId) }} ({{ $i.LinkType }})
+        {{ entity $i.EntityId }} ({{ $i.LinkType }})
     </li>
     {{- end }}
 </ul>

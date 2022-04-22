@@ -120,8 +120,11 @@ func (x *{{ $obj.Name }}) Name() string { return x.Name_ }
 {{- if $obj.SubType }}
 func (x *{{ $obj.Name }}) Type() string { return "{{ $obj.SubType }}" }
 {{- end }}
-func (x *{{ $obj.Name }}) RelatedToEntity(id int) bool { return {{ $obj.Related "civId,civ_id,entity_id,entity" }} }
+func (x *{{ $obj.Name }}) RelatedToEntity(id int) bool { return {{ $obj.Related "civId,civ_id,entity_id,entity,enid" }} }
 func (x *{{ $obj.Name }}) RelatedToHf(id int) bool { return {{ $obj.Related "hfid,hf_id,_hf,hist_figure_id,Hfid,histfig_id,histfig,bodies" }} }
+func (x *{{ $obj.Name }}) RelatedToArtifact(id int) bool { return {{ $obj.Related "artifact_id" }} }
+func (x *{{ $obj.Name }}) RelatedToSite(id int) bool { return {{ $obj.Related "site_id" }} }
+func (x *{{ $obj.Name }}) RelatedToRegion(id int) bool { return {{ $obj.Related "region_id" }} }
 
 func (x *{{ $obj.Name }}) CheckFields() {
 	{{- range $field := ($obj.LegendFields "plus") }}
@@ -129,7 +132,7 @@ func (x *{{ $obj.Name }}) CheckFields() {
 	{{- range $field2 := ($obj.LegendFields "base") }}
 		{{- if eq $field.Type $field2.Type }}
 		{{- if eq $field.Type "int" }}
-			if x.{{ $field.Name}} != x.{{ $field2.Name}} && x.{{ $field.Name}} != 0 && x.{{ $field2.Name}} != 0 {
+			if x.{{ $field.Name}} != x.{{ $field2.Name}} {
 				sameFields["{{$obj.Name}}"]["{{ $field.Name}}"]["{{ $field2.Name}}"] = false
 			}
 		{{- end }}

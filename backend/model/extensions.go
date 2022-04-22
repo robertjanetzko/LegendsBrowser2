@@ -2,6 +2,7 @@ package model
 
 import (
 	"fmt"
+	"html/template"
 	"regexp"
 	"strings"
 
@@ -39,6 +40,9 @@ func (hf *HistoricalFigure) Male() bool {
 type HistoricalEventDetails interface {
 	RelatedToEntity(int) bool
 	RelatedToHf(int) bool
+	RelatedToArtifact(int) bool
+	RelatedToSite(int) bool
+	RelatedToRegion(int) bool
 	Html() string
 	Type() string
 }
@@ -85,6 +89,10 @@ func entity(id int) string {
 	return "UNKNOWN ENTITY"
 }
 
+func entityList(ids []int) string {
+	return andList(util.Map(ids, entity))
+}
+
 func siteCiv(siteCivId, civId int) string {
 	if siteCivId == civId {
 		return entity(civId)
@@ -92,9 +100,16 @@ func siteCiv(siteCivId, civId int) string {
 	return util.If(siteCivId != -1, entity(siteCivId), "") + util.If(civId != -1 && siteCivId != -1, " of ", "") + util.If(civId != -1, entity(civId), "")
 }
 
+func siteStructure(siteId, structureId int, prefix string) string {
+	if siteId == -1 {
+		return ""
+	}
+	return " " + prefix + " " + util.If(structureId != -1, structure(siteId, structureId)+" in ", "") + site(siteId, "")
+}
+
 func hf(id int) string {
 	if x, ok := world.HistoricalFigures[id]; ok {
-		return fmt.Sprintf(`the %s <a class="hf" href="/hf/%d">%s</a>`, x.Race, x.Id(), util.Title(x.Name()))
+		return fmt.Sprintf(`the %s <a class="hf" href="/hf/%d">%s</a>`, x.Race+util.If(x.Deity, " deity", "")+util.If(x.Force, " force", ""), x.Id(), util.Title(x.Name()))
 	}
 	return "UNKNOWN HISTORICAL FIGURE"
 }
@@ -214,3 +229,8 @@ func worldConstruction(id int) string {
 	}
 	return "UNKNOWN WORLD CONSTRUCTION"
 }
+
+var LinkHf = func(id int) template.HTML { return template.HTML(hf(id)) }
+var LinkEntity = func(id int) template.HTML { return template.HTML(entity(id)) }
+var LinkSite = func(id int) template.HTML { return template.HTML(site(id, "")) }
+var LinkRegion = func(id int) template.HTML { return template.HTML(region(id)) }

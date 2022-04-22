@@ -39,9 +39,13 @@
     "BuilderHf": "BuilderHfid",
     "Civ": "CivId",
     "Site": "SiteId",
-    "SiteCiv": "SiteCivId"
+    "SiteCiv": "SiteCivId",
+    "Structure": "StructureId"
   },
   "HistoricalEventCreatureDevoured": {
+    "Site": "SiteId"
+  },
+  "HistoricalEventDiplomatLost": {
     "Site": "SiteId"
   },
   "HistoricalEventEntityPrimaryCriminals": {
@@ -94,6 +98,21 @@
     "Woundee": "WoundeeHfid",
     "Wounder": "WounderHfid"
   },
+  "HistoricalEventMasterpieceEngraving": {
+    "Maker": "Hfid",
+    "MakerEntity": "EntityId",
+    "Site": "SiteId"
+  },
+  "HistoricalEventMasterpieceItem": {
+    "Maker": "Hfid",
+    "MakerEntity": "EntityId",
+    "Site": "SiteId"
+  },
+  "HistoricalEventMerchant": {
+    "Destination": "DepotEntityId",
+    "Site": "SiteId",
+    "Source": "TraderEntityId"
+  },
   "HistoricalEventPeaceAccepted": {
     "Site": "SiteId"
   },
@@ -107,6 +126,13 @@
   },
   "HistoricalEventRemoveHfSiteLink": {
     "Site": "SiteId"
+  },
+  "HistoricalEventReplacedStructure": {
+    "Civ": "CivId",
+    "NewStructure": "NewAbId",
+    "OldStructure": "OldAbId",
+    "Site": "SiteId",
+    "SiteCiv": "SiteCivId"
   },
   "Structure": {},
   "WrittenContent": {
