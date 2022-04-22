@@ -142,10 +142,7 @@ func (x *HistoricalEventArtifactClaimFormed) Html() string {
 }
 
 func (x *HistoricalEventArtifactCopied) Html() string {
-	s := "aquired a copy of"
-	if x.FromOriginal {
-		s = "made a copy of the original"
-	}
+	s := util.If(x.FromOriginal, "made a copy of the original", "aquired a copy of")
 	return fmt.Sprintf("%s %s %s from %s%s of %s, keeping it within %s%s",
 		entity(x.DestEntityId), s, artifact(x.ArtifactId), structure(x.SourceSiteId, x.SourceStructureId), site(x.SourceSiteId, " in "),
 		entity(x.SourceEntityId), structure(x.DestSiteId, x.DestStructureId), site(x.DestSiteId, " in "))
@@ -284,10 +281,7 @@ func (x *HistoricalEventAssumeIdentity) Html() string {
 
 func (x *HistoricalEventAttackedSite) Html() string {
 	atk := entity(x.AttackerCivId)
-	def := entity(x.DefenderCivId)
-	if x.SiteCivId != x.DefenderCivId {
-		def = entity(x.SiteCivId) + " of " + def
-	}
+	def := siteCiv(x.SiteCivId, x.DefenderCivId)
 	generals := ""
 	if x.AttackerGeneralHfid != -1 {
 		generals += ". " + util.Capitalize(hf(x.AttackerGeneralHfid)) + " led the attack"
@@ -397,9 +391,7 @@ func (x *HistoricalEventChangeHfState) Html() string {
 	switch x.Reason {
 	case HistoricalEventChangeHfStateReason_BeWithMaster:
 		r = " in order to be with the master"
-	case HistoricalEventChangeHfStateReason_ConvictionExile:
-		r = " after being exiled following a criminal conviction"
-	case HistoricalEventChangeHfStateReason_ExiledAfterConviction:
+	case HistoricalEventChangeHfStateReason_ConvictionExile, HistoricalEventChangeHfStateReason_ExiledAfterConviction:
 		r = " after being exiled following a criminal conviction"
 	case HistoricalEventChangeHfStateReason_FailedMood:
 		r = " after failing to create an artifact"
@@ -442,7 +434,7 @@ func (x *HistoricalEventChangeHfState) Html() string {
 		}
 	}
 
-	switch x.Mood { // todo catatonic
+	switch x.Mood { // TODO catatonic
 	case HistoricalEventChangeHfStateMood_Berserk:
 		return hf(x.Hfid) + " went berserk " + site(x.SiteId, "in") + r
 	case HistoricalEventChangeHfStateMood_Fell:
@@ -464,24 +456,90 @@ func (x *HistoricalEventChangeHfState) Html() string {
 }
 
 func (x *HistoricalEventChangedCreatureType) Html() string {
-	return "UNKNWON HistoricalEventChangedCreatureType"
+	return hf(x.ChangerHfid) + " changed " + hf(x.ChangeeHfid) + " from " + articled(x.OldRace) + " to " + articled(x.NewRace)
 }
-func (x *HistoricalEventCompetition) Html() string { return "UNKNWON HistoricalEventCompetition" }
+
+func (x *HistoricalEventCompetition) Html() string {
+	e := world.Entities[x.CivId]
+	o := e.Occasion[x.OccasionId]
+	s := o.Schedule[x.ScheduleId]
+	return entity(x.CivId) + " held a " + strcase.ToDelimited(s.Type.String(), ' ') + site(x.SiteId, " in") + " as part of the " + o.Name() +
+		". Competing " + util.If(len(x.CompetitorHfid) > 1, "were ", "was ") + hfList(x.CompetitorHfid) + ". " +
+		util.Capitalize(hf(x.WinnerHfid)) + " was the victor"
+}
+
 func (x *HistoricalEventCreateEntityPosition) Html() string {
-	return "UNKNWON HistoricalEventCreateEntityPosition"
+	c := entity(x.Civ)
+	if x.SiteCiv != x.Civ {
+		c = entity(x.SiteCiv) + " of " + c
+	}
+	if x.Histfig != -1 {
+		c = hf(x.Histfig) + " of " + c
+	} else {
+		c = "members of " + c
+	}
+	switch x.Reason {
+	case HistoricalEventCreateEntityPositionReason_AsAMatterOfCourse:
+		return c + " created the position of " + x.Position + " as a matter of course"
+	case HistoricalEventCreateEntityPositionReason_Collaboration:
+		return c + " collaborated to create the position of " + x.Position
+	case HistoricalEventCreateEntityPositionReason_ForceOfArgument:
+		return c + " created the position of " + x.Position + " trough force of argument"
+	case HistoricalEventCreateEntityPositionReason_ThreatOfViolence:
+		return c + " compelled the creation of the position of " + x.Position + " with threats of violence"
+	case HistoricalEventCreateEntityPositionReason_WaveOfPopularSupport:
+		return c + " created the position of " + x.Position + ", pushed by a wave of popular support"
+	}
+	return c + " created the position of " + x.Position
 }
-func (x *HistoricalEventCreatedSite) Html() string { return "UNKNWON HistoricalEventCreatedSite" }
-func (x *HistoricalEventCreatedStructure) Html() string {
-	return "UNKNWON HistoricalEventCreatedStructure"
+
+func (x *HistoricalEventCreatedSite) Html() string {
+	f := util.If(x.ResidentCivId != -1, " for "+entity(x.ResidentCivId), "")
+	if x.BuilderHfid != -1 {
+		return hf(x.BuilderHfid) + " created " + site(x.SiteId, "") + f
+	}
+	return siteCiv(x.SiteCivId, x.CivId) + " founded " + site(x.SiteId, "") + f
+
 }
+
+func (x *HistoricalEventCreatedStructure) Html() string { // TODO rebuild/rebuilt; Structure/StructureId
+	if x.BuilderHfid != -1 {
+		return hf(x.BuilderHfid) + " thrust a spire of slade up from the underworld, naming it " + structure(x.SiteId, x.StructureId) +
+			", and established a gateway between worlds in " + site(x.SiteId, "")
+	}
+	return siteCiv(x.SiteCivId, x.CivId) + util.If(x.Rebuilt, " rebuild ", " constructed ") + structure(x.SiteId, x.StructureId) + site(x.SiteId, " in")
+}
+
 func (x *HistoricalEventCreatedWorldConstruction) Html() string {
-	return "UNKNWON HistoricalEventCreatedWorldConstruction"
+	return siteCiv(x.SiteCivId, x.CivId) + " finished the contruction of " + worldConstruction(x.Wcid) +
+		" connecting " + site(x.SiteId1, "") + " with " + site(x.SiteId2, "") +
+		util.If(x.MasterWcid != -1, " as part of "+worldConstruction(x.MasterWcid), "")
 }
+
 func (x *HistoricalEventCreatureDevoured) Html() string {
-	return "UNKNWON HistoricalEventCreatureDevoured"
+	return hf(x.Eater) + " devoured " + util.If(x.Victim != -1, hf(x.Victim), articled(x.Race)) +
+		util.If(x.Entity != -1, " of "+entity(x.Entity), "") +
+		location(x.SiteId, " in", x.SubregionId, " in")
 }
+
 func (x *HistoricalEventDanceFormCreated) Html() string {
-	return "UNKNWON HistoricalEventDanceFormCreated"
+	reason := ""
+	switch x.Reason {
+	case HistoricalEventDanceFormCreatedReason_GlorifyHf:
+		reason = " in order to glorify " + hf(x.ReasonId)
+	}
+	circumstance := ""
+	switch x.Circumstance {
+	case HistoricalEventDanceFormCreatedCircumstance_Dream:
+		circumstance = " after a dream"
+	case HistoricalEventDanceFormCreatedCircumstance_DreamAboutHf:
+		circumstance = " after a dreaming about " + hf(x.CircumstanceId)
+	case HistoricalEventDanceFormCreatedCircumstance_Nightmare:
+		circumstance = " after a nightmare"
+	case HistoricalEventDanceFormCreatedCircumstance_PrayToHf:
+		circumstance = " after praying to " + hf(x.CircumstanceId)
+	}
+	return danceForm(x.FormId) + " was created by " + hf(x.HistFigureId) + site(x.SiteId, " in") + reason + circumstance
 }
 func (x *HistoricalEventDestroyedSite) Html() string { return "UNKNWON HistoricalEventDestroyedSite" }
 func (x *HistoricalEventDiplomatLost) Html() string  { return "UNKNWON HistoricalEventDiplomatLost" }

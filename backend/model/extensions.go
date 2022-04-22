@@ -85,6 +85,13 @@ func entity(id int) string {
 	return "UNKNOWN ENTITY"
 }
 
+func siteCiv(siteCivId, civId int) string {
+	if siteCivId == civId {
+		return entity(civId)
+	}
+	return util.If(siteCivId != -1, entity(siteCivId), "") + util.If(civId != -1 && siteCivId != -1, " of ", "") + util.If(civId != -1, entity(civId), "")
+}
+
 func hf(id int) string {
 	if x, ok := world.HistoricalFigures[id]; ok {
 		return fmt.Sprintf(`the %s <a class="hf" href="/hf/%d">%s</a>`, x.Race, x.Id(), util.Title(x.Name()))
@@ -199,4 +206,11 @@ func poeticForm(id int) string {
 		return fmt.Sprintf(`<a class="artform" href="/poeticForm/%d">%s</a>`, id, util.Title(x.Name()))
 	}
 	return "UNKNOWN POETIC FORM"
+}
+
+func worldConstruction(id int) string {
+	if x, ok := world.WorldConstructions[id]; ok {
+		return fmt.Sprintf(`<a class="artform" href="/wc/%d">%s</a>`, id, util.Title(x.Name()))
+	}
+	return "UNKNOWN WORLD CONSTRUCTION"
 }
