@@ -47,6 +47,9 @@ func Title(input string) string {
 }
 
 func Capitalize(input string) string {
+	if input == "" {
+		return ""
+	}
 	return strings.ToUpper(input[:1]) + input[1:]
 }
 

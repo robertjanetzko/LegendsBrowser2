@@ -37,6 +37,10 @@ func (hf *HistoricalFigure) Male() bool {
 	return hf.Sex == 1 || hf.Caste == "MALE"
 }
 
+func (hf *HistoricalFigure) FirstName() string {
+	return strings.Split(hf.Name_, " ")[0]
+}
+
 type HistoricalEventDetails interface {
 	RelatedToEntity(int) bool
 	RelatedToHf(int) bool
@@ -93,6 +97,15 @@ func entityList(ids []int) string {
 	return andList(util.Map(ids, entity))
 }
 
+func position(entityId, positionId, hfId int) string {
+	if e, ok := world.Entities[entityId]; ok {
+		if h, ok := world.HistoricalFigures[hfId]; ok {
+			return e.Position(positionId).GenderName(h)
+		}
+	}
+	return "UNKNOWN POSITION"
+}
+
 func siteCiv(siteCivId, civId int) string {
 	if siteCivId == civId {
 		return entity(civId)
@@ -110,6 +123,13 @@ func siteStructure(siteId, structureId int, prefix string) string {
 func hf(id int) string {
 	if x, ok := world.HistoricalFigures[id]; ok {
 		return fmt.Sprintf(`the %s <a class="hf" href="/hf/%d">%s</a>`, x.Race+util.If(x.Deity, " deity", "")+util.If(x.Force, " force", ""), x.Id(), util.Title(x.Name()))
+	}
+	return "UNKNOWN HISTORICAL FIGURE"
+}
+
+func hfShort(id int) string {
+	if x, ok := world.HistoricalFigures[id]; ok {
+		return fmt.Sprintf(`<a class="hf" href="/hf/%d">%s</a>`, x.Id(), util.Title(x.FirstName()))
 	}
 	return "UNKNOWN HISTORICAL FIGURE"
 }

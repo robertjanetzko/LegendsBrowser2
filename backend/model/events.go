@@ -594,6 +594,7 @@ func (x *HistoricalEventEntityCreated) Html() string {
 func (x *HistoricalEventEntityDissolved) Html() string {
 	return entity(x.EntityId) + " dissolved after " + x.Reason.String()
 }
+
 func (x *HistoricalEventEntityEquipmentPurchase) Html() string { // todo check hfid
 	l := ""
 	switch x.NewEquipmentLevel {
@@ -610,41 +611,214 @@ func (x *HistoricalEventEntityEquipmentPurchase) Html() string { // todo check h
 	}
 	return entity(x.EntityId) + " purchased " + l + " equipment"
 }
-func (x *HistoricalEventEntityExpelsHf) Html() string { return "UNKNWON HistoricalEventEntityExpelsHf" }
-func (x *HistoricalEventEntityFledSite) Html() string { return "UNKNWON HistoricalEventEntityFledSite" }
-func (x *HistoricalEventEntityIncorporated) Html() string {
-	return "UNKNWON HistoricalEventEntityIncorporated"
+
+func (x *HistoricalEventEntityExpelsHf) Html() string {
+	return "UNKNWON HistoricalEventEntityExpelsHf"
 }
-func (x *HistoricalEventEntityLaw) Html() string { return "UNKNWON HistoricalEventEntityLaw" }
+
+func (x *HistoricalEventEntityFledSite) Html() string {
+	return "UNKNWON HistoricalEventEntityFledSite"
+}
+
+func (x *HistoricalEventEntityIncorporated) Html() string { // TODO site
+	return entity(x.JoinerEntityId) + util.If(x.PartialIncorporation, " began operating at the direction of ", " fully incorporated into ") +
+		entity(x.JoinedEntityId) + " under the leadership of " + hf(x.LeaderHfid)
+}
+
+func (x *HistoricalEventEntityLaw) Html() string {
+	switch x.LawAdd {
+	case HistoricalEventEntityLawLawAdd_Harsh:
+		return hf(x.HistFigureId) + " laid a series of oppressive edicts upon " + entity(x.EntityId)
+	}
+	switch x.LawRemove {
+	case HistoricalEventEntityLawLawRemove_Harsh:
+		return hf(x.HistFigureId) + " lifted numerous oppressive laws from " + entity(x.EntityId)
+	}
+	return hf(x.HistFigureId) + " UNKNOWN LAW upon " + entity(x.EntityId)
+}
+
 func (x *HistoricalEventEntityOverthrown) Html() string {
-	return "UNKNWON HistoricalEventEntityOverthrown"
+	return hf(x.InstigatorHfid) + " toppled the government of " + util.If(x.OverthrownHfid != -1, hf(x.OverthrownHfid)+" of ", "") + entity(x.EntityId) + " and " +
+		util.If(x.PosTakerHfid == x.InstigatorHfid, "assumed control", "placed "+hf(x.PosTakerHfid)+" in power") + site(x.SiteId, " in") +
+		util.If(len(x.ConspiratorHfid) > 0, ". The support of "+hfList(x.ConspiratorHfid)+" was crucial to the coup", "")
 }
+
 func (x *HistoricalEventEntityPersecuted) Html() string {
-	return "UNKNWON HistoricalEventEntityPersecuted"
+	var l []string
+	if len(x.ExpelledHfid) > 0 {
+		l = append(l, hfList(x.ExpelledHfid)+util.If(len(x.ExpelledHfid) > 1, " were", " was")+" expelled")
+	}
+	if len(x.PropertyConfiscatedFromHfid) > 0 {
+		l = append(l, "most property was confiscated")
+	}
+	if x.DestroyedStructureId != -1 {
+		l = append(l, structure(x.SiteId, x.DestroyedStructureId)+" was destroyed"+util.If(x.ShrineAmountDestroyed > 0, " along with several smaller sacred sites", ""))
+	} else if x.ShrineAmountDestroyed > 0 {
+		l = append(l, "some sacred sites were desecrated")
+	}
+	return hf(x.PersecutorHfid) + " of " + entity(x.PersecutorEnid) + " persecuted " + entity(x.TargetEnid) + " in " + site(x.SiteId, "") +
+		util.If(len(l) > 0, ". "+util.Capitalize(andList(l)), "")
 }
-func (x *HistoricalEventEntityPrimaryCriminals) Html() string {
+
+func (x *HistoricalEventEntityPrimaryCriminals) Html() string { // TODO structure
+	switch x.Action {
+	case HistoricalEventEntityPrimaryCriminalsAction_EntityPrimaryCriminals:
+		return entity(x.EntityId) + " became the primary criminal organization in " + site(x.SiteId, "")
+	}
 	return "UNKNWON HistoricalEventEntityPrimaryCriminals"
 }
-func (x *HistoricalEventEntityRampagedInSite) Html() string {
+
+func (x *HistoricalEventEntityRampagedInSite) Html() string { // TODO
 	return "UNKNWON HistoricalEventEntityRampagedInSite"
 }
-func (x *HistoricalEventEntityRelocate) Html() string { return "UNKNWON HistoricalEventEntityRelocate" }
-func (x *HistoricalEventEntitySearchedSite) Html() string {
+
+func (x *HistoricalEventEntityRelocate) Html() string {
+	switch x.Action {
+	case HistoricalEventEntityRelocateAction_EntityRelocate:
+		return entity(x.EntityId) + " moved" + siteStructure(x.SiteId, x.StructureId, "to")
+	}
+	return "UNKNWON HistoricalEventEntityRelocate"
+}
+
+func (x *HistoricalEventEntitySearchedSite) Html() string { // TODO
 	return "UNKNWON HistoricalEventEntitySearchedSite"
 }
+
 func (x *HistoricalEventFailedFrameAttempt) Html() string {
-	return "UNKNWON HistoricalEventFailedFrameAttempt"
+	return hf(x.FramerHfid) + " attempted to frame " + hf(x.TargetHfid) + " for " + x.Crime.String() +
+		util.If(x.PlotterHfid != -1, " at the behest of "+hf(x.PlotterHfid), "") +
+		" by fooling " + hf(x.FooledHfid) + " and " + entity(x.ConvicterEnid) +
+		" with fabricated evidence, but nothing came of it"
 }
+
 func (x *HistoricalEventFailedIntrigueCorruption) Html() string {
-	return "UNKNWON HistoricalEventFailedIntrigueCorruption"
+	action := ""
+	switch x.Action {
+	case HistoricalEventFailedIntrigueCorruptionAction_BribeOfficial:
+		action = "have law enforcement look the other way"
+	case HistoricalEventFailedIntrigueCorruptionAction_BringIntoNetwork:
+		action = "have someone to act on plots and schemes"
+	case HistoricalEventFailedIntrigueCorruptionAction_CorruptInPlace:
+		action = "have an agent"
+	case HistoricalEventFailedIntrigueCorruptionAction_InduceToEmbezzle:
+		action = "secure embezzled funds"
+	}
+	method := ""
+	switch x.Method {
+	case HistoricalEventFailedIntrigueCorruptionMethod_BlackmailOverEmbezzlement:
+		method = "made a blackmail threat, due to embezzlement using the position " + position(x.RelevantEntityId, x.RelevantPositionProfileId, x.CorruptorHfid) + " of " + entity(x.RelevantEntityId)
+	case HistoricalEventFailedIntrigueCorruptionMethod_Bribe:
+		method = "offered a bribe"
+	case HistoricalEventFailedIntrigueCorruptionMethod_Flatter:
+		method = "made flattering remarks"
+	case HistoricalEventFailedIntrigueCorruptionMethod_Intimidate:
+		method = "made a threat"
+	case HistoricalEventFailedIntrigueCorruptionMethod_OfferImmortality:
+		method = "offered immortality"
+	case HistoricalEventFailedIntrigueCorruptionMethod_Precedence:
+		method = "pulled rank as " + position(x.RelevantEntityId, x.RelevantPositionProfileId, x.CorruptorHfid) + " of " + entity(x.RelevantEntityId)
+	case HistoricalEventFailedIntrigueCorruptionMethod_ReligiousSympathy:
+		method = "played for sympathy" + util.If(x.RelevantIdForMethod != -1, " by appealing to shared worship of "+hf(x.RelevantIdForMethod), "")
+	case HistoricalEventFailedIntrigueCorruptionMethod_RevengeOnGrudge:
+		method = "offered revenge upon the persecutor " + hf(x.RelevantIdForMethod)
+	}
+	fail := "The plan failed"
+	switch x.TopValue {
+	case HistoricalEventFailedIntrigueCorruptionTopValue_Law:
+		fail = hf(x.TargetHfid) + " valued the law and refused"
+	case HistoricalEventFailedIntrigueCorruptionTopValue_Power:
+	}
+	switch x.TopFacet {
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Ambition:
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_AnxietyPropensity:
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Confidence:
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_EnvyPropensity:
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Fearlessness:
+		fail += ", despite being afraid"
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Greed:
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Hope:
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Pride:
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_StressVulnerability:
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Swayable:
+		fail += ", despite being swayed by the emotional appeal" // TODO
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Vanity:
+	case HistoricalEventFailedIntrigueCorruptionTopFacet_Vengeful:
+	}
+	return hf(x.CorruptorHfid) + " attempted to corrupt " + hf(x.TargetHfid) +
+		" in order to " + action + location(x.SiteId, " in", x.SubregionId, " in") + ". " +
+		util.Capitalize(util.If(x.LureHfid != -1,
+			hf(x.LureHfid)+" lured "+hfShort(x.TargetHfid)+" to a meeting with "+hfShort(x.CorruptorHfid)+", where the latter",
+			hfShort(x.CorruptorHfid)+" met with "+hfShort(x.TargetHfid))) +
+		util.If(x.FailedJudgmentTest, ", while completely misreading the situation,", "") + " " + method + ". " + fail
 }
-func (x *HistoricalEventFieldBattle) Html() string    { return "UNKNWON HistoricalEventFieldBattle" }
-func (x *HistoricalEventFirstContact) Html() string   { return "UNKNWON HistoricalEventFirstContact" }
-func (x *HistoricalEventGamble) Html() string         { return "UNKNWON HistoricalEventGamble" }
-func (x *HistoricalEventHfAbducted) Html() string     { return "UNKNWON HistoricalEventHfAbducted" }
-func (x *HistoricalEventHfAttackedSite) Html() string { return "UNKNWON HistoricalEventHfAttackedSite" }
-func (x *HistoricalEventHfConfronted) Html() string   { return "UNKNWON HistoricalEventHfConfronted" }
-func (x *HistoricalEventHfConvicted) Html() string    { return "UNKNWON HistoricalEventHfConvicted" }
+
+func (x *HistoricalEventFieldBattle) Html() string {
+	atk := entity(x.AttackerCivId)
+	def := entity(x.DefenderCivId)
+	generals := ""
+	if x.AttackerGeneralHfid != -1 {
+		generals += ". " + util.Capitalize(hf(x.AttackerGeneralHfid)) + " led the attack"
+		if x.DefenderGeneralHfid != -1 {
+			generals += ", and the defenders were led by " + hf(x.DefenderGeneralHfid)
+		}
+	}
+	mercs := ""
+	if x.AttackerMercEnid != -1 {
+		mercs += fmt.Sprintf(". %s were hired by the attackers", entity(x.AttackerMercEnid))
+	}
+	if x.ASupportMercEnid != -1 {
+		mercs += fmt.Sprintf(". %s were hired as scouts by the attackers", entity(x.ASupportMercEnid))
+	}
+	if x.DefenderMercEnid != -1 {
+		mercs += fmt.Sprintf(". The defenders hired %s", entity(x.DefenderMercEnid))
+	}
+	if x.DSupportMercEnid != -1 {
+		mercs += fmt.Sprintf(". The defenders hired %s as scouts", entity(x.DSupportMercEnid))
+	}
+	return fmt.Sprintf("%s attacked %s at %s%s%s", atk, def, region(x.SubregionId), generals, mercs)
+}
+
+func (x *HistoricalEventFirstContact) Html() string { // TODO
+	return "UNKNWON HistoricalEventFirstContact"
+}
+
+func (x *HistoricalEventGamble) Html() string {
+	outcome := ""
+	switch d := x.NewAccount - x.OldAccount; {
+	case d <= -5000:
+		outcome = "lost a fortune"
+	case d <= -1000:
+		outcome = "did poorly"
+	case d <= 1000:
+		outcome = "did well"
+	case d <= 5000:
+		outcome = "made a fortune"
+	}
+	return hf(x.GamblerHfid) + " " + outcome + " gambling" + siteStructure(x.SiteId, x.StructureId, " in") +
+		util.If(x.OldAccount >= 0 && x.NewAccount < 0, " and went into debt", "")
+}
+
+func (x *HistoricalEventHfAbducted) Html() string {
+	return hf(x.TargetHfid) + " was abducted " + location(x.SiteId, "from", x.SubregionId, "from") + " by " + hf(x.SnatcherHfid)
+}
+
+func (x *HistoricalEventHfAttackedSite) Html() string {
+	return hf(x.AttackerHfid) + " attacked " + siteCiv(x.SiteCivId, x.DefenderCivId) + site(x.SiteId, " in")
+}
+
+func (x *HistoricalEventHfConfronted) Html() string {
+	return hf(x.Hfid) + " aroused " + x.Situation.String() + location(x.SiteId, " in", x.SubregionId, " in") + " after " +
+		andList(util.Map(x.Reason, func(r HistoricalEventHfConfrontedReason) string {
+			switch r {
+			case HistoricalEventHfConfrontedReason_Ageless:
+				return " appearing not to age"
+			case HistoricalEventHfConfrontedReason_Murder:
+				return "a murder"
+			}
+			return ""
+		}))
+}
+func (x *HistoricalEventHfConvicted) Html() string { return "UNKNWON HistoricalEventHfConvicted" }
 func (x *HistoricalEventHfDestroyedSite) Html() string {
 	return "UNKNWON HistoricalEventHfDestroyedSite"
 }
