@@ -5,6 +5,11 @@
   "HistoricalEventAddHfSiteLink": {
     "Site": "SiteId"
   },
+  "HistoricalEventDiplomatLost": {
+    "Entity": "SiteId",
+    "Involved": "SiteId",
+    "Site": "SiteId"
+  },
   "HistoricalEventPeaceAccepted": {
     "Site": "SiteId"
   },
