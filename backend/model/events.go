@@ -2,6 +2,7 @@ package model
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/iancoleman/strcase"
@@ -41,6 +42,11 @@ func (x *HistoricalEventAddHfEntityHonor) Html(c *context) string {
 func (x *HistoricalEventAddHfEntityLink) Html(c *context) string {
 	h := c.hf(x.Hfid)
 	e := entity(x.CivId)
+
+	if c.Story {
+		return "the ascension of " + h + " to " + position(x.CivId, x.PositionId, x.Hfid) + " of " + e
+	}
+
 	if x.AppointerHfid != -1 {
 		e += fmt.Sprintf(", appointed by %s", c.hf(x.AppointerHfid))
 	}
@@ -50,7 +56,7 @@ func (x *HistoricalEventAddHfEntityLink) Html(c *context) string {
 	case HistoricalEventAddHfEntityLinkLink_Member:
 		return h + " became a member of " + e
 	case HistoricalEventAddHfEntityLinkLink_Position:
-		return h + " became " + world.Entities[x.CivId].Position(x.PositionId).GenderName(world.HistoricalFigures[x.Hfid]) + " of " + e
+		return h + " became " + position(x.CivId, x.PositionId, x.Hfid) + " of " + e
 	case HistoricalEventAddHfEntityLinkLink_Prisoner:
 		return h + " was imprisoned by " + e
 	case HistoricalEventAddHfEntityLinkLink_Slave:
@@ -1133,7 +1139,7 @@ func (x *HistoricalEventItemStolen) Html(c *context) string {
 	}
 
 	switch x.TheftMethod {
-	case HistoricalEventItemStolenTheftMethod_Confiscated:
+	case HistoricalEventItemStolenTheftMethod_Confiscated: // TODO
 	case HistoricalEventItemStolenTheftMethod_Looted:
 	case HistoricalEventItemStolenTheftMethod_Recovered:
 		return i + " was recovered by " + c.hf(x.Histfig) + circumstance
@@ -1143,8 +1149,9 @@ func (x *HistoricalEventItemStolen) Html(c *context) string {
 }
 
 func (x *HistoricalEventKnowledgeDiscovered) Html(c *context) string {
-	return "UNKNWON HistoricalEventKnowledgeDiscovered"
+	return c.hf(x.Hfid) + util.If(x.First, " was the very first to discover ", " independently discovered ") + x.Knowledge
 }
+
 func (x *HistoricalEventMasterpieceArchConstructed) Html(c *context) string {
 	return "UNKNWON HistoricalEventMasterpieceArchConstructed"
 }
@@ -1164,67 +1171,159 @@ func (x *HistoricalEventMasterpieceLost) Html(c *context) string {
 	return "UNKNWON HistoricalEventMasterpieceLost"
 }
 func (x *HistoricalEventMerchant) Html(c *context) string { return "UNKNWON HistoricalEventMerchant" }
+
 func (x *HistoricalEventModifiedBuilding) Html(c *context) string {
-	return "UNKNWON HistoricalEventModifiedBuilding"
+	return c.hf(x.ModifierHfid) + " had " + articled(x.Modification.String()) + " added " + siteStructure(x.SiteId, x.StructureId, "to")
 }
+
 func (x *HistoricalEventMusicalFormCreated) Html(c *context) string {
-	return "UNKNWON HistoricalEventMusicalFormCreated"
+	reason := ""
+	switch x.Reason {
+	case HistoricalEventMusicalFormCreatedReason_GlorifyHf:
+		reason = " in order to glorify " + c.hfRelated(x.ReasonId, x.HistFigureId)
+	}
+	circumstance := ""
+	switch x.Circumstance {
+	case HistoricalEventMusicalFormCreatedCircumstance_Dream:
+		circumstance = " after a dream"
+	case HistoricalEventMusicalFormCreatedCircumstance_DreamAboutHf:
+		circumstance = " after a dreaming about " + util.If(x.ReasonId == x.CircumstanceId, c.hfShort(x.CircumstanceId), c.hfRelated(x.CircumstanceId, x.HistFigureId))
+	case HistoricalEventMusicalFormCreatedCircumstance_Nightmare:
+		circumstance = " after a nightmare"
+	case HistoricalEventMusicalFormCreatedCircumstance_PrayToHf:
+		circumstance = " after praying to " + util.If(x.ReasonId == x.CircumstanceId, c.hfShort(x.CircumstanceId), c.hfRelated(x.CircumstanceId, x.HistFigureId))
+	}
+	return musicalForm(x.FormId) + " was created by " + c.hf(x.HistFigureId) + site(x.SiteId, " in") + reason + circumstance
 }
+
 func (x *HistoricalEventNewSiteLeader) Html(c *context) string {
-	return "UNKNWON HistoricalEventNewSiteLeader"
+	return entity(x.AttackerCivId) + " defeated " + siteCiv(x.SiteCivId, x.DefenderCivId) + " and placed " + c.hf(x.NewLeaderHfid) + " in charge of" + site(x.SiteId, "") +
+		". The new government was called " + entity(x.NewSiteCivId)
 }
+
 func (x *HistoricalEventPeaceAccepted) Html(c *context) string {
-	return "UNKNWON HistoricalEventPeaceAccepted"
+	return entity(x.Destination) + " accepted an offer of peace from " + entity(x.Source)
 }
+
 func (x *HistoricalEventPeaceRejected) Html(c *context) string {
-	return "UNKNWON HistoricalEventPeaceRejected"
+	return entity(x.Destination) + " rejected an offer of peace from " + entity(x.Source)
 }
+
 func (x *HistoricalEventPerformance) Html(c *context) string {
-	return "UNKNWON HistoricalEventPerformance"
+	r := entity(x.CivId) + " held "
+	if e, ok := world.Entities[x.CivId]; ok {
+		o := e.Occasion[x.OccasionId]
+		s := o.Schedule[x.ScheduleId]
+		r += schedule(s)
+		r += " as part of " + o.Name()
+		r += site(x.SiteId, " in")
+		r += string(util.Json(s))
+	}
+	return r
 }
-func (x *HistoricalEventPlunderedSite) Html(c *context) string {
-	return "UNKNWON HistoricalEventPlunderedSite"
+
+func (x *HistoricalEventPlunderedSite) Html(c *context) string { // TODO no_defeat_mention, took_items, took_livestock, was_raid
+	return entity(x.AttackerCivId) + " defeated " + siteCiv(x.SiteCivId, x.DefenderCivId) + " and pillaged " + site(x.SiteId, "")
 }
+
 func (x *HistoricalEventPoeticFormCreated) Html(c *context) string {
-	return "UNKNWON HistoricalEventPoeticFormCreated"
+	circumstance := ""
+	switch x.Circumstance {
+	case HistoricalEventPoeticFormCreatedCircumstance_Dream:
+		circumstance = " after a dream"
+	case HistoricalEventPoeticFormCreatedCircumstance_Nightmare:
+		circumstance = " after a nightmare"
+	}
+	return poeticForm(x.FormId) + " was created by " + c.hf(x.HistFigureId) + site(x.SiteId, " in") + circumstance
 }
+
 func (x *HistoricalEventProcession) Html(c *context) string {
-	return "UNKNWON HistoricalEventProcession"
+	r := entity(x.CivId) + " held a procession in " + site(x.SiteId, "")
+	if e, ok := world.Entities[x.CivId]; ok {
+		o := e.Occasion[x.OccasionId]
+		r += " as part of " + o.Name()
+		s := o.Schedule[x.ScheduleId]
+		if s.Reference != -1 {
+			r += ". It started at " + structure(x.SiteId, s.Reference)
+			if s.Reference2 != -1 && s.Reference2 != s.Reference {
+				r += " and ended at " + structure(x.SiteId, s.Reference2)
+			} else {
+				r += " and returned there after following its route"
+			}
+		}
+		if len(s.Feature) > 0 {
+			r += ". The event featured " + andList(util.Map(s.Feature, feature))
+		}
+		r += string(util.Json(s))
+	}
+	return r
 }
+
 func (x *HistoricalEventRazedStructure) Html(c *context) string {
-	return "UNKNWON HistoricalEventRazedStructure"
+	return entity(x.CivId) + " razed " + siteStructure(x.SiteId, x.StructureId, "")
 }
-func (x *HistoricalEventReclaimSite) Html(c *context) string {
-	return "UNKNWON HistoricalEventReclaimSite"
+
+func (x *HistoricalEventReclaimSite) Html(c *context) string { // TODO unretire
+	return siteCiv(x.SiteCivId, x.CivId) + " launched an expedition to reclaim " + site(x.SiteId, "")
 }
-func (x *HistoricalEventRegionpopIncorporatedIntoEntity) Html(c *context) string {
-	return "UNKNWON HistoricalEventRegionpopIncorporatedIntoEntity"
+
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) Html(c *context) string { // TODO Race
+	return strconv.Itoa(x.PopNumberMoved) + " of " + strconv.Itoa(x.PopRace) + " from " + region(x.PopSrid) + " joined with " + entity(x.JoinEntityId) + site(x.SiteId, " at")
 }
+
 func (x *HistoricalEventRemoveHfEntityLink) Html(c *context) string {
-	return "UNKNWON HistoricalEventRemoveHfEntityLink"
+	hf := c.hf(x.Hfid)
+	civ := entity(x.CivId)
+	switch x.Link {
+	case HistoricalEventRemoveHfEntityLinkLink_Member:
+		return hf + " left " + civ
+	case HistoricalEventRemoveHfEntityLinkLink_Position:
+		return hf + " ceased to be the " + position(x.CivId, x.PositionId, x.Hfid) + " of " + civ
+	case HistoricalEventRemoveHfEntityLinkLink_Prisoner:
+		return hf + " escaped from the prisons of " + civ
+	case HistoricalEventRemoveHfEntityLinkLink_Slave:
+		return hf + " escaped from the slavery of " + civ
+	}
+	return hf + " left " + civ
 }
-func (x *HistoricalEventRemoveHfHfLink) Html(c *context) string {
-	return "UNKNWON HistoricalEventRemoveHfHfLink"
+
+func (x *HistoricalEventRemoveHfHfLink) Html(c *context) string { // divorced
+	return c.hf(x.Hfid) + " and " + c.hfRelated(x.HfidTarget, x.Hfid) + " broke up"
 }
+
 func (x *HistoricalEventRemoveHfSiteLink) Html(c *context) string {
-	return "UNKNWON HistoricalEventRemoveHfSiteLink"
+	switch x.LinkType {
+	case HistoricalEventRemoveHfSiteLinkLinkType_HomeSiteAbstractBuilding:
+		return c.hf(x.Histfig) + " moved out " + siteStructure(x.SiteId, x.Structure, "of")
+	case HistoricalEventRemoveHfSiteLinkLinkType_Occupation:
+		return c.hf(x.Histfig) + " stopped working " + siteStructure(x.SiteId, x.Structure, "at")
+	case HistoricalEventRemoveHfSiteLinkLinkType_SeatOfPower:
+		return c.hf(x.Histfig) + " stopped ruling " + siteStructure(x.SiteId, x.Structure, "from")
+	}
+	return c.hf(x.Histfig) + " stopped working " + siteStructure(x.SiteId, x.Structure, "at")
 }
+
 func (x *HistoricalEventReplacedStructure) Html(c *context) string {
-	return "UNKNWON HistoricalEventReplacedStructure"
+	return siteCiv(x.SiteCivId, x.CivId) + " replaced " + siteStructure(x.SiteId, x.OldAbId, "") + " with " + structure(x.SiteId, x.NewAbId)
 }
-func (x *HistoricalEventSiteDied) Html(c *context) string { return "UNKNWON HistoricalEventSiteDied" }
+
+func (x *HistoricalEventSiteDied) Html(c *context) string { return "UNKNWON HistoricalEventSiteDied" } // TODO
+
 func (x *HistoricalEventSiteDispute) Html(c *context) string {
-	return "UNKNWON HistoricalEventSiteDispute"
+	return entity(x.EntityId1) + " of " + site(x.SiteId1, "") + " and " + entity(x.EntityId2) + " of " + site(x.SiteId2, "") + " became embroiled in a dispute over " + x.Dispute.String()
 }
-func (x *HistoricalEventSiteRetired) Html(c *context) string {
+
+func (x *HistoricalEventSiteRetired) Html(c *context) string { // TODO
 	return "UNKNWON HistoricalEventSiteRetired"
 }
-func (x *HistoricalEventSiteSurrendered) Html(c *context) string {
+func (x *HistoricalEventSiteSurrendered) Html(c *context) string { // TODO
 	return "UNKNWON HistoricalEventSiteSurrendered"
 }
+
 func (x *HistoricalEventSiteTakenOver) Html(c *context) string {
-	return "UNKNWON HistoricalEventSiteTakenOver"
+	return entity(x.AttackerCivId) + " defeated " + siteCiv(x.SiteCivId, x.DefenderCivId) + " and took over " + site(x.SiteId, "") + ". The new government was called " + entity(x.NewSiteCivId)
 }
+
 func (x *HistoricalEventSiteTributeForced) Html(c *context) string {
 	return "UNKNWON HistoricalEventSiteTributeForced"
 }
@@ -1240,9 +1339,38 @@ func (x *HistoricalEventSquadVsSquad) Html(c *context) string {
 func (x *HistoricalEventTacticalSituation) Html(c *context) string {
 	return "UNKNWON HistoricalEventTacticalSituation"
 }
-func (x *HistoricalEventTrade) Html(c *context) string { return "UNKNWON HistoricalEventTrade" }
+
+func (x *HistoricalEventTrade) Html(c *context) string {
+	outcome := ""
+	switch d := x.AccountShift; {
+	case d > 1000:
+		outcome = " did well"
+	case d < -1000:
+		outcome = " did poorly"
+	default:
+		outcome = " broke even"
+	}
+	return c.hf(x.TraderHfid) + util.If(x.TraderEntityId != -1, " of "+entity(x.TraderEntityId), "") + outcome + " trading" + site(x.SourceSiteId, " from") + site(x.DestSiteId, " to")
+}
+
 func (x *HistoricalEventWrittenContentComposed) Html(c *context) string {
-	return "UNKNWON HistoricalEventWrittenContentComposed"
+	reason := ""
+	switch x.Reason {
+	case HistoricalEventWrittenContentComposedReason_GlorifyHf:
+		reason = " in order to glorify " + c.hfRelated(x.ReasonId, x.HistFigureId)
+	}
+	circumstance := ""
+	switch x.Circumstance {
+	case HistoricalEventWrittenContentComposedCircumstance_Dream:
+		circumstance = " after a dream"
+	case HistoricalEventWrittenContentComposedCircumstance_DreamAboutHf:
+		circumstance = " after a dreaming about " + util.If(x.ReasonId == x.CircumstanceId, c.hfShort(x.CircumstanceId), c.hfRelated(x.CircumstanceId, x.HistFigureId))
+	case HistoricalEventWrittenContentComposedCircumstance_Nightmare:
+		circumstance = " after a nightmare"
+	case HistoricalEventWrittenContentComposedCircumstance_PrayToHf:
+		circumstance = " after praying to " + util.If(x.ReasonId == x.CircumstanceId, c.hfShort(x.CircumstanceId), c.hfRelated(x.CircumstanceId, x.HistFigureId))
+	}
+	return writtenContent(x.WcId) + " was authored by " + c.hf(x.HistFigureId) + location(x.SiteId, " in", x.SubregionId, " in") + reason + circumstance
 }
 
 func (x *HistoricalEventAgreementConcluded) Html(c *context) string {

@@ -21,7 +21,9 @@
     "Site": "SiteId"
   },
   "HistoricalEventHfDied": {
-    "ShooterArtifactId": "FeatureLayerId"
+    "ItemSubtype": "Cause",
+    "Mat": "Cause",
+    "ShooterMat": "Cause"
   },
   "HistoricalEventPeaceAccepted": {
     "Site": "SiteId"

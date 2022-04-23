@@ -56,6 +56,10 @@ func (hf *HistoricalFigure) FirstName() string {
 	return strings.Split(hf.Name_, " ")[0]
 }
 
+func (w *WrittenContent) Name() string {
+	return w.Title
+}
+
 type HistoricalEventDetails interface {
 	RelatedToEntity(int) bool
 	RelatedToHf(int) bool
@@ -112,7 +116,8 @@ func NewEventList(obj any) *EventList {
 }
 
 type context struct {
-	HfId int
+	HfId  int
+	Story bool
 }
 
 func (c *context) hf(id int) string {
@@ -241,6 +246,15 @@ func hfRelated(id, to int) string {
 	return "UNKNOWN HISTORICAL FIGURE"
 }
 
+func hfLink(id, to int) string {
+	if x, ok := world.HistoricalFigures[id]; ok {
+		if y, ok := util.Find(x.HfLink, func(l *HfLink) bool { return l.Hfid == to }); ok {
+			return y.LinkType.String()
+		}
+	}
+	return "UNKNOWN LINK"
+}
+
 func pronoun(id int) string {
 	if x, ok := world.HistoricalFigures[id]; ok {
 		return x.Pronoun()
@@ -339,12 +353,76 @@ func feature(x *Feature) string {
 		return "a recital of " + poeticForm(x.Reference)
 	case FeatureType_Storytelling:
 		if x.Reference != -1 {
-			return "a telling of the story of " + hf(x.Reference)
+			if e, ok := world.HistoricalEvents[x.Reference]; ok {
+				return "a telling of the story of " + e.Details.Html(&context{Story: true}) + " in " + Time(e.Year, e.Seconds72)
+			}
 		}
 		return "a story recital"
 	default:
 		return strcase.ToDelimited(x.Type.String(), ' ')
 	}
+}
+
+func schedule(x *Schedule) string {
+	switch x.Type {
+	case ScheduleType_DancePerformance:
+		return "a perfomance of " + danceForm(x.Reference)
+	case ScheduleType_MusicalPerformance:
+		return "a perfomance of " + musicalForm(x.Reference)
+	case ScheduleType_PoetryRecital:
+		return "a recital of " + poeticForm(x.Reference)
+	case ScheduleType_Storytelling:
+		if x.Reference != -1 {
+			if e, ok := world.HistoricalEvents[x.Reference]; ok {
+				return "the story of " + e.Details.Html(&context{Story: true}) + " in " + Time(e.Year, e.Seconds72)
+			}
+		}
+		return "a story recital"
+	default:
+		return strcase.ToDelimited(x.Type.String(), ' ')
+	}
+}
+
+func ShortTime(year, seconds int) string {
+	if year == -1 {
+		return "a time before time"
+	}
+	return fmt.Sprintf("%d", year)
+}
+
+func Time(year, seconds int) string {
+	if year == -1 {
+		return "a time before time"
+	}
+	if seconds == -1 {
+		return fmt.Sprintf("%d", year)
+	}
+	return fmt.Sprintf("%s of %d", Season(seconds), year)
+}
+
+func Season(seconds int) string {
+	r := ""
+	month := seconds % 100800
+	if month <= 33600 {
+		r += "early "
+	} else if month <= 67200 {
+		r += "mid"
+	} else if month <= 100800 {
+		r += "late "
+	}
+
+	season := seconds % 403200
+	if season < 100800 {
+		r += "spring"
+	} else if season < 201600 {
+		r += "summer"
+	} else if season < 302400 {
+		r += "autumn"
+	} else if season < 403200 {
+		r += "winter"
+	}
+
+	return r
 }
 
 func danceForm(id int) string {
@@ -371,6 +449,13 @@ func poeticForm(id int) string {
 func worldConstruction(id int) string {
 	if x, ok := world.WorldConstructions[id]; ok {
 		return fmt.Sprintf(`<a class="artform" href="/wc/%d">%s</a>`, id, util.Title(x.Name()))
+	}
+	return "UNKNOWN WORLD CONSTRUCTION"
+}
+
+func writtenContent(id int) string {
+	if x, ok := world.WrittenContents[id]; ok {
+		return fmt.Sprintf(`<a class="artform" href="/writtenContent/%d">%s</a>`, id, util.Title(x.Name()))
 	}
 	return "UNKNOWN WORLD CONSTRUCTION"
 }

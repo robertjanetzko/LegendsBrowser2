@@ -50,30 +50,8 @@ func main() {
 		"region":    model.LinkRegion,
 		"getRegion": func(id int) *model.Region { return world.Regions[id] },
 		"events":    model.NewEventList,
-		"season": func(seconds int) string {
-			r := ""
-			month := seconds % 100800
-			if month <= 33600 {
-				r += "early "
-			} else if month <= 67200 {
-				r += "mid"
-			} else if month <= 100800 {
-				r += "late "
-			}
-
-			season := seconds % 403200
-			if season < 100800 {
-				r += "spring"
-			} else if season < 201600 {
-				r += "summer"
-			} else if season < 302400 {
-				r += "autumn"
-			} else if season < 403200 {
-				r += "winter"
-			}
-
-			return r
-		},
+		"season":    model.Season,
+		"time":      model.Time,
 		"html": func(value any) template.HTML {
 			return template.HTML(fmt.Sprint(value))
 		},
