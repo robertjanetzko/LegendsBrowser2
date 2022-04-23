@@ -147,6 +147,15 @@ func pronoun(id int) string {
 	return "he"
 }
 
+func posessivePronoun(id int) string {
+	if x, ok := world.HistoricalFigures[id]; ok {
+		if x.Female() {
+			return "her"
+		}
+	}
+	return "his"
+}
+
 func site(id int, prefix string) string {
 	if x, ok := world.Sites[id]; ok {
 		return fmt.Sprintf(`%s <a class="site" href="/site/%d">%s</a>`, prefix, x.Id(), util.Title(x.Name()))
@@ -254,3 +263,19 @@ var LinkHf = func(id int) template.HTML { return template.HTML(hf(id)) }
 var LinkEntity = func(id int) template.HTML { return template.HTML(entity(id)) }
 var LinkSite = func(id int) template.HTML { return template.HTML(site(id, "")) }
 var LinkRegion = func(id int) template.HTML { return template.HTML(region(id)) }
+
+func equipmentLevel(level int) string {
+	switch level {
+	case 1:
+		return "well-crafted"
+	case 2:
+		return "finely-crafted"
+	case 3:
+		return "superior quality"
+	case 4:
+		return "exceptional"
+	case 5:
+		return "masterwork"
+	}
+	return ""
+}

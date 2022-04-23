@@ -2,6 +2,7 @@ package model
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/iancoleman/strcase"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
@@ -596,20 +597,7 @@ func (x *HistoricalEventEntityDissolved) Html() string {
 }
 
 func (x *HistoricalEventEntityEquipmentPurchase) Html() string { // todo check hfid
-	l := ""
-	switch x.NewEquipmentLevel {
-	case 1:
-		l = "well-crafted"
-	case 2:
-		l = "finely-crafted"
-	case 3:
-		l = "superior quality"
-	case 4:
-		l = "exceptional"
-	case 5:
-		l = "masterwork"
-	}
-	return entity(x.EntityId) + " purchased " + l + " equipment"
+	return entity(x.EntityId) + " purchased " + equipmentLevel(x.NewEquipmentLevel) + " equipment"
 }
 
 func (x *HistoricalEventEntityExpelsHf) Html() string {
@@ -818,26 +806,89 @@ func (x *HistoricalEventHfConfronted) Html() string {
 			return ""
 		}))
 }
-func (x *HistoricalEventHfConvicted) Html() string { return "UNKNWON HistoricalEventHfConvicted" }
+func (x *HistoricalEventHfConvicted) Html() string { // TODO no_prison_available, beating, hammerstrokes, interrogator_hfid
+	r := util.If(x.ConfessedAfterApbArrestEnid != -1, "after being recognized and arrested, ", "")
+	switch {
+	case x.SurveiledCoconspirator:
+		r += "due to ongoing surveillance on a coconspiratior, " + hf(x.CoconspiratorHfid) + ", as the plot unfolded, "
+	case x.SurveiledContact:
+		r += "due to ongoing surveillance on the contact " + hf(x.ContactHfid) + " as the plot unfolded, "
+	case x.SurveiledConvicted:
+		r += "due to ongoing surveillance as the plot unfolded, "
+	case x.SurveiledTarget:
+		r += "due to ongoing surveillance on the target " + hf(x.TargetHfid) + " as the plot unfolded, "
+	}
+	r += hf(x.ConvictedHfid) + util.If(x.ConfessedAfterApbArrestEnid != -1, " confessed and", "") + " was " + util.If(x.WrongfulConviction, "wrongfully ", "") + "convicted " +
+		util.If(x.ConvictIsContact, "as a go-between in a conspiracy to commit ", "of ") + x.Crime.String() + " by " + entity(x.ConvicterEnid)
+	if x.FooledHfid != -1 {
+		r += " after " + hf(x.FramerHfid) + " fooled " + hf(x.FooledHfid) + " with fabricated evidence" +
+			util.If(x.PlotterHfid != -1, " at the behest of "+hf(x.PlotterHfid), "")
+	}
+	if x.CorruptConvicterHfid != -1 {
+		r += " and the corrupt " + hf(x.CorruptConvicterHfid) + " through the machinations of " + hf(x.PlotterHfid)
+	}
+	switch {
+	case x.DeathPenalty:
+		r += " and sentenced to death"
+	case x.Exiled:
+		r += " and exiled"
+	case x.PrisonMonths > 0:
+		r += fmt.Sprintf(" and imprisoned for a term of %d years", x.PrisonMonths/12)
+	}
+	if x.HeldFirmInInterrogation {
+		r += ". " + hfShort(x.ConvictedHfid) + " revealed nothing during interrogation"
+	} else if len(x.ImplicatedHfid) > 0 {
+		r += ". " + hfShort(x.ConvictedHfid) + " implicated " + hfList(x.ImplicatedHfid) + " during interrogation" +
+			util.If(x.DidNotRevealAllInInterrogation, " but did not reveal eaverything", "")
+	}
+	return r
+}
+
 func (x *HistoricalEventHfDestroyedSite) Html() string {
-	return "UNKNWON HistoricalEventHfDestroyedSite"
+	return hf(x.AttackerHfid) + " routed " + siteCiv(x.SiteCivId, x.DefenderCivId) + " and destroyed " + site(x.SiteId, "")
 }
-func (x *HistoricalEventHfDied) Html() string { return "UNKNWON HistoricalEventHfDied" }
+
+func (x *HistoricalEventHfDied) Html() string { // TODO force cause enum
+	return "UNKNWON HistoricalEventHfDied"
+}
+
 func (x *HistoricalEventHfDisturbedStructure) Html() string {
-	return "UNKNWON HistoricalEventHfDisturbedStructure"
+	return hf(x.HistFigId) + " disturbed " + siteStructure(x.SiteId, x.StructureId, "")
 }
+
 func (x *HistoricalEventHfDoesInteraction) Html() string {
-	return "UNKNWON HistoricalEventHfDoesInteraction"
+	i := strings.Index(x.InteractionAction, " ")
+	if i > 0 {
+		return hf(x.DoerHfid) + " " + x.InteractionAction[:i+1] + hf(x.TargetHfid) + x.InteractionAction[i:] + util.If(x.Site != -1, site(x.Site, " in"), "")
+	} else {
+		return hf(x.DoerHfid) + " UNKNOWN INTERACTION " + hf(x.TargetHfid) + util.If(x.Site != -1, site(x.Site, " in"), "")
+	}
 }
-func (x *HistoricalEventHfEnslaved) Html() string { return "UNKNWON HistoricalEventHfEnslaved" }
-func (x *HistoricalEventHfEquipmentPurchase) Html() string {
-	return "UNKNWON HistoricalEventHfEquipmentPurchase"
+
+func (x *HistoricalEventHfEnslaved) Html() string {
+	return hf(x.SellerHfid) + " sold " + hf(x.EnslavedHfid) + " to " + entity(x.PayerEntityId) + site(x.MovedToSiteId, " in")
 }
-func (x *HistoricalEventHfFreed) Html() string { return "UNKNWON HistoricalEventHfFreed" }
+
+func (x *HistoricalEventHfEquipmentPurchase) Html() string { // TODO site, structure, region
+	return hf(x.GroupHfid) + " purchased " + equipmentLevel(x.Quality) + " equipment"
+}
+
+func (x *HistoricalEventHfFreed) Html() string { // TODO
+	return "UNKNWON HistoricalEventHfFreed"
+}
+
 func (x *HistoricalEventHfGainsSecretGoal) Html() string {
-	return "UNKNWON HistoricalEventHfGainsSecretGoal"
+	switch x.SecretGoal {
+	case HistoricalEventHfGainsSecretGoalSecretGoal_Immortality:
+		return hf(x.Hfid) + " became obsessed with " + posessivePronoun(x.Hfid) + " own mortality and sought to extend " + posessivePronoun(x.Hfid) + " life by any means"
+	}
+	return hf(x.Hfid) + " UNKNOWN SECRET GOAL"
 }
-func (x *HistoricalEventHfInterrogated) Html() string { return "UNKNWON HistoricalEventHfInterrogated" }
+
+func (x *HistoricalEventHfInterrogated) Html() string { // TODO
+	return "UNKNWON HistoricalEventHfInterrogated"
+}
+
 func (x *HistoricalEventHfLearnsSecret) Html() string { return "UNKNWON HistoricalEventHfLearnsSecret" }
 func (x *HistoricalEventHfNewPet) Html() string       { return "UNKNWON HistoricalEventHfNewPet" }
 func (x *HistoricalEventHfPerformedHorribleExperiments) Html() string {
