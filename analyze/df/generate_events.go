@@ -15,7 +15,7 @@ package model
 
 {{- range $name, $obj := $.Objects }}
 {{- if $obj.IsSubTypeOf "HistoricalEvent" }}
-func (x *{{ $obj.Name }}) Html() string { return "UNKNWON {{ $obj.Name }}" }
+func (x *{{ $obj.Name }}) Html(c *context) string { return "UNKNWON {{ $obj.Name }}" }
 {{- end }}
 {{- end }}
 `))

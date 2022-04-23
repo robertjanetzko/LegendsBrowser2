@@ -49,46 +49,7 @@ func main() {
 		"getSite":   func(id int) *model.Site { return world.Sites[id] },
 		"region":    model.LinkRegion,
 		"getRegion": func(id int) *model.Region { return world.Regions[id] },
-		"events": func(obj model.Identifiable) []*model.HistoricalEvent {
-			id := obj.Id()
-			var list []*model.HistoricalEvent
-			switch obj.(type) {
-			case *model.Entity:
-				for _, e := range world.HistoricalEvents {
-					if e.Details.RelatedToEntity(id) {
-						list = append(list, e)
-					}
-				}
-			case *model.HistoricalFigure:
-				for _, e := range world.HistoricalEvents {
-					if e.Details.RelatedToHf(id) {
-						list = append(list, e)
-					}
-				}
-			case *model.Artifact:
-				for _, e := range world.HistoricalEvents {
-					if e.Details.RelatedToArtifact(id) {
-						list = append(list, e)
-					}
-				}
-			case *model.Site:
-				for _, e := range world.HistoricalEvents {
-					if e.Details.RelatedToSite(id) {
-						list = append(list, e)
-					}
-				}
-			case *model.Region:
-				for _, e := range world.HistoricalEvents {
-					if e.Details.RelatedToRegion(id) {
-						list = append(list, e)
-					}
-				}
-			default:
-				fmt.Printf("unknown type %T\n", obj)
-			}
-			sort.Slice(list, func(a, b int) bool { return list[a].Id_ < list[b].Id_ })
-			return list
-		},
+		"events":    model.NewEventList,
 		"season": func(seconds int) string {
 			r := ""
 			month := seconds % 100800

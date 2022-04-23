@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"regexp"
+	"sort"
 	"strings"
 
 	"github.com/iancoleman/strcase"
@@ -61,11 +62,91 @@ type HistoricalEventDetails interface {
 	RelatedToArtifact(int) bool
 	RelatedToSite(int) bool
 	RelatedToRegion(int) bool
-	Html() string
+	Html(*context) string
 	Type() string
 }
 
 type HistoricalEventCollectionDetails interface {
+}
+
+type EventList struct {
+	Events  []*HistoricalEvent
+	Context *context
+}
+
+func filter(f func(HistoricalEventDetails) bool) []*HistoricalEvent {
+	var list []*HistoricalEvent
+	for _, e := range world.HistoricalEvents {
+		if f(e.Details) {
+			list = append(list, e)
+		}
+	}
+	sort.Slice(list, func(a, b int) bool { return list[a].Id_ < list[b].Id_ })
+	return list
+}
+
+func NewEventList(obj any) *EventList {
+	el := EventList{
+		Context: &context{HfId: -1},
+	}
+
+	switch x := obj.(type) {
+	case *Entity:
+		el.Events = filter(func(d HistoricalEventDetails) bool { return d.RelatedToEntity(x.Id()) })
+	case *HistoricalFigure:
+		el.Context.HfId = x.Id()
+		el.Events = filter(func(d HistoricalEventDetails) bool { return d.RelatedToHf(x.Id()) })
+	case *Artifact:
+		el.Events = filter(func(d HistoricalEventDetails) bool { return d.RelatedToArtifact(x.Id()) })
+	case *Site:
+		el.Events = filter(func(d HistoricalEventDetails) bool { return d.RelatedToSite(x.Id()) })
+	case *Region:
+		el.Events = filter(func(d HistoricalEventDetails) bool { return d.RelatedToRegion(x.Id()) })
+	case []*HistoricalEvent:
+		el.Events = x
+	default:
+		fmt.Printf("unknown type %T\n", obj)
+	}
+
+	return &el
+}
+
+type context struct {
+	HfId int
+}
+
+func (c *context) hf(id int) string {
+	if c.HfId != -1 {
+		if c.HfId == id {
+			return hfShort(id)
+		} else {
+			return hfRelated(id, c.HfId)
+		}
+	}
+	return hf(id)
+}
+
+func (c *context) hfShort(id int) string {
+	return hfShort(id)
+}
+
+func (c *context) hfRelated(id, to int) string {
+	if c.HfId != -1 {
+		if c.HfId == id {
+			return hfShort(id)
+		} else {
+			return hfRelated(id, c.HfId)
+		}
+	}
+	return hfRelated(id, to)
+}
+
+func (c *context) hfList(ids []int) string {
+	return andList(util.Map(ids, func(id int) string { return c.hf(id) }))
+}
+
+func (c *context) hfListRelated(ids []int, to int) string {
+	return andList(util.Map(ids, func(id int) string { return c.hfRelated(id, to) }))
 }
 
 func containsInt(list []int, id int) bool {
@@ -160,14 +241,6 @@ func hfRelated(id, to int) string {
 	return "UNKNOWN HISTORICAL FIGURE"
 }
 
-func hfList(ids []int) string {
-	return andList(util.Map(ids, hf))
-}
-
-func hfListRelated(ids []int, to int) string {
-	return andList(util.Map(ids, func(id int) string { return hfRelated(id, to) }))
-}
-
 func pronoun(id int) string {
 	if x, ok := world.HistoricalFigures[id]; ok {
 		return x.Pronoun()
@@ -240,6 +313,13 @@ func place(structureId, siteId int, sitePrefix string, regionId int, regionPrefi
 func identity(id int) string {
 	if x, ok := world.Identities[id]; ok {
 		return fmt.Sprintf(`<a class="identity" href="/region/%d">%s</a>`, x.Id(), util.Title(x.Name()))
+	}
+	return "UNKNOWN IDENTITY"
+}
+
+func fullIdentity(id int) string {
+	if x, ok := world.Identities[id]; ok {
+		return fmt.Sprintf(`&quot;the %s <a class="identity" href="/region/%d">%s</a> of %s&quot;`, x.Profession.String(), x.Id(), util.Title(x.Name()), entity(x.EntityId))
 	}
 	return "UNKNOWN IDENTITY"
 }
