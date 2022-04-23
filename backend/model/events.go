@@ -1324,19 +1324,19 @@ func (x *HistoricalEventSiteTakenOver) Html(c *context) string {
 	return entity(x.AttackerCivId) + " defeated " + siteCiv(x.SiteCivId, x.DefenderCivId) + " and took over " + site(x.SiteId, "") + ". The new government was called " + entity(x.NewSiteCivId)
 }
 
-func (x *HistoricalEventSiteTributeForced) Html(c *context) string {
+func (x *HistoricalEventSiteTributeForced) Html(c *context) string { // TODO
 	return "UNKNWON HistoricalEventSiteTributeForced"
 }
-func (x *HistoricalEventSneakIntoSite) Html(c *context) string {
+func (x *HistoricalEventSneakIntoSite) Html(c *context) string { // TODO
 	return "UNKNWON HistoricalEventSneakIntoSite"
 }
-func (x *HistoricalEventSpottedLeavingSite) Html(c *context) string {
+func (x *HistoricalEventSpottedLeavingSite) Html(c *context) string { // TODO
 	return "UNKNWON HistoricalEventSpottedLeavingSite"
 }
-func (x *HistoricalEventSquadVsSquad) Html(c *context) string {
+func (x *HistoricalEventSquadVsSquad) Html(c *context) string { // TODO
 	return "UNKNWON HistoricalEventSquadVsSquad"
 }
-func (x *HistoricalEventTacticalSituation) Html(c *context) string {
+func (x *HistoricalEventTacticalSituation) Html(c *context) string { // TODO
 	return "UNKNWON HistoricalEventTacticalSituation"
 }
 
@@ -1373,9 +1373,9 @@ func (x *HistoricalEventWrittenContentComposed) Html(c *context) string {
 	return writtenContent(x.WcId) + " was authored by " + c.hf(x.HistFigureId) + location(x.SiteId, " in", x.SubregionId, " in") + reason + circumstance
 }
 
-func (x *HistoricalEventAgreementConcluded) Html(c *context) string {
+func (x *HistoricalEventAgreementConcluded) Html(c *context) string { // TODO
 	return "UNKNWON HistoricalEventAgreementConcluded"
 }
-func (x *HistoricalEventMasterpieceDye) Html(c *context) string {
+func (x *HistoricalEventMasterpieceDye) Html(c *context) string { // TODO
 	return "UNKNWON HistoricalEventMasterpieceDye"
 }
