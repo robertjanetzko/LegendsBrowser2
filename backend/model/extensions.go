@@ -37,6 +37,20 @@ func (hf *HistoricalFigure) Male() bool {
 	return hf.Sex == 1 || hf.Caste == "MALE"
 }
 
+func (hf *HistoricalFigure) Pronoun() string {
+	if hf.Female() {
+		return "she"
+	}
+	return "he"
+}
+
+func (hf *HistoricalFigure) PossesivePronoun() string {
+	if hf.Female() {
+		return "her"
+	}
+	return "his"
+}
+
 func (hf *HistoricalFigure) FirstName() string {
 	return strings.Split(hf.Name_, " ")[0]
 }
@@ -134,24 +148,36 @@ func hfShort(id int) string {
 	return "UNKNOWN HISTORICAL FIGURE"
 }
 
+func hfRelated(id, to int) string {
+	if x, ok := world.HistoricalFigures[id]; ok {
+		if t, ok := world.HistoricalFigures[to]; ok {
+			if y, ok := util.Find(t.HfLink, func(l *HfLink) bool { return l.Hfid == id }); ok {
+				return fmt.Sprintf(`%s %s <a class="hf" href="/hf/%d">%s</a>`, t.PossesivePronoun(), y.LinkType, x.Id(), util.Title(x.Name()))
+			}
+		}
+		return fmt.Sprintf(`the %s <a class="hf" href="/hf/%d">%s</a>`, x.Race+util.If(x.Deity, " deity", "")+util.If(x.Force, " force", ""), x.Id(), util.Title(x.Name()))
+	}
+	return "UNKNOWN HISTORICAL FIGURE"
+}
+
 func hfList(ids []int) string {
 	return andList(util.Map(ids, hf))
 }
 
+func hfListRelated(ids []int, to int) string {
+	return andList(util.Map(ids, func(id int) string { return hfRelated(id, to) }))
+}
+
 func pronoun(id int) string {
 	if x, ok := world.HistoricalFigures[id]; ok {
-		if x.Female() {
-			return "she"
-		}
+		return x.Pronoun()
 	}
 	return "he"
 }
 
 func posessivePronoun(id int) string {
 	if x, ok := world.HistoricalFigures[id]; ok {
-		if x.Female() {
-			return "her"
-		}
+		return x.PossesivePronoun()
 	}
 	return "his"
 }
@@ -194,6 +220,16 @@ func region(id int) string {
 func location(siteId int, sitePrefix string, regionId int, regionPrefix string) string {
 	if siteId != -1 {
 		return site(siteId, sitePrefix)
+	}
+	if regionId != -1 {
+		return regionPrefix + " " + region(regionId)
+	}
+	return ""
+}
+
+func place(structureId, siteId int, sitePrefix string, regionId int, regionPrefix string) string {
+	if siteId != -1 {
+		return siteStructure(siteId, structureId, sitePrefix)
 	}
 	if regionId != -1 {
 		return regionPrefix + " " + region(regionId)

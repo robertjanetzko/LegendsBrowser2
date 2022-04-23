@@ -77,3 +77,16 @@ func Map[U, V any](list []U, mapper func(U) V) []V {
 	}
 	return newList
 }
+
+type Identifiable interface {
+	Id() int
+}
+
+func Find[U any](list []*U, predicate func(*U) bool) (*U, bool) {
+	for _, x := range list {
+		if predicate(x) {
+			return x, true
+		}
+	}
+	return nil, false
+}

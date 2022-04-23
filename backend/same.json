@@ -5,25 +5,11 @@
   "HistoricalEventAddHfSiteLink": {
     "Site": "SiteId"
   },
-  "HistoricalEventAgreementMade": {
-    "Destination": "SiteId",
-    "Site": "SiteId",
-    "Source": "SiteId"
-  },
-  "HistoricalEventAgreementRejected": {
-    "Destination": "SiteId",
-    "Site": "SiteId",
-    "Source": "SiteId"
-  },
   "HistoricalEventDiplomatLost": {
-    "Entity": "SiteId",
-    "Involved": "SiteId",
     "Site": "SiteId"
   },
   "HistoricalEventHfDied": {
-    "ItemSubtype": "Cause",
-    "Mat": "Cause",
-    "ShooterMat": "Cause"
+    "ShooterArtifactId": "FeatureLayerId"
   },
   "HistoricalEventPeaceAccepted": {
     "Site": "SiteId"
