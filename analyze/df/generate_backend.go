@@ -435,12 +435,6 @@ func (f Field) EndAction(obj Object) string {
 	return ""
 }
 
-// func (x *{{ $obj.Name }}) RelatedToEntity(id int) bool { return {{ $obj.Related "civId,civ_id,^(?!id)entity_id,^(?!id)entity,enid,^source$,^destination$" }} }
-// func (x *{{ $obj.Name }}) RelatedToHf(id int) bool { return {{ $obj.Related "hfid,hf_id,_hf,hist_figure_id,Hfid,histfig_id,histfig,bodies" }} }
-// func (x *{{ $obj.Name }}) RelatedToArtifact(id int) bool { return {{ $obj.Related "artifact_id" }} }
-// func (x *{{ $obj.Name }}) RelatedToSite(id int) bool { return {{ $obj.Related "site_id" }} }
-// func (x *{{ $obj.Name }}) RelatedToRegion(id int) bool { return {{ $obj.Related "region_id" }} }
-
 var entityRegex, _ = regexp.Compile("(civ|civ_id|enid|[^d]*entity(_id)?|^entity(_id)?|^source|^destination)(_?[0-9])?$")
 var hfRegex, _ = regexp.Compile("(hfid|hf_id|hist_figure_id|histfig_id|histfig|bodies|_hf)")
 var artifactRegex, _ = regexp.Compile("(item|artifact_id)$")
@@ -481,18 +475,6 @@ func (obj Object) Related(regex *regexp.Regexp) string {
 	}
 	return "false"
 }
-
-// func matchesAny(s string, substrings ...string) bool {
-// 	if s == "id" || s == "name" || s == "type" {
-// 		return false
-// 	}
-// 	for _, substring := range substrings {
-// 		if ok, _ := regexp.MatchString(s, substring); ok {
-// 			return true
-// 		}
-// 	}
-// 	return false
-// }
 
 func (obj Object) LegendFields(t string) []Field {
 	var list []Field

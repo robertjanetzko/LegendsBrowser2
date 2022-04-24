@@ -128,7 +128,7 @@ func (x *HistoricalEventAgreementConcluded) Html(c *context) string { // TODO wo
 	return r + " proposed by " + entity(x.Source) + " was concluded by " + entity(x.Destination) + site(x.Site, " at")
 }
 
-func (x *HistoricalEventAgreementFormed) Html(c *context) string { // TODO
+func (x *HistoricalEventAgreementFormed) Html(c *context) string { // TODO no info
 	return "UNKNWON HistoricalEventAgreementFormed"
 }
 
@@ -220,7 +220,7 @@ func (x *HistoricalEventArtifactCreated) Html(c *context) string {
 }
 
 func (x *HistoricalEventArtifactDestroyed) Html(c *context) string {
-	return fmt.Sprintf("%s was destroyed by %s in %s", artifact(x.ArtifactId), entity(x.DestroyerEnid), site(x.SiteId, ""))
+	return artifact(x.ArtifactId) + " was destroyed" + util.If(x.DestroyerEnid != -1, " by "+entity(x.DestroyerEnid), "") + site(x.SiteId, " in")
 }
 
 func (x *HistoricalEventArtifactFound) Html(c *context) string {
@@ -315,7 +315,7 @@ func (x *HistoricalEventArtifactRecovered) Html(c *context) string {
 	return fmt.Sprintf("%s was recovered %s by %s", a, w, h)
 }
 
-func (x *HistoricalEventArtifactStored) Html(c *context) string { // TODO export siteProperty
+func (x *HistoricalEventArtifactStored) Html(c *context) string {
 	if x.HistFigureId != -1 {
 		return fmt.Sprintf("%s stored %s in %s", c.hf(x.HistFigureId), artifact(x.ArtifactId), site(x.SiteId, ""))
 	} else {
@@ -458,15 +458,15 @@ func (x *HistoricalEventChangeHfState) Html(c *context) string {
 	case HistoricalEventChangeHfStateReason_GatherInformation:
 		r = " to gather information"
 	case HistoricalEventChangeHfStateReason_GreatDealOfStress:
-		r = " after a great deal of stress" // TODO check
+		r = " after a great deal of stress"
 	case HistoricalEventChangeHfStateReason_LackOfSleep:
-		r = " after a lack of sleep" // TODO check
+		r = " due to lack of sleep"
 	case HistoricalEventChangeHfStateReason_OnAPilgrimage:
 		r = " on a pilgrimage"
 	case HistoricalEventChangeHfStateReason_Scholarship:
 		r = " in order to pursue scholarship"
 	case HistoricalEventChangeHfStateReason_UnableToLeaveLocation:
-		r = " after being unable to leave the location" // TODO check
+		r = " after being unable to leave a location"
 	}
 
 	switch x.State {
@@ -603,7 +603,7 @@ func (x *HistoricalEventDanceFormCreated) Html(c *context) string {
 	return danceForm(x.FormId) + " was created by " + c.hf(x.HistFigureId) + location(x.SiteId, " in", x.SubregionId, " in") + reason + circumstance
 }
 
-func (x *HistoricalEventDestroyedSite) Html(c *context) string { // TODO NoDefeatMention
+func (x *HistoricalEventDestroyedSite) Html(c *context) string {
 	return entity(x.AttackerCivId) + " defeated " + siteCiv(x.SiteCivId, x.DefenderCivId) + " and destroyed " + site(x.SiteId, "")
 }
 
@@ -636,11 +636,11 @@ func (x *HistoricalEventEntityEquipmentPurchase) Html(c *context) string { // to
 }
 
 func (x *HistoricalEventEntityExpelsHf) Html(c *context) string {
-	return "UNKNWON HistoricalEventEntityExpelsHf"
+	return entity(x.EntityId) + " expelled " + c.hf(x.Hfid) + site(x.SiteId, " from")
 }
 
 func (x *HistoricalEventEntityFledSite) Html(c *context) string {
-	return "UNKNWON HistoricalEventEntityFledSite"
+	return entity(x.FledCivId) + " fled " + site(x.SiteId, "")
 }
 
 func (x *HistoricalEventEntityIncorporated) Html(c *context) string { // TODO site
@@ -684,27 +684,20 @@ func (x *HistoricalEventEntityPersecuted) Html(c *context) string {
 }
 
 func (x *HistoricalEventEntityPrimaryCriminals) Html(c *context) string { // TODO structure
-	switch x.Action {
-	case HistoricalEventEntityPrimaryCriminalsAction_EntityPrimaryCriminals:
-		return entity(x.EntityId) + " became the primary criminal organization in " + site(x.SiteId, "")
-	}
-	return "UNKNWON HistoricalEventEntityPrimaryCriminals"
+	return entity(x.EntityId) + " became the primary criminal organization in " + site(x.SiteId, "")
 }
 
-func (x *HistoricalEventEntityRampagedInSite) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventEntityRampagedInSite"
+func (x *HistoricalEventEntityRampagedInSite) Html(c *context) string {
+	return "the forces of " + entity(x.RampageCivId) + " rampaged throughout " + site(x.SiteId, "")
 }
 
 func (x *HistoricalEventEntityRelocate) Html(c *context) string {
-	switch x.Action {
-	case HistoricalEventEntityRelocateAction_EntityRelocate:
-		return entity(x.EntityId) + " moved" + siteStructure(x.SiteId, x.StructureId, "to")
-	}
-	return "UNKNWON HistoricalEventEntityRelocate"
+	return entity(x.EntityId) + " moved" + siteStructure(x.SiteId, x.StructureId, "to")
 }
 
-func (x *HistoricalEventEntitySearchedSite) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventEntitySearchedSite"
+func (x *HistoricalEventEntitySearchedSite) Html(c *context) string {
+	return entity(x.SearcherCivId) + " searched " + site(x.SiteId, "") +
+		util.If(x.Result == HistoricalEventEntitySearchedSiteResult_FoundNothing, " and found nothing", "")
 }
 
 func (x *HistoricalEventFailedFrameAttempt) Html(c *context) string {
@@ -801,8 +794,8 @@ func (x *HistoricalEventFieldBattle) Html(c *context) string {
 	return fmt.Sprintf("%s attacked %s at %s%s%s", atk, def, region(x.SubregionId), generals, mercs)
 }
 
-func (x *HistoricalEventFirstContact) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventFirstContact"
+func (x *HistoricalEventFirstContact) Html(c *context) string {
+	return entity(x.ContactorEnid) + " made contact with " + entity(x.ContactedEnid) + site(x.SiteId, " at")
 }
 
 func (x *HistoricalEventGamble) Html(c *context) string {
@@ -841,7 +834,7 @@ func (x *HistoricalEventHfConfronted) Html(c *context) string {
 			return ""
 		}))
 }
-func (x *HistoricalEventHfConvicted) Html(c *context) string { // TODO no_prison_available, beating, hammerstrokes, interrogator_hfid
+func (x *HistoricalEventHfConvicted) Html(c *context) string { // TODO no_prison_available, interrogator_hfid
 	r := util.If(x.ConfessedAfterApbArrestEnid != -1, "after being recognized and arrested, ", "")
 	switch {
 	case x.SurveiledCoconspirator:
@@ -862,14 +855,34 @@ func (x *HistoricalEventHfConvicted) Html(c *context) string { // TODO no_prison
 	if x.CorruptConvicterHfid != -1 {
 		r += " and the corrupt " + c.hfRelated(x.CorruptConvicterHfid, x.ConvictedHfid) + " through the machinations of " + c.hfRelated(x.PlotterHfid, x.ConvictedHfid)
 	}
-	switch {
-	case x.DeathPenalty:
-		r += " and sentenced to death"
-	case x.Exiled:
-		r += " and exiled"
-	case x.PrisonMonths > 0:
-		r += fmt.Sprintf(" and imprisoned for a term of %d years", x.PrisonMonths/12)
+	var penaltiy []string
+	penaltiy = append(penaltiy, r)
+	if x.Beating {
+		penaltiy = append(penaltiy, "beaten")
 	}
+	if x.Hammerstrokes > 0 {
+		penaltiy = append(penaltiy, fmt.Sprintf("sentenced to %d hammerstrokes", x.Hammerstrokes))
+	}
+	if x.DeathPenalty {
+		penaltiy = append(penaltiy, "sentenced to death")
+	}
+	if x.Exiled {
+		penaltiy = append(penaltiy, "exiled")
+	}
+	if x.PrisonMonths > 0 {
+		m := x.PrisonMonths % 12
+		y := x.PrisonMonths / 12
+		t := ""
+		if m != 0 && y != 0 {
+			t = fmt.Sprintf("%d %s and %d %s", y, util.If(y > 1, "years", "year"), m, util.If(m > 1, "months", "month"))
+		} else if y != 0 {
+			t = fmt.Sprintf("%d %s", y, util.If(y > 1, "years", "year"))
+		} else {
+			t = fmt.Sprintf("%d %s", m, util.If(m > 1, "months", "month"))
+		}
+		penaltiy = append(penaltiy, "imprisoned for a term of "+t)
+	}
+	r = andList(penaltiy)
 	if x.HeldFirmInInterrogation {
 		r += ". " + c.hfShort(x.ConvictedHfid) + " revealed nothing during interrogation"
 	} else if len(x.ImplicatedHfid) > 0 {
@@ -908,8 +921,9 @@ func (x *HistoricalEventHfEquipmentPurchase) Html(c *context) string { // TODO s
 	return c.hf(x.GroupHfid) + " purchased " + equipmentLevel(x.Quality) + " equipment"
 }
 
-func (x *HistoricalEventHfFreed) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventHfFreed"
+func (x *HistoricalEventHfFreed) Html(c *context) string {
+	return util.If(x.FreeingHfid != -1, c.hf(x.FreeingHfid), "the forces") + " of " + entity(x.FreeingCivId) + " freed " + c.hfList(x.RescuedHfid) +
+		site(x.SiteId, " from") + " and " + siteCiv(x.SiteCivId, x.HoldingCivId)
 }
 
 func (x *HistoricalEventHfGainsSecretGoal) Html(c *context) string {
@@ -963,8 +977,9 @@ func (x *HistoricalEventHfRansomed) Html(c *context) string {
 		". " + c.hfShort(x.RansomedHfid) + " was sent " + site(x.MovedToSiteId, "to")
 }
 
-func (x *HistoricalEventHfReachSummit) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventHfReachSummit"
+func (x *HistoricalEventHfReachSummit) Html(c *context) string {
+	id, _, _ := util.FindInMap(world.MountainPeaks, func(m *MountainPeak) bool { return m.Coords == x.Coords })
+	return c.hfList(x.GroupHfid) + util.If(len(x.GroupHfid) > 1, " were", " was") + " the first to reach the summit of " + mountain(id) + " which rises above " + region(x.SubregionId)
 }
 
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) Html(c *context) string {
@@ -1207,7 +1222,11 @@ func (x *HistoricalEventMasterpieceItemImprovement) Html(c *context) string {
 func (x *HistoricalEventMasterpieceLost) Html(c *context) string {
 	return "UNKNWON HistoricalEventMasterpieceLost"
 }
-func (x *HistoricalEventMerchant) Html(c *context) string { return "UNKNWON HistoricalEventMerchant" }
+func (x *HistoricalEventMerchant) Html(c *context) string {
+	return "merchants from " + entity(x.TraderEntityId) + " visited " + entity(x.DepotEntityId) + site(x.SiteId, " at") +
+		util.If(x.Hardship, " and suffered great hardship", "") +
+		util.If(x.LostValue, ". They reported irregularities with their goods", "")
+}
 
 func (x *HistoricalEventModifiedBuilding) Html(c *context) string {
 	return c.hf(x.ModifierHfid) + " had " + articled(x.Modification.String()) + " added " + siteStructure(x.SiteId, x.StructureId, "to")
@@ -1300,7 +1319,10 @@ func (x *HistoricalEventRazedStructure) Html(c *context) string {
 	return entity(x.CivId) + " razed " + siteStructure(x.SiteId, x.StructureId, "")
 }
 
-func (x *HistoricalEventReclaimSite) Html(c *context) string { // TODO unretire
+func (x *HistoricalEventReclaimSite) Html(c *context) string {
+	if x.Unretire {
+		return siteCiv(x.SiteCivId, x.CivId) + " were taken by a mood to act against their judgment " + site(x.SiteId, "at")
+	}
 	return siteCiv(x.SiteCivId, x.CivId) + " launched an expedition to reclaim " + site(x.SiteId, "")
 }
 
@@ -1350,11 +1372,12 @@ func (x *HistoricalEventSiteDispute) Html(c *context) string {
 	return entity(x.EntityId1) + " of " + site(x.SiteId1, "") + " and " + entity(x.EntityId2) + " of " + site(x.SiteId2, "") + " became embroiled in a dispute over " + x.Dispute.String()
 }
 
-func (x *HistoricalEventSiteRetired) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventSiteRetired"
+func (x *HistoricalEventSiteRetired) Html(c *context) string {
+	return siteCiv(x.SiteCivId, x.CivId) + " at the settlement " + site(x.SiteId, "of") + " regained their senses after " + util.If(x.First, "an initial", "another") + " period of questionable judgment"
 }
-func (x *HistoricalEventSiteSurrendered) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventSiteSurrendered"
+
+func (x *HistoricalEventSiteSurrendered) Html(c *context) string {
+	return siteCiv(x.SiteCivId, x.DefenderCivId) + " surrendered " + site(x.SiteId, "") + " to " + entity(x.AttackerCivId)
 }
 
 func (x *HistoricalEventSiteTakenOver) Html(c *context) string {
@@ -1364,15 +1387,23 @@ func (x *HistoricalEventSiteTakenOver) Html(c *context) string {
 func (x *HistoricalEventSiteTributeForced) Html(c *context) string { // TODO
 	return "UNKNWON HistoricalEventSiteTributeForced"
 }
+
 func (x *HistoricalEventSneakIntoSite) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventSneakIntoSite"
+	return util.If(x.AttackerCivId != -1, entity(x.AttackerCivId), "an unknown civilization") + " slipped " + site(x.SiteId, "into") +
+		util.If(x.SiteCivId != -1 || x.DefenderCivId != -1, ", undetected by "+siteCiv(x.SiteCivId, x.DefenderCivId), "")
 }
-func (x *HistoricalEventSpottedLeavingSite) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventSpottedLeavingSite"
+
+func (x *HistoricalEventSpottedLeavingSite) Html(c *context) string {
+	return c.hf(x.SpotterHfid) + " of " + entity(x.SiteCivId) + " spotted the forces of " + util.If(x.LeaverCivId != -1, entity(x.LeaverCivId), "an unknown civilization") + " slipping out of " + site(x.SiteId, "")
 }
-func (x *HistoricalEventSquadVsSquad) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventSquadVsSquad"
+
+func (x *HistoricalEventSquadVsSquad) Html(c *context) string { // TODO a_leader_hfid
+	return c.hfList(x.AHfid) + " clashed with " +
+		util.If(len(x.DHfid) > 0, c.hfList(x.DHfid), fmt.Sprintf("%d race_%d", x.DNumber, x.DRace)) +
+		site(x.SiteId, " in") +
+		util.If(x.DSlain > 0, fmt.Sprintf(", slaying %d", x.DSlain), "")
 }
+
 func (x *HistoricalEventTacticalSituation) Html(c *context) string { // TODO
 	return "UNKNWON HistoricalEventTacticalSituation"
 }

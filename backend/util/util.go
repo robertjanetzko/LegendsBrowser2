@@ -100,3 +100,12 @@ func Find[U any](list []*U, predicate func(*U) bool) (*U, bool) {
 	}
 	return nil, false
 }
+
+func FindInMap[U any](list map[int]*U, predicate func(*U) bool) (int, *U, bool) {
+	for id, x := range list {
+		if predicate(x) {
+			return id, x, true
+		}
+	}
+	return -1, nil, false
+}

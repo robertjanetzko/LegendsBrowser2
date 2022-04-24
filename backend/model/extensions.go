@@ -324,6 +324,13 @@ func place(structureId, siteId int, sitePrefix string, regionId int, regionPrefi
 	return ""
 }
 
+func mountain(id int) string {
+	if x, ok := world.MountainPeaks[id]; ok {
+		return fmt.Sprintf(`<a class="mountain" href="/site/%d">%s</a>`, x.Id(), util.Title(x.Name()))
+	}
+	return "UNKNOWN MOUNTAIN"
+}
+
 func identity(id int) string {
 	if x, ok := world.Identities[id]; ok {
 		return fmt.Sprintf(`<a class="identity" href="/region/%d">%s</a>`, x.Id(), util.Title(x.Name()))
