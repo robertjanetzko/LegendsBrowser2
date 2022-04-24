@@ -607,8 +607,8 @@ func (x *HistoricalEventDestroyedSite) Html(c *context) string {
 	return entity(x.AttackerCivId) + " defeated " + siteCiv(x.SiteCivId, x.DefenderCivId) + " and destroyed " + site(x.SiteId, "")
 }
 
-func (x *HistoricalEventDiplomatLost) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventDiplomatLost"
+func (x *HistoricalEventDiplomatLost) Html(c *context) string {
+	return entity(x.Entity) + " lost a diplomant in " + site(x.SiteId, "") + ". They suspected the involvement of " + entity(x.Involved)
 }
 
 func (x *HistoricalEventEntityAllianceFormed) Html(c *context) string {
@@ -756,7 +756,7 @@ func (x *HistoricalEventFailedIntrigueCorruption) Html(c *context) string {
 	case HistoricalEventFailedIntrigueCorruptionTopFacet_Pride:
 	case HistoricalEventFailedIntrigueCorruptionTopFacet_StressVulnerability:
 	case HistoricalEventFailedIntrigueCorruptionTopFacet_Swayable:
-		fail += ", despite being swayed by the emotional appeal" // TODO
+		fail += ", despite being swayed by the emotional appeal" // TODO relationship values
 	case HistoricalEventFailedIntrigueCorruptionTopFacet_Vanity:
 	case HistoricalEventFailedIntrigueCorruptionTopFacet_Vengeful:
 	}
@@ -1133,7 +1133,7 @@ func (x *HistoricalEventHfsFormedIntrigueRelationship) Html(c *context) string {
 	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Pride:
 	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_StressVulnerability:
 	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Swayable:
-		// success += ", despite being swayed by the emotional appeal" // TODO
+		// success += ", despite being swayed by the emotional appeal" // TODO relationship values
 	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Vanity:
 	case HistoricalEventHfsFormedIntrigueRelationshipTopFacet_Vengeful:
 	}
@@ -1202,26 +1202,74 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *context) string {
 }
 
 func (x *HistoricalEventMasterpieceArchConstructed) Html(c *context) string {
-	return "UNKNWON HistoricalEventMasterpieceArchConstructed"
+	return c.hf(x.Hfid) + " constructed a masterful " +
+		util.If(x.BuildingSubtype != HistoricalEventMasterpieceArchConstructedBuildingSubtype_Unknown, x.BuildingSubtype.String(), x.BuildingType.String()) +
+		" for " + entity(x.EntityId) + site(x.SiteId, " in")
 }
-func (x *HistoricalEventMasterpieceDye) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventMasterpieceDye"
+func (x *HistoricalEventMasterpieceDye) Html(c *context) string {
+	return c.hf(x.Hfid) + " masterfully dyed a " + x.Mat.String() + " " + x.ItemType.String() + " with " + x.DyeMat +
+		" for " + entity(x.EntityId) + site(x.SiteId, " in")
 }
 func (x *HistoricalEventMasterpieceEngraving) Html(c *context) string {
-	return "UNKNWON HistoricalEventMasterpieceEngraving"
+	return c.hf(x.Hfid) + " created a masterful " +
+		"engraving" +
+		" for " + entity(x.EntityId) + site(x.SiteId, " in")
 }
 func (x *HistoricalEventMasterpieceFood) Html(c *context) string {
-	return "UNKNWON HistoricalEventMasterpieceFood"
+	return c.hf(x.Hfid) + " prepared a masterful " +
+		x.ItemSubtype.String() +
+		" for " + entity(x.EntityId) + site(x.SiteId, " in")
 }
 func (x *HistoricalEventMasterpieceItem) Html(c *context) string {
-	return "UNKNWON HistoricalEventMasterpieceItem"
+	return c.hf(x.Hfid) + " created a masterful " +
+		x.Mat + " " + util.If(x.ItemSubtype != "", x.ItemSubtype, x.ItemType) +
+		" for " + entity(x.EntityId) + site(x.SiteId, " in")
 }
 func (x *HistoricalEventMasterpieceItemImprovement) Html(c *context) string {
-	return "UNKNWON HistoricalEventMasterpieceItemImprovement"
+	i := ""
+	switch x.ImprovementType {
+	case HistoricalEventMasterpieceItemImprovementImprovementType_ArtImage:
+		i = "a masterful image in " + x.ImpMat
+	case HistoricalEventMasterpieceItemImprovementImprovementType_Bands:
+		i = "masterful bands in " + x.ImpMat
+	case HistoricalEventMasterpieceItemImprovementImprovementType_Covered:
+		i = "a masterful covering in " + x.ImpMat
+	case HistoricalEventMasterpieceItemImprovementImprovementType_Itemspecific: // TODO check subtypes
+		i = "a masterful handle in " + x.ImpMat
+	case HistoricalEventMasterpieceItemImprovementImprovementType_RingsHanging:
+		i = "masterful rings in " + x.ImpMat
+	case HistoricalEventMasterpieceItemImprovementImprovementType_Spikes:
+		i = "masterful spikes in " + x.ImpMat
+	}
+	return c.hf(x.Hfid) + " added " + i + " to " +
+		articled(x.Mat+" "+util.If(x.ItemSubtype != "", x.ItemSubtype, x.ItemType)) +
+		" for " + entity(x.EntityId) + site(x.SiteId, " in")
 }
 func (x *HistoricalEventMasterpieceLost) Html(c *context) string {
-	return "UNKNWON HistoricalEventMasterpieceLost"
+	if e, ok := world.HistoricalEvents[x.CreationEvent]; ok {
+		switch y := e.Details.(type) {
+		case *HistoricalEventMasterpieceArchConstructed:
+			return "the " + util.If(y.BuildingSubtype != HistoricalEventMasterpieceArchConstructedBuildingSubtype_Unknown, y.BuildingSubtype.String(), y.BuildingType.String()) +
+				" masterfully constructed by " + c.hf(y.Hfid) + " for " + entity(y.EntityId) + site(x.Site, " at") + " in " + Time(e.Year, e.Seconds72) +
+				" was destroyed" + util.If(x.Histfig != -1, " by "+c.hfRelated(x.Histfig, y.Hfid), "") +
+				" by " + x.Method + site(x.Site, " at")
+		case *HistoricalEventMasterpieceEngraving:
+			return "a masterful engraving created by " + c.hf(y.Hfid) + " for " + entity(y.EntityId) + site(x.Site, " at") + " in " + Time(e.Year, e.Seconds72) +
+				" was destroyed" + util.If(x.Histfig != -1, " by "+c.hfRelated(x.Histfig, y.Hfid), "") +
+				" by " + x.Method + site(x.Site, " at")
+		case *HistoricalEventMasterpieceItem:
+			return "the masterful " +
+				y.Mat + " " + util.If(y.ItemSubtype != "", y.ItemSubtype, y.ItemType) +
+				" created by " + c.hf(y.Hfid) + " for " + entity(y.EntityId) + site(x.Site, " at") + " in " + Time(e.Year, e.Seconds72) +
+				" was destroyed" + util.If(x.Histfig != -1, " by "+c.hfRelated(x.Histfig, y.Hfid), "") +
+				" by " + x.Method + site(x.Site, " at")
+		default:
+			return c.hf(x.Histfig) + " destroyed a masterful item" + site(x.Site, " in") + " -- " + fmt.Sprintf("%T", e.Details)
+		}
+	}
+	return c.hf(x.Histfig) + " destroyed a masterful item" + site(x.Site, " in")
 }
+
 func (x *HistoricalEventMerchant) Html(c *context) string {
 	return "merchants from " + entity(x.TraderEntityId) + " visited " + entity(x.DepotEntityId) + site(x.SiteId, " at") +
 		util.If(x.Hardship, " and suffered great hardship", "") +
@@ -1366,7 +1414,9 @@ func (x *HistoricalEventReplacedStructure) Html(c *context) string {
 	return siteCiv(x.SiteCivId, x.CivId) + " replaced " + siteStructure(x.SiteId, x.OldAbId, "") + " with " + structure(x.SiteId, x.NewAbId)
 }
 
-func (x *HistoricalEventSiteDied) Html(c *context) string { return "UNKNWON HistoricalEventSiteDied" } // TODO
+func (x *HistoricalEventSiteDied) Html(c *context) string {
+	return siteCiv(x.SiteCivId, x.CivId) + " abandonned the settlement of " + site(x.SiteId, "")
+}
 
 func (x *HistoricalEventSiteDispute) Html(c *context) string {
 	return entity(x.EntityId1) + " of " + site(x.SiteId1, "") + " and " + entity(x.EntityId2) + " of " + site(x.SiteId2, "") + " became embroiled in a dispute over " + x.Dispute.String()
@@ -1384,11 +1434,13 @@ func (x *HistoricalEventSiteTakenOver) Html(c *context) string {
 	return entity(x.AttackerCivId) + " defeated " + siteCiv(x.SiteCivId, x.DefenderCivId) + " and took over " + site(x.SiteId, "") + ". The new government was called " + entity(x.NewSiteCivId)
 }
 
-func (x *HistoricalEventSiteTributeForced) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventSiteTributeForced"
+func (x *HistoricalEventSiteTributeForced) Html(c *context) string {
+	return entity(x.AttackerCivId) + " secured tribute from " + siteCiv(x.SiteCivId, x.DefenderCivId) +
+		util.If(x.SiteId != -1, ", to be delivered"+site(x.SiteId, " from"), "") +
+		util.If(x.Season != HistoricalEventSiteTributeForcedSeason_Unknown, " every "+x.Season.String(), "")
 }
 
-func (x *HistoricalEventSneakIntoSite) Html(c *context) string { // TODO
+func (x *HistoricalEventSneakIntoSite) Html(c *context) string {
 	return util.If(x.AttackerCivId != -1, entity(x.AttackerCivId), "an unknown civilization") + " slipped " + site(x.SiteId, "into") +
 		util.If(x.SiteCivId != -1 || x.DefenderCivId != -1, ", undetected by "+siteCiv(x.SiteCivId, x.DefenderCivId), "")
 }
@@ -1404,8 +1456,52 @@ func (x *HistoricalEventSquadVsSquad) Html(c *context) string { // TODO a_leader
 		util.If(x.DSlain > 0, fmt.Sprintf(", slaying %d", x.DSlain), "")
 }
 
-func (x *HistoricalEventTacticalSituation) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventTacticalSituation"
+func plan(diff int) string { // TODO not exact
+	switch {
+	case diff > 100:
+		return "unrolled a brilliant tactical plan"
+	case diff > 30:
+		return "put forth a sound plan"
+	case diff > 0:
+		return "used good tactics"
+	case diff > -20:
+		return "made a poor plan"
+	case diff > -60:
+		return "blundered terribly"
+	default:
+		return "made an outright foolish plan"
+	}
+}
+
+func (x *HistoricalEventTacticalSituation) Html(c *context) string {
+	r := ""
+	if x.ATacticianHfid == -1 && x.DTacticianHfid == -1 {
+		r = "the forces shifted"
+	} else if x.ATacticianHfid != -1 && x.DTacticianHfid == -1 {
+		r += c.hf(x.ATacticianHfid) + " " + plan(x.ATacticsRoll-x.DTacticsRoll)
+	} else if x.ATacticianHfid == -1 && x.DTacticianHfid != -1 {
+		r += c.hf(x.DTacticianHfid) + " " + plan(x.DTacticsRoll-x.ATacticsRoll)
+	} else {
+		if x.ATacticsRoll < x.DTacticsRoll {
+			r = c.hf(x.DTacticianHfid) + "'s tactical planning was superior to " + c.hf(x.ATacticianHfid) + "'s"
+		} else {
+			r = c.hf(x.ATacticianHfid) + " outmatched " + c.hf(x.DTacticianHfid) + " with a cunning plan"
+		}
+	}
+	switch x.Situation {
+	case HistoricalEventTacticalSituationSituation_AFavored: // TODO wording
+	case HistoricalEventTacticalSituationSituation_ASlightlyFavored:
+		r += ", " + util.If(x.DTacticsRoll > x.ATacticsRoll, "but", "and") + " the attackers had a slight positional advantage"
+	case HistoricalEventTacticalSituationSituation_AStronglyFavored:
+		r += ", " + util.If(x.DTacticsRoll > x.ATacticsRoll, "but", "and") + " the attackers had a strong positional advantage"
+	case HistoricalEventTacticalSituationSituation_DSlightlyFavored:
+		r += ", " + util.If(x.ATacticsRoll > x.DTacticsRoll, "but", "and") + " the defenders had a slight positional advantage"
+	case HistoricalEventTacticalSituationSituation_DStronglyFavored:
+		r += ", " + util.If(x.ATacticsRoll > x.DTacticsRoll, "but", "and") + " the defenders had a strong positional advantage"
+	case HistoricalEventTacticalSituationSituation_NeitherFavored:
+		r += ", but neither side had a positional advantage"
+	}
+	return r + site(x.SiteId, " in")
 }
 
 func (x *HistoricalEventTrade) Html(c *context) string {

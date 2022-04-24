@@ -7339,8 +7339,10 @@ func NewHistoricalEventDiplomatLost() *HistoricalEventDiplomatLost {
 		SiteId:   -1,
 	}
 }
-func (x *HistoricalEventDiplomatLost) Type() string                  { return "diplomat lost" }
-func (x *HistoricalEventDiplomatLost) RelatedToEntity(id int) bool   { return x.Entity == id }
+func (x *HistoricalEventDiplomatLost) Type() string { return "diplomat lost" }
+func (x *HistoricalEventDiplomatLost) RelatedToEntity(id int) bool {
+	return x.Entity == id || x.Involved == id
+}
 func (x *HistoricalEventDiplomatLost) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEventDiplomatLost) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventDiplomatLost) RelatedToSite(id int) bool     { return x.SiteId == id }
@@ -12335,9 +12337,6 @@ type HistoricalEventMasterpieceArchConstructed struct {
 	BuildingType    HistoricalEventMasterpieceArchConstructedBuildingType    `json:"buildingType" legend:"plus"`    // building_type
 	EntityId        int                                                      `json:"entityId" legend:"base"`        // entity_id
 	Hfid            int                                                      `json:"hfid" legend:"base"`            // hfid
-	Maker           int                                                      `json:"maker" legend:"plus"`           // maker
-	MakerEntity     int                                                      `json:"makerEntity" legend:"plus"`     // maker_entity
-	Site            int                                                      `json:"site" legend:"plus"`            // site
 	SiteId          int                                                      `json:"siteId" legend:"base"`          // site_id
 	SkillAtTime     HistoricalEventMasterpieceArchConstructedSkillAtTime     `json:"skillAtTime" legend:"both"`     // skill_at_time
 	Unk2            int                                                      `json:"unk2" legend:"plus"`            // unk_2
@@ -12348,9 +12347,6 @@ func NewHistoricalEventMasterpieceArchConstructed() *HistoricalEventMasterpieceA
 		BuildingCustom: -1,
 		EntityId:       -1,
 		Hfid:           -1,
-		Maker:          -1,
-		MakerEntity:    -1,
-		Site:           -1,
 		SiteId:         -1,
 		Unk2:           -1,
 	}
@@ -12359,14 +12355,12 @@ func (x *HistoricalEventMasterpieceArchConstructed) Type() string {
 	return "masterpiece arch constructed"
 }
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToEntity(id int) bool {
-	return x.EntityId == id || x.MakerEntity == id
+	return x.EntityId == id
 }
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToHf(id int) bool       { return x.Hfid == id }
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventMasterpieceArchConstructed) RelatedToSite(id int) bool {
-	return x.Site == id || x.SiteId == id
-}
-func (x *HistoricalEventMasterpieceArchConstructed) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToRegion(id int) bool   { return false }
 
 func (x *HistoricalEventMasterpieceArchConstructed) CheckFields() {
 	if x.BuildingCustom != x.EntityId {
@@ -12377,33 +12371,6 @@ func (x *HistoricalEventMasterpieceArchConstructed) CheckFields() {
 	}
 	if x.BuildingCustom != x.SiteId {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["BuildingCustom"]["SiteId"] = false
-	}
-	if x.Maker != x.EntityId {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Maker"]["EntityId"] = false
-	}
-	if x.Maker != x.Hfid {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Maker"]["Hfid"] = false
-	}
-	if x.Maker != x.SiteId {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Maker"]["SiteId"] = false
-	}
-	if x.MakerEntity != x.EntityId {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["MakerEntity"]["EntityId"] = false
-	}
-	if x.MakerEntity != x.Hfid {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["MakerEntity"]["Hfid"] = false
-	}
-	if x.MakerEntity != x.SiteId {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["MakerEntity"]["SiteId"] = false
-	}
-	if x.Site != x.EntityId {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Site"]["EntityId"] = false
-	}
-	if x.Site != x.Hfid {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Site"]["Hfid"] = false
-	}
-	if x.Site != x.SiteId {
-		sameFields["HistoricalEventMasterpieceArchConstructed"]["Site"]["SiteId"] = false
 	}
 	if x.Unk2 != x.EntityId {
 		sameFields["HistoricalEventMasterpieceArchConstructed"]["Unk2"]["EntityId"] = false
@@ -12432,15 +12399,6 @@ func (x *HistoricalEventMasterpieceArchConstructed) MarshalJSON() ([]byte, error
 	}
 	if x.Hfid != -1 {
 		d["hfid"] = x.Hfid
-	}
-	if x.Maker != -1 {
-		d["maker"] = x.Maker
-	}
-	if x.MakerEntity != -1 {
-		d["makerEntity"] = x.MakerEntity
-	}
-	if x.Site != -1 {
-		d["site"] = x.Site
 	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
@@ -31914,19 +31872,19 @@ func parseHistoricalEventMasterpieceArchConstructedPlus(p *util.XMLParser, obj *
 				if err != nil {
 					return nil, err
 				}
-				obj.Maker = num(data)
+				obj.Hfid = num(data)
 			case "maker_entity":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.MakerEntity = num(data)
+				obj.EntityId = num(data)
 			case "site":
 				data, err := p.Value()
 				if err != nil {
 					return nil, err
 				}
-				obj.Site = num(data)
+				obj.SiteId = num(data)
 			case "skill_at_time":
 				data, err := p.Value()
 				if err != nil {

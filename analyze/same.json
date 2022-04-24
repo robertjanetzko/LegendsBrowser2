@@ -104,6 +104,11 @@
     "Woundee": "WoundeeHfid",
     "Wounder": "WounderHfid"
   },
+  "HistoricalEventMasterpieceArchConstructed": {
+    "Maker": "Hfid",
+    "MakerEntity": "EntityId",
+    "Site": "SiteId"
+  },
   "HistoricalEventMasterpieceEngraving": {
     "Maker": "Hfid",
     "MakerEntity": "EntityId",

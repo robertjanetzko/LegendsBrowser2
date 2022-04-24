@@ -435,7 +435,7 @@ func (f Field) EndAction(obj Object) string {
 	return ""
 }
 
-var entityRegex, _ = regexp.Compile("(civ|civ_id|enid|[^d]*entity(_id)?|^entity(_id)?|^source|^destination)(_?[0-9])?$")
+var entityRegex, _ = regexp.Compile("(civ|civ_id|enid|[^d]*entity(_id)?|^entity(_id)?|^source|^destination|^involved)(_?[0-9])?$")
 var hfRegex, _ = regexp.Compile("(hfid|hf_id|hist_figure_id|histfig_id|histfig|bodies|_hf)")
 var artifactRegex, _ = regexp.Compile("(item|artifact_id)$")
 var siteRegex, _ = regexp.Compile("(site_id|site)[0-9]?$")
