@@ -11,6 +11,12 @@
   "HistoricalEventAddHfSiteLink": {
     "Site": "SiteId"
   },
+  "HistoricalEventAgreementMade": {
+    "Site": "SiteId"
+  },
+  "HistoricalEventAgreementRejected": {
+    "Site": "SiteId"
+  },
   "HistoricalEventArtifactCreated": {
     "CreatorHfid": "HistFigureId",
     "CreatorUnitId": "UnitId",

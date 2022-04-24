@@ -6,24 +6,15 @@
     "Site": "SiteId"
   },
   "HistoricalEventAgreementMade": {
-    "Destination": "SiteId",
-    "Site": "SiteId",
-    "Source": "SiteId"
+    "Site": "SiteId"
   },
   "HistoricalEventAgreementRejected": {
-    "Destination": "SiteId",
-    "Site": "SiteId",
-    "Source": "SiteId"
+    "Site": "SiteId"
   },
   "HistoricalEventDiplomatLost": {
     "Entity": "SiteId",
     "Involved": "SiteId",
     "Site": "SiteId"
-  },
-  "HistoricalEventHfDied": {
-    "ItemSubtype": "Cause",
-    "Mat": "Cause",
-    "ShooterMat": "Cause"
   },
   "HistoricalEventPeaceAccepted": {
     "Site": "SiteId"

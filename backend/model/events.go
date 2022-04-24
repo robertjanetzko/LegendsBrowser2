@@ -119,16 +119,45 @@ func (x *HistoricalEventAddHfSiteLink) Html(c *context) string {
 	}
 }
 
+func (x *HistoricalEventAgreementConcluded) Html(c *context) string { // TODO wording
+	r := ""
+	switch x.Topic {
+	case HistoricalEventAgreementConcludedTopic_Treequota:
+		r += "a lumber agreement"
+	}
+	return r + " proposed by " + entity(x.Source) + " was concluded by " + entity(x.Destination) + site(x.Site, " at")
+}
+
 func (x *HistoricalEventAgreementFormed) Html(c *context) string { // TODO
 	return "UNKNWON HistoricalEventAgreementFormed"
 }
 
-func (x *HistoricalEventAgreementMade) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventAgreementMade"
+func (x *HistoricalEventAgreementMade) Html(c *context) string {
+	r := ""
+	switch x.Topic {
+	case HistoricalEventAgreementMadeTopic_Becomelandholder:
+		r += "the establishment of landed nobility"
+	case HistoricalEventAgreementMadeTopic_Promotelandholder:
+		r += "the elevation of landed nobility"
+	case HistoricalEventAgreementMadeTopic_Treequota:
+		r += "a lumber agreement"
+	}
+	return r + " proposed by " + entity(x.Source) + " was accepted by " + entity(x.Destination) + site(x.SiteId, " at")
 }
 
-func (x *HistoricalEventAgreementRejected) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventAgreementRejected"
+func (x *HistoricalEventAgreementRejected) Html(c *context) string {
+	r := ""
+	switch x.Topic {
+	case HistoricalEventAgreementRejectedTopic_Becomelandholder:
+		r += "the establishment of landed nobility"
+	case HistoricalEventAgreementRejectedTopic_Treequota:
+		r += "a lumber agreement"
+	case HistoricalEventAgreementRejectedTopic_Tributeagreement:
+		r += "a tribute agreement"
+	case HistoricalEventAgreementRejectedTopic_Unknown10:
+		r += "a demand of unconditional surrender"
+	}
+	return r + " proposed by " + entity(x.Source) + " was rejected by " + entity(x.Destination) + site(x.SiteId, " at")
 }
 
 func (x *HistoricalEventArtifactClaimFormed) Html(c *context) string {
@@ -1131,18 +1160,23 @@ func (x *HistoricalEventInsurrectionStarted) Html(c *context) string {
 func (x *HistoricalEventItemStolen) Html(c *context) string {
 	i := util.If(x.Item != -1, artifact(x.Item), articled(x.Mat+" "+x.ItemType))
 	circumstance := ""
-	switch x.Circumstance.Type {
-	case HistoricalEventItemStolenCircumstanceType_Defeated:
-		circumstance = " after defeating " + c.hfRelated(x.Circumstance.Defeated, x.Histfig)
-	case HistoricalEventItemStolenCircumstanceType_Histeventcollection:
-	case HistoricalEventItemStolenCircumstanceType_Murdered:
+	if x.Circumstance != nil {
+		switch x.Circumstance.Type {
+		case HistoricalEventItemStolenCircumstanceType_Defeated:
+			circumstance = " after defeating " + c.hfRelated(x.Circumstance.Defeated, x.Histfig)
+		case HistoricalEventItemStolenCircumstanceType_Histeventcollection: // TODO during ...
+		case HistoricalEventItemStolenCircumstanceType_Murdered:
+			circumstance = " after murdering " + c.hfRelated(x.Circumstance.Defeated, x.Histfig)
+		}
 	}
 
 	switch x.TheftMethod {
-	case HistoricalEventItemStolenTheftMethod_Confiscated: // TODO
+	case HistoricalEventItemStolenTheftMethod_Confiscated:
+		return i + " was confiscated by " + c.hf(x.Histfig) + circumstance + util.If(x.Site != -1, site(x.Site, " in"), "")
 	case HistoricalEventItemStolenTheftMethod_Looted:
+		return i + " was looted " + util.If(x.Site != -1, site(x.Site, " from"), "") + " by " + c.hf(x.Histfig) + circumstance
 	case HistoricalEventItemStolenTheftMethod_Recovered:
-		return i + " was recovered by " + c.hf(x.Histfig) + circumstance
+		return i + " was recovered by " + c.hf(x.Histfig) + circumstance + util.If(x.Site != -1, site(x.Site, " in"), "")
 	}
 	return i + " was stolen " + siteStructure(x.Site, x.Structure, "from") + " by " + c.hf(x.Histfig) + circumstance +
 		util.If(x.StashSite != -1, " and brought "+site(x.StashSite, "to"), "")
@@ -1154,6 +1188,9 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *context) string {
 
 func (x *HistoricalEventMasterpieceArchConstructed) Html(c *context) string {
 	return "UNKNWON HistoricalEventMasterpieceArchConstructed"
+}
+func (x *HistoricalEventMasterpieceDye) Html(c *context) string { // TODO
+	return "UNKNWON HistoricalEventMasterpieceDye"
 }
 func (x *HistoricalEventMasterpieceEngraving) Html(c *context) string {
 	return "UNKNWON HistoricalEventMasterpieceEngraving"
@@ -1371,11 +1408,4 @@ func (x *HistoricalEventWrittenContentComposed) Html(c *context) string {
 		circumstance = " after praying to " + util.If(x.ReasonId == x.CircumstanceId, c.hfShort(x.CircumstanceId), c.hfRelated(x.CircumstanceId, x.HistFigureId))
 	}
 	return writtenContent(x.WcId) + " was authored by " + c.hf(x.HistFigureId) + location(x.SiteId, " in", x.SubregionId, " in") + reason + circumstance
-}
-
-func (x *HistoricalEventAgreementConcluded) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventAgreementConcluded"
-}
-func (x *HistoricalEventMasterpieceDye) Html(c *context) string { // TODO
-	return "UNKNWON HistoricalEventMasterpieceDye"
 }

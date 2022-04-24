@@ -3751,7 +3751,6 @@ func (s HistoricalEventAgreementMadeTopic) MarshalJSON() ([]byte, error) {
 
 type HistoricalEventAgreementMade struct {
 	Destination int                               `json:"destination" legend:"plus"` // destination
-	Site        int                               `json:"site" legend:"plus"`        // site
 	SiteId      int                               `json:"siteId" legend:"base"`      // site_id
 	Source      int                               `json:"source" legend:"plus"`      // source
 	Topic       HistoricalEventAgreementMadeTopic `json:"topic" legend:"plus"`       // topic
@@ -3760,7 +3759,6 @@ type HistoricalEventAgreementMade struct {
 func NewHistoricalEventAgreementMade() *HistoricalEventAgreementMade {
 	return &HistoricalEventAgreementMade{
 		Destination: -1,
-		Site:        -1,
 		SiteId:      -1,
 		Source:      -1,
 	}
@@ -3776,9 +3774,6 @@ func (x *HistoricalEventAgreementMade) CheckFields() {
 	if x.Destination != x.SiteId {
 		sameFields["HistoricalEventAgreementMade"]["Destination"]["SiteId"] = false
 	}
-	if x.Site != x.SiteId {
-		sameFields["HistoricalEventAgreementMade"]["Site"]["SiteId"] = false
-	}
 	if x.Source != x.SiteId {
 		sameFields["HistoricalEventAgreementMade"]["Source"]["SiteId"] = false
 	}
@@ -3788,9 +3783,6 @@ func (x *HistoricalEventAgreementMade) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
 	if x.Destination != -1 {
 		d["destination"] = x.Destination
-	}
-	if x.Site != -1 {
-		d["site"] = x.Site
 	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
@@ -3848,7 +3840,6 @@ func (s HistoricalEventAgreementRejectedTopic) MarshalJSON() ([]byte, error) {
 
 type HistoricalEventAgreementRejected struct {
 	Destination int                                   `json:"destination" legend:"plus"` // destination
-	Site        int                                   `json:"site" legend:"plus"`        // site
 	SiteId      int                                   `json:"siteId" legend:"base"`      // site_id
 	Source      int                                   `json:"source" legend:"plus"`      // source
 	Topic       HistoricalEventAgreementRejectedTopic `json:"topic" legend:"plus"`       // topic
@@ -3857,7 +3848,6 @@ type HistoricalEventAgreementRejected struct {
 func NewHistoricalEventAgreementRejected() *HistoricalEventAgreementRejected {
 	return &HistoricalEventAgreementRejected{
 		Destination: -1,
-		Site:        -1,
 		SiteId:      -1,
 		Source:      -1,
 	}
@@ -3873,9 +3863,6 @@ func (x *HistoricalEventAgreementRejected) CheckFields() {
 	if x.Destination != x.SiteId {
 		sameFields["HistoricalEventAgreementRejected"]["Destination"]["SiteId"] = false
 	}
-	if x.Site != x.SiteId {
-		sameFields["HistoricalEventAgreementRejected"]["Site"]["SiteId"] = false
-	}
 	if x.Source != x.SiteId {
 		sameFields["HistoricalEventAgreementRejected"]["Source"]["SiteId"] = false
 	}
@@ -3885,9 +3872,6 @@ func (x *HistoricalEventAgreementRejected) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
 	if x.Destination != -1 {
 		d["destination"] = x.Destination
-	}
-	if x.Site != -1 {
-		d["site"] = x.Site
 	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
@@ -22480,7 +22464,7 @@ func parseHistoricalEventAgreementMadePlus(p *util.XMLParser, obj *HistoricalEve
 				if err != nil {
 					return nil, err
 				}
-				obj.Site = num(data)
+				obj.SiteId = num(data)
 			case "source":
 				data, err := p.Value()
 				if err != nil {
@@ -22556,7 +22540,7 @@ func parseHistoricalEventAgreementRejectedPlus(p *util.XMLParser, obj *Historica
 				if err != nil {
 					return nil, err
 				}
-				obj.Site = num(data)
+				obj.SiteId = num(data)
 			case "source":
 				data, err := p.Value()
 				if err != nil {
