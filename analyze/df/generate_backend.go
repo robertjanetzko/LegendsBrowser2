@@ -7,6 +7,7 @@ import (
 	"go/format"
 	"io/ioutil"
 	"os"
+	"regexp"
 	"sort"
 	"strings"
 	"text/template"
@@ -120,11 +121,11 @@ func (x *{{ $obj.Name }}) Name() string { return x.Name_ }
 {{- if $obj.SubType }}
 func (x *{{ $obj.Name }}) Type() string { return "{{ $obj.SubType }}" }
 {{- end }}
-func (x *{{ $obj.Name }}) RelatedToEntity(id int) bool { return {{ $obj.Related "civId,civ_id,entity_id,entity,enid" }} }
-func (x *{{ $obj.Name }}) RelatedToHf(id int) bool { return {{ $obj.Related "hfid,hf_id,_hf,hist_figure_id,Hfid,histfig_id,histfig,bodies" }} }
-func (x *{{ $obj.Name }}) RelatedToArtifact(id int) bool { return {{ $obj.Related "artifact_id" }} }
-func (x *{{ $obj.Name }}) RelatedToSite(id int) bool { return {{ $obj.Related "site_id" }} }
-func (x *{{ $obj.Name }}) RelatedToRegion(id int) bool { return {{ $obj.Related "region_id" }} }
+func (x *{{ $obj.Name }}) RelatedToEntity(id int) bool { return {{ $obj.RelatedToEntity }} }
+func (x *{{ $obj.Name }}) RelatedToHf(id int) bool { return {{ $obj.RelatedToHf }} }
+func (x *{{ $obj.Name }}) RelatedToArtifact(id int) bool { return {{ $obj.RelatedToArtifact }} }
+func (x *{{ $obj.Name }}) RelatedToSite(id int) bool { return {{ $obj.RelatedToSite }} }
+func (x *{{ $obj.Name }}) RelatedToRegion(id int) bool { return {{ $obj.RelatedToRegion }} }
 
 func (x *{{ $obj.Name }}) CheckFields() {
 	{{- range $field := ($obj.LegendFields "plus") }}
@@ -434,11 +435,39 @@ func (f Field) EndAction(obj Object) string {
 	return ""
 }
 
-func (obj Object) Related(fields string) string {
+// func (x *{{ $obj.Name }}) RelatedToEntity(id int) bool { return {{ $obj.Related "civId,civ_id,^(?!id)entity_id,^(?!id)entity,enid,^source$,^destination$" }} }
+// func (x *{{ $obj.Name }}) RelatedToHf(id int) bool { return {{ $obj.Related "hfid,hf_id,_hf,hist_figure_id,Hfid,histfig_id,histfig,bodies" }} }
+// func (x *{{ $obj.Name }}) RelatedToArtifact(id int) bool { return {{ $obj.Related "artifact_id" }} }
+// func (x *{{ $obj.Name }}) RelatedToSite(id int) bool { return {{ $obj.Related "site_id" }} }
+// func (x *{{ $obj.Name }}) RelatedToRegion(id int) bool { return {{ $obj.Related "region_id" }} }
+
+var entityRegex, _ = regexp.Compile("(civ|civ_id|enid|[^d]*entity(_id)?|^entity(_id)?|^source|^destination)(_?[0-9])?$")
+var hfRegex, _ = regexp.Compile("(hfid|hf_id|hist_figure_id|histfig_id|histfig|bodies|_hf)")
+var artifactRegex, _ = regexp.Compile("(item|artifact_id)$")
+var siteRegex, _ = regexp.Compile("(site_id|site)[0-9]?$")
+var regionRegex, _ = regexp.Compile("(region_id|srid)$")
+
+func (obj Object) RelatedToEntity() string {
+	return obj.Related(entityRegex)
+}
+func (obj Object) RelatedToHf() string {
+	return obj.Related(hfRegex)
+}
+func (obj Object) RelatedToArtifact() string {
+	return obj.Related(artifactRegex)
+}
+func (obj Object) RelatedToSite() string {
+	return obj.Related(siteRegex)
+}
+func (obj Object) RelatedToRegion() string {
+	return obj.Related(regionRegex)
+}
+
+func (obj Object) Related(regex *regexp.Regexp) string {
 	var list []string
-	fs := strings.Split(fields, ",")
 	for n, f := range obj.Fields {
-		if f.Type == "int" && util.ContainsAny(n, fs...) && !f.SameField(obj) {
+		if f.Type == "int" && !f.SameField(obj) && regex.MatchString(n) {
+			fmt.Println(n, regex, regex.MatchString(n))
 			if !f.Multiple {
 				list = append(list, fmt.Sprintf("x.%s == id", f.Name))
 			} else {
@@ -452,6 +481,18 @@ func (obj Object) Related(fields string) string {
 	}
 	return "false"
 }
+
+// func matchesAny(s string, substrings ...string) bool {
+// 	if s == "id" || s == "name" || s == "type" {
+// 		return false
+// 	}
+// 	for _, substring := range substrings {
+// 		if ok, _ := regexp.MatchString(s, substring); ok {
+// 			return true
+// 		}
+// 	}
+// 	return false
+// }
 
 func (obj Object) LegendFields(t string) []Field {
 	var list []Field

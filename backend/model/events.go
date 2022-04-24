@@ -891,7 +891,7 @@ func (x *HistoricalEventHfDisturbedStructure) Html(c *context) string {
 	return c.hf(x.HistFigId) + " disturbed " + siteStructure(x.SiteId, x.StructureId, "")
 }
 
-func (x *HistoricalEventHfDoesInteraction) Html(c *context) string {
+func (x *HistoricalEventHfDoesInteraction) Html(c *context) string { // TODO ignore source
 	i := strings.Index(x.InteractionAction, " ")
 	if i > 0 {
 		return c.hf(x.DoerHfid) + " " + x.InteractionAction[:i+1] + c.hfRelated(x.TargetHfid, x.DoerHfid) + x.InteractionAction[i:] + util.If(x.Site != -1, site(x.Site, " in"), "")

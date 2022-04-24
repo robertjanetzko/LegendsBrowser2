@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"regexp"
 	"strings"
 )
 
@@ -26,6 +27,15 @@ func Values[K comparable, V any](input map[K]V) []V {
 func ContainsAny(s string, substrings ...string) bool {
 	for _, substring := range substrings {
 		if strings.Contains(s, substring) {
+			return true
+		}
+	}
+	return false
+}
+
+func MatchesAny(s string, substrings ...string) bool {
+	for _, substring := range substrings {
+		if ok, _ := regexp.MatchString(s, substring); ok {
 			return true
 		}
 	}
