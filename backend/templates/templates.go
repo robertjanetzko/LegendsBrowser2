@@ -31,7 +31,7 @@ func NewDebug(funcMap template.FuncMap) *Template {
 	}
 }
 
-var DebugTemplates = true
+var DebugTemplates = false
 
 func (t *Template) Render(w io.Writer, name string, data interface{}) error {
 	if DebugTemplates {

@@ -9,6 +9,7 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 	"os"
+	"os/exec"
 	"runtime"
 	"sort"
 	"strconv"
@@ -73,43 +74,7 @@ func main() {
 		}
 
 		world = w
-
-		fmt.Println("Hallo Welt!")
 		runtime.GC()
-		// world.Process()
-
-		// model.ListOtherElements("world", &[]*model.World{&world})
-		// model.ListOtherElements("region", &world.Regions)
-		// model.ListOtherElements("underground regions", &world.UndergroundRegions)
-		// model.ListOtherElements("landmasses", &world.Landmasses)
-		// model.ListOtherElements("sites", &world.Sites)
-		// model.ListOtherElements("world constructions", &world.WorldConstructions)
-		// model.ListOtherElements("artifacts", &world.Artifacts)
-		// model.ListOtherElements("entities", &world.Entities)
-		// model.ListOtherElements("hf", &world.HistoricalFigures)
-		// model.ListOtherElements("events", &world.HistoricalEvents)
-		// model.ListOtherElements("collections", &world.HistoricalEventCollections)
-		// model.ListOtherElements("era", &world.HistoricalEras)
-		// model.ListOtherElements("danceForm", &world.DanceForms)
-		// model.ListOtherElements("musicalForm", &world.MusicalForms)
-		// model.ListOtherElements("poeticForm", &world.PoeticForms)
-		// model.ListOtherElements("written", &world.WrittenContents)
-
-		// server.RegisterResource(router, "region", world.Regions)
-		// // server.RegisterResource(router, "undergroundRegion", world.UndergroundRegions)
-		// server.RegisterResource(router, "landmass", world.Landmasses)
-		// server.RegisterResource(router, "site", world.Sites)
-		// server.RegisterResource(router, "worldConstruction", world.WorldConstructions)
-		// server.RegisterResource(router, "artifact", world.Artifacts)
-		// server.RegisterResource(router, "hf", world.HistoricalFigures)
-		// server.RegisterResource(router, "collection", world.HistoricalEventCollections)
-		// server.RegisterResource(router, "entity", world.Entities)
-		// server.RegisterResource(router, "event", world.HistoricalEvents)
-		// // server.RegisterResource(router, "era", world.HistoricalEras)
-		// server.RegisterResource(router, "danceForm", world.DanceForms)
-		// server.RegisterResource(router, "musicalForm", world.MusicalForms)
-		// server.RegisterResource(router, "poeticForm", world.PoeticForms)
-		// server.RegisterResource(router, "written", world.WrittenContents)
 
 		RegisterResourcePage(router, "/entity/{id}", t, "entity.html", func(id int) any { return world.Entities[id] })
 		RegisterResourcePage(router, "/hf/{id}", t, "hf.html", func(id int) any { return world.HistoricalFigures[id] })
@@ -123,8 +88,30 @@ func main() {
 	spa := spaHandler{staticFS: static, staticPath: "static", indexPath: "index.html"}
 	router.PathPrefix("/").Handler(spa)
 
+	openbrowser("http://localhost:8080")
+
 	fmt.Println("Serving at :8080")
 	http.ListenAndServe(":8080", router)
+}
+
+func openbrowser(url string) {
+	var err error
+
+	switch runtime.GOOS {
+	case "linux":
+		err = exec.Command("xdg-open", url).Start()
+	case "windows":
+		err = exec.Command("rundll32", "url.dll,FileProtocolHandler", url).Start()
+	case "darwin":
+		err = exec.Command("open", url).Start()
+	default:
+		err = fmt.Errorf("unsupported platform")
+	}
+	if err != nil {
+		fmt.Println(err)
+		fmt.Println("navigate to http://localhost:8080 in your browser")
+	}
+
 }
 
 func allEventTypes() []string {

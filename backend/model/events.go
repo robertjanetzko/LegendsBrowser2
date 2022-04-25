@@ -933,7 +933,6 @@ func (x *HistoricalEventHfDied) Html(c *context) string {
 		return hf + " drowned" + loc
 	case HistoricalEventHfDiedCause_DrownAlt, HistoricalEventHfDiedCause_ExecDrowned:
 		return hf + " was drowned" + slayer + loc
-	case HistoricalEventHfDiedCause_DrownAltTwo:
 	case HistoricalEventHfDiedCause_EncaseIce, HistoricalEventHfDiedCause_FreezingWater:
 		return hf + " was encased in ice" + loc
 	case HistoricalEventHfDiedCause_ExecGeneric, HistoricalEventHfDiedCause_ExecutionGeneric:
@@ -949,7 +948,6 @@ func (x *HistoricalEventHfDied) Html(c *context) string {
 		return hf + " starved" + loc
 	case HistoricalEventHfDiedCause_Infection:
 		return hf + " succumbed to infection" + loc
-	case HistoricalEventHfDiedCause_LeaptFromHeight:
 	case HistoricalEventHfDiedCause_Melt:
 		return hf + " melted" + loc
 	case HistoricalEventHfDiedCause_Murder, HistoricalEventHfDiedCause_Murdered:
@@ -972,9 +970,9 @@ func (x *HistoricalEventHfDied) Html(c *context) string {
 		return hf + " was struck down" + slayer + loc
 	case HistoricalEventHfDiedCause_Suffocate, HistoricalEventHfDiedCause_Air:
 		return hf + " suffocated, slain by " + slayer + loc
-	case HistoricalEventHfDiedCause_SuicideDrowned:
+	case HistoricalEventHfDiedCause_SuicideDrowned, HistoricalEventHfDiedCause_DrownAltTwo:
 		return hf + " drowned " + util.If(world.HistoricalFigures[x.Hfid].Female(), "herself ", "himself ") + loc
-	case HistoricalEventHfDiedCause_SuicideLeaping:
+	case HistoricalEventHfDiedCause_SuicideLeaping, HistoricalEventHfDiedCause_LeaptFromHeight:
 		return hf + " leapt from a great height" + loc
 	case HistoricalEventHfDiedCause_Thirst:
 		return hf + " died of thirst" + loc

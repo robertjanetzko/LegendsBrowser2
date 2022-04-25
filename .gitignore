@@ -5,3 +5,4 @@ legendsbrowser
 *.png
 /*.json
 .DS_Store
+bin
