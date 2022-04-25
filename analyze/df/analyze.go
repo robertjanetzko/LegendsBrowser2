@@ -120,6 +120,22 @@ func CreateMetadata(a *AnalyzeData) (*Metadata, error) {
 								field.Type = "string"
 							} else {
 								var vs []string
+
+								for _, f2 := range fs {
+									if strings.HasPrefix(f2, k+PATH_SEPARATOR) {
+										fn2 := f2[len(k)+1:]
+										if !strings.Contains(fn2, PATH_SEPARATOR) {
+											if sn, ok := sameFields[typeNames[k]][strcase.ToCamel(fn2)]; ok {
+												if sn == strcase.ToCamel(fn) {
+													for k := range a.Fields[f2].Values {
+														a.Fields[f].Values[k] = true
+													}
+												}
+											}
+										}
+									}
+								}
+
 								for k := range a.Fields[f].Values {
 									vs = append(vs, k)
 								}

@@ -250,8 +250,6 @@ func LoadSameFields() error {
 }
 
 func GenerateBackendCode(objects *Metadata) error {
-	LoadSameFields()
-
 	file, _ := json.MarshalIndent(objects, "", "  ")
 	_ = ioutil.WriteFile("model.json", file, 0644)
 
@@ -437,7 +435,7 @@ func (f Field) EndAction(obj Object) string {
 
 var entityRegex, _ = regexp.Compile("(civ|civ_id|enid|[^d]*entity(_id)?|^entity(_id)?|^source|^destination|^involved)(_?[0-9])?$")
 var hfRegex, _ = regexp.Compile("(hfid|hf_id|hist_figure_id|histfig_id|histfig|bodies|_hf)")
-var artifactRegex, _ = regexp.Compile("(item|artifact_id)$")
+var artifactRegex, _ = regexp.Compile("(item(_id)?|artifact_id)$")
 var siteRegex, _ = regexp.Compile("(site_id|site)[0-9]?$")
 var regionRegex, _ = regexp.Compile("(region_id|srid)$")
 
@@ -461,7 +459,6 @@ func (obj Object) Related(regex *regexp.Regexp) string {
 	var list []string
 	for n, f := range obj.Fields {
 		if f.Type == "int" && !f.SameField(obj) && regex.MatchString(n) {
-			fmt.Println(n, regex, regex.MatchString(n))
 			if !f.Multiple {
 				list = append(list, fmt.Sprintf("x.%s == id", f.Name))
 			} else {

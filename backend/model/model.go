@@ -432,15 +432,9 @@ func InitSameFields() {
 				"SlayerShooterItemId": true,
 				"SubregionId":         true,
 			},
-			"ItemSubtype": {
-				"Cause": true,
-			},
-			"ItemType": {
-				"Cause": true,
-			},
-			"Mat": {
-				"Cause": true,
-			},
+			"ItemSubtype": {},
+			"ItemType":    {},
+			"Mat":         {},
 			"ShooterArtifactId": {
 				"FeatureLayerId":      true,
 				"Hfid":                true,
@@ -459,11 +453,13 @@ func InitSameFields() {
 				"SlayerShooterItemId": true,
 				"SubregionId":         true,
 			},
-			"ShooterItemSubtype": {},
-			"ShooterItemType":    {},
-			"ShooterMat": {
+			"ShooterItemSubtype": {
 				"Cause": true,
 			},
+			"ShooterItemType": {
+				"Cause": true,
+			},
+			"ShooterMat": {},
 			"Site": {
 				"FeatureLayerId":      true,
 				"Hfid":                true,
@@ -9260,6 +9256,537 @@ func (x *HistoricalEventHfDestroyedSite) MarshalJSON() ([]byte, error) {
 	return json.Marshal(d)
 }
 
+type HistoricalEventHfDiedCause int
+
+const (
+	HistoricalEventHfDiedCause_Unknown HistoricalEventHfDiedCause = iota
+	HistoricalEventHfDiedCause_Air
+	HistoricalEventHfDiedCause_Behead
+	HistoricalEventHfDiedCause_Bleed
+	HistoricalEventHfDiedCause_Blood
+	HistoricalEventHfDiedCause_BloodDrained
+	HistoricalEventHfDiedCause_BurnAlive
+	HistoricalEventHfDiedCause_BuryAlive
+	HistoricalEventHfDiedCause_Cavein
+	HistoricalEventHfDiedCause_Chasm
+	HistoricalEventHfDiedCause_Collision
+	HistoricalEventHfDiedCause_Crucify
+	HistoricalEventHfDiedCause_Crushed
+	HistoricalEventHfDiedCause_CrushedBridge
+	HistoricalEventHfDiedCause_DrainBlood
+	HistoricalEventHfDiedCause_Drawbridge
+	HistoricalEventHfDiedCause_Drown
+	HistoricalEventHfDiedCause_DrownAlt
+	HistoricalEventHfDiedCause_DrownAltTwo
+	HistoricalEventHfDiedCause_EncaseIce
+	HistoricalEventHfDiedCause_ExecBeheaded
+	HistoricalEventHfDiedCause_ExecBuriedAlive
+	HistoricalEventHfDiedCause_ExecBurnedAlive
+	HistoricalEventHfDiedCause_ExecCrucified
+	HistoricalEventHfDiedCause_ExecDrowned
+	HistoricalEventHfDiedCause_ExecFedToBeasts
+	HistoricalEventHfDiedCause_ExecGeneric
+	HistoricalEventHfDiedCause_ExecHackedToPieces
+	HistoricalEventHfDiedCause_ExecutionGeneric
+	HistoricalEventHfDiedCause_FallingObject
+	HistoricalEventHfDiedCause_FeedToBeasts
+	HistoricalEventHfDiedCause_FlyingObject
+	HistoricalEventHfDiedCause_FreezingWater
+	HistoricalEventHfDiedCause_HackToPieces
+	HistoricalEventHfDiedCause_Heat
+	HistoricalEventHfDiedCause_Hunger
+	HistoricalEventHfDiedCause_Infection
+	HistoricalEventHfDiedCause_LeaptFromHeight
+	HistoricalEventHfDiedCause_Melt
+	HistoricalEventHfDiedCause_Memorialize
+	HistoricalEventHfDiedCause_Murder
+	HistoricalEventHfDiedCause_Murdered
+	HistoricalEventHfDiedCause_Obstacle
+	HistoricalEventHfDiedCause_OldAge
+	HistoricalEventHfDiedCause_PutToRest
+	HistoricalEventHfDiedCause_Quit
+	HistoricalEventHfDiedCause_Quitdead
+	HistoricalEventHfDiedCause_Scare
+	HistoricalEventHfDiedCause_ScaredToDeath
+	HistoricalEventHfDiedCause_Shot
+	HistoricalEventHfDiedCause_Slaughter
+	HistoricalEventHfDiedCause_Slaughtered
+	HistoricalEventHfDiedCause_Spike
+	HistoricalEventHfDiedCause_Spikes
+	HistoricalEventHfDiedCause_Struck
+	HistoricalEventHfDiedCause_StruckDown
+	HistoricalEventHfDiedCause_Suffocate
+	HistoricalEventHfDiedCause_SuicideDrowned
+	HistoricalEventHfDiedCause_SuicideLeaping
+	HistoricalEventHfDiedCause_Thirst
+	HistoricalEventHfDiedCause_Trap
+	HistoricalEventHfDiedCause_Vanish
+)
+
+func parseHistoricalEventHfDiedCause(s string) HistoricalEventHfDiedCause {
+	switch s {
+	case "air":
+		return HistoricalEventHfDiedCause_Air
+	case "behead":
+		return HistoricalEventHfDiedCause_Behead
+	case "bleed":
+		return HistoricalEventHfDiedCause_Bleed
+	case "blood":
+		return HistoricalEventHfDiedCause_Blood
+	case "blood drained":
+		return HistoricalEventHfDiedCause_BloodDrained
+	case "burn_alive":
+		return HistoricalEventHfDiedCause_BurnAlive
+	case "bury_alive":
+		return HistoricalEventHfDiedCause_BuryAlive
+	case "cavein":
+		return HistoricalEventHfDiedCause_Cavein
+	case "chasm":
+		return HistoricalEventHfDiedCause_Chasm
+	case "collision":
+		return HistoricalEventHfDiedCause_Collision
+	case "crucify":
+		return HistoricalEventHfDiedCause_Crucify
+	case "crushed":
+		return HistoricalEventHfDiedCause_Crushed
+	case "crushed bridge":
+		return HistoricalEventHfDiedCause_CrushedBridge
+	case "drain_blood":
+		return HistoricalEventHfDiedCause_DrainBlood
+	case "drawbridge":
+		return HistoricalEventHfDiedCause_Drawbridge
+	case "drown":
+		return HistoricalEventHfDiedCause_Drown
+	case "drown_alt":
+		return HistoricalEventHfDiedCause_DrownAlt
+	case "drown_alt2":
+		return HistoricalEventHfDiedCause_DrownAltTwo
+	case "encase_ice":
+		return HistoricalEventHfDiedCause_EncaseIce
+	case "exec beheaded":
+		return HistoricalEventHfDiedCause_ExecBeheaded
+	case "exec buried alive":
+		return HistoricalEventHfDiedCause_ExecBuriedAlive
+	case "exec burned alive":
+		return HistoricalEventHfDiedCause_ExecBurnedAlive
+	case "exec crucified":
+		return HistoricalEventHfDiedCause_ExecCrucified
+	case "exec drowned":
+		return HistoricalEventHfDiedCause_ExecDrowned
+	case "exec fed to beasts":
+		return HistoricalEventHfDiedCause_ExecFedToBeasts
+	case "exec generic":
+		return HistoricalEventHfDiedCause_ExecGeneric
+	case "exec hacked to pieces":
+		return HistoricalEventHfDiedCause_ExecHackedToPieces
+	case "execution_generic":
+		return HistoricalEventHfDiedCause_ExecutionGeneric
+	case "falling_object":
+		return HistoricalEventHfDiedCause_FallingObject
+	case "feed_to_beasts":
+		return HistoricalEventHfDiedCause_FeedToBeasts
+	case "flying object":
+		return HistoricalEventHfDiedCause_FlyingObject
+	case "freezing water":
+		return HistoricalEventHfDiedCause_FreezingWater
+	case "hack_to_pieces":
+		return HistoricalEventHfDiedCause_HackToPieces
+	case "heat":
+		return HistoricalEventHfDiedCause_Heat
+	case "hunger":
+		return HistoricalEventHfDiedCause_Hunger
+	case "infection":
+		return HistoricalEventHfDiedCause_Infection
+	case "leapt_from_height":
+		return HistoricalEventHfDiedCause_LeaptFromHeight
+	case "melt":
+		return HistoricalEventHfDiedCause_Melt
+	case "memorialize":
+		return HistoricalEventHfDiedCause_Memorialize
+	case "murder":
+		return HistoricalEventHfDiedCause_Murder
+	case "murdered":
+		return HistoricalEventHfDiedCause_Murdered
+	case "obstacle":
+		return HistoricalEventHfDiedCause_Obstacle
+	case "old age":
+		return HistoricalEventHfDiedCause_OldAge
+	case "old_age":
+		return HistoricalEventHfDiedCause_OldAge
+	case "put to rest":
+		return HistoricalEventHfDiedCause_PutToRest
+	case "quit":
+		return HistoricalEventHfDiedCause_Quit
+	case "quitdead":
+		return HistoricalEventHfDiedCause_Quitdead
+	case "scare":
+		return HistoricalEventHfDiedCause_Scare
+	case "scared to death":
+		return HistoricalEventHfDiedCause_ScaredToDeath
+	case "shot":
+		return HistoricalEventHfDiedCause_Shot
+	case "slaughter":
+		return HistoricalEventHfDiedCause_Slaughter
+	case "slaughtered":
+		return HistoricalEventHfDiedCause_Slaughtered
+	case "spike":
+		return HistoricalEventHfDiedCause_Spike
+	case "spikes":
+		return HistoricalEventHfDiedCause_Spikes
+	case "struck":
+		return HistoricalEventHfDiedCause_Struck
+	case "struck_down":
+		return HistoricalEventHfDiedCause_StruckDown
+	case "suffocate":
+		return HistoricalEventHfDiedCause_Suffocate
+	case "suicide drowned":
+		return HistoricalEventHfDiedCause_SuicideDrowned
+	case "suicide leaping":
+		return HistoricalEventHfDiedCause_SuicideLeaping
+	case "thirst":
+		return HistoricalEventHfDiedCause_Thirst
+	case "trap":
+		return HistoricalEventHfDiedCause_Trap
+	case "vanish":
+		return HistoricalEventHfDiedCause_Vanish
+	}
+	return HistoricalEventHfDiedCause_Unknown
+}
+
+func (s HistoricalEventHfDiedCause) String() string {
+	switch s {
+	case HistoricalEventHfDiedCause_Air:
+		return "air"
+	case HistoricalEventHfDiedCause_Behead:
+		return "behead"
+	case HistoricalEventHfDiedCause_Bleed:
+		return "bleed"
+	case HistoricalEventHfDiedCause_Blood:
+		return "blood"
+	case HistoricalEventHfDiedCause_BloodDrained:
+		return "blood drained"
+	case HistoricalEventHfDiedCause_BurnAlive:
+		return "burn alive"
+	case HistoricalEventHfDiedCause_BuryAlive:
+		return "bury alive"
+	case HistoricalEventHfDiedCause_Cavein:
+		return "cavein"
+	case HistoricalEventHfDiedCause_Chasm:
+		return "chasm"
+	case HistoricalEventHfDiedCause_Collision:
+		return "collision"
+	case HistoricalEventHfDiedCause_Crucify:
+		return "crucify"
+	case HistoricalEventHfDiedCause_Crushed:
+		return "crushed"
+	case HistoricalEventHfDiedCause_CrushedBridge:
+		return "crushed bridge"
+	case HistoricalEventHfDiedCause_DrainBlood:
+		return "drain blood"
+	case HistoricalEventHfDiedCause_Drawbridge:
+		return "drawbridge"
+	case HistoricalEventHfDiedCause_Drown:
+		return "drown"
+	case HistoricalEventHfDiedCause_DrownAlt:
+		return "drown alt"
+	case HistoricalEventHfDiedCause_DrownAltTwo:
+		return "drown alt two"
+	case HistoricalEventHfDiedCause_EncaseIce:
+		return "encase ice"
+	case HistoricalEventHfDiedCause_ExecBeheaded:
+		return "exec beheaded"
+	case HistoricalEventHfDiedCause_ExecBuriedAlive:
+		return "exec buried alive"
+	case HistoricalEventHfDiedCause_ExecBurnedAlive:
+		return "exec burned alive"
+	case HistoricalEventHfDiedCause_ExecCrucified:
+		return "exec crucified"
+	case HistoricalEventHfDiedCause_ExecDrowned:
+		return "exec drowned"
+	case HistoricalEventHfDiedCause_ExecFedToBeasts:
+		return "exec fed to beasts"
+	case HistoricalEventHfDiedCause_ExecGeneric:
+		return "exec generic"
+	case HistoricalEventHfDiedCause_ExecHackedToPieces:
+		return "exec hacked to pieces"
+	case HistoricalEventHfDiedCause_ExecutionGeneric:
+		return "execution generic"
+	case HistoricalEventHfDiedCause_FallingObject:
+		return "falling object"
+	case HistoricalEventHfDiedCause_FeedToBeasts:
+		return "feed to beasts"
+	case HistoricalEventHfDiedCause_FlyingObject:
+		return "flying object"
+	case HistoricalEventHfDiedCause_FreezingWater:
+		return "freezing water"
+	case HistoricalEventHfDiedCause_HackToPieces:
+		return "hack to pieces"
+	case HistoricalEventHfDiedCause_Heat:
+		return "heat"
+	case HistoricalEventHfDiedCause_Hunger:
+		return "hunger"
+	case HistoricalEventHfDiedCause_Infection:
+		return "infection"
+	case HistoricalEventHfDiedCause_LeaptFromHeight:
+		return "leapt from height"
+	case HistoricalEventHfDiedCause_Melt:
+		return "melt"
+	case HistoricalEventHfDiedCause_Memorialize:
+		return "memorialize"
+	case HistoricalEventHfDiedCause_Murder:
+		return "murder"
+	case HistoricalEventHfDiedCause_Murdered:
+		return "murdered"
+	case HistoricalEventHfDiedCause_Obstacle:
+		return "obstacle"
+	case HistoricalEventHfDiedCause_OldAge:
+		return "old age"
+	case HistoricalEventHfDiedCause_PutToRest:
+		return "put to rest"
+	case HistoricalEventHfDiedCause_Quit:
+		return "quit"
+	case HistoricalEventHfDiedCause_Quitdead:
+		return "quitdead"
+	case HistoricalEventHfDiedCause_Scare:
+		return "scare"
+	case HistoricalEventHfDiedCause_ScaredToDeath:
+		return "scared to death"
+	case HistoricalEventHfDiedCause_Shot:
+		return "shot"
+	case HistoricalEventHfDiedCause_Slaughter:
+		return "slaughter"
+	case HistoricalEventHfDiedCause_Slaughtered:
+		return "slaughtered"
+	case HistoricalEventHfDiedCause_Spike:
+		return "spike"
+	case HistoricalEventHfDiedCause_Spikes:
+		return "spikes"
+	case HistoricalEventHfDiedCause_Struck:
+		return "struck"
+	case HistoricalEventHfDiedCause_StruckDown:
+		return "struck down"
+	case HistoricalEventHfDiedCause_Suffocate:
+		return "suffocate"
+	case HistoricalEventHfDiedCause_SuicideDrowned:
+		return "suicide drowned"
+	case HistoricalEventHfDiedCause_SuicideLeaping:
+		return "suicide leaping"
+	case HistoricalEventHfDiedCause_Thirst:
+		return "thirst"
+	case HistoricalEventHfDiedCause_Trap:
+		return "trap"
+	case HistoricalEventHfDiedCause_Vanish:
+		return "vanish"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfDiedCause) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
+type HistoricalEventHfDiedDeathCause int
+
+const (
+	HistoricalEventHfDiedDeathCause_Unknown HistoricalEventHfDiedDeathCause = iota
+	HistoricalEventHfDiedDeathCause_Behead
+	HistoricalEventHfDiedDeathCause_Bleed
+	HistoricalEventHfDiedDeathCause_BurnAlive
+	HistoricalEventHfDiedDeathCause_BuryAlive
+	HistoricalEventHfDiedDeathCause_Cavein
+	HistoricalEventHfDiedDeathCause_Chasm
+	HistoricalEventHfDiedDeathCause_Collision
+	HistoricalEventHfDiedDeathCause_Crucify
+	HistoricalEventHfDiedDeathCause_DrainBlood
+	HistoricalEventHfDiedDeathCause_Drawbridge
+	HistoricalEventHfDiedDeathCause_Drown
+	HistoricalEventHfDiedDeathCause_DrownAlt
+	HistoricalEventHfDiedDeathCause_DrownAltTwo
+	HistoricalEventHfDiedDeathCause_EncaseIce
+	HistoricalEventHfDiedDeathCause_ExecutionGeneric
+	HistoricalEventHfDiedDeathCause_FallingObject
+	HistoricalEventHfDiedDeathCause_FeedToBeasts
+	HistoricalEventHfDiedDeathCause_HackToPieces
+	HistoricalEventHfDiedDeathCause_Heat
+	HistoricalEventHfDiedDeathCause_Hunger
+	HistoricalEventHfDiedDeathCause_Infection
+	HistoricalEventHfDiedDeathCause_LeaptFromHeight
+	HistoricalEventHfDiedDeathCause_Melt
+	HistoricalEventHfDiedDeathCause_Memorialize
+	HistoricalEventHfDiedDeathCause_Murder
+	HistoricalEventHfDiedDeathCause_OldAge
+	HistoricalEventHfDiedDeathCause_Quit
+	HistoricalEventHfDiedDeathCause_Scare
+	HistoricalEventHfDiedDeathCause_Shot
+	HistoricalEventHfDiedDeathCause_Slaughter
+	HistoricalEventHfDiedDeathCause_Spike
+	HistoricalEventHfDiedDeathCause_StruckDown
+	HistoricalEventHfDiedDeathCause_Suffocate
+	HistoricalEventHfDiedDeathCause_Thirst
+	HistoricalEventHfDiedDeathCause_Trap
+	HistoricalEventHfDiedDeathCause_Vanish
+)
+
+func parseHistoricalEventHfDiedDeathCause(s string) HistoricalEventHfDiedDeathCause {
+	switch s {
+	case "behead":
+		return HistoricalEventHfDiedDeathCause_Behead
+	case "bleed":
+		return HistoricalEventHfDiedDeathCause_Bleed
+	case "burn_alive":
+		return HistoricalEventHfDiedDeathCause_BurnAlive
+	case "bury_alive":
+		return HistoricalEventHfDiedDeathCause_BuryAlive
+	case "cavein":
+		return HistoricalEventHfDiedDeathCause_Cavein
+	case "chasm":
+		return HistoricalEventHfDiedDeathCause_Chasm
+	case "collision":
+		return HistoricalEventHfDiedDeathCause_Collision
+	case "crucify":
+		return HistoricalEventHfDiedDeathCause_Crucify
+	case "drain_blood":
+		return HistoricalEventHfDiedDeathCause_DrainBlood
+	case "drawbridge":
+		return HistoricalEventHfDiedDeathCause_Drawbridge
+	case "drown":
+		return HistoricalEventHfDiedDeathCause_Drown
+	case "drown_alt":
+		return HistoricalEventHfDiedDeathCause_DrownAlt
+	case "drown_alt2":
+		return HistoricalEventHfDiedDeathCause_DrownAltTwo
+	case "encase_ice":
+		return HistoricalEventHfDiedDeathCause_EncaseIce
+	case "execution_generic":
+		return HistoricalEventHfDiedDeathCause_ExecutionGeneric
+	case "falling_object":
+		return HistoricalEventHfDiedDeathCause_FallingObject
+	case "feed_to_beasts":
+		return HistoricalEventHfDiedDeathCause_FeedToBeasts
+	case "hack_to_pieces":
+		return HistoricalEventHfDiedDeathCause_HackToPieces
+	case "heat":
+		return HistoricalEventHfDiedDeathCause_Heat
+	case "hunger":
+		return HistoricalEventHfDiedDeathCause_Hunger
+	case "infection":
+		return HistoricalEventHfDiedDeathCause_Infection
+	case "leapt_from_height":
+		return HistoricalEventHfDiedDeathCause_LeaptFromHeight
+	case "melt":
+		return HistoricalEventHfDiedDeathCause_Melt
+	case "memorialize":
+		return HistoricalEventHfDiedDeathCause_Memorialize
+	case "murder":
+		return HistoricalEventHfDiedDeathCause_Murder
+	case "old_age":
+		return HistoricalEventHfDiedDeathCause_OldAge
+	case "quit":
+		return HistoricalEventHfDiedDeathCause_Quit
+	case "scare":
+		return HistoricalEventHfDiedDeathCause_Scare
+	case "shot":
+		return HistoricalEventHfDiedDeathCause_Shot
+	case "slaughter":
+		return HistoricalEventHfDiedDeathCause_Slaughter
+	case "spike":
+		return HistoricalEventHfDiedDeathCause_Spike
+	case "struck_down":
+		return HistoricalEventHfDiedDeathCause_StruckDown
+	case "suffocate":
+		return HistoricalEventHfDiedDeathCause_Suffocate
+	case "thirst":
+		return HistoricalEventHfDiedDeathCause_Thirst
+	case "trap":
+		return HistoricalEventHfDiedDeathCause_Trap
+	case "vanish":
+		return HistoricalEventHfDiedDeathCause_Vanish
+	}
+	return HistoricalEventHfDiedDeathCause_Unknown
+}
+
+func (s HistoricalEventHfDiedDeathCause) String() string {
+	switch s {
+	case HistoricalEventHfDiedDeathCause_Behead:
+		return "behead"
+	case HistoricalEventHfDiedDeathCause_Bleed:
+		return "bleed"
+	case HistoricalEventHfDiedDeathCause_BurnAlive:
+		return "burn alive"
+	case HistoricalEventHfDiedDeathCause_BuryAlive:
+		return "bury alive"
+	case HistoricalEventHfDiedDeathCause_Cavein:
+		return "cavein"
+	case HistoricalEventHfDiedDeathCause_Chasm:
+		return "chasm"
+	case HistoricalEventHfDiedDeathCause_Collision:
+		return "collision"
+	case HistoricalEventHfDiedDeathCause_Crucify:
+		return "crucify"
+	case HistoricalEventHfDiedDeathCause_DrainBlood:
+		return "drain blood"
+	case HistoricalEventHfDiedDeathCause_Drawbridge:
+		return "drawbridge"
+	case HistoricalEventHfDiedDeathCause_Drown:
+		return "drown"
+	case HistoricalEventHfDiedDeathCause_DrownAlt:
+		return "drown alt"
+	case HistoricalEventHfDiedDeathCause_DrownAltTwo:
+		return "drown alt two"
+	case HistoricalEventHfDiedDeathCause_EncaseIce:
+		return "encase ice"
+	case HistoricalEventHfDiedDeathCause_ExecutionGeneric:
+		return "execution generic"
+	case HistoricalEventHfDiedDeathCause_FallingObject:
+		return "falling object"
+	case HistoricalEventHfDiedDeathCause_FeedToBeasts:
+		return "feed to beasts"
+	case HistoricalEventHfDiedDeathCause_HackToPieces:
+		return "hack to pieces"
+	case HistoricalEventHfDiedDeathCause_Heat:
+		return "heat"
+	case HistoricalEventHfDiedDeathCause_Hunger:
+		return "hunger"
+	case HistoricalEventHfDiedDeathCause_Infection:
+		return "infection"
+	case HistoricalEventHfDiedDeathCause_LeaptFromHeight:
+		return "leapt from height"
+	case HistoricalEventHfDiedDeathCause_Melt:
+		return "melt"
+	case HistoricalEventHfDiedDeathCause_Memorialize:
+		return "memorialize"
+	case HistoricalEventHfDiedDeathCause_Murder:
+		return "murder"
+	case HistoricalEventHfDiedDeathCause_OldAge:
+		return "old age"
+	case HistoricalEventHfDiedDeathCause_Quit:
+		return "quit"
+	case HistoricalEventHfDiedDeathCause_Scare:
+		return "scare"
+	case HistoricalEventHfDiedDeathCause_Shot:
+		return "shot"
+	case HistoricalEventHfDiedDeathCause_Slaughter:
+		return "slaughter"
+	case HistoricalEventHfDiedDeathCause_Spike:
+		return "spike"
+	case HistoricalEventHfDiedDeathCause_StruckDown:
+		return "struck down"
+	case HistoricalEventHfDiedDeathCause_Suffocate:
+		return "suffocate"
+	case HistoricalEventHfDiedDeathCause_Thirst:
+		return "thirst"
+	case HistoricalEventHfDiedDeathCause_Trap:
+		return "trap"
+	case HistoricalEventHfDiedDeathCause_Vanish:
+		return "vanish"
+	}
+	return "unknown"
+}
+
+func (s HistoricalEventHfDiedDeathCause) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.String())
+}
+
 type HistoricalEventHfDiedShooterItemSubtype int
 
 const (
@@ -9320,8 +9847,7 @@ func (s HistoricalEventHfDiedShooterItemType) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfDied struct {
-	Cause               string                                  `json:"cause" legend:"base"`               // cause
-	DeathCause          string                                  `json:"deathCause" legend:"plus"`          // death_cause
+	Cause               HistoricalEventHfDiedCause              `json:"cause" legend:"base"`               // cause
 	FeatureLayerId      int                                     `json:"featureLayerId" legend:"base"`      // feature_layer_id
 	Hfid                int                                     `json:"hfid" legend:"base"`                // hfid
 	ItemSubtype         string                                  `json:"itemSubtype" legend:"plus"`         // item_subtype
@@ -9358,24 +9884,12 @@ func (x *HistoricalEventHfDied) Type() string                { return "hf died" 
 func (x *HistoricalEventHfDied) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfDied) RelatedToHf(id int) bool     { return x.Hfid == id || x.SlayerHfid == id }
 func (x *HistoricalEventHfDied) RelatedToArtifact(id int) bool {
-	return x.ShooterArtifactId == id || x.ShooterItem == id
+	return x.ShooterArtifactId == id || x.ShooterItem == id || x.SlayerItemId == id || x.SlayerShooterItemId == id
 }
 func (x *HistoricalEventHfDied) RelatedToSite(id int) bool   { return x.SiteId == id }
 func (x *HistoricalEventHfDied) RelatedToRegion(id int) bool { return x.SubregionId == id }
 
 func (x *HistoricalEventHfDied) CheckFields() {
-	if x.DeathCause != x.Cause && x.DeathCause != "" && x.Cause != "" {
-		sameFields["HistoricalEventHfDied"]["DeathCause"]["Cause"] = false
-	}
-	if x.ItemSubtype != x.Cause && x.ItemSubtype != "" && x.Cause != "" {
-		sameFields["HistoricalEventHfDied"]["ItemSubtype"]["Cause"] = false
-	}
-	if x.ItemType != x.Cause && x.ItemType != "" && x.Cause != "" {
-		sameFields["HistoricalEventHfDied"]["ItemType"]["Cause"] = false
-	}
-	if x.Mat != x.Cause && x.Mat != "" && x.Cause != "" {
-		sameFields["HistoricalEventHfDied"]["Mat"]["Cause"] = false
-	}
 	if x.ShooterArtifactId != x.FeatureLayerId {
 		sameFields["HistoricalEventHfDied"]["ShooterArtifactId"]["FeatureLayerId"] = false
 	}
@@ -9418,15 +9932,13 @@ func (x *HistoricalEventHfDied) CheckFields() {
 	if x.ShooterItem != x.SubregionId {
 		sameFields["HistoricalEventHfDied"]["ShooterItem"]["SubregionId"] = false
 	}
-	if x.ShooterMat != x.Cause && x.ShooterMat != "" && x.Cause != "" {
-		sameFields["HistoricalEventHfDied"]["ShooterMat"]["Cause"] = false
-	}
 }
 
 func (x *HistoricalEventHfDied) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
-	d["cause"] = x.Cause
-	d["deathCause"] = x.DeathCause
+	if x.Cause != 0 {
+		d["cause"] = x.Cause
+	}
 	if x.FeatureLayerId != -1 {
 		d["featureLayerId"] = x.FeatureLayerId
 	}
@@ -12954,7 +13466,7 @@ func (x *HistoricalEventMasterpieceFood) RelatedToEntity(id int) bool {
 	return x.EntityId == id || x.MakerEntity == id
 }
 func (x *HistoricalEventMasterpieceFood) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *HistoricalEventMasterpieceFood) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventMasterpieceFood) RelatedToArtifact(id int) bool { return x.ItemId == id }
 func (x *HistoricalEventMasterpieceFood) RelatedToSite(id int) bool {
 	return x.Site == id || x.SiteId == id
 }
@@ -13060,7 +13572,7 @@ func NewHistoricalEventMasterpieceItem() *HistoricalEventMasterpieceItem {
 func (x *HistoricalEventMasterpieceItem) Type() string                  { return "masterpiece item" }
 func (x *HistoricalEventMasterpieceItem) RelatedToEntity(id int) bool   { return x.EntityId == id }
 func (x *HistoricalEventMasterpieceItem) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *HistoricalEventMasterpieceItem) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventMasterpieceItem) RelatedToArtifact(id int) bool { return x.ItemId == id }
 func (x *HistoricalEventMasterpieceItem) RelatedToSite(id int) bool     { return x.SiteId == id }
 func (x *HistoricalEventMasterpieceItem) RelatedToRegion(id int) bool   { return false }
 
@@ -28952,7 +29464,7 @@ func parseHistoricalEventHfDied(p *util.XMLParser) (*HistoricalEventHfDied, erro
 				if err != nil {
 					return nil, err
 				}
-				obj.Cause = txt(data)
+				obj.Cause = parseHistoricalEventHfDiedCause(txt(data))
 			case "feature_layer_id":
 				data, err := p.Value()
 				if err != nil {
@@ -29042,7 +29554,7 @@ func parseHistoricalEventHfDiedPlus(p *util.XMLParser, obj *HistoricalEventHfDie
 				if err != nil {
 					return nil, err
 				}
-				obj.DeathCause = txt(data)
+				obj.Cause = parseHistoricalEventHfDiedCause(txt(data))
 			case "item":
 				data, err := p.Value()
 				if err != nil {

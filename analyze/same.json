@@ -69,7 +69,8 @@
     "Item": "SlayerItemId",
     "Site": "SiteId",
     "SlayerHf": "SlayerHfid",
-    "VictimHf": "Hfid"
+    "VictimHf": "Hfid",
+    "DeathCause": "Cause"
   },
   "HistoricalEventHfDisturbedStructure": {
     "Histfig": "HistFigId",

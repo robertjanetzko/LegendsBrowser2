@@ -18,6 +18,8 @@ func main() {
 	}
 
 	if *g {
+		df.LoadSameFields()
+
 		a, err := df.LoadAnalyzeData()
 		if err != nil {
 			log.Fatal(err)

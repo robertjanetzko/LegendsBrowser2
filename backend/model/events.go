@@ -896,8 +896,93 @@ func (x *HistoricalEventHfDestroyedSite) Html(c *context) string {
 	return c.hf(x.AttackerHfid) + " routed " + siteCiv(x.SiteCivId, x.DefenderCivId) + " and destroyed " + site(x.SiteId, "")
 }
 
-func (x *HistoricalEventHfDied) Html(c *context) string { // TODO force cause enum
-	return "UNKNWON HistoricalEventHfDied"
+func (x *HistoricalEventHfDied) Html(c *context) string {
+	hf := c.hf(x.Hfid)
+	loc := location(x.SiteId, " in", x.SubregionId, " in")
+	slayer := ""
+	if x.SlayerHfid != -1 {
+		slayer = " by " + c.hfRelated(x.SlayerHfid, x.Hfid)
+	}
+
+	if x.SlayerItemId != -1 {
+		slayer += " with " + artifact(x.SlayerItemId)
+	} else {
+	}
+	switch x.Cause {
+	case HistoricalEventHfDiedCause_Behead, HistoricalEventHfDiedCause_ExecBeheaded:
+		return hf + " was beheaded" + slayer + loc
+	case HistoricalEventHfDiedCause_Bleed, HistoricalEventHfDiedCause_Blood:
+		return hf + " bled to death, slain by " + slayer + loc
+	case HistoricalEventHfDiedCause_BloodDrained, HistoricalEventHfDiedCause_DrainBlood:
+		return hf + " was drained of blood by " + slayer + loc
+	case HistoricalEventHfDiedCause_BurnAlive, HistoricalEventHfDiedCause_ExecBurnedAlive:
+		return hf + " was burned alive" + slayer + loc
+	case HistoricalEventHfDiedCause_BuryAlive, HistoricalEventHfDiedCause_ExecBuriedAlive:
+		return hf + " was buried alive" + slayer + loc
+	case HistoricalEventHfDiedCause_Cavein:
+	case HistoricalEventHfDiedCause_Chasm:
+		return hf + " fell into a deep chasm" + loc
+	case HistoricalEventHfDiedCause_Collision, HistoricalEventHfDiedCause_Obstacle:
+		return hf + " died after colliding with an obstacle, slain by " + slayer + loc
+	case HistoricalEventHfDiedCause_Crucify, HistoricalEventHfDiedCause_ExecCrucified:
+		return hf + " was crucified" + slayer + loc
+	case HistoricalEventHfDiedCause_Crushed:
+	case HistoricalEventHfDiedCause_CrushedBridge, HistoricalEventHfDiedCause_Drawbridge:
+		return hf + " was crushed by a drawbridge" + loc
+	case HistoricalEventHfDiedCause_Drown:
+		return hf + " drowned" + loc
+	case HistoricalEventHfDiedCause_DrownAlt, HistoricalEventHfDiedCause_ExecDrowned:
+		return hf + " was drowned" + slayer + loc
+	case HistoricalEventHfDiedCause_DrownAltTwo:
+	case HistoricalEventHfDiedCause_EncaseIce, HistoricalEventHfDiedCause_FreezingWater:
+		return hf + " was encased in ice" + loc
+	case HistoricalEventHfDiedCause_ExecGeneric, HistoricalEventHfDiedCause_ExecutionGeneric:
+		return hf + " was executed" + slayer + loc
+	case HistoricalEventHfDiedCause_FallingObject:
+	case HistoricalEventHfDiedCause_FeedToBeasts, HistoricalEventHfDiedCause_ExecFedToBeasts:
+		return hf + " was fed to beasts" + slayer + loc
+	case HistoricalEventHfDiedCause_FlyingObject:
+	case HistoricalEventHfDiedCause_HackToPieces, HistoricalEventHfDiedCause_ExecHackedToPieces:
+		return hf + " was hacked to pieces" + slayer + loc
+	case HistoricalEventHfDiedCause_Heat:
+	case HistoricalEventHfDiedCause_Hunger:
+		return hf + " starved" + loc
+	case HistoricalEventHfDiedCause_Infection:
+		return hf + " succumbed to infection" + loc
+	case HistoricalEventHfDiedCause_LeaptFromHeight:
+	case HistoricalEventHfDiedCause_Melt:
+		return hf + " melted" + loc
+	case HistoricalEventHfDiedCause_Murder, HistoricalEventHfDiedCause_Murdered:
+		return hf + " was murdered" + slayer + loc
+	case HistoricalEventHfDiedCause_OldAge:
+		return hf + " died of old age" + loc
+	case HistoricalEventHfDiedCause_PutToRest, HistoricalEventHfDiedCause_Memorialize:
+		return hf + " was put to rest" + loc
+	case HistoricalEventHfDiedCause_Quit:
+	case HistoricalEventHfDiedCause_Quitdead:
+	case HistoricalEventHfDiedCause_Scare:
+	case HistoricalEventHfDiedCause_ScaredToDeath:
+	case HistoricalEventHfDiedCause_Shot:
+		return hf + " was shot and killed" + slayer + loc
+	case HistoricalEventHfDiedCause_Slaughter, HistoricalEventHfDiedCause_Slaughtered:
+		return hf + " was slaughtered by " + slayer + loc
+	case HistoricalEventHfDiedCause_Spike:
+	case HistoricalEventHfDiedCause_Spikes:
+	case HistoricalEventHfDiedCause_Struck, HistoricalEventHfDiedCause_StruckDown:
+		return hf + " was struck down" + slayer + loc
+	case HistoricalEventHfDiedCause_Suffocate, HistoricalEventHfDiedCause_Air:
+		return hf + " suffocated, slain by " + slayer + loc
+	case HistoricalEventHfDiedCause_SuicideDrowned:
+		return hf + " drowned " + util.If(world.HistoricalFigures[x.Hfid].Female(), "herself ", "himself ") + loc
+	case HistoricalEventHfDiedCause_SuicideLeaping:
+		return hf + " leapt from a great height" + loc
+	case HistoricalEventHfDiedCause_Thirst:
+		return hf + " died of thirst" + loc
+	case HistoricalEventHfDiedCause_Trap:
+		return hf + " was killed by a trap" + loc
+	case HistoricalEventHfDiedCause_Vanish:
+	}
+	return hf + " died: " + x.Cause.String() + slayer + loc
 }
 
 func (x *HistoricalEventHfDisturbedStructure) Html(c *context) string {

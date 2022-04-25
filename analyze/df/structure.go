@@ -114,17 +114,30 @@ func (a *AnalyzeData) GetSubType(s string, t string) *Subtype {
 }
 
 type AnalyzeContext struct {
-	file     string
-	plus     bool
-	subtypes map[string]map[int]string
+	file       string
+	plus       bool
+	subtypes   map[string]map[int]string
+	overwrites *Overwrites
+}
+
+type Overwrites struct {
+	ForceEnum map[string]bool
 }
 
 func analyze(file string, a *AnalyzeData) error {
+	data, err := ioutil.ReadFile("overwrites.json")
+	if err != nil {
+		return err
+	}
+
+	overwrites := &Overwrites{}
+	json.Unmarshal(data, overwrites)
 
 	ctx := AnalyzeContext{
-		file:     file,
-		plus:     false,
-		subtypes: make(map[string]map[int]string),
+		file:       file,
+		plus:       false,
+		subtypes:   make(map[string]map[int]string),
+		overwrites: overwrites,
 	}
 
 	// base file
@@ -290,7 +303,8 @@ Loop:
 					if s != "" && f.Enum {
 						f.Values[s] = true
 					}
-					if len(f.Values) > 30 {
+					force := ctx.overwrites.ForceEnum[strings.Join(path, PATH_SEPARATOR)]
+					if len(f.Values) > 30 && !force {
 						f.Values = make(map[string]bool)
 						f.Enum = false
 					}
