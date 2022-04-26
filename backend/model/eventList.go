@@ -24,7 +24,10 @@ type EventList struct {
 
 func NewEventList(world *DfWorld, obj any) *EventList {
 	el := EventList{
-		Context: &Context{HfId: -1},
+		Context: &Context{
+			World: world,
+			HfId:  -1,
+		},
 	}
 
 	switch x := obj.(type) {

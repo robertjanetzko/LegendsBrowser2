@@ -7,8 +7,6 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
-	"github.com/robertjanetzko/LegendsBrowser2/backend/templates"
 )
 
 type Parms map[string]string
@@ -32,12 +30,7 @@ func (srv *DfServer) RegisterWorldPage(path string, template string, accessor fu
 			return
 		}
 
-		td := &templates.TemplateData{
-			Context: &model.Context{World: srv.context.world},
-			Data:    accessor(mux.Vars(r)),
-		}
-
-		err := srv.templates.Render(w, template, td)
+		err := srv.templates.Render(w, template, accessor(mux.Vars(r)))
 		if err != nil {
 			fmt.Fprintln(w, err)
 			fmt.Println(err)

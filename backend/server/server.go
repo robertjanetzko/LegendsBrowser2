@@ -72,7 +72,6 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// }
 	// prepend the path with the path to the static directory
 	path = h.staticPath + path
-	fmt.Println(r.URL, "->", path)
 
 	_, err := h.staticFS.Open(path)
 	if os.IsNotExist(err) {
@@ -125,7 +124,7 @@ func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				fmt.Println(err)
 			}
 
-			err = h.server.templates.Render(w, "load.html", &templates.TemplateData{Data: p})
+			err = h.server.templates.Render(w, "load.html", p)
 			if err != nil {
 				fmt.Fprintln(w, err)
 				fmt.Println(err)

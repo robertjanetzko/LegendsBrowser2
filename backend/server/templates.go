@@ -29,7 +29,6 @@ func (srv *DfServer) LoadTemplates() {
 		"region":    func(id int) template.HTML { return model.LinkRegion(srv.context.world, id) },
 		"getRegion": func(id int) *model.Region { return srv.context.world.Regions[id] },
 		"events": func(obj any) *model.EventList {
-			fmt.Println("W", srv.context.world)
 			return model.NewEventList(srv.context.world, obj)
 		},
 		"season":       model.Season,

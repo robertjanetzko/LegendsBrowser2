@@ -35,7 +35,7 @@ func (c *Context) hfShort(id int) string {
 }
 
 func (c *Context) hfRelated(id, to int) string {
-	if c.HfId != -1 {
+	if c.HfId != -1 && to != c.HfId {
 		if c.HfId == id {
 			return c.hfShort(id)
 		} else {
