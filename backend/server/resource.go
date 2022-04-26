@@ -1,39 +1,30 @@
 package server
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
 )
 
-type Info struct {
-	Id   int    `json:"id"`
-	Name string `json:"name"`
-}
+type Parms map[string]string
 
-func RegisterResource[T model.Named](router *mux.Router, resourceName string, resources map[int]T) {
-	list := func(w http.ResponseWriter, r *http.Request) {
-		values := make([]Info, 0, len(resources))
-		for _, v := range resources {
-			values = append(values, Info{Id: v.Id(), Name: v.Name()})
-
-		}
-		json.NewEncoder(w).Encode(values)
-	}
-
+func (srv *DfServer) RegisterPage(path string, template string, accessor func(Parms) any) {
 	get := func(w http.ResponseWriter, r *http.Request) {
-		id, err := strconv.Atoi(mux.Vars(r)["id"])
+		err := srv.templates.Render(w, template, accessor(mux.Vars(r)))
 		if err != nil {
+			fmt.Fprintln(w, err)
 			fmt.Println(err)
 		}
-
-		json.NewEncoder(w).Encode(resources[id])
 	}
 
-	router.HandleFunc(fmt.Sprintf("/api/%s", resourceName), list).Methods("GET")
-	router.HandleFunc(fmt.Sprintf("/api/%s/{id}", resourceName), get).Methods("GET")
+	srv.router.HandleFunc(path, get).Methods("GET")
+}
+
+func (srv *DfServer) RegisterResourcePage(path string, template string, accessor func(int) any) {
+	srv.RegisterPage(path, template, func(params Parms) any {
+		id, _ := strconv.Atoi(params["id"])
+		return accessor(id)
+	})
 }

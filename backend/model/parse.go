@@ -70,6 +70,8 @@ func Parse(file string) (*DfWorld, error) {
 	}
 	defer xmlFile.Close()
 
+	world := &DfWorld{}
+
 BaseLoop:
 	for {
 		t, n, err := p.Token()
