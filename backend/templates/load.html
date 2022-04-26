@@ -1,0 +1,23 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Loading{{end}}
+
+{{define "content"}}
+<h1>Loading</h1>
+
+<ul>
+    <li><a href="/load?p={{ (printf `%s/..` $.Current) }}&x=1">..</a></li>
+    {{- range $f := .List }}
+    {{- if $f.IsDir }}
+    <li><a href="/load?p={{ (printf `%s/%s` $.Current $f.Name) }}&x=1">{{$f.Name}}</a></li>
+    {{- end }}
+    {{- end }}
+    {{- range $f := .List }}
+    {{- if isLegendsXml $f }}
+    <li>+<a href="/load?p={{ (printf `%s/%s` $.Current $f.Name) }}&x=1">{{$f.Name}}</a></li>
+    {{- end }}
+    {{- end }}
+</ul>
+
+<p>{{ json . }}</p>
+{{- end }}

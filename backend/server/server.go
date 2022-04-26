@@ -4,34 +4,48 @@ import (
 	"embed"
 	"fmt"
 	"io/fs"
+	"io/ioutil"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/templates"
 )
 
+type DfServerContext struct {
+	world     *model.DfWorld
+	isLoading bool
+}
+
 type DfServer struct {
 	router    *mux.Router
 	templates *templates.Template
-	world     *model.DfWorld
+	context   *DfServerContext
 }
 
 func StartServer(world *model.DfWorld, static embed.FS) {
 	srv := &DfServer{
 		router: mux.NewRouter().StrictSlash(true),
-		world:  world,
+		context: &DfServerContext{
+			world:     world,
+			isLoading: false,
+		},
 	}
 	srv.LoadTemplates()
 
-	srv.RegisterResourcePage("/entity/{id}", "entity.html", func(id int) any { return srv.world.Entities[id] })
-	srv.RegisterResourcePage("/hf/{id}", "hf.html", func(id int) any { return srv.world.HistoricalFigures[id] })
-	srv.RegisterResourcePage("/region/{id}", "region.html", func(id int) any { return srv.world.Regions[id] })
-	srv.RegisterResourcePage("/site/{id}", "site.html", func(id int) any { return srv.world.Sites[id] })
-	srv.RegisterResourcePage("/artifact/{id}", "artifact.html", func(id int) any { return srv.world.Artifacts[id] })
-	srv.RegisterPage("/events", "eventTypes.html", func(p Parms) any { return srv.world.AllEventTypes() })
-	srv.RegisterPage("/events/{type}", "eventType.html", func(p Parms) any { return srv.world.EventsOfType(p["type"]) })
+	srv.RegisterWorldResourcePage("/entity/{id}", "entity.html", func(id int) any { return srv.context.world.Entities[id] })
+	srv.RegisterWorldResourcePage("/hf/{id}", "hf.html", func(id int) any { return srv.context.world.HistoricalFigures[id] })
+	srv.RegisterWorldResourcePage("/region/{id}", "region.html", func(id int) any { return srv.context.world.Regions[id] })
+	srv.RegisterWorldResourcePage("/site/{id}", "site.html", func(id int) any { return srv.context.world.Sites[id] })
+	srv.RegisterWorldResourcePage("/artifact/{id}", "artifact.html", func(id int) any { return srv.context.world.Artifacts[id] })
+
+	srv.RegisterWorldPage("/", "eventTypes.html", func(p Parms) any { return srv.context.world.AllEventTypes() })
+	srv.RegisterWorldPage("/events", "eventTypes.html", func(p Parms) any { return srv.context.world.AllEventTypes() })
+	srv.RegisterWorldPage("/events/{type}", "eventType.html", func(p Parms) any { return srv.context.world.EventsOfType(p["type"]) })
+
+	srv.router.PathPrefix("/load").Handler(loadHandler{server: srv})
 
 	spa := spaHandler{staticFS: static, staticPath: "static", indexPath: "index.html"}
 	srv.router.PathPrefix("/").Handler(spa)
@@ -87,4 +101,47 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	// otherwise, use http.FileServer to serve the static dir
 	http.FileServer(http.FS(statics)).ServeHTTP(w, r)
+}
+
+type loadHandler struct {
+	server *DfServer
+}
+
+func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	path := r.URL.Query().Get("p")
+
+	p := &paths{
+		Current: path,
+	}
+	if p.Current == "" {
+		p.Current = "."
+	}
+
+	if f, err := os.Stat(p.Current); err == nil {
+		if f.IsDir() {
+			p.List, err = ioutil.ReadDir(p.Current)
+			if err != nil {
+				fmt.Fprintln(w, err)
+				fmt.Println(err)
+			}
+
+			err = h.server.templates.Render(w, "load.html", &templates.TemplateData{Data: p})
+			if err != nil {
+				fmt.Fprintln(w, err)
+				fmt.Println(err)
+			}
+			return
+		} else {
+			h.server.context.isLoading = true
+			wrld, _ := model.Parse(p.Current)
+			h.server.context.world = wrld
+			http.Redirect(w, r, "/", http.StatusSeeOther)
+			return
+		}
+	}
+	http.Redirect(w, r, "/load", http.StatusSeeOther)
+}
+
+func isLegendsXml(f fs.FileInfo) bool {
+	return strings.HasSuffix(f.Name(), "-legends.xml")
 }

@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"html/template"
 	"io"
+
+	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
 )
 
 //go:embed *.html
@@ -13,6 +15,11 @@ var templateFS embed.FS
 type Template struct {
 	funcMap   template.FuncMap
 	templates *template.Template
+}
+
+type TemplateData struct {
+	Context *model.Context
+	Data    any
 }
 
 func New(funcMap template.FuncMap) *Template {
@@ -33,7 +40,7 @@ func NewDebug(funcMap template.FuncMap) *Template {
 
 var DebugTemplates = false
 
-func (t *Template) Render(w io.Writer, name string, data interface{}) error {
+func (t *Template) Render(w io.Writer, name string, data *TemplateData) error {
 	if DebugTemplates {
 		fmt.Println("RENDER", name)
 		tmpl := NewDebug(t.funcMap).templates

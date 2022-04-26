@@ -2,17 +2,42 @@ package server
 
 import (
 	"fmt"
+	"io/fs"
 	"net/http"
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
+	"github.com/robertjanetzko/LegendsBrowser2/backend/templates"
 )
 
 type Parms map[string]string
 
-func (srv *DfServer) RegisterPage(path string, template string, accessor func(Parms) any) {
+// func (srv *DfServer) RegisterPage(path string, template string, accessor func(Parms) any) {
+// 	get := func(w http.ResponseWriter, r *http.Request) {
+// 		err := srv.templates.Render(w, template, accessor(mux.Vars(r)))
+// 		if err != nil {
+// 			fmt.Fprintln(w, err)
+// 			fmt.Println(err)
+// 		}
+// 	}
+
+// 	srv.router.HandleFunc(path, get).Methods("GET")
+// }
+
+func (srv *DfServer) RegisterWorldPage(path string, template string, accessor func(Parms) any) {
 	get := func(w http.ResponseWriter, r *http.Request) {
-		err := srv.templates.Render(w, template, accessor(mux.Vars(r)))
+		if srv.context.world == nil {
+			srv.renderLoading(w, r)
+			return
+		}
+
+		td := &templates.TemplateData{
+			Context: &model.Context{World: srv.context.world},
+			Data:    accessor(mux.Vars(r)),
+		}
+
+		err := srv.templates.Render(w, template, td)
 		if err != nil {
 			fmt.Fprintln(w, err)
 			fmt.Println(err)
@@ -22,9 +47,26 @@ func (srv *DfServer) RegisterPage(path string, template string, accessor func(Pa
 	srv.router.HandleFunc(path, get).Methods("GET")
 }
 
-func (srv *DfServer) RegisterResourcePage(path string, template string, accessor func(int) any) {
-	srv.RegisterPage(path, template, func(params Parms) any {
+func (srv *DfServer) RegisterWorldResourcePage(path string, template string, accessor func(int) any) {
+	srv.RegisterWorldPage(path, template, func(params Parms) any {
 		id, _ := strconv.Atoi(params["id"])
 		return accessor(id)
 	})
+}
+
+type paths struct {
+	Current string
+	List    []fs.FileInfo
+}
+
+func (srv *DfServer) renderLoading(w http.ResponseWriter, r *http.Request) {
+	if srv.context.isLoading {
+		err := srv.templates.Render(w, "loading.html", nil)
+		if err != nil {
+			fmt.Fprintln(w, err)
+			fmt.Println(err)
+		}
+	} else {
+		http.Redirect(w, r, "/load", http.StatusSeeOther)
+	}
 }

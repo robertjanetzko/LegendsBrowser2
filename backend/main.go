@@ -12,6 +12,7 @@ import (
 	"github.com/pkg/profile"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/server"
+	"github.com/robertjanetzko/LegendsBrowser2/backend/templates"
 )
 
 //go:embed static
@@ -20,7 +21,10 @@ var static embed.FS
 func main() {
 	f := flag.String("f", "", "open a file")
 	p := flag.Bool("p", false, "start profiling")
+	d := flag.Bool("d", false, "debug templates")
 	flag.Parse()
+
+	templates.DebugTemplates = *d
 
 	if len(*f) > 0 {
 		if *p {
@@ -37,8 +41,9 @@ func main() {
 		}
 
 		runtime.GC()
-
 		server.StartServer(w, static)
-	}
 
+	} else {
+		server.StartServer(nil, static)
+	}
 }

@@ -10,7 +10,7 @@ type HistoricalEventDetails interface {
 	RelatedToArtifact(int) bool
 	RelatedToSite(int) bool
 	RelatedToRegion(int) bool
-	Html(*context) string
+	Html(*Context) string
 	Type() string
 }
 
@@ -19,19 +19,19 @@ type HistoricalEventCollectionDetails interface {
 
 type EventList struct {
 	Events  []*HistoricalEvent
-	Context *context
+	Context *Context
 }
 
 func NewEventList(world *DfWorld, obj any) *EventList {
 	el := EventList{
-		Context: &context{hfId: -1},
+		Context: &Context{HfId: -1},
 	}
 
 	switch x := obj.(type) {
 	case *Entity:
 		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToEntity(x.Id()) })
 	case *HistoricalFigure:
-		el.Context.hfId = x.Id()
+		el.Context.HfId = x.Id()
 		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToHf(x.Id()) })
 	case *Artifact:
 		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToArtifact(x.Id()) })
