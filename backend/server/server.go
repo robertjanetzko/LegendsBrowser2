@@ -2,6 +2,7 @@ package server
 
 import (
 	"embed"
+	"encoding/json"
 	"fmt"
 	"io/fs"
 	"io/ioutil"
@@ -17,10 +18,12 @@ import (
 type DfServerContext struct {
 	world     *model.DfWorld
 	isLoading bool
+	progress  *model.LoadProgress
 }
 
 type DfServer struct {
 	router    *mux.Router
+	loader    *loadHandler
 	templates *templates.Template
 	context   *DfServerContext
 }
@@ -31,8 +34,10 @@ func StartServer(world *model.DfWorld, static embed.FS) {
 		context: &DfServerContext{
 			world:     world,
 			isLoading: false,
+			progress:  &model.LoadProgress{},
 		},
 	}
+	srv.loader = &loadHandler{server: srv}
 	srv.LoadTemplates()
 
 	srv.RegisterWorldResourcePage("/entity/{id}", "entity.html", func(id int) any { return srv.context.world.Entities[id] })
@@ -45,7 +50,7 @@ func StartServer(world *model.DfWorld, static embed.FS) {
 	srv.RegisterWorldPage("/events", "eventTypes.html", func(p Parms) any { return srv.context.world.AllEventTypes() })
 	srv.RegisterWorldPage("/events/{type}", "eventType.html", func(p Parms) any { return srv.context.world.EventsOfType(p["type"]) })
 
-	srv.router.PathPrefix("/load").Handler(loadHandler{server: srv})
+	srv.router.PathPrefix("/load").Handler(srv.loader)
 
 	spa := spaHandler{staticFS: static, staticPath: "static", indexPath: "index.html"}
 	srv.router.PathPrefix("/").Handler(spa)
@@ -106,7 +111,35 @@ type loadHandler struct {
 	server *DfServer
 }
 
+type loadProgress struct {
+	Msg      string  `json:"msg"`
+	Progress float64 `json:"progress"`
+	Done     bool    `json:"done"`
+}
+
+func (h loadHandler) Progress() *loadProgress {
+	percent := 0.0
+	p := h.server.context.progress
+	if p.ProgressBar != nil {
+		percent = float64(p.ProgressBar.Current()*100) / float64(p.ProgressBar.Total())
+	}
+
+	return &loadProgress{
+		Msg:      h.server.context.progress.Message,
+		Progress: percent,
+		Done:     h.server.context.world != nil,
+	}
+}
+
 func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path == "/load/progress" {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusCreated)
+
+		json.NewEncoder(w).Encode(h.Progress())
+		return
+	}
+
 	path := r.URL.Query().Get("p")
 
 	p := &paths{
@@ -132,8 +165,7 @@ func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return
 		} else {
 			h.server.context.isLoading = true
-			wrld, _ := model.Parse(p.Current)
-			h.server.context.world = wrld
+			go loadWorld(h.server, p.Current)
 			http.Redirect(w, r, "/", http.StatusSeeOther)
 			return
 		}
@@ -143,4 +175,27 @@ func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func isLegendsXml(f fs.FileInfo) bool {
 	return strings.HasSuffix(f.Name(), "-legends.xml")
+}
+
+func loadWorld(server *DfServer, file string) {
+	wrld, _ := model.Parse(file, server.context.progress)
+	server.context.world = wrld
+	server.context.isLoading = false
+}
+
+type paths struct {
+	Current string
+	List    []fs.FileInfo
+}
+
+func (srv *DfServer) renderLoading(w http.ResponseWriter, r *http.Request) {
+	if srv.context.isLoading {
+		err := srv.templates.Render(w, "loading.html", srv.loader.Progress())
+		if err != nil {
+			fmt.Fprintln(w, err)
+			fmt.Println(err)
+		}
+	} else {
+		http.Redirect(w, r, "/load", http.StatusSeeOther)
+	}
 }

@@ -34,7 +34,7 @@ func main() {
 			}()
 		}
 
-		w, err := model.Parse(*f)
+		w, err := model.Parse(*f, nil)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)

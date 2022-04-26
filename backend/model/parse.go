@@ -61,16 +61,25 @@ func NewLegendsParser(file string) (*util.XMLParser, *os.File, *pb.ProgressBar, 
 	return d, xmlFile, bar, err
 }
 
-func Parse(file string) (*DfWorld, error) {
+type LoadProgress struct {
+	Message     string
+	ProgressBar *pb.ProgressBar
+}
+
+func Parse(file string, lp *LoadProgress) (*DfWorld, error) {
 	InitSameFields()
 
 	p, xmlFile, bar, err := NewLegendsParser(file)
+	if lp != nil {
+		lp.Message = "Loading " + file
+		lp.ProgressBar = bar
+	}
 	if err != nil {
 		return nil, err
 	}
 	defer xmlFile.Close()
 
-	world := &DfWorld{}
+	var world *DfWorld
 
 BaseLoop:
 	for {
@@ -98,6 +107,10 @@ BaseLoop:
 		file = strings.Replace(file, "-legends.xml", "-legends_plus.xml", 1)
 
 		p, xmlFile, bar, err = NewLegendsParser(file)
+		if lp != nil {
+			lp.Message = "Loading " + file
+			lp.ProgressBar = bar
+		}
 		if err != nil {
 			return nil, err
 		}

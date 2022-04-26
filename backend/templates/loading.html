@@ -1,0 +1,30 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Loading{{end}}
+
+{{define "content"}}
+<h1>Loading...</h1>
+<p id="msg">{{ .Msg }}</p>
+<div class="progress">
+    <div id="progress" class="progress-bar" role="progressbar" style="width: {{ .Progress }}%" aria-valuenow="25" aria-valuemin="0"
+        aria-valuemax="100">
+    </div>
+</div>
+
+<script>
+    setInterval(() => {
+        $.ajax({
+            url: "/load/progress",
+            context: document.body,
+            success: function (data) {
+                $("#msg").text(data.msg);
+                $("#progress").css("width", data.progress + "%");
+                if (data.done) {
+                    location.reload();
+                }
+            }
+        })
+    }, 300);
+</script>
+
+{{- end }}
