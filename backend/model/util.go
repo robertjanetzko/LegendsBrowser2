@@ -19,12 +19,6 @@ type Identifiable interface {
 	Id() int
 }
 
-type TypedObject struct {
-	Type_ string `xml:"type" json:"type"`
-}
-
-func (r *TypedObject) Type() string { return r.Type_ }
-
 type Typed interface {
 	Type() string
 }

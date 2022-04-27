@@ -48,6 +48,10 @@ func (w *DfWorld) EventsMatching(f func(HistoricalEventDetails) bool) []*Histori
 	return list
 }
 
+func (e *Entity) Type() string {
+	return e.Type_.String()
+}
+
 func (e *Entity) Position(id int) *EntityPosition {
 	for _, p := range e.EntityPosition {
 		if p.Id_ == id {

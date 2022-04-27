@@ -1982,7 +1982,7 @@ type Entity struct {
 	Occasion                 []*Occasion                 `json:"occasion" legend:"plus"`                 // occasion
 	Profession               EntityProfession            `json:"profession" legend:"plus"`               // profession
 	Race                     string                      `json:"race" legend:"plus"`                     // race
-	Type                     EntityType                  `json:"type" legend:"plus"`                     // type
+	Type_                    EntityType                  `json:"type" legend:"plus"`                     // type
 	Weapon                   []EntityWeapon              `json:"weapon" legend:"plus"`                   // weapon
 	WorshipId                []int                       `json:"worshipId" legend:"plus"`                // worship_id
 }
@@ -2021,8 +2021,8 @@ func (x *Entity) MarshalJSON() ([]byte, error) {
 		d["profession"] = x.Profession
 	}
 	d["race"] = x.Race
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	d["weapon"] = x.Weapon
 	d["worshipId"] = x.WorshipId
@@ -2069,7 +2069,7 @@ func (s EntityEntityLinkType) MarshalJSON() ([]byte, error) {
 type EntityEntityLink struct {
 	Strength int                  `json:"strength" legend:"plus"` // strength
 	Target   int                  `json:"target" legend:"plus"`   // target
-	Type     EntityEntityLinkType `json:"type" legend:"plus"`     // type
+	Type_    EntityEntityLinkType `json:"type" legend:"plus"`     // type
 }
 
 func NewEntityEntityLink() *EntityEntityLink {
@@ -2095,8 +2095,8 @@ func (x *EntityEntityLink) MarshalJSON() ([]byte, error) {
 	if x.Target != -1 {
 		d["target"] = x.Target
 	}
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	return json.Marshal(d)
 }
@@ -2566,7 +2566,7 @@ func (s FeatureType) MarshalJSON() ([]byte, error) {
 
 type Feature struct {
 	Reference int         `json:"reference" legend:"plus"` // reference
-	Type      FeatureType `json:"type" legend:"plus"`      // type
+	Type_     FeatureType `json:"type" legend:"plus"`      // type
 }
 
 func NewFeature() *Feature {
@@ -2588,8 +2588,8 @@ func (x *Feature) MarshalJSON() ([]byte, error) {
 	if x.Reference != -1 {
 		d["reference"] = x.Reference
 	}
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	return json.Marshal(d)
 }
@@ -4203,7 +4203,7 @@ func (s HistoricalEventArtifactCreatedCircumstanceType) MarshalJSON() ([]byte, e
 
 type HistoricalEventArtifactCreatedCircumstance struct {
 	Defeated int                                            `json:"defeated" legend:"plus"` // defeated
-	Type     HistoricalEventArtifactCreatedCircumstanceType `json:"type" legend:"plus"`     // type
+	Type_    HistoricalEventArtifactCreatedCircumstanceType `json:"type" legend:"plus"`     // type
 }
 
 func NewHistoricalEventArtifactCreatedCircumstance() *HistoricalEventArtifactCreatedCircumstance {
@@ -4225,8 +4225,8 @@ func (x *HistoricalEventArtifactCreatedCircumstance) MarshalJSON() ([]byte, erro
 	if x.Defeated != -1 {
 		d["defeated"] = x.Defeated
 	}
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	return json.Marshal(d)
 }
@@ -12595,7 +12595,7 @@ type HistoricalEventItemStolenCircumstance struct {
 	Defeated            int                                       `json:"defeated" legend:"plus"`            // defeated
 	HistEventCollection int                                       `json:"histEventCollection" legend:"plus"` // hist_event_collection
 	Murdered            int                                       `json:"murdered" legend:"plus"`            // murdered
-	Type                HistoricalEventItemStolenCircumstanceType `json:"type" legend:"plus"`                // type
+	Type_               HistoricalEventItemStolenCircumstanceType `json:"type" legend:"plus"`                // type
 }
 
 func NewHistoricalEventItemStolenCircumstance() *HistoricalEventItemStolenCircumstance {
@@ -12625,8 +12625,8 @@ func (x *HistoricalEventItemStolenCircumstance) MarshalJSON() ([]byte, error) {
 	if x.Murdered != -1 {
 		d["murdered"] = x.Murdered
 	}
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	return json.Marshal(d)
 }
@@ -17298,7 +17298,7 @@ type IntriguePlot struct {
 	ParentPlotHfid    int              `json:"parentPlotHfid" legend:"base"`    // parent_plot_hfid
 	ParentPlotId      int              `json:"parentPlotId" legend:"base"`      // parent_plot_id
 	PlotActor         []*PlotActor     `json:"plotActor" legend:"base"`         // plot_actor
-	Type              IntriguePlotType `json:"type" legend:"base"`              // type
+	Type_             IntriguePlotType `json:"type" legend:"base"`              // type
 }
 
 func NewIntriguePlot() *IntriguePlot {
@@ -17352,8 +17352,8 @@ func (x *IntriguePlot) MarshalJSON() ([]byte, error) {
 		d["parentPlotId"] = x.ParentPlotId
 	}
 	d["plotActor"] = x.PlotActor
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	return json.Marshal(d)
 }
@@ -17742,8 +17742,8 @@ func (s ReferenceType) MarshalJSON() ([]byte, error) {
 }
 
 type Reference struct {
-	Id_  int           `json:"id" legend:"plus"`   // id
-	Type ReferenceType `json:"type" legend:"plus"` // type
+	Id_   int           `json:"id" legend:"plus"`   // id
+	Type_ ReferenceType `json:"type" legend:"plus"` // type
 }
 
 func NewReference() *Reference {
@@ -17766,8 +17766,8 @@ func (x *Reference) MarshalJSON() ([]byte, error) {
 	if x.Id_ != -1 {
 		d["id"] = x.Id_
 	}
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	return json.Marshal(d)
 }
@@ -17887,7 +17887,7 @@ type Region struct {
 	ForceId  int            `json:"forceId" legend:"plus"`  // force_id
 	Id_      int            `json:"id" legend:"both"`       // id
 	Name_    string         `json:"name" legend:"base"`     // name
-	Type     RegionType     `json:"type" legend:"base"`     // type
+	Type_    RegionType     `json:"type" legend:"base"`     // type
 }
 
 func NewRegion() *Region {
@@ -17920,8 +17920,8 @@ func (x *Region) MarshalJSON() ([]byte, error) {
 		d["id"] = x.Id_
 	}
 	d["name"] = x.Name_
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	return json.Marshal(d)
 }
@@ -18479,7 +18479,7 @@ type Schedule struct {
 	ItemType    ScheduleItemType    `json:"itemType" legend:"plus"`    // item_type
 	Reference   int                 `json:"reference" legend:"plus"`   // reference
 	Reference2  int                 `json:"reference2" legend:"plus"`  // reference2
-	Type        ScheduleType        `json:"type" legend:"plus"`        // type
+	Type_       ScheduleType        `json:"type" legend:"plus"`        // type
 }
 
 func NewSchedule() *Schedule {
@@ -18517,8 +18517,8 @@ func (x *Schedule) MarshalJSON() ([]byte, error) {
 	if x.Reference2 != -1 {
 		d["reference2"] = x.Reference2
 	}
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	return json.Marshal(d)
 }
@@ -18654,7 +18654,7 @@ type Site struct {
 	Rectangle      string                    `json:"rectangle" legend:"base"`      // rectangle
 	SiteProperties map[int]*SiteSiteProperty `json:"siteProperties" legend:"base"` // site_properties
 	Structures     map[int]*Structure        `json:"structures" legend:"both"`     // structures
-	Type           SiteType                  `json:"type" legend:"base"`           // type
+	Type_          SiteType                  `json:"type" legend:"base"`           // type
 }
 
 func NewSite() *Site {
@@ -18693,8 +18693,8 @@ func (x *Site) MarshalJSON() ([]byte, error) {
 	d["rectangle"] = x.Rectangle
 	d["siteProperties"] = x.SiteProperties
 	d["structures"] = x.Structures
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	return json.Marshal(d)
 }
@@ -18837,7 +18837,7 @@ type SiteSiteProperty struct {
 	Id_         int                  `json:"id" legend:"base"`          // id
 	OwnerHfid   int                  `json:"ownerHfid" legend:"base"`   // owner_hfid
 	StructureId int                  `json:"structureId" legend:"base"` // structure_id
-	Type        SiteSitePropertyType `json:"type" legend:"base"`        // type
+	Type_       SiteSitePropertyType `json:"type" legend:"base"`        // type
 }
 
 func NewSiteSiteProperty() *SiteSiteProperty {
@@ -18868,8 +18868,8 @@ func (x *SiteSiteProperty) MarshalJSON() ([]byte, error) {
 	if x.StructureId != -1 {
 		d["structureId"] = x.StructureId
 	}
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	return json.Marshal(d)
 }
@@ -19009,7 +19009,7 @@ type Structure struct {
 	Name2            string           `json:"name2" legend:"plus"`            // name2
 	Religion         int              `json:"religion" legend:"plus"`         // religion
 	Subtype          StructureSubtype `json:"subtype" legend:"base"`          // subtype
-	Type             StructureType    `json:"type" legend:"both"`             // type
+	Type_            StructureType    `json:"type" legend:"both"`             // type
 	WorshipHfid      int              `json:"worshipHfid" legend:"base"`      // worship_hfid
 }
 
@@ -19102,8 +19102,8 @@ func (x *Structure) MarshalJSON() ([]byte, error) {
 	if x.Subtype != 0 {
 		d["subtype"] = x.Subtype
 	}
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	if x.WorshipHfid != -1 {
 		d["worshipHfid"] = x.WorshipHfid
@@ -19152,7 +19152,7 @@ type UndergroundRegion struct {
 	Coords string                `json:"coords" legend:"plus"` // coords
 	Depth  int                   `json:"depth" legend:"base"`  // depth
 	Id_    int                   `json:"id" legend:"both"`     // id
-	Type   UndergroundRegionType `json:"type" legend:"base"`   // type
+	Type_  UndergroundRegionType `json:"type" legend:"base"`   // type
 }
 
 func NewUndergroundRegion() *UndergroundRegion {
@@ -19180,8 +19180,8 @@ func (x *UndergroundRegion) MarshalJSON() ([]byte, error) {
 	if x.Id_ != -1 {
 		d["id"] = x.Id_
 	}
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	return json.Marshal(d)
 }
@@ -19279,7 +19279,7 @@ type WorldConstruction struct {
 	Coords string                `json:"coords" legend:"plus"` // coords
 	Id_    int                   `json:"id" legend:"plus"`     // id
 	Name_  string                `json:"name" legend:"plus"`   // name
-	Type   WorldConstructionType `json:"type" legend:"plus"`   // type
+	Type_  WorldConstructionType `json:"type" legend:"plus"`   // type
 }
 
 func NewWorldConstruction() *WorldConstruction {
@@ -19305,8 +19305,8 @@ func (x *WorldConstruction) MarshalJSON() ([]byte, error) {
 		d["id"] = x.Id_
 	}
 	d["name"] = x.Name_
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	return json.Marshal(d)
 }
@@ -19616,7 +19616,7 @@ type WrittenContent struct {
 	Reference  []*Reference       `json:"reference" legend:"plus"`  // reference
 	Style      []string           `json:"style" legend:"both"`      // style
 	Title      string             `json:"title" legend:"both"`      // title
-	Type       WrittenContentType `json:"type" legend:"plus"`       // type
+	Type_      WrittenContentType `json:"type" legend:"plus"`       // type
 }
 
 func NewWrittenContent() *WrittenContent {
@@ -19683,8 +19683,8 @@ func (x *WrittenContent) MarshalJSON() ([]byte, error) {
 	d["reference"] = x.Reference
 	d["style"] = x.Style
 	d["title"] = x.Title
-	if x.Type != 0 {
-		d["type"] = x.Type
+	if x.Type_ != 0 {
+		d["type"] = x.Type_
 	}
 	return json.Marshal(d)
 }
@@ -20900,7 +20900,7 @@ func parseEntityPlus(p *util.XMLParser, obj *Entity) (*Entity, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseEntityType(txt(data))
+				obj.Type_ = parseEntityType(txt(data))
 			case "weapon":
 				data, err := p.Value()
 				if err != nil {
@@ -20976,7 +20976,7 @@ func parseEntityEntityLinkPlus(p *util.XMLParser, obj *EntityEntityLink) (*Entit
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseEntityEntityLinkType(txt(data))
+				obj.Type_ = parseEntityEntityLinkType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -21672,7 +21672,7 @@ func parseFeaturePlus(p *util.XMLParser, obj *Feature) (*Feature, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseFeatureType(txt(data))
+				obj.Type_ = parseFeatureType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -23399,7 +23399,7 @@ func parseHistoricalEventArtifactCreatedCircumstancePlus(p *util.XMLParser, obj 
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseHistoricalEventArtifactCreatedCircumstanceType(txt(data))
+				obj.Type_ = parseHistoricalEventArtifactCreatedCircumstanceType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -32226,7 +32226,7 @@ func parseHistoricalEventItemStolenCircumstancePlus(p *util.XMLParser, obj *Hist
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseHistoricalEventItemStolenCircumstanceType(txt(data))
+				obj.Type_ = parseHistoricalEventItemStolenCircumstanceType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -36530,7 +36530,7 @@ func parseIntriguePlot(p *util.XMLParser) (*IntriguePlot, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseIntriguePlotType(txt(data))
+				obj.Type_ = parseIntriguePlotType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -37105,7 +37105,7 @@ func parseReferencePlus(p *util.XMLParser, obj *Reference) (*Reference, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseReferenceType(txt(data))
+				obj.Type_ = parseReferenceType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -37145,7 +37145,7 @@ func parseRegion(p *util.XMLParser) (*Region, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseRegionType(txt(data))
+				obj.Type_ = parseRegionType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -37726,7 +37726,7 @@ func parseSchedulePlus(p *util.XMLParser, obj *Schedule) (*Schedule, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseScheduleType(txt(data))
+				obj.Type_ = parseScheduleType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -37782,7 +37782,7 @@ func parseSite(p *util.XMLParser) (*Site, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseSiteType(txt(data))
+				obj.Type_ = parseSiteType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -37948,7 +37948,7 @@ func parseSiteSiteProperty(p *util.XMLParser) (*SiteSiteProperty, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseSiteSitePropertyType(txt(data))
+				obj.Type_ = parseSiteSitePropertyType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -38030,7 +38030,7 @@ func parseStructure(p *util.XMLParser) (*Structure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseStructureType(txt(data))
+				obj.Type_ = parseStructureType(txt(data))
 			case "worship_hfid":
 				data, err := p.Value()
 				if err != nil {
@@ -38114,7 +38114,7 @@ func parseStructurePlus(p *util.XMLParser, obj *Structure) (*Structure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseStructureType(txt(data))
+				obj.Type_ = parseStructureType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -38154,7 +38154,7 @@ func parseUndergroundRegion(p *util.XMLParser) (*UndergroundRegion, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseUndergroundRegionType(txt(data))
+				obj.Type_ = parseUndergroundRegionType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -38390,7 +38390,7 @@ func parseWorldConstructionPlus(p *util.XMLParser, obj *WorldConstruction) (*Wor
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseWorldConstructionType(txt(data))
+				obj.Type_ = parseWorldConstructionType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -38523,7 +38523,7 @@ func parseWrittenContentPlus(p *util.XMLParser, obj *WrittenContent) (*WrittenCo
 				if err != nil {
 					return nil, err
 				}
-				obj.Type = parseWrittenContentType(txt(data))
+				obj.Type_ = parseWrittenContentType(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()

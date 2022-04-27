@@ -279,12 +279,16 @@ func GenerateBackendCode(objects *Metadata) error {
 	return err
 }
 
-func (f Field) TypeLine() string {
+func (f Field) FixedName() string {
 	n := f.Name
-
-	if n == "Id" || n == "Name" {
+	if n == "Id" || n == "Name" || n == "Type" {
 		n = n + "_"
 	}
+	return n
+}
+
+func (f Field) TypeLine() string {
+	n := f.FixedName()
 
 	m := ""
 	if f.Multiple {
@@ -312,10 +316,7 @@ func (f Field) MustInit() bool {
 }
 
 func (f Field) Init() string {
-	n := f.Name
-	if n == "Id" || n == "Name" {
-		n = n + "_"
-	}
+	n := f.FixedName()
 
 	if f.Type == "map" {
 		return fmt.Sprintf("%s: make(map[int]*%s),", n, *f.ElementType)
@@ -328,11 +329,7 @@ func (f Field) Init() string {
 }
 
 func (f Field) StartAction(obj Object, plus bool) string {
-	n := f.Name
-
-	if n == "Id" || n == "Name" {
-		n = n + "_"
-	}
+	n := f.FixedName()
 
 	if f.Type == "object" {
 		var p string
@@ -366,11 +363,9 @@ func (f Field) StartAction(obj Object, plus bool) string {
 	}
 
 	if f.Type == "int" || f.Type == "string" || f.Type == "bool" || f.Type == "enum" {
-		n := f.Name
+		n := f.FixedName()
 
-		if n == "Id" || n == "Name" {
-			n = n + "_"
-		} else {
+		if f.Name == n {
 			n = f.CorrectedName(obj)
 		}
 
@@ -385,7 +380,7 @@ func (f Field) StartAction(obj Object, plus bool) string {
 				s := "_, err := p.Value()\nif err != nil { return nil, err }\n"
 				return fmt.Sprintf("%sobj.%s = true", s, n)
 			} else if f.Type == "enum" {
-				return fmt.Sprintf("%sobj.%s = parse%s%s(txt(data))", s, n, obj.Name, n)
+				return fmt.Sprintf("%sobj.%s = parse%s%s(txt(data))", s, n, obj.Name, f.CorrectedName(obj))
 			}
 		} else {
 			if f.Type == "int" {
@@ -393,7 +388,7 @@ func (f Field) StartAction(obj Object, plus bool) string {
 			} else if f.Type == "string" {
 				return fmt.Sprintf("%sobj.%s = append(obj.%s, txt(data))", s, n, n)
 			} else if f.Type == "enum" {
-				return fmt.Sprintf("%sobj.%s = append(obj.%s, parse%s%s(txt(data)))", s, n, n, obj.Name, n)
+				return fmt.Sprintf("%sobj.%s = append(obj.%s, parse%s%s(txt(data)))", s, n, n, obj.Name, f.CorrectedName(obj))
 			}
 		}
 	}
@@ -402,11 +397,9 @@ func (f Field) StartAction(obj Object, plus bool) string {
 }
 
 func (f Field) EndAction(obj Object) string {
-	n := f.Name
+	n := f.FixedName()
 
-	if n == "Id" || n == "Name" {
-		n = n + "_"
-	} else {
+	if f.Name == n {
 		n = f.CorrectedName(obj)
 	}
 
@@ -418,7 +411,7 @@ func (f Field) EndAction(obj Object) string {
 		} else if f.Type == "bool" {
 			return fmt.Sprintf("obj.%s = true", n)
 		} else if f.Type == "enum" {
-			return fmt.Sprintf("obj.%s = parse%s%s(string(data))", n, obj.Name, n)
+			return fmt.Sprintf("obj.%s = parse%s%s(string(data))", n, obj.Name, f.CorrectedName(obj))
 		}
 	} else {
 		if f.Type == "int" {
@@ -426,7 +419,7 @@ func (f Field) EndAction(obj Object) string {
 		} else if f.Type == "string" {
 			return fmt.Sprintf("obj.%s = append(obj.%s, string(data))", n, n)
 		} else if f.Type == "enum" {
-			return fmt.Sprintf("obj.%s = append(obj.%s, parse%s%s(string(data)))", n, n, obj.Name, n)
+			return fmt.Sprintf("obj.%s = append(obj.%s, parse%s%s(string(data)))", n, n, obj.Name, f.CorrectedName(obj))
 		}
 	}
 
@@ -485,11 +478,7 @@ func (obj Object) LegendFields(t string) []Field {
 }
 
 func (f Field) JsonMarshal() string {
-	n := f.Name
-
-	if n == "Id" || n == "Name" {
-		n = n + "_"
-	}
+	n := f.FixedName()
 
 	if f.Type == "int" && !f.Multiple {
 		return fmt.Sprintf(`if x.%s != -1 { d["%s"] = x.%s }`, n, strcase.ToLowerCamel(f.Name), n)

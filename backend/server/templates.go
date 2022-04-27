@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/url"
 
+	humanize "github.com/dustin/go-humanize"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/templates"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
@@ -39,6 +40,7 @@ func (srv *DfServer) LoadTemplates() {
 		"html": func(value any) template.HTML {
 			return template.HTML(fmt.Sprint(value))
 		},
+		"bytes": func(s int64) string { return humanize.Bytes(uint64(s)) },
 	}
 	srv.templates = templates.New(functions)
 }

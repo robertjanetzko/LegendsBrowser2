@@ -178,7 +178,7 @@ func (x *HistoricalEventArtifactCreated) Html(c *Context) string {
 	}
 	e := ""
 	if x.Circumstance != nil {
-		switch x.Circumstance.Type {
+		switch x.Circumstance.Type_ {
 		case HistoricalEventArtifactCreatedCircumstanceType_Defeated:
 			e = " after defeating " + c.hf(x.Circumstance.Defeated)
 		case HistoricalEventArtifactCreatedCircumstanceType_Favoritepossession:
@@ -500,7 +500,7 @@ func (x *HistoricalEventCompetition) Html(c *Context) string {
 	e := c.World.Entities[x.CivId]
 	o := e.Occasion[x.OccasionId]
 	s := o.Schedule[x.ScheduleId]
-	return c.entity(x.CivId) + " held a " + strcase.ToDelimited(s.Type.String(), ' ') + c.site(x.SiteId, " in") + " as part of the " + o.Name() +
+	return c.entity(x.CivId) + " held a " + strcase.ToDelimited(s.Type_.String(), ' ') + c.site(x.SiteId, " in") + " as part of the " + o.Name() +
 		". Competing " + util.If(len(x.CompetitorHfid) > 1, "were ", "was ") + c.hfList(x.CompetitorHfid) + ". " +
 		util.Capitalize(c.hf(x.WinnerHfid)) + " was the victor"
 }
@@ -1236,7 +1236,7 @@ func (x *HistoricalEventItemStolen) Html(c *Context) string {
 	i := util.If(x.Item != -1, c.artifact(x.Item), articled(x.Mat+" "+x.ItemType))
 	circumstance := ""
 	if x.Circumstance != nil {
-		switch x.Circumstance.Type {
+		switch x.Circumstance.Type_ {
 		case HistoricalEventItemStolenCircumstanceType_Defeated:
 			circumstance = " after defeating " + c.hfRelated(x.Circumstance.Defeated, x.Histfig)
 		case HistoricalEventItemStolenCircumstanceType_Histeventcollection: // TODO during ...

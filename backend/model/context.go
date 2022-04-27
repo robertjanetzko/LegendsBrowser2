@@ -124,7 +124,7 @@ func (c *Context) property(siteId, propertyId int) string {
 			if y.StructureId != -1 {
 				return c.structure(siteId, y.StructureId)
 			}
-			return articled(y.Type.String())
+			return articled(y.Type_.String())
 		}
 	}
 	return "UNKNOWN PROPERTY"
@@ -214,7 +214,7 @@ func (c *Context) writtenContent(id int) string {
 }
 
 func (c *Context) feature(x *Feature) string {
-	switch x.Type {
+	switch x.Type_ {
 	case FeatureType_DancePerformance:
 		return "a perfomance of " + c.danceForm(x.Reference)
 	case FeatureType_Images:
@@ -234,12 +234,12 @@ func (c *Context) feature(x *Feature) string {
 		}
 		return "a story recital"
 	default:
-		return strcase.ToDelimited(x.Type.String(), ' ')
+		return strcase.ToDelimited(x.Type_.String(), ' ')
 	}
 }
 
 func (c *Context) schedule(x *Schedule) string {
-	switch x.Type {
+	switch x.Type_ {
 	case ScheduleType_DancePerformance:
 		return "a perfomance of " + c.danceForm(x.Reference)
 	case ScheduleType_MusicalPerformance:
@@ -254,7 +254,7 @@ func (c *Context) schedule(x *Schedule) string {
 		}
 		return "a story recital"
 	default:
-		return strcase.ToDelimited(x.Type.String(), ' ')
+		return strcase.ToDelimited(x.Type_.String(), ' ')
 	}
 }
 

@@ -8,11 +8,15 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"path/filepath"
+	"runtime"
 	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/templates"
+	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
+	"github.com/shirou/gopsutil/disk"
 )
 
 type DfServerContext struct {
@@ -40,7 +44,9 @@ func StartServer(world *model.DfWorld, static embed.FS) {
 	srv.loader = &loadHandler{server: srv}
 	srv.LoadTemplates()
 
+	srv.RegisterWorldPage("/entities", "entities.html", func(p Parms) any { return grouped(srv.context.world.Entities) })
 	srv.RegisterWorldResourcePage("/entity/{id}", "entity.html", func(id int) any { return srv.context.world.Entities[id] })
+
 	srv.RegisterWorldResourcePage("/hf/{id}", "hf.html", func(id int) any { return srv.context.world.HistoricalFigures[id] })
 	srv.RegisterWorldResourcePage("/region/{id}", "region.html", func(id int) any { return srv.context.world.Regions[id] })
 	srv.RegisterWorldResourcePage("/site/{id}", "site.html", func(id int) any { return srv.context.world.Sites[id] })
@@ -140,31 +146,46 @@ func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var partitions []string
+	if runtime.GOOS == "windows" {
+		ps, _ := disk.Partitions(false)
+		partitions = util.Map(ps, func(p disk.PartitionStat) string { return p.Mountpoint + `\` })
+	} else {
+		partitions = append(partitions, "/")
+	}
+
 	path := r.URL.Query().Get("p")
 
 	p := &paths{
-		Current: path,
+		Partitions: partitions,
+		Current:    path,
 	}
 	if p.Current == "" {
 		p.Current = "."
+	}
+	var err error
+	p.Current, err = filepath.Abs(p.Current)
+	if err != nil {
+		httpError(w, err)
+		return
 	}
 
 	if f, err := os.Stat(p.Current); err == nil {
 		if f.IsDir() {
 			p.List, err = ioutil.ReadDir(p.Current)
 			if err != nil {
-				fmt.Fprintln(w, err)
-				fmt.Println(err)
+				httpError(w, err)
+				return
 			}
 
 			err = h.server.templates.Render(w, "load.html", p)
 			if err != nil {
-				fmt.Fprintln(w, err)
-				fmt.Println(err)
+				httpError(w, err)
 			}
 			return
 		} else {
 			h.server.context.isLoading = true
+			h.server.context.world = nil
 			go loadWorld(h.server, p.Current)
 			http.Redirect(w, r, "/", http.StatusSeeOther)
 			return
@@ -178,24 +199,41 @@ func isLegendsXml(f fs.FileInfo) bool {
 }
 
 func loadWorld(server *DfServer, file string) {
+	runtime.GC()
 	wrld, _ := model.Parse(file, server.context.progress)
 	server.context.world = wrld
 	server.context.isLoading = false
 }
 
 type paths struct {
-	Current string
-	List    []fs.FileInfo
+	Current    string
+	List       []fs.FileInfo
+	Partitions []string
 }
 
 func (srv *DfServer) renderLoading(w http.ResponseWriter, r *http.Request) {
 	if srv.context.isLoading {
 		err := srv.templates.Render(w, "loading.html", srv.loader.Progress())
 		if err != nil {
-			fmt.Fprintln(w, err)
-			fmt.Println(err)
+			httpError(w, err)
 		}
 	} else {
 		http.Redirect(w, r, "/load", http.StatusSeeOther)
 	}
+}
+
+func httpError(w http.ResponseWriter, err error) {
+	fmt.Fprintln(w, err)
+	fmt.Println(err)
+}
+
+func grouped[T model.Typed](input map[int]T) map[string][]T {
+	output := make(map[string][]T)
+
+	for _, v := range input {
+		k := v.Type()
+		output[k] = append(output[k], v)
+	}
+
+	return output
 }

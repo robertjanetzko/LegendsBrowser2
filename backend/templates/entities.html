@@ -1,0 +1,34 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Entities{{end}}
+
+{{define "content"}}
+<h3>Entities</h3>
+
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        {{- range $t, $v := .}}
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-{{$t}}" type="button" role="tab">{{$t}}</button>
+        {{- end}}
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    {{- range $t, $v := . }}
+    <div class="tab-pane" id="nav-{{$t}}" role="tabpanel" aria-labelledby="nav-home-tab">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Race</th>
+            </tr>
+            {{- range $v }}{{- if not (eq .Name "") }}
+            <tr>
+                <td>{{ entity .Id }}</td>
+                <td>{{ .Race }}</td>
+            </tr>
+            {{- end}}{{- end}}
+        </table>
+    </div>
+    {{- end}}
+</div>
+
+{{- end }}
