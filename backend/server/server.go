@@ -48,10 +48,34 @@ func StartServer(world *model.DfWorld, static embed.FS) {
 	srv.RegisterWorldPage("/entities", "entities.html", func(p Parms) any { return grouped(srv.context.world.Entities) })
 	srv.RegisterWorldResourcePage("/entity/{id}", "entity.html", func(id int) any { return srv.context.world.Entities[id] })
 
-	srv.RegisterWorldResourcePage("/hf/{id}", "hf.html", func(id int) any { return srv.context.world.HistoricalFigures[id] })
+	srv.RegisterWorldPage("/regions", "regions.html", func(p Parms) any { return grouped(srv.context.world.Regions) })
 	srv.RegisterWorldResourcePage("/region/{id}", "region.html", func(id int) any { return srv.context.world.Regions[id] })
+
+	srv.RegisterWorldPage("/sites", "sites.html", func(p Parms) any { return grouped(srv.context.world.Sites) })
 	srv.RegisterWorldResourcePage("/site/{id}", "site.html", func(id int) any { return srv.context.world.Sites[id] })
+
+	srv.RegisterWorldPage("/worldconstructions", "worldconstructions.html", func(p Parms) any { return grouped(srv.context.world.WorldConstructions) })
+	srv.RegisterWorldResourcePage("/worldconstruction/{id}", "worldconstruction.html", func(id int) any { return srv.context.world.WorldConstructions[id] })
+
+	srv.RegisterWorldPage("/artifacts", "artifacts.html", func(p Parms) any { return grouped(srv.context.world.Artifacts) })
 	srv.RegisterWorldResourcePage("/artifact/{id}", "artifact.html", func(id int) any { return srv.context.world.Artifacts[id] })
+
+	srv.RegisterWorldPage("/artforms", "artforms.html", func(p Parms) any {
+		return struct {
+			DanceForms   map[string][]*model.DanceForm
+			MusicalForms map[string][]*model.MusicalForm
+			PoeticForms  map[string][]*model.PoeticForm
+		}{
+			DanceForms:   grouped(srv.context.world.DanceForms),
+			MusicalForms: grouped(srv.context.world.MusicalForms),
+			PoeticForms:  grouped(srv.context.world.PoeticForms),
+		}
+	})
+
+	srv.RegisterWorldPage("/writtencontents", "writtencontents.html", func(p Parms) any { return grouped(srv.context.world.WrittenContents) })
+	srv.RegisterWorldResourcePage("/writtencontent/{id}", "writtencontent.html", func(id int) any { return srv.context.world.WrittenContents[id] })
+
+	srv.RegisterWorldResourcePage("/hf/{id}", "hf.html", func(id int) any { return srv.context.world.HistoricalFigures[id] })
 
 	srv.RegisterWorldPage("/", "eventTypes.html", func(p Parms) any { return srv.context.world.AllEventTypes() })
 	srv.RegisterWorldPage("/events", "eventTypes.html", func(p Parms) any { return srv.context.world.AllEventTypes() })

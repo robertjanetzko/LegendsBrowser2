@@ -114,6 +114,7 @@ func New{{ $obj.Name }}() *{{ $obj.Name }} {
 
 {{- if $obj.Id }}
 func (x *{{ $obj.Name }}) Id() int { return x.Id_ }
+func (x *{{ $obj.Name }}) setId(id int) { x.Id_ = id }
 {{- end }}
 {{- if $obj.Named }}
 func (x *{{ $obj.Name }}) Name() string { return x.Name_ }

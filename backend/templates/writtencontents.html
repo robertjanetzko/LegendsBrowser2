@@ -1,9 +1,9 @@
 {{template "layout.html" .}}
 
-{{define "title"}}Entities{{end}}
+{{define "title"}}Written Contents{{end}}
 
 {{define "content"}}
-<h3>Entities</h3>
+<h3>Written Contents</h3>
 
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -19,12 +19,12 @@
         <table>
             <tr>
                 <th width="100%">Name</th>
-                <th>Race</th>
+                <th>Size</th>
             </tr>
             {{- range $v }}{{- if not (eq .Name "") }}
             <tr>
-                <td>{{ entity .Id }}</td>
-                <td>{{ .Race }}</td>
+                <td>{{ writtencontent .Id }}</td>
+                <td></td>
             </tr>
             {{- end}}{{- end}}
         </table>

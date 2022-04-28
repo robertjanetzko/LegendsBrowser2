@@ -11,6 +11,14 @@ var LinkHf = func(w *DfWorld, id int) template.HTML { return template.HTML((&Con
 var LinkEntity = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).entity(id)) }
 var LinkSite = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).site(id, "")) }
 var LinkRegion = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).region(id)) }
+var LinkWorldConstruction = func(w *DfWorld, id int) template.HTML {
+	return template.HTML((&Context{World: w}).worldConstruction(id))
+}
+var LinkArtifact = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).artifact(id)) }
+var LinkDanceForm = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).danceForm(id)) }
+var LinkMusicalForm = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).musicalForm(id)) }
+var LinkPoeticForm = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).poeticForm(id)) }
+var LinkWrittenContent = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).writtenContent(id)) }
 
 func andList(list []string) string {
 	if len(list) > 1 {

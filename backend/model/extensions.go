@@ -48,6 +48,10 @@ func (w *DfWorld) EventsMatching(f func(HistoricalEventDetails) bool) []*Histori
 	return list
 }
 
+func (e *Artifact) Type() string {
+	return e.ItemType
+}
+
 func (e *Entity) Type() string {
 	return e.Type_.String()
 }
@@ -121,6 +125,34 @@ func (x *Honor) Requirement() string {
 	return " after " + andList(list)
 }
 
+func (r *Region) Type() string {
+	return r.Type_.String()
+}
+
+func (s *Site) Type() string {
+	return s.Type_.String()
+}
+
+func (w *WorldConstruction) Type() string {
+	return w.Type_.String()
+}
+
 func (w *WrittenContent) Name() string {
 	return w.Title
+}
+
+func (w *WrittenContent) Type() string {
+	return w.Type_.String()
+}
+
+func (w *DanceForm) Type() string {
+	return "dance form"
+}
+
+func (w *MusicalForm) Type() string {
+	return "musical form"
+}
+
+func (w *PoeticForm) Type() string {
+	return "poetic form"
 }

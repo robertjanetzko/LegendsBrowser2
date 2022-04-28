@@ -229,7 +229,7 @@ func (c *Context) feature(x *Feature) string {
 	case FeatureType_Storytelling:
 		if x.Reference != -1 {
 			if e, ok := c.World.HistoricalEvents[x.Reference]; ok {
-				return "a telling of the story of " + e.Details.Html(&Context{Story: true}) + " in " + Time(e.Year, e.Seconds72)
+				return "a telling of the story of " + e.Details.Html(&Context{World: c.World, Story: true}) + " in " + Time(e.Year, e.Seconds72)
 			}
 		}
 		return "a story recital"
@@ -249,7 +249,7 @@ func (c *Context) schedule(x *Schedule) string {
 	case ScheduleType_Storytelling:
 		if x.Reference != -1 {
 			if e, ok := c.World.HistoricalEvents[x.Reference]; ok {
-				return "the story of " + e.Details.Html(&Context{Story: true}) + " in " + Time(e.Year, e.Seconds72)
+				return "the story of " + e.Details.Html(&Context{World: c.World, Story: true}) + " in " + Time(e.Year, e.Seconds72)
 			}
 		}
 		return "a story recital"

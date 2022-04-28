@@ -1148,6 +1148,7 @@ func NewArtifact() *Artifact {
 	}
 }
 func (x *Artifact) Id() int                       { return x.Id_ }
+func (x *Artifact) setId(id int)                  { x.Id_ = id }
 func (x *Artifact) Name() string                  { return x.Name_ }
 func (x *Artifact) RelatedToEntity(id int) bool   { return false }
 func (x *Artifact) RelatedToHf(id int) bool       { return x.HolderHfid == id }
@@ -1511,6 +1512,7 @@ func NewDanceForm() *DanceForm {
 	}
 }
 func (x *DanceForm) Id() int                       { return x.Id_ }
+func (x *DanceForm) setId(id int)                  { x.Id_ = id }
 func (x *DanceForm) Name() string                  { return x.Name_ }
 func (x *DanceForm) RelatedToEntity(id int) bool   { return false }
 func (x *DanceForm) RelatedToHf(id int) bool       { return false }
@@ -1993,6 +1995,7 @@ func NewEntity() *Entity {
 	}
 }
 func (x *Entity) Id() int                       { return x.Id_ }
+func (x *Entity) setId(id int)                  { x.Id_ = id }
 func (x *Entity) Name() string                  { return x.Name_ }
 func (x *Entity) RelatedToEntity(id int) bool   { return false }
 func (x *Entity) RelatedToHf(id int) bool       { return containsInt(x.HistfigId, id) }
@@ -2196,6 +2199,7 @@ func NewEntityPopulation() *EntityPopulation {
 	}
 }
 func (x *EntityPopulation) Id() int                       { return x.Id_ }
+func (x *EntityPopulation) setId(id int)                  { x.Id_ = id }
 func (x *EntityPopulation) RelatedToEntity(id int) bool   { return x.CivId == id }
 func (x *EntityPopulation) RelatedToHf(id int) bool       { return false }
 func (x *EntityPopulation) RelatedToArtifact(id int) bool { return false }
@@ -2233,6 +2237,7 @@ func NewEntityPosition() *EntityPosition {
 	}
 }
 func (x *EntityPosition) Id() int                       { return x.Id_ }
+func (x *EntityPosition) setId(id int)                  { x.Id_ = id }
 func (x *EntityPosition) Name() string                  { return x.Name_ }
 func (x *EntityPosition) RelatedToEntity(id int) bool   { return false }
 func (x *EntityPosition) RelatedToHf(id int) bool       { return false }
@@ -2273,6 +2278,7 @@ func NewEntityPositionAssignment() *EntityPositionAssignment {
 	}
 }
 func (x *EntityPositionAssignment) Id() int                       { return x.Id_ }
+func (x *EntityPositionAssignment) setId(id int)                  { x.Id_ = id }
 func (x *EntityPositionAssignment) RelatedToEntity(id int) bool   { return false }
 func (x *EntityPositionAssignment) RelatedToHf(id int) bool       { return x.Histfig == id }
 func (x *EntityPositionAssignment) RelatedToArtifact(id int) bool { return false }
@@ -2798,6 +2804,7 @@ func NewHistoricalEvent() *HistoricalEvent {
 	}
 }
 func (x *HistoricalEvent) Id() int                       { return x.Id_ }
+func (x *HistoricalEvent) setId(id int)                  { x.Id_ = id }
 func (x *HistoricalEvent) RelatedToEntity(id int) bool   { return false }
 func (x *HistoricalEvent) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEvent) RelatedToArtifact(id int) bool { return false }
@@ -5803,6 +5810,7 @@ func NewHistoricalEventCollection() *HistoricalEventCollection {
 	}
 }
 func (x *HistoricalEventCollection) Id() int                       { return x.Id_ }
+func (x *HistoricalEventCollection) setId(id int)                  { x.Id_ = id }
 func (x *HistoricalEventCollection) RelatedToEntity(id int) bool   { return false }
 func (x *HistoricalEventCollection) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEventCollection) RelatedToArtifact(id int) bool { return false }
@@ -16372,6 +16380,7 @@ func NewHistoricalFigure() *HistoricalFigure {
 	}
 }
 func (x *HistoricalFigure) Id() int      { return x.Id_ }
+func (x *HistoricalFigure) setId(id int) { x.Id_ = id }
 func (x *HistoricalFigure) Name() string { return x.Name_ }
 func (x *HistoricalFigure) RelatedToEntity(id int) bool {
 	return containsInt(x.UsedIdentityId, id) || x.CurrentIdentityId == id
@@ -16700,6 +16709,7 @@ func NewHonor() *Honor {
 	}
 }
 func (x *Honor) Id() int                       { return x.Id_ }
+func (x *Honor) setId(id int)                  { x.Id_ = id }
 func (x *Honor) Name() string                  { return x.Name_ }
 func (x *Honor) RelatedToEntity(id int) bool   { return false }
 func (x *Honor) RelatedToHf(id int) bool       { return false }
@@ -16904,6 +16914,7 @@ func NewIdentity() *Identity {
 	}
 }
 func (x *Identity) Id() int                       { return x.Id_ }
+func (x *Identity) setId(id int)                  { x.Id_ = id }
 func (x *Identity) Name() string                  { return x.Name_ }
 func (x *Identity) RelatedToEntity(id int) bool   { return x.EntityId == id }
 func (x *Identity) RelatedToHf(id int) bool       { return x.HistfigId == id }
@@ -17409,6 +17420,7 @@ func NewLandmass() *Landmass {
 	}
 }
 func (x *Landmass) Id() int                       { return x.Id_ }
+func (x *Landmass) setId(id int)                  { x.Id_ = id }
 func (x *Landmass) Name() string                  { return x.Name_ }
 func (x *Landmass) RelatedToEntity(id int) bool   { return false }
 func (x *Landmass) RelatedToHf(id int) bool       { return false }
@@ -17445,6 +17457,7 @@ func NewMountainPeak() *MountainPeak {
 	}
 }
 func (x *MountainPeak) Id() int                       { return x.Id_ }
+func (x *MountainPeak) setId(id int)                  { x.Id_ = id }
 func (x *MountainPeak) Name() string                  { return x.Name_ }
 func (x *MountainPeak) RelatedToEntity(id int) bool   { return false }
 func (x *MountainPeak) RelatedToHf(id int) bool       { return false }
@@ -17481,6 +17494,7 @@ func NewMusicalForm() *MusicalForm {
 	}
 }
 func (x *MusicalForm) Id() int                       { return x.Id_ }
+func (x *MusicalForm) setId(id int)                  { x.Id_ = id }
 func (x *MusicalForm) Name() string                  { return x.Name_ }
 func (x *MusicalForm) RelatedToEntity(id int) bool   { return false }
 func (x *MusicalForm) RelatedToHf(id int) bool       { return false }
@@ -17515,6 +17529,7 @@ func NewOccasion() *Occasion {
 	}
 }
 func (x *Occasion) Id() int                       { return x.Id_ }
+func (x *Occasion) setId(id int)                  { x.Id_ = id }
 func (x *Occasion) Name() string                  { return x.Name_ }
 func (x *Occasion) RelatedToEntity(id int) bool   { return false }
 func (x *Occasion) RelatedToHf(id int) bool       { return false }
@@ -17624,6 +17639,7 @@ func NewPoeticForm() *PoeticForm {
 	}
 }
 func (x *PoeticForm) Id() int                       { return x.Id_ }
+func (x *PoeticForm) setId(id int)                  { x.Id_ = id }
 func (x *PoeticForm) Name() string                  { return x.Name_ }
 func (x *PoeticForm) RelatedToEntity(id int) bool   { return false }
 func (x *PoeticForm) RelatedToHf(id int) bool       { return false }
@@ -17752,6 +17768,7 @@ func NewReference() *Reference {
 	}
 }
 func (x *Reference) Id() int                       { return x.Id_ }
+func (x *Reference) setId(id int)                  { x.Id_ = id }
 func (x *Reference) RelatedToEntity(id int) bool   { return false }
 func (x *Reference) RelatedToHf(id int) bool       { return false }
 func (x *Reference) RelatedToArtifact(id int) bool { return false }
@@ -17897,6 +17914,7 @@ func NewRegion() *Region {
 	}
 }
 func (x *Region) Id() int                       { return x.Id_ }
+func (x *Region) setId(id int)                  { x.Id_ = id }
 func (x *Region) Name() string                  { return x.Name_ }
 func (x *Region) RelatedToEntity(id int) bool   { return false }
 func (x *Region) RelatedToHf(id int) bool       { return false }
@@ -18034,6 +18052,7 @@ func NewRelationshipProfileHfIdentity() *RelationshipProfileHfIdentity {
 	}
 }
 func (x *RelationshipProfileHfIdentity) Id() int                       { return x.Id_ }
+func (x *RelationshipProfileHfIdentity) setId(id int)                  { x.Id_ = id }
 func (x *RelationshipProfileHfIdentity) RelatedToEntity(id int) bool   { return false }
 func (x *RelationshipProfileHfIdentity) RelatedToHf(id int) bool       { return false }
 func (x *RelationshipProfileHfIdentity) RelatedToArtifact(id int) bool { return false }
@@ -18490,6 +18509,7 @@ func NewSchedule() *Schedule {
 	}
 }
 func (x *Schedule) Id() int                       { return x.Id_ }
+func (x *Schedule) setId(id int)                  { x.Id_ = id }
 func (x *Schedule) RelatedToEntity(id int) bool   { return false }
 func (x *Schedule) RelatedToHf(id int) bool       { return false }
 func (x *Schedule) RelatedToArtifact(id int) bool { return false }
@@ -18667,6 +18687,7 @@ func NewSite() *Site {
 	}
 }
 func (x *Site) Id() int                       { return x.Id_ }
+func (x *Site) setId(id int)                  { x.Id_ = id }
 func (x *Site) Name() string                  { return x.Name_ }
 func (x *Site) RelatedToEntity(id int) bool   { return x.CivId == id }
 func (x *Site) RelatedToHf(id int) bool       { return false }
@@ -18848,6 +18869,7 @@ func NewSiteSiteProperty() *SiteSiteProperty {
 	}
 }
 func (x *SiteSiteProperty) Id() int                       { return x.Id_ }
+func (x *SiteSiteProperty) setId(id int)                  { x.Id_ = id }
 func (x *SiteSiteProperty) RelatedToEntity(id int) bool   { return false }
 func (x *SiteSiteProperty) RelatedToHf(id int) bool       { return x.OwnerHfid == id }
 func (x *SiteSiteProperty) RelatedToArtifact(id int) bool { return false }
@@ -19026,6 +19048,7 @@ func NewStructure() *Structure {
 	}
 }
 func (x *Structure) Id() int                       { return x.Id_ }
+func (x *Structure) setId(id int)                  { x.Id_ = id }
 func (x *Structure) Name() string                  { return x.Name_ }
 func (x *Structure) RelatedToEntity(id int) bool   { return x.EntityId == id }
 func (x *Structure) RelatedToHf(id int) bool       { return x.WorshipHfid == id }
@@ -19162,6 +19185,7 @@ func NewUndergroundRegion() *UndergroundRegion {
 	}
 }
 func (x *UndergroundRegion) Id() int                       { return x.Id_ }
+func (x *UndergroundRegion) setId(id int)                  { x.Id_ = id }
 func (x *UndergroundRegion) RelatedToEntity(id int) bool   { return false }
 func (x *UndergroundRegion) RelatedToHf(id int) bool       { return false }
 func (x *UndergroundRegion) RelatedToArtifact(id int) bool { return false }
@@ -19288,6 +19312,7 @@ func NewWorldConstruction() *WorldConstruction {
 	}
 }
 func (x *WorldConstruction) Id() int                       { return x.Id_ }
+func (x *WorldConstruction) setId(id int)                  { x.Id_ = id }
 func (x *WorldConstruction) Name() string                  { return x.Name_ }
 func (x *WorldConstruction) RelatedToEntity(id int) bool   { return false }
 func (x *WorldConstruction) RelatedToHf(id int) bool       { return false }
@@ -19630,6 +19655,7 @@ func NewWrittenContent() *WrittenContent {
 	}
 }
 func (x *WrittenContent) Id() int                       { return x.Id_ }
+func (x *WrittenContent) setId(id int)                  { x.Id_ = id }
 func (x *WrittenContent) RelatedToEntity(id int) bool   { return false }
 func (x *WrittenContent) RelatedToHf(id int) bool       { return x.AuthorHfid == id }
 func (x *WrittenContent) RelatedToArtifact(id int) bool { return false }

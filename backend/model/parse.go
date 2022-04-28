@@ -143,6 +143,10 @@ BaseLoop:
 	}
 	ioutil.WriteFile("same.json", same, 0644)
 
+	for _, e := range world.HistoricalEvents {
+		e.Details.Html(&Context{World: world})
+	}
+
 	return world, nil
 }
 
@@ -193,6 +197,7 @@ func parseMapPlus[T Identifiable](p *util.XMLParser, dest *map[int]T, creator fu
 				log.Fatal(err)
 			}
 			x, err := creator(p, (*dest)[id])
+			x.setId(id)
 			if err != nil {
 				return
 			}

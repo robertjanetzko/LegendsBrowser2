@@ -17,6 +17,7 @@ type Named interface {
 
 type Identifiable interface {
 	Id() int
+	setId(int)
 }
 
 type Typed interface {

@@ -1,7 +1,7 @@
 <ul>
     {{- range $event := .Events }}
     <li>
-        [{{ $event.Id }}] In {{ if gt $event.Seconds72 -1 }}{{ season $event.Seconds72 }} of {{ end }}{{ $event.Year }}, {{
+        [{{ $event.Id }}] In {{ time $event.Year $event.Seconds72 }}, {{
         html ($event.Details.Html $.Context) }} {{ json $event.Details }}
     </li>
     {{- end}}
