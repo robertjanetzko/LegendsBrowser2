@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"sort"
 	"strings"
 
 	"github.com/gorilla/mux"
@@ -227,12 +228,21 @@ func httpError(w http.ResponseWriter, err error) {
 	fmt.Println(err)
 }
 
-func grouped[T model.Typed](input map[int]T) map[string][]T {
+type namedTyped interface {
+	model.Named
+	model.Typed
+}
+
+func grouped[T namedTyped](input map[int]T) map[string][]T {
 	output := make(map[string][]T)
 
 	for _, v := range input {
 		k := v.Type()
 		output[k] = append(output[k], v)
+	}
+
+	for _, v := range output {
+		sort.Slice(v, func(i, j int) bool { return v[i].Name() < v[j].Name() })
 	}
 
 	return output

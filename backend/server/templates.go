@@ -40,7 +40,9 @@ func (srv *DfServer) LoadTemplates() {
 		"html": func(value any) template.HTML {
 			return template.HTML(fmt.Sprint(value))
 		},
-		"bytes": func(s int64) string { return humanize.Bytes(uint64(s)) },
+		"bytes":   func(s int64) string { return humanize.Bytes(uint64(s)) },
+		"first":   util.FirstInMap,
+		"ifFirst": func(m any, k string, r string) string { return util.If(util.FirstInMap(m, k), r, "") },
 	}
 	srv.templates = templates.New(functions)
 }

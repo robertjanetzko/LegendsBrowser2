@@ -8,16 +8,17 @@
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         {{- range $t, $v := .}}
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-{{$t}}" type="button" role="tab">{{$t}}</button>
+        <button class="nav-link{{ ifFirst $ $t " active" }}" data-bs-toggle="tab" data-bs-target="#nav-{{$t}}" type="button"
+            role="tab">{{$t}}</button>
         {{- end}}
     </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
     {{- range $t, $v := . }}
-    <div class="tab-pane" id="nav-{{$t}}" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="tab-pane{{ ifFirst $ $t " active" }}" id="nav-{{$t}}" role="tabpanel" aria-labelledby="nav-home-tab">
         <table>
             <tr>
-                <th>Name</th>
+                <th width="100%">Name</th>
                 <th>Race</th>
             </tr>
             {{- range $v }}{{- if not (eq .Name "") }}

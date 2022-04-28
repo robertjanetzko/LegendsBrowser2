@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"reflect"
 	"regexp"
+	"sort"
 	"strings"
 )
 
@@ -108,4 +110,10 @@ func FindInMap[U any](list map[int]*U, predicate func(*U) bool) (int, *U, bool) 
 		}
 	}
 	return -1, nil, false
+}
+
+func FirstInMap(a any, b string) bool {
+	ks := reflect.ValueOf(a).MapKeys()
+	sort.Slice(ks, func(i, j int) bool { return ks[i].String() < ks[j].String() })
+	return ks[0].String() == b
 }

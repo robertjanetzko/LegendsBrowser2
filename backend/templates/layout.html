@@ -62,6 +62,21 @@
     </nav>
 
     <div class="container">{{block "content" .}}{{end}}</div>
+
+    <script>
+        var hash = document.location.hash;
+        console.log("hah", hash)
+        if (hash && hash.startsWith("#nav-")) {
+            var hashPieces = hash.split('?');
+            activeTab = $('.nav-link[data-bs-target="' + hashPieces[0] + '"]');
+            console.log(hashPieces[0], activeTab);
+            activeTab && activeTab.click()
+        }
+
+        $('.nav-tabs button').on('click', function (e) {
+            window.location.hash = $(this).data("bs-target")
+        });
+    </script>
 </body>
 
 </html>
