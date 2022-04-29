@@ -9,6 +9,7 @@ require (
 	github.com/iancoleman/strcase v0.2.0
 	github.com/pkg/profile v1.6.0
 	github.com/shirou/gopsutil v3.21.11+incompatible
+	golang.org/x/exp v0.0.0-20220428152302-39d4317da171
 )
 
 require (

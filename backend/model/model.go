@@ -1987,13 +1987,12 @@ type Entity struct {
 	Type_                    EntityType                  `json:"type" legend:"plus"`                     // type
 	Weapon                   []EntityWeapon              `json:"weapon" legend:"plus"`                   // weapon
 	WorshipId                []int                       `json:"worshipId" legend:"plus"`                // worship_id
-	Sites                    map[int]*Site               `json:"sites" legend:"add"`                     // Sites
+	Sites                    []int                       `json:"sites" legend:"add"`                     // Sites
 }
 
 func NewEntity() *Entity {
 	return &Entity{
-		Id_:   -1,
-		Sites: make(map[int]*Site),
+		Id_: -1,
 	}
 }
 func (x *Entity) Id() int                       { return x.Id_ }

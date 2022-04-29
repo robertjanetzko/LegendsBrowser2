@@ -23,7 +23,7 @@
         "Entity": [
             {
                 "Name": "Sites",
-                "Type": "map[int]*Site"
+                "Type": "[]int"
             }
         ],
         "Site": [

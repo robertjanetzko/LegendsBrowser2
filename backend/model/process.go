@@ -1,8 +1,9 @@
 package model
 
 import (
-	"fmt"
 	"strings"
+
+	"golang.org/x/exp/slices"
 )
 
 func (w *DfWorld) process() {
@@ -57,10 +58,9 @@ func (w *DfWorld) processEvents() {
 }
 
 func (w *DfWorld) addEntitySite(entityId, siteId int) {
-	fmt.Println("add site", entityId, siteId)
 	if e, ok := w.Entities[entityId]; ok {
-		if s, ok := w.Sites[siteId]; ok {
-			e.Sites[s.Id_] = s
+		if !slices.Contains(e.Sites, siteId) {
+			e.Sites = append(e.Sites, siteId)
 		}
 	}
 }

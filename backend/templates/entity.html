@@ -8,10 +8,10 @@
 
 <h5>Sites</h5>
 <table>
-    {{- range $i, $s := .Sites }}
+    {{- range .Sites }}
     <tr>
-        <td> {{ site $s.Id }}</td>
-        <td> {{ template "events.html" events (history $s.Id) }}</td>
+        <td> {{ site . }}</td>
+        <td> {{ template "events.html" events (history .) }}</td>
     </tr>
     {{- end }}
 </table>
