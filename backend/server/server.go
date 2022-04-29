@@ -83,7 +83,7 @@ func StartServer(world *model.DfWorld, static embed.FS) {
 
 	srv.router.PathPrefix("/load").Handler(srv.loader)
 
-	spa := spaHandler{staticFS: static, staticPath: "static", indexPath: "index.html"}
+	spa := spaHandler{server: srv, staticFS: static, staticPath: "static", indexPath: "index.html"}
 	srv.router.PathPrefix("/").Handler(spa)
 
 	OpenBrowser("http://localhost:8080")
@@ -93,6 +93,7 @@ func StartServer(world *model.DfWorld, static embed.FS) {
 }
 
 type spaHandler struct {
+	server     *DfServer
 	staticFS   embed.FS
 	staticPath string
 	indexPath  string
@@ -115,7 +116,10 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(path)
 		index, err := h.staticFS.ReadFile(h.staticPath + "/" + h.indexPath)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			err = h.server.templates.Render(w, "notFound.html", nil)
+			if err != nil {
+				httpError(w, err)
+			}
 			return
 		}
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
