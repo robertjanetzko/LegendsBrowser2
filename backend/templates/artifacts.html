@@ -19,12 +19,12 @@
         <table>
             <tr>
                 <th width="100%">Name</th>
-                <th>Size</th>
+                <th>Type</th>
             </tr>
             {{- range $v }}{{- if not (eq .Name "") }}
             <tr>
                 <td>{{ artifact .Id }}</td>
-                <td></td>
+                <td>{{ if eq $t "item"}}{{.ItemType}}{{else}}{{.ItemSubtype}}{{end}}</td>
             </tr>
             {{- end}}{{- end}}
         </table>

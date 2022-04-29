@@ -262,7 +262,9 @@ func grouped[T namedTyped](input map[int]T) map[string][]T {
 
 	for _, v := range input {
 		k := v.Type()
-		output[k] = append(output[k], v)
+		if v.Name() != "" {
+			output[k] = append(output[k], v)
+		}
 	}
 
 	for _, v := range output {

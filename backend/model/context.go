@@ -63,14 +63,14 @@ func (c *Context) hfListRelated(ids []int, to int) string {
 
 func (c *Context) artifact(id int) string {
 	if x, ok := c.World.Artifacts[id]; ok {
-		return fmt.Sprintf(`<a class="artifact" href="/artifact/%d">%s</a>`, x.Id(), util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="artifact" href="/artifact/%d"><i class="%s fa-xs"></i>&nbsp;%s</a>`, x.Id(), x.Icon(), util.Title(x.Name()))
 	}
 	return "UNKNOWN ARTIFACT"
 }
 
 func (c *Context) entity(id int) string {
 	if x, ok := c.World.Entities[id]; ok {
-		return fmt.Sprintf(`<a class="entity" href="/entity/%d">%s</a>`, x.Id(), util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="entity" href="/entity/%d"><i class="%s fa-xs"></i>&nbsp;%s</a>`, x.Id(), x.Icon(), util.Title(x.Name()))
 	}
 	return "UNKNOWN ENTITY"
 }
@@ -104,7 +104,7 @@ func (c *Context) siteStructure(siteId, structureId int, prefix string) string {
 
 func (c *Context) site(id int, prefix string) string {
 	if x, ok := c.World.Sites[id]; ok {
-		return fmt.Sprintf(`%s <a class="site" href="/site/%d">%s</a>`, prefix, x.Id(), util.Title(x.Name()))
+		return fmt.Sprintf(`%s <a class="site" href="/site/%d"><i class="%s fa-xs"></i>&nbsp;%s</a>`, prefix, x.Id(), x.Icon(), util.Title(x.Name()))
 	}
 	return "UNKNOWN SITE"
 }
@@ -180,28 +180,28 @@ func (c *Context) fullIdentity(id int) string {
 
 func (c *Context) danceForm(id int) string {
 	if x, ok := c.World.DanceForms[id]; ok {
-		return fmt.Sprintf(`<a class="artform" href="/danceForm/%d">%s</a>`, id, util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="artform" href="/danceForm/%d"><i class="fa-solid fa-shoe-prints fa-xs"></i>&nbsp;%s</a>`, id, util.Title(x.Name()))
 	}
 	return "UNKNOWN DANCE FORM"
 }
 
 func (c *Context) musicalForm(id int) string {
 	if x, ok := c.World.MusicalForms[id]; ok {
-		return fmt.Sprintf(`<a class="artform" href="/musicalForm/%d">%s</a>`, id, util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="artform" href="/musicalForm/%d"><i class="fa-solid fa-music fa-xs"></i>&nbsp;%s</a>`, id, util.Title(x.Name()))
 	}
 	return "UNKNOWN MUSICAL FORM"
 }
 
 func (c *Context) poeticForm(id int) string {
 	if x, ok := c.World.PoeticForms[id]; ok {
-		return fmt.Sprintf(`<a class="artform" href="/poeticForm/%d">%s</a>`, id, util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="artform" href="/poeticForm/%d"><i class="fa-solid fa-comment-dots fa-xs"></i>&nbsp;%s</a>`, id, util.Title(x.Name()))
 	}
 	return "UNKNOWN POETIC FORM"
 }
 
 func (c *Context) worldConstruction(id int) string {
 	if x, ok := c.World.WorldConstructions[id]; ok {
-		return fmt.Sprintf(`<a class="artform" href="/wc/%d">%s</a>`, id, util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="worldconstruction" href="/wc/%d"><i class="%s fa-xs"></i>&nbsp;%s</a>`, id, x.Icon(), util.Title(x.Name()))
 	}
 	return "UNKNOWN WORLD CONSTRUCTION"
 }

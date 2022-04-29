@@ -49,7 +49,18 @@ func (w *DfWorld) EventsMatching(f func(HistoricalEventDetails) bool) []*Histori
 }
 
 func (e *Artifact) Type() string {
-	return e.ItemType
+	switch e.ItemSubtype {
+	case "scroll":
+		return "scroll"
+	}
+	switch e.ItemType {
+	case "weapon", "tool", "book", "slab":
+		return e.ItemType
+	case "armor", "shoe", "gloves", "helm", "pants":
+		return "armor"
+	default:
+		return "item"
+	}
 }
 
 func (e *Entity) Type() string {
