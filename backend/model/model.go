@@ -1987,11 +1987,13 @@ type Entity struct {
 	Type_                    EntityType                  `json:"type" legend:"plus"`                     // type
 	Weapon                   []EntityWeapon              `json:"weapon" legend:"plus"`                   // weapon
 	WorshipId                []int                       `json:"worshipId" legend:"plus"`                // worship_id
+	Sites                    map[int]*Site               `json:"sites" legend:"add"`                     // Sites
 }
 
 func NewEntity() *Entity {
 	return &Entity{
-		Id_: -1,
+		Id_:   -1,
+		Sites: make(map[int]*Site),
 	}
 }
 func (x *Entity) Id() int                       { return x.Id_ }
@@ -16363,6 +16365,8 @@ type HistoricalFigure struct {
 	Sphere                          []string                           `json:"sphere" legend:"base"`                          // sphere
 	UsedIdentityId                  []int                              `json:"usedIdentityId" legend:"base"`                  // used_identity_id
 	VagueRelationship               []*VagueRelationship               `json:"vagueRelationship" legend:"base"`               // vague_relationship
+	Vampire                         bool                               `json:"vampire" legend:"add"`                          // Vampire
+	Werebeast                       bool                               `json:"werebeast" legend:"add"`                        // Werebeast
 }
 
 func NewHistoricalFigure() *HistoricalFigure {
@@ -18675,6 +18679,7 @@ type Site struct {
 	SiteProperties map[int]*SiteSiteProperty `json:"siteProperties" legend:"base"` // site_properties
 	Structures     map[int]*Structure        `json:"structures" legend:"both"`     // structures
 	Type_          SiteType                  `json:"type" legend:"base"`           // type
+	Ruin           bool                      `json:"ruin" legend:"add"`            // Ruin
 }
 
 func NewSite() *Site {
@@ -19046,6 +19051,7 @@ func NewStructure() *Structure {
 		LocalId:     -1,
 		Religion:    -1,
 		WorshipHfid: -1,
+		SiteId:      -1,
 	}
 }
 func (x *Structure) Id() int                       { return x.Id_ }

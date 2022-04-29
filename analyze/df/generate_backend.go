@@ -112,6 +112,9 @@ func New{{ $obj.Name }}() *{{ $obj.Name }} {
 		{{- range $fname, $field := $obj.Fields }}{{- if $field.MustInit }}{{- if not ($field.SameField $obj) }}
 		{{ $field.Init }}
 		{{- end }}{{- end }}{{- end }}
+		{{- range $fname, $field := $obj.Additional }}{{- if $field.MustInit }}
+		{{ $field.Init }}
+		{{- end }}{{- end }}
 	}
 }
 
@@ -316,7 +319,7 @@ func (f Field) TypeLine() string {
 }
 
 func (f Field) MustInit() bool {
-	return f.Type == "map" || (f.Type == "int" && !f.Multiple)
+	return f.Type == "map" || (f.Type == "int" && !f.Multiple) || strings.HasPrefix(f.Type, "map[")
 }
 
 func (f Field) Init() string {
@@ -324,6 +327,8 @@ func (f Field) Init() string {
 
 	if f.Type == "map" {
 		return fmt.Sprintf("%s: make(map[int]*%s),", n, *f.ElementType)
+	} else if strings.HasPrefix(f.Type, "map[") {
+		return fmt.Sprintf("%s: make(%s),", n, f.Type)
 	}
 	if f.Type == "int" && !f.Multiple {
 		return fmt.Sprintf("%s: -1,", n)

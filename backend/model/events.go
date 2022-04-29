@@ -1135,12 +1135,12 @@ func (x *HistoricalEventHfWounded) Html(c *Context) string {
 	case HistoricalEventHfWoundedInjuryType_Smash:
 		r += "'s " + bp + util.If(x.PartLost == HistoricalEventHfWoundedPartLost_True, " was smashed off ", " was smashed ")
 	case HistoricalEventHfWoundedInjuryType_Stab:
-		r += "'s " + bp + util.If(x.PartLost == HistoricalEventHfWoundedPartLost_True, " was stabbed off ", " was stabbed ")
+		r += "'s " + bp + util.If(x.PartLost == HistoricalEventHfWoundedPartLost_True, " was stabbed off ", " was stabbed")
 	default:
-		r += " was wounded by "
+		r += " was wounded"
 	}
 
-	return r + c.hfRelated(x.WounderHfid, x.WoundeeHfid) + c.location(x.SiteId, " in", x.SubregionId, " in") + util.If(x.WasTorture, " as a means of torture", "")
+	return r + " by " + c.hfRelated(x.WounderHfid, x.WoundeeHfid) + c.location(x.SiteId, " in", x.SubregionId, " in") + util.If(x.WasTorture, " as a means of torture", "")
 }
 
 func (x *HistoricalEventHfsFormedIntrigueRelationship) Html(c *Context) string {

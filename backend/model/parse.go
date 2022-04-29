@@ -143,7 +143,7 @@ BaseLoop:
 	}
 	ioutil.WriteFile("same.json", same, 0644)
 
-	world.Process()
+	world.process()
 
 	return world, nil
 }

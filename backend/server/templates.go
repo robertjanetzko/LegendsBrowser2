@@ -43,6 +43,9 @@ func (srv *DfServer) LoadTemplates() {
 		"events": func(obj any) *model.EventList {
 			return model.NewEventList(srv.context.world, obj)
 		},
+		"history": func(siteId int) []*model.HistoricalEvent {
+			return srv.context.world.SiteHistory(siteId)
+		},
 		"season":       model.Season,
 		"time":         model.Time,
 		"url":          url.PathEscape,

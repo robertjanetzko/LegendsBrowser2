@@ -6,6 +6,18 @@
 <h1>{{ title .Name }}</h1>
 {{ .Race }} {{ .Type }}
 
+<h5>Sites</h5>
+<table>
+    {{- range $i, $s := .Sites }}
+    <tr>
+        <td> {{ site $s.Id }}</td>
+        <td> {{ template "events.html" events (history $s.Id) }}</td>
+    </tr>
+    {{- end }}
+</table>
+{{- if ne 0 (len .Sites) }}
+{{- end }}
+
 <h3>Events</h3>
 
 {{ template "events.html" events . }}

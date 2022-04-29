@@ -48,6 +48,20 @@ func (w *DfWorld) EventsMatching(f func(HistoricalEventDetails) bool) []*Histori
 	return list
 }
 
+func (w *DfWorld) SiteHistory(siteId int) []*HistoricalEvent {
+	var list []*HistoricalEvent
+	for _, e := range w.HistoricalEvents {
+		if e.Details.RelatedToSite(siteId) {
+			switch e.Details.(type) {
+			case *HistoricalEventCreatedSite, *HistoricalEventDestroyedSite, *HistoricalEventSiteTakenOver, *HistoricalEventHfDestroyedSite, *HistoricalEventReclaimSite:
+				list = append(list, e)
+			}
+		}
+	}
+	sort.Slice(list, func(a, b int) bool { return list[a].Id_ < list[b].Id_ })
+	return list
+}
+
 func (e *Artifact) Type() string {
 	switch e.ItemSubtype {
 	case "scroll":

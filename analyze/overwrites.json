@@ -9,6 +9,28 @@
                 "Name": "SiteId",
                 "Type": "int"
             }
+        ],
+        "HistoricalFigure": [
+            {
+                "Name": "Werebeast",
+                "Type": "bool"
+            },
+            {
+                "Name": "Vampire",
+                "Type": "bool"
+            }
+        ],
+        "Entity": [
+            {
+                "Name": "Sites",
+                "Type": "map[int]*Site"
+            }
+        ],
+        "Site": [
+            {
+                "Name": "Ruin",
+                "Type": "bool"
+            }
         ]
     }
 }
