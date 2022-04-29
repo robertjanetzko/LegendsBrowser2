@@ -64,6 +64,36 @@ func (x *Site) Icon() string {
 	return ""
 }
 
+func (x *Structure) Icon() string {
+	switch x.Type_ {
+	case StructureType_CountingHouse:
+		return "fa-solid fa-coins"
+	case StructureType_Dungeon:
+		return "fa-solid fa-dungeon"
+	case StructureType_Guildhall:
+		return "fa-solid fa-wrench"
+	case StructureType_InnTavern:
+		return "fa-solid fa-utensils"
+	case StructureType_Keep:
+		return "fa-brands fa-fort-awesome"
+	case StructureType_Library:
+		return "fa-solid fa-book"
+	case StructureType_Market:
+		return "fa-solid fa-store"
+	case StructureType_MeadHall:
+		return "fa-solid fa-warehouse"
+	case StructureType_Temple:
+		return "fa-solid fa-landmark-dome"
+	case StructureType_Tomb:
+		return "fa-solid fa-circle-stop"
+	case StructureType_Tower:
+		return "fa-solid fa-chess-rook"
+	case StructureType_UnderworldSpire:
+		return "fa-solid fa-monument"
+	}
+	return ""
+}
+
 func (x *WorldConstruction) Icon() string {
 	switch x.Type_ {
 	case WorldConstructionType_Bridge:

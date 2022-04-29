@@ -144,6 +144,10 @@ func (s *Site) Type() string {
 	return s.Type_.String()
 }
 
+func (s *Structure) Type() string {
+	return s.Type_.String()
+}
+
 func (w *WorldConstruction) Type() string {
 	return w.Type_.String()
 }

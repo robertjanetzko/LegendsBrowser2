@@ -102,6 +102,9 @@ type {{ $obj.Name }} struct {
 	{{- if not (not $obj.SubTypes) }}
 	Details {{ $obj.Name }}Details
 	{{- end }}
+	{{- range $fname, $field := $obj.Additional }}
+	{{ $field.TypeLine }} // {{ $fname }}
+	{{- end }}
 }
 
 func New{{ $obj.Name }}() *{{ $obj.Name }} {

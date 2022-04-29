@@ -51,8 +51,9 @@ func NewFieldData() *FieldData {
 }
 
 type AnalyzeData struct {
-	Fields   map[string]*FieldData
-	SubTypes map[string]*map[string]*Subtype
+	Fields     map[string]*FieldData
+	SubTypes   map[string]*map[string]*Subtype
+	Overwrites *Overwrites
 }
 
 func NewAnalyzeData() *AnalyzeData {
@@ -78,6 +79,16 @@ func LoadAnalyzeData() (*AnalyzeData, error) {
 
 	a := NewAnalyzeData()
 	json.Unmarshal(data, a)
+
+	data, err = ioutil.ReadFile("overwrites.json")
+	if err != nil {
+		return nil, err
+	}
+
+	overwrites := &Overwrites{}
+	json.Unmarshal(data, overwrites)
+	a.Overwrites = overwrites
+
 	return a, nil
 }
 
@@ -120,8 +131,14 @@ type AnalyzeContext struct {
 	overwrites *Overwrites
 }
 
+type AdditionalField struct {
+	Name string
+	Type string
+}
+
 type Overwrites struct {
-	ForceEnum map[string]bool
+	ForceEnum        map[string]bool
+	AdditionalFields map[string][]AdditionalField
 }
 
 func analyze(file string, a *AnalyzeData) error {

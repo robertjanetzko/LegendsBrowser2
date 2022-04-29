@@ -143,9 +143,7 @@ BaseLoop:
 	}
 	ioutil.WriteFile("same.json", same, 0644)
 
-	for _, e := range world.HistoricalEvents {
-		e.Details.Html(&Context{World: world})
-	}
+	world.Process()
 
 	return world, nil
 }

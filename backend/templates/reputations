@@ -1,0 +1,23 @@
+            {{if ge .RepHero 0}}<li>Hero: $r.repHero</li>{{end}}
+            {{if ge .RepViolent 0}}<li>Violent: $r.repViolent</li>{{end}}
+            {{if ge .RepPsychopath 0}}<li>Psychopath: $r.repPsychopath</li>{{end}}
+            {{if ge .RepEnemyFighter 0}}<li>Enemy Fighter: $r.repEnemyFighter</li>{{end}}
+            {{if ge .RepFriendlyFighter 0}}<li>Enemy Fighter: $r.repEnemyFighter</li>{{end}}
+            {{if ge .RepKiller 0}}<li>Killer: $r.repKiller</li>{{end}}
+            {{if ge .RepMurderer 0}}<li>Murderer: $r.repMurderer</li>{{end}}
+            {{if ge .RepPoet 0}}<li>Poet: $r.repPoet</li>{{end}}
+            {{if ge .RepBard 0}}<li>Bard: $r.repBard</li>{{end}}
+            {{if ge .RepDancer 0}}<li>Dancer: $r.repDancer</li>{{end}}
+            {{if ge .RepStoryteller 0}}<li>Storyteller: $r.repStoryteller</li>{{end}}
+            {{if ge .RepTreasureHunter 0}}<li>Treasure Hunter: $r.repTreasureHunter</li>{{end}}
+            {{if ge .RepPreacher 0}}<li>Preacher: $r.repPreacher</li>{{end}}
+            {{if ge .RepBrigand 0}}<li>Brigand: $r.repBrigand</li>{{end}}
+            {{if ge .RepIntruder 0}}<li>Intruder: $r.repIntruder</li>{{end}}
+            {{if ge .RepMonster 0}}<li>Monster: $r.repMonster</li>{{end}}
+            {{if ge .RepThief 0}}<li>Thief: $r.repThief</li>{{end}}
+            {{if ge .RepHatedGroup 0}}<li>Member of Hated Group: $r.repHatedGroup</li>{{end}}
+            {{if ge .RepRespectedGroup 0}}<li>Member of Respected Group: $r.repRespectedGroup</li>{{end}}
+            {{if ge .RepHunter 0}}<li>Hunter: $r.repHunter</li>{{end}}
+            {{if ge .RepLoyalSoldier 0}}<li>Loyal Soldier: $r.repLoyalSoldier</li>{{end}}
+            {{if ge .RepComrade 0}}<li>Comrade: $r.repComrade</li>{{end}}
+            {{if ge .RepBully 0}}<li>Bully: $r.repBully</li>{{end}}

@@ -7,14 +7,15 @@ import (
 )
 
 type Object struct {
-	Name      string           `json:"name"`
-	Id        bool             `json:"id,omitempty"`
-	Named     bool             `json:"named,omitempty"`
-	Typed     bool             `json:"typed,omitempty"`
-	SubTypes  *[]Subtype       `json:"subtypes,omitempty"`
-	SubTypeOf *string          `json:"subtypeof,omitempty"`
-	SubType   *string          `json:"subtype,omitempty"`
-	Fields    map[string]Field `json:"fields"`
+	Name       string           `json:"name"`
+	Id         bool             `json:"id,omitempty"`
+	Named      bool             `json:"named,omitempty"`
+	Typed      bool             `json:"typed,omitempty"`
+	SubTypes   *[]Subtype       `json:"subtypes,omitempty"`
+	SubTypeOf  *string          `json:"subtypeof,omitempty"`
+	SubType    *string          `json:"subtype,omitempty"`
+	Fields     map[string]Field `json:"fields"`
+	Additional map[string]Field `json:"additional"`
 }
 
 type Subtype struct {

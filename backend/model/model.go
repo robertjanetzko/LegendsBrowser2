@@ -19033,6 +19033,7 @@ type Structure struct {
 	Subtype          StructureSubtype `json:"subtype" legend:"base"`          // subtype
 	Type_            StructureType    `json:"type" legend:"both"`             // type
 	WorshipHfid      int              `json:"worshipHfid" legend:"base"`      // worship_hfid
+	SiteId           int              `json:"siteId" legend:"add"`            // SiteId
 }
 
 func NewStructure() *Structure {

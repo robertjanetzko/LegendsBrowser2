@@ -151,15 +151,27 @@ func CreateMetadata(a *AnalyzeData) (*Metadata, error) {
 				}
 			}
 
+			additional := make(map[string]Field)
+			if afs, ok := a.Overwrites.AdditionalFields[typeNames[k]]; ok {
+				for _, add := range afs {
+					additional[add.Name] = Field{
+						Name:   add.Name,
+						Type:   add.Type,
+						Legend: "add",
+					}
+				}
+			}
+
 			objects[typeNames[k]] = Object{
-				Name:      typeNames[k],
-				Id:        a.Fields[k+PATH_SEPARATOR+"id"] != nil,
-				Named:     a.Fields[k+PATH_SEPARATOR+"name"] != nil,
-				Typed:     a.Fields[k+PATH_SEPARATOR+"type"] != nil,
-				SubTypes:  getSubtypes(a, k),
-				SubTypeOf: getSubtypeOf(k),
-				SubType:   getSubtype(k),
-				Fields:    objFields,
+				Name:       typeNames[k],
+				Id:         a.Fields[k+PATH_SEPARATOR+"id"] != nil,
+				Named:      a.Fields[k+PATH_SEPARATOR+"name"] != nil,
+				Typed:      a.Fields[k+PATH_SEPARATOR+"type"] != nil,
+				SubTypes:   getSubtypes(a, k),
+				SubTypeOf:  getSubtypeOf(k),
+				SubType:    getSubtype(k),
+				Fields:     objFields,
+				Additional: additional,
 			}
 		}
 	}

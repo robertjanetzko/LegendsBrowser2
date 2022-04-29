@@ -29,6 +29,7 @@ func (srv *DfServer) LoadTemplates() {
 		"getEntity":            func(id int) *model.Entity { return srv.context.world.Entities[id] },
 		"site":                 func(id int) template.HTML { return model.LinkSite(srv.context.world, id) },
 		"getSite":              func(id int) *model.Site { return srv.context.world.Sites[id] },
+		"structure":            func(siteId, id int) template.HTML { return model.LinkStructure(srv.context.world, siteId, id) },
 		"region":               func(id int) template.HTML { return model.LinkRegion(srv.context.world, id) },
 		"getRegion":            func(id int) *model.Region { return srv.context.world.Regions[id] },
 		"worldconstruction":    func(id int) template.HTML { return model.LinkWorldConstruction(srv.context.world, id) },

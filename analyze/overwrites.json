@@ -2,5 +2,13 @@
     "ForceEnum": {
         "df_world|historical_events|historical_event+HfDied|cause": true,
         "df_world|historical_events|historical_event+HfDied|death_cause": true
+    },
+    "AdditionalFields": {
+        "Structure": [
+            {
+                "Name": "SiteId",
+                "Type": "int"
+            }
+        ]
     }
 }

@@ -112,7 +112,7 @@ func (c *Context) site(id int, prefix string) string {
 func (c *Context) structure(siteId, structureId int) string {
 	if x, ok := c.World.Sites[siteId]; ok {
 		if y, ok := x.Structures[structureId]; ok {
-			return fmt.Sprintf(`<a class="structure" href="/site/%d/structure/%d">%s</a>`, siteId, structureId, util.Title(y.Name()))
+			return fmt.Sprintf(`<a class="structure" href="/site/%d/structure/%d"><i class="%s fa-xs"></i>&nbsp;%s</a>`, siteId, structureId, y.Icon(), util.Title(y.Name()))
 		}
 	}
 	return "UNKNOWN STRUCTURE"

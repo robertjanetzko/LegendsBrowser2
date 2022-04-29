@@ -1,0 +1,33 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Structures{{end}}
+
+{{define "content"}}
+<h3>Structures</h3>
+
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        {{- range $t, $v := .}}
+        <button class="nav-link{{ ifFirst $ $t " active" }}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button"
+            role="tab">{{$t}} ({{ len $v }})</button>
+        {{- end}}
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    {{- range $t, $v := . }}
+    <div class="tab-pane{{ ifFirst $ $t " active" }}" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
+        <table>
+            <tr>
+                <th width="100%">Name</th>
+            </tr>
+            {{- range $v }}{{- if not (eq .Name "") }}
+            <tr>
+                <td>{{ structure .SiteId .Id }}</td>
+            </tr>
+            {{- end}}{{- end}}
+        </table>
+    </div>
+    {{- end}}
+</div>
+
+{{- end }}

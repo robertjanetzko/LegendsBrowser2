@@ -3,10 +3,10 @@
 {{define "title"}}{{ title .Name }}{{end}}
 
 {{define "content"}}
-<h1>{{ title .Name }}</h1>
+<h3>{{ title .Name }}</h3>
+{{ .Type_ }}
 
-<h3>Events</h3>
-
+<h5 class="mt-3">Events</h5>
 {{ template "events.html" events . }}
 
 <p>{{ json . }}</p>

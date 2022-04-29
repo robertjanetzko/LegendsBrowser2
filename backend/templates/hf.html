@@ -3,51 +3,131 @@
 {{define "title"}}{{ title .Name }}{{end}}
 
 {{define "content"}}
-<h1>{{ title .Name }}</h1>
-{{ .Race }} (*{{ .BirthYear }}{{ if ge .DeathYear 0 }} †{{ .DeathYear }}{{ end }})
+<h3>{{ title .Name }}</h3>
+{{if .Female }}
+<i class="fa-solid fa-venus fa-xs"></i>
+{{else}}
+<i class="fa-solid fa-mars fa-xs"></i>
 {{end}}
+{{ .Race }} (*{{ .BirthYear }}{{ if ge .DeathYear 0 }} †{{ .DeathYear }}{{ end }})
 
-{{- if or (ne 0 (len .EntityFormerPositionLink)) (ne 0 (len .EntityPositionLink)) }}
-<h3>Positions</h3>
-<ul>
-    {{- range $i := .EntityFormerPositionLink }}
-    <li>
-        {{ ((getEntity $i.EntityId).Position $i.PositionProfileId).Name }} of {{ entity $i.EntityId }} ({{
-        $i.StartYear }} - {{ $i.EndYear }})
-    </li>
+<div class="row mt-3">
+    <div class="col-4">
+        {{- if ne 0 (len .SiteLink) }}
+        <h5>Sites</h5>
+        <ul>
+            {{- range $i := .SiteLink }}
+            <li>
+                {{ site $i.SiteId }} ({{ $i.LinkType }})
+            </li>
+            {{- end }}
+        </ul>
+        {{- end }}
+
+        {{- if or (ne 0 (len .EntityFormerPositionLink)) (ne 0 (len .EntityPositionLink)) }}
+        <h5>Positions</h5>
+        <ul>
+            {{- range $i := .EntityFormerPositionLink }}
+            <li>
+                {{ ((getEntity $i.EntityId).Position $i.PositionProfileId).Name }} of {{ entity $i.EntityId }} ({{
+                $i.StartYear }} - {{ $i.EndYear }})
+            </li>
+            {{- end }}
+            {{- range $i := .EntityPositionLink }}
+            <li>
+                of {{ entity $i.EntityId }}
+            </li>
+            {{- end }}
+        </ul>
+        {{- end }}
+    </div>
+    {{- if ne 0 (len .HfLink) }}
+    <div class="col-4">
+        <h5>Related Figures</h5>
+        <ul>
+            {{- range $i := .HfLink }}
+            <li>
+                {{ hf $i.Hfid }} ({{ $i.LinkType }})
+            </li>
+            {{- end }}
+        </ul>
+    </div>
     {{- end }}
-    {{- range $i := .EntityPositionLink }}
-    <li>
-        of {{ entity $i.EntityId }}
-    </li>
+
+    {{- if ne 0 (len .EntityLink) }}
+    <div class="col-4">
+        <h5>Related Entities</h5>
+        <ul>
+            {{- range $i := .EntityLink }}
+            <li>
+                {{ entity $i.EntityId }} ({{ $i.LinkType }})
+            </li>
+            {{- end }}
+        </ul>
+    </div>
     {{- end }}
-</ul>
-{{- end }}
+</div>
 
-{{- if ne 0 (len .HfLink) }}
-<h3>Related Figures</h3>
-<ul>
-    {{- range $i := .HfLink }}
-    <li>
-        {{ hf $i.Hfid }} ({{ $i.LinkType }})
-    </li>
+<div class="row">
+    {{- if ne 0 (len .EntityReputation) }}
+    <div class="col-4">
+        <h5>Entity Reputations</h5>
+        <ul>
+            {{- range $i := .EntityReputation }}
+            <li>
+                {{ entity $i.EntityId }}
+                <ul>
+                    {{if gt .UnsolvedMurders 0}}<li>Unsolved Murders: {{.UnsolvedMurders}}</li>{{end}}
+                    {{if gt .FirstAgelessYear 0}}<li>First Suspected Ageless Year: {{.FirstAgelessYear}}</li>{{end}}
+                </ul>
+            </li>
+            {{- end }}
+        </ul>
+    </div>
     {{- end }}
-</ul>
-{{- end }}
 
-{{- if ne 0 (len .EntityLink) }}
-<h3>Related Entities</h3>
-<ul>
-    {{- range $i := .EntityLink }}
-    <li>
-        {{ entity $i.EntityId }} ({{ $i.LinkType }})
-    </li>
+    {{- if ne 0 (len .VagueRelationship) }}
+    <div class="col-4">
+        <h5>Relationships</h5>
+        <ul>
+            {{- range $i := .VagueRelationship }}
+            <li>
+                {{ hf $i.Hfid }} (TODO)
+            </li>
+            {{- end }}
+        </ul>
+    </div>
     {{- end }}
-</ul>
-{{- end }}
 
-<h3>Events</h3>
+    {{- if ne 0 (len .IntrigueActor) }}
+    <div class="col-8">
+        <h5>Intrigue Actors</h5>
+        <ul>
+            {{- range $i := .IntrigueActor }}
+            <li>
+                {{if ne .EntityId -1}}{{entity .EntityId}}{{else}}{{ hf .Hfid }}{{end}} - {{.Role}} - {{.Strategy}}
+            </li>
+            {{- end }}
+        </ul>
+    </div>
+    {{- end }}
 
+    {{- if ne 0 (len .IntriguePlot) }}
+    <div class="col-4">
+        <h5>Intrigue Plots</h5>
+        <ul>
+            {{- range $i := .IntriguePlot }}
+            <li>
+                {{ .Type_ }}{{if .OnHold}} (on hold){{end}}
+            </li>
+            {{- end }}
+        </ul>
+    </div>
+    {{- end }}
+</div>
+
+<h5>Events</h5>
 {{ template "events.html" events . }}
 
 {{ json . }}
+{{end}}

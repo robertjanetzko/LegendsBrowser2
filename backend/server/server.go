@@ -54,6 +54,11 @@ func StartServer(world *model.DfWorld, static embed.FS) {
 	srv.RegisterWorldPage("/sites", "sites.html", func(p Parms) any { return grouped(srv.context.world.Sites) })
 	srv.RegisterWorldResourcePage("/site/{id}", "site.html", func(id int) any { return srv.context.world.Sites[id] })
 
+	srv.RegisterWorldPage("/structures", "structures.html", func(p Parms) any {
+		return flatGrouped(srv.context.world.Sites, func(s *model.Site) []*model.Structure { return util.Values(s.Structures) })
+	})
+	srv.RegisterWorldResourcePage("/structure/{id}", "site.html", func(id int) any { return srv.context.world.Sites[id/100].Structures[id%100] })
+
 	srv.RegisterWorldPage("/worldconstructions", "worldconstructions.html", func(p Parms) any { return grouped(srv.context.world.WorldConstructions) })
 	srv.RegisterWorldResourcePage("/worldconstruction/{id}", "worldconstruction.html", func(id int) any { return srv.context.world.WorldConstructions[id] })
 
@@ -261,7 +266,26 @@ type namedTyped interface {
 	model.Typed
 }
 
-func grouped[T namedTyped](input map[int]T) map[string][]T {
+func flatGrouped[K comparable, U any, V namedTyped](input map[K]U, mapper func(U) []V) map[string][]V {
+	output := make(map[string][]V)
+
+	for _, x := range input {
+		for _, v := range mapper(x) {
+			k := v.Type()
+			if v.Name() != "" {
+				output[k] = append(output[k], v)
+			}
+		}
+	}
+
+	for _, v := range output {
+		sort.Slice(v, func(i, j int) bool { return v[i].Name() < v[j].Name() })
+	}
+
+	return output
+}
+
+func grouped[K comparable, T namedTyped](input map[K]T) map[string][]T {
 	output := make(map[string][]T)
 
 	for _, v := range input {
