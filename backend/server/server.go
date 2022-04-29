@@ -86,6 +86,8 @@ func StartServer(world *model.DfWorld, static embed.FS) {
 	srv.RegisterWorldPage("/events", "eventTypes.html", func(p Parms) any { return srv.context.world.AllEventTypes() })
 	srv.RegisterWorldPage("/events/{type}", "eventType.html", func(p Parms) any { return srv.context.world.EventsOfType(p["type"]) })
 
+	srv.router.PathPrefix("/search").Handler(searchHandler{server: srv})
+
 	srv.router.PathPrefix("/load").Handler(srv.loader)
 
 	spa := spaHandler{server: srv, staticFS: static, staticPath: "static", indexPath: "index.html"}
@@ -174,7 +176,7 @@ func (h loadHandler) Progress() *loadProgress {
 func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path == "/load/progress" {
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusCreated)
+		w.WriteHeader(http.StatusOK)
 
 		json.NewEncoder(w).Encode(h.Progress())
 		return
@@ -299,5 +301,51 @@ func grouped[K comparable, T namedTyped](input map[K]T) map[string][]T {
 		sort.Slice(v, func(i, j int) bool { return v[i].Name() < v[j].Name() })
 	}
 
+	return output
+}
+
+type searchHandler struct {
+	server *DfServer
+}
+
+type SearchResult struct {
+	Label string `json:"label"`
+	Value string `json:"value"`
+}
+
+func (h searchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	term := r.URL.Query().Get("term")
+
+	var results []SearchResult
+
+	results = seachMap(term, h.server.context.world.HistoricalFigures, results, "/hf")
+	results = seachMap(term, h.server.context.world.Entities, results, "/entity")
+	results = seachMap(term, h.server.context.world.Sites, results, "/site")
+	results = seachMap(term, h.server.context.world.Regions, results, "/region")
+	results = seachMap(term, h.server.context.world.Artifacts, results, "/artifavt")
+	results = seachMap(term, h.server.context.world.WorldConstructions, results, "/worldconstruction")
+	results = seachMap(term, h.server.context.world.DanceForms, results, "/danceForm")
+	results = seachMap(term, h.server.context.world.MusicalForms, results, "/musicalForm")
+	results = seachMap(term, h.server.context.world.PoeticForms, results, "/poeticForm")
+	results = seachMap(term, h.server.context.world.WrittenContents, results, "/writtencontent")
+	results = seachMap(term, h.server.context.world.Landmasses, results, "/landmass")
+	results = seachMap(term, h.server.context.world.MountainPeaks, results, "/mountain")
+
+	sort.Slice(results, func(i, j int) bool { return results[i].Label < results[j].Label })
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(results)
+}
+
+func seachMap[T model.Named](s string, input map[int]T, output []SearchResult, baseUrl string) []SearchResult {
+	for id, v := range input {
+		if strings.Contains(v.Name(), s) {
+			output = append(output, SearchResult{
+				Label: util.Title(v.Name()),
+				Value: fmt.Sprintf("%s/%d", baseUrl, id),
+			})
+		}
+	}
 	return output
 }

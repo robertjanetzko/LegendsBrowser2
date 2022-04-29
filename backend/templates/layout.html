@@ -12,6 +12,7 @@
     <link href="/css/legends.css" rel="stylesheet">
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/autocomplete.js"></script>
 </head>
 
 <body>
@@ -55,9 +56,26 @@
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <div class="input-group">
+                        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
+                        <button class="btn btn-outline-secondary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
                 </form>
+                <script>
+                    const ac = new Autocomplete(document.getElementById("search"), {
+                        data: [{ label: "I'm a label", value: 42 }],
+                        maximumItems: 50,
+                        onInput: value => $.get("/search?term=" + value, data => ac.setData(data)),
+                        onSelectItem: ({ label, value }) => window.location = value
+                    });
+
+                    // later, when you need to change the dataset
+
+                    ac.setData([
+                        { label: 'New York JFK', value: 'JFK' },
+                        { label: 'Moscow SVO', value: 'SVO' },
+                    ]);
+                </script>
             </div>
         </div>
     </nav>
