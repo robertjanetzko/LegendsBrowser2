@@ -19,7 +19,7 @@ func (srv *DfServer) RegisterWorldPage(path string, template string, accessor fu
 		}
 
 		data := accessor(mux.Vars(r))
-		if reflect.ValueOf(data).IsNil() {
+		if data == nil || (reflect.ValueOf(data).Kind() == reflect.Ptr && reflect.ValueOf(data).IsNil()) {
 			srv.notFound(w)
 			return
 		}
