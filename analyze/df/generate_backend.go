@@ -134,6 +134,7 @@ func (x *{{ $obj.Name }}) RelatedToEntity(id int) bool { return {{ $obj.RelatedT
 func (x *{{ $obj.Name }}) RelatedToHf(id int) bool { return {{ $obj.RelatedToHf }} }
 func (x *{{ $obj.Name }}) RelatedToArtifact(id int) bool { return {{ $obj.RelatedToArtifact }} }
 func (x *{{ $obj.Name }}) RelatedToSite(id int) bool { return {{ $obj.RelatedToSite }} }
+func (x *{{ $obj.Name }}) RelatedToStructure(siteId, id int) bool { return {{ $obj.RelatedToStructure }} }
 func (x *{{ $obj.Name }}) RelatedToRegion(id int) bool { return {{ $obj.RelatedToRegion }} }
 
 func (x *{{ $obj.Name }}) CheckFields() {
@@ -441,25 +442,29 @@ var entityRegex, _ = regexp.Compile("(civ|civ_id|enid|[^d]*entity(_id)?|^entity(
 var hfRegex, _ = regexp.Compile("(hfid|hf_id|hist_figure_id|histfig_id|histfig|bodies|_hf)")
 var artifactRegex, _ = regexp.Compile("(item(_id)?|artifact_id)$")
 var siteRegex, _ = regexp.Compile("(site_id|site)[0-9]?$")
+var structureRegex, _ = regexp.Compile("(structure(_id)?)$")
 var regionRegex, _ = regexp.Compile("(region_id|srid)$")
 
 func (obj Object) RelatedToEntity() string {
-	return obj.Related(entityRegex)
+	return obj.Related(entityRegex, "")
 }
 func (obj Object) RelatedToHf() string {
-	return obj.Related(hfRegex)
+	return obj.Related(hfRegex, "")
 }
 func (obj Object) RelatedToArtifact() string {
-	return obj.Related(artifactRegex)
+	return obj.Related(artifactRegex, "")
 }
 func (obj Object) RelatedToSite() string {
-	return obj.Related(siteRegex)
+	return obj.Related(siteRegex, "")
+}
+func (obj Object) RelatedToStructure() string {
+	return obj.Related(structureRegex, "x.RelatedToSite(siteId)")
 }
 func (obj Object) RelatedToRegion() string {
-	return obj.Related(regionRegex)
+	return obj.Related(regionRegex, "")
 }
 
-func (obj Object) Related(regex *regexp.Regexp) string {
+func (obj Object) Related(regex *regexp.Regexp, init string) string {
 	var list []string
 	for n, f := range obj.Fields {
 		if f.Type == "int" && !f.SameField(obj) && regex.MatchString(n) {
@@ -472,7 +477,12 @@ func (obj Object) Related(regex *regexp.Regexp) string {
 	}
 	sort.Strings(list)
 	if len(list) > 0 {
-		return strings.Join(list, " || ")
+		l := strings.Join(list, " || ")
+		if init == "" {
+			return l
+		} else {
+			return init + "&& (" + l + ")"
+		}
 	}
 	return "false"
 }
@@ -511,6 +521,9 @@ func (f Field) SameField(obj Object) bool {
 
 func (f Field) CorrectedName(obj Object) string {
 	if f.Legend != "plus" {
+		if f.Name == "LocalId" && obj.Id {
+			return "Id_"
+		}
 		return f.Name
 	}
 	n, ok := sameFields[obj.Name][f.Name]

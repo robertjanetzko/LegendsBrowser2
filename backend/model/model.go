@@ -1147,14 +1147,15 @@ func NewArtifact() *Artifact {
 		Writing:          -1,
 	}
 }
-func (x *Artifact) Id() int                       { return x.Id_ }
-func (x *Artifact) setId(id int)                  { x.Id_ = id }
-func (x *Artifact) Name() string                  { return x.Name_ }
-func (x *Artifact) RelatedToEntity(id int) bool   { return false }
-func (x *Artifact) RelatedToHf(id int) bool       { return x.HolderHfid == id }
-func (x *Artifact) RelatedToArtifact(id int) bool { return false }
-func (x *Artifact) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *Artifact) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *Artifact) Id() int                                { return x.Id_ }
+func (x *Artifact) setId(id int)                           { x.Id_ = id }
+func (x *Artifact) Name() string                           { return x.Name_ }
+func (x *Artifact) RelatedToEntity(id int) bool            { return false }
+func (x *Artifact) RelatedToHf(id int) bool                { return x.HolderHfid == id }
+func (x *Artifact) RelatedToArtifact(id int) bool          { return false }
+func (x *Artifact) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *Artifact) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Artifact) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *Artifact) CheckFields() {
 	if x.PageCount != x.AbsTileX {
@@ -1367,11 +1368,12 @@ type Creature struct {
 func NewCreature() *Creature {
 	return &Creature{}
 }
-func (x *Creature) RelatedToEntity(id int) bool   { return false }
-func (x *Creature) RelatedToHf(id int) bool       { return false }
-func (x *Creature) RelatedToArtifact(id int) bool { return false }
-func (x *Creature) RelatedToSite(id int) bool     { return false }
-func (x *Creature) RelatedToRegion(id int) bool   { return false }
+func (x *Creature) RelatedToEntity(id int) bool            { return false }
+func (x *Creature) RelatedToHf(id int) bool                { return false }
+func (x *Creature) RelatedToArtifact(id int) bool          { return false }
+func (x *Creature) RelatedToSite(id int) bool              { return false }
+func (x *Creature) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Creature) RelatedToRegion(id int) bool            { return false }
 
 func (x *Creature) CheckFields() {
 }
@@ -1511,14 +1513,15 @@ func NewDanceForm() *DanceForm {
 		Id_: -1,
 	}
 }
-func (x *DanceForm) Id() int                       { return x.Id_ }
-func (x *DanceForm) setId(id int)                  { x.Id_ = id }
-func (x *DanceForm) Name() string                  { return x.Name_ }
-func (x *DanceForm) RelatedToEntity(id int) bool   { return false }
-func (x *DanceForm) RelatedToHf(id int) bool       { return false }
-func (x *DanceForm) RelatedToArtifact(id int) bool { return false }
-func (x *DanceForm) RelatedToSite(id int) bool     { return false }
-func (x *DanceForm) RelatedToRegion(id int) bool   { return false }
+func (x *DanceForm) Id() int                                { return x.Id_ }
+func (x *DanceForm) setId(id int)                           { x.Id_ = id }
+func (x *DanceForm) Name() string                           { return x.Name_ }
+func (x *DanceForm) RelatedToEntity(id int) bool            { return false }
+func (x *DanceForm) RelatedToHf(id int) bool                { return false }
+func (x *DanceForm) RelatedToArtifact(id int) bool          { return false }
+func (x *DanceForm) RelatedToSite(id int) bool              { return false }
+func (x *DanceForm) RelatedToStructure(siteId, id int) bool { return false }
+func (x *DanceForm) RelatedToRegion(id int) bool            { return false }
 
 func (x *DanceForm) CheckFields() {
 }
@@ -1581,12 +1584,13 @@ func NewDfWorld() *DfWorld {
 		WrittenContents:            make(map[int]*WrittenContent),
 	}
 }
-func (x *DfWorld) Name() string                  { return x.Name_ }
-func (x *DfWorld) RelatedToEntity(id int) bool   { return false }
-func (x *DfWorld) RelatedToHf(id int) bool       { return false }
-func (x *DfWorld) RelatedToArtifact(id int) bool { return false }
-func (x *DfWorld) RelatedToSite(id int) bool     { return false }
-func (x *DfWorld) RelatedToRegion(id int) bool   { return false }
+func (x *DfWorld) Name() string                           { return x.Name_ }
+func (x *DfWorld) RelatedToEntity(id int) bool            { return false }
+func (x *DfWorld) RelatedToHf(id int) bool                { return false }
+func (x *DfWorld) RelatedToArtifact(id int) bool          { return false }
+func (x *DfWorld) RelatedToSite(id int) bool              { return false }
+func (x *DfWorld) RelatedToStructure(siteId, id int) bool { return false }
+func (x *DfWorld) RelatedToRegion(id int) bool            { return false }
 
 func (x *DfWorld) CheckFields() {
 }
@@ -1995,14 +1999,15 @@ func NewEntity() *Entity {
 		Id_: -1,
 	}
 }
-func (x *Entity) Id() int                       { return x.Id_ }
-func (x *Entity) setId(id int)                  { x.Id_ = id }
-func (x *Entity) Name() string                  { return x.Name_ }
-func (x *Entity) RelatedToEntity(id int) bool   { return false }
-func (x *Entity) RelatedToHf(id int) bool       { return containsInt(x.HistfigId, id) }
-func (x *Entity) RelatedToArtifact(id int) bool { return false }
-func (x *Entity) RelatedToSite(id int) bool     { return false }
-func (x *Entity) RelatedToRegion(id int) bool   { return false }
+func (x *Entity) Id() int                                { return x.Id_ }
+func (x *Entity) setId(id int)                           { x.Id_ = id }
+func (x *Entity) Name() string                           { return x.Name_ }
+func (x *Entity) RelatedToEntity(id int) bool            { return false }
+func (x *Entity) RelatedToHf(id int) bool                { return containsInt(x.HistfigId, id) }
+func (x *Entity) RelatedToArtifact(id int) bool          { return false }
+func (x *Entity) RelatedToSite(id int) bool              { return false }
+func (x *Entity) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Entity) RelatedToRegion(id int) bool            { return false }
 
 func (x *Entity) CheckFields() {
 }
@@ -2082,11 +2087,12 @@ func NewEntityEntityLink() *EntityEntityLink {
 		Target:   -1,
 	}
 }
-func (x *EntityEntityLink) RelatedToEntity(id int) bool   { return false }
-func (x *EntityEntityLink) RelatedToHf(id int) bool       { return false }
-func (x *EntityEntityLink) RelatedToArtifact(id int) bool { return false }
-func (x *EntityEntityLink) RelatedToSite(id int) bool     { return false }
-func (x *EntityEntityLink) RelatedToRegion(id int) bool   { return false }
+func (x *EntityEntityLink) RelatedToEntity(id int) bool            { return false }
+func (x *EntityEntityLink) RelatedToHf(id int) bool                { return false }
+func (x *EntityEntityLink) RelatedToArtifact(id int) bool          { return false }
+func (x *EntityEntityLink) RelatedToSite(id int) bool              { return false }
+func (x *EntityEntityLink) RelatedToStructure(siteId, id int) bool { return false }
+func (x *EntityEntityLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntityEntityLink) CheckFields() {
 }
@@ -2120,11 +2126,12 @@ func NewEntityFormerPositionLink() *EntityFormerPositionLink {
 		StartYear:         -1,
 	}
 }
-func (x *EntityFormerPositionLink) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *EntityFormerPositionLink) RelatedToHf(id int) bool       { return false }
-func (x *EntityFormerPositionLink) RelatedToArtifact(id int) bool { return false }
-func (x *EntityFormerPositionLink) RelatedToSite(id int) bool     { return false }
-func (x *EntityFormerPositionLink) RelatedToRegion(id int) bool   { return false }
+func (x *EntityFormerPositionLink) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *EntityFormerPositionLink) RelatedToHf(id int) bool                { return false }
+func (x *EntityFormerPositionLink) RelatedToArtifact(id int) bool          { return false }
+func (x *EntityFormerPositionLink) RelatedToSite(id int) bool              { return false }
+func (x *EntityFormerPositionLink) RelatedToStructure(siteId, id int) bool { return false }
+func (x *EntityFormerPositionLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntityFormerPositionLink) CheckFields() {
 }
@@ -2161,11 +2168,12 @@ func NewEntityFormerSquadLink() *EntityFormerSquadLink {
 		StartYear: -1,
 	}
 }
-func (x *EntityFormerSquadLink) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *EntityFormerSquadLink) RelatedToHf(id int) bool       { return false }
-func (x *EntityFormerSquadLink) RelatedToArtifact(id int) bool { return false }
-func (x *EntityFormerSquadLink) RelatedToSite(id int) bool     { return false }
-func (x *EntityFormerSquadLink) RelatedToRegion(id int) bool   { return false }
+func (x *EntityFormerSquadLink) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *EntityFormerSquadLink) RelatedToHf(id int) bool                { return false }
+func (x *EntityFormerSquadLink) RelatedToArtifact(id int) bool          { return false }
+func (x *EntityFormerSquadLink) RelatedToSite(id int) bool              { return false }
+func (x *EntityFormerSquadLink) RelatedToStructure(siteId, id int) bool { return false }
+func (x *EntityFormerSquadLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntityFormerSquadLink) CheckFields() {
 }
@@ -2199,13 +2207,14 @@ func NewEntityPopulation() *EntityPopulation {
 		Id_:   -1,
 	}
 }
-func (x *EntityPopulation) Id() int                       { return x.Id_ }
-func (x *EntityPopulation) setId(id int)                  { x.Id_ = id }
-func (x *EntityPopulation) RelatedToEntity(id int) bool   { return x.CivId == id }
-func (x *EntityPopulation) RelatedToHf(id int) bool       { return false }
-func (x *EntityPopulation) RelatedToArtifact(id int) bool { return false }
-func (x *EntityPopulation) RelatedToSite(id int) bool     { return false }
-func (x *EntityPopulation) RelatedToRegion(id int) bool   { return false }
+func (x *EntityPopulation) Id() int                                { return x.Id_ }
+func (x *EntityPopulation) setId(id int)                           { x.Id_ = id }
+func (x *EntityPopulation) RelatedToEntity(id int) bool            { return x.CivId == id }
+func (x *EntityPopulation) RelatedToHf(id int) bool                { return false }
+func (x *EntityPopulation) RelatedToArtifact(id int) bool          { return false }
+func (x *EntityPopulation) RelatedToSite(id int) bool              { return false }
+func (x *EntityPopulation) RelatedToStructure(siteId, id int) bool { return false }
+func (x *EntityPopulation) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntityPopulation) CheckFields() {
 }
@@ -2237,14 +2246,15 @@ func NewEntityPosition() *EntityPosition {
 		Id_: -1,
 	}
 }
-func (x *EntityPosition) Id() int                       { return x.Id_ }
-func (x *EntityPosition) setId(id int)                  { x.Id_ = id }
-func (x *EntityPosition) Name() string                  { return x.Name_ }
-func (x *EntityPosition) RelatedToEntity(id int) bool   { return false }
-func (x *EntityPosition) RelatedToHf(id int) bool       { return false }
-func (x *EntityPosition) RelatedToArtifact(id int) bool { return false }
-func (x *EntityPosition) RelatedToSite(id int) bool     { return false }
-func (x *EntityPosition) RelatedToRegion(id int) bool   { return false }
+func (x *EntityPosition) Id() int                                { return x.Id_ }
+func (x *EntityPosition) setId(id int)                           { x.Id_ = id }
+func (x *EntityPosition) Name() string                           { return x.Name_ }
+func (x *EntityPosition) RelatedToEntity(id int) bool            { return false }
+func (x *EntityPosition) RelatedToHf(id int) bool                { return false }
+func (x *EntityPosition) RelatedToArtifact(id int) bool          { return false }
+func (x *EntityPosition) RelatedToSite(id int) bool              { return false }
+func (x *EntityPosition) RelatedToStructure(siteId, id int) bool { return false }
+func (x *EntityPosition) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntityPosition) CheckFields() {
 }
@@ -2278,13 +2288,14 @@ func NewEntityPositionAssignment() *EntityPositionAssignment {
 		SquadId:    -1,
 	}
 }
-func (x *EntityPositionAssignment) Id() int                       { return x.Id_ }
-func (x *EntityPositionAssignment) setId(id int)                  { x.Id_ = id }
-func (x *EntityPositionAssignment) RelatedToEntity(id int) bool   { return false }
-func (x *EntityPositionAssignment) RelatedToHf(id int) bool       { return x.Histfig == id }
-func (x *EntityPositionAssignment) RelatedToArtifact(id int) bool { return false }
-func (x *EntityPositionAssignment) RelatedToSite(id int) bool     { return false }
-func (x *EntityPositionAssignment) RelatedToRegion(id int) bool   { return false }
+func (x *EntityPositionAssignment) Id() int                                { return x.Id_ }
+func (x *EntityPositionAssignment) setId(id int)                           { x.Id_ = id }
+func (x *EntityPositionAssignment) RelatedToEntity(id int) bool            { return false }
+func (x *EntityPositionAssignment) RelatedToHf(id int) bool                { return x.Histfig == id }
+func (x *EntityPositionAssignment) RelatedToArtifact(id int) bool          { return false }
+func (x *EntityPositionAssignment) RelatedToSite(id int) bool              { return false }
+func (x *EntityPositionAssignment) RelatedToStructure(siteId, id int) bool { return false }
+func (x *EntityPositionAssignment) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntityPositionAssignment) CheckFields() {
 }
@@ -2319,11 +2330,12 @@ func NewEntityPositionLink() *EntityPositionLink {
 		StartYear:         -1,
 	}
 }
-func (x *EntityPositionLink) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *EntityPositionLink) RelatedToHf(id int) bool       { return false }
-func (x *EntityPositionLink) RelatedToArtifact(id int) bool { return false }
-func (x *EntityPositionLink) RelatedToSite(id int) bool     { return false }
-func (x *EntityPositionLink) RelatedToRegion(id int) bool   { return false }
+func (x *EntityPositionLink) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *EntityPositionLink) RelatedToHf(id int) bool                { return false }
+func (x *EntityPositionLink) RelatedToArtifact(id int) bool          { return false }
+func (x *EntityPositionLink) RelatedToSite(id int) bool              { return false }
+func (x *EntityPositionLink) RelatedToStructure(siteId, id int) bool { return false }
+func (x *EntityPositionLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntityPositionLink) CheckFields() {
 }
@@ -2379,11 +2391,12 @@ func NewEntityReputation() *EntityReputation {
 		UnsolvedMurders:         -1,
 	}
 }
-func (x *EntityReputation) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *EntityReputation) RelatedToHf(id int) bool       { return false }
-func (x *EntityReputation) RelatedToArtifact(id int) bool { return false }
-func (x *EntityReputation) RelatedToSite(id int) bool     { return false }
-func (x *EntityReputation) RelatedToRegion(id int) bool   { return false }
+func (x *EntityReputation) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *EntityReputation) RelatedToHf(id int) bool                { return false }
+func (x *EntityReputation) RelatedToArtifact(id int) bool          { return false }
+func (x *EntityReputation) RelatedToSite(id int) bool              { return false }
+func (x *EntityReputation) RelatedToStructure(siteId, id int) bool { return false }
+func (x *EntityReputation) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntityReputation) CheckFields() {
 }
@@ -2453,11 +2466,12 @@ func NewEntitySquadLink() *EntitySquadLink {
 		StartYear:     -1,
 	}
 }
-func (x *EntitySquadLink) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *EntitySquadLink) RelatedToHf(id int) bool       { return false }
-func (x *EntitySquadLink) RelatedToArtifact(id int) bool { return false }
-func (x *EntitySquadLink) RelatedToSite(id int) bool     { return false }
-func (x *EntitySquadLink) RelatedToRegion(id int) bool   { return false }
+func (x *EntitySquadLink) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *EntitySquadLink) RelatedToHf(id int) bool                { return false }
+func (x *EntitySquadLink) RelatedToArtifact(id int) bool          { return false }
+func (x *EntitySquadLink) RelatedToSite(id int) bool              { return false }
+func (x *EntitySquadLink) RelatedToStructure(siteId, id int) bool { return false }
+func (x *EntitySquadLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntitySquadLink) CheckFields() {
 }
@@ -2581,11 +2595,12 @@ func NewFeature() *Feature {
 		Reference: -1,
 	}
 }
-func (x *Feature) RelatedToEntity(id int) bool   { return false }
-func (x *Feature) RelatedToHf(id int) bool       { return false }
-func (x *Feature) RelatedToArtifact(id int) bool { return false }
-func (x *Feature) RelatedToSite(id int) bool     { return false }
-func (x *Feature) RelatedToRegion(id int) bool   { return false }
+func (x *Feature) RelatedToEntity(id int) bool            { return false }
+func (x *Feature) RelatedToHf(id int) bool                { return false }
+func (x *Feature) RelatedToArtifact(id int) bool          { return false }
+func (x *Feature) RelatedToSite(id int) bool              { return false }
+func (x *Feature) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Feature) RelatedToRegion(id int) bool            { return false }
 
 func (x *Feature) CheckFields() {
 }
@@ -2710,11 +2725,12 @@ func NewHfLink() *HfLink {
 		LinkStrength: -1,
 	}
 }
-func (x *HfLink) RelatedToEntity(id int) bool   { return false }
-func (x *HfLink) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *HfLink) RelatedToArtifact(id int) bool { return false }
-func (x *HfLink) RelatedToSite(id int) bool     { return false }
-func (x *HfLink) RelatedToRegion(id int) bool   { return false }
+func (x *HfLink) RelatedToEntity(id int) bool            { return false }
+func (x *HfLink) RelatedToHf(id int) bool                { return x.Hfid == id }
+func (x *HfLink) RelatedToArtifact(id int) bool          { return false }
+func (x *HfLink) RelatedToSite(id int) bool              { return false }
+func (x *HfLink) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HfLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *HfLink) CheckFields() {
 }
@@ -2743,11 +2759,12 @@ func NewHfSkill() *HfSkill {
 		TotalIp: -1,
 	}
 }
-func (x *HfSkill) RelatedToEntity(id int) bool   { return false }
-func (x *HfSkill) RelatedToHf(id int) bool       { return false }
-func (x *HfSkill) RelatedToArtifact(id int) bool { return false }
-func (x *HfSkill) RelatedToSite(id int) bool     { return false }
-func (x *HfSkill) RelatedToRegion(id int) bool   { return false }
+func (x *HfSkill) RelatedToEntity(id int) bool            { return false }
+func (x *HfSkill) RelatedToHf(id int) bool                { return false }
+func (x *HfSkill) RelatedToArtifact(id int) bool          { return false }
+func (x *HfSkill) RelatedToSite(id int) bool              { return false }
+func (x *HfSkill) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HfSkill) RelatedToRegion(id int) bool            { return false }
 
 func (x *HfSkill) CheckFields() {
 }
@@ -2771,12 +2788,13 @@ func NewHistoricalEra() *HistoricalEra {
 		StartYear: -1,
 	}
 }
-func (x *HistoricalEra) Name() string                  { return x.Name_ }
-func (x *HistoricalEra) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEra) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEra) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEra) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEra) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEra) Name() string                           { return x.Name_ }
+func (x *HistoricalEra) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEra) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEra) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEra) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEra) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEra) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEra) CheckFields() {
 }
@@ -2804,13 +2822,14 @@ func NewHistoricalEvent() *HistoricalEvent {
 		Year:      -1,
 	}
 }
-func (x *HistoricalEvent) Id() int                       { return x.Id_ }
-func (x *HistoricalEvent) setId(id int)                  { x.Id_ = id }
-func (x *HistoricalEvent) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEvent) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEvent) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEvent) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEvent) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEvent) Id() int                                { return x.Id_ }
+func (x *HistoricalEvent) setId(id int)                           { x.Id_ = id }
+func (x *HistoricalEvent) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEvent) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEvent) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEvent) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEvent) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEvent) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEvent) CheckFields() {
 }
@@ -2842,12 +2861,13 @@ func NewHistoricalEventAddHfEntityHonor() *HistoricalEventAddHfEntityHonor {
 		HonorId:  -1,
 	}
 }
-func (x *HistoricalEventAddHfEntityHonor) Type() string                  { return "add hf entity honor" }
-func (x *HistoricalEventAddHfEntityHonor) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *HistoricalEventAddHfEntityHonor) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *HistoricalEventAddHfEntityHonor) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventAddHfEntityHonor) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventAddHfEntityHonor) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventAddHfEntityHonor) Type() string                           { return "add hf entity honor" }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToHf(id int) bool                { return x.Hfid == id }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventAddHfEntityHonor) CheckFields() {
 }
@@ -2994,9 +3014,10 @@ func (x *HistoricalEventAddHfEntityLink) RelatedToEntity(id int) bool { return x
 func (x *HistoricalEventAddHfEntityLink) RelatedToHf(id int) bool {
 	return x.AppointerHfid == id || x.Hfid == id || x.PromiseToHfid == id
 }
-func (x *HistoricalEventAddHfEntityLink) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventAddHfEntityLink) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventAddHfEntityLink) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventAddHfEntityLink) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventAddHfEntityLink) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventAddHfEntityLink) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventAddHfEntityLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventAddHfEntityLink) CheckFields() {
 }
@@ -3104,9 +3125,10 @@ func (x *HistoricalEventAddHfHfLink) RelatedToEntity(id int) bool { return false
 func (x *HistoricalEventAddHfHfLink) RelatedToHf(id int) bool {
 	return x.Hfid == id || x.HfidTarget == id
 }
-func (x *HistoricalEventAddHfHfLink) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventAddHfHfLink) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventAddHfHfLink) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventAddHfHfLink) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventAddHfHfLink) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventAddHfHfLink) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventAddHfHfLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventAddHfHfLink) CheckFields() {
 }
@@ -3193,7 +3215,10 @@ func (x *HistoricalEventAddHfSiteLink) RelatedToEntity(id int) bool   { return x
 func (x *HistoricalEventAddHfSiteLink) RelatedToHf(id int) bool       { return x.Histfig == id }
 func (x *HistoricalEventAddHfSiteLink) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventAddHfSiteLink) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventAddHfSiteLink) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventAddHfSiteLink) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.Structure == id)
+}
+func (x *HistoricalEventAddHfSiteLink) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventAddHfSiteLink) CheckFields() {
 	if x.Civ != x.SiteId {
@@ -3274,10 +3299,11 @@ func (x *HistoricalEventAgreementConcluded) Type() string { return "agreement co
 func (x *HistoricalEventAgreementConcluded) RelatedToEntity(id int) bool {
 	return x.Destination == id || x.Source == id
 }
-func (x *HistoricalEventAgreementConcluded) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventAgreementConcluded) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventAgreementConcluded) RelatedToSite(id int) bool     { return x.Site == id }
-func (x *HistoricalEventAgreementConcluded) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToSite(id int) bool              { return x.Site == id }
+func (x *HistoricalEventAgreementConcluded) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventAgreementConcluded) CheckFields() {
 }
@@ -3642,10 +3668,11 @@ func (x *HistoricalEventAgreementFormed) Type() string { return "agreement forme
 func (x *HistoricalEventAgreementFormed) RelatedToEntity(id int) bool {
 	return x.RelevantEntityId == id
 }
-func (x *HistoricalEventAgreementFormed) RelatedToHf(id int) bool       { return x.ConcluderHfid == id }
-func (x *HistoricalEventAgreementFormed) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventAgreementFormed) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventAgreementFormed) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventAgreementFormed) RelatedToHf(id int) bool                { return x.ConcluderHfid == id }
+func (x *HistoricalEventAgreementFormed) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventAgreementFormed) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventAgreementFormed) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventAgreementFormed) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventAgreementFormed) CheckFields() {
 }
@@ -3773,10 +3800,11 @@ func (x *HistoricalEventAgreementMade) Type() string { return "agreement made" }
 func (x *HistoricalEventAgreementMade) RelatedToEntity(id int) bool {
 	return x.Destination == id || x.Source == id
 }
-func (x *HistoricalEventAgreementMade) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventAgreementMade) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventAgreementMade) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventAgreementMade) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventAgreementMade) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventAgreementMade) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventAgreementMade) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventAgreementMade) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventAgreementMade) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventAgreementMade) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -3864,10 +3892,11 @@ func (x *HistoricalEventAgreementRejected) Type() string { return "agreement rej
 func (x *HistoricalEventAgreementRejected) RelatedToEntity(id int) bool {
 	return x.Destination == id || x.Source == id
 }
-func (x *HistoricalEventAgreementRejected) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventAgreementRejected) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventAgreementRejected) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventAgreementRejected) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventAgreementRejected) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventAgreementRejected) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -3987,8 +4016,9 @@ func (x *HistoricalEventArtifactClaimFormed) RelatedToHf(id int) bool     { retu
 func (x *HistoricalEventArtifactClaimFormed) RelatedToArtifact(id int) bool {
 	return x.ArtifactId == id
 }
-func (x *HistoricalEventArtifactClaimFormed) RelatedToSite(id int) bool   { return false }
-func (x *HistoricalEventArtifactClaimFormed) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventArtifactClaimFormed) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventArtifactClaimFormed) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventArtifactClaimFormed) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventArtifactClaimFormed) CheckFields() {
 }
@@ -4046,6 +4076,9 @@ func (x *HistoricalEventArtifactCopied) RelatedToHf(id int) bool       { return 
 func (x *HistoricalEventArtifactCopied) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
 func (x *HistoricalEventArtifactCopied) RelatedToSite(id int) bool {
 	return x.DestSiteId == id || x.SourceSiteId == id
+}
+func (x *HistoricalEventArtifactCopied) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.DestStructureId == id || x.SourceStructureId == id)
 }
 func (x *HistoricalEventArtifactCopied) RelatedToRegion(id int) bool { return false }
 
@@ -4131,9 +4164,10 @@ func (x *HistoricalEventArtifactCreated) RelatedToEntity(id int) bool { return f
 func (x *HistoricalEventArtifactCreated) RelatedToHf(id int) bool {
 	return x.HistFigureId == id || x.SanctifyHf == id
 }
-func (x *HistoricalEventArtifactCreated) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
-func (x *HistoricalEventArtifactCreated) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventArtifactCreated) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventArtifactCreated) RelatedToArtifact(id int) bool          { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactCreated) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventArtifactCreated) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventArtifactCreated) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventArtifactCreated) CheckFields() {
 	if x.SanctifyHf != x.HistFigureId {
@@ -4223,7 +4257,10 @@ func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToEntity(id int) boo
 func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToStructure(siteId, id int) bool {
+	return false
+}
+func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventArtifactCreatedCircumstance) CheckFields() {
 }
@@ -4252,12 +4289,13 @@ func NewHistoricalEventArtifactDestroyed() *HistoricalEventArtifactDestroyed {
 		SiteId:        -1,
 	}
 }
-func (x *HistoricalEventArtifactDestroyed) Type() string                  { return "artifact destroyed" }
-func (x *HistoricalEventArtifactDestroyed) RelatedToEntity(id int) bool   { return x.DestroyerEnid == id }
-func (x *HistoricalEventArtifactDestroyed) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventArtifactDestroyed) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
-func (x *HistoricalEventArtifactDestroyed) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventArtifactDestroyed) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventArtifactDestroyed) Type() string                           { return "artifact destroyed" }
+func (x *HistoricalEventArtifactDestroyed) RelatedToEntity(id int) bool            { return x.DestroyerEnid == id }
+func (x *HistoricalEventArtifactDestroyed) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventArtifactDestroyed) RelatedToArtifact(id int) bool          { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactDestroyed) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventArtifactDestroyed) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventArtifactDestroyed) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventArtifactDestroyed) CheckFields() {
 }
@@ -4293,12 +4331,13 @@ func NewHistoricalEventArtifactFound() *HistoricalEventArtifactFound {
 		UnitId:         -1,
 	}
 }
-func (x *HistoricalEventArtifactFound) Type() string                  { return "artifact found" }
-func (x *HistoricalEventArtifactFound) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventArtifactFound) RelatedToHf(id int) bool       { return x.HistFigureId == id }
-func (x *HistoricalEventArtifactFound) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
-func (x *HistoricalEventArtifactFound) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventArtifactFound) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventArtifactFound) Type() string                           { return "artifact found" }
+func (x *HistoricalEventArtifactFound) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventArtifactFound) RelatedToHf(id int) bool                { return x.HistFigureId == id }
+func (x *HistoricalEventArtifactFound) RelatedToArtifact(id int) bool          { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactFound) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventArtifactFound) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventArtifactFound) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventArtifactFound) CheckFields() {
 }
@@ -4375,9 +4414,10 @@ func (x *HistoricalEventArtifactGiven) RelatedToEntity(id int) bool {
 func (x *HistoricalEventArtifactGiven) RelatedToHf(id int) bool {
 	return x.GiverHistFigureId == id || x.ReceiverHistFigureId == id
 }
-func (x *HistoricalEventArtifactGiven) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
-func (x *HistoricalEventArtifactGiven) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventArtifactGiven) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventArtifactGiven) RelatedToArtifact(id int) bool          { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactGiven) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventArtifactGiven) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventArtifactGiven) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventArtifactGiven) CheckFields() {
 }
@@ -4422,12 +4462,13 @@ func NewHistoricalEventArtifactLost() *HistoricalEventArtifactLost {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventArtifactLost) Type() string                  { return "artifact lost" }
-func (x *HistoricalEventArtifactLost) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventArtifactLost) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventArtifactLost) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
-func (x *HistoricalEventArtifactLost) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventArtifactLost) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventArtifactLost) Type() string                           { return "artifact lost" }
+func (x *HistoricalEventArtifactLost) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventArtifactLost) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventArtifactLost) RelatedToArtifact(id int) bool          { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactLost) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventArtifactLost) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventArtifactLost) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventArtifactLost) CheckFields() {
 }
@@ -4536,12 +4577,13 @@ func NewHistoricalEventArtifactPossessed() *HistoricalEventArtifactPossessed {
 		UnitId:         -1,
 	}
 }
-func (x *HistoricalEventArtifactPossessed) Type() string                  { return "artifact possessed" }
-func (x *HistoricalEventArtifactPossessed) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventArtifactPossessed) RelatedToHf(id int) bool       { return x.HistFigureId == id }
-func (x *HistoricalEventArtifactPossessed) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
-func (x *HistoricalEventArtifactPossessed) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventArtifactPossessed) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventArtifactPossessed) Type() string                           { return "artifact possessed" }
+func (x *HistoricalEventArtifactPossessed) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventArtifactPossessed) RelatedToHf(id int) bool                { return x.HistFigureId == id }
+func (x *HistoricalEventArtifactPossessed) RelatedToArtifact(id int) bool          { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactPossessed) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventArtifactPossessed) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventArtifactPossessed) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventArtifactPossessed) CheckFields() {
 }
@@ -4607,7 +4649,10 @@ func (x *HistoricalEventArtifactRecovered) RelatedToEntity(id int) bool   { retu
 func (x *HistoricalEventArtifactRecovered) RelatedToHf(id int) bool       { return x.HistFigureId == id }
 func (x *HistoricalEventArtifactRecovered) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
 func (x *HistoricalEventArtifactRecovered) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventArtifactRecovered) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventArtifactRecovered) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventArtifactRecovered) RelatedToRegion(id int) bool { return x.SubregionId == id }
 
 func (x *HistoricalEventArtifactRecovered) CheckFields() {
 }
@@ -4653,12 +4698,13 @@ func NewHistoricalEventArtifactStored() *HistoricalEventArtifactStored {
 		UnitId:       -1,
 	}
 }
-func (x *HistoricalEventArtifactStored) Type() string                  { return "artifact stored" }
-func (x *HistoricalEventArtifactStored) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventArtifactStored) RelatedToHf(id int) bool       { return x.HistFigureId == id }
-func (x *HistoricalEventArtifactStored) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
-func (x *HistoricalEventArtifactStored) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventArtifactStored) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventArtifactStored) Type() string                           { return "artifact stored" }
+func (x *HistoricalEventArtifactStored) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventArtifactStored) RelatedToHf(id int) bool                { return x.HistFigureId == id }
+func (x *HistoricalEventArtifactStored) RelatedToArtifact(id int) bool          { return x.ArtifactId == id }
+func (x *HistoricalEventArtifactStored) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventArtifactStored) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventArtifactStored) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventArtifactStored) CheckFields() {
 }
@@ -4703,8 +4749,9 @@ func (x *HistoricalEventArtifactTransformed) RelatedToHf(id int) bool     { retu
 func (x *HistoricalEventArtifactTransformed) RelatedToArtifact(id int) bool {
 	return x.NewArtifactId == id || x.OldArtifactId == id
 }
-func (x *HistoricalEventArtifactTransformed) RelatedToSite(id int) bool   { return x.SiteId == id }
-func (x *HistoricalEventArtifactTransformed) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventArtifactTransformed) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventArtifactTransformed) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventArtifactTransformed) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventArtifactTransformed) CheckFields() {
 }
@@ -4749,10 +4796,11 @@ func (x *HistoricalEventAssumeIdentity) Type() string { return "assume identity"
 func (x *HistoricalEventAssumeIdentity) RelatedToEntity(id int) bool {
 	return x.IdentityId == id || x.TargetEnid == id
 }
-func (x *HistoricalEventAssumeIdentity) RelatedToHf(id int) bool       { return x.TricksterHfid == id }
-func (x *HistoricalEventAssumeIdentity) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventAssumeIdentity) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventAssumeIdentity) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventAssumeIdentity) RelatedToHf(id int) bool                { return x.TricksterHfid == id }
+func (x *HistoricalEventAssumeIdentity) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventAssumeIdentity) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventAssumeIdentity) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventAssumeIdentity) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventAssumeIdentity) CheckFields() {
 }
@@ -4808,9 +4856,10 @@ func (x *HistoricalEventAttackedSite) RelatedToEntity(id int) bool {
 func (x *HistoricalEventAttackedSite) RelatedToHf(id int) bool {
 	return x.AttackerGeneralHfid == id || x.DefenderGeneralHfid == id
 }
-func (x *HistoricalEventAttackedSite) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventAttackedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventAttackedSite) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventAttackedSite) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventAttackedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventAttackedSite) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventAttackedSite) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventAttackedSite) CheckFields() {
 }
@@ -5039,7 +5088,10 @@ func (x *HistoricalEventBodyAbused) RelatedToHf(id int) bool {
 }
 func (x *HistoricalEventBodyAbused) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventBodyAbused) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventBodyAbused) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventBodyAbused) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.Structure == id)
+}
+func (x *HistoricalEventBodyAbused) RelatedToRegion(id int) bool { return x.SubregionId == id }
 
 func (x *HistoricalEventBodyAbused) CheckFields() {
 	if x.Civ != x.FeatureLayerId {
@@ -5177,7 +5229,10 @@ func (x *HistoricalEventBuildingProfileAcquired) RelatedToHf(id int) bool {
 }
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventBuildingProfileAcquired) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToStructure(siteId, id int) bool {
+	return false
+}
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventBuildingProfileAcquired) CheckFields() {
 }
@@ -5224,12 +5279,13 @@ func NewHistoricalEventCeremony() *HistoricalEventCeremony {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventCeremony) Type() string                  { return "ceremony" }
-func (x *HistoricalEventCeremony) RelatedToEntity(id int) bool   { return x.CivId == id }
-func (x *HistoricalEventCeremony) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCeremony) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCeremony) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCeremony) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventCeremony) Type() string                           { return "ceremony" }
+func (x *HistoricalEventCeremony) RelatedToEntity(id int) bool            { return x.CivId == id }
+func (x *HistoricalEventCeremony) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCeremony) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCeremony) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventCeremony) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCeremony) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventCeremony) CheckFields() {
 }
@@ -5308,7 +5364,10 @@ func (x *HistoricalEventChangeHfBodyState) RelatedToEntity(id int) bool   { retu
 func (x *HistoricalEventChangeHfBodyState) RelatedToHf(id int) bool       { return x.Hfid == id }
 func (x *HistoricalEventChangeHfBodyState) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventChangeHfBodyState) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventChangeHfBodyState) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventChangeHfBodyState) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventChangeHfBodyState) RelatedToRegion(id int) bool { return x.SubregionId == id }
 
 func (x *HistoricalEventChangeHfBodyState) CheckFields() {
 }
@@ -5354,12 +5413,13 @@ func NewHistoricalEventChangeHfJob() *HistoricalEventChangeHfJob {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventChangeHfJob) Type() string                  { return "change hf job" }
-func (x *HistoricalEventChangeHfJob) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventChangeHfJob) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *HistoricalEventChangeHfJob) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventChangeHfJob) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventChangeHfJob) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventChangeHfJob) Type() string                           { return "change hf job" }
+func (x *HistoricalEventChangeHfJob) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventChangeHfJob) RelatedToHf(id int) bool                { return x.Hfid == id }
+func (x *HistoricalEventChangeHfJob) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventChangeHfJob) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventChangeHfJob) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventChangeHfJob) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventChangeHfJob) CheckFields() {
 }
@@ -5599,12 +5659,13 @@ func NewHistoricalEventChangeHfState() *HistoricalEventChangeHfState {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventChangeHfState) Type() string                  { return "change hf state" }
-func (x *HistoricalEventChangeHfState) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventChangeHfState) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *HistoricalEventChangeHfState) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventChangeHfState) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventChangeHfState) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventChangeHfState) Type() string                           { return "change hf state" }
+func (x *HistoricalEventChangeHfState) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventChangeHfState) RelatedToHf(id int) bool                { return x.Hfid == id }
+func (x *HistoricalEventChangeHfState) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventChangeHfState) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventChangeHfState) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventChangeHfState) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventChangeHfState) CheckFields() {
 }
@@ -5656,9 +5717,10 @@ func (x *HistoricalEventChangedCreatureType) RelatedToEntity(id int) bool { retu
 func (x *HistoricalEventChangedCreatureType) RelatedToHf(id int) bool {
 	return x.ChangeeHfid == id || x.ChangerHfid == id
 }
-func (x *HistoricalEventChangedCreatureType) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventChangedCreatureType) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventChangedCreatureType) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventChangedCreatureType) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventChangedCreatureType) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventChangedCreatureType) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventChangedCreatureType) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventChangedCreatureType) CheckFields() {
 }
@@ -5810,13 +5872,14 @@ func NewHistoricalEventCollection() *HistoricalEventCollection {
 		StartYear:      -1,
 	}
 }
-func (x *HistoricalEventCollection) Id() int                       { return x.Id_ }
-func (x *HistoricalEventCollection) setId(id int)                  { x.Id_ = id }
-func (x *HistoricalEventCollection) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventCollection) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollection) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollection) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventCollection) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCollection) Id() int                                { return x.Id_ }
+func (x *HistoricalEventCollection) setId(id int)                           { x.Id_ = id }
+func (x *HistoricalEventCollection) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventCollection) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollection) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollection) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventCollection) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollection) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventCollection) CheckFields() {
 }
@@ -5869,10 +5932,11 @@ func (x *HistoricalEventCollectionAbduction) Type() string { return "abduction" 
 func (x *HistoricalEventCollectionAbduction) RelatedToEntity(id int) bool {
 	return x.AttackingEnid == id || x.DefendingEnid == id
 }
-func (x *HistoricalEventCollectionAbduction) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionAbduction) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionAbduction) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCollectionAbduction) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventCollectionAbduction) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionAbduction) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionAbduction) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventCollectionAbduction) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionAbduction) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventCollectionAbduction) CheckFields() {
 }
@@ -5993,7 +6057,8 @@ func (x *HistoricalEventCollectionBattle) RelatedToArtifact(id int) bool { retur
 func (x *HistoricalEventCollectionBattle) RelatedToSite(id int) bool {
 	return containsInt(x.AttackingSquadSite, id) || containsInt(x.DefendingSquadSite, id) || x.SiteId == id
 }
-func (x *HistoricalEventCollectionBattle) RelatedToRegion(id int) bool { return x.SubregionId == id }
+func (x *HistoricalEventCollectionBattle) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionBattle) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventCollectionBattle) CheckFields() {
 }
@@ -6075,9 +6140,10 @@ func (x *HistoricalEventCollectionBeastAttack) Type() string { return "beast att
 func (x *HistoricalEventCollectionBeastAttack) RelatedToEntity(id int) bool {
 	return x.DefendingEnid == id
 }
-func (x *HistoricalEventCollectionBeastAttack) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionBeastAttack) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionBeastAttack) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionBeastAttack) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
 }
@@ -6118,12 +6184,13 @@ func NewHistoricalEventCollectionCeremony() *HistoricalEventCollectionCeremony {
 		Ordinal: -1,
 	}
 }
-func (x *HistoricalEventCollectionCeremony) Type() string                  { return "ceremony" }
-func (x *HistoricalEventCollectionCeremony) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventCollectionCeremony) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionCeremony) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionCeremony) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventCollectionCeremony) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCollectionCeremony) Type() string                           { return "ceremony" }
+func (x *HistoricalEventCollectionCeremony) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventCollectionCeremony) CheckFields() {
 }
@@ -6145,12 +6212,13 @@ func NewHistoricalEventCollectionCompetition() *HistoricalEventCollectionCompeti
 		Ordinal: -1,
 	}
 }
-func (x *HistoricalEventCollectionCompetition) Type() string                  { return "competition" }
-func (x *HistoricalEventCollectionCompetition) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventCollectionCompetition) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionCompetition) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionCompetition) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventCollectionCompetition) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCollectionCompetition) Type() string                           { return "competition" }
+func (x *HistoricalEventCollectionCompetition) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventCollectionCompetition) CheckFields() {
 }
@@ -6190,9 +6258,10 @@ func (x *HistoricalEventCollectionDuel) RelatedToEntity(id int) bool { return fa
 func (x *HistoricalEventCollectionDuel) RelatedToHf(id int) bool {
 	return x.AttackingHfid == id || x.DefendingHfid == id
 }
-func (x *HistoricalEventCollectionDuel) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionDuel) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCollectionDuel) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventCollectionDuel) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionDuel) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventCollectionDuel) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionDuel) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventCollectionDuel) CheckFields() {
 }
@@ -6244,7 +6313,10 @@ func (x *HistoricalEventCollectionEntityOverthrown) RelatedToEntity(id int) bool
 func (x *HistoricalEventCollectionEntityOverthrown) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEventCollectionEntityOverthrown) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventCollectionEntityOverthrown) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCollectionEntityOverthrown) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToStructure(siteId, id int) bool {
+	return false
+}
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventCollectionEntityOverthrown) CheckFields() {
 }
@@ -6280,10 +6352,11 @@ func (x *HistoricalEventCollectionInsurrection) Type() string { return "insurrec
 func (x *HistoricalEventCollectionInsurrection) RelatedToEntity(id int) bool {
 	return x.TargetEnid == id
 }
-func (x *HistoricalEventCollectionInsurrection) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionInsurrection) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionInsurrection) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCollectionInsurrection) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCollectionInsurrection) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionInsurrection) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionInsurrection) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventCollectionInsurrection) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionInsurrection) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventCollectionInsurrection) CheckFields() {
 }
@@ -6311,12 +6384,13 @@ func NewHistoricalEventCollectionJourney() *HistoricalEventCollectionJourney {
 		Ordinal: -1,
 	}
 }
-func (x *HistoricalEventCollectionJourney) Type() string                  { return "journey" }
-func (x *HistoricalEventCollectionJourney) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventCollectionJourney) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionJourney) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionJourney) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventCollectionJourney) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCollectionJourney) Type() string                           { return "journey" }
+func (x *HistoricalEventCollectionJourney) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventCollectionJourney) CheckFields() {
 }
@@ -6342,12 +6416,13 @@ func NewHistoricalEventCollectionOccasion() *HistoricalEventCollectionOccasion {
 		Ordinal:    -1,
 	}
 }
-func (x *HistoricalEventCollectionOccasion) Type() string                  { return "occasion" }
-func (x *HistoricalEventCollectionOccasion) RelatedToEntity(id int) bool   { return x.CivId == id }
-func (x *HistoricalEventCollectionOccasion) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionOccasion) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionOccasion) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventCollectionOccasion) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCollectionOccasion) Type() string                           { return "occasion" }
+func (x *HistoricalEventCollectionOccasion) RelatedToEntity(id int) bool            { return x.CivId == id }
+func (x *HistoricalEventCollectionOccasion) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventCollectionOccasion) CheckFields() {
 }
@@ -6375,12 +6450,13 @@ func NewHistoricalEventCollectionPerformance() *HistoricalEventCollectionPerform
 		Ordinal: -1,
 	}
 }
-func (x *HistoricalEventCollectionPerformance) Type() string                  { return "performance" }
-func (x *HistoricalEventCollectionPerformance) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventCollectionPerformance) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionPerformance) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionPerformance) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventCollectionPerformance) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCollectionPerformance) Type() string                           { return "performance" }
+func (x *HistoricalEventCollectionPerformance) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventCollectionPerformance) CheckFields() {
 }
@@ -6410,10 +6486,11 @@ func (x *HistoricalEventCollectionPersecution) Type() string { return "persecuti
 func (x *HistoricalEventCollectionPersecution) RelatedToEntity(id int) bool {
 	return x.TargetEntityId == id
 }
-func (x *HistoricalEventCollectionPersecution) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionPersecution) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionPersecution) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCollectionPersecution) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventCollectionPersecution) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventCollectionPersecution) CheckFields() {
 }
@@ -6441,12 +6518,13 @@ func NewHistoricalEventCollectionProcession() *HistoricalEventCollectionProcessi
 		Ordinal: -1,
 	}
 }
-func (x *HistoricalEventCollectionProcession) Type() string                  { return "procession" }
-func (x *HistoricalEventCollectionProcession) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventCollectionProcession) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionProcession) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionProcession) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventCollectionProcession) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCollectionProcession) Type() string                           { return "procession" }
+func (x *HistoricalEventCollectionProcession) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventCollectionProcession) CheckFields() {
 }
@@ -6498,12 +6576,13 @@ func NewHistoricalEventCollectionPurge() *HistoricalEventCollectionPurge {
 		SiteId:  -1,
 	}
 }
-func (x *HistoricalEventCollectionPurge) Type() string                  { return "purge" }
-func (x *HistoricalEventCollectionPurge) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventCollectionPurge) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionPurge) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionPurge) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCollectionPurge) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCollectionPurge) Type() string                           { return "purge" }
+func (x *HistoricalEventCollectionPurge) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventCollectionPurge) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventCollectionPurge) CheckFields() {
 }
@@ -6548,10 +6627,11 @@ func (x *HistoricalEventCollectionRaid) Type() string { return "raid" }
 func (x *HistoricalEventCollectionRaid) RelatedToEntity(id int) bool {
 	return x.AttackingEnid == id || x.DefendingEnid == id
 }
-func (x *HistoricalEventCollectionRaid) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionRaid) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionRaid) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCollectionRaid) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventCollectionRaid) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionRaid) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionRaid) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventCollectionRaid) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionRaid) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventCollectionRaid) CheckFields() {
 }
@@ -6607,7 +6687,10 @@ func (x *HistoricalEventCollectionSiteConquered) RelatedToEntity(id int) bool {
 func (x *HistoricalEventCollectionSiteConquered) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEventCollectionSiteConquered) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventCollectionSiteConquered) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCollectionSiteConquered) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCollectionSiteConquered) RelatedToStructure(siteId, id int) bool {
+	return false
+}
+func (x *HistoricalEventCollectionSiteConquered) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventCollectionSiteConquered) CheckFields() {
 }
@@ -6658,10 +6741,11 @@ func (x *HistoricalEventCollectionTheft) Type() string { return "theft" }
 func (x *HistoricalEventCollectionTheft) RelatedToEntity(id int) bool {
 	return x.AttackingEnid == id || x.DefendingEnid == id
 }
-func (x *HistoricalEventCollectionTheft) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionTheft) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionTheft) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCollectionTheft) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventCollectionTheft) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionTheft) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionTheft) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventCollectionTheft) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionTheft) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventCollectionTheft) CheckFields() {
 }
@@ -6705,13 +6789,14 @@ func NewHistoricalEventCollectionWar() *HistoricalEventCollectionWar {
 		DefenderEntId:  -1,
 	}
 }
-func (x *HistoricalEventCollectionWar) Name() string                  { return x.Name_ }
-func (x *HistoricalEventCollectionWar) Type() string                  { return "war" }
-func (x *HistoricalEventCollectionWar) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventCollectionWar) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCollectionWar) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCollectionWar) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventCollectionWar) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCollectionWar) Name() string                           { return x.Name_ }
+func (x *HistoricalEventCollectionWar) Type() string                           { return "war" }
+func (x *HistoricalEventCollectionWar) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventCollectionWar) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCollectionWar) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCollectionWar) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventCollectionWar) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCollectionWar) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventCollectionWar) CheckFields() {
 }
@@ -6755,9 +6840,10 @@ func (x *HistoricalEventCompetition) RelatedToEntity(id int) bool { return x.Civ
 func (x *HistoricalEventCompetition) RelatedToHf(id int) bool {
 	return containsInt(x.CompetitorHfid, id) || x.WinnerHfid == id
 }
-func (x *HistoricalEventCompetition) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCompetition) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCompetition) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventCompetition) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCompetition) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventCompetition) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCompetition) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventCompetition) CheckFields() {
 }
@@ -6855,10 +6941,11 @@ func (x *HistoricalEventCreateEntityPosition) Type() string { return "create ent
 func (x *HistoricalEventCreateEntityPosition) RelatedToEntity(id int) bool {
 	return x.Civ == id || x.SiteCiv == id
 }
-func (x *HistoricalEventCreateEntityPosition) RelatedToHf(id int) bool       { return x.Histfig == id }
-func (x *HistoricalEventCreateEntityPosition) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCreateEntityPosition) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventCreateEntityPosition) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToHf(id int) bool                { return x.Histfig == id }
+func (x *HistoricalEventCreateEntityPosition) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventCreateEntityPosition) CheckFields() {
 }
@@ -6902,10 +6989,11 @@ func (x *HistoricalEventCreatedSite) Type() string { return "created site" }
 func (x *HistoricalEventCreatedSite) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.ResidentCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventCreatedSite) RelatedToHf(id int) bool       { return x.BuilderHfid == id }
-func (x *HistoricalEventCreatedSite) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCreatedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCreatedSite) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCreatedSite) RelatedToHf(id int) bool                { return x.BuilderHfid == id }
+func (x *HistoricalEventCreatedSite) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCreatedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventCreatedSite) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCreatedSite) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventCreatedSite) CheckFields() {
 }
@@ -6988,7 +7076,10 @@ func (x *HistoricalEventCreatedStructure) RelatedToEntity(id int) bool {
 func (x *HistoricalEventCreatedStructure) RelatedToHf(id int) bool       { return x.BuilderHfid == id }
 func (x *HistoricalEventCreatedStructure) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventCreatedStructure) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCreatedStructure) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventCreatedStructure) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventCreatedStructure) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventCreatedStructure) CheckFields() {
 }
@@ -7045,6 +7136,9 @@ func (x *HistoricalEventCreatedWorldConstruction) RelatedToArtifact(id int) bool
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToSite(id int) bool {
 	return x.SiteId1 == id || x.SiteId2 == id
 }
+func (x *HistoricalEventCreatedWorldConstruction) RelatedToStructure(siteId, id int) bool {
+	return false
+}
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventCreatedWorldConstruction) CheckFields() {
@@ -7094,12 +7188,13 @@ func NewHistoricalEventCreatureDevoured() *HistoricalEventCreatureDevoured {
 		Victim:         -1,
 	}
 }
-func (x *HistoricalEventCreatureDevoured) Type() string                  { return "creature devoured" }
-func (x *HistoricalEventCreatureDevoured) RelatedToEntity(id int) bool   { return x.Entity == id }
-func (x *HistoricalEventCreatureDevoured) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventCreatureDevoured) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventCreatureDevoured) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventCreatureDevoured) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventCreatureDevoured) Type() string                           { return "creature devoured" }
+func (x *HistoricalEventCreatureDevoured) RelatedToEntity(id int) bool            { return x.Entity == id }
+func (x *HistoricalEventCreatureDevoured) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventCreatureDevoured) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventCreatureDevoured) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventCreatureDevoured) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventCreatureDevoured) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventCreatureDevoured) CheckFields() {
 	if x.Eater != x.FeatureLayerId {
@@ -7246,12 +7341,13 @@ func NewHistoricalEventDanceFormCreated() *HistoricalEventDanceFormCreated {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventDanceFormCreated) Type() string                  { return "dance form created" }
-func (x *HistoricalEventDanceFormCreated) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventDanceFormCreated) RelatedToHf(id int) bool       { return x.HistFigureId == id }
-func (x *HistoricalEventDanceFormCreated) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventDanceFormCreated) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventDanceFormCreated) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventDanceFormCreated) Type() string                           { return "dance form created" }
+func (x *HistoricalEventDanceFormCreated) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventDanceFormCreated) RelatedToHf(id int) bool                { return x.HistFigureId == id }
+func (x *HistoricalEventDanceFormCreated) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventDanceFormCreated) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventDanceFormCreated) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventDanceFormCreated) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventDanceFormCreated) CheckFields() {
 }
@@ -7305,10 +7401,11 @@ func (x *HistoricalEventDestroyedSite) Type() string { return "destroyed site" }
 func (x *HistoricalEventDestroyedSite) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventDestroyedSite) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventDestroyedSite) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventDestroyedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventDestroyedSite) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventDestroyedSite) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventDestroyedSite) CheckFields() {
 }
@@ -7348,10 +7445,11 @@ func (x *HistoricalEventDiplomatLost) Type() string { return "diplomat lost" }
 func (x *HistoricalEventDiplomatLost) RelatedToEntity(id int) bool {
 	return x.Entity == id || x.Involved == id
 }
-func (x *HistoricalEventDiplomatLost) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventDiplomatLost) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventDiplomatLost) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventDiplomatLost) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventDiplomatLost) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventDiplomatLost) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventDiplomatLost) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventDiplomatLost) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventDiplomatLost) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventDiplomatLost) CheckFields() {
 	if x.Entity != x.SiteId {
@@ -7390,10 +7488,11 @@ func (x *HistoricalEventEntityAllianceFormed) Type() string { return "entity all
 func (x *HistoricalEventEntityAllianceFormed) RelatedToEntity(id int) bool {
 	return containsInt(x.JoiningEnid, id) || x.InitiatingEnid == id
 }
-func (x *HistoricalEventEntityAllianceFormed) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventEntityAllianceFormed) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventEntityAllianceFormed) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventEntityAllianceFormed) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventEntityAllianceFormed) CheckFields() {
 }
@@ -7429,7 +7528,10 @@ func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToEntity(id int) bool {
 func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToStructure(siteId, id int) bool {
+	return false
+}
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventEntityBreachFeatureLayer) CheckFields() {
 }
@@ -7471,7 +7573,10 @@ func (x *HistoricalEventEntityCreated) RelatedToEntity(id int) bool   { return x
 func (x *HistoricalEventEntityCreated) RelatedToHf(id int) bool       { return x.CreatorHfid == id }
 func (x *HistoricalEventEntityCreated) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventEntityCreated) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventEntityCreated) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityCreated) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventEntityCreated) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventEntityCreated) CheckFields() {
 }
@@ -7535,12 +7640,13 @@ func NewHistoricalEventEntityDissolved() *HistoricalEventEntityDissolved {
 		EntityId: -1,
 	}
 }
-func (x *HistoricalEventEntityDissolved) Type() string                  { return "entity dissolved" }
-func (x *HistoricalEventEntityDissolved) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *HistoricalEventEntityDissolved) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventEntityDissolved) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventEntityDissolved) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventEntityDissolved) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityDissolved) Type() string                           { return "entity dissolved" }
+func (x *HistoricalEventEntityDissolved) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *HistoricalEventEntityDissolved) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventEntityDissolved) CheckFields() {
 }
@@ -7577,7 +7683,10 @@ func (x *HistoricalEventEntityEquipmentPurchase) RelatedToHf(id int) bool {
 }
 func (x *HistoricalEventEntityEquipmentPurchase) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventEntityEquipmentPurchase) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventEntityEquipmentPurchase) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityEquipmentPurchase) RelatedToStructure(siteId, id int) bool {
+	return false
+}
+func (x *HistoricalEventEntityEquipmentPurchase) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventEntityEquipmentPurchase) CheckFields() {
 }
@@ -7607,12 +7716,13 @@ func NewHistoricalEventEntityExpelsHf() *HistoricalEventEntityExpelsHf {
 		SiteId:   -1,
 	}
 }
-func (x *HistoricalEventEntityExpelsHf) Type() string                  { return "entity expels hf" }
-func (x *HistoricalEventEntityExpelsHf) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *HistoricalEventEntityExpelsHf) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *HistoricalEventEntityExpelsHf) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventEntityExpelsHf) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventEntityExpelsHf) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityExpelsHf) Type() string                           { return "entity expels hf" }
+func (x *HistoricalEventEntityExpelsHf) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *HistoricalEventEntityExpelsHf) RelatedToHf(id int) bool                { return x.Hfid == id }
+func (x *HistoricalEventEntityExpelsHf) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventEntityExpelsHf) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventEntityExpelsHf) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventEntityExpelsHf) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventEntityExpelsHf) CheckFields() {
 }
@@ -7642,12 +7752,13 @@ func NewHistoricalEventEntityFledSite() *HistoricalEventEntityFledSite {
 		SiteId:    -1,
 	}
 }
-func (x *HistoricalEventEntityFledSite) Type() string                  { return "entity fled site" }
-func (x *HistoricalEventEntityFledSite) RelatedToEntity(id int) bool   { return x.FledCivId == id }
-func (x *HistoricalEventEntityFledSite) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventEntityFledSite) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventEntityFledSite) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventEntityFledSite) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityFledSite) Type() string                           { return "entity fled site" }
+func (x *HistoricalEventEntityFledSite) RelatedToEntity(id int) bool            { return x.FledCivId == id }
+func (x *HistoricalEventEntityFledSite) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventEntityFledSite) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventEntityFledSite) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventEntityFledSite) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventEntityFledSite) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventEntityFledSite) CheckFields() {
 }
@@ -7683,10 +7794,11 @@ func (x *HistoricalEventEntityIncorporated) Type() string { return "entity incor
 func (x *HistoricalEventEntityIncorporated) RelatedToEntity(id int) bool {
 	return x.JoinedEntityId == id || x.JoinerEntityId == id
 }
-func (x *HistoricalEventEntityIncorporated) RelatedToHf(id int) bool       { return x.LeaderHfid == id }
-func (x *HistoricalEventEntityIncorporated) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventEntityIncorporated) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventEntityIncorporated) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityIncorporated) RelatedToHf(id int) bool                { return x.LeaderHfid == id }
+func (x *HistoricalEventEntityIncorporated) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventEntityIncorporated) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventEntityIncorporated) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventEntityIncorporated) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventEntityIncorporated) CheckFields() {
 }
@@ -7776,12 +7888,13 @@ func NewHistoricalEventEntityLaw() *HistoricalEventEntityLaw {
 		HistFigureId: -1,
 	}
 }
-func (x *HistoricalEventEntityLaw) Type() string                  { return "entity law" }
-func (x *HistoricalEventEntityLaw) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *HistoricalEventEntityLaw) RelatedToHf(id int) bool       { return x.HistFigureId == id }
-func (x *HistoricalEventEntityLaw) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventEntityLaw) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventEntityLaw) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityLaw) Type() string                           { return "entity law" }
+func (x *HistoricalEventEntityLaw) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *HistoricalEventEntityLaw) RelatedToHf(id int) bool                { return x.HistFigureId == id }
+func (x *HistoricalEventEntityLaw) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventEntityLaw) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventEntityLaw) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventEntityLaw) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventEntityLaw) CheckFields() {
 }
@@ -7828,9 +7941,10 @@ func (x *HistoricalEventEntityOverthrown) RelatedToEntity(id int) bool { return 
 func (x *HistoricalEventEntityOverthrown) RelatedToHf(id int) bool {
 	return containsInt(x.ConspiratorHfid, id) || x.InstigatorHfid == id || x.OverthrownHfid == id || x.PosTakerHfid == id
 }
-func (x *HistoricalEventEntityOverthrown) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventEntityOverthrown) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventEntityOverthrown) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityOverthrown) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventEntityOverthrown) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventEntityOverthrown) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventEntityOverthrown) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventEntityOverthrown) CheckFields() {
 }
@@ -7892,7 +8006,10 @@ func (x *HistoricalEventEntityPersecuted) RelatedToHf(id int) bool {
 }
 func (x *HistoricalEventEntityPersecuted) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventEntityPersecuted) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventEntityPersecuted) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityPersecuted) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.DestroyedStructureId == id)
+}
+func (x *HistoricalEventEntityPersecuted) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventEntityPersecuted) CheckFields() {
 }
@@ -7971,7 +8088,10 @@ func (x *HistoricalEventEntityPrimaryCriminals) RelatedToEntity(id int) bool   {
 func (x *HistoricalEventEntityPrimaryCriminals) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEventEntityPrimaryCriminals) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventEntityPrimaryCriminals) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventEntityPrimaryCriminals) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventEntityPrimaryCriminals) CheckFields() {
 }
@@ -8008,10 +8128,11 @@ func (x *HistoricalEventEntityRampagedInSite) Type() string { return "entity ram
 func (x *HistoricalEventEntityRampagedInSite) RelatedToEntity(id int) bool {
 	return x.RampageCivId == id
 }
-func (x *HistoricalEventEntityRampagedInSite) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventEntityRampagedInSite) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventEntityRampagedInSite) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventEntityRampagedInSite) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventEntityRampagedInSite) CheckFields() {
 }
@@ -8073,7 +8194,10 @@ func (x *HistoricalEventEntityRelocate) RelatedToEntity(id int) bool   { return 
 func (x *HistoricalEventEntityRelocate) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEventEntityRelocate) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventEntityRelocate) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventEntityRelocate) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntityRelocate) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventEntityRelocate) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventEntityRelocate) CheckFields() {
 }
@@ -8138,10 +8262,11 @@ func (x *HistoricalEventEntitySearchedSite) Type() string { return "entity searc
 func (x *HistoricalEventEntitySearchedSite) RelatedToEntity(id int) bool {
 	return x.SearcherCivId == id
 }
-func (x *HistoricalEventEntitySearchedSite) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventEntitySearchedSite) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventEntitySearchedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventEntitySearchedSite) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventEntitySearchedSite) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventEntitySearchedSite) CheckFields() {
 }
@@ -8212,9 +8337,10 @@ func (x *HistoricalEventFailedFrameAttempt) RelatedToEntity(id int) bool {
 func (x *HistoricalEventFailedFrameAttempt) RelatedToHf(id int) bool {
 	return x.FooledHfid == id || x.FramerHfid == id || x.PlotterHfid == id || x.TargetHfid == id
 }
-func (x *HistoricalEventFailedFrameAttempt) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventFailedFrameAttempt) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventFailedFrameAttempt) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventFailedFrameAttempt) CheckFields() {
 }
@@ -8567,6 +8693,9 @@ func (x *HistoricalEventFailedIntrigueCorruption) RelatedToHf(id int) bool {
 }
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventFailedIntrigueCorruption) RelatedToStructure(siteId, id int) bool {
+	return false
+}
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
 }
@@ -8687,9 +8816,10 @@ func (x *HistoricalEventFieldBattle) RelatedToEntity(id int) bool {
 func (x *HistoricalEventFieldBattle) RelatedToHf(id int) bool {
 	return x.AttackerGeneralHfid == id || x.DefenderGeneralHfid == id
 }
-func (x *HistoricalEventFieldBattle) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventFieldBattle) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventFieldBattle) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventFieldBattle) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventFieldBattle) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventFieldBattle) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventFieldBattle) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventFieldBattle) CheckFields() {
 }
@@ -8747,10 +8877,11 @@ func (x *HistoricalEventFirstContact) Type() string { return "first contact" }
 func (x *HistoricalEventFirstContact) RelatedToEntity(id int) bool {
 	return x.ContactedEnid == id || x.ContactorEnid == id
 }
-func (x *HistoricalEventFirstContact) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventFirstContact) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventFirstContact) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventFirstContact) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventFirstContact) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventFirstContact) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventFirstContact) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventFirstContact) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventFirstContact) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventFirstContact) CheckFields() {
 }
@@ -8791,7 +8922,10 @@ func (x *HistoricalEventGamble) RelatedToEntity(id int) bool   { return false }
 func (x *HistoricalEventGamble) RelatedToHf(id int) bool       { return x.GamblerHfid == id }
 func (x *HistoricalEventGamble) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventGamble) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventGamble) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventGamble) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventGamble) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventGamble) CheckFields() {
 }
@@ -8838,9 +8972,10 @@ func (x *HistoricalEventHfAbducted) RelatedToEntity(id int) bool { return false 
 func (x *HistoricalEventHfAbducted) RelatedToHf(id int) bool {
 	return x.SnatcherHfid == id || x.TargetHfid == id
 }
-func (x *HistoricalEventHfAbducted) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfAbducted) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfAbducted) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventHfAbducted) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfAbducted) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHfAbducted) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfAbducted) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventHfAbducted) CheckFields() {
 }
@@ -8884,10 +9019,11 @@ func (x *HistoricalEventHfAttackedSite) Type() string { return "hf attacked site
 func (x *HistoricalEventHfAttackedSite) RelatedToEntity(id int) bool {
 	return x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventHfAttackedSite) RelatedToHf(id int) bool       { return x.AttackerHfid == id }
-func (x *HistoricalEventHfAttackedSite) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfAttackedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfAttackedSite) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfAttackedSite) RelatedToHf(id int) bool                { return x.AttackerHfid == id }
+func (x *HistoricalEventHfAttackedSite) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfAttackedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHfAttackedSite) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfAttackedSite) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventHfAttackedSite) CheckFields() {
 }
@@ -8986,12 +9122,13 @@ func NewHistoricalEventHfConfronted() *HistoricalEventHfConfronted {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventHfConfronted) Type() string                  { return "hf confronted" }
-func (x *HistoricalEventHfConfronted) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventHfConfronted) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *HistoricalEventHfConfronted) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfConfronted) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfConfronted) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventHfConfronted) Type() string                           { return "hf confronted" }
+func (x *HistoricalEventHfConfronted) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventHfConfronted) RelatedToHf(id int) bool                { return x.Hfid == id }
+func (x *HistoricalEventHfConfronted) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfConfronted) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHfConfronted) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfConfronted) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventHfConfronted) CheckFields() {
 }
@@ -9154,9 +9291,10 @@ func (x *HistoricalEventHfConvicted) RelatedToEntity(id int) bool {
 func (x *HistoricalEventHfConvicted) RelatedToHf(id int) bool {
 	return containsInt(x.ImplicatedHfid, id) || x.CoconspiratorHfid == id || x.ContactHfid == id || x.ConvictedHfid == id || x.CorruptConvicterHfid == id || x.FooledHfid == id || x.FramerHfid == id || x.InterrogatorHfid == id || x.PlotterHfid == id || x.TargetHfid == id
 }
-func (x *HistoricalEventHfConvicted) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfConvicted) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventHfConvicted) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfConvicted) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfConvicted) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventHfConvicted) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfConvicted) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventHfConvicted) CheckFields() {
 }
@@ -9240,10 +9378,11 @@ func (x *HistoricalEventHfDestroyedSite) Type() string { return "hf destroyed si
 func (x *HistoricalEventHfDestroyedSite) RelatedToEntity(id int) bool {
 	return x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventHfDestroyedSite) RelatedToHf(id int) bool       { return x.AttackerHfid == id }
-func (x *HistoricalEventHfDestroyedSite) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfDestroyedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfDestroyedSite) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfDestroyedSite) RelatedToHf(id int) bool                { return x.AttackerHfid == id }
+func (x *HistoricalEventHfDestroyedSite) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfDestroyedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHfDestroyedSite) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfDestroyedSite) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventHfDestroyedSite) CheckFields() {
 }
@@ -9276,6 +9415,8 @@ const (
 	HistoricalEventHfDiedCause_BloodDrained
 	HistoricalEventHfDiedCause_BurnAlive
 	HistoricalEventHfDiedCause_BuryAlive
+	HistoricalEventHfDiedCause_Cage
+	HistoricalEventHfDiedCause_CageBlasted
 	HistoricalEventHfDiedCause_Cavein
 	HistoricalEventHfDiedCause_Chasm
 	HistoricalEventHfDiedCause_Collision
@@ -9330,6 +9471,7 @@ const (
 	HistoricalEventHfDiedCause_Thirst
 	HistoricalEventHfDiedCause_Trap
 	HistoricalEventHfDiedCause_Vanish
+	HistoricalEventHfDiedCause_Vehicle
 )
 
 func parseHistoricalEventHfDiedCause(s string) HistoricalEventHfDiedCause {
@@ -9348,6 +9490,10 @@ func parseHistoricalEventHfDiedCause(s string) HistoricalEventHfDiedCause {
 		return HistoricalEventHfDiedCause_BurnAlive
 	case "bury_alive":
 		return HistoricalEventHfDiedCause_BuryAlive
+	case "cage":
+		return HistoricalEventHfDiedCause_Cage
+	case "cage blasted":
+		return HistoricalEventHfDiedCause_CageBlasted
 	case "cavein":
 		return HistoricalEventHfDiedCause_Cavein
 	case "chasm":
@@ -9458,6 +9604,8 @@ func parseHistoricalEventHfDiedCause(s string) HistoricalEventHfDiedCause {
 		return HistoricalEventHfDiedCause_Trap
 	case "vanish":
 		return HistoricalEventHfDiedCause_Vanish
+	case "vehicle":
+		return HistoricalEventHfDiedCause_Vehicle
 	}
 	return HistoricalEventHfDiedCause_Unknown
 }
@@ -9478,6 +9626,10 @@ func (s HistoricalEventHfDiedCause) String() string {
 		return "burn alive"
 	case HistoricalEventHfDiedCause_BuryAlive:
 		return "bury alive"
+	case HistoricalEventHfDiedCause_Cage:
+		return "cage"
+	case HistoricalEventHfDiedCause_CageBlasted:
+		return "cage blasted"
 	case HistoricalEventHfDiedCause_Cavein:
 		return "cavein"
 	case HistoricalEventHfDiedCause_Chasm:
@@ -9586,6 +9738,8 @@ func (s HistoricalEventHfDiedCause) String() string {
 		return "trap"
 	case HistoricalEventHfDiedCause_Vanish:
 		return "vanish"
+	case HistoricalEventHfDiedCause_Vehicle:
+		return "vehicle"
 	}
 	return "unknown"
 }
@@ -9602,6 +9756,7 @@ const (
 	HistoricalEventHfDiedDeathCause_Bleed
 	HistoricalEventHfDiedDeathCause_BurnAlive
 	HistoricalEventHfDiedDeathCause_BuryAlive
+	HistoricalEventHfDiedDeathCause_Cage
 	HistoricalEventHfDiedDeathCause_Cavein
 	HistoricalEventHfDiedDeathCause_Chasm
 	HistoricalEventHfDiedDeathCause_Collision
@@ -9634,6 +9789,7 @@ const (
 	HistoricalEventHfDiedDeathCause_Thirst
 	HistoricalEventHfDiedDeathCause_Trap
 	HistoricalEventHfDiedDeathCause_Vanish
+	HistoricalEventHfDiedDeathCause_Vehicle
 )
 
 func parseHistoricalEventHfDiedDeathCause(s string) HistoricalEventHfDiedDeathCause {
@@ -9646,6 +9802,8 @@ func parseHistoricalEventHfDiedDeathCause(s string) HistoricalEventHfDiedDeathCa
 		return HistoricalEventHfDiedDeathCause_BurnAlive
 	case "bury_alive":
 		return HistoricalEventHfDiedDeathCause_BuryAlive
+	case "cage":
+		return HistoricalEventHfDiedDeathCause_Cage
 	case "cavein":
 		return HistoricalEventHfDiedDeathCause_Cavein
 	case "chasm":
@@ -9710,6 +9868,8 @@ func parseHistoricalEventHfDiedDeathCause(s string) HistoricalEventHfDiedDeathCa
 		return HistoricalEventHfDiedDeathCause_Trap
 	case "vanish":
 		return HistoricalEventHfDiedDeathCause_Vanish
+	case "vehicle":
+		return HistoricalEventHfDiedDeathCause_Vehicle
 	}
 	return HistoricalEventHfDiedDeathCause_Unknown
 }
@@ -9724,6 +9884,8 @@ func (s HistoricalEventHfDiedDeathCause) String() string {
 		return "burn alive"
 	case HistoricalEventHfDiedDeathCause_BuryAlive:
 		return "bury alive"
+	case HistoricalEventHfDiedDeathCause_Cage:
+		return "cage"
 	case HistoricalEventHfDiedDeathCause_Cavein:
 		return "cavein"
 	case HistoricalEventHfDiedDeathCause_Chasm:
@@ -9788,6 +9950,8 @@ func (s HistoricalEventHfDiedDeathCause) String() string {
 		return "trap"
 	case HistoricalEventHfDiedDeathCause_Vanish:
 		return "vanish"
+	case HistoricalEventHfDiedDeathCause_Vehicle:
+		return "vehicle"
 	}
 	return "unknown"
 }
@@ -9895,8 +10059,9 @@ func (x *HistoricalEventHfDied) RelatedToHf(id int) bool     { return x.Hfid == 
 func (x *HistoricalEventHfDied) RelatedToArtifact(id int) bool {
 	return x.ShooterArtifactId == id || x.ShooterItem == id || x.SlayerItemId == id || x.SlayerShooterItemId == id
 }
-func (x *HistoricalEventHfDied) RelatedToSite(id int) bool   { return x.SiteId == id }
-func (x *HistoricalEventHfDied) RelatedToRegion(id int) bool { return x.SubregionId == id }
+func (x *HistoricalEventHfDied) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHfDied) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfDied) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventHfDied) CheckFields() {
 	if x.ShooterArtifactId != x.FeatureLayerId {
@@ -10036,7 +10201,10 @@ func (x *HistoricalEventHfDisturbedStructure) RelatedToEntity(id int) bool   { r
 func (x *HistoricalEventHfDisturbedStructure) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEventHfDisturbedStructure) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventHfDisturbedStructure) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfDisturbedStructure) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventHfDisturbedStructure) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventHfDisturbedStructure) CheckFields() {
 }
@@ -10082,9 +10250,10 @@ func (x *HistoricalEventHfDoesInteraction) RelatedToEntity(id int) bool { return
 func (x *HistoricalEventHfDoesInteraction) RelatedToHf(id int) bool {
 	return x.DoerHfid == id || x.TargetHfid == id
 }
-func (x *HistoricalEventHfDoesInteraction) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfDoesInteraction) RelatedToSite(id int) bool     { return x.Site == id }
-func (x *HistoricalEventHfDoesInteraction) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfDoesInteraction) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfDoesInteraction) RelatedToSite(id int) bool              { return x.Site == id }
+func (x *HistoricalEventHfDoesInteraction) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfDoesInteraction) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventHfDoesInteraction) CheckFields() {
 	if x.InteractionAction != x.Interaction && x.InteractionAction != "" && x.Interaction != "" {
@@ -10152,9 +10321,10 @@ func (x *HistoricalEventHfEnslaved) RelatedToEntity(id int) bool { return x.Paye
 func (x *HistoricalEventHfEnslaved) RelatedToHf(id int) bool {
 	return x.EnslavedHfid == id || x.SellerHfid == id
 }
-func (x *HistoricalEventHfEnslaved) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfEnslaved) RelatedToSite(id int) bool     { return x.MovedToSiteId == id }
-func (x *HistoricalEventHfEnslaved) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfEnslaved) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfEnslaved) RelatedToSite(id int) bool              { return x.MovedToSiteId == id }
+func (x *HistoricalEventHfEnslaved) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfEnslaved) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventHfEnslaved) CheckFields() {
 }
@@ -10200,7 +10370,10 @@ func (x *HistoricalEventHfEquipmentPurchase) RelatedToEntity(id int) bool   { re
 func (x *HistoricalEventHfEquipmentPurchase) RelatedToHf(id int) bool       { return x.GroupHfid == id }
 func (x *HistoricalEventHfEquipmentPurchase) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventHfEquipmentPurchase) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfEquipmentPurchase) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToRegion(id int) bool { return x.SubregionId == id }
 
 func (x *HistoricalEventHfEquipmentPurchase) CheckFields() {
 }
@@ -10253,9 +10426,10 @@ func (x *HistoricalEventHfFreed) RelatedToEntity(id int) bool {
 func (x *HistoricalEventHfFreed) RelatedToHf(id int) bool {
 	return containsInt(x.RescuedHfid, id) || x.FreeingHfid == id
 }
-func (x *HistoricalEventHfFreed) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfFreed) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfFreed) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfFreed) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfFreed) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHfFreed) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfFreed) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventHfFreed) CheckFields() {
 }
@@ -10318,12 +10492,13 @@ func NewHistoricalEventHfGainsSecretGoal() *HistoricalEventHfGainsSecretGoal {
 		Hfid: -1,
 	}
 }
-func (x *HistoricalEventHfGainsSecretGoal) Type() string                  { return "hf gains secret goal" }
-func (x *HistoricalEventHfGainsSecretGoal) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventHfGainsSecretGoal) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *HistoricalEventHfGainsSecretGoal) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfGainsSecretGoal) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventHfGainsSecretGoal) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfGainsSecretGoal) Type() string                           { return "hf gains secret goal" }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToHf(id int) bool                { return x.Hfid == id }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventHfGainsSecretGoal) CheckFields() {
 }
@@ -10361,9 +10536,10 @@ func (x *HistoricalEventHfInterrogated) RelatedToEntity(id int) bool { return x.
 func (x *HistoricalEventHfInterrogated) RelatedToHf(id int) bool {
 	return x.ImplicatedHfid == id || x.InterrogatorHfid == id || x.TargetHfid == id
 }
-func (x *HistoricalEventHfInterrogated) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfInterrogated) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventHfInterrogated) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventHfInterrogated) CheckFields() {
 }
@@ -10434,9 +10610,10 @@ func (x *HistoricalEventHfLearnsSecret) RelatedToEntity(id int) bool { return fa
 func (x *HistoricalEventHfLearnsSecret) RelatedToHf(id int) bool {
 	return x.StudentHfid == id || x.TeacherHfid == id
 }
-func (x *HistoricalEventHfLearnsSecret) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
-func (x *HistoricalEventHfLearnsSecret) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventHfLearnsSecret) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfLearnsSecret) RelatedToArtifact(id int) bool          { return x.ArtifactId == id }
+func (x *HistoricalEventHfLearnsSecret) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventHfLearnsSecret) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfLearnsSecret) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventHfLearnsSecret) CheckFields() {
 }
@@ -10476,12 +10653,13 @@ func NewHistoricalEventHfNewPet() *HistoricalEventHfNewPet {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventHfNewPet) Type() string                  { return "hf new pet" }
-func (x *HistoricalEventHfNewPet) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventHfNewPet) RelatedToHf(id int) bool       { return x.GroupHfid == id }
-func (x *HistoricalEventHfNewPet) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfNewPet) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfNewPet) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventHfNewPet) Type() string                           { return "hf new pet" }
+func (x *HistoricalEventHfNewPet) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventHfNewPet) RelatedToHf(id int) bool                { return x.GroupHfid == id }
+func (x *HistoricalEventHfNewPet) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfNewPet) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHfNewPet) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfNewPet) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventHfNewPet) CheckFields() {
 	if x.Pets != x.Coords && x.Pets != "" && x.Coords != "" {
@@ -10535,6 +10713,9 @@ func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToHf(id int) bool
 func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToSite(id int) bool {
 	return x.SiteId == id
+}
+func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
 func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
@@ -10609,7 +10790,10 @@ func (x *HistoricalEventHfPrayedInsideStructure) RelatedToEntity(id int) bool   
 func (x *HistoricalEventHfPrayedInsideStructure) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEventHfPrayedInsideStructure) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventHfPrayedInsideStructure) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfPrayedInsideStructure) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventHfPrayedInsideStructure) CheckFields() {
 }
@@ -10686,9 +10870,10 @@ func (x *HistoricalEventHfPreach) RelatedToEntity(id int) bool {
 func (x *HistoricalEventHfPreach) RelatedToHf(id int) bool {
 	return x.SiteHfid == id || x.SpeakerHfid == id
 }
-func (x *HistoricalEventHfPreach) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfPreach) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventHfPreach) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfPreach) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfPreach) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventHfPreach) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfPreach) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventHfPreach) CheckFields() {
 }
@@ -10759,7 +10944,10 @@ func (x *HistoricalEventHfProfanedStructure) RelatedToEntity(id int) bool   { re
 func (x *HistoricalEventHfProfanedStructure) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEventHfProfanedStructure) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventHfProfanedStructure) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfProfanedStructure) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfProfanedStructure) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventHfProfanedStructure) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventHfProfanedStructure) CheckFields() {
 }
@@ -10803,9 +10991,10 @@ func (x *HistoricalEventHfRansomed) RelatedToEntity(id int) bool { return x.Paye
 func (x *HistoricalEventHfRansomed) RelatedToHf(id int) bool {
 	return x.PayerHfid == id || x.RansomedHfid == id || x.RansomerHfid == id
 }
-func (x *HistoricalEventHfRansomed) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfRansomed) RelatedToSite(id int) bool     { return x.MovedToSiteId == id }
-func (x *HistoricalEventHfRansomed) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfRansomed) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfRansomed) RelatedToSite(id int) bool              { return x.MovedToSiteId == id }
+func (x *HistoricalEventHfRansomed) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfRansomed) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventHfRansomed) CheckFields() {
 }
@@ -10844,12 +11033,13 @@ func NewHistoricalEventHfReachSummit() *HistoricalEventHfReachSummit {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventHfReachSummit) Type() string                  { return "hf reach summit" }
-func (x *HistoricalEventHfReachSummit) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventHfReachSummit) RelatedToHf(id int) bool       { return containsInt(x.GroupHfid, id) }
-func (x *HistoricalEventHfReachSummit) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfReachSummit) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventHfReachSummit) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventHfReachSummit) Type() string                           { return "hf reach summit" }
+func (x *HistoricalEventHfReachSummit) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventHfReachSummit) RelatedToHf(id int) bool                { return containsInt(x.GroupHfid, id) }
+func (x *HistoricalEventHfReachSummit) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfReachSummit) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventHfReachSummit) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfReachSummit) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventHfReachSummit) CheckFields() {
 }
@@ -10923,6 +11113,9 @@ func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToHf(id int) bool  
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToSite(id int) bool {
 	return x.SiteId == id
+}
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToStructure(siteId, id int) bool {
+	return false
 }
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
@@ -11039,8 +11232,9 @@ func (x *HistoricalEventHfRelationshipDenied) RelatedToEntity(id int) bool { ret
 func (x *HistoricalEventHfRelationshipDenied) RelatedToHf(id int) bool {
 	return x.SeekerHfid == id || x.TargetHfid == id
 }
-func (x *HistoricalEventHfRelationshipDenied) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfRelationshipDenied) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfRelationshipDenied) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfRelationshipDenied) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHfRelationshipDenied) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfRelationshipDenied) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
 }
@@ -11098,9 +11292,10 @@ func (x *HistoricalEventHfReunion) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfReunion) RelatedToHf(id int) bool {
 	return containsInt(x.Group2Hfid, id) || x.Group1Hfid == id
 }
-func (x *HistoricalEventHfReunion) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfReunion) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfReunion) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventHfReunion) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfReunion) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHfReunion) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfReunion) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventHfReunion) CheckFields() {
 }
@@ -11220,12 +11415,13 @@ func NewHistoricalEventHfRevived() *HistoricalEventHfRevived {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventHfRevived) Type() string                  { return "hf revived" }
-func (x *HistoricalEventHfRevived) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventHfRevived) RelatedToHf(id int) bool       { return x.ActorHfid == id || x.Hfid == id }
-func (x *HistoricalEventHfRevived) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfRevived) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfRevived) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventHfRevived) Type() string                           { return "hf revived" }
+func (x *HistoricalEventHfRevived) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventHfRevived) RelatedToHf(id int) bool                { return x.ActorHfid == id || x.Hfid == id }
+func (x *HistoricalEventHfRevived) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfRevived) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHfRevived) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfRevived) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventHfRevived) CheckFields() {
 }
@@ -11360,9 +11556,10 @@ func (x *HistoricalEventHfSimpleBattleEvent) RelatedToEntity(id int) bool { retu
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToHf(id int) bool {
 	return x.Group1Hfid == id || x.Group2Hfid == id
 }
-func (x *HistoricalEventHfSimpleBattleEvent) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfSimpleBattleEvent) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfSimpleBattleEvent) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventHfSimpleBattleEvent) CheckFields() {
 }
@@ -11406,12 +11603,13 @@ func NewHistoricalEventHfTravel() *HistoricalEventHfTravel {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventHfTravel) Type() string                  { return "hf travel" }
-func (x *HistoricalEventHfTravel) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventHfTravel) RelatedToHf(id int) bool       { return containsInt(x.GroupHfid, id) }
-func (x *HistoricalEventHfTravel) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfTravel) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfTravel) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventHfTravel) Type() string                           { return "hf travel" }
+func (x *HistoricalEventHfTravel) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventHfTravel) RelatedToHf(id int) bool                { return containsInt(x.GroupHfid, id) }
+func (x *HistoricalEventHfTravel) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfTravel) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHfTravel) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfTravel) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventHfTravel) CheckFields() {
 }
@@ -11453,7 +11651,10 @@ func (x *HistoricalEventHfViewedArtifact) RelatedToEntity(id int) bool   { retur
 func (x *HistoricalEventHfViewedArtifact) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEventHfViewedArtifact) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
 func (x *HistoricalEventHfViewedArtifact) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfViewedArtifact) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHfViewedArtifact) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventHfViewedArtifact) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventHfViewedArtifact) CheckFields() {
 }
@@ -11580,9 +11781,10 @@ func (x *HistoricalEventHfWounded) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfWounded) RelatedToHf(id int) bool {
 	return x.WoundeeHfid == id || x.WounderHfid == id
 }
-func (x *HistoricalEventHfWounded) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHfWounded) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHfWounded) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventHfWounded) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHfWounded) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHfWounded) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHfWounded) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventHfWounded) CheckFields() {
 	if x.BodyPart != x.FeatureLayerId {
@@ -12084,6 +12286,9 @@ func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToArtifact(id int)
 func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToSite(id int) bool {
 	return x.SiteId == id
 }
+func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToStructure(siteId, id int) bool {
+	return false
+}
 func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
 }
@@ -12277,6 +12482,9 @@ func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToArtifact(id in
 func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToSite(id int) bool {
 	return x.SiteId == id
 }
+func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToStructure(siteId, id int) bool {
+	return false
+}
 func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
 }
@@ -12327,12 +12535,13 @@ func NewHistoricalEventHolyCityDeclaration() *HistoricalEventHolyCityDeclaration
 		SiteId:     -1,
 	}
 }
-func (x *HistoricalEventHolyCityDeclaration) Type() string                  { return "holy city declaration" }
-func (x *HistoricalEventHolyCityDeclaration) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventHolyCityDeclaration) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventHolyCityDeclaration) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventHolyCityDeclaration) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventHolyCityDeclaration) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventHolyCityDeclaration) Type() string                           { return "holy city declaration" }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventHolyCityDeclaration) CheckFields() {
 }
@@ -12392,12 +12601,13 @@ func NewHistoricalEventInsurrectionStarted() *HistoricalEventInsurrectionStarted
 		TargetCivId: -1,
 	}
 }
-func (x *HistoricalEventInsurrectionStarted) Type() string                  { return "insurrection started" }
-func (x *HistoricalEventInsurrectionStarted) RelatedToEntity(id int) bool   { return x.TargetCivId == id }
-func (x *HistoricalEventInsurrectionStarted) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventInsurrectionStarted) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventInsurrectionStarted) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventInsurrectionStarted) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventInsurrectionStarted) Type() string                           { return "insurrection started" }
+func (x *HistoricalEventInsurrectionStarted) RelatedToEntity(id int) bool            { return x.TargetCivId == id }
+func (x *HistoricalEventInsurrectionStarted) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventInsurrectionStarted) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventInsurrectionStarted) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventInsurrectionStarted) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventInsurrectionStarted) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventInsurrectionStarted) CheckFields() {
 }
@@ -12494,6 +12704,9 @@ func (x *HistoricalEventItemStolen) RelatedToHf(id int) bool       { return x.Hi
 func (x *HistoricalEventItemStolen) RelatedToArtifact(id int) bool { return x.Item == id }
 func (x *HistoricalEventItemStolen) RelatedToSite(id int) bool {
 	return x.Site == id || x.StashSite == id
+}
+func (x *HistoricalEventItemStolen) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.Structure == id)
 }
 func (x *HistoricalEventItemStolen) RelatedToRegion(id int) bool { return false }
 
@@ -12614,11 +12827,12 @@ func NewHistoricalEventItemStolenCircumstance() *HistoricalEventItemStolenCircum
 		Murdered:            -1,
 	}
 }
-func (x *HistoricalEventItemStolenCircumstance) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventItemStolenCircumstance) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventItemStolenCircumstance) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventItemStolenCircumstance) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventItemStolenCircumstance) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventItemStolenCircumstance) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventItemStolenCircumstance) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventItemStolenCircumstance) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventItemStolenCircumstance) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventItemStolenCircumstance) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventItemStolenCircumstance) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventItemStolenCircumstance) CheckFields() {
 }
@@ -13923,12 +14137,13 @@ func NewHistoricalEventKnowledgeDiscovered() *HistoricalEventKnowledgeDiscovered
 		Hfid: -1,
 	}
 }
-func (x *HistoricalEventKnowledgeDiscovered) Type() string                  { return "knowledge discovered" }
-func (x *HistoricalEventKnowledgeDiscovered) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventKnowledgeDiscovered) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *HistoricalEventKnowledgeDiscovered) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventKnowledgeDiscovered) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventKnowledgeDiscovered) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventKnowledgeDiscovered) Type() string                           { return "knowledge discovered" }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToHf(id int) bool                { return x.Hfid == id }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventKnowledgeDiscovered) CheckFields() {
 }
@@ -14155,7 +14370,10 @@ func (x *HistoricalEventMasterpieceArchConstructed) RelatedToEntity(id int) bool
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToHf(id int) bool       { return x.Hfid == id }
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventMasterpieceArchConstructed) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToStructure(siteId, id int) bool {
+	return false
+}
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventMasterpieceArchConstructed) CheckFields() {
 	if x.BuildingCustom != x.EntityId {
@@ -14326,7 +14544,8 @@ func (x *HistoricalEventMasterpieceDye) RelatedToArtifact(id int) bool { return 
 func (x *HistoricalEventMasterpieceDye) RelatedToSite(id int) bool {
 	return x.Site == id || x.SiteId == id
 }
-func (x *HistoricalEventMasterpieceDye) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventMasterpieceDye) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventMasterpieceDye) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventMasterpieceDye) CheckFields() {
 	if x.DyeMatIndex != x.EntityId {
@@ -14445,12 +14664,13 @@ func NewHistoricalEventMasterpieceEngraving() *HistoricalEventMasterpieceEngravi
 		SiteId:   -1,
 	}
 }
-func (x *HistoricalEventMasterpieceEngraving) Type() string                  { return "masterpiece engraving" }
-func (x *HistoricalEventMasterpieceEngraving) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *HistoricalEventMasterpieceEngraving) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *HistoricalEventMasterpieceEngraving) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventMasterpieceEngraving) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventMasterpieceEngraving) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventMasterpieceEngraving) Type() string                           { return "masterpiece engraving" }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToHf(id int) bool                { return x.Hfid == id }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventMasterpieceEngraving) CheckFields() {
 	if x.ArtId != x.EntityId {
@@ -14753,7 +14973,8 @@ func (x *HistoricalEventMasterpieceFood) RelatedToArtifact(id int) bool { return
 func (x *HistoricalEventMasterpieceFood) RelatedToSite(id int) bool {
 	return x.Site == id || x.SiteId == id
 }
-func (x *HistoricalEventMasterpieceFood) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventMasterpieceFood) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventMasterpieceFood) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventMasterpieceFood) CheckFields() {
 	if x.ItemId != x.EntityId {
@@ -14852,12 +15073,13 @@ func NewHistoricalEventMasterpieceItem() *HistoricalEventMasterpieceItem {
 		SiteId:   -1,
 	}
 }
-func (x *HistoricalEventMasterpieceItem) Type() string                  { return "masterpiece item" }
-func (x *HistoricalEventMasterpieceItem) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *HistoricalEventMasterpieceItem) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *HistoricalEventMasterpieceItem) RelatedToArtifact(id int) bool { return x.ItemId == id }
-func (x *HistoricalEventMasterpieceItem) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventMasterpieceItem) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventMasterpieceItem) Type() string                           { return "masterpiece item" }
+func (x *HistoricalEventMasterpieceItem) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *HistoricalEventMasterpieceItem) RelatedToHf(id int) bool                { return x.Hfid == id }
+func (x *HistoricalEventMasterpieceItem) RelatedToArtifact(id int) bool          { return x.ItemId == id }
+func (x *HistoricalEventMasterpieceItem) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventMasterpieceItem) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventMasterpieceItem) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventMasterpieceItem) CheckFields() {
 	if x.ItemId != x.EntityId {
@@ -15159,6 +15381,9 @@ func (x *HistoricalEventMasterpieceItemImprovement) RelatedToArtifact(id int) bo
 func (x *HistoricalEventMasterpieceItemImprovement) RelatedToSite(id int) bool {
 	return x.Site == id || x.SiteId == id
 }
+func (x *HistoricalEventMasterpieceItemImprovement) RelatedToStructure(siteId, id int) bool {
+	return false
+}
 func (x *HistoricalEventMasterpieceItemImprovement) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventMasterpieceItemImprovement) CheckFields() {
@@ -15286,12 +15511,13 @@ func NewHistoricalEventMasterpieceLost() *HistoricalEventMasterpieceLost {
 		Site:          -1,
 	}
 }
-func (x *HistoricalEventMasterpieceLost) Type() string                  { return "masterpiece lost" }
-func (x *HistoricalEventMasterpieceLost) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventMasterpieceLost) RelatedToHf(id int) bool       { return x.Histfig == id }
-func (x *HistoricalEventMasterpieceLost) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventMasterpieceLost) RelatedToSite(id int) bool     { return x.Site == id }
-func (x *HistoricalEventMasterpieceLost) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventMasterpieceLost) Type() string                           { return "masterpiece lost" }
+func (x *HistoricalEventMasterpieceLost) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventMasterpieceLost) RelatedToHf(id int) bool                { return x.Histfig == id }
+func (x *HistoricalEventMasterpieceLost) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventMasterpieceLost) RelatedToSite(id int) bool              { return x.Site == id }
+func (x *HistoricalEventMasterpieceLost) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventMasterpieceLost) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventMasterpieceLost) CheckFields() {
 }
@@ -15330,10 +15556,11 @@ func (x *HistoricalEventMerchant) Type() string { return "merchant" }
 func (x *HistoricalEventMerchant) RelatedToEntity(id int) bool {
 	return x.DepotEntityId == id || x.TraderEntityId == id
 }
-func (x *HistoricalEventMerchant) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventMerchant) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventMerchant) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventMerchant) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventMerchant) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventMerchant) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventMerchant) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventMerchant) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventMerchant) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventMerchant) CheckFields() {
 }
@@ -15415,7 +15642,10 @@ func (x *HistoricalEventModifiedBuilding) RelatedToEntity(id int) bool   { retur
 func (x *HistoricalEventModifiedBuilding) RelatedToHf(id int) bool       { return x.ModifierHfid == id }
 func (x *HistoricalEventModifiedBuilding) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventModifiedBuilding) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventModifiedBuilding) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventModifiedBuilding) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventModifiedBuilding) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventModifiedBuilding) CheckFields() {
 }
@@ -15525,12 +15755,13 @@ func NewHistoricalEventMusicalFormCreated() *HistoricalEventMusicalFormCreated {
 		SiteId:         -1,
 	}
 }
-func (x *HistoricalEventMusicalFormCreated) Type() string                  { return "musical form created" }
-func (x *HistoricalEventMusicalFormCreated) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventMusicalFormCreated) RelatedToHf(id int) bool       { return x.HistFigureId == id }
-func (x *HistoricalEventMusicalFormCreated) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventMusicalFormCreated) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventMusicalFormCreated) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventMusicalFormCreated) Type() string                           { return "musical form created" }
+func (x *HistoricalEventMusicalFormCreated) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventMusicalFormCreated) RelatedToHf(id int) bool                { return x.HistFigureId == id }
+func (x *HistoricalEventMusicalFormCreated) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventMusicalFormCreated) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventMusicalFormCreated) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventMusicalFormCreated) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventMusicalFormCreated) CheckFields() {
 }
@@ -15584,10 +15815,11 @@ func (x *HistoricalEventNewSiteLeader) Type() string { return "new site leader" 
 func (x *HistoricalEventNewSiteLeader) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.NewSiteCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventNewSiteLeader) RelatedToHf(id int) bool       { return x.NewLeaderHfid == id }
-func (x *HistoricalEventNewSiteLeader) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventNewSiteLeader) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventNewSiteLeader) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventNewSiteLeader) RelatedToHf(id int) bool                { return x.NewLeaderHfid == id }
+func (x *HistoricalEventNewSiteLeader) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventNewSiteLeader) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventNewSiteLeader) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventNewSiteLeader) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventNewSiteLeader) CheckFields() {
 }
@@ -15660,10 +15892,11 @@ func (x *HistoricalEventPeaceAccepted) Type() string { return "peace accepted" }
 func (x *HistoricalEventPeaceAccepted) RelatedToEntity(id int) bool {
 	return x.Destination == id || x.Source == id
 }
-func (x *HistoricalEventPeaceAccepted) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventPeaceAccepted) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventPeaceAccepted) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventPeaceAccepted) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventPeaceAccepted) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventPeaceAccepted) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -15736,10 +15969,11 @@ func (x *HistoricalEventPeaceRejected) Type() string { return "peace rejected" }
 func (x *HistoricalEventPeaceRejected) RelatedToEntity(id int) bool {
 	return x.Destination == id || x.Source == id
 }
-func (x *HistoricalEventPeaceRejected) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventPeaceRejected) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventPeaceRejected) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventPeaceRejected) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventPeaceRejected) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventPeaceRejected) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -15786,12 +16020,13 @@ func NewHistoricalEventPerformance() *HistoricalEventPerformance {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventPerformance) Type() string                  { return "performance" }
-func (x *HistoricalEventPerformance) RelatedToEntity(id int) bool   { return x.CivId == id }
-func (x *HistoricalEventPerformance) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventPerformance) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventPerformance) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventPerformance) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventPerformance) Type() string                           { return "performance" }
+func (x *HistoricalEventPerformance) RelatedToEntity(id int) bool            { return x.CivId == id }
+func (x *HistoricalEventPerformance) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventPerformance) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventPerformance) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventPerformance) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventPerformance) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventPerformance) CheckFields() {
 }
@@ -15843,10 +16078,11 @@ func (x *HistoricalEventPlunderedSite) Type() string { return "plundered site" }
 func (x *HistoricalEventPlunderedSite) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventPlunderedSite) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventPlunderedSite) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventPlunderedSite) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventPlunderedSite) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventPlunderedSite) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventPlunderedSite) CheckFields() {
 }
@@ -15921,12 +16157,13 @@ func NewHistoricalEventPoeticFormCreated() *HistoricalEventPoeticFormCreated {
 		SubregionId:  -1,
 	}
 }
-func (x *HistoricalEventPoeticFormCreated) Type() string                  { return "poetic form created" }
-func (x *HistoricalEventPoeticFormCreated) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventPoeticFormCreated) RelatedToHf(id int) bool       { return x.HistFigureId == id }
-func (x *HistoricalEventPoeticFormCreated) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventPoeticFormCreated) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventPoeticFormCreated) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventPoeticFormCreated) Type() string                           { return "poetic form created" }
+func (x *HistoricalEventPoeticFormCreated) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventPoeticFormCreated) RelatedToHf(id int) bool                { return x.HistFigureId == id }
+func (x *HistoricalEventPoeticFormCreated) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventPoeticFormCreated) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventPoeticFormCreated) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventPoeticFormCreated) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventPoeticFormCreated) CheckFields() {
 }
@@ -15970,12 +16207,13 @@ func NewHistoricalEventProcession() *HistoricalEventProcession {
 		SubregionId:    -1,
 	}
 }
-func (x *HistoricalEventProcession) Type() string                  { return "procession" }
-func (x *HistoricalEventProcession) RelatedToEntity(id int) bool   { return x.CivId == id }
-func (x *HistoricalEventProcession) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventProcession) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventProcession) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventProcession) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventProcession) Type() string                           { return "procession" }
+func (x *HistoricalEventProcession) RelatedToEntity(id int) bool            { return x.CivId == id }
+func (x *HistoricalEventProcession) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventProcession) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventProcession) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventProcession) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventProcession) RelatedToRegion(id int) bool            { return x.SubregionId == id }
 
 func (x *HistoricalEventProcession) CheckFields() {
 }
@@ -16021,7 +16259,10 @@ func (x *HistoricalEventRazedStructure) RelatedToEntity(id int) bool   { return 
 func (x *HistoricalEventRazedStructure) RelatedToHf(id int) bool       { return false }
 func (x *HistoricalEventRazedStructure) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventRazedStructure) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventRazedStructure) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventRazedStructure) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventRazedStructure) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventRazedStructure) CheckFields() {
 }
@@ -16058,10 +16299,11 @@ func (x *HistoricalEventReclaimSite) Type() string { return "reclaim site" }
 func (x *HistoricalEventReclaimSite) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventReclaimSite) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventReclaimSite) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventReclaimSite) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventReclaimSite) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventReclaimSite) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventReclaimSite) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventReclaimSite) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventReclaimSite) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventReclaimSite) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventReclaimSite) CheckFields() {
 }
@@ -16110,6 +16352,9 @@ func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToHf(id int) boo
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToSite(id int) bool {
 	return x.SiteId == id
+}
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToStructure(siteId, id int) bool {
+	return false
 }
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToRegion(id int) bool {
 	return x.PopSrid == id
@@ -16263,9 +16508,10 @@ func (x *HistoricalEventRelationship) RelatedToEntity(id int) bool { return fals
 func (x *HistoricalEventRelationship) RelatedToHf(id int) bool {
 	return x.SourceHf == id || x.TargetHf == id
 }
-func (x *HistoricalEventRelationship) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventRelationship) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventRelationship) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventRelationship) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventRelationship) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventRelationship) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventRelationship) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventRelationship) CheckFields() {
 }
@@ -16305,11 +16551,12 @@ func NewHistoricalEventRelationshipSupplement() *HistoricalEventRelationshipSupp
 		Unk1:         -1,
 	}
 }
-func (x *HistoricalEventRelationshipSupplement) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventRelationshipSupplement) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventRelationshipSupplement) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventRelationshipSupplement) RelatedToSite(id int) bool     { return x.Site == id }
-func (x *HistoricalEventRelationshipSupplement) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventRelationshipSupplement) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventRelationshipSupplement) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventRelationshipSupplement) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventRelationshipSupplement) RelatedToSite(id int) bool              { return x.Site == id }
+func (x *HistoricalEventRelationshipSupplement) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventRelationshipSupplement) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventRelationshipSupplement) CheckFields() {
 }
@@ -16430,12 +16677,13 @@ func NewHistoricalEventRemoveHfEntityLink() *HistoricalEventRemoveHfEntityLink {
 		PositionId: -1,
 	}
 }
-func (x *HistoricalEventRemoveHfEntityLink) Type() string                  { return "remove hf entity link" }
-func (x *HistoricalEventRemoveHfEntityLink) RelatedToEntity(id int) bool   { return x.CivId == id }
-func (x *HistoricalEventRemoveHfEntityLink) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *HistoricalEventRemoveHfEntityLink) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventRemoveHfEntityLink) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventRemoveHfEntityLink) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventRemoveHfEntityLink) Type() string                           { return "remove hf entity link" }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToEntity(id int) bool            { return x.CivId == id }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToHf(id int) bool                { return x.Hfid == id }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventRemoveHfEntityLink) CheckFields() {
 }
@@ -16474,9 +16722,10 @@ func (x *HistoricalEventRemoveHfHfLink) RelatedToEntity(id int) bool { return fa
 func (x *HistoricalEventRemoveHfHfLink) RelatedToHf(id int) bool {
 	return x.Hfid == id || x.HfidTarget == id
 }
-func (x *HistoricalEventRemoveHfHfLink) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventRemoveHfHfLink) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventRemoveHfHfLink) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventRemoveHfHfLink) CheckFields() {
 }
@@ -16550,7 +16799,10 @@ func (x *HistoricalEventRemoveHfSiteLink) RelatedToEntity(id int) bool   { retur
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToHf(id int) bool       { return x.Histfig == id }
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventRemoveHfSiteLink) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.Structure == id)
+}
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventRemoveHfSiteLink) CheckFields() {
 	if x.Civ != x.SiteId {
@@ -16605,10 +16857,11 @@ func (x *HistoricalEventReplacedStructure) Type() string { return "replaced stru
 func (x *HistoricalEventReplacedStructure) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventReplacedStructure) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventReplacedStructure) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventReplacedStructure) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventReplacedStructure) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventReplacedStructure) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventReplacedStructure) CheckFields() {
 }
@@ -16651,10 +16904,11 @@ func (x *HistoricalEventSiteDied) Type() string { return "site died" }
 func (x *HistoricalEventSiteDied) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSiteDied) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventSiteDied) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventSiteDied) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventSiteDied) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventSiteDied) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventSiteDied) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventSiteDied) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventSiteDied) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventSiteDied) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventSiteDied) CheckFields() {
 }
@@ -16746,10 +17000,11 @@ func (x *HistoricalEventSiteDispute) Type() string { return "site dispute" }
 func (x *HistoricalEventSiteDispute) RelatedToEntity(id int) bool {
 	return x.EntityId1 == id || x.EntityId2 == id
 }
-func (x *HistoricalEventSiteDispute) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventSiteDispute) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventSiteDispute) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventSiteDispute) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventSiteDispute) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventSiteDispute) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventSiteDispute) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventSiteDispute) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventSiteDispute) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventSiteDispute) CheckFields() {
 }
@@ -16792,10 +17047,11 @@ func (x *HistoricalEventSiteRetired) Type() string { return "site retired" }
 func (x *HistoricalEventSiteRetired) RelatedToEntity(id int) bool {
 	return x.CivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSiteRetired) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventSiteRetired) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventSiteRetired) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventSiteRetired) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventSiteRetired) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventSiteRetired) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventSiteRetired) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventSiteRetired) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventSiteRetired) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventSiteRetired) CheckFields() {
 }
@@ -16834,10 +17090,11 @@ func (x *HistoricalEventSiteSurrendered) Type() string { return "site surrendere
 func (x *HistoricalEventSiteSurrendered) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSiteSurrendered) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventSiteSurrendered) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventSiteSurrendered) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventSiteSurrendered) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventSiteSurrendered) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventSiteSurrendered) CheckFields() {
 }
@@ -16880,10 +17137,11 @@ func (x *HistoricalEventSiteTakenOver) Type() string { return "site taken over" 
 func (x *HistoricalEventSiteTakenOver) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.NewSiteCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSiteTakenOver) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventSiteTakenOver) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventSiteTakenOver) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventSiteTakenOver) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventSiteTakenOver) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventSiteTakenOver) CheckFields() {
 }
@@ -16965,10 +17223,11 @@ func (x *HistoricalEventSiteTributeForced) Type() string { return "site tribute 
 func (x *HistoricalEventSiteTributeForced) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSiteTributeForced) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventSiteTributeForced) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventSiteTributeForced) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventSiteTributeForced) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventSiteTributeForced) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventSiteTributeForced) CheckFields() {
 }
@@ -17012,10 +17271,11 @@ func (x *HistoricalEventSneakIntoSite) Type() string { return "sneak into site" 
 func (x *HistoricalEventSneakIntoSite) RelatedToEntity(id int) bool {
 	return x.AttackerCivId == id || x.DefenderCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSneakIntoSite) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventSneakIntoSite) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventSneakIntoSite) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventSneakIntoSite) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventSneakIntoSite) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventSneakIntoSite) CheckFields() {
 }
@@ -17056,10 +17316,11 @@ func (x *HistoricalEventSpottedLeavingSite) Type() string { return "spotted leav
 func (x *HistoricalEventSpottedLeavingSite) RelatedToEntity(id int) bool {
 	return x.LeaverCivId == id || x.SiteCivId == id
 }
-func (x *HistoricalEventSpottedLeavingSite) RelatedToHf(id int) bool       { return x.SpotterHfid == id }
-func (x *HistoricalEventSpottedLeavingSite) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventSpottedLeavingSite) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventSpottedLeavingSite) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToHf(id int) bool                { return x.SpotterHfid == id }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventSpottedLeavingSite) CheckFields() {
 }
@@ -17127,7 +17388,10 @@ func (x *HistoricalEventSquadVsSquad) RelatedToHf(id int) bool {
 }
 func (x *HistoricalEventSquadVsSquad) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventSquadVsSquad) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventSquadVsSquad) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventSquadVsSquad) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventSquadVsSquad) RelatedToRegion(id int) bool { return x.SubregionId == id }
 
 func (x *HistoricalEventSquadVsSquad) CheckFields() {
 }
@@ -17268,7 +17532,10 @@ func (x *HistoricalEventTacticalSituation) RelatedToHf(id int) bool {
 }
 func (x *HistoricalEventTacticalSituation) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventTacticalSituation) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalEventTacticalSituation) RelatedToRegion(id int) bool   { return x.SubregionId == id }
+func (x *HistoricalEventTacticalSituation) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventTacticalSituation) RelatedToRegion(id int) bool { return x.SubregionId == id }
 
 func (x *HistoricalEventTacticalSituation) CheckFields() {
 }
@@ -17336,7 +17603,8 @@ func (x *HistoricalEventTrade) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventTrade) RelatedToSite(id int) bool {
 	return x.DestSiteId == id || x.SourceSiteId == id
 }
-func (x *HistoricalEventTrade) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventTrade) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventTrade) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventTrade) CheckFields() {
 }
@@ -17460,11 +17728,12 @@ func NewHistoricalEventWrittenContentComposed() *HistoricalEventWrittenContentCo
 		WcId:           -1,
 	}
 }
-func (x *HistoricalEventWrittenContentComposed) Type() string                  { return "written content composed" }
-func (x *HistoricalEventWrittenContentComposed) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventWrittenContentComposed) RelatedToHf(id int) bool       { return x.HistFigureId == id }
-func (x *HistoricalEventWrittenContentComposed) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventWrittenContentComposed) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventWrittenContentComposed) Type() string                           { return "written content composed" }
+func (x *HistoricalEventWrittenContentComposed) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventWrittenContentComposed) RelatedToHf(id int) bool                { return x.HistFigureId == id }
+func (x *HistoricalEventWrittenContentComposed) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventWrittenContentComposed) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventWrittenContentComposed) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventWrittenContentComposed) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
 }
@@ -17662,10 +17931,11 @@ func (x *HistoricalFigure) Name() string { return x.Name_ }
 func (x *HistoricalFigure) RelatedToEntity(id int) bool {
 	return containsInt(x.UsedIdentityId, id) || x.CurrentIdentityId == id
 }
-func (x *HistoricalFigure) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalFigure) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalFigure) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalFigure) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalFigure) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalFigure) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalFigure) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalFigure) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalFigure) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalFigure) CheckFields() {
 	if x.Sex != x.Appeared {
@@ -17837,11 +18107,12 @@ func NewHistoricalFigureEntityLink() *HistoricalFigureEntityLink {
 		LinkStrength: -1,
 	}
 }
-func (x *HistoricalFigureEntityLink) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *HistoricalFigureEntityLink) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalFigureEntityLink) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalFigureEntityLink) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalFigureEntityLink) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalFigureEntityLink) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *HistoricalFigureEntityLink) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalFigureEntityLink) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalFigureEntityLink) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalFigureEntityLink) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalFigureEntityLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalFigureEntityLink) CheckFields() {
 }
@@ -17871,11 +18142,12 @@ func NewHistoricalFigureSiteProperty() *HistoricalFigureSiteProperty {
 		SiteId:     -1,
 	}
 }
-func (x *HistoricalFigureSiteProperty) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalFigureSiteProperty) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalFigureSiteProperty) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalFigureSiteProperty) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *HistoricalFigureSiteProperty) RelatedToRegion(id int) bool   { return false }
+func (x *HistoricalFigureSiteProperty) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalFigureSiteProperty) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalFigureSiteProperty) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalFigureSiteProperty) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalFigureSiteProperty) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalFigureSiteProperty) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalFigureSiteProperty) CheckFields() {
 }
@@ -17985,14 +18257,15 @@ func NewHonor() *Honor {
 		RequiredYears:        -1,
 	}
 }
-func (x *Honor) Id() int                       { return x.Id_ }
-func (x *Honor) setId(id int)                  { x.Id_ = id }
-func (x *Honor) Name() string                  { return x.Name_ }
-func (x *Honor) RelatedToEntity(id int) bool   { return false }
-func (x *Honor) RelatedToHf(id int) bool       { return false }
-func (x *Honor) RelatedToArtifact(id int) bool { return false }
-func (x *Honor) RelatedToSite(id int) bool     { return false }
-func (x *Honor) RelatedToRegion(id int) bool   { return false }
+func (x *Honor) Id() int                                { return x.Id_ }
+func (x *Honor) setId(id int)                           { x.Id_ = id }
+func (x *Honor) Name() string                           { return x.Name_ }
+func (x *Honor) RelatedToEntity(id int) bool            { return false }
+func (x *Honor) RelatedToHf(id int) bool                { return false }
+func (x *Honor) RelatedToArtifact(id int) bool          { return false }
+func (x *Honor) RelatedToSite(id int) bool              { return false }
+func (x *Honor) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Honor) RelatedToRegion(id int) bool            { return false }
 
 func (x *Honor) CheckFields() {
 }
@@ -18046,11 +18319,12 @@ func NewHonorEntity() *HonorEntity {
 		Kills:   -1,
 	}
 }
-func (x *HonorEntity) RelatedToEntity(id int) bool   { return x.Entity == id }
-func (x *HonorEntity) RelatedToHf(id int) bool       { return false }
-func (x *HonorEntity) RelatedToArtifact(id int) bool { return false }
-func (x *HonorEntity) RelatedToSite(id int) bool     { return false }
-func (x *HonorEntity) RelatedToRegion(id int) bool   { return false }
+func (x *HonorEntity) RelatedToEntity(id int) bool            { return x.Entity == id }
+func (x *HonorEntity) RelatedToHf(id int) bool                { return false }
+func (x *HonorEntity) RelatedToArtifact(id int) bool          { return false }
+func (x *HonorEntity) RelatedToSite(id int) bool              { return false }
+func (x *HonorEntity) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HonorEntity) RelatedToRegion(id int) bool            { return false }
 
 func (x *HonorEntity) CheckFields() {
 }
@@ -18190,14 +18464,15 @@ func NewIdentity() *Identity {
 		NemesisId:   -1,
 	}
 }
-func (x *Identity) Id() int                       { return x.Id_ }
-func (x *Identity) setId(id int)                  { x.Id_ = id }
-func (x *Identity) Name() string                  { return x.Name_ }
-func (x *Identity) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *Identity) RelatedToHf(id int) bool       { return x.HistfigId == id }
-func (x *Identity) RelatedToArtifact(id int) bool { return false }
-func (x *Identity) RelatedToSite(id int) bool     { return false }
-func (x *Identity) RelatedToRegion(id int) bool   { return false }
+func (x *Identity) Id() int                                { return x.Id_ }
+func (x *Identity) setId(id int)                           { x.Id_ = id }
+func (x *Identity) Name() string                           { return x.Name_ }
+func (x *Identity) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *Identity) RelatedToHf(id int) bool                { return x.HistfigId == id }
+func (x *Identity) RelatedToArtifact(id int) bool          { return false }
+func (x *Identity) RelatedToSite(id int) bool              { return false }
+func (x *Identity) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Identity) RelatedToRegion(id int) bool            { return false }
 
 func (x *Identity) CheckFields() {
 }
@@ -18433,11 +18708,12 @@ func NewIntrigueActor() *IntrigueActor {
 		StrategyEppid: -1,
 	}
 }
-func (x *IntrigueActor) RelatedToEntity(id int) bool   { return x.EntityId == id || x.StrategyEnid == id }
-func (x *IntrigueActor) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *IntrigueActor) RelatedToArtifact(id int) bool { return false }
-func (x *IntrigueActor) RelatedToSite(id int) bool     { return false }
-func (x *IntrigueActor) RelatedToRegion(id int) bool   { return false }
+func (x *IntrigueActor) RelatedToEntity(id int) bool            { return x.EntityId == id || x.StrategyEnid == id }
+func (x *IntrigueActor) RelatedToHf(id int) bool                { return x.Hfid == id }
+func (x *IntrigueActor) RelatedToArtifact(id int) bool          { return false }
+func (x *IntrigueActor) RelatedToSite(id int) bool              { return false }
+func (x *IntrigueActor) RelatedToStructure(siteId, id int) bool { return false }
+func (x *IntrigueActor) RelatedToRegion(id int) bool            { return false }
 
 func (x *IntrigueActor) CheckFields() {
 }
@@ -18605,9 +18881,10 @@ func (x *IntriguePlot) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *IntriguePlot) RelatedToHf(id int) bool {
 	return x.DelegatedPlotHfid == id || x.ParentPlotHfid == id
 }
-func (x *IntriguePlot) RelatedToArtifact(id int) bool { return x.ArtifactId == id }
-func (x *IntriguePlot) RelatedToSite(id int) bool     { return false }
-func (x *IntriguePlot) RelatedToRegion(id int) bool   { return false }
+func (x *IntriguePlot) RelatedToArtifact(id int) bool          { return x.ArtifactId == id }
+func (x *IntriguePlot) RelatedToSite(id int) bool              { return false }
+func (x *IntriguePlot) RelatedToStructure(siteId, id int) bool { return false }
+func (x *IntriguePlot) RelatedToRegion(id int) bool            { return false }
 
 func (x *IntriguePlot) CheckFields() {
 }
@@ -18660,11 +18937,12 @@ func NewItem() *Item {
 		WritingWrittenContentId: -1,
 	}
 }
-func (x *Item) RelatedToEntity(id int) bool   { return false }
-func (x *Item) RelatedToHf(id int) bool       { return false }
-func (x *Item) RelatedToArtifact(id int) bool { return false }
-func (x *Item) RelatedToSite(id int) bool     { return false }
-func (x *Item) RelatedToRegion(id int) bool   { return false }
+func (x *Item) RelatedToEntity(id int) bool            { return false }
+func (x *Item) RelatedToHf(id int) bool                { return false }
+func (x *Item) RelatedToArtifact(id int) bool          { return false }
+func (x *Item) RelatedToSite(id int) bool              { return false }
+func (x *Item) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Item) RelatedToRegion(id int) bool            { return false }
 
 func (x *Item) CheckFields() {
 }
@@ -18696,14 +18974,15 @@ func NewLandmass() *Landmass {
 		Id_: -1,
 	}
 }
-func (x *Landmass) Id() int                       { return x.Id_ }
-func (x *Landmass) setId(id int)                  { x.Id_ = id }
-func (x *Landmass) Name() string                  { return x.Name_ }
-func (x *Landmass) RelatedToEntity(id int) bool   { return false }
-func (x *Landmass) RelatedToHf(id int) bool       { return false }
-func (x *Landmass) RelatedToArtifact(id int) bool { return false }
-func (x *Landmass) RelatedToSite(id int) bool     { return false }
-func (x *Landmass) RelatedToRegion(id int) bool   { return false }
+func (x *Landmass) Id() int                                { return x.Id_ }
+func (x *Landmass) setId(id int)                           { x.Id_ = id }
+func (x *Landmass) Name() string                           { return x.Name_ }
+func (x *Landmass) RelatedToEntity(id int) bool            { return false }
+func (x *Landmass) RelatedToHf(id int) bool                { return false }
+func (x *Landmass) RelatedToArtifact(id int) bool          { return false }
+func (x *Landmass) RelatedToSite(id int) bool              { return false }
+func (x *Landmass) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Landmass) RelatedToRegion(id int) bool            { return false }
 
 func (x *Landmass) CheckFields() {
 }
@@ -18733,14 +19012,15 @@ func NewMountainPeak() *MountainPeak {
 		Id_:    -1,
 	}
 }
-func (x *MountainPeak) Id() int                       { return x.Id_ }
-func (x *MountainPeak) setId(id int)                  { x.Id_ = id }
-func (x *MountainPeak) Name() string                  { return x.Name_ }
-func (x *MountainPeak) RelatedToEntity(id int) bool   { return false }
-func (x *MountainPeak) RelatedToHf(id int) bool       { return false }
-func (x *MountainPeak) RelatedToArtifact(id int) bool { return false }
-func (x *MountainPeak) RelatedToSite(id int) bool     { return false }
-func (x *MountainPeak) RelatedToRegion(id int) bool   { return false }
+func (x *MountainPeak) Id() int                                { return x.Id_ }
+func (x *MountainPeak) setId(id int)                           { x.Id_ = id }
+func (x *MountainPeak) Name() string                           { return x.Name_ }
+func (x *MountainPeak) RelatedToEntity(id int) bool            { return false }
+func (x *MountainPeak) RelatedToHf(id int) bool                { return false }
+func (x *MountainPeak) RelatedToArtifact(id int) bool          { return false }
+func (x *MountainPeak) RelatedToSite(id int) bool              { return false }
+func (x *MountainPeak) RelatedToStructure(siteId, id int) bool { return false }
+func (x *MountainPeak) RelatedToRegion(id int) bool            { return false }
 
 func (x *MountainPeak) CheckFields() {
 }
@@ -18770,14 +19050,15 @@ func NewMusicalForm() *MusicalForm {
 		Id_: -1,
 	}
 }
-func (x *MusicalForm) Id() int                       { return x.Id_ }
-func (x *MusicalForm) setId(id int)                  { x.Id_ = id }
-func (x *MusicalForm) Name() string                  { return x.Name_ }
-func (x *MusicalForm) RelatedToEntity(id int) bool   { return false }
-func (x *MusicalForm) RelatedToHf(id int) bool       { return false }
-func (x *MusicalForm) RelatedToArtifact(id int) bool { return false }
-func (x *MusicalForm) RelatedToSite(id int) bool     { return false }
-func (x *MusicalForm) RelatedToRegion(id int) bool   { return false }
+func (x *MusicalForm) Id() int                                { return x.Id_ }
+func (x *MusicalForm) setId(id int)                           { x.Id_ = id }
+func (x *MusicalForm) Name() string                           { return x.Name_ }
+func (x *MusicalForm) RelatedToEntity(id int) bool            { return false }
+func (x *MusicalForm) RelatedToHf(id int) bool                { return false }
+func (x *MusicalForm) RelatedToArtifact(id int) bool          { return false }
+func (x *MusicalForm) RelatedToSite(id int) bool              { return false }
+func (x *MusicalForm) RelatedToStructure(siteId, id int) bool { return false }
+func (x *MusicalForm) RelatedToRegion(id int) bool            { return false }
 
 func (x *MusicalForm) CheckFields() {
 }
@@ -18805,14 +19086,15 @@ func NewOccasion() *Occasion {
 		Id_:   -1,
 	}
 }
-func (x *Occasion) Id() int                       { return x.Id_ }
-func (x *Occasion) setId(id int)                  { x.Id_ = id }
-func (x *Occasion) Name() string                  { return x.Name_ }
-func (x *Occasion) RelatedToEntity(id int) bool   { return false }
-func (x *Occasion) RelatedToHf(id int) bool       { return false }
-func (x *Occasion) RelatedToArtifact(id int) bool { return false }
-func (x *Occasion) RelatedToSite(id int) bool     { return false }
-func (x *Occasion) RelatedToRegion(id int) bool   { return false }
+func (x *Occasion) Id() int                                { return x.Id_ }
+func (x *Occasion) setId(id int)                           { x.Id_ = id }
+func (x *Occasion) Name() string                           { return x.Name_ }
+func (x *Occasion) RelatedToEntity(id int) bool            { return false }
+func (x *Occasion) RelatedToHf(id int) bool                { return false }
+func (x *Occasion) RelatedToArtifact(id int) bool          { return false }
+func (x *Occasion) RelatedToSite(id int) bool              { return false }
+func (x *Occasion) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Occasion) RelatedToRegion(id int) bool            { return false }
 
 func (x *Occasion) CheckFields() {
 }
@@ -18880,11 +19162,12 @@ func NewPlotActor() *PlotActor {
 		AgreementId: -1,
 	}
 }
-func (x *PlotActor) RelatedToEntity(id int) bool   { return false }
-func (x *PlotActor) RelatedToHf(id int) bool       { return false }
-func (x *PlotActor) RelatedToArtifact(id int) bool { return false }
-func (x *PlotActor) RelatedToSite(id int) bool     { return false }
-func (x *PlotActor) RelatedToRegion(id int) bool   { return false }
+func (x *PlotActor) RelatedToEntity(id int) bool            { return false }
+func (x *PlotActor) RelatedToHf(id int) bool                { return false }
+func (x *PlotActor) RelatedToArtifact(id int) bool          { return false }
+func (x *PlotActor) RelatedToSite(id int) bool              { return false }
+func (x *PlotActor) RelatedToStructure(siteId, id int) bool { return false }
+func (x *PlotActor) RelatedToRegion(id int) bool            { return false }
 
 func (x *PlotActor) CheckFields() {
 }
@@ -18915,14 +19198,15 @@ func NewPoeticForm() *PoeticForm {
 		Id_: -1,
 	}
 }
-func (x *PoeticForm) Id() int                       { return x.Id_ }
-func (x *PoeticForm) setId(id int)                  { x.Id_ = id }
-func (x *PoeticForm) Name() string                  { return x.Name_ }
-func (x *PoeticForm) RelatedToEntity(id int) bool   { return false }
-func (x *PoeticForm) RelatedToHf(id int) bool       { return false }
-func (x *PoeticForm) RelatedToArtifact(id int) bool { return false }
-func (x *PoeticForm) RelatedToSite(id int) bool     { return false }
-func (x *PoeticForm) RelatedToRegion(id int) bool   { return false }
+func (x *PoeticForm) Id() int                                { return x.Id_ }
+func (x *PoeticForm) setId(id int)                           { x.Id_ = id }
+func (x *PoeticForm) Name() string                           { return x.Name_ }
+func (x *PoeticForm) RelatedToEntity(id int) bool            { return false }
+func (x *PoeticForm) RelatedToHf(id int) bool                { return false }
+func (x *PoeticForm) RelatedToArtifact(id int) bool          { return false }
+func (x *PoeticForm) RelatedToSite(id int) bool              { return false }
+func (x *PoeticForm) RelatedToStructure(siteId, id int) bool { return false }
+func (x *PoeticForm) RelatedToRegion(id int) bool            { return false }
 
 func (x *PoeticForm) CheckFields() {
 }
@@ -19044,13 +19328,14 @@ func NewReference() *Reference {
 		Id_: -1,
 	}
 }
-func (x *Reference) Id() int                       { return x.Id_ }
-func (x *Reference) setId(id int)                  { x.Id_ = id }
-func (x *Reference) RelatedToEntity(id int) bool   { return false }
-func (x *Reference) RelatedToHf(id int) bool       { return false }
-func (x *Reference) RelatedToArtifact(id int) bool { return false }
-func (x *Reference) RelatedToSite(id int) bool     { return false }
-func (x *Reference) RelatedToRegion(id int) bool   { return false }
+func (x *Reference) Id() int                                { return x.Id_ }
+func (x *Reference) setId(id int)                           { x.Id_ = id }
+func (x *Reference) RelatedToEntity(id int) bool            { return false }
+func (x *Reference) RelatedToHf(id int) bool                { return false }
+func (x *Reference) RelatedToArtifact(id int) bool          { return false }
+func (x *Reference) RelatedToSite(id int) bool              { return false }
+func (x *Reference) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Reference) RelatedToRegion(id int) bool            { return false }
 
 func (x *Reference) CheckFields() {
 }
@@ -19190,14 +19475,15 @@ func NewRegion() *Region {
 		Id_:     -1,
 	}
 }
-func (x *Region) Id() int                       { return x.Id_ }
-func (x *Region) setId(id int)                  { x.Id_ = id }
-func (x *Region) Name() string                  { return x.Name_ }
-func (x *Region) RelatedToEntity(id int) bool   { return false }
-func (x *Region) RelatedToHf(id int) bool       { return false }
-func (x *Region) RelatedToArtifact(id int) bool { return false }
-func (x *Region) RelatedToSite(id int) bool     { return false }
-func (x *Region) RelatedToRegion(id int) bool   { return false }
+func (x *Region) Id() int                                { return x.Id_ }
+func (x *Region) setId(id int)                           { x.Id_ = id }
+func (x *Region) Name() string                           { return x.Name_ }
+func (x *Region) RelatedToEntity(id int) bool            { return false }
+func (x *Region) RelatedToHf(id int) bool                { return false }
+func (x *Region) RelatedToArtifact(id int) bool          { return false }
+func (x *Region) RelatedToSite(id int) bool              { return false }
+func (x *Region) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Region) RelatedToRegion(id int) bool            { return false }
 
 func (x *Region) CheckFields() {
 }
@@ -19254,11 +19540,12 @@ func NewRelationshipProfileHfHistorical() *RelationshipProfileHfHistorical {
 		Trust:           -1,
 	}
 }
-func (x *RelationshipProfileHfHistorical) RelatedToEntity(id int) bool   { return false }
-func (x *RelationshipProfileHfHistorical) RelatedToHf(id int) bool       { return x.HfId == id }
-func (x *RelationshipProfileHfHistorical) RelatedToArtifact(id int) bool { return false }
-func (x *RelationshipProfileHfHistorical) RelatedToSite(id int) bool     { return false }
-func (x *RelationshipProfileHfHistorical) RelatedToRegion(id int) bool   { return false }
+func (x *RelationshipProfileHfHistorical) RelatedToEntity(id int) bool            { return false }
+func (x *RelationshipProfileHfHistorical) RelatedToHf(id int) bool                { return x.HfId == id }
+func (x *RelationshipProfileHfHistorical) RelatedToArtifact(id int) bool          { return false }
+func (x *RelationshipProfileHfHistorical) RelatedToSite(id int) bool              { return false }
+func (x *RelationshipProfileHfHistorical) RelatedToStructure(siteId, id int) bool { return false }
+func (x *RelationshipProfileHfHistorical) RelatedToRegion(id int) bool            { return false }
 
 func (x *RelationshipProfileHfHistorical) CheckFields() {
 }
@@ -19328,13 +19615,14 @@ func NewRelationshipProfileHfIdentity() *RelationshipProfileHfIdentity {
 		Trust:         -1,
 	}
 }
-func (x *RelationshipProfileHfIdentity) Id() int                       { return x.Id_ }
-func (x *RelationshipProfileHfIdentity) setId(id int)                  { x.Id_ = id }
-func (x *RelationshipProfileHfIdentity) RelatedToEntity(id int) bool   { return false }
-func (x *RelationshipProfileHfIdentity) RelatedToHf(id int) bool       { return false }
-func (x *RelationshipProfileHfIdentity) RelatedToArtifact(id int) bool { return false }
-func (x *RelationshipProfileHfIdentity) RelatedToSite(id int) bool     { return false }
-func (x *RelationshipProfileHfIdentity) RelatedToRegion(id int) bool   { return false }
+func (x *RelationshipProfileHfIdentity) Id() int                                { return x.Id_ }
+func (x *RelationshipProfileHfIdentity) setId(id int)                           { x.Id_ = id }
+func (x *RelationshipProfileHfIdentity) RelatedToEntity(id int) bool            { return false }
+func (x *RelationshipProfileHfIdentity) RelatedToHf(id int) bool                { return false }
+func (x *RelationshipProfileHfIdentity) RelatedToArtifact(id int) bool          { return false }
+func (x *RelationshipProfileHfIdentity) RelatedToSite(id int) bool              { return false }
+func (x *RelationshipProfileHfIdentity) RelatedToStructure(siteId, id int) bool { return false }
+func (x *RelationshipProfileHfIdentity) RelatedToRegion(id int) bool            { return false }
 
 func (x *RelationshipProfileHfIdentity) CheckFields() {
 }
@@ -19416,10 +19704,11 @@ func NewRelationshipProfileHfVisual() *RelationshipProfileHfVisual {
 func (x *RelationshipProfileHfVisual) RelatedToEntity(id int) bool {
 	return containsInt(x.KnownIdentityId, id)
 }
-func (x *RelationshipProfileHfVisual) RelatedToHf(id int) bool       { return x.HfId == id }
-func (x *RelationshipProfileHfVisual) RelatedToArtifact(id int) bool { return false }
-func (x *RelationshipProfileHfVisual) RelatedToSite(id int) bool     { return false }
-func (x *RelationshipProfileHfVisual) RelatedToRegion(id int) bool   { return false }
+func (x *RelationshipProfileHfVisual) RelatedToHf(id int) bool                { return x.HfId == id }
+func (x *RelationshipProfileHfVisual) RelatedToArtifact(id int) bool          { return false }
+func (x *RelationshipProfileHfVisual) RelatedToSite(id int) bool              { return false }
+func (x *RelationshipProfileHfVisual) RelatedToStructure(siteId, id int) bool { return false }
+func (x *RelationshipProfileHfVisual) RelatedToRegion(id int) bool            { return false }
 
 func (x *RelationshipProfileHfVisual) CheckFields() {
 }
@@ -19499,12 +19788,13 @@ type River struct {
 func NewRiver() *River {
 	return &River{}
 }
-func (x *River) Name() string                  { return x.Name_ }
-func (x *River) RelatedToEntity(id int) bool   { return false }
-func (x *River) RelatedToHf(id int) bool       { return false }
-func (x *River) RelatedToArtifact(id int) bool { return false }
-func (x *River) RelatedToSite(id int) bool     { return false }
-func (x *River) RelatedToRegion(id int) bool   { return false }
+func (x *River) Name() string                           { return x.Name_ }
+func (x *River) RelatedToEntity(id int) bool            { return false }
+func (x *River) RelatedToHf(id int) bool                { return false }
+func (x *River) RelatedToArtifact(id int) bool          { return false }
+func (x *River) RelatedToSite(id int) bool              { return false }
+func (x *River) RelatedToStructure(siteId, id int) bool { return false }
+func (x *River) RelatedToRegion(id int) bool            { return false }
 
 func (x *River) CheckFields() {
 }
@@ -19785,13 +20075,14 @@ func NewSchedule() *Schedule {
 		Reference2: -1,
 	}
 }
-func (x *Schedule) Id() int                       { return x.Id_ }
-func (x *Schedule) setId(id int)                  { x.Id_ = id }
-func (x *Schedule) RelatedToEntity(id int) bool   { return false }
-func (x *Schedule) RelatedToHf(id int) bool       { return false }
-func (x *Schedule) RelatedToArtifact(id int) bool { return false }
-func (x *Schedule) RelatedToSite(id int) bool     { return false }
-func (x *Schedule) RelatedToRegion(id int) bool   { return false }
+func (x *Schedule) Id() int                                { return x.Id_ }
+func (x *Schedule) setId(id int)                           { x.Id_ = id }
+func (x *Schedule) RelatedToEntity(id int) bool            { return false }
+func (x *Schedule) RelatedToHf(id int) bool                { return false }
+func (x *Schedule) RelatedToArtifact(id int) bool          { return false }
+func (x *Schedule) RelatedToSite(id int) bool              { return false }
+func (x *Schedule) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Schedule) RelatedToRegion(id int) bool            { return false }
 
 func (x *Schedule) CheckFields() {
 }
@@ -19964,14 +20255,15 @@ func NewSite() *Site {
 		Structures:     make(map[int]*Structure),
 	}
 }
-func (x *Site) Id() int                       { return x.Id_ }
-func (x *Site) setId(id int)                  { x.Id_ = id }
-func (x *Site) Name() string                  { return x.Name_ }
-func (x *Site) RelatedToEntity(id int) bool   { return x.CivId == id }
-func (x *Site) RelatedToHf(id int) bool       { return false }
-func (x *Site) RelatedToArtifact(id int) bool { return false }
-func (x *Site) RelatedToSite(id int) bool     { return false }
-func (x *Site) RelatedToRegion(id int) bool   { return false }
+func (x *Site) Id() int                                { return x.Id_ }
+func (x *Site) setId(id int)                           { x.Id_ = id }
+func (x *Site) Name() string                           { return x.Name_ }
+func (x *Site) RelatedToEntity(id int) bool            { return x.CivId == id }
+func (x *Site) RelatedToHf(id int) bool                { return false }
+func (x *Site) RelatedToArtifact(id int) bool          { return false }
+func (x *Site) RelatedToSite(id int) bool              { return false }
+func (x *Site) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Site) RelatedToRegion(id int) bool            { return false }
 
 func (x *Site) CheckFields() {
 }
@@ -20076,11 +20368,12 @@ func NewSiteLink() *SiteLink {
 		SubId:        -1,
 	}
 }
-func (x *SiteLink) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *SiteLink) RelatedToHf(id int) bool       { return false }
-func (x *SiteLink) RelatedToArtifact(id int) bool { return false }
-func (x *SiteLink) RelatedToSite(id int) bool     { return x.SiteId == id }
-func (x *SiteLink) RelatedToRegion(id int) bool   { return false }
+func (x *SiteLink) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *SiteLink) RelatedToHf(id int) bool                { return false }
+func (x *SiteLink) RelatedToArtifact(id int) bool          { return false }
+func (x *SiteLink) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *SiteLink) RelatedToStructure(siteId, id int) bool { return false }
+func (x *SiteLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *SiteLink) CheckFields() {
 }
@@ -20152,7 +20445,10 @@ func (x *SiteSiteProperty) RelatedToEntity(id int) bool   { return false }
 func (x *SiteSiteProperty) RelatedToHf(id int) bool       { return x.OwnerHfid == id }
 func (x *SiteSiteProperty) RelatedToArtifact(id int) bool { return false }
 func (x *SiteSiteProperty) RelatedToSite(id int) bool     { return false }
-func (x *SiteSiteProperty) RelatedToRegion(id int) bool   { return false }
+func (x *SiteSiteProperty) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *SiteSiteProperty) RelatedToRegion(id int) bool { return false }
 
 func (x *SiteSiteProperty) CheckFields() {
 }
@@ -20327,14 +20623,15 @@ func NewStructure() *Structure {
 		SiteId:      -1,
 	}
 }
-func (x *Structure) Id() int                       { return x.Id_ }
-func (x *Structure) setId(id int)                  { x.Id_ = id }
-func (x *Structure) Name() string                  { return x.Name_ }
-func (x *Structure) RelatedToEntity(id int) bool   { return x.EntityId == id }
-func (x *Structure) RelatedToHf(id int) bool       { return x.WorshipHfid == id }
-func (x *Structure) RelatedToArtifact(id int) bool { return containsInt(x.CopiedArtifactId, id) }
-func (x *Structure) RelatedToSite(id int) bool     { return false }
-func (x *Structure) RelatedToRegion(id int) bool   { return false }
+func (x *Structure) Id() int                                { return x.Id_ }
+func (x *Structure) setId(id int)                           { x.Id_ = id }
+func (x *Structure) Name() string                           { return x.Name_ }
+func (x *Structure) RelatedToEntity(id int) bool            { return x.EntityId == id }
+func (x *Structure) RelatedToHf(id int) bool                { return x.WorshipHfid == id }
+func (x *Structure) RelatedToArtifact(id int) bool          { return containsInt(x.CopiedArtifactId, id) }
+func (x *Structure) RelatedToSite(id int) bool              { return false }
+func (x *Structure) RelatedToStructure(siteId, id int) bool { return false }
+func (x *Structure) RelatedToRegion(id int) bool            { return false }
 
 func (x *Structure) CheckFields() {
 	if x.Deity != x.EntityId {
@@ -20464,13 +20761,14 @@ func NewUndergroundRegion() *UndergroundRegion {
 		Id_:   -1,
 	}
 }
-func (x *UndergroundRegion) Id() int                       { return x.Id_ }
-func (x *UndergroundRegion) setId(id int)                  { x.Id_ = id }
-func (x *UndergroundRegion) RelatedToEntity(id int) bool   { return false }
-func (x *UndergroundRegion) RelatedToHf(id int) bool       { return false }
-func (x *UndergroundRegion) RelatedToArtifact(id int) bool { return false }
-func (x *UndergroundRegion) RelatedToSite(id int) bool     { return false }
-func (x *UndergroundRegion) RelatedToRegion(id int) bool   { return false }
+func (x *UndergroundRegion) Id() int                                { return x.Id_ }
+func (x *UndergroundRegion) setId(id int)                           { x.Id_ = id }
+func (x *UndergroundRegion) RelatedToEntity(id int) bool            { return false }
+func (x *UndergroundRegion) RelatedToHf(id int) bool                { return false }
+func (x *UndergroundRegion) RelatedToArtifact(id int) bool          { return false }
+func (x *UndergroundRegion) RelatedToSite(id int) bool              { return false }
+func (x *UndergroundRegion) RelatedToStructure(siteId, id int) bool { return false }
+func (x *UndergroundRegion) RelatedToRegion(id int) bool            { return false }
 
 func (x *UndergroundRegion) CheckFields() {
 }
@@ -20512,11 +20810,12 @@ func NewVagueRelationship() *VagueRelationship {
 		Hfid: -1,
 	}
 }
-func (x *VagueRelationship) RelatedToEntity(id int) bool   { return false }
-func (x *VagueRelationship) RelatedToHf(id int) bool       { return x.Hfid == id }
-func (x *VagueRelationship) RelatedToArtifact(id int) bool { return false }
-func (x *VagueRelationship) RelatedToSite(id int) bool     { return false }
-func (x *VagueRelationship) RelatedToRegion(id int) bool   { return false }
+func (x *VagueRelationship) RelatedToEntity(id int) bool            { return false }
+func (x *VagueRelationship) RelatedToHf(id int) bool                { return x.Hfid == id }
+func (x *VagueRelationship) RelatedToArtifact(id int) bool          { return false }
+func (x *VagueRelationship) RelatedToSite(id int) bool              { return false }
+func (x *VagueRelationship) RelatedToStructure(siteId, id int) bool { return false }
+func (x *VagueRelationship) RelatedToRegion(id int) bool            { return false }
 
 func (x *VagueRelationship) CheckFields() {
 }
@@ -20591,14 +20890,15 @@ func NewWorldConstruction() *WorldConstruction {
 		Id_: -1,
 	}
 }
-func (x *WorldConstruction) Id() int                       { return x.Id_ }
-func (x *WorldConstruction) setId(id int)                  { x.Id_ = id }
-func (x *WorldConstruction) Name() string                  { return x.Name_ }
-func (x *WorldConstruction) RelatedToEntity(id int) bool   { return false }
-func (x *WorldConstruction) RelatedToHf(id int) bool       { return false }
-func (x *WorldConstruction) RelatedToArtifact(id int) bool { return false }
-func (x *WorldConstruction) RelatedToSite(id int) bool     { return false }
-func (x *WorldConstruction) RelatedToRegion(id int) bool   { return false }
+func (x *WorldConstruction) Id() int                                { return x.Id_ }
+func (x *WorldConstruction) setId(id int)                           { x.Id_ = id }
+func (x *WorldConstruction) Name() string                           { return x.Name_ }
+func (x *WorldConstruction) RelatedToEntity(id int) bool            { return false }
+func (x *WorldConstruction) RelatedToHf(id int) bool                { return false }
+func (x *WorldConstruction) RelatedToArtifact(id int) bool          { return false }
+func (x *WorldConstruction) RelatedToSite(id int) bool              { return false }
+func (x *WorldConstruction) RelatedToStructure(siteId, id int) bool { return false }
+func (x *WorldConstruction) RelatedToRegion(id int) bool            { return false }
 
 func (x *WorldConstruction) CheckFields() {
 }
@@ -20934,13 +21234,14 @@ func NewWrittenContent() *WrittenContent {
 		PageStart:  -1,
 	}
 }
-func (x *WrittenContent) Id() int                       { return x.Id_ }
-func (x *WrittenContent) setId(id int)                  { x.Id_ = id }
-func (x *WrittenContent) RelatedToEntity(id int) bool   { return false }
-func (x *WrittenContent) RelatedToHf(id int) bool       { return x.AuthorHfid == id }
-func (x *WrittenContent) RelatedToArtifact(id int) bool { return false }
-func (x *WrittenContent) RelatedToSite(id int) bool     { return false }
-func (x *WrittenContent) RelatedToRegion(id int) bool   { return false }
+func (x *WrittenContent) Id() int                                { return x.Id_ }
+func (x *WrittenContent) setId(id int)                           { x.Id_ = id }
+func (x *WrittenContent) RelatedToEntity(id int) bool            { return false }
+func (x *WrittenContent) RelatedToHf(id int) bool                { return x.AuthorHfid == id }
+func (x *WrittenContent) RelatedToArtifact(id int) bool          { return false }
+func (x *WrittenContent) RelatedToSite(id int) bool              { return false }
+func (x *WrittenContent) RelatedToStructure(siteId, id int) bool { return false }
+func (x *WrittenContent) RelatedToRegion(id int) bool            { return false }
 
 func (x *WrittenContent) CheckFields() {
 	if x.PageEnd != x.AuthorHfid {
@@ -39318,7 +39619,7 @@ func parseStructure(p *util.XMLParser) (*Structure, error) {
 				if err != nil {
 					return nil, err
 				}
-				obj.LocalId = num(data)
+				obj.Id_ = num(data)
 			case "name":
 				data, err := p.Value()
 				if err != nil {

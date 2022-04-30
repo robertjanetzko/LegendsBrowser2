@@ -9,6 +9,7 @@ type HistoricalEventDetails interface {
 	RelatedToHf(int) bool
 	RelatedToArtifact(int) bool
 	RelatedToSite(int) bool
+	RelatedToStructure(int, int) bool
 	RelatedToRegion(int) bool
 	Html(*Context) string
 	Type() string
@@ -40,6 +41,8 @@ func NewEventList(world *DfWorld, obj any) *EventList {
 		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToArtifact(x.Id()) })
 	case *Site:
 		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToSite(x.Id()) })
+	case *Structure:
+		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToStructure(x.SiteId, x.Id()) })
 	case *Region:
 		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToRegion(x.Id()) })
 	case []*HistoricalEvent:

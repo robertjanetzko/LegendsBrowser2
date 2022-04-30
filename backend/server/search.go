@@ -33,6 +33,9 @@ func (h searchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	results = seachMap(term, h.server.context.world.HistoricalFigures, results, "/hf")
 	results = seachMap(term, h.server.context.world.Entities, results, "/entity")
 	results = seachMap(term, h.server.context.world.Sites, results, "/site")
+	for _, site := range h.server.context.world.Sites {
+		results = seachMap(term, site.Structures, results, fmt.Sprintf("/site/%d/structure", site.Id_))
+	}
 	results = seachMap(term, h.server.context.world.Regions, results, "/region")
 	results = seachMap(term, h.server.context.world.Artifacts, results, "/artifavt")
 	results = seachMap(term, h.server.context.world.WorldConstructions, results, "/worldconstruction")

@@ -269,7 +269,7 @@ Loop:
 				return nil, err
 			}
 			if v != nil {
-				if v.Name == "id" {
+				if v.Name == "id" || v.Name == "local_id" {
 					idFound = true
 					id, _ = strconv.Atoi(v.Value)
 				}

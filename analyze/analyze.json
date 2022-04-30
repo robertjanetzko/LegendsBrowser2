@@ -7526,6 +7526,7 @@
         "air": true,
         "blood": true,
         "blood drained": true,
+        "cage blasted": true,
         "chasm": true,
         "crushed": true,
         "crushed bridge": true,
@@ -7558,7 +7559,8 @@
         "suicide leaping": true,
         "thirst": true,
         "trap": true,
-        "vanish": true
+        "vanish": true,
+        "vehicle": true
       },
       "Enum": true
     },
@@ -7573,6 +7575,7 @@
         "bleed": true,
         "burn_alive": true,
         "bury_alive": true,
+        "cage": true,
         "cavein": true,
         "chasm": true,
         "collision": true,
@@ -7604,7 +7607,8 @@
         "suffocate": true,
         "thirst": true,
         "trap": true,
-        "vanish": true
+        "vanish": true,
+        "vehicle": true
       },
       "Enum": true
     },
@@ -7711,10 +7715,13 @@
       "Plus": true,
       "Values": {
         "apple wood": true,
+        "bismuth bronze": true,
         "bronze": true,
         "chestnut": true,
         "copper": true,
-        "iron": true
+        "date palm wood": true,
+        "iron": true,
+        "steel": true
       },
       "Enum": true
     },
@@ -16271,6 +16278,93 @@
         "plus": ""
       }
     },
+    "df_world|historical_figures|historical_figure|intrigue_plot": {
+      "": {
+        "name": "",
+        "base": "",
+        "plus": ""
+      },
+      "AcquireArtifact": {
+        "name": "AcquireArtifact",
+        "base": "acquire artifact",
+        "plus": ""
+      },
+      "AssassinateActor": {
+        "name": "AssassinateActor",
+        "base": "assassinate actor",
+        "plus": ""
+      },
+      "AttainRank": {
+        "name": "AttainRank",
+        "base": "attain rank",
+        "plus": ""
+      },
+      "BecomeImmortal": {
+        "name": "BecomeImmortal",
+        "base": "become immortal",
+        "plus": ""
+      },
+      "CorruptActorsGovernment": {
+        "name": "CorruptActorsGovernment",
+        "base": "corrupt actor's government",
+        "plus": ""
+      },
+      "CorruptlyPunishActor": {
+        "name": "CorruptlyPunishActor",
+        "base": "corruptly punish actor",
+        "plus": ""
+      },
+      "Counterintelligence": {
+        "name": "Counterintelligence",
+        "base": "counterintelligence",
+        "plus": ""
+      },
+      "DirectWarToActor": {
+        "name": "DirectWarToActor",
+        "base": "direct war to actor",
+        "plus": ""
+      },
+      "FrameActor": {
+        "name": "FrameActor",
+        "base": "frame actor",
+        "plus": ""
+      },
+      "GrowAssetNetwork": {
+        "name": "GrowAssetNetwork",
+        "base": "grow asset network",
+        "plus": ""
+      },
+      "GrowCorruptionNetwork": {
+        "name": "GrowCorruptionNetwork",
+        "base": "grow corruption network",
+        "plus": ""
+      },
+      "GrowFundingNetwork": {
+        "name": "GrowFundingNetwork",
+        "base": "grow funding network",
+        "plus": ""
+      },
+      "InfiltrateSociety": {
+        "name": "InfiltrateSociety",
+        "base": "infiltrate society",
+        "plus": ""
+      },
+      "KidnapActor": {
+        "name": "KidnapActor",
+        "base": "kidnap actor",
+        "plus": ""
+      },
+      "SabotageActor": {
+        "name": "SabotageActor",
+        "base": "sabotage actor",
+        "plus": ""
+      },
+      "UndeadWorldConquest": {
+        "name": "UndeadWorldConquest",
+        "base": "undead world conquest",
+        "plus": ""
+      }
+    },
     "df_world|regions|region": {
       "Desert": {
         "name": "Desert",
@@ -16435,63 +16529,63 @@
     "df_world|sites|site|structures|structure": {
       "CountingHouse": {
         "name": "CountingHouse",
-        "base": "",
+        "base": "counting house",
         "plus": "counting_house"
       },
       "Dungeon": {
         "name": "Dungeon",
-        "base": "",
+        "base": "dungeon",
         "plus": "dungeon"
       },
       "Guildhall": {
         "name": "Guildhall",
-        "base": "",
+        "base": "guildhall",
         "plus": "guildhall"
       },
       "InnTavern": {
         "name": "InnTavern",
-        "base": "",
+        "base": "inn tavern",
         "plus": "inn_tavern"
       },
       "Keep": {
         "name": "Keep",
-        "base": "",
-        "plus": "keep"
+        "base": "keep",
+        "plus": ""
       },
       "Library": {
         "name": "Library",
-        "base": "",
+        "base": "library",
         "plus": "library"
       },
       "Market": {
         "name": "Market",
-        "base": "",
-        "plus": "market"
+        "base": "market",
+        "plus": ""
       },
       "MeadHall": {
         "name": "MeadHall",
-        "base": "",
-        "plus": "mead_hall"
+        "base": "mead hall",
+        "plus": ""
       },
       "Temple": {
         "name": "Temple",
-        "base": "",
+        "base": "temple",
         "plus": "temple"
       },
       "Tomb": {
         "name": "Tomb",
-        "base": "",
+        "base": "tomb",
         "plus": "tomb"
       },
       "Tower": {
         "name": "Tower",
-        "base": "",
+        "base": "tower",
         "plus": "tower"
       },
       "UnderworldSpire": {
         "name": "UnderworldSpire",
-        "base": "",
-        "plus": "underworld_spire"
+        "base": "underworld spire",
+        "plus": ""
       }
     },
     "df_world|underground_regions|underground_region": {
