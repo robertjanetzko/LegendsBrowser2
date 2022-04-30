@@ -2,6 +2,14 @@ a {
     text-decoration: none;
 }
 
+.object-table td {
+    white-space: nowrap;
+}
+
+td.object {
+    white-space: nowrap;
+}
+
 .hf {
     color: #3366CC;
 }

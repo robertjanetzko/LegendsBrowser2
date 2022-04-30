@@ -16,13 +16,15 @@
 <div class="tab-content" id="nav-tabContent">
     {{- range $t, $v := . }}
     <div class="tab-pane{{ ifFirst $ $t " active" }}" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
-        <table>
+        <table class="table table-hover table-sm table-borderless object-table">
             <tr>
-                <th width="100%">Name</th>
+                <th>Name</th>
+                <th width="100%">Site</th>
             </tr>
             {{- range $v }}{{- if not (eq .Name "") }}
             <tr>
                 <td>{{ structure .SiteId .Id }}</td>
+                <td>{{ site .SiteId }}</td>
             </tr>
             {{- end}}{{- end}}
         </table>

@@ -16,7 +16,7 @@
 <div class="tab-content" id="nav-tabContent">
     {{- range $t, $v := . }}
     <div class="tab-pane{{ ifFirst $ $t " active" }}" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
-        <table>
+        <table class="table table-hover table-sm table-borderless object-table">
             <tr>
                 <th width="100%">Name</th>
                 <th>Type</th>

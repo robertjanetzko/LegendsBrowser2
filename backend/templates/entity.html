@@ -10,7 +10,7 @@
 <table>
     {{- range .Sites }}
     <tr>
-        <td> {{ site . }}</td>
+        <td class="object" style="vertical-align: top;"> {{ site . }}</td>
         <td> {{ template "events.html" events (history .) }}</td>
     </tr>
     {{- end }}

@@ -2,22 +2,17 @@ package server
 
 import (
 	"embed"
-	"encoding/json"
 	"fmt"
 	"io/fs"
-	"io/ioutil"
 	"net/http"
 	"os"
-	"path/filepath"
-	"runtime"
 	"sort"
-	"strings"
+	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/templates"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
-	"github.com/shirou/gopsutil/disk"
 )
 
 type DfServerContext struct {
@@ -57,7 +52,20 @@ func StartServer(world *model.DfWorld, static embed.FS) {
 	srv.RegisterWorldPage("/structures", "structures.html", func(p Parms) any {
 		return flatGrouped(srv.context.world.Sites, func(s *model.Site) []*model.Structure { return util.Values(s.Structures) })
 	})
-	srv.RegisterWorldResourcePage("/structure/{id}", "site.html", func(id int) any { return srv.context.world.Sites[id/100].Structures[id%100] })
+	srv.RegisterWorldPage("/site/{siteId}/structure/{id}", "structure.html", func(p Parms) any {
+		siteId, err := strconv.Atoi(p["siteId"])
+		if err != nil {
+			return nil
+		}
+		structureId, err := strconv.Atoi(p["id"])
+		if err != nil {
+			return nil
+		}
+		if site, ok := srv.context.world.Sites[siteId]; ok {
+			return site.Structures[structureId]
+		}
+		return nil
+	})
 
 	srv.RegisterWorldPage("/worldconstructions", "worldconstructions.html", func(p Parms) any { return grouped(srv.context.world.WorldConstructions) })
 	srv.RegisterWorldResourcePage("/worldconstruction/{id}", "worldconstruction.html", func(id int) any { return srv.context.world.WorldConstructions[id] })
@@ -66,7 +74,7 @@ func StartServer(world *model.DfWorld, static embed.FS) {
 	srv.RegisterWorldResourcePage("/artifact/{id}", "artifact.html", func(id int) any { return srv.context.world.Artifacts[id] })
 
 	srv.RegisterWorldPage("/artforms", "artforms.html", func(p Parms) any {
-		return struct {
+		return &struct {
 			DanceForms   map[string][]*model.DanceForm
 			MusicalForms map[string][]*model.MusicalForm
 			PoeticForms  map[string][]*model.PoeticForm
@@ -123,10 +131,7 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(path)
 		index, err := h.staticFS.ReadFile(h.staticPath + "/" + h.indexPath)
 		if err != nil {
-			err = h.server.templates.Render(w, "notFound.html", nil)
-			if err != nil {
-				httpError(w, err)
-			}
+			h.server.notFound(w)
 			return
 		}
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
@@ -149,112 +154,10 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	http.FileServer(http.FS(statics)).ServeHTTP(w, r)
 }
 
-type loadHandler struct {
-	server *DfServer
-}
-
-type loadProgress struct {
-	Msg      string  `json:"msg"`
-	Progress float64 `json:"progress"`
-	Done     bool    `json:"done"`
-}
-
-func (h loadHandler) Progress() *loadProgress {
-	percent := 0.0
-	p := h.server.context.progress
-	if p.ProgressBar != nil {
-		percent = float64(p.ProgressBar.Current()*100) / float64(p.ProgressBar.Total())
-	}
-
-	return &loadProgress{
-		Msg:      h.server.context.progress.Message,
-		Progress: percent,
-		Done:     h.server.context.world != nil,
-	}
-}
-
-func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path == "/load/progress" {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-
-		json.NewEncoder(w).Encode(h.Progress())
-		return
-	}
-
-	var partitions []string
-	if runtime.GOOS == "windows" {
-		ps, _ := disk.Partitions(false)
-		partitions = util.Map(ps, func(p disk.PartitionStat) string { return p.Mountpoint + `\` })
-	} else {
-		partitions = append(partitions, "/")
-	}
-
-	path := r.URL.Query().Get("p")
-
-	p := &paths{
-		Partitions: partitions,
-		Current:    path,
-	}
-	if p.Current == "" {
-		p.Current = "."
-	}
-	var err error
-	p.Current, err = filepath.Abs(p.Current)
+func (srv *DfServer) notFound(w http.ResponseWriter) {
+	err := srv.templates.Render(w, "notFound.html", nil)
 	if err != nil {
 		httpError(w, err)
-		return
-	}
-
-	if f, err := os.Stat(p.Current); err == nil {
-		if f.IsDir() {
-			p.List, err = ioutil.ReadDir(p.Current)
-			if err != nil {
-				httpError(w, err)
-				return
-			}
-
-			err = h.server.templates.Render(w, "load.html", p)
-			if err != nil {
-				httpError(w, err)
-			}
-			return
-		} else {
-			h.server.context.isLoading = true
-			h.server.context.world = nil
-			go loadWorld(h.server, p.Current)
-			http.Redirect(w, r, "/", http.StatusSeeOther)
-			return
-		}
-	}
-	http.Redirect(w, r, "/load", http.StatusSeeOther)
-}
-
-func isLegendsXml(f fs.FileInfo) bool {
-	return strings.HasSuffix(f.Name(), "-legends.xml")
-}
-
-func loadWorld(server *DfServer, file string) {
-	runtime.GC()
-	wrld, _ := model.Parse(file, server.context.progress)
-	server.context.world = wrld
-	server.context.isLoading = false
-}
-
-type paths struct {
-	Current    string
-	List       []fs.FileInfo
-	Partitions []string
-}
-
-func (srv *DfServer) renderLoading(w http.ResponseWriter, r *http.Request) {
-	if srv.context.isLoading {
-		err := srv.templates.Render(w, "loading.html", srv.loader.Progress())
-		if err != nil {
-			httpError(w, err)
-		}
-	} else {
-		http.Redirect(w, r, "/load", http.StatusSeeOther)
 	}
 }
 
@@ -301,51 +204,5 @@ func grouped[K comparable, T namedTyped](input map[K]T) map[string][]T {
 		sort.Slice(v, func(i, j int) bool { return v[i].Name() < v[j].Name() })
 	}
 
-	return output
-}
-
-type searchHandler struct {
-	server *DfServer
-}
-
-type SearchResult struct {
-	Label string `json:"label"`
-	Value string `json:"value"`
-}
-
-func (h searchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	term := r.URL.Query().Get("term")
-
-	var results []SearchResult
-
-	results = seachMap(term, h.server.context.world.HistoricalFigures, results, "/hf")
-	results = seachMap(term, h.server.context.world.Entities, results, "/entity")
-	results = seachMap(term, h.server.context.world.Sites, results, "/site")
-	results = seachMap(term, h.server.context.world.Regions, results, "/region")
-	results = seachMap(term, h.server.context.world.Artifacts, results, "/artifavt")
-	results = seachMap(term, h.server.context.world.WorldConstructions, results, "/worldconstruction")
-	results = seachMap(term, h.server.context.world.DanceForms, results, "/danceForm")
-	results = seachMap(term, h.server.context.world.MusicalForms, results, "/musicalForm")
-	results = seachMap(term, h.server.context.world.PoeticForms, results, "/poeticForm")
-	results = seachMap(term, h.server.context.world.WrittenContents, results, "/writtencontent")
-	results = seachMap(term, h.server.context.world.Landmasses, results, "/landmass")
-	results = seachMap(term, h.server.context.world.MountainPeaks, results, "/mountain")
-
-	sort.Slice(results, func(i, j int) bool { return results[i].Label < results[j].Label })
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(results)
-}
-
-func seachMap[T model.Named](s string, input map[int]T, output []SearchResult, baseUrl string) []SearchResult {
-	for id, v := range input {
-		if strings.Contains(v.Name(), s) {
-			output = append(output, SearchResult{
-				Label: util.Title(v.Name()),
-				Value: fmt.Sprintf("%s/%d", baseUrl, id),
-			})
-		}
-	}
 	return output
 }
