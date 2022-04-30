@@ -1,0 +1,115 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Search Results{{end}}
+
+{{define "content"}}
+<h3>Search Results for "{{.Term}}"</h3>
+
+<div class="row">
+    {{- if ne 0 (len .Entities) }}
+    <div class="col-4">
+        <h5>Entities</h5>
+        <ul>
+            {{range .Entities}}<li>{{ entity .Id }}</li>{{end}}
+        </ul>
+    </div>
+    {{- end}}
+    {{- if ne 0 (len .Sites) }}
+    <div class="col-4">
+        <h5>Sites</h5>
+        <ul>
+            {{range .Sites}}<li>{{ site .Id }}</li>{{end}}
+        </ul>
+    </div>
+    {{- end}}
+    {{- if ne 0 (len .Structures) }}
+    <div class="col-4">
+        <h5>Structures</h5>
+        <ul>
+            {{range .Structures}}<li>{{ structure .SiteId .Id }}</li>{{end}}
+        </ul>
+    </div>
+    {{- end}}
+    {{- if ne 0 (len .Regions) }}
+    <div class="col-4">
+        <h5>Regions</h5>
+        <ul>
+            {{range .Regions}}<li>{{ region .Id }}</li>{{end}}
+        </ul>
+    </div>
+    {{- end}}
+    {{- if ne 0 (len .Artifacts) }}
+    <div class="col-4">
+        <h5>Artifacts</h5>
+        <ul>
+            {{range .Artifacts}}<li>{{ artifact .Id }}</li>{{end}}
+        </ul>
+    </div>
+    {{- end}}
+    {{- if ne 0 (len .HistoricalFigures) }}
+    <div class="col-4">
+        <h5>HistoricalFigures</h5>
+        <ul>
+            {{range .HistoricalFigures}}<li>{{ hf .Id }}</li>{{end}}
+        </ul>
+    </div>
+    {{- end}}
+    {{- if ne 0 (len .WorldConstructions) }}
+    <div class="col-4">
+        <h5>WorldConstructions</h5>
+        <ul>
+            {{range .WorldConstructions}}<li>{{ worldconstruction .Id }}</li>{{end}}
+        </ul>
+    </div>
+    {{- end}}
+    {{- if ne 0 (len .DanceForms) }}
+    <div class="col-4">
+        <h5>DanceForms</h5>
+        <ul>
+            {{range .DanceForms}}<li>{{ danceForm .Id }}</li>{{end}}
+        </ul>
+    </div>
+    {{- end}}
+    {{- if ne 0 (len .MusicalForms) }}
+    <div class="col-4">
+        <h5>MusicalForms</h5>
+        <ul>
+            {{range .MusicalForms}}<li>{{ musicalForm .Id }}</li>{{end}}
+        </ul>
+    </div>
+    {{- end}}
+    {{- if ne 0 (len .PoeticForms) }}
+    <div class="col-4">
+        <h5>PoeticForms</h5>
+        <ul>
+            {{range .PoeticForms}}<li>{{ poeticForm .Id }}</li>{{end}}
+        </ul>
+    </div>
+    {{- end}}
+    {{- if ne 0 (len .WrittenContents) }}
+    <div class="col-4">
+        <h5>Written Contents</h5>
+        <ul>
+            {{range .WrittenContents}}<li>{{ writtenContent .Id }}</li>{{end}}
+        </ul>
+    </div>
+    {{- end}}
+    {{- if ne 0 (len .Landmasses) }}
+    <div class="col-4">
+        <h5>Landmasses</h5>
+        <ul>
+            {{range .Landmasses}}<li>{{ landmass .Id }}</li>{{end}}
+        </ul>
+    </div>
+    {{- end}}
+    {{- if ne 0 (len .MountainPeaks) }}
+    <div class="col-4">
+        <h5>Mountain Peaks</h5>
+        <ul>
+            {{range .MountainPeaks}}<li>{{ mountain .Id }}</li>{{end}}
+        </ul>
+    </div>
+    {{- end}}
+</div>
+
+{{- end }}

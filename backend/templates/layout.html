@@ -55,9 +55,10 @@
                         <a class="nav-link" href="/collections">Collections</a>
                     </li>
                 </ul>
-                <form class="d-flex">
+                <form class="d-flex" action="/search" method="get">
                     <div class="input-group">
-                        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
+                        <input id="search" class="form-control" name="search" type="search" placeholder="Search" aria-label="Search"
+                            autocomplete="off">
                         <button class="btn btn-outline-secondary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </form>

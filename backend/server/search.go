@@ -28,32 +28,78 @@ func (h searchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	term := r.URL.Query().Get("term")
 
-	var results []SearchResult
+	world := h.server.context.world
+	if term != "" {
+		var results []SearchResult
+		results = searchMap(term, world.HistoricalFigures, results, "/hf")
+		results = searchMap(term, world.Entities, results, "/entity")
+		results = searchMap(term, world.Sites, results, "/site")
+		for _, site := range world.Sites {
+			results = searchMap(term, site.Structures, results, fmt.Sprintf("/site/%d/structure", site.Id_))
+		}
+		results = searchMap(term, world.Regions, results, "/region")
+		results = searchMap(term, world.Artifacts, results, "/artifavt")
+		results = searchMap(term, world.WorldConstructions, results, "/worldconstruction")
+		results = searchMap(term, world.DanceForms, results, "/danceForm")
+		results = searchMap(term, world.MusicalForms, results, "/musicalForm")
+		results = searchMap(term, world.PoeticForms, results, "/poeticForm")
+		results = searchMap(term, world.WrittenContents, results, "/writtencontent")
+		results = searchMap(term, world.Landmasses, results, "/landmass")
+		results = searchMap(term, world.MountainPeaks, results, "/mountain")
 
-	results = seachMap(term, h.server.context.world.HistoricalFigures, results, "/hf")
-	results = seachMap(term, h.server.context.world.Entities, results, "/entity")
-	results = seachMap(term, h.server.context.world.Sites, results, "/site")
-	for _, site := range h.server.context.world.Sites {
-		results = seachMap(term, site.Structures, results, fmt.Sprintf("/site/%d/structure", site.Id_))
+		sort.Slice(results, func(i, j int) bool { return results[i].Label < results[j].Label })
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(results)
+	} else {
+		term = r.URL.Query().Get("search")
+
+		var structures []*model.Structure
+		for _, site := range world.Sites {
+			structures = search(term, site.Structures, structures)
+		}
+
+		results := struct {
+			Term               string
+			HistoricalFigures  []*model.HistoricalFigure
+			Entities           []*model.Entity
+			Sites              []*model.Site
+			Structures         []*model.Structure
+			Regions            []*model.Region
+			Artifacts          []*model.Artifact
+			WorldConstructions []*model.WorldConstruction
+			DanceForms         []*model.DanceForm
+			MusicalForms       []*model.MusicalForm
+			PoeticForms        []*model.PoeticForm
+			WrittenContents    []*model.WrittenContent
+			Landmasses         []*model.Landmass
+			MountainPeaks      []*model.MountainPeak
+		}{
+			Term:               term,
+			HistoricalFigures:  search(term, world.HistoricalFigures, nil),
+			Entities:           search(term, world.Entities, nil),
+			Sites:              search(term, world.Sites, nil),
+			Structures:         structures,
+			Regions:            search(term, world.Regions, nil),
+			Artifacts:          search(term, world.Artifacts, nil),
+			WorldConstructions: search(term, world.WorldConstructions, nil),
+			DanceForms:         search(term, world.DanceForms, nil),
+			MusicalForms:       search(term, world.MusicalForms, nil),
+			PoeticForms:        search(term, world.PoeticForms, nil),
+			WrittenContents:    search(term, world.WrittenContents, nil),
+			Landmasses:         search(term, world.Landmasses, nil),
+			MountainPeaks:      search(term, world.MountainPeaks, nil),
+		}
+
+		err := h.server.templates.Render(w, "search.html", results)
+		if err != nil {
+			httpError(w, err)
+		}
 	}
-	results = seachMap(term, h.server.context.world.Regions, results, "/region")
-	results = seachMap(term, h.server.context.world.Artifacts, results, "/artifavt")
-	results = seachMap(term, h.server.context.world.WorldConstructions, results, "/worldconstruction")
-	results = seachMap(term, h.server.context.world.DanceForms, results, "/danceForm")
-	results = seachMap(term, h.server.context.world.MusicalForms, results, "/musicalForm")
-	results = seachMap(term, h.server.context.world.PoeticForms, results, "/poeticForm")
-	results = seachMap(term, h.server.context.world.WrittenContents, results, "/writtencontent")
-	results = seachMap(term, h.server.context.world.Landmasses, results, "/landmass")
-	results = seachMap(term, h.server.context.world.MountainPeaks, results, "/mountain")
-
-	sort.Slice(results, func(i, j int) bool { return results[i].Label < results[j].Label })
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(results)
 }
 
-func seachMap[T model.Named](s string, input map[int]T, output []SearchResult, baseUrl string) []SearchResult {
+func searchMap[T model.Named](s string, input map[int]T, output []SearchResult, baseUrl string) []SearchResult {
 	s = strings.ToLower(s)
 	for id, v := range input {
 		if strings.Contains(strings.ToLower(v.Name()), s) {
@@ -63,5 +109,16 @@ func seachMap[T model.Named](s string, input map[int]T, output []SearchResult, b
 			})
 		}
 	}
+	return output
+}
+
+func search[T model.Named](s string, input map[int]T, output []T) []T {
+	s = strings.ToLower(s)
+	for _, v := range input {
+		if strings.Contains(strings.ToLower(v.Name()), s) {
+			output = append(output, v)
+		}
+	}
+	sort.Slice(output, func(i, j int) bool { return output[i].Name() < output[j].Name() })
 	return output
 }
