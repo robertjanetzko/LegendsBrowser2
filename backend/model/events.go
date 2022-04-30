@@ -1261,7 +1261,512 @@ func (x *HistoricalEventItemStolen) Html(c *Context) string {
 }
 
 func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
-	return c.hf(x.Hfid) + util.If(x.First, " was the very first to discover ", " independently discovered ") + x.Knowledge.String()
+	knowledge := x.Knowledge.String()
+	switch x.Knowledge {
+	case HistoricalEventKnowledgeDiscoveredKnowledge_Unknown:
+		knowledge = "unknown knowledge"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyDatesOfLunarAndSolarEclipses:
+		knowledge = "the dates of lunar and solar eclipses"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyDaylightVariationWithSolarYear:
+		knowledge = "the variation of daylight with the season"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyGeocentricModel:
+		knowledge = "the theory that the sun moves around the world"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyHeightOfTidesVsMoonAndSun:
+		knowledge = "the height of the tides, the moon and the sun"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyHeliocentricModel:
+		knowledge = "the theory that the world moves around the sun"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyMethodEmpiricalObservation:
+		knowledge = "methods of empirical observation in astronomy"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPathOfTheMoon:
+		knowledge = "the path of the moon"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPhasesOfTheMoon:
+		knowledge = "the phases of the moon"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyRelationshipBetweenLunarSolarYear:
+		knowledge = "the relationship between the lunar and solar year"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyStarCatalogues100:
+		knowledge = "the compilation of information about stars"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyStarCatalogues1000:
+		knowledge = "the precise compilation of information about stars"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyStarCharts:
+		knowledge = "the creation of star charts"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyStarColorClassification:
+		knowledge = "the classification of stars according to color"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyStarMagnitudeClassification:
+		knowledge = "the classification of stars according to brightness"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomySummerWinterMoon:
+		knowledge = "the rise of the moon according to the season"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomySummerWinterSun:
+		knowledge = "the rise of the sun according to the season"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyTidesAndTheMoon:
+		knowledge = "the relationship between the moon and the tides"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsAdhesives:
+		knowledge = "the preparation and use of adhesive materials"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsNitricAcid:
+		knowledge = "the preparation of spirit of niter"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsSulfuricAcid:
+		knowledge = "the preparation of oil of vitriol"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryClassificationAlkaliAndAcids:
+		knowledge = "the classification of alkali and acids"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryClassificationCombustibles:
+		knowledge = "the classification of combustible materials"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryClassificationElementalTheory:
+		knowledge = "the classification of materials based on which elemental materials might form them"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryClassificationOres:
+		knowledge = "the classification of ores"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryClassificationScratchTest:
+		knowledge = "a method to classify the hardness of materials by scratching them against each other"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratoryAlembic:
+		knowledge = "the construction and use of the alembic"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratoryBlastFurnace:
+		knowledge = "the construction and use of the blast furnace"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratoryCrucible:
+		knowledge = "the construction and use of the crucible"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratoryGlassAmpoule:
+		knowledge = "the construction and use of the ampoule"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratoryGlassBeaker:
+		knowledge = "the construction and use of the beaker"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratoryGlassFlask:
+		knowledge = "the construction and use of the flask"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratoryGlassFunnel:
+		knowledge = "the construction and use of the funnel"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratoryGlassRetort:
+		knowledge = "the construction and use of the retort"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratoryGlassVial:
+		knowledge = "the construction and use of the vial"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratoryLabOvens:
+		knowledge = "the construction and use of laboratory ovens"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratorySystematicExperiments:
+		knowledge = "methods for performing experiments systematically in the laboratory"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratoryTheoryOfDistillation:
+		knowledge = "the theory and methods involved in distillation"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratoryTheoryOfEvaporation:
+		knowledge = "the theory and methods involved in evaporation"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryLaboratoryTheoryOfLiquidLiquidExtraction:
+		knowledge = "the theory and methods involved in the extraction of a constituent liquid from one solution to another"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryMetallurgyAlloys:
+		knowledge = "the mixing of metals to produce alloys"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringAstronomyArmillarySphere:
+		knowledge = "the construction and use of armillary spheres"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringAstronomyAstrolabe:
+		knowledge = "the construction and use of the astrolabe"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringAstronomyDioptra:
+		knowledge = "the construction and use of the dioptra"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringConstructionWoodLamination:
+		knowledge = "the use of lamination"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringDesignModelsAndTemplates:
+		knowledge = "the use of models and templates in engineering"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringFluidArchimedesPrinciple:
+		knowledge = "the law of fluid displacement"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringFluidForcePump:
+		knowledge = "the construction and use of the force pump"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringFluidTheoryOfSiphon:
+		knowledge = "the action of the siphon"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringFluidValves:
+		knowledge = "the construction and use of valves"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringHorologyConicalWaterClock:
+		knowledge = "the use of conical shapes in water-based clocks to improve their accuracy"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringHorologyHourglass:
+		knowledge = "the construction and use of the hourglass"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringHorologyShadowClock:
+		knowledge = "the use of shadows to tell direction and time"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringHorologyWaterClock:
+		knowledge = "the use of water-based devices to tell time"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringHorologyWaterClockReservoir:
+		knowledge = "the use of reservoirs in water-based clocks to improve their accuracy"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineBalanceWheel:
+		knowledge = "the construction and use of the balance wheel"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineBellows:
+		knowledge = "the construction and use of the bellows"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCamshaft:
+		knowledge = "the construction and use of the camshaft"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineChainDrive:
+		knowledge = "the construction and use of chain drives"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineChariotOdometer:
+		knowledge = "the construction and use of the chariot odometer"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCrank:
+		knowledge = "the construction and use of the crank"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCrankshaft:
+		knowledge = "the construction and use of the crankshaft"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineDifferentialGear:
+		knowledge = "the construction and use of the differential gear"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineDoubleActingPistonBellows:
+		knowledge = "the construction and use of the double-acting piston bellows"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineLever:
+		knowledge = "the construction and use of the lever"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineMechanicalCompass:
+		knowledge = "the construction and use of the mechanical compass"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachinePadlock:
+		knowledge = "the construction and use of the padlock"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachinePiston:
+		knowledge = "the construction and use of the piston"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachinePulley:
+		knowledge = "the construction and use of the pulley"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineScrew:
+		knowledge = "the construction and use of the screw"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineStraightBeamBalance:
+		knowledge = "the construction and use of the straight-beam balance"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineTheoryOfGears:
+		knowledge = "the reasons why gears are effective"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineTheoryOfLever:
+		knowledge = "the reasons why the lever is effective"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineTheoryOfPulley:
+		knowledge = "the reasons why pulleys are effective"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineTheoryOfScrew:
+		knowledge = "the reasons why screws are effective"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineTheoryOfWedge:
+		knowledge = "the reasons why the wedge is effective"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineTheoryOfWheelAndAxle:
+		knowledge = "the reasons why the wheel-and-axle construction is effective"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineTripHammer:
+		knowledge = "the construction and use of the trip-hammer"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineTumblerLock:
+		knowledge = "the construction and use of the tumbler lock"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineVergeEscapement:
+		knowledge = "the construction and use of the verge escapement"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineWardedLock:
+		knowledge = "the construction and use of the warded lock"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineWaterPoweredSawmill:
+		knowledge = "the construction and use of the water-powered sawmill"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineWaterWheel:
+		knowledge = "the construction and use of the water wheel"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineWindlass:
+		knowledge = "the construction and use of the windlass"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringOpticsCameraObscura:
+		knowledge = "the construction and use of the camera obscura"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringOpticsCrystalLens:
+		knowledge = "the construction and use of the crystal lens"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringOpticsGlassLens:
+		knowledge = "the construction and use of the glass lens"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringOpticsTheoryOfColor:
+		knowledge = "the theory of light and color"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringOpticsWaterFilledSpheres:
+		knowledge = "the construction and use of water-filled spheres as lenses"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyBasic:
+		knowledge = "the process involved in creating maps"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyEconomic:
+		knowledge = "the placement of economic information on maps"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyGeological:
+		knowledge = "the placement of geological information on maps"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographyFormAtlas:
+		knowledge = "the collection of maps and other information together into a single text"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographyMethodEconomicDataCollection:
+		knowledge = "the process of economic data collection"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographySurveyingBasic:
+		knowledge = "the process of surveying land"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographySurveyingStaff:
+		knowledge = "the construction and use of the surveying staff"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographyTheoryDeltaFormation:
+		knowledge = "the process of the formation of deltas at the mouths of rivers"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographyTheoryOriginOfRainfallFromEvapCondense:
+		knowledge = "the origin of rainfall through evaporation and condensation"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographyTheoryWaterCycle:
+		knowledge = "a world-wide cycle involving precipitation, oceans, rivers, and other forms of water"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographyTheoryWindPatterns:
+		knowledge = "the forces that govern wind patterns"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryFormAlternateHistory:
+		knowledge = "the exploration of how history would be different if some key past events had transpired differently"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryFormAutobiographicalAdventure:
+		knowledge = "the method of writing a biography of oneself, particularly as it concerns a military campaign or adventure"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryFormBiographicalDictionaries:
+		knowledge = "the compilation of brief biographies into one large collection"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryFormBiography:
+		knowledge = "the method of writing the history of a single individual"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryFormComparativeBiography:
+		knowledge = "the method of compiling several biographies to compare and contrast the subjects' character and to gain insight into history"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryFormCulturalComparison:
+		knowledge = "the method of comparing and contrasting different cultures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryFormCulturalHistory:
+		knowledge = "the method of accurately and comprehensively describing cultures and civilizations"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryFormEncyclopedia:
+		knowledge = "the compilation of many summaries into a single text"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryFormGenealogy:
+		knowledge = "the compilation of family lineages and methods of displaying them artfully"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryFormTreatiseOnTechEvolution:
+		knowledge = "the method of examining artifacts to determine how methods have changed over time"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingBasicArchaeology:
+		knowledge = "the method of collecting and evaluating artifacts to learn about history and culture"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingBasicReliability:
+		knowledge = "the reliability of sources"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingPersonalInterviews:
+		knowledge = "using personal interviews as sources"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfCulturalDifferences:
+		knowledge = "the role of cultural differences in source reliability and interpretation"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfStateBiasAndPropaganda:
+		knowledge = "the role of state bias and propaganda in sources"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheoryHistoricalCausation:
+		knowledge = "the causes of historical events"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheoryHistoricalCycles:
+		knowledge = "the notion of historical, governmental and social cycles"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheorySocialCohesion:
+		knowledge = "the notion of bonds between members of a community"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheorySocialConflict:
+		knowledge = "the notion of conflict between members of a community"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraBalancingAndCompletion:
+		knowledge = "the technique of balancing and completion for solving equations"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraDivergenceOfHarmonicSeries:
+		knowledge = "the divergence of the harmonic series"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraFiniteSummationFormulas:
+		knowledge = "simple formulas for certain arbitrarily large sums"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraPascalsTriangle:
+		knowledge = "a triangular configuration of numbers relating to the successive powers of any sum"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraQuadraticByCompletingSquare:
+		knowledge = "the solving of quadratic equations by completion of the square"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraQuadraticFormula:
+		knowledge = "a formula which solves quadratic equations"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraSolvingHigherOrderPolynomials:
+		knowledge = "methods for solving certain equations involving powers higher than the quadratic"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraSolvingLinearSystems:
+		knowledge = "methods of solving systems of equations"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryAreaOfTriangleFromSideLengths:
+		knowledge = "the computation of the area of a triangle from its three side lengths alone"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryBasicObjects:
+		knowledge = "geometric objects: points, lines, circles, triangles, and so on"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryExistenceOfIncommensurableRatios:
+		knowledge = "the existence of incommensurable ratios"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryGeometricMeanTheorem:
+		knowledge = "the relationship between the length of the altitude of a right triangle and the lengths of the segments into which it divides the hypotenuse"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryInscribedTriangleOnDiameterIsRight:
+		knowledge = "the angles of triangles inscribed in a circle with one edge on the diameter"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryIsoscelesBaseAnglesEqual:
+		knowledge = "the equality of the base angle of isosceles triangles"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPiTo4Digits:
+		knowledge = "the value of pi to four digits"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPropertiesOfChords:
+		knowledge = "the properties of chords"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTheorem:
+		knowledge = "the relationship between the lengths of the hypotenuse of a right triangle and the other two sides"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTriplesSmall:
+		knowledge = "examples of triples of large whole numbers which, when taken together, are the lengths of the sides of a right triangle"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometrySimilarAndCongruentTriangles:
+		knowledge = "the properties of similar and congruent triangles"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryVolumeOfPyramid:
+		knowledge = "the computation of the volume of different pyramids"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsMethodAxiomaticReasoning:
+		knowledge = "axiomatic reasoning"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsMethodExhaustion:
+		knowledge = "an approximation of the ratio of a circumference of a circle to its diameter, using the area of polygons and the method of exhaustion"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsMethodProofByContradiction:
+		knowledge = "the method of proof by contradiction"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationLargeNumbers:
+		knowledge = "notation for very large numbers"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationNegativeNumbers:
+		knowledge = "notation for negative quantities"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationPositional:
+		knowledge = "positional notation"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationSyncopatedAlgebra:
+		knowledge = "the idea of using symbolic notation for addition"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationZero:
+		knowledge = "a symbol for nothingness"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersAlgorithmForComputingGcd:
+		knowledge = "an algorithm for computing the greatest common divisor of two numbers"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersChineseRemainderAlgorithm:
+		knowledge = "an algorithm for computing a number which has given remainders when divided by several given primes"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersDivisionAlgorithm:
+		knowledge = "an algorithm for dividing one number into another, possibly yielding a remainder"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersInfinitePrimes:
+		knowledge = "a proof that there are infinitely many prime numbers"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersRootTwoTo5Digits:
+		knowledge = "a proof that the length of a diagonal of a square is incommensurable with its edge"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersSieveAlgorithmForPrimes:
+		knowledge = "an algorithm for calculating prime numbers"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersUniquePrimeFactorization:
+		knowledge = "the unique decomposition of a number into products of its prime divisors"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodAnesthesia:
+		knowledge = "anesthesia"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodAutopsy:
+		knowledge = "the method of autopsy"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodCauterization:
+		knowledge = "cauterization"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodFractureImmobilization:
+		knowledge = "the method of fracture immobilization"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodFractureTreatment:
+		knowledge = "the treatment of fractures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodHerniaSurgery:
+		knowledge = "hernia surgery"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodPhysicalExamination:
+		knowledge = "the method of physical examination in diagnosing illness"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryDraining:
+		knowledge = "the surgical method of draining"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryExcision:
+		knowledge = "the surgical method of excision"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryIncision:
+		knowledge = "the surgical method of incision"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryLigature:
+		knowledge = "the surgical method of ligature"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryProbing:
+		knowledge = "the surgical method of probing"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryScraping:
+		knowledge = "the surgical method of scraping"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgerySuturing:
+		knowledge = "the surgical method of suturing"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodTracheotomySurgery:
+		knowledge = "the tracheotomy surgery"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodTreatmentOfTraumaticInjuries:
+		knowledge = "the treatment of traumatic injuries"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryAnatomicalStudies:
+		knowledge = "anatomical studies for medical edification"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryBloodVessels:
+		knowledge = "the distinction between veins and arteries"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfBodilyFluids:
+		knowledge = "the classification of bodily fluids"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfMuscles:
+		knowledge = "the classification of muscles"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryComparativeAnatomy:
+		knowledge = "comparative anatomical studies for the use in medicine"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryConvalescence:
+		knowledge = "the theory of convalescence"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryDiseaseAndFouledWater:
+		knowledge = "the connection between disease and fouled water"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryDiseaseClassification:
+		knowledge = "the classification of disease"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryEndemicDisease:
+		knowledge = "the theory of endemic disease"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryEpidemicDisease:
+		knowledge = "the theory of epidemic disease"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryExacerbation:
+		knowledge = "the notion of the exacerbation of a patient's condition"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryEyeAnatomy:
+		knowledge = "the anatomy of the eye"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryFractureClassification:
+		knowledge = "the classification of fractures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryMotorVsSensoryNerves:
+		knowledge = "the distinction between motor and sensory nerves"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryParoxysm:
+		knowledge = "the notion of paroxysm"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPrognosis:
+		knowledge = "determining the likely outcome of a disease given a patient's current status"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryMedicine:
+		knowledge = "pulmonary medicine"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheorySpecializedSurgicalInstruments:
+		knowledge = "the use of specialized surgical instruments"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheorySurgicalModels:
+		knowledge = "the use of practice models in surgery"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryTheVoice:
+		knowledge = "the source of the voice"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryToxicology:
+		knowledge = "the classification of toxic substances"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolAnimalRemedies:
+		knowledge = "remedies prepared from animals"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolAnimalsAsSurgicalModels:
+		knowledge = "the use of animals as surgical models"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolBandages:
+		knowledge = "the method of bandaging wounds"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolDedicatedHospitals:
+		knowledge = "the preparation and use of dedicated hospitals"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolHerbalRemedies:
+		knowledge = "herbal remedies"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolMineralRemedies:
+		knowledge = "mineral remedies"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolMudBagsAsSurgicalModels:
+		knowledge = "the use of mud bags as surgical models"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolPlantsAsSurgicalModels:
+		knowledge = "the use of plants as surgical models"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolScalpel:
+		knowledge = "the construction and use of the scalpel"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolSurgicalNeedles:
+		knowledge = "the construction and use of surgical needles"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolSurgicalScissors:
+		knowledge = "the construction and use of surgical scissors"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistMethodDissection:
+		knowledge = "the dissection of creatures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistObservationAnatomy:
+		knowledge = "the anatomical study of creatures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistObservationDiseases:
+		knowledge = "the diseases of creatures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistObservationEmbriologicalDevelopment:
+		knowledge = "the embryological development of creatures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistObservationForagingBehaviorAndDiet:
+		knowledge = "the foraging behavior and diet of creatures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistObservationMigrationPatterns:
+		knowledge = "the migratory patterns of creatures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistObservationReproductiveBehavior:
+		knowledge = "the reproductive behavior of creatures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistObservationSocialBehavior:
+		knowledge = "the social behavior of creatures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistTheoryClassificationByPhysicalFeatures:
+		knowledge = "the classification of creatures by their physical features"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistTheoryClimaticAdaptation:
+		knowledge = "the way that creatures are suited to the climates in which they live"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistTheoryComparativeAnatomy:
+		knowledge = "the comparison of the anatomy of creatures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistTheoryFoodChain:
+		knowledge = "the links between the diets of different creatures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistTheoryStruggleForExistence:
+		knowledge = "the struggle for survival among creatures"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyAestheticsNatureOfBeauty:
+		knowledge = "discourse on the nature of beauty"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyAestheticsValueOfArt:
+		knowledge = "discourse on the value of art"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyEpistemologyBelief:
+		knowledge = "discourse on the nature of belief"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyEpistemologyJustification:
+		knowledge = "discourse on the nature of justification"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyEpistemologyPerception:
+		knowledge = "discourse on the nature of perception"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyEpistemologyTruth:
+		knowledge = "discourse on the nature of truth"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyEthicsAppliedInterpersonalConduct:
+		knowledge = "discourse on ethics as applied to interpersonal conduct"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyEthicsAppliedMedical:
+		knowledge = "discourse on medical ethics"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyEthicsAppliedMilitary:
+		knowledge = "discourse on ethics as applied to war"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyEthicsIndividualValue:
+		knowledge = "discourse on the meaning of individual happiness"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyEthicsStateConsequentialism:
+		knowledge = "discourse on ethics as applied to the benefit of the state"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyLogicAnalogicalInference:
+		knowledge = "analogical inference"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyLogicDeductiveReasoning:
+		knowledge = "deductive reasoning"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyLogicDialecticReasoning:
+		knowledge = "dialectic reasoning"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyLogicDirectInference:
+		knowledge = "direct inference"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyLogicFormalReasoning:
+		knowledge = "formal reasoning"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyLogicHypotheticalSyllogisms:
+		knowledge = "hypothetical syllogisms"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyLogicInductiveReasoning:
+		knowledge = "inductive reasoning"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyLogicSyllogisticLogic:
+		knowledge = "syllogistic logic"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyMetaphysicsCausation:
+		knowledge = "the nature of causation"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyMetaphysicsEvents:
+		knowledge = "discourse on the nature of events"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyMetaphysicsExistence:
+		knowledge = "the nature of existence"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyMetaphysicsMindBody:
+		knowledge = "discourse on the nature of mind and body"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyMetaphysicsObjectsAndProperties:
+		knowledge = "the relationship between objects and their properties"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyMetaphysicsProcesses:
+		knowledge = "the nature of processes"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyMetaphysicsTime:
+		knowledge = "discourse on the nature of time"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophyMetaphysicsWholesAndParts:
+		knowledge = "the relationship between wholes and parts"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophySpecializedEducation:
+		knowledge = "education, its forms and recommendations"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophySpecializedLanguageDictionary:
+		knowledge = "dictionaries"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophySpecializedLanguageEtymology:
+		knowledge = "the notion of etymology"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophySpecializedLanguageGrammar:
+		knowledge = "grammar"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophySpecializedLaw:
+		knowledge = "discourse on law"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophySpecializedPoliticsDiplomacy:
+		knowledge = "discourse on diplomacy"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophySpecializedPoliticsEconomicPolicy:
+		knowledge = "discourse on economic policy"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophySpecializedPoliticsGovernmentForms:
+		knowledge = "discourse on government"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophySpecializedPoliticsSocialWelfare:
+		knowledge = "discourse on social welfare"
+	}
+	return c.hf(x.Hfid) + util.If(x.First, " was the very first to discover ", " independently discovered ") + knowledge
 }
 
 func (x *HistoricalEventMasterpieceArchConstructed) Html(c *Context) string {
