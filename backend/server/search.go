@@ -54,8 +54,9 @@ func (h searchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func seachMap[T model.Named](s string, input map[int]T, output []SearchResult, baseUrl string) []SearchResult {
+	s = strings.ToLower(s)
 	for id, v := range input {
-		if strings.Contains(v.Name(), s) {
+		if strings.Contains(strings.ToLower(v.Name()), s) {
 			output = append(output, SearchResult{
 				Label: util.Title(v.Name()),
 				Value: fmt.Sprintf("%s/%d", baseUrl, id),
