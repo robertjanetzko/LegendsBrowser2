@@ -1261,7 +1261,7 @@ func (x *HistoricalEventItemStolen) Html(c *Context) string {
 }
 
 func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
-	return c.hf(x.Hfid) + util.If(x.First, " was the very first to discover ", " independently discovered ") + x.Knowledge
+	return c.hf(x.Hfid) + util.If(x.First, " was the very first to discover ", " independently discovered ") + x.Knowledge.String()
 }
 
 func (x *HistoricalEventMasterpieceArchConstructed) Html(c *Context) string {

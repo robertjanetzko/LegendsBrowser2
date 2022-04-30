@@ -8,13 +8,22 @@ import (
 )
 
 func main() {
-	a := flag.String("a", "", "analyze a file")
+	f := flag.String("a", "", "analyze files")
+	l := flag.Bool("l", false, "load previous analyze data")
 	g := flag.Bool("g", false, "generate model")
 	e := flag.Bool("e", false, "regenerate events")
 	flag.Parse()
 
-	if len(*a) > 0 {
-		df.AnalyzeStructure(*a)
+	if len(*f) > 0 {
+		var a *df.AnalyzeData
+		var err error
+		if *l {
+			a, err = df.LoadAnalyzeData()
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+		df.AnalyzeStructure(*f, a)
 	}
 
 	if *g {

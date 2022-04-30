@@ -16,7 +16,7 @@ import (
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
 
-func AnalyzeStructure(filex string) error {
+func AnalyzeStructure(filex string, a *AnalyzeData) error {
 	fmt.Println("Search...", filex)
 	files, err := filepath.Glob(filex + "/*-legends.xml")
 	if err != nil {
@@ -24,7 +24,9 @@ func AnalyzeStructure(filex string) error {
 	}
 	fmt.Println(files)
 
-	a := NewAnalyzeData()
+	if a == nil {
+		a = NewAnalyzeData()
+	}
 
 	for _, file := range files {
 		analyze(file, a)
@@ -53,7 +55,7 @@ func NewFieldData() *FieldData {
 type AnalyzeData struct {
 	Fields     map[string]*FieldData
 	SubTypes   map[string]*map[string]*Subtype
-	Overwrites *Overwrites
+	Overwrites *Overwrites `json:"-"`
 }
 
 func NewAnalyzeData() *AnalyzeData {
@@ -316,11 +318,17 @@ Loop:
 				s := strings.TrimSpace(string(data))
 				if _, err := strconv.Atoi(s); err != nil {
 					f := a.GetField(strings.Join(path, PATH_SEPARATOR))
+
+					force := ctx.overwrites.ForceEnum[strings.Join(path, PATH_SEPARATOR)]
+					if force {
+						f.Enum = true
+					}
+
 					f.IsString = true
 					if s != "" && f.Enum {
 						f.Values[s] = true
 					}
-					force := ctx.overwrites.ForceEnum[strings.Join(path, PATH_SEPARATOR)]
+
 					if len(f.Values) > 30 && !force {
 						f.Values = make(map[string]bool)
 						f.Enum = false

@@ -16,7 +16,9 @@ import (
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
 
-func enumValue(s string) string  { return strcase.ToCamel(strings.ReplaceAll(s, "2", " two")) }
+func enumValue(s string) string {
+	return strcase.ToCamel(strings.ReplaceAll(strings.ReplaceAll(s, "2", " two"), ":", "_"))
+}
 func enumString(s string) string { return strcase.ToDelimited(s, ' ') }
 
 var backendTemplate = template.Must(template.New("").Funcs(template.FuncMap{
