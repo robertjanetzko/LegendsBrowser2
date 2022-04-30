@@ -201,7 +201,7 @@ func (c *Context) poeticForm(id int) string {
 
 func (c *Context) worldConstruction(id int) string {
 	if x, ok := c.World.WorldConstructions[id]; ok {
-		return fmt.Sprintf(`<a class="worldconstruction" href="/wc/%d"><i class="%s fa-xs"></i>&nbsp;%s</a>`, id, x.Icon(), util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="worldconstruction" href="/worldconstruction/%d"><i class="%s fa-xs"></i>&nbsp;%s</a>`, id, x.Icon(), util.Title(x.Name()))
 	}
 	return "UNKNOWN WORLD CONSTRUCTION"
 }

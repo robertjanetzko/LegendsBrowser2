@@ -11,6 +11,7 @@
     <link href="/css/all.min.css" rel="stylesheet">
     <link href="/css/legends.css" rel="stylesheet">
     <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/autocomplete.js"></script>
 </head>
@@ -96,6 +97,17 @@
         $('.nav-tabs button').on('click', function (e) {
             window.location.hash = $(this).data("bs-target")
         });
+
+        function loadLinkPopoverData() {
+            return $.ajax({
+                url: "/popover" + this.getAttribute("href"),
+                async: false
+            }).responseText;
+        }
+
+        $('a.entity,a.hf,a.region,a.site,a.structure,a.worldconstruction').each(function () {
+            var popover = new bootstrap.Popover($(this), { content: loadLinkPopoverData, trigger: "hover", placement: "top", html: true })
+        })
     </script>
 </body>
 
