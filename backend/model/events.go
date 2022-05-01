@@ -1277,10 +1277,14 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "the theory that the world moves around the sun"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyMethodEmpiricalObservation:
 		knowledge = "methods of empirical observation in astronomy"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyMethodPathModels:
+		knowledge = "the method of forming precise models for the paths of astronomical objects"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPathOfTheMoon:
 		knowledge = "the path of the moon"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPhasesOfTheMoon:
 		knowledge = "the phases of the moon"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPrecessionOfEquinoxes:
+		knowledge = "the precession of equinoxes over great periods of time"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyRelationshipBetweenLunarSolarYear:
 		knowledge = "the relationship between the lunar and solar year"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyStarCatalogues100:
@@ -1301,6 +1305,8 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "the relationship between the moon and the tides"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsAdhesives:
 		knowledge = "the preparation and use of adhesive materials"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsAquaRegia:
+		knowledge = "the preparation of aqua regia"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsNitricAcid:
 		knowledge = "the preparation of spirit of niter"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsSulfuricAcid:
@@ -1383,6 +1389,8 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "the construction and use of chain drives"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineChariotOdometer:
 		knowledge = "the construction and use of the chariot odometer"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCombinationLock:
+		knowledge = "the construction and use of the combination lock"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCrank:
 		knowledge = "the construction and use of the crank"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCrankshaft:
@@ -1425,10 +1433,10 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "the construction and use of the verge escapement"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineWardedLock:
 		knowledge = "the construction and use of the warded lock"
-	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineWaterPoweredSawmill:
-		knowledge = "the construction and use of the water-powered sawmill"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineWaterWheel:
 		knowledge = "the construction and use of the water wheel"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineWaterPoweredSawmill:
+		knowledge = "the construction and use of the water-powered sawmill"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineWindlass:
 		knowledge = "the construction and use of the windlass"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringOpticsCameraObscura:
@@ -1493,6 +1501,8 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "the role of cultural differences in source reliability and interpretation"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfStateBiasAndPropaganda:
 		knowledge = "the role of state bias and propaganda in sources"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfSystemicBias:
+		knowledge = "the role of systemic bias in sources"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheoryHistoricalCausation:
 		knowledge = "the causes of historical events"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheoryHistoricalCycles:
@@ -1502,7 +1512,7 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheorySocialConflict:
 		knowledge = "the notion of conflict between members of a community"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraBalancingAndCompletion:
-		knowledge = "the technique of balancing and completion for solving equations"
+		knowledge = "the techniques of balancing and completion for solving equations"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraDivergenceOfHarmonicSeries:
 		knowledge = "the divergence of the harmonic series"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraFiniteSummationFormulas:
@@ -1517,6 +1527,10 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "methods for solving certain equations involving powers higher than the quadratic"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraSolvingLinearSystems:
 		knowledge = "methods of solving systems of equations"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryAngleSumDifferenceTrigIdentities:
+		knowledge = "trigonometric identities relating to the sums and differences of angles"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryAreaOfCircle:
+		knowledge = "the relationship between the area of a circle and its radius, involving the ratio of the circumference of the circle to its diameter"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryAreaOfTriangleFromSideLengths:
 		knowledge = "the computation of the area of a triangle from its three side lengths alone"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryBasicObjects:
@@ -1529,16 +1543,30 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "the angles of triangles inscribed in a circle with one edge on the diameter"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryIsoscelesBaseAnglesEqual:
 		knowledge = "the equality of the base angle of isosceles triangles"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryLawOfSines:
+		knowledge = "the relatonship between the half chords of lengths and the diameter of the triangle’s circumscribed circle"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPiTo4Digits:
-		knowledge = "the value of pi to four digits"
+		knowledge = "an approximate value of the ratio of the circumference of a circle to its diameter, using the circumference of polygons and the method of exhaustion"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPiTo6Digits:
+		knowledge = "an approximate value of the ratio of the circumference of a circle to its diameter, using the area of polygons and the method of exhaustion"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPropertiesOfChords:
 		knowledge = "the properties of chords"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTheorem:
 		knowledge = "the relationship between the lengths of the hypotenuse of a right triangle and the other two sides"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTriples3Digit:
+		knowledge = "examples of triples of large whole numbers which, when taken together, are the lengths of the sides of a right triangle"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTriples4Digit:
+		knowledge = "examples of triples of very large whole numbers which, when taken together, are the lengths of the sides of a right triangle"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTriplesSmall:
 		knowledge = "examples of triples of large whole numbers which, when taken together, are the lengths of the sides of a right triangle"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometrySimilarAndCongruentTriangles:
 		knowledge = "the properties of similar and congruent triangles"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometrySurfaceAreaOfSphere:
+		knowledge = "the computation of the surface area of a sphere"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryTableOfChordValues:
+		knowledge = "a table of chord lengths indexed by angle"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryVolumeOfCone:
+		knowledge = "the computation of the volume of a cone"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryVolumeOfPyramid:
 		knowledge = "the computation of the volume of different pyramids"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsMethodAxiomaticReasoning:
@@ -1547,6 +1575,8 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "an approximation of the ratio of a circumference of a circle to its diameter, using the area of polygons and the method of exhaustion"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsMethodProofByContradiction:
 		knowledge = "the method of proof by contradiction"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationEarlySymbolsForOperations:
+		knowledge = "the idea of using symbolic notation for addition"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationLargeNumbers:
 		knowledge = "notation for very large numbers"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationNegativeNumbers:
@@ -1554,7 +1584,7 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationPositional:
 		knowledge = "positional notation"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationSyncopatedAlgebra:
-		knowledge = "the idea of using symbolic notation for addition"
+		knowledge = "a notation for abbreviating the unknown and other elements of an equation in a systematic and useful fashion"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationZero:
 		knowledge = "a symbol for nothingness"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersAlgorithmForComputingGcd:
@@ -1565,8 +1595,10 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "an algorithm for dividing one number into another, possibly yielding a remainder"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersInfinitePrimes:
 		knowledge = "a proof that there are infinitely many prime numbers"
-	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersRootTwoTo5Digits:
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersRootTwoIrrational:
 		knowledge = "a proof that the length of a diagonal of a square is incommensurable with its edge"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersRootTwoTo5Digits:
+		knowledge = "an approximation for the length of the diagonal of a square"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersSieveAlgorithmForPrimes:
 		knowledge = "an algorithm for calculating prime numbers"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersUniquePrimeFactorization:
@@ -1583,8 +1615,12 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "the treatment of fractures"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodHerniaSurgery:
 		knowledge = "hernia surgery"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodLithotomySurgery:
+		knowledge = "the lithotomy surgery"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodPhysicalExamination:
 		knowledge = "the method of physical examination in diagnosing illness"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSpecializedWards:
+		knowledge = "the use of specialized wards in hospitals"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryDraining:
 		knowledge = "the surgical method of draining"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryExcision:
@@ -1603,12 +1639,16 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "the tracheotomy surgery"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodTreatmentOfTraumaticInjuries:
 		knowledge = "the treatment of traumatic injuries"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryAcuteAndChronicConditions:
+		knowledge = "the distinction between acute and chronic conditions"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryAnatomicalStudies:
 		knowledge = "anatomical studies for medical edification"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryBloodVessels:
 		knowledge = "the distinction between veins and arteries"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfBodilyFluids:
 		knowledge = "the classification of bodily fluids"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfMentalIllnesses:
+		knowledge = "the classification of mental illness"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfMuscles:
 		knowledge = "the classification of muscles"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryComparativeAnatomy:
@@ -1631,10 +1671,14 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "the classification of fractures"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryMotorVsSensoryNerves:
 		knowledge = "the distinction between motor and sensory nerves"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryNervousSystemFunction:
+		knowledge = "the function of the nervous system"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryParoxysm:
 		knowledge = "the notion of paroxysm"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPrognosis:
 		knowledge = "determining the likely outcome of a disease given a patient's current status"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryCirculation:
+		knowledge = "pulmonary circulation"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryMedicine:
 		knowledge = "pulmonary medicine"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheorySpecializedSurgicalInstruments:
@@ -1645,6 +1689,8 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "the source of the voice"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryToxicology:
 		knowledge = "the classification of toxic substances"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryTreatmentOfMentalIllnesses:
+		knowledge = "the treatment of mental illnesses"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolAnimalRemedies:
 		knowledge = "remedies prepared from animals"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolAnimalsAsSurgicalModels:
@@ -1653,6 +1699,8 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 		knowledge = "the method of bandaging wounds"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolDedicatedHospitals:
 		knowledge = "the preparation and use of dedicated hospitals"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolForceps:
+		knowledge = "the construction and use of forceps"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolHerbalRemedies:
 		knowledge = "herbal remedies"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolMineralRemedies:
@@ -1766,6 +1814,7 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 	case HistoricalEventKnowledgeDiscoveredKnowledge_PhilosophySpecializedPoliticsSocialWelfare:
 		knowledge = "discourse on social welfare"
 	}
+
 	return c.hf(x.Hfid) + util.If(x.First, " was the very first to discover ", " independently discovered ") + knowledge
 }
 
