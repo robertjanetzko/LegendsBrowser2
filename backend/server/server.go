@@ -40,15 +40,15 @@ func StartServer(world *model.DfWorld, static embed.FS) {
 	srv.loader = &loadHandler{server: srv}
 	srv.LoadTemplates()
 
-	srv.RegisterWorldPage("/entities", "entities.html", func(p Parms) any { return grouped(srv.context.world.Entities) })
+	srv.RegisterWorldPage("/entities", "entities.html", func(p Parms) any { return groupByType(srv.context.world.Entities) })
 	srv.RegisterWorldResourcePage("/entity/{id}", "entity.html", func(id int) any { return srv.context.world.Entities[id] })
 	srv.RegisterWorldResourcePage("/popover/entity/{id}", "popoverEntity.html", func(id int) any { return srv.context.world.Entities[id] })
 
-	srv.RegisterWorldPage("/regions", "regions.html", func(p Parms) any { return grouped(srv.context.world.Regions) })
+	srv.RegisterWorldPage("/regions", "regions.html", func(p Parms) any { return groupByType(srv.context.world.Regions) })
 	srv.RegisterWorldResourcePage("/region/{id}", "region.html", func(id int) any { return srv.context.world.Regions[id] })
 	srv.RegisterWorldResourcePage("/popover/region/{id}", "popoverRegion.html", func(id int) any { return srv.context.world.Regions[id] })
 
-	srv.RegisterWorldPage("/sites", "sites.html", func(p Parms) any { return grouped(srv.context.world.Sites) })
+	srv.RegisterWorldPage("/sites", "sites.html", func(p Parms) any { return groupByType(srv.context.world.Sites) })
 	srv.RegisterWorldResourcePage("/site/{id}", "site.html", func(id int) any { return srv.context.world.Sites[id] })
 	srv.RegisterWorldResourcePage("/popover/site/{id}", "popoverSite.html", func(id int) any { return srv.context.world.Sites[id] })
 
@@ -58,11 +58,11 @@ func StartServer(world *model.DfWorld, static embed.FS) {
 	srv.RegisterWorldPage("/site/{siteId}/structure/{id}", "structure.html", srv.findStructure)
 	srv.RegisterWorldPage("/popover/site/{siteId}/structure/{id}", "popoverStructure.html", srv.findStructure)
 
-	srv.RegisterWorldPage("/worldconstructions", "worldconstructions.html", func(p Parms) any { return grouped(srv.context.world.WorldConstructions) })
+	srv.RegisterWorldPage("/worldconstructions", "worldconstructions.html", func(p Parms) any { return groupByType(srv.context.world.WorldConstructions) })
 	srv.RegisterWorldResourcePage("/worldconstruction/{id}", "worldconstruction.html", func(id int) any { return srv.context.world.WorldConstructions[id] })
 	srv.RegisterWorldResourcePage("/popover/worldconstruction/{id}", "popoverWorldconstruction.html", func(id int) any { return srv.context.world.WorldConstructions[id] })
 
-	srv.RegisterWorldPage("/artifacts", "artifacts.html", func(p Parms) any { return grouped(srv.context.world.Artifacts) })
+	srv.RegisterWorldPage("/artifacts", "artifacts.html", func(p Parms) any { return groupByType(srv.context.world.Artifacts) })
 	srv.RegisterWorldResourcePage("/artifact/{id}", "artifact.html", func(id int) any { return srv.context.world.Artifacts[id] })
 	srv.RegisterWorldResourcePage("/popover/artifact/{id}", "popoverArtifact.html", func(id int) any { return srv.context.world.Artifacts[id] })
 
@@ -72,22 +72,32 @@ func StartServer(world *model.DfWorld, static embed.FS) {
 			MusicalForms map[string][]*model.MusicalForm
 			PoeticForms  map[string][]*model.PoeticForm
 		}{
-			DanceForms:   grouped(srv.context.world.DanceForms),
-			MusicalForms: grouped(srv.context.world.MusicalForms),
-			PoeticForms:  grouped(srv.context.world.PoeticForms),
+			DanceForms:   groupByType(srv.context.world.DanceForms),
+			MusicalForms: groupByType(srv.context.world.MusicalForms),
+			PoeticForms:  groupByType(srv.context.world.PoeticForms),
 		}
 	})
 
-	srv.RegisterWorldPage("/writtencontents", "writtencontents.html", func(p Parms) any { return grouped(srv.context.world.WrittenContents) })
+	srv.RegisterWorldPage("/writtencontents", "writtencontents.html", func(p Parms) any { return groupByType(srv.context.world.WrittenContents) })
 	srv.RegisterWorldResourcePage("/writtencontent/{id}", "writtencontent.html", func(id int) any { return srv.context.world.WrittenContents[id] })
 	srv.RegisterWorldResourcePage("/popover/writtencontent/{id}", "popoverWrittencontent.html", func(id int) any { return srv.context.world.WrittenContents[id] })
 
 	srv.RegisterWorldResourcePage("/hf/{id}", "hf.html", func(id int) any { return srv.context.world.HistoricalFigures[id] })
 	srv.RegisterWorldResourcePage("/popover/hf/{id}", "popoverHf.html", func(id int) any { return srv.context.world.HistoricalFigures[id] })
 
-	srv.RegisterWorldPage("/", "eventTypes.html", func(p Parms) any { return srv.context.world.AllEventTypes() })
 	srv.RegisterWorldPage("/events", "eventTypes.html", func(p Parms) any { return srv.context.world.AllEventTypes() })
 	srv.RegisterWorldPage("/events/{type}", "eventType.html", func(p Parms) any { return srv.context.world.EventsOfType(p["type"]) })
+
+	srv.RegisterWorldPage("/", "index.html", func(p Parms) any {
+		return &struct {
+			Civilizations map[string][]*model.Entity
+		}{
+			Civilizations: groupBy(srv.context.world.Entities,
+				func(e *model.Entity) string { return e.Race },
+				func(e *model.Entity) bool { return e.Name() != "" && e.Type_ == model.EntityType_Civilization },
+				func(e *model.Entity) string { return e.Name() }),
+		}
+	})
 
 	srv.router.PathPrefix("/search").Handler(searchHandler{server: srv})
 
@@ -200,18 +210,22 @@ func flatGrouped[K comparable, U any, V namedTyped](input map[K]U, mapper func(U
 	return output
 }
 
-func grouped[K comparable, T namedTyped](input map[K]T) map[string][]T {
+func groupByType[K comparable, T namedTyped](input map[K]T) map[string][]T {
+	return groupBy(input, func(t T) string { return t.Type() }, func(t T) bool { return t.Name() != "" }, func(t T) string { return t.Name() })
+}
+
+func groupBy[K comparable, T any](input map[K]T, mapper func(T) string, filter func(T) bool, sortMapper func(T) string) map[string][]T {
 	output := make(map[string][]T)
 
 	for _, v := range input {
-		k := v.Type()
-		if v.Name() != "" {
+		k := mapper(v)
+		if filter(v) {
 			output[k] = append(output[k], v)
 		}
 	}
 
 	for _, v := range output {
-		sort.Slice(v, func(i, j int) bool { return v[i].Name() < v[j].Name() })
+		sort.Slice(v, func(i, j int) bool { return sortMapper(v[i]) < sortMapper(v[j]) })
 	}
 
 	return output

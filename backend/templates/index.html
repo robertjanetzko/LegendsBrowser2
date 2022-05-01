@@ -1,0 +1,19 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Legends Browser{{end}}
+
+{{define "content"}}
+<h3>Civilizations</h3>
+
+<ul>
+    {{- range $race, $civs := .Civilizations }}
+    <li>{{ $race }}</li>
+    <ul>
+        {{- range $civs }}
+        <li>{{ entity .Id }}</li>
+        {{- end }}
+    </ul>
+    {{- end }}
+</ul>
+
+{{- end }}
