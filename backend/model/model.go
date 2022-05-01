@@ -4393,6 +4393,7 @@ type HistoricalEventArtifactGiven struct {
 	ArtifactId           int                                `json:"artifactId" legend:"base"`           // artifact_id
 	GiverEntityId        int                                `json:"giverEntityId" legend:"base"`        // giver_entity_id
 	GiverHistFigureId    int                                `json:"giverHistFigureId" legend:"base"`    // giver_hist_figure_id
+	Inherited            bool                               `json:"inherited" legend:"base"`            // inherited
 	Reason               HistoricalEventArtifactGivenReason `json:"reason" legend:"base"`               // reason
 	ReceiverEntityId     int                                `json:"receiverEntityId" legend:"base"`     // receiver_entity_id
 	ReceiverHistFigureId int                                `json:"receiverHistFigureId" legend:"base"` // receiver_hist_figure_id
@@ -4433,6 +4434,7 @@ func (x *HistoricalEventArtifactGiven) MarshalJSON() ([]byte, error) {
 	if x.GiverHistFigureId != -1 {
 		d["giverHistFigureId"] = x.GiverHistFigureId
 	}
+	d["inherited"] = x.Inherited
 	if x.Reason != 0 {
 		d["reason"] = x.Reason
 	}
@@ -11680,6 +11682,7 @@ type HistoricalEventHfWoundedInjuryType int
 
 const (
 	HistoricalEventHfWoundedInjuryType_Unknown HistoricalEventHfWoundedInjuryType = iota
+	HistoricalEventHfWoundedInjuryType_Burn
 	HistoricalEventHfWoundedInjuryType_Rip
 	HistoricalEventHfWoundedInjuryType_Slash
 	HistoricalEventHfWoundedInjuryType_Smash
@@ -11688,6 +11691,8 @@ const (
 
 func parseHistoricalEventHfWoundedInjuryType(s string) HistoricalEventHfWoundedInjuryType {
 	switch s {
+	case "burn":
+		return HistoricalEventHfWoundedInjuryType_Burn
 	case "rip":
 		return HistoricalEventHfWoundedInjuryType_Rip
 	case "slash":
@@ -11702,6 +11707,8 @@ func parseHistoricalEventHfWoundedInjuryType(s string) HistoricalEventHfWoundedI
 
 func (s HistoricalEventHfWoundedInjuryType) String() string {
 	switch s {
+	case HistoricalEventHfWoundedInjuryType_Burn:
+		return "burn"
 	case HistoricalEventHfWoundedInjuryType_Rip:
 		return "rip"
 	case HistoricalEventHfWoundedInjuryType_Slash:
@@ -12780,6 +12787,7 @@ type HistoricalEventItemStolenCircumstanceType int
 
 const (
 	HistoricalEventItemStolenCircumstanceType_Unknown HistoricalEventItemStolenCircumstanceType = iota
+	HistoricalEventItemStolenCircumstanceType_Abducted
 	HistoricalEventItemStolenCircumstanceType_Defeated
 	HistoricalEventItemStolenCircumstanceType_Histeventcollection
 	HistoricalEventItemStolenCircumstanceType_Murdered
@@ -12787,6 +12795,8 @@ const (
 
 func parseHistoricalEventItemStolenCircumstanceType(s string) HistoricalEventItemStolenCircumstanceType {
 	switch s {
+	case "abducted":
+		return HistoricalEventItemStolenCircumstanceType_Abducted
 	case "defeated":
 		return HistoricalEventItemStolenCircumstanceType_Defeated
 	case "histeventcollection":
@@ -12799,6 +12809,8 @@ func parseHistoricalEventItemStolenCircumstanceType(s string) HistoricalEventIte
 
 func (s HistoricalEventItemStolenCircumstanceType) String() string {
 	switch s {
+	case HistoricalEventItemStolenCircumstanceType_Abducted:
+		return "abducted"
 	case HistoricalEventItemStolenCircumstanceType_Defeated:
 		return "defeated"
 	case HistoricalEventItemStolenCircumstanceType_Histeventcollection:
@@ -12864,8 +12876,10 @@ const (
 	HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyHeightOfTidesVsMoonAndSun
 	HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyHeliocentricModel
 	HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyMethodEmpiricalObservation
+	HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyMethodPathModels
 	HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPathOfTheMoon
 	HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPhasesOfTheMoon
+	HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPrecessionOfEquinoxes
 	HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyRelationshipBetweenLunarSolarYear
 	HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyStarCatalogues100
 	HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyStarCatalogues1000
@@ -12876,6 +12890,7 @@ const (
 	HistoricalEventKnowledgeDiscoveredKnowledge_AstronomySummerWinterSun
 	HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyTidesAndTheMoon
 	HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsAdhesives
+	HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsAquaRegia
 	HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsNitricAcid
 	HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsSulfuricAcid
 	HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryClassificationAlkaliAndAcids
@@ -12917,6 +12932,7 @@ const (
 	HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCamshaft
 	HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineChainDrive
 	HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineChariotOdometer
+	HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCombinationLock
 	HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCrank
 	HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCrankshaft
 	HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineDifferentialGear
@@ -12972,6 +12988,7 @@ const (
 	HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingPersonalInterviews
 	HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfCulturalDifferences
 	HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfStateBiasAndPropaganda
+	HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfSystemicBias
 	HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheoryHistoricalCausation
 	HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheoryHistoricalCycles
 	HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheorySocialCohesion
@@ -12984,21 +13001,31 @@ const (
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraQuadraticFormula
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraSolvingHigherOrderPolynomials
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraSolvingLinearSystems
+	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryAngleSumDifferenceTrigIdentities
+	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryAreaOfCircle
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryAreaOfTriangleFromSideLengths
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryBasicObjects
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryExistenceOfIncommensurableRatios
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryGeometricMeanTheorem
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryInscribedTriangleOnDiameterIsRight
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryIsoscelesBaseAnglesEqual
+	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryLawOfSines
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPiTo4Digits
+	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPiTo6Digits
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPropertiesOfChords
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTheorem
+	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTriples3Digit
+	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTriples4Digit
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTriplesSmall
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometrySimilarAndCongruentTriangles
+	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometrySurfaceAreaOfSphere
+	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryTableOfChordValues
+	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryVolumeOfCone
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryVolumeOfPyramid
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsMethodAxiomaticReasoning
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsMethodExhaustion
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsMethodProofByContradiction
+	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationEarlySymbolsForOperations
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationLargeNumbers
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationNegativeNumbers
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationPositional
@@ -13008,6 +13035,7 @@ const (
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersChineseRemainderAlgorithm
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersDivisionAlgorithm
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersInfinitePrimes
+	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersRootTwoIrrational
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersRootTwoTo5Digits
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersSieveAlgorithmForPrimes
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersUniquePrimeFactorization
@@ -13017,7 +13045,9 @@ const (
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodFractureImmobilization
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodFractureTreatment
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodHerniaSurgery
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodLithotomySurgery
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodPhysicalExamination
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSpecializedWards
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryDraining
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryExcision
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryIncision
@@ -13027,9 +13057,11 @@ const (
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgerySuturing
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodTracheotomySurgery
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodTreatmentOfTraumaticInjuries
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryAcuteAndChronicConditions
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryAnatomicalStudies
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryBloodVessels
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfBodilyFluids
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfMentalIllnesses
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfMuscles
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryComparativeAnatomy
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryConvalescence
@@ -13041,17 +13073,21 @@ const (
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryEyeAnatomy
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryFractureClassification
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryMotorVsSensoryNerves
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryNervousSystemFunction
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryParoxysm
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPrognosis
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryCirculation
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryMedicine
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheorySpecializedSurgicalInstruments
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheorySurgicalModels
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryTheVoice
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryToxicology
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryTreatmentOfMentalIllnesses
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolAnimalRemedies
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolAnimalsAsSurgicalModels
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolBandages
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolDedicatedHospitals
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolForceps
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolHerbalRemedies
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolMineralRemedies
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolMudBagsAsSurgicalModels
@@ -13124,10 +13160,14 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyHeliocentricModel
 	case "astronomy:method empirical observation":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyMethodEmpiricalObservation
+	case "astronomy:method path models":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyMethodPathModels
 	case "astronomy:path of the moon":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPathOfTheMoon
 	case "astronomy:phases of the moon":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPhasesOfTheMoon
+	case "astronomy:precession of equinoxes":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPrecessionOfEquinoxes
 	case "astronomy:relationship between lunar solar year":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyRelationshipBetweenLunarSolarYear
 	case "astronomy:star catalogues 100":
@@ -13148,6 +13188,8 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyTidesAndTheMoon
 	case "chemistry:chemicals:adhesives":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsAdhesives
+	case "chemistry:chemicals:aqua regia":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsAquaRegia
 	case "chemistry:chemicals:nitric acid":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsNitricAcid
 	case "chemistry:chemicals:sulfuric acid":
@@ -13230,6 +13272,8 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineChainDrive
 	case "engineering:machine:chariot odometer":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineChariotOdometer
+	case "engineering:machine:combination lock":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCombinationLock
 	case "engineering:machine:crank":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCrank
 	case "engineering:machine:crankshaft":
@@ -13340,6 +13384,8 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfCulturalDifferences
 	case "history:sourcing:role of state bias and propaganda":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfStateBiasAndPropaganda
+	case "history:sourcing:role of systemic bias":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfSystemicBias
 	case "history:theory:historical causation":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheoryHistoricalCausation
 	case "history:theory:historical cycles":
@@ -13364,6 +13410,10 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraSolvingHigherOrderPolynomials
 	case "mathematics:algebra:solving linear systems":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraSolvingLinearSystems
+	case "mathematics:geometry:angle sum difference trig identities":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryAngleSumDifferenceTrigIdentities
+	case "mathematics:geometry:area of circle":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryAreaOfCircle
 	case "mathematics:geometry:area of triangle from side lengths":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryAreaOfTriangleFromSideLengths
 	case "mathematics:geometry:basic objects":
@@ -13376,16 +13426,30 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryInscribedTriangleOnDiameterIsRight
 	case "mathematics:geometry:isosceles base angles equal":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryIsoscelesBaseAnglesEqual
+	case "mathematics:geometry:law of sines":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryLawOfSines
 	case "mathematics:geometry:pi to 4 digits":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPiTo4Digits
+	case "mathematics:geometry:pi to 6 digits":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPiTo6Digits
 	case "mathematics:geometry:properties of chords":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPropertiesOfChords
 	case "mathematics:geometry:pythagorean theorem":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTheorem
+	case "mathematics:geometry:pythagorean triples 3 digit":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTriples3Digit
+	case "mathematics:geometry:pythagorean triples 4 digit":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTriples4Digit
 	case "mathematics:geometry:pythagorean triples small":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTriplesSmall
 	case "mathematics:geometry:similar and congruent triangles":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometrySimilarAndCongruentTriangles
+	case "mathematics:geometry:surface area of sphere":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometrySurfaceAreaOfSphere
+	case "mathematics:geometry:table of chord values":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryTableOfChordValues
+	case "mathematics:geometry:volume of cone":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryVolumeOfCone
 	case "mathematics:geometry:volume of pyramid":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryVolumeOfPyramid
 	case "mathematics:method:axiomatic reasoning":
@@ -13394,6 +13458,8 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsMethodExhaustion
 	case "mathematics:method:proof by contradiction":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsMethodProofByContradiction
+	case "mathematics:notation:early symbols for operations":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationEarlySymbolsForOperations
 	case "mathematics:notation:large numbers":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationLargeNumbers
 	case "mathematics:notation:negative numbers":
@@ -13412,6 +13478,8 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersDivisionAlgorithm
 	case "mathematics:numbers:infinite primes":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersInfinitePrimes
+	case "mathematics:numbers:root 2 irrational":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersRootTwoIrrational
 	case "mathematics:numbers:root 2 to 5 digits":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersRootTwoTo5Digits
 	case "mathematics:numbers:sieve algorithm for primes":
@@ -13430,8 +13498,12 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodFractureTreatment
 	case "medicine:method:hernia surgery":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodHerniaSurgery
+	case "medicine:method:lithotomy surgery":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodLithotomySurgery
 	case "medicine:method:physical examination":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodPhysicalExamination
+	case "medicine:method:specialized wards":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSpecializedWards
 	case "medicine:method:surgery draining":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryDraining
 	case "medicine:method:surgery excision":
@@ -13450,12 +13522,16 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodTracheotomySurgery
 	case "medicine:method:treatment of traumatic injuries":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodTreatmentOfTraumaticInjuries
+	case "medicine:theory:acute and chronic conditions":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryAcuteAndChronicConditions
 	case "medicine:theory:anatomical studies":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryAnatomicalStudies
 	case "medicine:theory:blood vessels":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryBloodVessels
 	case "medicine:theory:classification of bodily fluids":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfBodilyFluids
+	case "medicine:theory:classification of mental illnesses":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfMentalIllnesses
 	case "medicine:theory:classification of muscles":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfMuscles
 	case "medicine:theory:comparative anatomy":
@@ -13478,10 +13554,14 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryFractureClassification
 	case "medicine:theory:motor vs sensory nerves":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryMotorVsSensoryNerves
+	case "medicine:theory:nervous system function":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryNervousSystemFunction
 	case "medicine:theory:paroxysm":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryParoxysm
 	case "medicine:theory:prognosis":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPrognosis
+	case "medicine:theory:pulmonary circulation":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryCirculation
 	case "medicine:theory:pulmonary medicine":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryMedicine
 	case "medicine:theory:specialized surgical instruments":
@@ -13492,6 +13572,8 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryTheVoice
 	case "medicine:theory:toxicology":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryToxicology
+	case "medicine:theory:treatment of mental illnesses":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryTreatmentOfMentalIllnesses
 	case "medicine:tool:animal remedies":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolAnimalRemedies
 	case "medicine:tool:animals as surgical models":
@@ -13500,6 +13582,8 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolBandages
 	case "medicine:tool:dedicated hospitals":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolDedicatedHospitals
+	case "medicine:tool:forceps":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolForceps
 	case "medicine:tool:herbal remedies":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolHerbalRemedies
 	case "medicine:tool:mineral remedies":
@@ -13630,10 +13714,14 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "astronomy heliocentric model"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyMethodEmpiricalObservation:
 		return "astronomy method empirical observation"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyMethodPathModels:
+		return "astronomy method path models"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPathOfTheMoon:
 		return "astronomy path of the moon"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPhasesOfTheMoon:
 		return "astronomy phases of the moon"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyPrecessionOfEquinoxes:
+		return "astronomy precession of equinoxes"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyRelationshipBetweenLunarSolarYear:
 		return "astronomy relationship between lunar solar year"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_AstronomyStarCatalogues100:
@@ -13654,6 +13742,8 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "astronomy tides and the moon"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsAdhesives:
 		return "chemistry chemicals adhesives"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsAquaRegia:
+		return "chemistry chemicals aqua regia"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsNitricAcid:
 		return "chemistry chemicals nitric acid"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_ChemistryChemicalsSulfuricAcid:
@@ -13736,6 +13826,8 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "engineering machine chain drive"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineChariotOdometer:
 		return "engineering machine chariot odometer"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCombinationLock:
+		return "engineering machine combination lock"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCrank:
 		return "engineering machine crank"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringMachineCrankshaft:
@@ -13846,6 +13938,8 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "history sourcing role of cultural differences"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfStateBiasAndPropaganda:
 		return "history sourcing role of state bias and propaganda"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfSystemicBias:
+		return "history sourcing role of systemic bias"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheoryHistoricalCausation:
 		return "history theory historical causation"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheoryHistoricalCycles:
@@ -13870,6 +13964,10 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "mathematics algebra solving higher order polynomials"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsAlgebraSolvingLinearSystems:
 		return "mathematics algebra solving linear systems"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryAngleSumDifferenceTrigIdentities:
+		return "mathematics geometry angle sum difference trig identities"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryAreaOfCircle:
+		return "mathematics geometry area of circle"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryAreaOfTriangleFromSideLengths:
 		return "mathematics geometry area of triangle from side lengths"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryBasicObjects:
@@ -13882,16 +13980,30 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "mathematics geometry inscribed triangle on diameter is right"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryIsoscelesBaseAnglesEqual:
 		return "mathematics geometry isosceles base angles equal"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryLawOfSines:
+		return "mathematics geometry law of sines"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPiTo4Digits:
 		return "mathematics geometry pi to 4 digits"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPiTo6Digits:
+		return "mathematics geometry pi to 6 digits"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPropertiesOfChords:
 		return "mathematics geometry properties of chords"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTheorem:
 		return "mathematics geometry pythagorean theorem"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTriples3Digit:
+		return "mathematics geometry pythagorean triples 3 digit"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTriples4Digit:
+		return "mathematics geometry pythagorean triples 4 digit"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryPythagoreanTriplesSmall:
 		return "mathematics geometry pythagorean triples small"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometrySimilarAndCongruentTriangles:
 		return "mathematics geometry similar and congruent triangles"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometrySurfaceAreaOfSphere:
+		return "mathematics geometry surface area of sphere"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryTableOfChordValues:
+		return "mathematics geometry table of chord values"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryVolumeOfCone:
+		return "mathematics geometry volume of cone"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsGeometryVolumeOfPyramid:
 		return "mathematics geometry volume of pyramid"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsMethodAxiomaticReasoning:
@@ -13900,6 +14012,8 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "mathematics method exhaustion"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsMethodProofByContradiction:
 		return "mathematics method proof by contradiction"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationEarlySymbolsForOperations:
+		return "mathematics notation early symbols for operations"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationLargeNumbers:
 		return "mathematics notation large numbers"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNotationNegativeNumbers:
@@ -13918,6 +14032,8 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "mathematics numbers division algorithm"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersInfinitePrimes:
 		return "mathematics numbers infinite primes"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersRootTwoIrrational:
+		return "mathematics numbers root two irrational"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersRootTwoTo5Digits:
 		return "mathematics numbers root two to 5 digits"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersSieveAlgorithmForPrimes:
@@ -13936,8 +14052,12 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "medicine method fracture treatment"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodHerniaSurgery:
 		return "medicine method hernia surgery"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodLithotomySurgery:
+		return "medicine method lithotomy surgery"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodPhysicalExamination:
 		return "medicine method physical examination"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSpecializedWards:
+		return "medicine method specialized wards"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryDraining:
 		return "medicine method surgery draining"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryExcision:
@@ -13956,12 +14076,16 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "medicine method tracheotomy surgery"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodTreatmentOfTraumaticInjuries:
 		return "medicine method treatment of traumatic injuries"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryAcuteAndChronicConditions:
+		return "medicine theory acute and chronic conditions"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryAnatomicalStudies:
 		return "medicine theory anatomical studies"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryBloodVessels:
 		return "medicine theory blood vessels"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfBodilyFluids:
 		return "medicine theory classification of bodily fluids"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfMentalIllnesses:
+		return "medicine theory classification of mental illnesses"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryClassificationOfMuscles:
 		return "medicine theory classification of muscles"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryComparativeAnatomy:
@@ -13984,10 +14108,14 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "medicine theory fracture classification"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryMotorVsSensoryNerves:
 		return "medicine theory motor vs sensory nerves"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryNervousSystemFunction:
+		return "medicine theory nervous system function"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryParoxysm:
 		return "medicine theory paroxysm"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPrognosis:
 		return "medicine theory prognosis"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryCirculation:
+		return "medicine theory pulmonary circulation"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryMedicine:
 		return "medicine theory pulmonary medicine"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheorySpecializedSurgicalInstruments:
@@ -13998,6 +14126,8 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "medicine theory the voice"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryToxicology:
 		return "medicine theory toxicology"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryTreatmentOfMentalIllnesses:
+		return "medicine theory treatment of mental illnesses"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolAnimalRemedies:
 		return "medicine tool animal remedies"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolAnimalsAsSurgicalModels:
@@ -14006,6 +14136,8 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "medicine tool bandages"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolDedicatedHospitals:
 		return "medicine tool dedicated hospitals"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolForceps:
+		return "medicine tool forceps"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolHerbalRemedies:
 		return "medicine tool herbal remedies"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolMineralRemedies:
@@ -19815,6 +19947,7 @@ const (
 	ScheduleItemSubtype_BattleAxe
 	ScheduleItemSubtype_Bow
 	ScheduleItemSubtype_Crossbow
+	ScheduleItemSubtype_EbpelBlowpipe
 	ScheduleItemSubtype_Flail
 	ScheduleItemSubtype_GreatAxe
 	ScheduleItemSubtype_Halberd
@@ -19845,6 +19978,8 @@ func parseScheduleItemSubtype(s string) ScheduleItemSubtype {
 		return ScheduleItemSubtype_Bow
 	case "crossbow":
 		return ScheduleItemSubtype_Crossbow
+	case "ebpel blowpipe":
+		return ScheduleItemSubtype_EbpelBlowpipe
 	case "flail":
 		return ScheduleItemSubtype_Flail
 	case "great axe":
@@ -19895,6 +20030,8 @@ func (s ScheduleItemSubtype) String() string {
 		return "bow"
 	case ScheduleItemSubtype_Crossbow:
 		return "crossbow"
+	case ScheduleItemSubtype_EbpelBlowpipe:
+		return "ebpel blowpipe"
 	case ScheduleItemSubtype_Flail:
 		return "flail"
 	case ScheduleItemSubtype_GreatAxe:
@@ -20923,6 +21060,7 @@ const (
 	WrittenContentForm_AlternateHistory
 	WrittenContentForm_Atlas
 	WrittenContentForm_Autobiography
+	WrittenContentForm_BiographicalDictionary
 	WrittenContentForm_Biography
 	WrittenContentForm_Choreography
 	WrittenContentForm_Chronicle
@@ -20955,6 +21093,8 @@ func parseWrittenContentForm(s string) WrittenContentForm {
 		return WrittenContentForm_Atlas
 	case "autobiography":
 		return WrittenContentForm_Autobiography
+	case "biographical dictionary":
+		return WrittenContentForm_BiographicalDictionary
 	case "biography":
 		return WrittenContentForm_Biography
 	case "choreography":
@@ -21011,6 +21151,8 @@ func (s WrittenContentForm) String() string {
 		return "atlas"
 	case WrittenContentForm_Autobiography:
 		return "autobiography"
+	case WrittenContentForm_BiographicalDictionary:
+		return "biographical dictionary"
 	case WrittenContentForm_Biography:
 		return "biography"
 	case WrittenContentForm_Choreography:
@@ -21070,6 +21212,7 @@ const (
 	WrittenContentType_AlternateHistory
 	WrittenContentType_Atlas
 	WrittenContentType_Autobiography
+	WrittenContentType_BiographicalDictionary
 	WrittenContentType_Biography
 	WrittenContentType_Choreography
 	WrittenContentType_Chronicle
@@ -21102,6 +21245,8 @@ func parseWrittenContentType(s string) WrittenContentType {
 		return WrittenContentType_Atlas
 	case "Autobiography":
 		return WrittenContentType_Autobiography
+	case "BiographicalDictionary":
+		return WrittenContentType_BiographicalDictionary
 	case "Biography":
 		return WrittenContentType_Biography
 	case "Choreography":
@@ -21158,6 +21303,8 @@ func (s WrittenContentType) String() string {
 		return "atlas"
 	case WrittenContentType_Autobiography:
 		return "autobiography"
+	case WrittenContentType_BiographicalDictionary:
+		return "biographical dictionary"
 	case WrittenContentType_Biography:
 		return "biography"
 	case WrittenContentType_Choreography:
@@ -25187,6 +25334,12 @@ func parseHistoricalEventArtifactGiven(p *util.XMLParser) (*HistoricalEventArtif
 					return nil, err
 				}
 				obj.GiverHistFigureId = num(data)
+			case "inherited":
+				_, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Inherited = true
 			case "reason":
 				data, err := p.Value()
 				if err != nil {
