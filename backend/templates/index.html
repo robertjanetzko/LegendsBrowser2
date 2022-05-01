@@ -16,4 +16,16 @@
     {{- end }}
 </ul>
 
+<div id="map" style="height: 400px"></div>
+<script>
+    var map = L.map('map').setView([5, 5], 13);
+
+    var imageUrl = '$suburi/map'
+    var imageBounds = [[0, 0],
+    [10, 10]];
+
+    var imageLayer = L.imageOverlay(imageUrl, imageBounds, { opacity: 0.5 });
+    imageLayer.addTo(map);
+
+</script>
 {{- end }}
