@@ -1494,7 +1494,7 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingBasicArchaeology:
 		knowledge = "the method of collecting and evaluating artifacts to learn about history and culture"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingBasicReliability:
-		knowledge = "the reliability of sources"
+		knowledge = "the idea of source reliability"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingPersonalInterviews:
 		knowledge = "using personal interviews as sources"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfCulturalDifferences:
@@ -1504,7 +1504,7 @@ func (x *HistoricalEventKnowledgeDiscovered) Html(c *Context) string {
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistorySourcingRoleOfSystemicBias:
 		knowledge = "the role of systemic bias in sources"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheoryHistoricalCausation:
-		knowledge = "the causes of historical events"
+		knowledge = "discourse on the causes of historical events"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheoryHistoricalCycles:
 		knowledge = "the notion of historical, governmental and social cycles"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_HistoryTheorySocialCohesion:
