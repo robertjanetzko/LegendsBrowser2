@@ -2,10 +2,8 @@ package model
 
 import (
 	"bufio"
-	"encoding/json"
 	"encoding/xml"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"strconv"
@@ -98,6 +96,7 @@ BaseLoop:
 			}
 		}
 	}
+	world.FilePath = file
 
 	bar.Finish()
 
@@ -133,15 +132,18 @@ BaseLoop:
 				}
 			}
 		}
+		world.PlusFilePath = file
 
 		bar.Finish()
 	}
 
-	same, err := json.MarshalIndent(exportSameFields(), "", "  ")
-	if err != nil {
-		return world, err
-	}
-	ioutil.WriteFile("same.json", same, 0644)
+	// same, err := json.MarshalIndent(exportSameFields(), "", "  ")
+	// if err != nil {
+	// 	return world, err
+	// }
+	// ioutil.WriteFile("same.json", same, 0644)
+
+	world.LoadMap()
 
 	world.process()
 

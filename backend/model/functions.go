@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -22,6 +23,21 @@ var LinkDanceForm = func(w *DfWorld, id int) template.HTML { return template.HTM
 var LinkMusicalForm = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).musicalForm(id)) }
 var LinkPoeticForm = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).poeticForm(id)) }
 var LinkWrittenContent = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).writtenContent(id)) }
+
+var AddMapSite = func(w *DfWorld, id int) template.HTML {
+	if site, ok := w.Sites[id]; ok {
+		coords := strings.Split(site.Rectangle, ":")
+		c1 := strings.Split(coords[0], ",")
+		x1, _ := strconv.ParseFloat(c1[0], 32)
+		y1, _ := strconv.ParseFloat(c1[1], 32)
+		c2 := strings.Split(coords[1], ",")
+		x2, _ := strconv.ParseFloat(c2[0], 32)
+		y2, _ := strconv.ParseFloat(c2[1], 32)
+		return template.HTML(fmt.Sprintf(`<script>addSite("%s", %f, %f, %f, %f, "#FF0", "")</script>`, site.Name(), x1/16.0, y1/16.0-1, x2/16.0, y2/16.0-1))
+	} else {
+		return ""
+	}
+}
 
 func andList(list []string) string {
 	if len(list) > 1 {

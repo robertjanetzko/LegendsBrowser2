@@ -1561,6 +1561,13 @@ type DfWorld struct {
 	UndergroundRegions                     map[int]*UndergroundRegion               `json:"undergroundRegions" legend:"both"`                     // underground_regions
 	WorldConstructions                     map[int]*WorldConstruction               `json:"worldConstructions" legend:"both"`                     // world_constructions
 	WrittenContents                        map[int]*WrittenContent                  `json:"writtenContents" legend:"both"`                        // written_contents
+	EndYear                                int                                      `json:"endYear" legend:"add"`                                 // EndYear
+	FilePath                               string                                   `json:"filePath" legend:"add"`                                // FilePath
+	Height                                 int                                      `json:"height" legend:"add"`                                  // Height
+	MapData                                []byte                                   `json:"mapData" legend:"add"`                                 // MapData
+	MapReady                               bool                                     `json:"mapReady" legend:"add"`                                // MapReady
+	PlusFilePath                           string                                   `json:"plusFilePath" legend:"add"`                            // PlusFilePath
+	Width                                  int                                      `json:"width" legend:"add"`                                   // Width
 }
 
 func NewDfWorld() *DfWorld {
@@ -1582,6 +1589,9 @@ func NewDfWorld() *DfWorld {
 		UndergroundRegions:         make(map[int]*UndergroundRegion),
 		WorldConstructions:         make(map[int]*WorldConstruction),
 		WrittenContents:            make(map[int]*WrittenContent),
+		EndYear:                    -1,
+		Height:                     -1,
+		Width:                      -1,
 	}
 }
 func (x *DfWorld) Name() string                           { return x.Name_ }

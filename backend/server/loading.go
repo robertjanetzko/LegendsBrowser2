@@ -63,7 +63,7 @@ func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		Current:    path,
 	}
 	if p.Current == "" {
-		p.Current = "."
+		p.Current = h.server.context.config.LastPath
 	}
 	var err error
 	p.Current, err = filepath.Abs(p.Current)
@@ -74,6 +74,9 @@ func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	if f, err := os.Stat(p.Current); err == nil {
 		if f.IsDir() {
+			h.server.context.config.LastPath = p.Current
+			h.server.context.config.Save()
+
 			p.List, err = ioutil.ReadDir(p.Current)
 			if err != nil {
 				httpError(w, err)

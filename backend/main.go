@@ -3,10 +3,9 @@ package main
 import (
 	"embed"
 	"flag"
-	"fmt"
+	"log"
 	"net/http"
 	_ "net/http/pprof"
-	"os"
 	"runtime"
 
 	"github.com/pkg/profile"
@@ -26,6 +25,8 @@ func main() {
 
 	templates.DebugTemplates = *d
 
+	var world *model.DfWorld
+
 	if len(*f) > 0 {
 		if *p {
 			defer profile.Start(profile.ProfilePath(".")).Stop()
@@ -36,14 +37,15 @@ func main() {
 
 		w, err := model.Parse(*f, nil)
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			log.Fatal(err)
 		}
 
 		runtime.GC()
-		server.StartServer(w, static)
+		world = w
+	}
 
-	} else {
-		server.StartServer(nil, static)
+	err := server.StartServer(world, static)
+	if err != nil {
+		log.Fatal(err)
 	}
 }

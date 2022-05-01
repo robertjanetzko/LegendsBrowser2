@@ -21,13 +21,19 @@ func (srv *DfServer) LoadTemplates() {
 			}
 			return nil
 		},
-		"title":                util.Title,
-		"kebab":                func(s string) string { return strcase.ToKebab(s) },
+		"title": util.Title,
+		"kebab": func(s string) string { return strcase.ToKebab(s) },
+		"world": func() *model.DfWorld { return srv.context.world },
+		"initMap": func() template.HTML {
+			return template.HTML(fmt.Sprintf(`<script>var worldWidth = %d, worldHeight = %d;</script><script src="/js/map.js"></script>`,
+				srv.context.world.Width, srv.context.world.Height))
+		},
 		"hf":                   func(id int) template.HTML { return model.LinkHf(srv.context.world, id) },
 		"getHf":                func(id int) *model.HistoricalFigure { return srv.context.world.HistoricalFigures[id] },
 		"entity":               func(id int) template.HTML { return model.LinkEntity(srv.context.world, id) },
 		"getEntity":            func(id int) *model.Entity { return srv.context.world.Entities[id] },
 		"site":                 func(id int) template.HTML { return model.LinkSite(srv.context.world, id) },
+		"addSite":              func(id int) template.HTML { return model.AddMapSite(srv.context.world, id) },
 		"getSite":              func(id int) *model.Site { return srv.context.world.Sites[id] },
 		"structure":            func(siteId, id int) template.HTML { return model.LinkStructure(srv.context.world, siteId, id) },
 		"region":               func(id int) template.HTML { return model.LinkRegion(srv.context.world, id) },

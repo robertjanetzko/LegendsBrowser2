@@ -6,3 +6,4 @@ legendsbrowser
 /*.json
 .DS_Store
 bin
+/inputs/*

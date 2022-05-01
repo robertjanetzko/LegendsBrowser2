@@ -88,7 +88,6 @@
 
     <script>
         var hash = document.location.hash;
-        console.log("hah", hash)
         if (hash && hash.startsWith("#nav-")) {
             var hashPieces = hash.split('?');
             activeTab = $('.nav-link[data-bs-target="' + hashPieces[0] + '"]');

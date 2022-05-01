@@ -5,6 +5,36 @@
         "df_world|historical_events|historical_event+KnowledgeDiscovered|knowledge": true
     },
     "AdditionalFields": {
+        "DfWorld": [
+            {
+                "Name": "FilePath",
+                "Type": "string"
+            },
+            {
+                "Name": "PlusFilePath",
+                "Type": "string"
+            },
+            {
+                "Name": "MapReady",
+                "Type": "bool"
+            },
+            {
+                "Name": "MapData",
+                "Type": "[]byte"
+            },
+            {
+                "Name": "Width",
+                "Type": "int"
+            },
+            {
+                "Name": "Height",
+                "Type": "int"
+            },
+            {
+                "Name": "EndYear",
+                "Type": "int"
+            }
+        ],
         "Structure": [
             {
                 "Name": "SiteId",
