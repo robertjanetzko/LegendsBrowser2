@@ -107,7 +107,7 @@
             }).responseText;
         }
 
-        $('a.entity,a.hf,a.region,a.site,a.structure,a.worldconstruction').each(function () {
+        $('a.entity,a.hf,a.region,a.site,a.structure,a.worldconstruction,a.artifact,a.writtencontent').each(function () {
             var popover = new bootstrap.Popover($(this), { content: loadLinkPopoverData, trigger: "hover", placement: "top", html: true })
         })
     </script>

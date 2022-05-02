@@ -13,6 +13,17 @@ type Context struct {
 	Story bool
 }
 
+func NewContext(w *DfWorld, ref any) *Context {
+	c := &Context{World: w}
+	switch r := ref.(type) {
+	case *WrittenContent:
+		c.HfId = r.AuthorHfid
+	default:
+		fmt.Printf("unknown type for context %T\n", ref)
+	}
+	return c
+}
+
 func (c *Context) hf(id int) string {
 	if c.HfId != -1 {
 		if c.HfId == id {
@@ -208,7 +219,7 @@ func (c *Context) worldConstruction(id int) string {
 
 func (c *Context) writtenContent(id int) string {
 	if x, ok := c.World.WrittenContents[id]; ok {
-		return fmt.Sprintf(`<a class="artform" href="/writtenContent/%d">%s</a>`, id, util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="writtencontent" href="/writtencontent/%d">%s</a>`, id, util.Title(x.Name()))
 	}
 	return "UNKNOWN WORLD CONSTRUCTION"
 }

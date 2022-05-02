@@ -4,7 +4,24 @@
 
 {{define "content"}}
 <h1>{{ title .Name }}</h1>
-
+{{if ne .ItemDescription ""}}<p><i>{{ .ItemDescription }}</i></p>{{end}}
+<p>
+    {{- if or (ne .ItemType "") (ne .ItemSubtype "")}}
+    {{.Mat}} {{if ne .ItemSubtype ""}}{{.ItemSubtype}}{{else}}{{.ItemType}}{{end}}
+    {{- end}}
+    {{- if gt .PageCount 0 }}
+    with {{ .PageCount }} pages
+    {{- end}}
+    {{- if ne .Writing -1 }}
+    containing {{ writtenContent .Writing}}
+    {{- end}}
+    {{- if ne .SiteId -1 }}
+    stored in {{ site .SiteId}}
+    {{- end}}
+    {{- if ne .HolderHfid -1 }}
+    owned by {{ hf .HolderHfid}}
+    {{- end}}
+</p>
 <h3>Events</h3>
 
 {{ template "events.html" events . }}

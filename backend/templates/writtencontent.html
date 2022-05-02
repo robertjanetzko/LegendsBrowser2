@@ -1,0 +1,37 @@
+{{template "layout.html" .}}
+
+{{define "title"}}{{ title .Name }}{{end}}
+
+{{define "content"}}
+<h3>{{ title .Name }}</h3>
+<p>{{ .Type_ }} by {{ hf .AuthorHfid }}</p>
+
+<div class="row">
+    {{- if ne 0 (len .Reference) }}
+    <div class="col-md-9">
+        <h5>References</h5>
+        <ul>
+            {{- range .Reference }}
+            <li> {{ .Html (context $) }}</li>
+            {{- end }}
+        </ul>
+    </div>
+    {{- end }}
+
+    {{- if ne 0 (len .Style) }}
+    <div class="col-3">
+        <h5>Style</h5>
+        <ul>
+            {{- range .Style }}
+            <li> {{ . }}</li>
+            {{- end }}
+        </ul>
+    </div>
+    {{- end }}
+</div>
+
+<h5 class="mt-3">Events</h5>
+{{ template "events.html" events . }}
+
+<p>{{ json . }}</p>
+{{- end }}

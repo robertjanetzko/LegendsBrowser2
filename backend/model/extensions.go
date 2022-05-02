@@ -2,6 +2,7 @@ package model
 
 import (
 	"fmt"
+	"html/template"
 	"sort"
 	"strings"
 
@@ -184,4 +185,42 @@ func (w *MusicalForm) Type() string {
 
 func (w *PoeticForm) Type() string {
 	return "poetic form"
+}
+
+func (r *Reference) Html(c *Context) template.HTML {
+	switch r.Type_ {
+	case ReferenceType_ABSTRACTBUILDING:
+		return template.HTML("a building")
+	case ReferenceType_ARTIFACT:
+		return template.HTML(c.artifact(r.Id_))
+	case ReferenceType_DANCEFORM:
+		return template.HTML(c.danceForm(r.Id_))
+	case ReferenceType_ENTITY:
+		return template.HTML(c.entity(r.Id_))
+	case ReferenceType_HISTORICALEVENT:
+		if e, ok := c.World.HistoricalEvents[r.Id_]; ok {
+			return template.HTML("how in " + Time(e.Year, e.Seconds72) + " " + e.Details.Html(c))
+		}
+	case ReferenceType_HISTORICALFIGURE:
+		return template.HTML(c.hf(r.Id_))
+	case ReferenceType_INTERACTION:
+		return template.HTML("an interaction")
+	case ReferenceType_KNOWLEDGESCHOLARFLAG:
+		return template.HTML("specific knowledge")
+	case ReferenceType_LANGUAGE:
+		return template.HTML("a language")
+	case ReferenceType_MUSICALFORM:
+		return template.HTML(c.musicalForm(r.Id_))
+	case ReferenceType_POETICFORM:
+		return template.HTML(c.poeticForm(r.Id_))
+	case ReferenceType_SITE:
+		return template.HTML(c.site(r.Id_, ""))
+	case ReferenceType_SUBREGION:
+		return template.HTML(c.region(r.Id_))
+	case ReferenceType_VALUELEVEL:
+		return template.HTML("a value")
+	case ReferenceType_WRITTENCONTENT:
+		return template.HTML(c.writtenContent(r.Id_))
+	}
+	return template.HTML(r.Type_.String())
 }

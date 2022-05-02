@@ -38,6 +38,7 @@ func NewEventList(world *DfWorld, obj any) *EventList {
 		el.Context.HfId = x.Id()
 		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToHf(x.Id()) })
 	case *Artifact:
+		el.Context.HfId = x.HolderHfid
 		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToArtifact(x.Id()) })
 	case *Site:
 		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToSite(x.Id()) })

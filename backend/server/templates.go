@@ -21,9 +21,10 @@ func (srv *DfServer) LoadTemplates() {
 			}
 			return nil
 		},
-		"title": util.Title,
-		"kebab": func(s string) string { return strcase.ToKebab(s) },
-		"world": func() *model.DfWorld { return srv.context.world },
+		"title":   util.Title,
+		"kebab":   func(s string) string { return strcase.ToKebab(s) },
+		"world":   func() *model.DfWorld { return srv.context.world },
+		"context": func(r any) *model.Context { return model.NewContext(srv.context.world, r) },
 		"initMap": func() template.HTML {
 			return template.HTML(fmt.Sprintf(`<script>var worldWidth = %d, worldHeight = %d;</script><script src="/js/map.js"></script>`,
 				srv.context.world.Width, srv.context.world.Height))
