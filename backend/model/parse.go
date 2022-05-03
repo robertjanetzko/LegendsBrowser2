@@ -13,8 +13,7 @@ import (
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
 
-func (e *HistoricalEvent) Name() string           { return "" }
-func (e *HistoricalEventCollection) Name() string { return "" }
+func (e *HistoricalEvent) Name() string { return "" }
 
 func NewLegendsDecoder(file string) (*xml.Decoder, *os.File, *pb.ProgressBar, error) {
 	fi, err := os.Stat(file)

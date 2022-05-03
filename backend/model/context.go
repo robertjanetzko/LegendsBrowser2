@@ -74,14 +74,14 @@ func (c *Context) hfListRelated(ids []int, to int) string {
 
 func (c *Context) artifact(id int) string {
 	if x, ok := c.World.Artifacts[id]; ok {
-		return fmt.Sprintf(`<a class="artifact" href="/artifact/%d"><i class="%s fa-xs"></i>&nbsp;%s</a>`, x.Id(), x.Icon(), util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="artifact" href="/artifact/%d"><i class="%s fa-xs"></i> %s</a>`, x.Id(), x.Icon(), util.Title(x.Name()))
 	}
 	return "UNKNOWN ARTIFACT"
 }
 
 func (c *Context) entity(id int) string {
 	if x, ok := c.World.Entities[id]; ok {
-		return fmt.Sprintf(`<a class="entity" href="/entity/%d"><i class="%s fa-xs"></i>&nbsp;%s</a>`, x.Id(), x.Icon(), util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="entity" href="/entity/%d"><i class="%s fa-xs"></i> %s</a>`, x.Id(), x.Icon(), util.Title(x.Name()))
 	}
 	return "UNKNOWN ENTITY"
 }
@@ -115,7 +115,7 @@ func (c *Context) siteStructure(siteId, structureId int, prefix string) string {
 
 func (c *Context) site(id int, prefix string) string {
 	if x, ok := c.World.Sites[id]; ok {
-		return fmt.Sprintf(`%s <a class="site" href="/site/%d"><i class="%s fa-xs"></i>&nbsp;%s</a>`, prefix, x.Id(), x.Icon(), util.Title(x.Name()))
+		return fmt.Sprintf(`%s <a class="site" href="/site/%d"><i class="%s fa-xs"></i> %s</a>`, prefix, x.Id(), x.Icon(), util.Title(x.Name()))
 	}
 	return "UNKNOWN SITE"
 }
@@ -123,7 +123,7 @@ func (c *Context) site(id int, prefix string) string {
 func (c *Context) structure(siteId, structureId int) string {
 	if x, ok := c.World.Sites[siteId]; ok {
 		if y, ok := x.Structures[structureId]; ok {
-			return fmt.Sprintf(`<a class="structure" href="/site/%d/structure/%d"><i class="%s fa-xs"></i>&nbsp;%s</a>`, siteId, structureId, y.Icon(), util.Title(y.Name()))
+			return fmt.Sprintf(`<a class="structure" href="/site/%d/structure/%d"><i class="%s fa-xs"></i> %s</a>`, siteId, structureId, y.Icon(), util.Title(y.Name()))
 		}
 	}
 	return "UNKNOWN STRUCTURE"
@@ -191,28 +191,28 @@ func (c *Context) fullIdentity(id int) string {
 
 func (c *Context) danceForm(id int) string {
 	if x, ok := c.World.DanceForms[id]; ok {
-		return fmt.Sprintf(`<a class="artform" href="/danceForm/%d"><i class="fa-solid fa-shoe-prints fa-xs"></i>&nbsp;%s</a>`, id, util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="artform" href="/danceForm/%d"><i class="fa-solid fa-shoe-prints fa-xs"></i> %s</a>`, id, util.Title(x.Name()))
 	}
 	return "UNKNOWN DANCE FORM"
 }
 
 func (c *Context) musicalForm(id int) string {
 	if x, ok := c.World.MusicalForms[id]; ok {
-		return fmt.Sprintf(`<a class="artform" href="/musicalForm/%d"><i class="fa-solid fa-music fa-xs"></i>&nbsp;%s</a>`, id, util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="artform" href="/musicalForm/%d"><i class="fa-solid fa-music fa-xs"></i> %s</a>`, id, util.Title(x.Name()))
 	}
 	return "UNKNOWN MUSICAL FORM"
 }
 
 func (c *Context) poeticForm(id int) string {
 	if x, ok := c.World.PoeticForms[id]; ok {
-		return fmt.Sprintf(`<a class="artform" href="/poeticForm/%d"><i class="fa-solid fa-comment-dots fa-xs"></i>&nbsp;%s</a>`, id, util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="artform" href="/poeticForm/%d"><i class="fa-solid fa-comment-dots fa-xs"></i> %s</a>`, id, util.Title(x.Name()))
 	}
 	return "UNKNOWN POETIC FORM"
 }
 
 func (c *Context) worldConstruction(id int) string {
 	if x, ok := c.World.WorldConstructions[id]; ok {
-		return fmt.Sprintf(`<a class="worldconstruction" href="/worldconstruction/%d"><i class="%s fa-xs"></i>&nbsp;%s</a>`, id, x.Icon(), util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="worldconstruction" href="/worldconstruction/%d"><i class="%s fa-xs"></i> %s</a>`, id, x.Icon(), util.Title(x.Name()))
 	}
 	return "UNKNOWN WORLD CONSTRUCTION"
 }
@@ -222,6 +222,13 @@ func (c *Context) writtenContent(id int) string {
 		return fmt.Sprintf(`<a class="writtencontent" href="/writtencontent/%d">%s</a>`, id, util.Title(x.Name()))
 	}
 	return "UNKNOWN WORLD CONSTRUCTION"
+}
+
+func (c *Context) collection(id int) string {
+	if x, ok := c.World.HistoricalEventCollections[id]; ok {
+		return x.Details.Html(x, c)
+	}
+	return "UNKNOWN EVENT COLLECTION"
 }
 
 func (c *Context) feature(x *Feature) string {

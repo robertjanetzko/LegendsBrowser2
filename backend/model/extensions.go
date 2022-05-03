@@ -63,6 +63,20 @@ func (w *DfWorld) SiteHistory(siteId int) []*HistoricalEvent {
 	return list
 }
 
+func (c *HistoricalEventCollection) Type() string {
+	if c.Details == nil {
+		return "unk"
+	}
+	return c.Details.Type()
+}
+
+func (e *HistoricalEventCollection) Html(c *Context) string {
+	if e.Details == nil {
+		return "unk"
+	}
+	return e.Details.Html(e, c)
+}
+
 func (e *Artifact) Type() string {
 	switch e.ItemSubtype {
 	case "scroll":

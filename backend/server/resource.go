@@ -26,7 +26,7 @@ func (srv *DfServer) RegisterWorldPage(path string, template string, accessor fu
 
 		err := srv.templates.Render(w, template, data)
 		if err != nil {
-			fmt.Fprintln(w, err)
+			fmt.Fprint(w, err)
 			fmt.Println(err)
 		}
 	}

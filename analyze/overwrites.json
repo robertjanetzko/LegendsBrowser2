@@ -62,6 +62,54 @@
                 "Name": "Ruin",
                 "Type": "bool"
             }
+        ],
+        "HistoricalEvent": [
+            {
+                "Name": "Collection",
+                "Type": "int"
+            }
+        ],
+        "HistoricalEventCollectionAbduction": [
+            {
+                "Name": "TargetHfids",
+                "Type": "[]int"
+            }
+        ],
+        "HistoricalEventCollectionBeastAttack": [
+            {
+                "Name": "AttackerHfIds",
+                "Type": "[]int"
+            }
+        ],
+        "HistoricalEventCollectionJourney": [
+            {
+                "Name": "TravellerHfIds",
+                "Type": "[]int"
+            }
+        ],
+        "HistoricalEventCollectionCeremony": [
+            {
+                "Name": "OccasionEventcol",
+                "Type": "int"
+            }
+        ],
+        "HistoricalEventCollectionCompetition": [
+            {
+                "Name": "OccasionEventcol",
+                "Type": "int"
+            }
+        ],
+        "HistoricalEventCollectionPerformance": [
+            {
+                "Name": "OccasionEventcol",
+                "Type": "int"
+            }
+        ],
+        "HistoricalEventCollectionProcession": [
+            {
+                "Name": "OccasionEventcol",
+                "Type": "int"
+            }
         ]
     }
 }

@@ -2,6 +2,8 @@ package model
 
 import (
 	"fmt"
+
+	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
 
 type HistoricalEventDetails interface {
@@ -16,6 +18,8 @@ type HistoricalEventDetails interface {
 }
 
 type HistoricalEventCollectionDetails interface {
+	Type() string
+	Html(*HistoricalEventCollection, *Context) string
 }
 
 type EventList struct {
@@ -48,6 +52,8 @@ func NewEventList(world *DfWorld, obj any) *EventList {
 		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToRegion(x.Id()) })
 	case []*HistoricalEvent:
 		el.Events = x
+	case []int:
+		el.Events = util.Map(x, func(id int) *HistoricalEvent { return world.HistoricalEvents[id] })
 	default:
 		fmt.Printf("unknown type %T\n", obj)
 	}

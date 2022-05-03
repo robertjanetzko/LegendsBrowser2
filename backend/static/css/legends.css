@@ -71,17 +71,22 @@ td.object {
     font-size: 80%;
 }
 
-/* 
+
 @media (prefers-color-scheme: dark) {
     a {
         color: #337ab7;
     }
 
+    .collection {
+        color: #718dc9;
+    }
+
+
     .artifact {
         color: #ea4e00;
     }
 
-    .historical-figure {
+    .hf {
         color: #5c93ff;
     }
 
@@ -93,7 +98,20 @@ td.object {
         color: #c70303;
     }
 
-    .art-form {
+    .occasion {
+        color: #ff91ff;
+    }
+
+
+    .artform {
         color: #cc45cc;
     }
-} */
+
+    .worldconstruction {
+        color: #aaa;
+    }
+
+    .json {
+        color: #666;
+    }
+}

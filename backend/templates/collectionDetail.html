@@ -1,0 +1,11 @@
+{{- if gt (len .Eventcol) 0 }}
+<ul>
+    {{- range .Eventcol }}
+    <li>{{ with getCollection . }}
+        In {{ time .StartYear .StartSeconds72 }}, {{ collection .Id }} occurred
+        {{ template "events.html" events .Event }}
+        {{ end }}</li>
+    {{- end }}
+</ul>
+{{- end }}
+{{ template "events.html" events .Event }}

@@ -23,6 +23,7 @@ var LinkDanceForm = func(w *DfWorld, id int) template.HTML { return template.HTM
 var LinkMusicalForm = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).musicalForm(id)) }
 var LinkPoeticForm = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).poeticForm(id)) }
 var LinkWrittenContent = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).writtenContent(id)) }
+var LinkCollection = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).collection(id)) }
 
 var AddMapSite = func(w *DfWorld, id int) template.HTML {
 	if site, ok := w.Sites[id]; ok {

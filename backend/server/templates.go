@@ -55,6 +55,20 @@ func (srv *DfServer) LoadTemplates() {
 		"history": func(siteId int) []*model.HistoricalEvent {
 			return srv.context.world.SiteHistory(siteId)
 		},
+		"collection":    func(id int) template.HTML { return model.LinkCollection(srv.context.world, id) },
+		"getCollection": func(id int) *model.HistoricalEventCollection { return srv.context.world.HistoricalEventCollections[id] },
+		"getOccasion": func(civId, occasionId int) *model.Occasion {
+			if civ, ok := srv.context.world.Entities[civId]; ok {
+				return civ.Occasion[occasionId]
+			}
+			return nil
+		},
+		"story": func(id int) template.HTML {
+			if e, ok := srv.context.world.HistoricalEvents[id]; ok {
+				return template.HTML(e.Details.Html(&model.Context{World: srv.context.world, Story: true}) + " in " + model.Time(e.Year, e.Seconds72))
+			}
+			return template.HTML("")
+		},
 		"season":       model.Season,
 		"time":         model.Time,
 		"url":          url.PathEscape,
@@ -63,9 +77,12 @@ func (srv *DfServer) LoadTemplates() {
 		"html": func(value any) template.HTML {
 			return template.HTML(fmt.Sprint(value))
 		},
-		"bytes":   func(s int64) string { return humanize.Bytes(uint64(s)) },
-		"first":   util.FirstInMap,
-		"ifFirst": func(m any, k string, r string) string { return util.If(util.FirstInMap(m, k), r, "") },
+		"bytes":      func(s int64) string { return humanize.Bytes(uint64(s)) },
+		"first":      util.FirstInMap,
+		"ifFirst":    func(m any, k string, r string) string { return util.If(util.FirstInMap(m, k), r, "") },
+		"strip":      util.Strip,
+		"string":     util.String,
+		"capitalize": util.Capitalize,
 	}
 	srv.templates = templates.New(functions)
 }

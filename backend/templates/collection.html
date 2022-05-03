@@ -1,0 +1,16 @@
+{{template "layout.html" .}}
+
+{{define "title"}}{{ title (strip (collection .Id)) }}{{end}}
+
+{{define "content"}}
+
+<h3>{{ html (capitalize (string (collection .Id))) }}</h3>
+
+{{- if eq .Type "occasion" }}{{- with getOccasion .Details.CivId .Details.OccasionId }}{{- if ne .Event -1 }}
+<p>A festival commemorating {{ story .Event }}</p>
+{{- end }}{{- end}}{{- end}}
+
+{{ template "collectionDetail.html" . }}
+
+<p>{{ json . }}</p>
+{{- end }}

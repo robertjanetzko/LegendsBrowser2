@@ -4,6 +4,7 @@ import (
 	"embed"
 	"fmt"
 	"net/http"
+	"os"
 	"sort"
 	"strconv"
 
@@ -93,6 +94,16 @@ func StartServer(world *model.DfWorld, static embed.FS) error {
 	srv.RegisterWorldPage("/events", "eventTypes.html", func(p Parms) any { return srv.context.world.AllEventTypes() })
 	srv.RegisterWorldPage("/events/{type}", "eventType.html", func(p Parms) any { return srv.context.world.EventsOfType(p["type"]) })
 
+	srv.RegisterWorldPage("/collections", "collections.html", func(p Parms) any {
+		return groupBy(srv.context.world.HistoricalEventCollections,
+			func(e *model.HistoricalEventCollection) string { return e.Type() },
+			func(e *model.HistoricalEventCollection) bool { return true },
+			func(e *model.HistoricalEventCollection) string { return model.Time(e.StartYear, e.StartSeconds72) },
+		)
+	})
+	srv.RegisterWorldResourcePage("/collection/{id}", "collection.html", func(id int) any { return srv.context.world.HistoricalEventCollections[id] })
+	srv.RegisterWorldResourcePage("/popover/collection/{id}", "popoverCollection.html", func(id int) any { return srv.context.world.HistoricalEventCollections[id] })
+
 	srv.RegisterWorldPage("/", "index.html", func(p Parms) any {
 		return &struct {
 			Civilizations map[string][]*model.Entity
@@ -115,6 +126,9 @@ func StartServer(world *model.DfWorld, static embed.FS) error {
 	srv.router.PathPrefix("/load").Handler(srv.loader)
 
 	spa := spaHandler{server: srv, staticFS: static, staticPath: "static", indexPath: "index.html"}
+	if templates.DebugTemplates {
+		spa.staticFS = os.DirFS(".")
+	}
 	srv.router.PathPrefix("/").Handler(spa)
 
 	OpenBrowser("http://localhost:8080")

@@ -162,6 +162,12 @@ func (x *{{ $obj.Name }}) MarshalJSON() ([]byte, error) {
 	{{- range $fname, $field := $obj.Fields }}{{- if not ($field.SameField $obj) }}{{- if not (and (eq $fname "type") (not (not $obj.SubTypes))) }}
 	{{ $field.JsonMarshal }}
 	{{- end }}{{- end }}{{- end }}
+	{{- if not (not $obj.SubTypes) }}
+	d["details"] = x.Details
+	{{- end }}
+	{{- range $fname, $field := $obj.Additional }}
+	{{ $field.JsonMarshal }}
+	{{- end }}
 	return json.Marshal(d)
 }
 
@@ -399,6 +405,9 @@ func (f Field) StartAction(obj Object, plus bool) string {
 				return fmt.Sprintf("%sobj.%s = append(obj.%s, num(data))", s, n, n)
 			} else if f.Type == "string" {
 				return fmt.Sprintf("%sobj.%s = append(obj.%s, txt(data))", s, n, n)
+			} else if f.Type == "bool" {
+				s := "_, err := p.Value()\nif err != nil { return nil, err }\n"
+				return fmt.Sprintf("%sobj.%s = append(obj.%s, true)", s, n, n)
 			} else if f.Type == "enum" {
 				return fmt.Sprintf("%sobj.%s = append(obj.%s, parse%s%s(txt(data)))", s, n, n, obj.Name, f.CorrectedName(obj))
 			}

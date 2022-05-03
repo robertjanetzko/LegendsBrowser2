@@ -1,0 +1,37 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Event Collections{{end}}
+
+{{define "content"}}
+<h3>Event Collections</h3>
+
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        {{- range $t, $v := .}}
+        <button class="nav-link{{ ifFirst $ $t " active" }}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button"
+            role="tab">{{$t}} ({{ len $v }})</button>
+        {{- end}}
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    {{- range $t, $v := . }}
+    <div class="tab-pane{{ ifFirst $ $t " active" }}" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
+        <table class="table table-hover table-sm table-borderless object-table">
+            <tr>
+                <th width="100%">Name</th>
+                <th>Collections</th>
+                <th>Events</th>
+            </tr>
+            {{- range $v }}
+            <tr>
+                <td>{{ collection .Id }}</td>
+                <td>{{ len .Eventcol }}</td>
+                <td>{{ len .Event }}</td>
+            </tr>
+            {{- end}}
+        </table>
+    </div>
+    {{- end}}
+</div>
+
+{{- end }}

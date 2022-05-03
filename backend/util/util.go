@@ -117,3 +117,12 @@ func FirstInMap(a any, b string) bool {
 	sort.Slice(ks, func(i, j int) bool { return ks[i].String() < ks[j].String() })
 	return ks[0].String() == b
 }
+
+func Strip(html template.HTML) string {
+	r := regexp.MustCompile(`<.*?>`)
+	return r.ReplaceAllString(string(html), "")
+}
+
+func String(html template.HTML) string {
+	return string(html)
+}

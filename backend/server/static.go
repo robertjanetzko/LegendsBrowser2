@@ -1,16 +1,16 @@
 package server
 
 import (
-	"embed"
 	"fmt"
 	"io/fs"
+	"io/ioutil"
 	"net/http"
 	"os"
 )
 
 type spaHandler struct {
 	server     *DfServer
-	staticFS   embed.FS
+	staticFS   fs.FS
 	staticPath string
 	indexPath  string
 }
@@ -30,7 +30,12 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if os.IsNotExist(err) {
 		// file does not exist, serve index.html
 		fmt.Println(path)
-		index, err := h.staticFS.ReadFile(h.staticPath + "/" + h.indexPath)
+		file, err := h.staticFS.Open(h.staticPath + "/" + h.indexPath)
+		if err != nil {
+			h.server.notFound(w)
+			return
+		}
+		index, err := ioutil.ReadAll(file)
 		if err != nil {
 			h.server.notFound(w)
 			return

@@ -1631,6 +1631,19 @@ func (x *DfWorld) MarshalJSON() ([]byte, error) {
 	d["undergroundRegions"] = x.UndergroundRegions
 	d["worldConstructions"] = x.WorldConstructions
 	d["writtenContents"] = x.WrittenContents
+	if x.EndYear != -1 {
+		d["endYear"] = x.EndYear
+	}
+	d["filePath"] = x.FilePath
+	if x.Height != -1 {
+		d["height"] = x.Height
+	}
+	d["mapData"] = x.MapData
+	d["mapReady"] = x.MapReady
+	d["plusFilePath"] = x.PlusFilePath
+	if x.Width != -1 {
+		d["width"] = x.Width
+	}
 	return json.Marshal(d)
 }
 
@@ -2045,6 +2058,7 @@ func (x *Entity) MarshalJSON() ([]byte, error) {
 	}
 	d["weapon"] = x.Weapon
 	d["worshipId"] = x.WorshipId
+	d["sites"] = x.Sites
 	return json.Marshal(d)
 }
 
@@ -2819,17 +2833,19 @@ func (x *HistoricalEra) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEvent struct {
-	Id_       int `json:"id" legend:"both"`        // id
-	Seconds72 int `json:"seconds72" legend:"base"` // seconds72
-	Year      int `json:"year" legend:"base"`      // year
-	Details   HistoricalEventDetails
+	Id_        int `json:"id" legend:"both"`        // id
+	Seconds72  int `json:"seconds72" legend:"base"` // seconds72
+	Year       int `json:"year" legend:"base"`      // year
+	Details    HistoricalEventDetails
+	Collection int `json:"collection" legend:"add"` // Collection
 }
 
 func NewHistoricalEvent() *HistoricalEvent {
 	return &HistoricalEvent{
-		Id_:       -1,
-		Seconds72: -1,
-		Year:      -1,
+		Id_:        -1,
+		Seconds72:  -1,
+		Year:       -1,
+		Collection: -1,
 	}
 }
 func (x *HistoricalEvent) Id() int                                { return x.Id_ }
@@ -2854,6 +2870,10 @@ func (x *HistoricalEvent) MarshalJSON() ([]byte, error) {
 	}
 	if x.Year != -1 {
 		d["year"] = x.Year
+	}
+	d["details"] = x.Details
+	if x.Collection != -1 {
+		d["collection"] = x.Collection
 	}
 	return json.Marshal(d)
 }
@@ -5915,6 +5935,7 @@ func (x *HistoricalEventCollection) MarshalJSON() ([]byte, error) {
 	if x.StartYear != -1 {
 		d["startYear"] = x.StartYear
 	}
+	d["details"] = x.Details
 	return json.Marshal(d)
 }
 
@@ -5927,6 +5948,7 @@ type HistoricalEventCollectionAbduction struct {
 	ParentEventcol int    `json:"parentEventcol" legend:"base"` // parent_eventcol
 	SiteId         int    `json:"siteId" legend:"base"`         // site_id
 	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	TargetHfids    []int  `json:"targetHfids" legend:"add"`     // TargetHfids
 }
 
 func NewHistoricalEventCollectionAbduction() *HistoricalEventCollectionAbduction {
@@ -5977,6 +5999,7 @@ func (x *HistoricalEventCollectionAbduction) MarshalJSON() ([]byte, error) {
 	if x.SubregionId != -1 {
 		d["subregionId"] = x.SubregionId
 	}
+	d["targetHfids"] = x.TargetHfids
 	return json.Marshal(d)
 }
 
@@ -6136,6 +6159,7 @@ type HistoricalEventCollectionBeastAttack struct {
 	ParentEventcol int    `json:"parentEventcol" legend:"base"` // parent_eventcol
 	SiteId         int    `json:"siteId" legend:"base"`         // site_id
 	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	AttackerHfIds  []int  `json:"attackerHfIds" legend:"add"`   // AttackerHfIds
 }
 
 func NewHistoricalEventCollectionBeastAttack() *HistoricalEventCollectionBeastAttack {
@@ -6184,16 +6208,19 @@ func (x *HistoricalEventCollectionBeastAttack) MarshalJSON() ([]byte, error) {
 	if x.SubregionId != -1 {
 		d["subregionId"] = x.SubregionId
 	}
+	d["attackerHfIds"] = x.AttackerHfIds
 	return json.Marshal(d)
 }
 
 type HistoricalEventCollectionCeremony struct {
-	Ordinal int `json:"ordinal" legend:"base"` // ordinal
+	Ordinal          int `json:"ordinal" legend:"base"`         // ordinal
+	OccasionEventcol int `json:"occasionEventcol" legend:"add"` // OccasionEventcol
 }
 
 func NewHistoricalEventCollectionCeremony() *HistoricalEventCollectionCeremony {
 	return &HistoricalEventCollectionCeremony{
-		Ordinal: -1,
+		Ordinal:          -1,
+		OccasionEventcol: -1,
 	}
 }
 func (x *HistoricalEventCollectionCeremony) Type() string                           { return "ceremony" }
@@ -6212,16 +6239,21 @@ func (x *HistoricalEventCollectionCeremony) MarshalJSON() ([]byte, error) {
 	if x.Ordinal != -1 {
 		d["ordinal"] = x.Ordinal
 	}
+	if x.OccasionEventcol != -1 {
+		d["occasionEventcol"] = x.OccasionEventcol
+	}
 	return json.Marshal(d)
 }
 
 type HistoricalEventCollectionCompetition struct {
-	Ordinal int `json:"ordinal" legend:"base"` // ordinal
+	Ordinal          int `json:"ordinal" legend:"base"`         // ordinal
+	OccasionEventcol int `json:"occasionEventcol" legend:"add"` // OccasionEventcol
 }
 
 func NewHistoricalEventCollectionCompetition() *HistoricalEventCollectionCompetition {
 	return &HistoricalEventCollectionCompetition{
-		Ordinal: -1,
+		Ordinal:          -1,
+		OccasionEventcol: -1,
 	}
 }
 func (x *HistoricalEventCollectionCompetition) Type() string                           { return "competition" }
@@ -6239,6 +6271,9 @@ func (x *HistoricalEventCollectionCompetition) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
 	if x.Ordinal != -1 {
 		d["ordinal"] = x.Ordinal
+	}
+	if x.OccasionEventcol != -1 {
+		d["occasionEventcol"] = x.OccasionEventcol
 	}
 	return json.Marshal(d)
 }
@@ -6388,7 +6423,8 @@ func (x *HistoricalEventCollectionInsurrection) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionJourney struct {
-	Ordinal int `json:"ordinal" legend:"base"` // ordinal
+	Ordinal        int   `json:"ordinal" legend:"base"`       // ordinal
+	TravellerHfIds []int `json:"travellerHfIds" legend:"add"` // TravellerHfIds
 }
 
 func NewHistoricalEventCollectionJourney() *HistoricalEventCollectionJourney {
@@ -6412,6 +6448,7 @@ func (x *HistoricalEventCollectionJourney) MarshalJSON() ([]byte, error) {
 	if x.Ordinal != -1 {
 		d["ordinal"] = x.Ordinal
 	}
+	d["travellerHfIds"] = x.TravellerHfIds
 	return json.Marshal(d)
 }
 
@@ -6454,12 +6491,14 @@ func (x *HistoricalEventCollectionOccasion) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionPerformance struct {
-	Ordinal int `json:"ordinal" legend:"base"` // ordinal
+	Ordinal          int `json:"ordinal" legend:"base"`         // ordinal
+	OccasionEventcol int `json:"occasionEventcol" legend:"add"` // OccasionEventcol
 }
 
 func NewHistoricalEventCollectionPerformance() *HistoricalEventCollectionPerformance {
 	return &HistoricalEventCollectionPerformance{
-		Ordinal: -1,
+		Ordinal:          -1,
+		OccasionEventcol: -1,
 	}
 }
 func (x *HistoricalEventCollectionPerformance) Type() string                           { return "performance" }
@@ -6477,6 +6516,9 @@ func (x *HistoricalEventCollectionPerformance) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
 	if x.Ordinal != -1 {
 		d["ordinal"] = x.Ordinal
+	}
+	if x.OccasionEventcol != -1 {
+		d["occasionEventcol"] = x.OccasionEventcol
 	}
 	return json.Marshal(d)
 }
@@ -6522,12 +6564,14 @@ func (x *HistoricalEventCollectionPersecution) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionProcession struct {
-	Ordinal int `json:"ordinal" legend:"base"` // ordinal
+	Ordinal          int `json:"ordinal" legend:"base"`         // ordinal
+	OccasionEventcol int `json:"occasionEventcol" legend:"add"` // OccasionEventcol
 }
 
 func NewHistoricalEventCollectionProcession() *HistoricalEventCollectionProcession {
 	return &HistoricalEventCollectionProcession{
-		Ordinal: -1,
+		Ordinal:          -1,
+		OccasionEventcol: -1,
 	}
 }
 func (x *HistoricalEventCollectionProcession) Type() string                           { return "procession" }
@@ -6545,6 +6589,9 @@ func (x *HistoricalEventCollectionProcession) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
 	if x.Ordinal != -1 {
 		d["ordinal"] = x.Ordinal
+	}
+	if x.OccasionEventcol != -1 {
+		d["occasionEventcol"] = x.OccasionEventcol
 	}
 	return json.Marshal(d)
 }
@@ -18172,6 +18219,8 @@ func (x *HistoricalFigure) MarshalJSON() ([]byte, error) {
 	d["sphere"] = x.Sphere
 	d["usedIdentityId"] = x.UsedIdentityId
 	d["vagueRelationship"] = x.VagueRelationship
+	d["vampire"] = x.Vampire
+	d["werebeast"] = x.Werebeast
 	return json.Marshal(d)
 }
 
@@ -20434,6 +20483,7 @@ func (x *Site) MarshalJSON() ([]byte, error) {
 	if x.Type_ != 0 {
 		d["type"] = x.Type_
 	}
+	d["ruin"] = x.Ruin
 	return json.Marshal(d)
 }
 
@@ -20854,6 +20904,9 @@ func (x *Structure) MarshalJSON() ([]byte, error) {
 	}
 	if x.WorshipHfid != -1 {
 		d["worshipHfid"] = x.WorshipHfid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
 	}
 	return json.Marshal(d)
 }
@@ -27040,7 +27093,11 @@ func parseHistoricalEventCollectionBattle(p *util.XMLParser) (*HistoricalEventCo
 				}
 				obj.AttackingMercEnid = num(data)
 			case "attacking_squad_animated":
-
+				_, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.AttackingSquadAnimated = append(obj.AttackingSquadAnimated, true)
 			case "attacking_squad_deaths":
 				data, err := p.Value()
 				if err != nil {
@@ -27072,7 +27129,11 @@ func parseHistoricalEventCollectionBattle(p *util.XMLParser) (*HistoricalEventCo
 				}
 				obj.AttackingSquadSite = append(obj.AttackingSquadSite, num(data))
 			case "company_merc":
-
+				_, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.CompanyMerc = append(obj.CompanyMerc, true)
 			case "coords":
 				data, err := p.Value()
 				if err != nil {
@@ -27104,7 +27165,11 @@ func parseHistoricalEventCollectionBattle(p *util.XMLParser) (*HistoricalEventCo
 				}
 				obj.DefendingMercEnid = num(data)
 			case "defending_squad_animated":
-
+				_, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.DefendingSquadAnimated = append(obj.DefendingSquadAnimated, true)
 			case "defending_squad_deaths":
 				data, err := p.Value()
 				if err != nil {
@@ -27142,7 +27207,11 @@ func parseHistoricalEventCollectionBattle(p *util.XMLParser) (*HistoricalEventCo
 				}
 				obj.FeatureLayerId = num(data)
 			case "individual_merc":
-
+				_, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.IndividualMerc = append(obj.IndividualMerc, true)
 			case "name":
 				data, err := p.Value()
 				if err != nil {
