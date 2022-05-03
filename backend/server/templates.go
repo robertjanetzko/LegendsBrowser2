@@ -69,6 +69,7 @@ func (srv *DfServer) LoadTemplates() {
 			}
 			return template.HTML("")
 		},
+		"description":  func(d string) template.HTML { return model.LinkDescription(srv.context.world, d) },
 		"season":       model.Season,
 		"time":         model.Time,
 		"url":          url.PathEscape,

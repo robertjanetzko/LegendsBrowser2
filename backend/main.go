@@ -23,18 +23,18 @@ func main() {
 	d := flag.Bool("d", false, "debug templates")
 	flag.Parse()
 
+	if *p {
+		defer profile.Start(profile.ProfilePath(".")).Stop()
+		go func() {
+			http.ListenAndServe(":8081", nil)
+		}()
+	}
+
 	templates.DebugTemplates = *d
 
 	var world *model.DfWorld
 
 	if len(*f) > 0 {
-		if *p {
-			defer profile.Start(profile.ProfilePath(".")).Stop()
-			go func() {
-				http.ListenAndServe(":8081", nil)
-			}()
-		}
-
 		w, err := model.Parse(*f, nil)
 		if err != nil {
 			log.Fatal(err)

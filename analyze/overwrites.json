@@ -4,6 +4,11 @@
         "df_world|historical_events|historical_event+HfDied|death_cause": true,
         "df_world|historical_events|historical_event+KnowledgeDiscovered|knowledge": true
     },
+    "Relations": {
+        "HistoricalEventDanceFormCreated.FormId": "danceForm",
+        "HistoricalEventMusicalFormCreated.FormId": "musicalForm",
+        "HistoricalEventPoeticFormCreated.FormId": "poeticForm"
+    },
     "AdditionalFields": {
         "DfWorld": [
             {

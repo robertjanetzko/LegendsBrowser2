@@ -5,7 +5,18 @@
 {{define "content"}}
 <h3>{{ title .Name }}</h3>
 <p>{{ .Type_ }} by {{ hf .AuthorHfid }}</p>
-
+{{- if ne .FormId -1 }}
+<p>
+    an example of
+    {{- if eq .Form.String "musical composition" }}
+    {{ musicalForm .FormId }}
+    {{- else if eq .Form.String "choreography" }}
+    {{ danceForm .FormId }}
+    {{- else }}
+    {{ poeticForm .FormId }}
+    {{- end }}
+</p>
+{{- end }}
 <div class="row">
     {{- if ne 0 (len .Reference) }}
     <div class="col-md-9">

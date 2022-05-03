@@ -1147,15 +1147,9 @@ func NewArtifact() *Artifact {
 		Writing:          -1,
 	}
 }
-func (x *Artifact) Id() int                                { return x.Id_ }
-func (x *Artifact) setId(id int)                           { x.Id_ = id }
-func (x *Artifact) Name() string                           { return x.Name_ }
-func (x *Artifact) RelatedToEntity(id int) bool            { return false }
-func (x *Artifact) RelatedToHf(id int) bool                { return x.HolderHfid == id }
-func (x *Artifact) RelatedToArtifact(id int) bool          { return false }
-func (x *Artifact) RelatedToSite(id int) bool              { return x.SiteId == id }
-func (x *Artifact) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Artifact) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *Artifact) Id() int      { return x.Id_ }
+func (x *Artifact) setId(id int) { x.Id_ = id }
+func (x *Artifact) Name() string { return x.Name_ }
 
 func (x *Artifact) CheckFields() {
 	if x.PageCount != x.AbsTileX {
@@ -1368,12 +1362,6 @@ type Creature struct {
 func NewCreature() *Creature {
 	return &Creature{}
 }
-func (x *Creature) RelatedToEntity(id int) bool            { return false }
-func (x *Creature) RelatedToHf(id int) bool                { return false }
-func (x *Creature) RelatedToArtifact(id int) bool          { return false }
-func (x *Creature) RelatedToSite(id int) bool              { return false }
-func (x *Creature) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Creature) RelatedToRegion(id int) bool            { return false }
 
 func (x *Creature) CheckFields() {
 }
@@ -1513,15 +1501,9 @@ func NewDanceForm() *DanceForm {
 		Id_: -1,
 	}
 }
-func (x *DanceForm) Id() int                                { return x.Id_ }
-func (x *DanceForm) setId(id int)                           { x.Id_ = id }
-func (x *DanceForm) Name() string                           { return x.Name_ }
-func (x *DanceForm) RelatedToEntity(id int) bool            { return false }
-func (x *DanceForm) RelatedToHf(id int) bool                { return false }
-func (x *DanceForm) RelatedToArtifact(id int) bool          { return false }
-func (x *DanceForm) RelatedToSite(id int) bool              { return false }
-func (x *DanceForm) RelatedToStructure(siteId, id int) bool { return false }
-func (x *DanceForm) RelatedToRegion(id int) bool            { return false }
+func (x *DanceForm) Id() int      { return x.Id_ }
+func (x *DanceForm) setId(id int) { x.Id_ = id }
+func (x *DanceForm) Name() string { return x.Name_ }
 
 func (x *DanceForm) CheckFields() {
 }
@@ -1594,13 +1576,7 @@ func NewDfWorld() *DfWorld {
 		Width:                      -1,
 	}
 }
-func (x *DfWorld) Name() string                           { return x.Name_ }
-func (x *DfWorld) RelatedToEntity(id int) bool            { return false }
-func (x *DfWorld) RelatedToHf(id int) bool                { return false }
-func (x *DfWorld) RelatedToArtifact(id int) bool          { return false }
-func (x *DfWorld) RelatedToSite(id int) bool              { return false }
-func (x *DfWorld) RelatedToStructure(siteId, id int) bool { return false }
-func (x *DfWorld) RelatedToRegion(id int) bool            { return false }
+func (x *DfWorld) Name() string { return x.Name_ }
 
 func (x *DfWorld) CheckFields() {
 }
@@ -2022,15 +1998,9 @@ func NewEntity() *Entity {
 		Id_: -1,
 	}
 }
-func (x *Entity) Id() int                                { return x.Id_ }
-func (x *Entity) setId(id int)                           { x.Id_ = id }
-func (x *Entity) Name() string                           { return x.Name_ }
-func (x *Entity) RelatedToEntity(id int) bool            { return false }
-func (x *Entity) RelatedToHf(id int) bool                { return containsInt(x.HistfigId, id) }
-func (x *Entity) RelatedToArtifact(id int) bool          { return false }
-func (x *Entity) RelatedToSite(id int) bool              { return false }
-func (x *Entity) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Entity) RelatedToRegion(id int) bool            { return false }
+func (x *Entity) Id() int      { return x.Id_ }
+func (x *Entity) setId(id int) { x.Id_ = id }
+func (x *Entity) Name() string { return x.Name_ }
 
 func (x *Entity) CheckFields() {
 }
@@ -2111,12 +2081,6 @@ func NewEntityEntityLink() *EntityEntityLink {
 		Target:   -1,
 	}
 }
-func (x *EntityEntityLink) RelatedToEntity(id int) bool            { return false }
-func (x *EntityEntityLink) RelatedToHf(id int) bool                { return false }
-func (x *EntityEntityLink) RelatedToArtifact(id int) bool          { return false }
-func (x *EntityEntityLink) RelatedToSite(id int) bool              { return false }
-func (x *EntityEntityLink) RelatedToStructure(siteId, id int) bool { return false }
-func (x *EntityEntityLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntityEntityLink) CheckFields() {
 }
@@ -2150,12 +2114,6 @@ func NewEntityFormerPositionLink() *EntityFormerPositionLink {
 		StartYear:         -1,
 	}
 }
-func (x *EntityFormerPositionLink) RelatedToEntity(id int) bool            { return x.EntityId == id }
-func (x *EntityFormerPositionLink) RelatedToHf(id int) bool                { return false }
-func (x *EntityFormerPositionLink) RelatedToArtifact(id int) bool          { return false }
-func (x *EntityFormerPositionLink) RelatedToSite(id int) bool              { return false }
-func (x *EntityFormerPositionLink) RelatedToStructure(siteId, id int) bool { return false }
-func (x *EntityFormerPositionLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntityFormerPositionLink) CheckFields() {
 }
@@ -2192,12 +2150,6 @@ func NewEntityFormerSquadLink() *EntityFormerSquadLink {
 		StartYear: -1,
 	}
 }
-func (x *EntityFormerSquadLink) RelatedToEntity(id int) bool            { return x.EntityId == id }
-func (x *EntityFormerSquadLink) RelatedToHf(id int) bool                { return false }
-func (x *EntityFormerSquadLink) RelatedToArtifact(id int) bool          { return false }
-func (x *EntityFormerSquadLink) RelatedToSite(id int) bool              { return false }
-func (x *EntityFormerSquadLink) RelatedToStructure(siteId, id int) bool { return false }
-func (x *EntityFormerSquadLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntityFormerSquadLink) CheckFields() {
 }
@@ -2231,14 +2183,8 @@ func NewEntityPopulation() *EntityPopulation {
 		Id_:   -1,
 	}
 }
-func (x *EntityPopulation) Id() int                                { return x.Id_ }
-func (x *EntityPopulation) setId(id int)                           { x.Id_ = id }
-func (x *EntityPopulation) RelatedToEntity(id int) bool            { return x.CivId == id }
-func (x *EntityPopulation) RelatedToHf(id int) bool                { return false }
-func (x *EntityPopulation) RelatedToArtifact(id int) bool          { return false }
-func (x *EntityPopulation) RelatedToSite(id int) bool              { return false }
-func (x *EntityPopulation) RelatedToStructure(siteId, id int) bool { return false }
-func (x *EntityPopulation) RelatedToRegion(id int) bool            { return false }
+func (x *EntityPopulation) Id() int      { return x.Id_ }
+func (x *EntityPopulation) setId(id int) { x.Id_ = id }
 
 func (x *EntityPopulation) CheckFields() {
 }
@@ -2270,15 +2216,9 @@ func NewEntityPosition() *EntityPosition {
 		Id_: -1,
 	}
 }
-func (x *EntityPosition) Id() int                                { return x.Id_ }
-func (x *EntityPosition) setId(id int)                           { x.Id_ = id }
-func (x *EntityPosition) Name() string                           { return x.Name_ }
-func (x *EntityPosition) RelatedToEntity(id int) bool            { return false }
-func (x *EntityPosition) RelatedToHf(id int) bool                { return false }
-func (x *EntityPosition) RelatedToArtifact(id int) bool          { return false }
-func (x *EntityPosition) RelatedToSite(id int) bool              { return false }
-func (x *EntityPosition) RelatedToStructure(siteId, id int) bool { return false }
-func (x *EntityPosition) RelatedToRegion(id int) bool            { return false }
+func (x *EntityPosition) Id() int      { return x.Id_ }
+func (x *EntityPosition) setId(id int) { x.Id_ = id }
+func (x *EntityPosition) Name() string { return x.Name_ }
 
 func (x *EntityPosition) CheckFields() {
 }
@@ -2312,14 +2252,8 @@ func NewEntityPositionAssignment() *EntityPositionAssignment {
 		SquadId:    -1,
 	}
 }
-func (x *EntityPositionAssignment) Id() int                                { return x.Id_ }
-func (x *EntityPositionAssignment) setId(id int)                           { x.Id_ = id }
-func (x *EntityPositionAssignment) RelatedToEntity(id int) bool            { return false }
-func (x *EntityPositionAssignment) RelatedToHf(id int) bool                { return x.Histfig == id }
-func (x *EntityPositionAssignment) RelatedToArtifact(id int) bool          { return false }
-func (x *EntityPositionAssignment) RelatedToSite(id int) bool              { return false }
-func (x *EntityPositionAssignment) RelatedToStructure(siteId, id int) bool { return false }
-func (x *EntityPositionAssignment) RelatedToRegion(id int) bool            { return false }
+func (x *EntityPositionAssignment) Id() int      { return x.Id_ }
+func (x *EntityPositionAssignment) setId(id int) { x.Id_ = id }
 
 func (x *EntityPositionAssignment) CheckFields() {
 }
@@ -2354,12 +2288,6 @@ func NewEntityPositionLink() *EntityPositionLink {
 		StartYear:         -1,
 	}
 }
-func (x *EntityPositionLink) RelatedToEntity(id int) bool            { return x.EntityId == id }
-func (x *EntityPositionLink) RelatedToHf(id int) bool                { return false }
-func (x *EntityPositionLink) RelatedToArtifact(id int) bool          { return false }
-func (x *EntityPositionLink) RelatedToSite(id int) bool              { return false }
-func (x *EntityPositionLink) RelatedToStructure(siteId, id int) bool { return false }
-func (x *EntityPositionLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntityPositionLink) CheckFields() {
 }
@@ -2415,12 +2343,6 @@ func NewEntityReputation() *EntityReputation {
 		UnsolvedMurders:         -1,
 	}
 }
-func (x *EntityReputation) RelatedToEntity(id int) bool            { return x.EntityId == id }
-func (x *EntityReputation) RelatedToHf(id int) bool                { return false }
-func (x *EntityReputation) RelatedToArtifact(id int) bool          { return false }
-func (x *EntityReputation) RelatedToSite(id int) bool              { return false }
-func (x *EntityReputation) RelatedToStructure(siteId, id int) bool { return false }
-func (x *EntityReputation) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntityReputation) CheckFields() {
 }
@@ -2490,12 +2412,6 @@ func NewEntitySquadLink() *EntitySquadLink {
 		StartYear:     -1,
 	}
 }
-func (x *EntitySquadLink) RelatedToEntity(id int) bool            { return x.EntityId == id }
-func (x *EntitySquadLink) RelatedToHf(id int) bool                { return false }
-func (x *EntitySquadLink) RelatedToArtifact(id int) bool          { return false }
-func (x *EntitySquadLink) RelatedToSite(id int) bool              { return false }
-func (x *EntitySquadLink) RelatedToStructure(siteId, id int) bool { return false }
-func (x *EntitySquadLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *EntitySquadLink) CheckFields() {
 }
@@ -2619,12 +2535,6 @@ func NewFeature() *Feature {
 		Reference: -1,
 	}
 }
-func (x *Feature) RelatedToEntity(id int) bool            { return false }
-func (x *Feature) RelatedToHf(id int) bool                { return false }
-func (x *Feature) RelatedToArtifact(id int) bool          { return false }
-func (x *Feature) RelatedToSite(id int) bool              { return false }
-func (x *Feature) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Feature) RelatedToRegion(id int) bool            { return false }
 
 func (x *Feature) CheckFields() {
 }
@@ -2749,12 +2659,6 @@ func NewHfLink() *HfLink {
 		LinkStrength: -1,
 	}
 }
-func (x *HfLink) RelatedToEntity(id int) bool            { return false }
-func (x *HfLink) RelatedToHf(id int) bool                { return x.Hfid == id }
-func (x *HfLink) RelatedToArtifact(id int) bool          { return false }
-func (x *HfLink) RelatedToSite(id int) bool              { return false }
-func (x *HfLink) RelatedToStructure(siteId, id int) bool { return false }
-func (x *HfLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *HfLink) CheckFields() {
 }
@@ -2783,12 +2687,6 @@ func NewHfSkill() *HfSkill {
 		TotalIp: -1,
 	}
 }
-func (x *HfSkill) RelatedToEntity(id int) bool            { return false }
-func (x *HfSkill) RelatedToHf(id int) bool                { return false }
-func (x *HfSkill) RelatedToArtifact(id int) bool          { return false }
-func (x *HfSkill) RelatedToSite(id int) bool              { return false }
-func (x *HfSkill) RelatedToStructure(siteId, id int) bool { return false }
-func (x *HfSkill) RelatedToRegion(id int) bool            { return false }
 
 func (x *HfSkill) CheckFields() {
 }
@@ -2812,13 +2710,7 @@ func NewHistoricalEra() *HistoricalEra {
 		StartYear: -1,
 	}
 }
-func (x *HistoricalEra) Name() string                           { return x.Name_ }
-func (x *HistoricalEra) RelatedToEntity(id int) bool            { return false }
-func (x *HistoricalEra) RelatedToHf(id int) bool                { return false }
-func (x *HistoricalEra) RelatedToArtifact(id int) bool          { return false }
-func (x *HistoricalEra) RelatedToSite(id int) bool              { return false }
-func (x *HistoricalEra) RelatedToStructure(siteId, id int) bool { return false }
-func (x *HistoricalEra) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEra) Name() string { return x.Name_ }
 
 func (x *HistoricalEra) CheckFields() {
 }
@@ -2848,14 +2740,8 @@ func NewHistoricalEvent() *HistoricalEvent {
 		Collection: -1,
 	}
 }
-func (x *HistoricalEvent) Id() int                                { return x.Id_ }
-func (x *HistoricalEvent) setId(id int)                           { x.Id_ = id }
-func (x *HistoricalEvent) RelatedToEntity(id int) bool            { return false }
-func (x *HistoricalEvent) RelatedToHf(id int) bool                { return false }
-func (x *HistoricalEvent) RelatedToArtifact(id int) bool          { return false }
-func (x *HistoricalEvent) RelatedToSite(id int) bool              { return false }
-func (x *HistoricalEvent) RelatedToStructure(siteId, id int) bool { return false }
-func (x *HistoricalEvent) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEvent) Id() int      { return x.Id_ }
+func (x *HistoricalEvent) setId(id int) { x.Id_ = id }
 
 func (x *HistoricalEvent) CheckFields() {
 }
@@ -2898,6 +2784,11 @@ func (x *HistoricalEventAddHfEntityHonor) RelatedToArtifact(id int) bool        
 func (x *HistoricalEventAddHfEntityHonor) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventAddHfEntityHonor) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventAddHfEntityHonor) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventAddHfEntityHonor) CheckFields() {
 }
@@ -3048,6 +2939,11 @@ func (x *HistoricalEventAddHfEntityLink) RelatedToArtifact(id int) bool         
 func (x *HistoricalEventAddHfEntityLink) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventAddHfEntityLink) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventAddHfEntityLink) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventAddHfEntityLink) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventAddHfEntityLink) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventAddHfEntityLink) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventAddHfEntityLink) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventAddHfEntityLink) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventAddHfEntityLink) CheckFields() {
 }
@@ -3159,6 +3055,11 @@ func (x *HistoricalEventAddHfHfLink) RelatedToArtifact(id int) bool          { r
 func (x *HistoricalEventAddHfHfLink) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventAddHfHfLink) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventAddHfHfLink) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventAddHfHfLink) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventAddHfHfLink) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventAddHfHfLink) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventAddHfHfLink) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventAddHfHfLink) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventAddHfHfLink) CheckFields() {
 }
@@ -3248,7 +3149,12 @@ func (x *HistoricalEventAddHfSiteLink) RelatedToSite(id int) bool     { return x
 func (x *HistoricalEventAddHfSiteLink) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.Structure == id)
 }
-func (x *HistoricalEventAddHfSiteLink) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventAddHfSiteLink) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventAddHfSiteLink) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventAddHfSiteLink) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventAddHfSiteLink) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventAddHfSiteLink) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventAddHfSiteLink) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventAddHfSiteLink) CheckFields() {
 	if x.Civ != x.SiteId {
@@ -3334,6 +3240,11 @@ func (x *HistoricalEventAgreementConcluded) RelatedToArtifact(id int) bool      
 func (x *HistoricalEventAgreementConcluded) RelatedToSite(id int) bool              { return x.Site == id }
 func (x *HistoricalEventAgreementConcluded) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventAgreementConcluded) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventAgreementConcluded) CheckFields() {
 }
@@ -3703,6 +3614,11 @@ func (x *HistoricalEventAgreementFormed) RelatedToArtifact(id int) bool         
 func (x *HistoricalEventAgreementFormed) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventAgreementFormed) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventAgreementFormed) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventAgreementFormed) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventAgreementFormed) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventAgreementFormed) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventAgreementFormed) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventAgreementFormed) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventAgreementFormed) CheckFields() {
 }
@@ -3835,6 +3751,11 @@ func (x *HistoricalEventAgreementMade) RelatedToArtifact(id int) bool          {
 func (x *HistoricalEventAgreementMade) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventAgreementMade) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventAgreementMade) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventAgreementMade) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventAgreementMade) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventAgreementMade) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventAgreementMade) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventAgreementMade) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventAgreementMade) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -3927,6 +3848,11 @@ func (x *HistoricalEventAgreementRejected) RelatedToArtifact(id int) bool       
 func (x *HistoricalEventAgreementRejected) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventAgreementRejected) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventAgreementRejected) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventAgreementRejected) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -4049,6 +3975,11 @@ func (x *HistoricalEventArtifactClaimFormed) RelatedToArtifact(id int) bool {
 func (x *HistoricalEventArtifactClaimFormed) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventArtifactClaimFormed) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventArtifactClaimFormed) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventArtifactClaimFormed) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventArtifactClaimFormed) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventArtifactClaimFormed) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventArtifactClaimFormed) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventArtifactClaimFormed) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventArtifactClaimFormed) CheckFields() {
 }
@@ -4110,7 +4041,12 @@ func (x *HistoricalEventArtifactCopied) RelatedToSite(id int) bool {
 func (x *HistoricalEventArtifactCopied) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.DestStructureId == id || x.SourceStructureId == id)
 }
-func (x *HistoricalEventArtifactCopied) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventArtifactCopied) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventArtifactCopied) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventArtifactCopied) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventArtifactCopied) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventArtifactCopied) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventArtifactCopied) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventArtifactCopied) CheckFields() {
 }
@@ -4198,6 +4134,11 @@ func (x *HistoricalEventArtifactCreated) RelatedToArtifact(id int) bool         
 func (x *HistoricalEventArtifactCreated) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventArtifactCreated) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventArtifactCreated) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventArtifactCreated) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventArtifactCreated) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventArtifactCreated) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventArtifactCreated) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventArtifactCreated) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventArtifactCreated) CheckFields() {
 	if x.SanctifyHf != x.HistFigureId {
@@ -4283,14 +4224,6 @@ func NewHistoricalEventArtifactCreatedCircumstance() *HistoricalEventArtifactCre
 		Defeated: -1,
 	}
 }
-func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToEntity(id int) bool   { return false }
-func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToHf(id int) bool       { return false }
-func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToArtifact(id int) bool { return false }
-func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToSite(id int) bool     { return false }
-func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToStructure(siteId, id int) bool {
-	return false
-}
-func (x *HistoricalEventArtifactCreatedCircumstance) RelatedToRegion(id int) bool { return false }
 
 func (x *HistoricalEventArtifactCreatedCircumstance) CheckFields() {
 }
@@ -4326,6 +4259,11 @@ func (x *HistoricalEventArtifactDestroyed) RelatedToArtifact(id int) bool       
 func (x *HistoricalEventArtifactDestroyed) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventArtifactDestroyed) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventArtifactDestroyed) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventArtifactDestroyed) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventArtifactDestroyed) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventArtifactDestroyed) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventArtifactDestroyed) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventArtifactDestroyed) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventArtifactDestroyed) CheckFields() {
 }
@@ -4368,6 +4306,11 @@ func (x *HistoricalEventArtifactFound) RelatedToArtifact(id int) bool          {
 func (x *HistoricalEventArtifactFound) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventArtifactFound) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventArtifactFound) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventArtifactFound) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventArtifactFound) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventArtifactFound) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventArtifactFound) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventArtifactFound) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventArtifactFound) CheckFields() {
 }
@@ -4449,6 +4392,11 @@ func (x *HistoricalEventArtifactGiven) RelatedToArtifact(id int) bool          {
 func (x *HistoricalEventArtifactGiven) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventArtifactGiven) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventArtifactGiven) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventArtifactGiven) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventArtifactGiven) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventArtifactGiven) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventArtifactGiven) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventArtifactGiven) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventArtifactGiven) CheckFields() {
 }
@@ -4501,6 +4449,11 @@ func (x *HistoricalEventArtifactLost) RelatedToArtifact(id int) bool          { 
 func (x *HistoricalEventArtifactLost) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventArtifactLost) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventArtifactLost) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventArtifactLost) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventArtifactLost) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventArtifactLost) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventArtifactLost) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventArtifactLost) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventArtifactLost) CheckFields() {
 }
@@ -4616,6 +4569,11 @@ func (x *HistoricalEventArtifactPossessed) RelatedToArtifact(id int) bool       
 func (x *HistoricalEventArtifactPossessed) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventArtifactPossessed) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventArtifactPossessed) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventArtifactPossessed) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventArtifactPossessed) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventArtifactPossessed) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventArtifactPossessed) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventArtifactPossessed) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventArtifactPossessed) CheckFields() {
 }
@@ -4684,7 +4642,12 @@ func (x *HistoricalEventArtifactRecovered) RelatedToSite(id int) bool     { retu
 func (x *HistoricalEventArtifactRecovered) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventArtifactRecovered) RelatedToRegion(id int) bool { return x.SubregionId == id }
+func (x *HistoricalEventArtifactRecovered) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventArtifactRecovered) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventArtifactRecovered) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventArtifactRecovered) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventArtifactRecovered) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventArtifactRecovered) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventArtifactRecovered) CheckFields() {
 }
@@ -4737,6 +4700,11 @@ func (x *HistoricalEventArtifactStored) RelatedToArtifact(id int) bool          
 func (x *HistoricalEventArtifactStored) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventArtifactStored) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventArtifactStored) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventArtifactStored) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventArtifactStored) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventArtifactStored) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventArtifactStored) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventArtifactStored) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventArtifactStored) CheckFields() {
 }
@@ -4784,6 +4752,11 @@ func (x *HistoricalEventArtifactTransformed) RelatedToArtifact(id int) bool {
 func (x *HistoricalEventArtifactTransformed) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventArtifactTransformed) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventArtifactTransformed) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventArtifactTransformed) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventArtifactTransformed) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventArtifactTransformed) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventArtifactTransformed) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventArtifactTransformed) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventArtifactTransformed) CheckFields() {
 }
@@ -4833,6 +4806,11 @@ func (x *HistoricalEventAssumeIdentity) RelatedToArtifact(id int) bool          
 func (x *HistoricalEventAssumeIdentity) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventAssumeIdentity) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventAssumeIdentity) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventAssumeIdentity) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventAssumeIdentity) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventAssumeIdentity) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventAssumeIdentity) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventAssumeIdentity) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventAssumeIdentity) CheckFields() {
 }
@@ -4892,6 +4870,11 @@ func (x *HistoricalEventAttackedSite) RelatedToArtifact(id int) bool          { 
 func (x *HistoricalEventAttackedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventAttackedSite) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventAttackedSite) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventAttackedSite) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventAttackedSite) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventAttackedSite) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventAttackedSite) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventAttackedSite) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventAttackedSite) CheckFields() {
 }
@@ -5123,7 +5106,12 @@ func (x *HistoricalEventBodyAbused) RelatedToSite(id int) bool     { return x.Si
 func (x *HistoricalEventBodyAbused) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.Structure == id)
 }
-func (x *HistoricalEventBodyAbused) RelatedToRegion(id int) bool { return x.SubregionId == id }
+func (x *HistoricalEventBodyAbused) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventBodyAbused) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventBodyAbused) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventBodyAbused) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventBodyAbused) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventBodyAbused) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventBodyAbused) CheckFields() {
 	if x.Civ != x.FeatureLayerId {
@@ -5265,6 +5253,13 @@ func (x *HistoricalEventBuildingProfileAcquired) RelatedToStructure(siteId, id i
 	return false
 }
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToWrittenContent(id int) bool { return false }
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToDanceForm(id int) bool      { return false }
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToMusicalForm(id int) bool    { return false }
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToPoeticForm(id int) bool     { return false }
 
 func (x *HistoricalEventBuildingProfileAcquired) CheckFields() {
 }
@@ -5318,6 +5313,11 @@ func (x *HistoricalEventCeremony) RelatedToArtifact(id int) bool          { retu
 func (x *HistoricalEventCeremony) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventCeremony) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCeremony) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventCeremony) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCeremony) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCeremony) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCeremony) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCeremony) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCeremony) CheckFields() {
 }
@@ -5399,7 +5399,12 @@ func (x *HistoricalEventChangeHfBodyState) RelatedToSite(id int) bool     { retu
 func (x *HistoricalEventChangeHfBodyState) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventChangeHfBodyState) RelatedToRegion(id int) bool { return x.SubregionId == id }
+func (x *HistoricalEventChangeHfBodyState) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventChangeHfBodyState) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventChangeHfBodyState) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventChangeHfBodyState) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventChangeHfBodyState) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventChangeHfBodyState) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventChangeHfBodyState) CheckFields() {
 }
@@ -5452,6 +5457,11 @@ func (x *HistoricalEventChangeHfJob) RelatedToArtifact(id int) bool          { r
 func (x *HistoricalEventChangeHfJob) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventChangeHfJob) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventChangeHfJob) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventChangeHfJob) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventChangeHfJob) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventChangeHfJob) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventChangeHfJob) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventChangeHfJob) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventChangeHfJob) CheckFields() {
 }
@@ -5698,6 +5708,11 @@ func (x *HistoricalEventChangeHfState) RelatedToArtifact(id int) bool          {
 func (x *HistoricalEventChangeHfState) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventChangeHfState) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventChangeHfState) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventChangeHfState) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventChangeHfState) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventChangeHfState) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventChangeHfState) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventChangeHfState) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventChangeHfState) CheckFields() {
 }
@@ -5753,6 +5768,11 @@ func (x *HistoricalEventChangedCreatureType) RelatedToArtifact(id int) bool     
 func (x *HistoricalEventChangedCreatureType) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventChangedCreatureType) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventChangedCreatureType) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventChangedCreatureType) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventChangedCreatureType) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventChangedCreatureType) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventChangedCreatureType) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventChangedCreatureType) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventChangedCreatureType) CheckFields() {
 }
@@ -5904,14 +5924,8 @@ func NewHistoricalEventCollection() *HistoricalEventCollection {
 		StartYear:      -1,
 	}
 }
-func (x *HistoricalEventCollection) Id() int                                { return x.Id_ }
-func (x *HistoricalEventCollection) setId(id int)                           { x.Id_ = id }
-func (x *HistoricalEventCollection) RelatedToEntity(id int) bool            { return false }
-func (x *HistoricalEventCollection) RelatedToHf(id int) bool                { return false }
-func (x *HistoricalEventCollection) RelatedToArtifact(id int) bool          { return false }
-func (x *HistoricalEventCollection) RelatedToSite(id int) bool              { return false }
-func (x *HistoricalEventCollection) RelatedToStructure(siteId, id int) bool { return false }
-func (x *HistoricalEventCollection) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCollection) Id() int      { return x.Id_ }
+func (x *HistoricalEventCollection) setId(id int) { x.Id_ = id }
 
 func (x *HistoricalEventCollection) CheckFields() {
 }
@@ -5971,6 +5985,11 @@ func (x *HistoricalEventCollectionAbduction) RelatedToArtifact(id int) bool     
 func (x *HistoricalEventCollectionAbduction) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventCollectionAbduction) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionAbduction) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventCollectionAbduction) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionAbduction) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionAbduction) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionAbduction) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionAbduction) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionAbduction) CheckFields() {
 }
@@ -6094,6 +6113,11 @@ func (x *HistoricalEventCollectionBattle) RelatedToSite(id int) bool {
 }
 func (x *HistoricalEventCollectionBattle) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionBattle) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventCollectionBattle) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionBattle) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionBattle) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionBattle) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionBattle) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionBattle) CheckFields() {
 }
@@ -6183,6 +6207,11 @@ func (x *HistoricalEventCollectionBeastAttack) RelatedToStructure(siteId, id int
 func (x *HistoricalEventCollectionBeastAttack) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
 }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionBeastAttack) CheckFields() {
 }
@@ -6230,6 +6259,11 @@ func (x *HistoricalEventCollectionCeremony) RelatedToArtifact(id int) bool      
 func (x *HistoricalEventCollectionCeremony) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventCollectionCeremony) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionCeremony) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionCeremony) CheckFields() {
 }
@@ -6263,6 +6297,11 @@ func (x *HistoricalEventCollectionCompetition) RelatedToArtifact(id int) bool   
 func (x *HistoricalEventCollectionCompetition) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventCollectionCompetition) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionCompetition) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionCompetition) CheckFields() {
 }
@@ -6309,6 +6348,11 @@ func (x *HistoricalEventCollectionDuel) RelatedToArtifact(id int) bool          
 func (x *HistoricalEventCollectionDuel) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventCollectionDuel) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionDuel) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventCollectionDuel) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionDuel) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionDuel) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionDuel) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionDuel) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionDuel) CheckFields() {
 }
@@ -6364,6 +6408,15 @@ func (x *HistoricalEventCollectionEntityOverthrown) RelatedToStructure(siteId, i
 	return false
 }
 func (x *HistoricalEventCollectionEntityOverthrown) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToWrittenContent(id int) bool {
+	return false
+}
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToDanceForm(id int) bool   { return false }
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToMusicalForm(id int) bool { return false }
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToPoeticForm(id int) bool  { return false }
 
 func (x *HistoricalEventCollectionEntityOverthrown) CheckFields() {
 }
@@ -6404,6 +6457,11 @@ func (x *HistoricalEventCollectionInsurrection) RelatedToArtifact(id int) bool  
 func (x *HistoricalEventCollectionInsurrection) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventCollectionInsurrection) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionInsurrection) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCollectionInsurrection) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionInsurrection) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionInsurrection) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionInsurrection) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionInsurrection) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionInsurrection) CheckFields() {
 }
@@ -6439,6 +6497,11 @@ func (x *HistoricalEventCollectionJourney) RelatedToArtifact(id int) bool       
 func (x *HistoricalEventCollectionJourney) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventCollectionJourney) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionJourney) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionJourney) CheckFields() {
 }
@@ -6472,6 +6535,11 @@ func (x *HistoricalEventCollectionOccasion) RelatedToArtifact(id int) bool      
 func (x *HistoricalEventCollectionOccasion) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventCollectionOccasion) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionOccasion) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionOccasion) CheckFields() {
 }
@@ -6508,6 +6576,11 @@ func (x *HistoricalEventCollectionPerformance) RelatedToArtifact(id int) bool   
 func (x *HistoricalEventCollectionPerformance) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventCollectionPerformance) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionPerformance) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionPerformance) CheckFields() {
 }
@@ -6545,6 +6618,11 @@ func (x *HistoricalEventCollectionPersecution) RelatedToArtifact(id int) bool   
 func (x *HistoricalEventCollectionPersecution) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventCollectionPersecution) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionPersecution) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionPersecution) CheckFields() {
 }
@@ -6581,6 +6659,11 @@ func (x *HistoricalEventCollectionProcession) RelatedToArtifact(id int) bool    
 func (x *HistoricalEventCollectionProcession) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventCollectionProcession) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionProcession) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionProcession) CheckFields() {
 }
@@ -6642,6 +6725,11 @@ func (x *HistoricalEventCollectionPurge) RelatedToArtifact(id int) bool         
 func (x *HistoricalEventCollectionPurge) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventCollectionPurge) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionPurge) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionPurge) CheckFields() {
 }
@@ -6691,6 +6779,11 @@ func (x *HistoricalEventCollectionRaid) RelatedToArtifact(id int) bool          
 func (x *HistoricalEventCollectionRaid) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventCollectionRaid) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionRaid) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventCollectionRaid) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionRaid) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionRaid) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionRaid) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionRaid) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionRaid) CheckFields() {
 }
@@ -6750,6 +6843,13 @@ func (x *HistoricalEventCollectionSiteConquered) RelatedToStructure(siteId, id i
 	return false
 }
 func (x *HistoricalEventCollectionSiteConquered) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventCollectionSiteConquered) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventCollectionSiteConquered) RelatedToWrittenContent(id int) bool { return false }
+func (x *HistoricalEventCollectionSiteConquered) RelatedToDanceForm(id int) bool      { return false }
+func (x *HistoricalEventCollectionSiteConquered) RelatedToMusicalForm(id int) bool    { return false }
+func (x *HistoricalEventCollectionSiteConquered) RelatedToPoeticForm(id int) bool     { return false }
 
 func (x *HistoricalEventCollectionSiteConquered) CheckFields() {
 }
@@ -6805,6 +6905,11 @@ func (x *HistoricalEventCollectionTheft) RelatedToArtifact(id int) bool         
 func (x *HistoricalEventCollectionTheft) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventCollectionTheft) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionTheft) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventCollectionTheft) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionTheft) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionTheft) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionTheft) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionTheft) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionTheft) CheckFields() {
 }
@@ -6856,6 +6961,11 @@ func (x *HistoricalEventCollectionWar) RelatedToArtifact(id int) bool          {
 func (x *HistoricalEventCollectionWar) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventCollectionWar) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCollectionWar) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCollectionWar) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCollectionWar) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCollectionWar) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCollectionWar) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCollectionWar) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCollectionWar) CheckFields() {
 }
@@ -6903,6 +7013,11 @@ func (x *HistoricalEventCompetition) RelatedToArtifact(id int) bool          { r
 func (x *HistoricalEventCompetition) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventCompetition) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCompetition) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventCompetition) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCompetition) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCompetition) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCompetition) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCompetition) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCompetition) CheckFields() {
 }
@@ -7005,6 +7120,11 @@ func (x *HistoricalEventCreateEntityPosition) RelatedToArtifact(id int) bool    
 func (x *HistoricalEventCreateEntityPosition) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventCreateEntityPosition) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCreateEntityPosition) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCreateEntityPosition) CheckFields() {
 }
@@ -7053,6 +7173,11 @@ func (x *HistoricalEventCreatedSite) RelatedToArtifact(id int) bool          { r
 func (x *HistoricalEventCreatedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventCreatedSite) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCreatedSite) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCreatedSite) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCreatedSite) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCreatedSite) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCreatedSite) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCreatedSite) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCreatedSite) CheckFields() {
 }
@@ -7138,7 +7263,12 @@ func (x *HistoricalEventCreatedStructure) RelatedToSite(id int) bool     { retur
 func (x *HistoricalEventCreatedStructure) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventCreatedStructure) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventCreatedStructure) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventCreatedStructure) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCreatedStructure) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCreatedStructure) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCreatedStructure) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCreatedStructure) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCreatedStructure) CheckFields() {
 }
@@ -7199,6 +7329,13 @@ func (x *HistoricalEventCreatedWorldConstruction) RelatedToStructure(siteId, id 
 	return false
 }
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventCreatedWorldConstruction) RelatedToWorldConstruction(id int) bool {
+	return x.MasterWcid == id || x.Wcid == id
+}
+func (x *HistoricalEventCreatedWorldConstruction) RelatedToWrittenContent(id int) bool { return false }
+func (x *HistoricalEventCreatedWorldConstruction) RelatedToDanceForm(id int) bool      { return false }
+func (x *HistoricalEventCreatedWorldConstruction) RelatedToMusicalForm(id int) bool    { return false }
+func (x *HistoricalEventCreatedWorldConstruction) RelatedToPoeticForm(id int) bool     { return false }
 
 func (x *HistoricalEventCreatedWorldConstruction) CheckFields() {
 }
@@ -7254,6 +7391,11 @@ func (x *HistoricalEventCreatureDevoured) RelatedToArtifact(id int) bool        
 func (x *HistoricalEventCreatureDevoured) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventCreatureDevoured) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventCreatureDevoured) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventCreatureDevoured) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventCreatureDevoured) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventCreatureDevoured) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventCreatureDevoured) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventCreatureDevoured) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventCreatureDevoured) CheckFields() {
 	if x.Eater != x.FeatureLayerId {
@@ -7407,6 +7549,11 @@ func (x *HistoricalEventDanceFormCreated) RelatedToArtifact(id int) bool        
 func (x *HistoricalEventDanceFormCreated) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventDanceFormCreated) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventDanceFormCreated) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventDanceFormCreated) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventDanceFormCreated) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventDanceFormCreated) RelatedToDanceForm(id int) bool         { return x.FormId == id }
+func (x *HistoricalEventDanceFormCreated) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventDanceFormCreated) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventDanceFormCreated) CheckFields() {
 }
@@ -7465,6 +7612,11 @@ func (x *HistoricalEventDestroyedSite) RelatedToArtifact(id int) bool          {
 func (x *HistoricalEventDestroyedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventDestroyedSite) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventDestroyedSite) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventDestroyedSite) CheckFields() {
 }
@@ -7509,6 +7661,11 @@ func (x *HistoricalEventDiplomatLost) RelatedToArtifact(id int) bool          { 
 func (x *HistoricalEventDiplomatLost) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventDiplomatLost) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventDiplomatLost) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventDiplomatLost) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventDiplomatLost) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventDiplomatLost) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventDiplomatLost) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventDiplomatLost) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventDiplomatLost) CheckFields() {
 	if x.Entity != x.SiteId {
@@ -7552,6 +7709,11 @@ func (x *HistoricalEventEntityAllianceFormed) RelatedToArtifact(id int) bool    
 func (x *HistoricalEventEntityAllianceFormed) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventEntityAllianceFormed) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventEntityAllianceFormed) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventEntityAllianceFormed) CheckFields() {
 }
@@ -7591,6 +7753,13 @@ func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToStructure(siteId, id 
 	return false
 }
 func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToWrittenContent(id int) bool { return false }
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToDanceForm(id int) bool      { return false }
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToMusicalForm(id int) bool    { return false }
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToPoeticForm(id int) bool     { return false }
 
 func (x *HistoricalEventEntityBreachFeatureLayer) CheckFields() {
 }
@@ -7635,7 +7804,12 @@ func (x *HistoricalEventEntityCreated) RelatedToSite(id int) bool     { return x
 func (x *HistoricalEventEntityCreated) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventEntityCreated) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventEntityCreated) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventEntityCreated) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventEntityCreated) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventEntityCreated) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventEntityCreated) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventEntityCreated) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventEntityCreated) CheckFields() {
 }
@@ -7706,6 +7880,11 @@ func (x *HistoricalEventEntityDissolved) RelatedToArtifact(id int) bool         
 func (x *HistoricalEventEntityDissolved) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventEntityDissolved) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventEntityDissolved) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventEntityDissolved) CheckFields() {
 }
@@ -7746,6 +7925,13 @@ func (x *HistoricalEventEntityEquipmentPurchase) RelatedToStructure(siteId, id i
 	return false
 }
 func (x *HistoricalEventEntityEquipmentPurchase) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventEntityEquipmentPurchase) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventEntityEquipmentPurchase) RelatedToWrittenContent(id int) bool { return false }
+func (x *HistoricalEventEntityEquipmentPurchase) RelatedToDanceForm(id int) bool      { return false }
+func (x *HistoricalEventEntityEquipmentPurchase) RelatedToMusicalForm(id int) bool    { return false }
+func (x *HistoricalEventEntityEquipmentPurchase) RelatedToPoeticForm(id int) bool     { return false }
 
 func (x *HistoricalEventEntityEquipmentPurchase) CheckFields() {
 }
@@ -7782,6 +7968,11 @@ func (x *HistoricalEventEntityExpelsHf) RelatedToArtifact(id int) bool          
 func (x *HistoricalEventEntityExpelsHf) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventEntityExpelsHf) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventEntityExpelsHf) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventEntityExpelsHf) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventEntityExpelsHf) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventEntityExpelsHf) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventEntityExpelsHf) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventEntityExpelsHf) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventEntityExpelsHf) CheckFields() {
 }
@@ -7818,6 +8009,11 @@ func (x *HistoricalEventEntityFledSite) RelatedToArtifact(id int) bool          
 func (x *HistoricalEventEntityFledSite) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventEntityFledSite) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventEntityFledSite) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventEntityFledSite) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventEntityFledSite) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventEntityFledSite) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventEntityFledSite) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventEntityFledSite) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventEntityFledSite) CheckFields() {
 }
@@ -7858,6 +8054,11 @@ func (x *HistoricalEventEntityIncorporated) RelatedToArtifact(id int) bool      
 func (x *HistoricalEventEntityIncorporated) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventEntityIncorporated) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventEntityIncorporated) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventEntityIncorporated) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventEntityIncorporated) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventEntityIncorporated) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventEntityIncorporated) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventEntityIncorporated) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventEntityIncorporated) CheckFields() {
 }
@@ -7954,6 +8155,11 @@ func (x *HistoricalEventEntityLaw) RelatedToArtifact(id int) bool          { ret
 func (x *HistoricalEventEntityLaw) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventEntityLaw) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventEntityLaw) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventEntityLaw) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventEntityLaw) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventEntityLaw) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventEntityLaw) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventEntityLaw) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventEntityLaw) CheckFields() {
 }
@@ -8004,6 +8210,11 @@ func (x *HistoricalEventEntityOverthrown) RelatedToArtifact(id int) bool        
 func (x *HistoricalEventEntityOverthrown) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventEntityOverthrown) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventEntityOverthrown) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventEntityOverthrown) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventEntityOverthrown) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventEntityOverthrown) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventEntityOverthrown) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventEntityOverthrown) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventEntityOverthrown) CheckFields() {
 }
@@ -8068,7 +8279,12 @@ func (x *HistoricalEventEntityPersecuted) RelatedToSite(id int) bool     { retur
 func (x *HistoricalEventEntityPersecuted) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.DestroyedStructureId == id)
 }
-func (x *HistoricalEventEntityPersecuted) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventEntityPersecuted) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventEntityPersecuted) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventEntityPersecuted) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventEntityPersecuted) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventEntityPersecuted) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventEntityPersecuted) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventEntityPersecuted) CheckFields() {
 }
@@ -8150,7 +8366,12 @@ func (x *HistoricalEventEntityPrimaryCriminals) RelatedToSite(id int) bool     {
 func (x *HistoricalEventEntityPrimaryCriminals) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventEntityPrimaryCriminals) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventEntityPrimaryCriminals) CheckFields() {
 }
@@ -8192,6 +8413,11 @@ func (x *HistoricalEventEntityRampagedInSite) RelatedToArtifact(id int) bool    
 func (x *HistoricalEventEntityRampagedInSite) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventEntityRampagedInSite) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventEntityRampagedInSite) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventEntityRampagedInSite) CheckFields() {
 }
@@ -8256,7 +8482,12 @@ func (x *HistoricalEventEntityRelocate) RelatedToSite(id int) bool     { return 
 func (x *HistoricalEventEntityRelocate) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventEntityRelocate) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventEntityRelocate) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventEntityRelocate) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventEntityRelocate) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventEntityRelocate) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventEntityRelocate) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventEntityRelocate) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventEntityRelocate) CheckFields() {
 }
@@ -8326,6 +8557,11 @@ func (x *HistoricalEventEntitySearchedSite) RelatedToArtifact(id int) bool      
 func (x *HistoricalEventEntitySearchedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventEntitySearchedSite) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventEntitySearchedSite) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventEntitySearchedSite) CheckFields() {
 }
@@ -8400,6 +8636,11 @@ func (x *HistoricalEventFailedFrameAttempt) RelatedToArtifact(id int) bool      
 func (x *HistoricalEventFailedFrameAttempt) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventFailedFrameAttempt) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventFailedFrameAttempt) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventFailedFrameAttempt) CheckFields() {
 }
@@ -8758,6 +8999,13 @@ func (x *HistoricalEventFailedIntrigueCorruption) RelatedToStructure(siteId, id 
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
 }
+func (x *HistoricalEventFailedIntrigueCorruption) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventFailedIntrigueCorruption) RelatedToWrittenContent(id int) bool { return false }
+func (x *HistoricalEventFailedIntrigueCorruption) RelatedToDanceForm(id int) bool      { return false }
+func (x *HistoricalEventFailedIntrigueCorruption) RelatedToMusicalForm(id int) bool    { return false }
+func (x *HistoricalEventFailedIntrigueCorruption) RelatedToPoeticForm(id int) bool     { return false }
 
 func (x *HistoricalEventFailedIntrigueCorruption) CheckFields() {
 }
@@ -8879,6 +9127,11 @@ func (x *HistoricalEventFieldBattle) RelatedToArtifact(id int) bool          { r
 func (x *HistoricalEventFieldBattle) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventFieldBattle) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventFieldBattle) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventFieldBattle) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventFieldBattle) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventFieldBattle) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventFieldBattle) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventFieldBattle) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventFieldBattle) CheckFields() {
 }
@@ -8941,6 +9194,11 @@ func (x *HistoricalEventFirstContact) RelatedToArtifact(id int) bool          { 
 func (x *HistoricalEventFirstContact) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventFirstContact) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventFirstContact) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventFirstContact) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventFirstContact) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventFirstContact) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventFirstContact) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventFirstContact) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventFirstContact) CheckFields() {
 }
@@ -8984,7 +9242,12 @@ func (x *HistoricalEventGamble) RelatedToSite(id int) bool     { return x.SiteId
 func (x *HistoricalEventGamble) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventGamble) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventGamble) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventGamble) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventGamble) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventGamble) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventGamble) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventGamble) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventGamble) CheckFields() {
 }
@@ -9035,6 +9298,11 @@ func (x *HistoricalEventHfAbducted) RelatedToArtifact(id int) bool          { re
 func (x *HistoricalEventHfAbducted) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventHfAbducted) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfAbducted) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventHfAbducted) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfAbducted) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfAbducted) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfAbducted) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfAbducted) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfAbducted) CheckFields() {
 }
@@ -9083,6 +9351,11 @@ func (x *HistoricalEventHfAttackedSite) RelatedToArtifact(id int) bool          
 func (x *HistoricalEventHfAttackedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventHfAttackedSite) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfAttackedSite) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfAttackedSite) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfAttackedSite) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfAttackedSite) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfAttackedSite) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfAttackedSite) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfAttackedSite) CheckFields() {
 }
@@ -9188,6 +9461,11 @@ func (x *HistoricalEventHfConfronted) RelatedToArtifact(id int) bool          { 
 func (x *HistoricalEventHfConfronted) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventHfConfronted) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfConfronted) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventHfConfronted) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfConfronted) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfConfronted) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfConfronted) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfConfronted) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfConfronted) CheckFields() {
 }
@@ -9354,6 +9632,11 @@ func (x *HistoricalEventHfConvicted) RelatedToArtifact(id int) bool          { r
 func (x *HistoricalEventHfConvicted) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventHfConvicted) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfConvicted) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfConvicted) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfConvicted) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfConvicted) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfConvicted) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfConvicted) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfConvicted) CheckFields() {
 }
@@ -9442,6 +9725,11 @@ func (x *HistoricalEventHfDestroyedSite) RelatedToArtifact(id int) bool         
 func (x *HistoricalEventHfDestroyedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventHfDestroyedSite) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfDestroyedSite) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfDestroyedSite) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfDestroyedSite) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfDestroyedSite) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfDestroyedSite) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfDestroyedSite) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfDestroyedSite) CheckFields() {
 }
@@ -10121,6 +10409,11 @@ func (x *HistoricalEventHfDied) RelatedToArtifact(id int) bool {
 func (x *HistoricalEventHfDied) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventHfDied) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfDied) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventHfDied) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfDied) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfDied) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfDied) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfDied) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfDied) CheckFields() {
 	if x.ShooterArtifactId != x.FeatureLayerId {
@@ -10263,7 +10556,12 @@ func (x *HistoricalEventHfDisturbedStructure) RelatedToSite(id int) bool     { r
 func (x *HistoricalEventHfDisturbedStructure) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventHfDisturbedStructure) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfDisturbedStructure) CheckFields() {
 }
@@ -10313,6 +10611,11 @@ func (x *HistoricalEventHfDoesInteraction) RelatedToArtifact(id int) bool       
 func (x *HistoricalEventHfDoesInteraction) RelatedToSite(id int) bool              { return x.Site == id }
 func (x *HistoricalEventHfDoesInteraction) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfDoesInteraction) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfDoesInteraction) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfDoesInteraction) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfDoesInteraction) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfDoesInteraction) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfDoesInteraction) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfDoesInteraction) CheckFields() {
 	if x.InteractionAction != x.Interaction && x.InteractionAction != "" && x.Interaction != "" {
@@ -10384,6 +10687,11 @@ func (x *HistoricalEventHfEnslaved) RelatedToArtifact(id int) bool          { re
 func (x *HistoricalEventHfEnslaved) RelatedToSite(id int) bool              { return x.MovedToSiteId == id }
 func (x *HistoricalEventHfEnslaved) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfEnslaved) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfEnslaved) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfEnslaved) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfEnslaved) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfEnslaved) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfEnslaved) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfEnslaved) CheckFields() {
 }
@@ -10432,7 +10740,12 @@ func (x *HistoricalEventHfEquipmentPurchase) RelatedToSite(id int) bool     { re
 func (x *HistoricalEventHfEquipmentPurchase) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventHfEquipmentPurchase) RelatedToRegion(id int) bool { return x.SubregionId == id }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfEquipmentPurchase) CheckFields() {
 }
@@ -10489,6 +10802,11 @@ func (x *HistoricalEventHfFreed) RelatedToArtifact(id int) bool          { retur
 func (x *HistoricalEventHfFreed) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventHfFreed) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfFreed) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfFreed) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfFreed) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfFreed) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfFreed) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfFreed) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfFreed) CheckFields() {
 }
@@ -10558,6 +10876,11 @@ func (x *HistoricalEventHfGainsSecretGoal) RelatedToArtifact(id int) bool       
 func (x *HistoricalEventHfGainsSecretGoal) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventHfGainsSecretGoal) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfGainsSecretGoal) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfGainsSecretGoal) CheckFields() {
 }
@@ -10599,6 +10922,11 @@ func (x *HistoricalEventHfInterrogated) RelatedToArtifact(id int) bool          
 func (x *HistoricalEventHfInterrogated) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventHfInterrogated) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfInterrogated) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfInterrogated) CheckFields() {
 }
@@ -10673,6 +11001,11 @@ func (x *HistoricalEventHfLearnsSecret) RelatedToArtifact(id int) bool          
 func (x *HistoricalEventHfLearnsSecret) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventHfLearnsSecret) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfLearnsSecret) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfLearnsSecret) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfLearnsSecret) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfLearnsSecret) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfLearnsSecret) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfLearnsSecret) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfLearnsSecret) CheckFields() {
 }
@@ -10719,6 +11052,11 @@ func (x *HistoricalEventHfNewPet) RelatedToArtifact(id int) bool          { retu
 func (x *HistoricalEventHfNewPet) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventHfNewPet) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfNewPet) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventHfNewPet) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfNewPet) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfNewPet) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfNewPet) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfNewPet) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfNewPet) CheckFields() {
 	if x.Pets != x.Coords && x.Pets != "" && x.Coords != "" {
@@ -10778,6 +11116,19 @@ func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToStructure(siteI
 }
 func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
+}
+func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToWrittenContent(id int) bool {
+	return false
+}
+func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToDanceForm(id int) bool { return false }
+func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToMusicalForm(id int) bool {
+	return false
+}
+func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToPoeticForm(id int) bool {
+	return false
 }
 
 func (x *HistoricalEventHfPerformedHorribleExperiments) CheckFields() {
@@ -10853,6 +11204,13 @@ func (x *HistoricalEventHfPrayedInsideStructure) RelatedToStructure(siteId, id i
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
 func (x *HistoricalEventHfPrayedInsideStructure) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToWrittenContent(id int) bool { return false }
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToDanceForm(id int) bool      { return false }
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToMusicalForm(id int) bool    { return false }
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToPoeticForm(id int) bool     { return false }
 
 func (x *HistoricalEventHfPrayedInsideStructure) CheckFields() {
 }
@@ -10933,6 +11291,11 @@ func (x *HistoricalEventHfPreach) RelatedToArtifact(id int) bool          { retu
 func (x *HistoricalEventHfPreach) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventHfPreach) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfPreach) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfPreach) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfPreach) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfPreach) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfPreach) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfPreach) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfPreach) CheckFields() {
 }
@@ -11006,7 +11369,12 @@ func (x *HistoricalEventHfProfanedStructure) RelatedToSite(id int) bool     { re
 func (x *HistoricalEventHfProfanedStructure) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventHfProfanedStructure) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventHfProfanedStructure) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfProfanedStructure) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfProfanedStructure) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfProfanedStructure) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfProfanedStructure) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfProfanedStructure) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfProfanedStructure) CheckFields() {
 }
@@ -11054,6 +11422,11 @@ func (x *HistoricalEventHfRansomed) RelatedToArtifact(id int) bool          { re
 func (x *HistoricalEventHfRansomed) RelatedToSite(id int) bool              { return x.MovedToSiteId == id }
 func (x *HistoricalEventHfRansomed) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfRansomed) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfRansomed) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfRansomed) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfRansomed) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfRansomed) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfRansomed) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfRansomed) CheckFields() {
 }
@@ -11099,6 +11472,11 @@ func (x *HistoricalEventHfReachSummit) RelatedToArtifact(id int) bool          {
 func (x *HistoricalEventHfReachSummit) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventHfReachSummit) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfReachSummit) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventHfReachSummit) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfReachSummit) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfReachSummit) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfReachSummit) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfReachSummit) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfReachSummit) CheckFields() {
 }
@@ -11179,6 +11557,15 @@ func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToStructure(siteId,
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
 }
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToWrittenContent(id int) bool {
+	return false
+}
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToDanceForm(id int) bool   { return false }
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToMusicalForm(id int) bool { return false }
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToPoeticForm(id int) bool  { return false }
 
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) CheckFields() {
 }
@@ -11297,6 +11684,11 @@ func (x *HistoricalEventHfRelationshipDenied) RelatedToStructure(siteId, id int)
 func (x *HistoricalEventHfRelationshipDenied) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
 }
+func (x *HistoricalEventHfRelationshipDenied) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfRelationshipDenied) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfRelationshipDenied) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfRelationshipDenied) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfRelationshipDenied) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfRelationshipDenied) CheckFields() {
 }
@@ -11355,6 +11747,11 @@ func (x *HistoricalEventHfReunion) RelatedToArtifact(id int) bool          { ret
 func (x *HistoricalEventHfReunion) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventHfReunion) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfReunion) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventHfReunion) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfReunion) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfReunion) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfReunion) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfReunion) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfReunion) CheckFields() {
 }
@@ -11481,6 +11878,11 @@ func (x *HistoricalEventHfRevived) RelatedToArtifact(id int) bool          { ret
 func (x *HistoricalEventHfRevived) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventHfRevived) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfRevived) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventHfRevived) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfRevived) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfRevived) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfRevived) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfRevived) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfRevived) CheckFields() {
 }
@@ -11619,6 +12021,11 @@ func (x *HistoricalEventHfSimpleBattleEvent) RelatedToArtifact(id int) bool     
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfSimpleBattleEvent) CheckFields() {
 }
@@ -11669,6 +12076,11 @@ func (x *HistoricalEventHfTravel) RelatedToArtifact(id int) bool          { retu
 func (x *HistoricalEventHfTravel) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventHfTravel) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfTravel) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventHfTravel) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfTravel) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfTravel) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfTravel) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfTravel) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfTravel) CheckFields() {
 }
@@ -11713,7 +12125,12 @@ func (x *HistoricalEventHfViewedArtifact) RelatedToSite(id int) bool     { retur
 func (x *HistoricalEventHfViewedArtifact) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventHfViewedArtifact) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventHfViewedArtifact) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfViewedArtifact) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfViewedArtifact) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfViewedArtifact) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfViewedArtifact) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfViewedArtifact) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfViewedArtifact) CheckFields() {
 }
@@ -11849,6 +12266,11 @@ func (x *HistoricalEventHfWounded) RelatedToArtifact(id int) bool          { ret
 func (x *HistoricalEventHfWounded) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventHfWounded) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfWounded) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventHfWounded) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfWounded) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfWounded) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfWounded) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfWounded) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHfWounded) CheckFields() {
 	if x.BodyPart != x.FeatureLayerId {
@@ -12356,6 +12778,17 @@ func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToStructure(siteId
 func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
 }
+func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToWrittenContent(id int) bool {
+	return false
+}
+func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToDanceForm(id int) bool { return false }
+func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToMusicalForm(id int) bool {
+	return false
+}
+func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToPoeticForm(id int) bool { return false }
 
 func (x *HistoricalEventHfsFormedIntrigueRelationship) CheckFields() {
 }
@@ -12552,6 +12985,21 @@ func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToStructure(site
 func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
 }
+func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToWrittenContent(id int) bool {
+	return false
+}
+func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToDanceForm(id int) bool {
+	return false
+}
+func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToMusicalForm(id int) bool {
+	return false
+}
+func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToPoeticForm(id int) bool {
+	return false
+}
 
 func (x *HistoricalEventHfsFormedReputationRelationship) CheckFields() {
 }
@@ -12606,6 +13054,11 @@ func (x *HistoricalEventHolyCityDeclaration) RelatedToArtifact(id int) bool     
 func (x *HistoricalEventHolyCityDeclaration) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventHolyCityDeclaration) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHolyCityDeclaration) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventHolyCityDeclaration) CheckFields() {
 }
@@ -12672,6 +13125,11 @@ func (x *HistoricalEventInsurrectionStarted) RelatedToArtifact(id int) bool     
 func (x *HistoricalEventInsurrectionStarted) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventInsurrectionStarted) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventInsurrectionStarted) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventInsurrectionStarted) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventInsurrectionStarted) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventInsurrectionStarted) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventInsurrectionStarted) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventInsurrectionStarted) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventInsurrectionStarted) CheckFields() {
 }
@@ -12772,7 +13230,12 @@ func (x *HistoricalEventItemStolen) RelatedToSite(id int) bool {
 func (x *HistoricalEventItemStolen) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.Structure == id)
 }
-func (x *HistoricalEventItemStolen) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventItemStolen) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventItemStolen) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventItemStolen) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventItemStolen) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventItemStolen) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventItemStolen) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventItemStolen) CheckFields() {
 	if x.Entity != x.CircumstanceId {
@@ -12896,12 +13359,6 @@ func NewHistoricalEventItemStolenCircumstance() *HistoricalEventItemStolenCircum
 		Murdered:            -1,
 	}
 }
-func (x *HistoricalEventItemStolenCircumstance) RelatedToEntity(id int) bool            { return false }
-func (x *HistoricalEventItemStolenCircumstance) RelatedToHf(id int) bool                { return false }
-func (x *HistoricalEventItemStolenCircumstance) RelatedToArtifact(id int) bool          { return false }
-func (x *HistoricalEventItemStolenCircumstance) RelatedToSite(id int) bool              { return false }
-func (x *HistoricalEventItemStolenCircumstance) RelatedToStructure(siteId, id int) bool { return false }
-func (x *HistoricalEventItemStolenCircumstance) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventItemStolenCircumstance) CheckFields() {
 }
@@ -14333,6 +14790,11 @@ func (x *HistoricalEventKnowledgeDiscovered) RelatedToArtifact(id int) bool     
 func (x *HistoricalEventKnowledgeDiscovered) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventKnowledgeDiscovered) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventKnowledgeDiscovered) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventKnowledgeDiscovered) CheckFields() {
 }
@@ -14563,6 +15025,15 @@ func (x *HistoricalEventMasterpieceArchConstructed) RelatedToStructure(siteId, i
 	return false
 }
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToWrittenContent(id int) bool {
+	return false
+}
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToDanceForm(id int) bool   { return false }
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToMusicalForm(id int) bool { return false }
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToPoeticForm(id int) bool  { return false }
 
 func (x *HistoricalEventMasterpieceArchConstructed) CheckFields() {
 	if x.BuildingCustom != x.EntityId {
@@ -14735,6 +15206,11 @@ func (x *HistoricalEventMasterpieceDye) RelatedToSite(id int) bool {
 }
 func (x *HistoricalEventMasterpieceDye) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventMasterpieceDye) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventMasterpieceDye) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventMasterpieceDye) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventMasterpieceDye) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventMasterpieceDye) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventMasterpieceDye) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventMasterpieceDye) CheckFields() {
 	if x.DyeMatIndex != x.EntityId {
@@ -14860,6 +15336,11 @@ func (x *HistoricalEventMasterpieceEngraving) RelatedToArtifact(id int) bool    
 func (x *HistoricalEventMasterpieceEngraving) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventMasterpieceEngraving) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventMasterpieceEngraving) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventMasterpieceEngraving) CheckFields() {
 	if x.ArtId != x.EntityId {
@@ -15164,6 +15645,11 @@ func (x *HistoricalEventMasterpieceFood) RelatedToSite(id int) bool {
 }
 func (x *HistoricalEventMasterpieceFood) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventMasterpieceFood) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventMasterpieceFood) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventMasterpieceFood) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventMasterpieceFood) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventMasterpieceFood) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventMasterpieceFood) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventMasterpieceFood) CheckFields() {
 	if x.ItemId != x.EntityId {
@@ -15269,6 +15755,11 @@ func (x *HistoricalEventMasterpieceItem) RelatedToArtifact(id int) bool         
 func (x *HistoricalEventMasterpieceItem) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventMasterpieceItem) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventMasterpieceItem) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventMasterpieceItem) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventMasterpieceItem) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventMasterpieceItem) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventMasterpieceItem) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventMasterpieceItem) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventMasterpieceItem) CheckFields() {
 	if x.ItemId != x.EntityId {
@@ -15574,6 +16065,15 @@ func (x *HistoricalEventMasterpieceItemImprovement) RelatedToStructure(siteId, i
 	return false
 }
 func (x *HistoricalEventMasterpieceItemImprovement) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventMasterpieceItemImprovement) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventMasterpieceItemImprovement) RelatedToWrittenContent(id int) bool {
+	return false
+}
+func (x *HistoricalEventMasterpieceItemImprovement) RelatedToDanceForm(id int) bool   { return false }
+func (x *HistoricalEventMasterpieceItemImprovement) RelatedToMusicalForm(id int) bool { return false }
+func (x *HistoricalEventMasterpieceItemImprovement) RelatedToPoeticForm(id int) bool  { return false }
 
 func (x *HistoricalEventMasterpieceItemImprovement) CheckFields() {
 	if x.ArtId != x.EntityId {
@@ -15707,6 +16207,11 @@ func (x *HistoricalEventMasterpieceLost) RelatedToArtifact(id int) bool         
 func (x *HistoricalEventMasterpieceLost) RelatedToSite(id int) bool              { return x.Site == id }
 func (x *HistoricalEventMasterpieceLost) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventMasterpieceLost) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventMasterpieceLost) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventMasterpieceLost) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventMasterpieceLost) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventMasterpieceLost) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventMasterpieceLost) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventMasterpieceLost) CheckFields() {
 }
@@ -15750,6 +16255,11 @@ func (x *HistoricalEventMerchant) RelatedToArtifact(id int) bool          { retu
 func (x *HistoricalEventMerchant) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventMerchant) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventMerchant) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventMerchant) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventMerchant) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventMerchant) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventMerchant) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventMerchant) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventMerchant) CheckFields() {
 }
@@ -15834,7 +16344,12 @@ func (x *HistoricalEventModifiedBuilding) RelatedToSite(id int) bool     { retur
 func (x *HistoricalEventModifiedBuilding) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventModifiedBuilding) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventModifiedBuilding) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventModifiedBuilding) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventModifiedBuilding) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventModifiedBuilding) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventModifiedBuilding) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventModifiedBuilding) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventModifiedBuilding) CheckFields() {
 }
@@ -15951,6 +16466,11 @@ func (x *HistoricalEventMusicalFormCreated) RelatedToArtifact(id int) bool      
 func (x *HistoricalEventMusicalFormCreated) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventMusicalFormCreated) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventMusicalFormCreated) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventMusicalFormCreated) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventMusicalFormCreated) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventMusicalFormCreated) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventMusicalFormCreated) RelatedToMusicalForm(id int) bool       { return x.FormId == id }
+func (x *HistoricalEventMusicalFormCreated) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventMusicalFormCreated) CheckFields() {
 }
@@ -16009,6 +16529,11 @@ func (x *HistoricalEventNewSiteLeader) RelatedToArtifact(id int) bool          {
 func (x *HistoricalEventNewSiteLeader) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventNewSiteLeader) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventNewSiteLeader) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventNewSiteLeader) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventNewSiteLeader) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventNewSiteLeader) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventNewSiteLeader) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventNewSiteLeader) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventNewSiteLeader) CheckFields() {
 }
@@ -16086,6 +16611,11 @@ func (x *HistoricalEventPeaceAccepted) RelatedToArtifact(id int) bool          {
 func (x *HistoricalEventPeaceAccepted) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventPeaceAccepted) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventPeaceAccepted) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventPeaceAccepted) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -16163,6 +16693,11 @@ func (x *HistoricalEventPeaceRejected) RelatedToArtifact(id int) bool          {
 func (x *HistoricalEventPeaceRejected) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventPeaceRejected) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventPeaceRejected) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventPeaceRejected) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -16216,6 +16751,11 @@ func (x *HistoricalEventPerformance) RelatedToArtifact(id int) bool          { r
 func (x *HistoricalEventPerformance) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventPerformance) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventPerformance) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventPerformance) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventPerformance) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventPerformance) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventPerformance) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventPerformance) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventPerformance) CheckFields() {
 }
@@ -16272,6 +16812,11 @@ func (x *HistoricalEventPlunderedSite) RelatedToArtifact(id int) bool          {
 func (x *HistoricalEventPlunderedSite) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventPlunderedSite) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventPlunderedSite) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventPlunderedSite) CheckFields() {
 }
@@ -16353,6 +16898,11 @@ func (x *HistoricalEventPoeticFormCreated) RelatedToArtifact(id int) bool       
 func (x *HistoricalEventPoeticFormCreated) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventPoeticFormCreated) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventPoeticFormCreated) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventPoeticFormCreated) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventPoeticFormCreated) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventPoeticFormCreated) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventPoeticFormCreated) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventPoeticFormCreated) RelatedToPoeticForm(id int) bool        { return x.FormId == id }
 
 func (x *HistoricalEventPoeticFormCreated) CheckFields() {
 }
@@ -16403,6 +16953,11 @@ func (x *HistoricalEventProcession) RelatedToArtifact(id int) bool          { re
 func (x *HistoricalEventProcession) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventProcession) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventProcession) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventProcession) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventProcession) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventProcession) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventProcession) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventProcession) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventProcession) CheckFields() {
 }
@@ -16451,7 +17006,12 @@ func (x *HistoricalEventRazedStructure) RelatedToSite(id int) bool     { return 
 func (x *HistoricalEventRazedStructure) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventRazedStructure) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventRazedStructure) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventRazedStructure) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventRazedStructure) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventRazedStructure) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventRazedStructure) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventRazedStructure) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventRazedStructure) CheckFields() {
 }
@@ -16493,6 +17053,11 @@ func (x *HistoricalEventReclaimSite) RelatedToArtifact(id int) bool          { r
 func (x *HistoricalEventReclaimSite) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventReclaimSite) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventReclaimSite) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventReclaimSite) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventReclaimSite) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventReclaimSite) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventReclaimSite) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventReclaimSite) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventReclaimSite) CheckFields() {
 }
@@ -16547,6 +17112,21 @@ func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToStructure(site
 }
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToRegion(id int) bool {
 	return x.PopSrid == id
+}
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToWorldConstruction(id int) bool {
+	return false
+}
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToWrittenContent(id int) bool {
+	return false
+}
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToDanceForm(id int) bool {
+	return false
+}
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToMusicalForm(id int) bool {
+	return false
+}
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToPoeticForm(id int) bool {
+	return false
 }
 
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) CheckFields() {
@@ -16693,14 +17273,6 @@ func NewHistoricalEventRelationship() *HistoricalEventRelationship {
 		Year:     -1,
 	}
 }
-func (x *HistoricalEventRelationship) RelatedToEntity(id int) bool { return false }
-func (x *HistoricalEventRelationship) RelatedToHf(id int) bool {
-	return x.SourceHf == id || x.TargetHf == id
-}
-func (x *HistoricalEventRelationship) RelatedToArtifact(id int) bool          { return false }
-func (x *HistoricalEventRelationship) RelatedToSite(id int) bool              { return false }
-func (x *HistoricalEventRelationship) RelatedToStructure(siteId, id int) bool { return false }
-func (x *HistoricalEventRelationship) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventRelationship) CheckFields() {
 }
@@ -16740,12 +17312,6 @@ func NewHistoricalEventRelationshipSupplement() *HistoricalEventRelationshipSupp
 		Unk1:         -1,
 	}
 }
-func (x *HistoricalEventRelationshipSupplement) RelatedToEntity(id int) bool            { return false }
-func (x *HistoricalEventRelationshipSupplement) RelatedToHf(id int) bool                { return false }
-func (x *HistoricalEventRelationshipSupplement) RelatedToArtifact(id int) bool          { return false }
-func (x *HistoricalEventRelationshipSupplement) RelatedToSite(id int) bool              { return x.Site == id }
-func (x *HistoricalEventRelationshipSupplement) RelatedToStructure(siteId, id int) bool { return false }
-func (x *HistoricalEventRelationshipSupplement) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalEventRelationshipSupplement) CheckFields() {
 }
@@ -16873,6 +17439,11 @@ func (x *HistoricalEventRemoveHfEntityLink) RelatedToArtifact(id int) bool      
 func (x *HistoricalEventRemoveHfEntityLink) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventRemoveHfEntityLink) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventRemoveHfEntityLink) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventRemoveHfEntityLink) CheckFields() {
 }
@@ -16915,6 +17486,11 @@ func (x *HistoricalEventRemoveHfHfLink) RelatedToArtifact(id int) bool          
 func (x *HistoricalEventRemoveHfHfLink) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventRemoveHfHfLink) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventRemoveHfHfLink) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventRemoveHfHfLink) CheckFields() {
 }
@@ -16991,7 +17567,12 @@ func (x *HistoricalEventRemoveHfSiteLink) RelatedToSite(id int) bool     { retur
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.Structure == id)
 }
-func (x *HistoricalEventRemoveHfSiteLink) RelatedToRegion(id int) bool { return false }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventRemoveHfSiteLink) CheckFields() {
 	if x.Civ != x.SiteId {
@@ -17051,6 +17632,11 @@ func (x *HistoricalEventReplacedStructure) RelatedToArtifact(id int) bool       
 func (x *HistoricalEventReplacedStructure) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventReplacedStructure) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventReplacedStructure) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventReplacedStructure) CheckFields() {
 }
@@ -17098,6 +17684,11 @@ func (x *HistoricalEventSiteDied) RelatedToArtifact(id int) bool          { retu
 func (x *HistoricalEventSiteDied) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventSiteDied) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventSiteDied) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventSiteDied) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventSiteDied) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventSiteDied) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventSiteDied) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventSiteDied) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventSiteDied) CheckFields() {
 }
@@ -17194,6 +17785,11 @@ func (x *HistoricalEventSiteDispute) RelatedToArtifact(id int) bool          { r
 func (x *HistoricalEventSiteDispute) RelatedToSite(id int) bool              { return false }
 func (x *HistoricalEventSiteDispute) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventSiteDispute) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventSiteDispute) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventSiteDispute) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventSiteDispute) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventSiteDispute) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventSiteDispute) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventSiteDispute) CheckFields() {
 }
@@ -17241,6 +17837,11 @@ func (x *HistoricalEventSiteRetired) RelatedToArtifact(id int) bool          { r
 func (x *HistoricalEventSiteRetired) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventSiteRetired) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventSiteRetired) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventSiteRetired) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventSiteRetired) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventSiteRetired) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventSiteRetired) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventSiteRetired) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventSiteRetired) CheckFields() {
 }
@@ -17284,6 +17885,11 @@ func (x *HistoricalEventSiteSurrendered) RelatedToArtifact(id int) bool         
 func (x *HistoricalEventSiteSurrendered) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventSiteSurrendered) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventSiteSurrendered) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventSiteSurrendered) CheckFields() {
 }
@@ -17331,6 +17937,11 @@ func (x *HistoricalEventSiteTakenOver) RelatedToArtifact(id int) bool          {
 func (x *HistoricalEventSiteTakenOver) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventSiteTakenOver) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventSiteTakenOver) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventSiteTakenOver) CheckFields() {
 }
@@ -17417,6 +18028,11 @@ func (x *HistoricalEventSiteTributeForced) RelatedToArtifact(id int) bool       
 func (x *HistoricalEventSiteTributeForced) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventSiteTributeForced) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventSiteTributeForced) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventSiteTributeForced) CheckFields() {
 }
@@ -17465,6 +18081,11 @@ func (x *HistoricalEventSneakIntoSite) RelatedToArtifact(id int) bool          {
 func (x *HistoricalEventSneakIntoSite) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventSneakIntoSite) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventSneakIntoSite) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventSneakIntoSite) CheckFields() {
 }
@@ -17510,6 +18131,11 @@ func (x *HistoricalEventSpottedLeavingSite) RelatedToArtifact(id int) bool      
 func (x *HistoricalEventSpottedLeavingSite) RelatedToSite(id int) bool              { return x.SiteId == id }
 func (x *HistoricalEventSpottedLeavingSite) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventSpottedLeavingSite) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventSpottedLeavingSite) CheckFields() {
 }
@@ -17580,7 +18206,12 @@ func (x *HistoricalEventSquadVsSquad) RelatedToSite(id int) bool     { return x.
 func (x *HistoricalEventSquadVsSquad) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventSquadVsSquad) RelatedToRegion(id int) bool { return x.SubregionId == id }
+func (x *HistoricalEventSquadVsSquad) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventSquadVsSquad) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventSquadVsSquad) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventSquadVsSquad) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventSquadVsSquad) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventSquadVsSquad) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventSquadVsSquad) CheckFields() {
 }
@@ -17724,7 +18355,12 @@ func (x *HistoricalEventTacticalSituation) RelatedToSite(id int) bool     { retu
 func (x *HistoricalEventTacticalSituation) RelatedToStructure(siteId, id int) bool {
 	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
-func (x *HistoricalEventTacticalSituation) RelatedToRegion(id int) bool { return x.SubregionId == id }
+func (x *HistoricalEventTacticalSituation) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventTacticalSituation) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventTacticalSituation) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventTacticalSituation) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventTacticalSituation) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventTacticalSituation) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventTacticalSituation) CheckFields() {
 }
@@ -17794,6 +18430,11 @@ func (x *HistoricalEventTrade) RelatedToSite(id int) bool {
 }
 func (x *HistoricalEventTrade) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventTrade) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventTrade) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventTrade) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventTrade) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventTrade) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventTrade) RelatedToPoeticForm(id int) bool        { return false }
 
 func (x *HistoricalEventTrade) CheckFields() {
 }
@@ -17926,6 +18567,13 @@ func (x *HistoricalEventWrittenContentComposed) RelatedToStructure(siteId, id in
 func (x *HistoricalEventWrittenContentComposed) RelatedToRegion(id int) bool {
 	return x.SubregionId == id
 }
+func (x *HistoricalEventWrittenContentComposed) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventWrittenContentComposed) RelatedToWrittenContent(id int) bool {
+	return x.WcId == id
+}
+func (x *HistoricalEventWrittenContentComposed) RelatedToDanceForm(id int) bool   { return false }
+func (x *HistoricalEventWrittenContentComposed) RelatedToMusicalForm(id int) bool { return false }
+func (x *HistoricalEventWrittenContentComposed) RelatedToPoeticForm(id int) bool  { return false }
 
 func (x *HistoricalEventWrittenContentComposed) CheckFields() {
 }
@@ -18117,14 +18765,6 @@ func NewHistoricalFigure() *HistoricalFigure {
 func (x *HistoricalFigure) Id() int      { return x.Id_ }
 func (x *HistoricalFigure) setId(id int) { x.Id_ = id }
 func (x *HistoricalFigure) Name() string { return x.Name_ }
-func (x *HistoricalFigure) RelatedToEntity(id int) bool {
-	return containsInt(x.UsedIdentityId, id) || x.CurrentIdentityId == id
-}
-func (x *HistoricalFigure) RelatedToHf(id int) bool                { return false }
-func (x *HistoricalFigure) RelatedToArtifact(id int) bool          { return false }
-func (x *HistoricalFigure) RelatedToSite(id int) bool              { return false }
-func (x *HistoricalFigure) RelatedToStructure(siteId, id int) bool { return false }
-func (x *HistoricalFigure) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalFigure) CheckFields() {
 	if x.Sex != x.Appeared {
@@ -18298,12 +18938,6 @@ func NewHistoricalFigureEntityLink() *HistoricalFigureEntityLink {
 		LinkStrength: -1,
 	}
 }
-func (x *HistoricalFigureEntityLink) RelatedToEntity(id int) bool            { return x.EntityId == id }
-func (x *HistoricalFigureEntityLink) RelatedToHf(id int) bool                { return false }
-func (x *HistoricalFigureEntityLink) RelatedToArtifact(id int) bool          { return false }
-func (x *HistoricalFigureEntityLink) RelatedToSite(id int) bool              { return false }
-func (x *HistoricalFigureEntityLink) RelatedToStructure(siteId, id int) bool { return false }
-func (x *HistoricalFigureEntityLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalFigureEntityLink) CheckFields() {
 }
@@ -18333,12 +18967,6 @@ func NewHistoricalFigureSiteProperty() *HistoricalFigureSiteProperty {
 		SiteId:     -1,
 	}
 }
-func (x *HistoricalFigureSiteProperty) RelatedToEntity(id int) bool            { return false }
-func (x *HistoricalFigureSiteProperty) RelatedToHf(id int) bool                { return false }
-func (x *HistoricalFigureSiteProperty) RelatedToArtifact(id int) bool          { return false }
-func (x *HistoricalFigureSiteProperty) RelatedToSite(id int) bool              { return x.SiteId == id }
-func (x *HistoricalFigureSiteProperty) RelatedToStructure(siteId, id int) bool { return false }
-func (x *HistoricalFigureSiteProperty) RelatedToRegion(id int) bool            { return false }
 
 func (x *HistoricalFigureSiteProperty) CheckFields() {
 }
@@ -18448,15 +19076,9 @@ func NewHonor() *Honor {
 		RequiredYears:        -1,
 	}
 }
-func (x *Honor) Id() int                                { return x.Id_ }
-func (x *Honor) setId(id int)                           { x.Id_ = id }
-func (x *Honor) Name() string                           { return x.Name_ }
-func (x *Honor) RelatedToEntity(id int) bool            { return false }
-func (x *Honor) RelatedToHf(id int) bool                { return false }
-func (x *Honor) RelatedToArtifact(id int) bool          { return false }
-func (x *Honor) RelatedToSite(id int) bool              { return false }
-func (x *Honor) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Honor) RelatedToRegion(id int) bool            { return false }
+func (x *Honor) Id() int      { return x.Id_ }
+func (x *Honor) setId(id int) { x.Id_ = id }
+func (x *Honor) Name() string { return x.Name_ }
 
 func (x *Honor) CheckFields() {
 }
@@ -18510,12 +19132,6 @@ func NewHonorEntity() *HonorEntity {
 		Kills:   -1,
 	}
 }
-func (x *HonorEntity) RelatedToEntity(id int) bool            { return x.Entity == id }
-func (x *HonorEntity) RelatedToHf(id int) bool                { return false }
-func (x *HonorEntity) RelatedToArtifact(id int) bool          { return false }
-func (x *HonorEntity) RelatedToSite(id int) bool              { return false }
-func (x *HonorEntity) RelatedToStructure(siteId, id int) bool { return false }
-func (x *HonorEntity) RelatedToRegion(id int) bool            { return false }
 
 func (x *HonorEntity) CheckFields() {
 }
@@ -18655,15 +19271,9 @@ func NewIdentity() *Identity {
 		NemesisId:   -1,
 	}
 }
-func (x *Identity) Id() int                                { return x.Id_ }
-func (x *Identity) setId(id int)                           { x.Id_ = id }
-func (x *Identity) Name() string                           { return x.Name_ }
-func (x *Identity) RelatedToEntity(id int) bool            { return x.EntityId == id }
-func (x *Identity) RelatedToHf(id int) bool                { return x.HistfigId == id }
-func (x *Identity) RelatedToArtifact(id int) bool          { return false }
-func (x *Identity) RelatedToSite(id int) bool              { return false }
-func (x *Identity) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Identity) RelatedToRegion(id int) bool            { return false }
+func (x *Identity) Id() int      { return x.Id_ }
+func (x *Identity) setId(id int) { x.Id_ = id }
+func (x *Identity) Name() string { return x.Name_ }
 
 func (x *Identity) CheckFields() {
 }
@@ -18899,12 +19509,6 @@ func NewIntrigueActor() *IntrigueActor {
 		StrategyEppid: -1,
 	}
 }
-func (x *IntrigueActor) RelatedToEntity(id int) bool            { return x.EntityId == id || x.StrategyEnid == id }
-func (x *IntrigueActor) RelatedToHf(id int) bool                { return x.Hfid == id }
-func (x *IntrigueActor) RelatedToArtifact(id int) bool          { return false }
-func (x *IntrigueActor) RelatedToSite(id int) bool              { return false }
-func (x *IntrigueActor) RelatedToStructure(siteId, id int) bool { return false }
-func (x *IntrigueActor) RelatedToRegion(id int) bool            { return false }
 
 func (x *IntrigueActor) CheckFields() {
 }
@@ -19068,14 +19672,6 @@ func NewIntriguePlot() *IntriguePlot {
 		ParentPlotId:      -1,
 	}
 }
-func (x *IntriguePlot) RelatedToEntity(id int) bool { return x.EntityId == id }
-func (x *IntriguePlot) RelatedToHf(id int) bool {
-	return x.DelegatedPlotHfid == id || x.ParentPlotHfid == id
-}
-func (x *IntriguePlot) RelatedToArtifact(id int) bool          { return x.ArtifactId == id }
-func (x *IntriguePlot) RelatedToSite(id int) bool              { return false }
-func (x *IntriguePlot) RelatedToStructure(siteId, id int) bool { return false }
-func (x *IntriguePlot) RelatedToRegion(id int) bool            { return false }
 
 func (x *IntriguePlot) CheckFields() {
 }
@@ -19128,12 +19724,6 @@ func NewItem() *Item {
 		WritingWrittenContentId: -1,
 	}
 }
-func (x *Item) RelatedToEntity(id int) bool            { return false }
-func (x *Item) RelatedToHf(id int) bool                { return false }
-func (x *Item) RelatedToArtifact(id int) bool          { return false }
-func (x *Item) RelatedToSite(id int) bool              { return false }
-func (x *Item) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Item) RelatedToRegion(id int) bool            { return false }
 
 func (x *Item) CheckFields() {
 }
@@ -19165,15 +19755,9 @@ func NewLandmass() *Landmass {
 		Id_: -1,
 	}
 }
-func (x *Landmass) Id() int                                { return x.Id_ }
-func (x *Landmass) setId(id int)                           { x.Id_ = id }
-func (x *Landmass) Name() string                           { return x.Name_ }
-func (x *Landmass) RelatedToEntity(id int) bool            { return false }
-func (x *Landmass) RelatedToHf(id int) bool                { return false }
-func (x *Landmass) RelatedToArtifact(id int) bool          { return false }
-func (x *Landmass) RelatedToSite(id int) bool              { return false }
-func (x *Landmass) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Landmass) RelatedToRegion(id int) bool            { return false }
+func (x *Landmass) Id() int      { return x.Id_ }
+func (x *Landmass) setId(id int) { x.Id_ = id }
+func (x *Landmass) Name() string { return x.Name_ }
 
 func (x *Landmass) CheckFields() {
 }
@@ -19203,15 +19787,9 @@ func NewMountainPeak() *MountainPeak {
 		Id_:    -1,
 	}
 }
-func (x *MountainPeak) Id() int                                { return x.Id_ }
-func (x *MountainPeak) setId(id int)                           { x.Id_ = id }
-func (x *MountainPeak) Name() string                           { return x.Name_ }
-func (x *MountainPeak) RelatedToEntity(id int) bool            { return false }
-func (x *MountainPeak) RelatedToHf(id int) bool                { return false }
-func (x *MountainPeak) RelatedToArtifact(id int) bool          { return false }
-func (x *MountainPeak) RelatedToSite(id int) bool              { return false }
-func (x *MountainPeak) RelatedToStructure(siteId, id int) bool { return false }
-func (x *MountainPeak) RelatedToRegion(id int) bool            { return false }
+func (x *MountainPeak) Id() int      { return x.Id_ }
+func (x *MountainPeak) setId(id int) { x.Id_ = id }
+func (x *MountainPeak) Name() string { return x.Name_ }
 
 func (x *MountainPeak) CheckFields() {
 }
@@ -19241,15 +19819,9 @@ func NewMusicalForm() *MusicalForm {
 		Id_: -1,
 	}
 }
-func (x *MusicalForm) Id() int                                { return x.Id_ }
-func (x *MusicalForm) setId(id int)                           { x.Id_ = id }
-func (x *MusicalForm) Name() string                           { return x.Name_ }
-func (x *MusicalForm) RelatedToEntity(id int) bool            { return false }
-func (x *MusicalForm) RelatedToHf(id int) bool                { return false }
-func (x *MusicalForm) RelatedToArtifact(id int) bool          { return false }
-func (x *MusicalForm) RelatedToSite(id int) bool              { return false }
-func (x *MusicalForm) RelatedToStructure(siteId, id int) bool { return false }
-func (x *MusicalForm) RelatedToRegion(id int) bool            { return false }
+func (x *MusicalForm) Id() int      { return x.Id_ }
+func (x *MusicalForm) setId(id int) { x.Id_ = id }
+func (x *MusicalForm) Name() string { return x.Name_ }
 
 func (x *MusicalForm) CheckFields() {
 }
@@ -19277,15 +19849,9 @@ func NewOccasion() *Occasion {
 		Id_:   -1,
 	}
 }
-func (x *Occasion) Id() int                                { return x.Id_ }
-func (x *Occasion) setId(id int)                           { x.Id_ = id }
-func (x *Occasion) Name() string                           { return x.Name_ }
-func (x *Occasion) RelatedToEntity(id int) bool            { return false }
-func (x *Occasion) RelatedToHf(id int) bool                { return false }
-func (x *Occasion) RelatedToArtifact(id int) bool          { return false }
-func (x *Occasion) RelatedToSite(id int) bool              { return false }
-func (x *Occasion) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Occasion) RelatedToRegion(id int) bool            { return false }
+func (x *Occasion) Id() int      { return x.Id_ }
+func (x *Occasion) setId(id int) { x.Id_ = id }
+func (x *Occasion) Name() string { return x.Name_ }
 
 func (x *Occasion) CheckFields() {
 }
@@ -19353,12 +19919,6 @@ func NewPlotActor() *PlotActor {
 		AgreementId: -1,
 	}
 }
-func (x *PlotActor) RelatedToEntity(id int) bool            { return false }
-func (x *PlotActor) RelatedToHf(id int) bool                { return false }
-func (x *PlotActor) RelatedToArtifact(id int) bool          { return false }
-func (x *PlotActor) RelatedToSite(id int) bool              { return false }
-func (x *PlotActor) RelatedToStructure(siteId, id int) bool { return false }
-func (x *PlotActor) RelatedToRegion(id int) bool            { return false }
 
 func (x *PlotActor) CheckFields() {
 }
@@ -19389,15 +19949,9 @@ func NewPoeticForm() *PoeticForm {
 		Id_: -1,
 	}
 }
-func (x *PoeticForm) Id() int                                { return x.Id_ }
-func (x *PoeticForm) setId(id int)                           { x.Id_ = id }
-func (x *PoeticForm) Name() string                           { return x.Name_ }
-func (x *PoeticForm) RelatedToEntity(id int) bool            { return false }
-func (x *PoeticForm) RelatedToHf(id int) bool                { return false }
-func (x *PoeticForm) RelatedToArtifact(id int) bool          { return false }
-func (x *PoeticForm) RelatedToSite(id int) bool              { return false }
-func (x *PoeticForm) RelatedToStructure(siteId, id int) bool { return false }
-func (x *PoeticForm) RelatedToRegion(id int) bool            { return false }
+func (x *PoeticForm) Id() int      { return x.Id_ }
+func (x *PoeticForm) setId(id int) { x.Id_ = id }
+func (x *PoeticForm) Name() string { return x.Name_ }
 
 func (x *PoeticForm) CheckFields() {
 }
@@ -19519,14 +20073,8 @@ func NewReference() *Reference {
 		Id_: -1,
 	}
 }
-func (x *Reference) Id() int                                { return x.Id_ }
-func (x *Reference) setId(id int)                           { x.Id_ = id }
-func (x *Reference) RelatedToEntity(id int) bool            { return false }
-func (x *Reference) RelatedToHf(id int) bool                { return false }
-func (x *Reference) RelatedToArtifact(id int) bool          { return false }
-func (x *Reference) RelatedToSite(id int) bool              { return false }
-func (x *Reference) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Reference) RelatedToRegion(id int) bool            { return false }
+func (x *Reference) Id() int      { return x.Id_ }
+func (x *Reference) setId(id int) { x.Id_ = id }
 
 func (x *Reference) CheckFields() {
 }
@@ -19666,15 +20214,9 @@ func NewRegion() *Region {
 		Id_:     -1,
 	}
 }
-func (x *Region) Id() int                                { return x.Id_ }
-func (x *Region) setId(id int)                           { x.Id_ = id }
-func (x *Region) Name() string                           { return x.Name_ }
-func (x *Region) RelatedToEntity(id int) bool            { return false }
-func (x *Region) RelatedToHf(id int) bool                { return false }
-func (x *Region) RelatedToArtifact(id int) bool          { return false }
-func (x *Region) RelatedToSite(id int) bool              { return false }
-func (x *Region) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Region) RelatedToRegion(id int) bool            { return false }
+func (x *Region) Id() int      { return x.Id_ }
+func (x *Region) setId(id int) { x.Id_ = id }
+func (x *Region) Name() string { return x.Name_ }
 
 func (x *Region) CheckFields() {
 }
@@ -19731,12 +20273,6 @@ func NewRelationshipProfileHfHistorical() *RelationshipProfileHfHistorical {
 		Trust:           -1,
 	}
 }
-func (x *RelationshipProfileHfHistorical) RelatedToEntity(id int) bool            { return false }
-func (x *RelationshipProfileHfHistorical) RelatedToHf(id int) bool                { return x.HfId == id }
-func (x *RelationshipProfileHfHistorical) RelatedToArtifact(id int) bool          { return false }
-func (x *RelationshipProfileHfHistorical) RelatedToSite(id int) bool              { return false }
-func (x *RelationshipProfileHfHistorical) RelatedToStructure(siteId, id int) bool { return false }
-func (x *RelationshipProfileHfHistorical) RelatedToRegion(id int) bool            { return false }
 
 func (x *RelationshipProfileHfHistorical) CheckFields() {
 }
@@ -19806,14 +20342,8 @@ func NewRelationshipProfileHfIdentity() *RelationshipProfileHfIdentity {
 		Trust:         -1,
 	}
 }
-func (x *RelationshipProfileHfIdentity) Id() int                                { return x.Id_ }
-func (x *RelationshipProfileHfIdentity) setId(id int)                           { x.Id_ = id }
-func (x *RelationshipProfileHfIdentity) RelatedToEntity(id int) bool            { return false }
-func (x *RelationshipProfileHfIdentity) RelatedToHf(id int) bool                { return false }
-func (x *RelationshipProfileHfIdentity) RelatedToArtifact(id int) bool          { return false }
-func (x *RelationshipProfileHfIdentity) RelatedToSite(id int) bool              { return false }
-func (x *RelationshipProfileHfIdentity) RelatedToStructure(siteId, id int) bool { return false }
-func (x *RelationshipProfileHfIdentity) RelatedToRegion(id int) bool            { return false }
+func (x *RelationshipProfileHfIdentity) Id() int      { return x.Id_ }
+func (x *RelationshipProfileHfIdentity) setId(id int) { x.Id_ = id }
 
 func (x *RelationshipProfileHfIdentity) CheckFields() {
 }
@@ -19892,14 +20422,6 @@ func NewRelationshipProfileHfVisual() *RelationshipProfileHfVisual {
 		Trust:                -1,
 	}
 }
-func (x *RelationshipProfileHfVisual) RelatedToEntity(id int) bool {
-	return containsInt(x.KnownIdentityId, id)
-}
-func (x *RelationshipProfileHfVisual) RelatedToHf(id int) bool                { return x.HfId == id }
-func (x *RelationshipProfileHfVisual) RelatedToArtifact(id int) bool          { return false }
-func (x *RelationshipProfileHfVisual) RelatedToSite(id int) bool              { return false }
-func (x *RelationshipProfileHfVisual) RelatedToStructure(siteId, id int) bool { return false }
-func (x *RelationshipProfileHfVisual) RelatedToRegion(id int) bool            { return false }
 
 func (x *RelationshipProfileHfVisual) CheckFields() {
 }
@@ -19979,13 +20501,7 @@ type River struct {
 func NewRiver() *River {
 	return &River{}
 }
-func (x *River) Name() string                           { return x.Name_ }
-func (x *River) RelatedToEntity(id int) bool            { return false }
-func (x *River) RelatedToHf(id int) bool                { return false }
-func (x *River) RelatedToArtifact(id int) bool          { return false }
-func (x *River) RelatedToSite(id int) bool              { return false }
-func (x *River) RelatedToStructure(siteId, id int) bool { return false }
-func (x *River) RelatedToRegion(id int) bool            { return false }
+func (x *River) Name() string { return x.Name_ }
 
 func (x *River) CheckFields() {
 }
@@ -20271,14 +20787,8 @@ func NewSchedule() *Schedule {
 		Reference2: -1,
 	}
 }
-func (x *Schedule) Id() int                                { return x.Id_ }
-func (x *Schedule) setId(id int)                           { x.Id_ = id }
-func (x *Schedule) RelatedToEntity(id int) bool            { return false }
-func (x *Schedule) RelatedToHf(id int) bool                { return false }
-func (x *Schedule) RelatedToArtifact(id int) bool          { return false }
-func (x *Schedule) RelatedToSite(id int) bool              { return false }
-func (x *Schedule) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Schedule) RelatedToRegion(id int) bool            { return false }
+func (x *Schedule) Id() int      { return x.Id_ }
+func (x *Schedule) setId(id int) { x.Id_ = id }
 
 func (x *Schedule) CheckFields() {
 }
@@ -20451,15 +20961,9 @@ func NewSite() *Site {
 		Structures:     make(map[int]*Structure),
 	}
 }
-func (x *Site) Id() int                                { return x.Id_ }
-func (x *Site) setId(id int)                           { x.Id_ = id }
-func (x *Site) Name() string                           { return x.Name_ }
-func (x *Site) RelatedToEntity(id int) bool            { return x.CivId == id }
-func (x *Site) RelatedToHf(id int) bool                { return false }
-func (x *Site) RelatedToArtifact(id int) bool          { return false }
-func (x *Site) RelatedToSite(id int) bool              { return false }
-func (x *Site) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Site) RelatedToRegion(id int) bool            { return false }
+func (x *Site) Id() int      { return x.Id_ }
+func (x *Site) setId(id int) { x.Id_ = id }
+func (x *Site) Name() string { return x.Name_ }
 
 func (x *Site) CheckFields() {
 }
@@ -20565,12 +21069,6 @@ func NewSiteLink() *SiteLink {
 		SubId:        -1,
 	}
 }
-func (x *SiteLink) RelatedToEntity(id int) bool            { return x.EntityId == id }
-func (x *SiteLink) RelatedToHf(id int) bool                { return false }
-func (x *SiteLink) RelatedToArtifact(id int) bool          { return false }
-func (x *SiteLink) RelatedToSite(id int) bool              { return x.SiteId == id }
-func (x *SiteLink) RelatedToStructure(siteId, id int) bool { return false }
-func (x *SiteLink) RelatedToRegion(id int) bool            { return false }
 
 func (x *SiteLink) CheckFields() {
 }
@@ -20636,16 +21134,8 @@ func NewSiteSiteProperty() *SiteSiteProperty {
 		StructureId: -1,
 	}
 }
-func (x *SiteSiteProperty) Id() int                       { return x.Id_ }
-func (x *SiteSiteProperty) setId(id int)                  { x.Id_ = id }
-func (x *SiteSiteProperty) RelatedToEntity(id int) bool   { return false }
-func (x *SiteSiteProperty) RelatedToHf(id int) bool       { return x.OwnerHfid == id }
-func (x *SiteSiteProperty) RelatedToArtifact(id int) bool { return false }
-func (x *SiteSiteProperty) RelatedToSite(id int) bool     { return false }
-func (x *SiteSiteProperty) RelatedToStructure(siteId, id int) bool {
-	return x.RelatedToSite(siteId) && (x.StructureId == id)
-}
-func (x *SiteSiteProperty) RelatedToRegion(id int) bool { return false }
+func (x *SiteSiteProperty) Id() int      { return x.Id_ }
+func (x *SiteSiteProperty) setId(id int) { x.Id_ = id }
 
 func (x *SiteSiteProperty) CheckFields() {
 }
@@ -20820,15 +21310,9 @@ func NewStructure() *Structure {
 		SiteId:      -1,
 	}
 }
-func (x *Structure) Id() int                                { return x.Id_ }
-func (x *Structure) setId(id int)                           { x.Id_ = id }
-func (x *Structure) Name() string                           { return x.Name_ }
-func (x *Structure) RelatedToEntity(id int) bool            { return x.EntityId == id }
-func (x *Structure) RelatedToHf(id int) bool                { return x.WorshipHfid == id }
-func (x *Structure) RelatedToArtifact(id int) bool          { return containsInt(x.CopiedArtifactId, id) }
-func (x *Structure) RelatedToSite(id int) bool              { return false }
-func (x *Structure) RelatedToStructure(siteId, id int) bool { return false }
-func (x *Structure) RelatedToRegion(id int) bool            { return false }
+func (x *Structure) Id() int      { return x.Id_ }
+func (x *Structure) setId(id int) { x.Id_ = id }
+func (x *Structure) Name() string { return x.Name_ }
 
 func (x *Structure) CheckFields() {
 	if x.Deity != x.EntityId {
@@ -20961,14 +21445,8 @@ func NewUndergroundRegion() *UndergroundRegion {
 		Id_:   -1,
 	}
 }
-func (x *UndergroundRegion) Id() int                                { return x.Id_ }
-func (x *UndergroundRegion) setId(id int)                           { x.Id_ = id }
-func (x *UndergroundRegion) RelatedToEntity(id int) bool            { return false }
-func (x *UndergroundRegion) RelatedToHf(id int) bool                { return false }
-func (x *UndergroundRegion) RelatedToArtifact(id int) bool          { return false }
-func (x *UndergroundRegion) RelatedToSite(id int) bool              { return false }
-func (x *UndergroundRegion) RelatedToStructure(siteId, id int) bool { return false }
-func (x *UndergroundRegion) RelatedToRegion(id int) bool            { return false }
+func (x *UndergroundRegion) Id() int      { return x.Id_ }
+func (x *UndergroundRegion) setId(id int) { x.Id_ = id }
 
 func (x *UndergroundRegion) CheckFields() {
 }
@@ -21010,12 +21488,6 @@ func NewVagueRelationship() *VagueRelationship {
 		Hfid: -1,
 	}
 }
-func (x *VagueRelationship) RelatedToEntity(id int) bool            { return false }
-func (x *VagueRelationship) RelatedToHf(id int) bool                { return x.Hfid == id }
-func (x *VagueRelationship) RelatedToArtifact(id int) bool          { return false }
-func (x *VagueRelationship) RelatedToSite(id int) bool              { return false }
-func (x *VagueRelationship) RelatedToStructure(siteId, id int) bool { return false }
-func (x *VagueRelationship) RelatedToRegion(id int) bool            { return false }
 
 func (x *VagueRelationship) CheckFields() {
 }
@@ -21090,15 +21562,9 @@ func NewWorldConstruction() *WorldConstruction {
 		Id_: -1,
 	}
 }
-func (x *WorldConstruction) Id() int                                { return x.Id_ }
-func (x *WorldConstruction) setId(id int)                           { x.Id_ = id }
-func (x *WorldConstruction) Name() string                           { return x.Name_ }
-func (x *WorldConstruction) RelatedToEntity(id int) bool            { return false }
-func (x *WorldConstruction) RelatedToHf(id int) bool                { return false }
-func (x *WorldConstruction) RelatedToArtifact(id int) bool          { return false }
-func (x *WorldConstruction) RelatedToSite(id int) bool              { return false }
-func (x *WorldConstruction) RelatedToStructure(siteId, id int) bool { return false }
-func (x *WorldConstruction) RelatedToRegion(id int) bool            { return false }
+func (x *WorldConstruction) Id() int      { return x.Id_ }
+func (x *WorldConstruction) setId(id int) { x.Id_ = id }
+func (x *WorldConstruction) Name() string { return x.Name_ }
 
 func (x *WorldConstruction) CheckFields() {
 }
@@ -21444,14 +21910,8 @@ func NewWrittenContent() *WrittenContent {
 		PageStart:  -1,
 	}
 }
-func (x *WrittenContent) Id() int                                { return x.Id_ }
-func (x *WrittenContent) setId(id int)                           { x.Id_ = id }
-func (x *WrittenContent) RelatedToEntity(id int) bool            { return false }
-func (x *WrittenContent) RelatedToHf(id int) bool                { return x.AuthorHfid == id }
-func (x *WrittenContent) RelatedToArtifact(id int) bool          { return false }
-func (x *WrittenContent) RelatedToSite(id int) bool              { return false }
-func (x *WrittenContent) RelatedToStructure(siteId, id int) bool { return false }
-func (x *WrittenContent) RelatedToRegion(id int) bool            { return false }
+func (x *WrittenContent) Id() int      { return x.Id_ }
+func (x *WrittenContent) setId(id int) { x.Id_ = id }
 
 func (x *WrittenContent) CheckFields() {
 	if x.PageEnd != x.AuthorHfid {

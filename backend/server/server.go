@@ -84,6 +84,10 @@ func StartServer(world *model.DfWorld, static embed.FS) error {
 		}
 	})
 
+	srv.RegisterWorldResourcePage("/danceform/{id}", "artform.html", func(id int) any { return srv.context.world.DanceForms[id] })
+	srv.RegisterWorldResourcePage("/musicalform/{id}", "artform.html", func(id int) any { return srv.context.world.MusicalForms[id] })
+	srv.RegisterWorldResourcePage("/poeticform/{id}", "artform.html", func(id int) any { return srv.context.world.PoeticForms[id] })
+
 	srv.RegisterWorldPage("/writtencontents", "writtencontents.html", func(p Parms) any { return groupByType(srv.context.world.WrittenContents) })
 	srv.RegisterWorldResourcePage("/writtencontent/{id}", "writtencontent.html", func(id int) any { return srv.context.world.WrittenContents[id] })
 	srv.RegisterWorldResourcePage("/popover/writtencontent/{id}", "popoverWrittencontent.html", func(id int) any { return srv.context.world.WrittenContents[id] })

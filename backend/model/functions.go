@@ -120,3 +120,60 @@ func containsInt(list []int, id int) bool {
 	}
 	return false
 }
+
+func LinkDescription(w *DfWorld, desc string) template.HTML {
+	c := &Context{World: w}
+	desc = replaceNameDescription(desc, "originating in ", `\.`, w.Entities, c.entity)
+	desc = replaceNameDescription(desc, "grew out of the performances of ", `\.`, w.Entities, c.entity)
+	desc = replaceNameDescription(desc, "accompanied by(?: any composition of)? ", `(?: as |\.)`, w.MusicalForms, c.musicalForm)
+	desc = replaceNameDescription(desc, "(?:recites?|acts? out)(?: any composition of)? ", `(?: while |\.)`, w.PoeticForms, c.poeticForm)
+	desc = replacHfDescription(desc, "devised by ", `\.`, w.HistoricalFigures, c.hf)
+	desc = replacHfDescription(desc, "the story of ", `\.`, w.HistoricalFigures, c.hf)
+	desc = replaceNameDescription(desc, "the words of ", `(?: while |\.)`, w.WrittenContents, c.writtenContent)
+	desc = replacHfDescription(desc, "express pleasure with ", " originally", w.HistoricalFigures, c.hf)
+	s := strings.Split(desc, "[B]")
+	if len(s) > 1 {
+		desc = s[0] + "<ul><li>" + strings.Join(s[1:], "</li><li>") + "</li></ul>"
+	}
+	return template.HTML(desc)
+}
+
+type NamedIdentifiable interface {
+	Id() int
+	Name() string
+}
+
+func replaceNameDescription[T NamedIdentifiable](s, prefix, suffix string, input map[int]T, mapper func(int) string) string {
+	return replaceDescription(s, prefix, suffix, input, func(t T) string { return t.Name() }, mapper)
+}
+
+func replacHfDescription(s, prefix, suffix string, input map[int]*HistoricalFigure, mapper func(int) string) string {
+	return replaceDescription(s, prefix, suffix, input,
+		func(hf *HistoricalFigure) string {
+			if hf.Race != "" && !hf.Deity && !hf.Force {
+				return fmt.Sprintf("the %s %s", hf.Race, hf.Name())
+			} else {
+				return hf.Name()
+			}
+		}, mapper)
+}
+
+func replaceDescription[T NamedIdentifiable](s, prefix, suffix string, input map[int]T, namer func(T) string, mapper func(int) string) string {
+	r := "(" + prefix + `)([^.]+?)(` + suffix + ")"
+	fmt.Println(">", r)
+	reg := regexp.MustCompile(r)
+	res := reg.FindStringSubmatch(s)
+	if res == nil {
+		return s
+	}
+
+	fmt.Println(strings.Join(res, " / "))
+
+	name := strings.ToLower(res[2])
+	for id, v := range input {
+		if strings.ToLower(namer(v)) == name {
+			return reg.ReplaceAllString(s, res[1]+mapper(id)+" ("+name+")"+res[3])
+		}
+	}
+	return s
+}

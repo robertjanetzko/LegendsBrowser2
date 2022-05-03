@@ -141,6 +141,7 @@ type AdditionalField struct {
 type Overwrites struct {
 	ForceEnum        map[string]bool
 	AdditionalFields map[string][]AdditionalField
+	Relations        map[string]string
 }
 
 func analyze(file string, a *AnalyzeData) error {

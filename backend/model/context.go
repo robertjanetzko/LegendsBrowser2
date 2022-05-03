@@ -191,21 +191,21 @@ func (c *Context) fullIdentity(id int) string {
 
 func (c *Context) danceForm(id int) string {
 	if x, ok := c.World.DanceForms[id]; ok {
-		return fmt.Sprintf(`<a class="artform" href="/danceForm/%d"><i class="fa-solid fa-shoe-prints fa-xs"></i> %s</a>`, id, util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="artform" href="/danceform/%d"><i class="fa-solid fa-shoe-prints fa-xs"></i> %s</a>`, id, util.Title(x.Name()))
 	}
 	return "UNKNOWN DANCE FORM"
 }
 
 func (c *Context) musicalForm(id int) string {
 	if x, ok := c.World.MusicalForms[id]; ok {
-		return fmt.Sprintf(`<a class="artform" href="/musicalForm/%d"><i class="fa-solid fa-music fa-xs"></i> %s</a>`, id, util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="artform" href="/musicalform/%d"><i class="fa-solid fa-music fa-xs"></i> %s</a>`, id, util.Title(x.Name()))
 	}
 	return "UNKNOWN MUSICAL FORM"
 }
 
 func (c *Context) poeticForm(id int) string {
 	if x, ok := c.World.PoeticForms[id]; ok {
-		return fmt.Sprintf(`<a class="artform" href="/poeticForm/%d"><i class="fa-solid fa-comment-dots fa-xs"></i> %s</a>`, id, util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="artform" href="/poeticform/%d"><i class="fa-solid fa-comment-dots fa-xs"></i> %s</a>`, id, util.Title(x.Name()))
 	}
 	return "UNKNOWN POETIC FORM"
 }

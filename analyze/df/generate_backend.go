@@ -130,12 +130,19 @@ func (x *{{ $obj.Name }}) Name() string { return x.Name_ }
 {{- if $obj.SubType }}
 func (x *{{ $obj.Name }}) Type() string { return "{{ $obj.SubType }}" }
 {{- end }}
+{{- if $obj.SubType }}
 func (x *{{ $obj.Name }}) RelatedToEntity(id int) bool { return {{ $obj.RelatedToEntity }} }
 func (x *{{ $obj.Name }}) RelatedToHf(id int) bool { return {{ $obj.RelatedToHf }} }
 func (x *{{ $obj.Name }}) RelatedToArtifact(id int) bool { return {{ $obj.RelatedToArtifact }} }
 func (x *{{ $obj.Name }}) RelatedToSite(id int) bool { return {{ $obj.RelatedToSite }} }
 func (x *{{ $obj.Name }}) RelatedToStructure(siteId, id int) bool { return {{ $obj.RelatedToStructure }} }
 func (x *{{ $obj.Name }}) RelatedToRegion(id int) bool { return {{ $obj.RelatedToRegion }} }
+func (x *{{ $obj.Name }}) RelatedToWorldConstruction(id int) bool { return {{ $obj.RelatedToWorldConstruction }} }
+func (x *{{ $obj.Name }}) RelatedToWrittenContent(id int) bool { return {{ $obj.RelatedToWrittenContent }} }
+func (x *{{ $obj.Name }}) RelatedToDanceForm(id int) bool { return {{ $obj.RelatedToDanceForm }} }
+func (x *{{ $obj.Name }}) RelatedToMusicalForm(id int) bool { return {{ $obj.RelatedToMusicalForm }} }
+func (x *{{ $obj.Name }}) RelatedToPoeticForm(id int) bool { return {{ $obj.RelatedToPoeticForm }} }
+{{- end }}
 
 func (x *{{ $obj.Name }}) CheckFields() {
 	{{- range $field := ($obj.LegendFields "plus") }}
@@ -453,30 +460,49 @@ var artifactRegex, _ = regexp.Compile("(item(_id)?|artifact_id)$")
 var siteRegex, _ = regexp.Compile("(site_id|site)[0-9]?$")
 var structureRegex, _ = regexp.Compile("(structure(_id)?)$")
 var regionRegex, _ = regexp.Compile("(region_id|srid)$")
+var worldConstructionRegex, _ = regexp.Compile("(wcid)$")
+var writtenContentRegex, _ = regexp.Compile("^wc_id$")
+
+var noRegex, _ = regexp.Compile("^XXXXX$")
 
 func (obj Object) RelatedToEntity() string {
-	return obj.Related(entityRegex, "")
+	return obj.Related("entity", entityRegex, "")
 }
 func (obj Object) RelatedToHf() string {
-	return obj.Related(hfRegex, "")
+	return obj.Related("hf", hfRegex, "")
 }
 func (obj Object) RelatedToArtifact() string {
-	return obj.Related(artifactRegex, "")
+	return obj.Related("artifact", artifactRegex, "")
 }
 func (obj Object) RelatedToSite() string {
-	return obj.Related(siteRegex, "")
+	return obj.Related("site", siteRegex, "")
 }
 func (obj Object) RelatedToStructure() string {
-	return obj.Related(structureRegex, "x.RelatedToSite(siteId)")
+	return obj.Related("structure", structureRegex, "x.RelatedToSite(siteId)")
 }
 func (obj Object) RelatedToRegion() string {
-	return obj.Related(regionRegex, "")
+	return obj.Related("region", regionRegex, "")
+}
+func (obj Object) RelatedToWorldConstruction() string {
+	return obj.Related("worldConstruction", worldConstructionRegex, "")
+}
+func (obj Object) RelatedToWrittenContent() string {
+	return obj.Related("writtenContent", writtenContentRegex, "")
+}
+func (obj Object) RelatedToDanceForm() string {
+	return obj.Related("danceForm", noRegex, "")
+}
+func (obj Object) RelatedToMusicalForm() string {
+	return obj.Related("musicalForm", noRegex, "")
+}
+func (obj Object) RelatedToPoeticForm() string {
+	return obj.Related("poeticForm", noRegex, "")
 }
 
-func (obj Object) Related(regex *regexp.Regexp, init string) string {
+func (obj Object) Related(relation string, regex *regexp.Regexp, init string) string {
 	var list []string
 	for n, f := range obj.Fields {
-		if f.Type == "int" && !f.SameField(obj) && regex.MatchString(n) {
+		if f.Type == "int" && !f.SameField(obj) && (relation == f.Related || regex.MatchString(n)) {
 			if !f.Multiple {
 				list = append(list, fmt.Sprintf("x.%s == id", f.Name))
 			} else {

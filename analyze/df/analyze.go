@@ -100,6 +100,7 @@ func CreateMetadata(a *AnalyzeData) (*Metadata, error) {
 							Legend:   legend,
 							Base:     a.Fields[f].Base,
 							Plus:     a.Fields[f].Plus,
+							Related:  a.Overwrites.Relations[fmt.Sprintf("%s.%s", typeNames[k], strcase.ToCamel(fn))],
 						}
 						if ok, elements := isArray(f, fs); ok {
 							el := typeNames[elements]

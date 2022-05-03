@@ -33,6 +33,7 @@ type Field struct {
 	Base        bool
 	Plus        bool
 	EnumValues  *[]string
+	Related     string
 }
 
 func (f Field) Active(plus bool) bool {

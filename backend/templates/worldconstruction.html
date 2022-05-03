@@ -4,9 +4,9 @@
 
 {{define "content"}}
 <h3>{{ title .Name }}</h3>
-{{ .Type_ }} in {{ site .SiteId }}
+<p>{{ .Type }}</p>
+<h5>Events</h5>
 
-<h5 class="mt-3">Events</h5>
 {{ template "events.html" events . }}
 
 <p>{{ json . }}</p>
