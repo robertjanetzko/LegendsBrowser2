@@ -71,6 +71,9 @@ func (w *DfWorld) processEvents() {
 					}
 				}
 			}
+		case *HistoricalEventHfReachSummit:
+			id, _, _ := util.FindInMap(w.MountainPeaks, func(m *MountainPeak) bool { return m.Coords == d.Coords })
+			d.MountainPeakId = id
 		}
 	}
 }
@@ -159,12 +162,15 @@ func (w *DfWorld) addEntitySite(entityId, siteId int) {
 func (w *DfWorld) addRelationshipEvents() {
 	for _, r := range w.HistoricalEventRelationships {
 		w.HistoricalEvents[r.Event] = &HistoricalEvent{
-			Id_:  r.Event,
-			Year: r.Year,
+			Id_:        r.Event,
+			Year:       r.Year,
+			Collection: -1,
+			Seconds72:  -1,
 			Details: &HistoricalEventAddHfHfLink{
 				Hfid:         r.SourceHf,
 				HfidTarget:   r.TargetHf,
 				Relationship: r.Relationship,
+				LinkType:     HistoricalEventAddHfHfLinkLinkType_Unknown,
 			},
 		}
 	}

@@ -65,6 +65,40 @@ func (x *HistoricalEventAddHfHfLink) Html(c *Context) string {
 		return h + " married " + t
 	default:
 		if x.Relationship != HistoricalEventRelationshipRelationship_Unknown {
+			switch x.Relationship {
+			case HistoricalEventRelationshipRelationship_ArtisticBuddy:
+				return h + " and " + t + " became friends due to a shared interest in art" // TODO art detail and occasion
+			case HistoricalEventRelationshipRelationship_AtheleticRival:
+				return h + " and " + t + " developed an athletic rivalry"
+			case HistoricalEventRelationshipRelationship_AthleteBuddy:
+				return h + " and " + t + " became friends over a shared love of athletics"
+			case HistoricalEventRelationshipRelationship_BusinessRival:
+				return h + " and " + t + " developed a business rivalry"
+			case HistoricalEventRelationshipRelationship_ChildhoodFriend:
+				return h + " and " + t + " became childhood friends"
+			case HistoricalEventRelationshipRelationship_FormerLover:
+				return h + " and " + t + " broke up"
+			case HistoricalEventRelationshipRelationship_Grudge:
+				return h + " formed a grudge against " + t
+			case HistoricalEventRelationshipRelationship_JealousObsession:
+				return h + " became infatuated with " + t
+			case HistoricalEventRelationshipRelationship_JealousRelationshipGrudge:
+				return h + " formed a grudge against " + t + " due to the latter's romantic relationship"
+			case HistoricalEventRelationshipRelationship_Lieutenant:
+				return h + " recognized " + t + " as a capable and connected lieutenant with more autonomy to act on plots in the web of intrigue"
+			case HistoricalEventRelationshipRelationship_Lover:
+				return h + " and " + t + " became lovers"
+			case HistoricalEventRelationshipRelationship_PersecutionGrudge:
+				return h + " held a deep hatred of " + t + " due to persecution"
+			case HistoricalEventRelationshipRelationship_ReligiousPersecutionGrudge:
+				return h + " held a deep hatred of " + t + " due to religious persecution"
+			case HistoricalEventRelationshipRelationship_ScholarBuddy:
+				return h + " and " + t + " became friends due to a shared interest in UNKNOWN KNOWLEDGE after a scholarly lecture " // TODO detail and site
+			case HistoricalEventRelationshipRelationship_SupernaturalGrudge:
+				return h + " was bent toward supernatural vengeance upon " + t
+			case HistoricalEventRelationshipRelationship_WarBuddy:
+				return h + " and " + t + " cemented a bond friendship amidst the horror of combat"
+			}
 			return h + " and " + t + " became " + x.Relationship.String() + "s" // TODO Texts
 		}
 		return h + " LINKED TO " + t
@@ -1043,8 +1077,7 @@ func (x *HistoricalEventHfRansomed) Html(c *Context) string {
 }
 
 func (x *HistoricalEventHfReachSummit) Html(c *Context) string {
-	id, _, _ := util.FindInMap(c.World.MountainPeaks, func(m *MountainPeak) bool { return m.Coords == x.Coords })
-	return c.hfList(x.GroupHfid) + util.If(len(x.GroupHfid) > 1, " were", " was") + " the first to reach the summit of " + c.mountain(id) + " which rises above " + c.region(x.SubregionId)
+	return c.hfList(x.GroupHfid) + util.If(len(x.GroupHfid) > 1, " were", " was") + " the first to reach the summit of " + c.mountain(x.MountainPeakId) + " which rises above " + c.region(x.SubregionId)
 }
 
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) Html(c *Context) string {
@@ -2013,8 +2046,8 @@ func (x *HistoricalEventRemoveHfEntityLink) Html(c *Context) string {
 	return hf + " left " + civ
 }
 
-func (x *HistoricalEventRemoveHfHfLink) Html(c *Context) string { // divorced
-	return c.hf(x.Hfid) + " and " + c.hfRelated(x.HfidTarget, x.Hfid) + " broke up"
+func (x *HistoricalEventRemoveHfHfLink) Html(c *Context) string {
+	return c.hf(x.Hfid) + " divorced " + c.hfRelated(x.HfidTarget, x.Hfid)
 }
 
 func (x *HistoricalEventRemoveHfSiteLink) Html(c *Context) string {
