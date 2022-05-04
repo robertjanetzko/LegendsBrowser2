@@ -18,6 +18,7 @@ type HistoricalEventDetails interface {
 	RelatedToDanceForm(int) bool
 	RelatedToMusicalForm(int) bool
 	RelatedToPoeticForm(int) bool
+	RelatedToMountain(int) bool
 	Html(*Context) string
 	Type() string
 }
@@ -65,6 +66,8 @@ func NewEventList(world *DfWorld, obj any) *EventList {
 		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToMusicalForm(x.Id()) })
 	case *PoeticForm:
 		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToPoeticForm(x.Id()) })
+	case *MountainPeak:
+		el.Events = world.EventsMatching(func(d HistoricalEventDetails) bool { return d.RelatedToMountain(x.Id()) })
 	case []*HistoricalEvent:
 		el.Events = x
 	case []int:

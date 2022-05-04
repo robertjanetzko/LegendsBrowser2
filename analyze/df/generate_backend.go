@@ -142,6 +142,7 @@ func (x *{{ $obj.Name }}) RelatedToWrittenContent(id int) bool { return {{ $obj.
 func (x *{{ $obj.Name }}) RelatedToDanceForm(id int) bool { return {{ $obj.RelatedToDanceForm }} }
 func (x *{{ $obj.Name }}) RelatedToMusicalForm(id int) bool { return {{ $obj.RelatedToMusicalForm }} }
 func (x *{{ $obj.Name }}) RelatedToPoeticForm(id int) bool { return {{ $obj.RelatedToPoeticForm }} }
+func (x *{{ $obj.Name }}) RelatedToMountain(id int) bool { return {{ $obj.RelatedToMountain }} }
 {{- end }}
 
 func (x *{{ $obj.Name }}) CheckFields() {
@@ -330,7 +331,7 @@ func (f Field) TypeLine() string {
 	if f.Type == "enum" {
 		t = *f.ElementType
 	}
-	j := fmt.Sprintf("`json:\"%s\" legend:\"%s\"`", strcase.ToLowerCamel(f.Name), f.Legend)
+	j := fmt.Sprintf("`json:\"%s\" legend:\"%s\" related:\"%s\"`", strcase.ToLowerCamel(f.Name), f.Legend, f.Related)
 	return fmt.Sprintf("%s %s%s %s", n, m, t, j)
 }
 
@@ -503,6 +504,9 @@ func (obj Object) RelatedToMusicalForm() string {
 func (obj Object) RelatedToPoeticForm() string {
 	return obj.Related("poeticForm", noRegex, "")
 }
+func (obj Object) RelatedToMountain() string {
+	return obj.Related("mountain", noRegex, "")
+}
 
 func (obj Object) Related(relation string, regex *regexp.Regexp, init string) string {
 	var list []string
@@ -513,6 +517,13 @@ func (obj Object) Related(relation string, regex *regexp.Regexp, init string) st
 			} else {
 				list = append(list, fmt.Sprintf("containsInt(x.%s, id)", f.Name))
 			}
+		}
+	}
+	for _, f := range obj.Additional {
+		if f.Type == "int" && relation == f.Related {
+			list = append(list, fmt.Sprintf("x.%s == id", f.Name))
+		} else if f.Type == "[]int" && relation == f.Related {
+			list = append(list, fmt.Sprintf("containsInt(x.%s, id)", f.Name))
 		}
 	}
 	sort.Strings(list)

@@ -156,9 +156,10 @@ func CreateMetadata(a *AnalyzeData) (*Metadata, error) {
 			if afs, ok := a.Overwrites.AdditionalFields[typeNames[k]]; ok {
 				for _, add := range afs {
 					additional[add.Name] = Field{
-						Name:   add.Name,
-						Type:   add.Type,
-						Legend: "add",
+						Name:    add.Name,
+						Type:    add.Type,
+						Legend:  "add",
+						Related: a.Overwrites.Relations[fmt.Sprintf("%s.%s", typeNames[k], add.Name)],
 					}
 				}
 			}

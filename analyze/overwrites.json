@@ -7,7 +7,8 @@
     "Relations": {
         "HistoricalEventDanceFormCreated.FormId": "danceForm",
         "HistoricalEventMusicalFormCreated.FormId": "musicalForm",
-        "HistoricalEventPoeticFormCreated.FormId": "poeticForm"
+        "HistoricalEventPoeticFormCreated.FormId": "poeticForm",
+        "HistoricalEventHfReachSummit.MountainPeakId": "mountain"
     },
     "AdditionalFields": {
         "DfWorld": [
@@ -78,6 +79,12 @@
             {
                 "Name": "Relationship",
                 "Type": "HistoricalEventRelationshipRelationship"
+            }
+        ],
+        "HistoricalEventHfReachSummit": [
+            {
+                "Name": "MountainPeakId",
+                "Type": "int"
             }
         ],
         "HistoricalEventCollectionAbduction": [

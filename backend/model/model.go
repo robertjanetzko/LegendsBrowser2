@@ -1115,22 +1115,22 @@ func InitSameFields() {
 }
 
 type Artifact struct {
-	AbsTileX         int    `json:"absTileX" legend:"base"`         // abs_tile_x
-	AbsTileY         int    `json:"absTileY" legend:"base"`         // abs_tile_y
-	AbsTileZ         int    `json:"absTileZ" legend:"base"`         // abs_tile_z
-	HolderHfid       int    `json:"holderHfid" legend:"base"`       // holder_hfid
-	Id_              int    `json:"id" legend:"both"`               // id
-	Item             *Item  `json:"item" legend:"base"`             // item
-	ItemDescription  string `json:"itemDescription" legend:"plus"`  // item_description
-	ItemSubtype      string `json:"itemSubtype" legend:"plus"`      // item_subtype
-	ItemType         string `json:"itemType" legend:"plus"`         // item_type
-	Mat              string `json:"mat" legend:"plus"`              // mat
-	Name_            string `json:"name" legend:"base"`             // name
-	PageCount        int    `json:"pageCount" legend:"plus"`        // page_count
-	SiteId           int    `json:"siteId" legend:"base"`           // site_id
-	StructureLocalId int    `json:"structureLocalId" legend:"base"` // structure_local_id
-	SubregionId      int    `json:"subregionId" legend:"base"`      // subregion_id
-	Writing          int    `json:"writing" legend:"plus"`          // writing
+	AbsTileX         int    `json:"absTileX" legend:"base" related:""`         // abs_tile_x
+	AbsTileY         int    `json:"absTileY" legend:"base" related:""`         // abs_tile_y
+	AbsTileZ         int    `json:"absTileZ" legend:"base" related:""`         // abs_tile_z
+	HolderHfid       int    `json:"holderHfid" legend:"base" related:""`       // holder_hfid
+	Id_              int    `json:"id" legend:"both" related:""`               // id
+	Item             *Item  `json:"item" legend:"base" related:""`             // item
+	ItemDescription  string `json:"itemDescription" legend:"plus" related:""`  // item_description
+	ItemSubtype      string `json:"itemSubtype" legend:"plus" related:""`      // item_subtype
+	ItemType         string `json:"itemType" legend:"plus" related:""`         // item_type
+	Mat              string `json:"mat" legend:"plus" related:""`              // mat
+	Name_            string `json:"name" legend:"base" related:""`             // name
+	PageCount        int    `json:"pageCount" legend:"plus" related:""`        // page_count
+	SiteId           int    `json:"siteId" legend:"base" related:""`           // site_id
+	StructureLocalId int    `json:"structureLocalId" legend:"base" related:""` // structure_local_id
+	SubregionId      int    `json:"subregionId" legend:"base" related:""`      // subregion_id
+	Writing          int    `json:"writing" legend:"plus" related:""`          // writing
 }
 
 func NewArtifact() *Artifact {
@@ -1238,125 +1238,125 @@ func (x *Artifact) MarshalJSON() ([]byte, error) {
 }
 
 type Creature struct {
-	AllCastesAlive                    bool   `json:"allCastesAlive" legend:"plus"`                    // all_castes_alive
-	ArtificialHiveable                bool   `json:"artificialHiveable" legend:"plus"`                // artificial_hiveable
-	BiomeDesertBadland                bool   `json:"biomeDesertBadland" legend:"plus"`                // biome_desert_badland
-	BiomeDesertRock                   bool   `json:"biomeDesertRock" legend:"plus"`                   // biome_desert_rock
-	BiomeDesertSand                   bool   `json:"biomeDesertSand" legend:"plus"`                   // biome_desert_sand
-	BiomeForestTaiga                  bool   `json:"biomeForestTaiga" legend:"plus"`                  // biome_forest_taiga
-	BiomeForestTemperateBroadleaf     bool   `json:"biomeForestTemperateBroadleaf" legend:"plus"`     // biome_forest_temperate_broadleaf
-	BiomeForestTemperateConifer       bool   `json:"biomeForestTemperateConifer" legend:"plus"`       // biome_forest_temperate_conifer
-	BiomeForestTropicalConifer        bool   `json:"biomeForestTropicalConifer" legend:"plus"`        // biome_forest_tropical_conifer
-	BiomeForestTropicalDryBroadleaf   bool   `json:"biomeForestTropicalDryBroadleaf" legend:"plus"`   // biome_forest_tropical_dry_broadleaf
-	BiomeForestTropicalMoistBroadleaf bool   `json:"biomeForestTropicalMoistBroadleaf" legend:"plus"` // biome_forest_tropical_moist_broadleaf
-	BiomeGlacier                      bool   `json:"biomeGlacier" legend:"plus"`                      // biome_glacier
-	BiomeGrasslandTemperate           bool   `json:"biomeGrasslandTemperate" legend:"plus"`           // biome_grassland_temperate
-	BiomeGrasslandTropical            bool   `json:"biomeGrasslandTropical" legend:"plus"`            // biome_grassland_tropical
-	BiomeLakeTemperateBrackishwater   bool   `json:"biomeLakeTemperateBrackishwater" legend:"plus"`   // biome_lake_temperate_brackishwater
-	BiomeLakeTemperateFreshwater      bool   `json:"biomeLakeTemperateFreshwater" legend:"plus"`      // biome_lake_temperate_freshwater
-	BiomeLakeTemperateSaltwater       bool   `json:"biomeLakeTemperateSaltwater" legend:"plus"`       // biome_lake_temperate_saltwater
-	BiomeLakeTropicalBrackishwater    bool   `json:"biomeLakeTropicalBrackishwater" legend:"plus"`    // biome_lake_tropical_brackishwater
-	BiomeLakeTropicalFreshwater       bool   `json:"biomeLakeTropicalFreshwater" legend:"plus"`       // biome_lake_tropical_freshwater
-	BiomeLakeTropicalSaltwater        bool   `json:"biomeLakeTropicalSaltwater" legend:"plus"`        // biome_lake_tropical_saltwater
-	BiomeMarshTemperateFreshwater     bool   `json:"biomeMarshTemperateFreshwater" legend:"plus"`     // biome_marsh_temperate_freshwater
-	BiomeMarshTemperateSaltwater      bool   `json:"biomeMarshTemperateSaltwater" legend:"plus"`      // biome_marsh_temperate_saltwater
-	BiomeMarshTropicalFreshwater      bool   `json:"biomeMarshTropicalFreshwater" legend:"plus"`      // biome_marsh_tropical_freshwater
-	BiomeMarshTropicalSaltwater       bool   `json:"biomeMarshTropicalSaltwater" legend:"plus"`       // biome_marsh_tropical_saltwater
-	BiomeMountain                     bool   `json:"biomeMountain" legend:"plus"`                     // biome_mountain
-	BiomeOceanArctic                  bool   `json:"biomeOceanArctic" legend:"plus"`                  // biome_ocean_arctic
-	BiomeOceanTemperate               bool   `json:"biomeOceanTemperate" legend:"plus"`               // biome_ocean_temperate
-	BiomeOceanTropical                bool   `json:"biomeOceanTropical" legend:"plus"`                // biome_ocean_tropical
-	BiomePoolTemperateBrackishwater   bool   `json:"biomePoolTemperateBrackishwater" legend:"plus"`   // biome_pool_temperate_brackishwater
-	BiomePoolTemperateFreshwater      bool   `json:"biomePoolTemperateFreshwater" legend:"plus"`      // biome_pool_temperate_freshwater
-	BiomePoolTemperateSaltwater       bool   `json:"biomePoolTemperateSaltwater" legend:"plus"`       // biome_pool_temperate_saltwater
-	BiomePoolTropicalBrackishwater    bool   `json:"biomePoolTropicalBrackishwater" legend:"plus"`    // biome_pool_tropical_brackishwater
-	BiomePoolTropicalFreshwater       bool   `json:"biomePoolTropicalFreshwater" legend:"plus"`       // biome_pool_tropical_freshwater
-	BiomePoolTropicalSaltwater        bool   `json:"biomePoolTropicalSaltwater" legend:"plus"`        // biome_pool_tropical_saltwater
-	BiomeRiverTemperateBrackishwater  bool   `json:"biomeRiverTemperateBrackishwater" legend:"plus"`  // biome_river_temperate_brackishwater
-	BiomeRiverTemperateFreshwater     bool   `json:"biomeRiverTemperateFreshwater" legend:"plus"`     // biome_river_temperate_freshwater
-	BiomeRiverTemperateSaltwater      bool   `json:"biomeRiverTemperateSaltwater" legend:"plus"`      // biome_river_temperate_saltwater
-	BiomeRiverTropicalBrackishwater   bool   `json:"biomeRiverTropicalBrackishwater" legend:"plus"`   // biome_river_tropical_brackishwater
-	BiomeRiverTropicalFreshwater      bool   `json:"biomeRiverTropicalFreshwater" legend:"plus"`      // biome_river_tropical_freshwater
-	BiomeRiverTropicalSaltwater       bool   `json:"biomeRiverTropicalSaltwater" legend:"plus"`       // biome_river_tropical_saltwater
-	BiomeSavannaTemperate             bool   `json:"biomeSavannaTemperate" legend:"plus"`             // biome_savanna_temperate
-	BiomeSavannaTropical              bool   `json:"biomeSavannaTropical" legend:"plus"`              // biome_savanna_tropical
-	BiomeShrublandTemperate           bool   `json:"biomeShrublandTemperate" legend:"plus"`           // biome_shrubland_temperate
-	BiomeShrublandTropical            bool   `json:"biomeShrublandTropical" legend:"plus"`            // biome_shrubland_tropical
-	BiomeSubterraneanChasm            bool   `json:"biomeSubterraneanChasm" legend:"plus"`            // biome_subterranean_chasm
-	BiomeSubterraneanLava             bool   `json:"biomeSubterraneanLava" legend:"plus"`             // biome_subterranean_lava
-	BiomeSubterraneanWater            bool   `json:"biomeSubterraneanWater" legend:"plus"`            // biome_subterranean_water
-	BiomeSwampMangrove                bool   `json:"biomeSwampMangrove" legend:"plus"`                // biome_swamp_mangrove
-	BiomeSwampTemperateFreshwater     bool   `json:"biomeSwampTemperateFreshwater" legend:"plus"`     // biome_swamp_temperate_freshwater
-	BiomeSwampTemperateSaltwater      bool   `json:"biomeSwampTemperateSaltwater" legend:"plus"`      // biome_swamp_temperate_saltwater
-	BiomeSwampTropicalFreshwater      bool   `json:"biomeSwampTropicalFreshwater" legend:"plus"`      // biome_swamp_tropical_freshwater
-	BiomeSwampTropicalSaltwater       bool   `json:"biomeSwampTropicalSaltwater" legend:"plus"`       // biome_swamp_tropical_saltwater
-	BiomeTundra                       bool   `json:"biomeTundra" legend:"plus"`                       // biome_tundra
-	CreatureId                        string `json:"creatureId" legend:"plus"`                        // creature_id
-	DoesNotExist                      bool   `json:"doesNotExist" legend:"plus"`                      // does_not_exist
-	Equipment                         bool   `json:"equipment" legend:"plus"`                         // equipment
-	EquipmentWagon                    bool   `json:"equipmentWagon" legend:"plus"`                    // equipment_wagon
-	Evil                              bool   `json:"evil" legend:"plus"`                              // evil
-	Fanciful                          bool   `json:"fanciful" legend:"plus"`                          // fanciful
-	Generated                         bool   `json:"generated" legend:"plus"`                         // generated
-	Good                              bool   `json:"good" legend:"plus"`                              // good
-	HasAnyBenign                      bool   `json:"hasAnyBenign" legend:"plus"`                      // has_any_benign
-	HasAnyCanSwim                     bool   `json:"hasAnyCanSwim" legend:"plus"`                     // has_any_can_swim
-	HasAnyCannotBreatheAir            bool   `json:"hasAnyCannotBreatheAir" legend:"plus"`            // has_any_cannot_breathe_air
-	HasAnyCannotBreatheWater          bool   `json:"hasAnyCannotBreatheWater" legend:"plus"`          // has_any_cannot_breathe_water
-	HasAnyCarnivore                   bool   `json:"hasAnyCarnivore" legend:"plus"`                   // has_any_carnivore
-	HasAnyCommonDomestic              bool   `json:"hasAnyCommonDomestic" legend:"plus"`              // has_any_common_domestic
-	HasAnyCuriousBeast                bool   `json:"hasAnyCuriousBeast" legend:"plus"`                // has_any_curious_beast
-	HasAnyDemon                       bool   `json:"hasAnyDemon" legend:"plus"`                       // has_any_demon
-	HasAnyFeatureBeast                bool   `json:"hasAnyFeatureBeast" legend:"plus"`                // has_any_feature_beast
-	HasAnyFlier                       bool   `json:"hasAnyFlier" legend:"plus"`                       // has_any_flier
-	HasAnyFlyRaceGait                 bool   `json:"hasAnyFlyRaceGait" legend:"plus"`                 // has_any_fly_race_gait
-	HasAnyGrasp                       bool   `json:"hasAnyGrasp" legend:"plus"`                       // has_any_grasp
-	HasAnyGrazer                      bool   `json:"hasAnyGrazer" legend:"plus"`                      // has_any_grazer
-	HasAnyHasBlood                    bool   `json:"hasAnyHasBlood" legend:"plus"`                    // has_any_has_blood
-	HasAnyImmobile                    bool   `json:"hasAnyImmobile" legend:"plus"`                    // has_any_immobile
-	HasAnyIntelligentLearns           bool   `json:"hasAnyIntelligentLearns" legend:"plus"`           // has_any_intelligent_learns
-	HasAnyIntelligentSpeaks           bool   `json:"hasAnyIntelligentSpeaks" legend:"plus"`           // has_any_intelligent_speaks
-	HasAnyLargePredator               bool   `json:"hasAnyLargePredator" legend:"plus"`               // has_any_large_predator
-	HasAnyLocalPopsControllable       bool   `json:"hasAnyLocalPopsControllable" legend:"plus"`       // has_any_local_pops_controllable
-	HasAnyLocalPopsProduceHeroes      bool   `json:"hasAnyLocalPopsProduceHeroes" legend:"plus"`      // has_any_local_pops_produce_heroes
-	HasAnyMegabeast                   bool   `json:"hasAnyMegabeast" legend:"plus"`                   // has_any_megabeast
-	HasAnyMischievous                 bool   `json:"hasAnyMischievous" legend:"plus"`                 // has_any_mischievous
-	HasAnyNaturalAnimal               bool   `json:"hasAnyNaturalAnimal" legend:"plus"`               // has_any_natural_animal
-	HasAnyNightCreature               bool   `json:"hasAnyNightCreature" legend:"plus"`               // has_any_night_creature
-	HasAnyNightCreatureBogeyman       bool   `json:"hasAnyNightCreatureBogeyman" legend:"plus"`       // has_any_night_creature_bogeyman
-	HasAnyNightCreatureHunter         bool   `json:"hasAnyNightCreatureHunter" legend:"plus"`         // has_any_night_creature_hunter
-	HasAnyNightCreatureNightmare      bool   `json:"hasAnyNightCreatureNightmare" legend:"plus"`      // has_any_night_creature_nightmare
-	HasAnyNotFireimmune               bool   `json:"hasAnyNotFireimmune" legend:"plus"`               // has_any_not_fireimmune
-	HasAnyNotLiving                   bool   `json:"hasAnyNotLiving" legend:"plus"`                   // has_any_not_living
-	HasAnyOutsiderControllable        bool   `json:"hasAnyOutsiderControllable" legend:"plus"`        // has_any_outsider_controllable
-	HasAnyRaceGait                    bool   `json:"hasAnyRaceGait" legend:"plus"`                    // has_any_race_gait
-	HasAnySemimegabeast               bool   `json:"hasAnySemimegabeast" legend:"plus"`               // has_any_semimegabeast
-	HasAnySlowLearner                 bool   `json:"hasAnySlowLearner" legend:"plus"`                 // has_any_slow_learner
-	HasAnySupernatural                bool   `json:"hasAnySupernatural" legend:"plus"`                // has_any_supernatural
-	HasAnyTitan                       bool   `json:"hasAnyTitan" legend:"plus"`                       // has_any_titan
-	HasAnyUniqueDemon                 bool   `json:"hasAnyUniqueDemon" legend:"plus"`                 // has_any_unique_demon
-	HasAnyUtterances                  bool   `json:"hasAnyUtterances" legend:"plus"`                  // has_any_utterances
-	HasAnyVerminHateable              bool   `json:"hasAnyVerminHateable" legend:"plus"`              // has_any_vermin_hateable
-	HasAnyVerminMicro                 bool   `json:"hasAnyVerminMicro" legend:"plus"`                 // has_any_vermin_micro
-	HasFemale                         bool   `json:"hasFemale" legend:"plus"`                         // has_female
-	HasMale                           bool   `json:"hasMale" legend:"plus"`                           // has_male
-	LargeRoaming                      bool   `json:"largeRoaming" legend:"plus"`                      // large_roaming
-	LooseClusters                     bool   `json:"looseClusters" legend:"plus"`                     // loose_clusters
-	MatesToBreed                      bool   `json:"matesToBreed" legend:"plus"`                      // mates_to_breed
-	Mundane                           bool   `json:"mundane" legend:"plus"`                           // mundane
-	NamePlural                        string `json:"namePlural" legend:"plus"`                        // name_plural
-	NameSingular                      string `json:"nameSingular" legend:"plus"`                      // name_singular
-	OccursAsEntityRace                bool   `json:"occursAsEntityRace" legend:"plus"`                // occurs_as_entity_race
-	Savage                            bool   `json:"savage" legend:"plus"`                            // savage
-	SmallRace                         bool   `json:"smallRace" legend:"plus"`                         // small_race
-	TwoGenders                        bool   `json:"twoGenders" legend:"plus"`                        // two_genders
-	Ubiquitous                        bool   `json:"ubiquitous" legend:"plus"`                        // ubiquitous
-	VerminEater                       bool   `json:"verminEater" legend:"plus"`                       // vermin_eater
-	VerminFish                        bool   `json:"verminFish" legend:"plus"`                        // vermin_fish
-	VerminGrounder                    bool   `json:"verminGrounder" legend:"plus"`                    // vermin_grounder
-	VerminRotter                      bool   `json:"verminRotter" legend:"plus"`                      // vermin_rotter
-	VerminSoil                        bool   `json:"verminSoil" legend:"plus"`                        // vermin_soil
-	VerminSoilColony                  bool   `json:"verminSoilColony" legend:"plus"`                  // vermin_soil_colony
+	AllCastesAlive                    bool   `json:"allCastesAlive" legend:"plus" related:""`                    // all_castes_alive
+	ArtificialHiveable                bool   `json:"artificialHiveable" legend:"plus" related:""`                // artificial_hiveable
+	BiomeDesertBadland                bool   `json:"biomeDesertBadland" legend:"plus" related:""`                // biome_desert_badland
+	BiomeDesertRock                   bool   `json:"biomeDesertRock" legend:"plus" related:""`                   // biome_desert_rock
+	BiomeDesertSand                   bool   `json:"biomeDesertSand" legend:"plus" related:""`                   // biome_desert_sand
+	BiomeForestTaiga                  bool   `json:"biomeForestTaiga" legend:"plus" related:""`                  // biome_forest_taiga
+	BiomeForestTemperateBroadleaf     bool   `json:"biomeForestTemperateBroadleaf" legend:"plus" related:""`     // biome_forest_temperate_broadleaf
+	BiomeForestTemperateConifer       bool   `json:"biomeForestTemperateConifer" legend:"plus" related:""`       // biome_forest_temperate_conifer
+	BiomeForestTropicalConifer        bool   `json:"biomeForestTropicalConifer" legend:"plus" related:""`        // biome_forest_tropical_conifer
+	BiomeForestTropicalDryBroadleaf   bool   `json:"biomeForestTropicalDryBroadleaf" legend:"plus" related:""`   // biome_forest_tropical_dry_broadleaf
+	BiomeForestTropicalMoistBroadleaf bool   `json:"biomeForestTropicalMoistBroadleaf" legend:"plus" related:""` // biome_forest_tropical_moist_broadleaf
+	BiomeGlacier                      bool   `json:"biomeGlacier" legend:"plus" related:""`                      // biome_glacier
+	BiomeGrasslandTemperate           bool   `json:"biomeGrasslandTemperate" legend:"plus" related:""`           // biome_grassland_temperate
+	BiomeGrasslandTropical            bool   `json:"biomeGrasslandTropical" legend:"plus" related:""`            // biome_grassland_tropical
+	BiomeLakeTemperateBrackishwater   bool   `json:"biomeLakeTemperateBrackishwater" legend:"plus" related:""`   // biome_lake_temperate_brackishwater
+	BiomeLakeTemperateFreshwater      bool   `json:"biomeLakeTemperateFreshwater" legend:"plus" related:""`      // biome_lake_temperate_freshwater
+	BiomeLakeTemperateSaltwater       bool   `json:"biomeLakeTemperateSaltwater" legend:"plus" related:""`       // biome_lake_temperate_saltwater
+	BiomeLakeTropicalBrackishwater    bool   `json:"biomeLakeTropicalBrackishwater" legend:"plus" related:""`    // biome_lake_tropical_brackishwater
+	BiomeLakeTropicalFreshwater       bool   `json:"biomeLakeTropicalFreshwater" legend:"plus" related:""`       // biome_lake_tropical_freshwater
+	BiomeLakeTropicalSaltwater        bool   `json:"biomeLakeTropicalSaltwater" legend:"plus" related:""`        // biome_lake_tropical_saltwater
+	BiomeMarshTemperateFreshwater     bool   `json:"biomeMarshTemperateFreshwater" legend:"plus" related:""`     // biome_marsh_temperate_freshwater
+	BiomeMarshTemperateSaltwater      bool   `json:"biomeMarshTemperateSaltwater" legend:"plus" related:""`      // biome_marsh_temperate_saltwater
+	BiomeMarshTropicalFreshwater      bool   `json:"biomeMarshTropicalFreshwater" legend:"plus" related:""`      // biome_marsh_tropical_freshwater
+	BiomeMarshTropicalSaltwater       bool   `json:"biomeMarshTropicalSaltwater" legend:"plus" related:""`       // biome_marsh_tropical_saltwater
+	BiomeMountain                     bool   `json:"biomeMountain" legend:"plus" related:""`                     // biome_mountain
+	BiomeOceanArctic                  bool   `json:"biomeOceanArctic" legend:"plus" related:""`                  // biome_ocean_arctic
+	BiomeOceanTemperate               bool   `json:"biomeOceanTemperate" legend:"plus" related:""`               // biome_ocean_temperate
+	BiomeOceanTropical                bool   `json:"biomeOceanTropical" legend:"plus" related:""`                // biome_ocean_tropical
+	BiomePoolTemperateBrackishwater   bool   `json:"biomePoolTemperateBrackishwater" legend:"plus" related:""`   // biome_pool_temperate_brackishwater
+	BiomePoolTemperateFreshwater      bool   `json:"biomePoolTemperateFreshwater" legend:"plus" related:""`      // biome_pool_temperate_freshwater
+	BiomePoolTemperateSaltwater       bool   `json:"biomePoolTemperateSaltwater" legend:"plus" related:""`       // biome_pool_temperate_saltwater
+	BiomePoolTropicalBrackishwater    bool   `json:"biomePoolTropicalBrackishwater" legend:"plus" related:""`    // biome_pool_tropical_brackishwater
+	BiomePoolTropicalFreshwater       bool   `json:"biomePoolTropicalFreshwater" legend:"plus" related:""`       // biome_pool_tropical_freshwater
+	BiomePoolTropicalSaltwater        bool   `json:"biomePoolTropicalSaltwater" legend:"plus" related:""`        // biome_pool_tropical_saltwater
+	BiomeRiverTemperateBrackishwater  bool   `json:"biomeRiverTemperateBrackishwater" legend:"plus" related:""`  // biome_river_temperate_brackishwater
+	BiomeRiverTemperateFreshwater     bool   `json:"biomeRiverTemperateFreshwater" legend:"plus" related:""`     // biome_river_temperate_freshwater
+	BiomeRiverTemperateSaltwater      bool   `json:"biomeRiverTemperateSaltwater" legend:"plus" related:""`      // biome_river_temperate_saltwater
+	BiomeRiverTropicalBrackishwater   bool   `json:"biomeRiverTropicalBrackishwater" legend:"plus" related:""`   // biome_river_tropical_brackishwater
+	BiomeRiverTropicalFreshwater      bool   `json:"biomeRiverTropicalFreshwater" legend:"plus" related:""`      // biome_river_tropical_freshwater
+	BiomeRiverTropicalSaltwater       bool   `json:"biomeRiverTropicalSaltwater" legend:"plus" related:""`       // biome_river_tropical_saltwater
+	BiomeSavannaTemperate             bool   `json:"biomeSavannaTemperate" legend:"plus" related:""`             // biome_savanna_temperate
+	BiomeSavannaTropical              bool   `json:"biomeSavannaTropical" legend:"plus" related:""`              // biome_savanna_tropical
+	BiomeShrublandTemperate           bool   `json:"biomeShrublandTemperate" legend:"plus" related:""`           // biome_shrubland_temperate
+	BiomeShrublandTropical            bool   `json:"biomeShrublandTropical" legend:"plus" related:""`            // biome_shrubland_tropical
+	BiomeSubterraneanChasm            bool   `json:"biomeSubterraneanChasm" legend:"plus" related:""`            // biome_subterranean_chasm
+	BiomeSubterraneanLava             bool   `json:"biomeSubterraneanLava" legend:"plus" related:""`             // biome_subterranean_lava
+	BiomeSubterraneanWater            bool   `json:"biomeSubterraneanWater" legend:"plus" related:""`            // biome_subterranean_water
+	BiomeSwampMangrove                bool   `json:"biomeSwampMangrove" legend:"plus" related:""`                // biome_swamp_mangrove
+	BiomeSwampTemperateFreshwater     bool   `json:"biomeSwampTemperateFreshwater" legend:"plus" related:""`     // biome_swamp_temperate_freshwater
+	BiomeSwampTemperateSaltwater      bool   `json:"biomeSwampTemperateSaltwater" legend:"plus" related:""`      // biome_swamp_temperate_saltwater
+	BiomeSwampTropicalFreshwater      bool   `json:"biomeSwampTropicalFreshwater" legend:"plus" related:""`      // biome_swamp_tropical_freshwater
+	BiomeSwampTropicalSaltwater       bool   `json:"biomeSwampTropicalSaltwater" legend:"plus" related:""`       // biome_swamp_tropical_saltwater
+	BiomeTundra                       bool   `json:"biomeTundra" legend:"plus" related:""`                       // biome_tundra
+	CreatureId                        string `json:"creatureId" legend:"plus" related:""`                        // creature_id
+	DoesNotExist                      bool   `json:"doesNotExist" legend:"plus" related:""`                      // does_not_exist
+	Equipment                         bool   `json:"equipment" legend:"plus" related:""`                         // equipment
+	EquipmentWagon                    bool   `json:"equipmentWagon" legend:"plus" related:""`                    // equipment_wagon
+	Evil                              bool   `json:"evil" legend:"plus" related:""`                              // evil
+	Fanciful                          bool   `json:"fanciful" legend:"plus" related:""`                          // fanciful
+	Generated                         bool   `json:"generated" legend:"plus" related:""`                         // generated
+	Good                              bool   `json:"good" legend:"plus" related:""`                              // good
+	HasAnyBenign                      bool   `json:"hasAnyBenign" legend:"plus" related:""`                      // has_any_benign
+	HasAnyCanSwim                     bool   `json:"hasAnyCanSwim" legend:"plus" related:""`                     // has_any_can_swim
+	HasAnyCannotBreatheAir            bool   `json:"hasAnyCannotBreatheAir" legend:"plus" related:""`            // has_any_cannot_breathe_air
+	HasAnyCannotBreatheWater          bool   `json:"hasAnyCannotBreatheWater" legend:"plus" related:""`          // has_any_cannot_breathe_water
+	HasAnyCarnivore                   bool   `json:"hasAnyCarnivore" legend:"plus" related:""`                   // has_any_carnivore
+	HasAnyCommonDomestic              bool   `json:"hasAnyCommonDomestic" legend:"plus" related:""`              // has_any_common_domestic
+	HasAnyCuriousBeast                bool   `json:"hasAnyCuriousBeast" legend:"plus" related:""`                // has_any_curious_beast
+	HasAnyDemon                       bool   `json:"hasAnyDemon" legend:"plus" related:""`                       // has_any_demon
+	HasAnyFeatureBeast                bool   `json:"hasAnyFeatureBeast" legend:"plus" related:""`                // has_any_feature_beast
+	HasAnyFlier                       bool   `json:"hasAnyFlier" legend:"plus" related:""`                       // has_any_flier
+	HasAnyFlyRaceGait                 bool   `json:"hasAnyFlyRaceGait" legend:"plus" related:""`                 // has_any_fly_race_gait
+	HasAnyGrasp                       bool   `json:"hasAnyGrasp" legend:"plus" related:""`                       // has_any_grasp
+	HasAnyGrazer                      bool   `json:"hasAnyGrazer" legend:"plus" related:""`                      // has_any_grazer
+	HasAnyHasBlood                    bool   `json:"hasAnyHasBlood" legend:"plus" related:""`                    // has_any_has_blood
+	HasAnyImmobile                    bool   `json:"hasAnyImmobile" legend:"plus" related:""`                    // has_any_immobile
+	HasAnyIntelligentLearns           bool   `json:"hasAnyIntelligentLearns" legend:"plus" related:""`           // has_any_intelligent_learns
+	HasAnyIntelligentSpeaks           bool   `json:"hasAnyIntelligentSpeaks" legend:"plus" related:""`           // has_any_intelligent_speaks
+	HasAnyLargePredator               bool   `json:"hasAnyLargePredator" legend:"plus" related:""`               // has_any_large_predator
+	HasAnyLocalPopsControllable       bool   `json:"hasAnyLocalPopsControllable" legend:"plus" related:""`       // has_any_local_pops_controllable
+	HasAnyLocalPopsProduceHeroes      bool   `json:"hasAnyLocalPopsProduceHeroes" legend:"plus" related:""`      // has_any_local_pops_produce_heroes
+	HasAnyMegabeast                   bool   `json:"hasAnyMegabeast" legend:"plus" related:""`                   // has_any_megabeast
+	HasAnyMischievous                 bool   `json:"hasAnyMischievous" legend:"plus" related:""`                 // has_any_mischievous
+	HasAnyNaturalAnimal               bool   `json:"hasAnyNaturalAnimal" legend:"plus" related:""`               // has_any_natural_animal
+	HasAnyNightCreature               bool   `json:"hasAnyNightCreature" legend:"plus" related:""`               // has_any_night_creature
+	HasAnyNightCreatureBogeyman       bool   `json:"hasAnyNightCreatureBogeyman" legend:"plus" related:""`       // has_any_night_creature_bogeyman
+	HasAnyNightCreatureHunter         bool   `json:"hasAnyNightCreatureHunter" legend:"plus" related:""`         // has_any_night_creature_hunter
+	HasAnyNightCreatureNightmare      bool   `json:"hasAnyNightCreatureNightmare" legend:"plus" related:""`      // has_any_night_creature_nightmare
+	HasAnyNotFireimmune               bool   `json:"hasAnyNotFireimmune" legend:"plus" related:""`               // has_any_not_fireimmune
+	HasAnyNotLiving                   bool   `json:"hasAnyNotLiving" legend:"plus" related:""`                   // has_any_not_living
+	HasAnyOutsiderControllable        bool   `json:"hasAnyOutsiderControllable" legend:"plus" related:""`        // has_any_outsider_controllable
+	HasAnyRaceGait                    bool   `json:"hasAnyRaceGait" legend:"plus" related:""`                    // has_any_race_gait
+	HasAnySemimegabeast               bool   `json:"hasAnySemimegabeast" legend:"plus" related:""`               // has_any_semimegabeast
+	HasAnySlowLearner                 bool   `json:"hasAnySlowLearner" legend:"plus" related:""`                 // has_any_slow_learner
+	HasAnySupernatural                bool   `json:"hasAnySupernatural" legend:"plus" related:""`                // has_any_supernatural
+	HasAnyTitan                       bool   `json:"hasAnyTitan" legend:"plus" related:""`                       // has_any_titan
+	HasAnyUniqueDemon                 bool   `json:"hasAnyUniqueDemon" legend:"plus" related:""`                 // has_any_unique_demon
+	HasAnyUtterances                  bool   `json:"hasAnyUtterances" legend:"plus" related:""`                  // has_any_utterances
+	HasAnyVerminHateable              bool   `json:"hasAnyVerminHateable" legend:"plus" related:""`              // has_any_vermin_hateable
+	HasAnyVerminMicro                 bool   `json:"hasAnyVerminMicro" legend:"plus" related:""`                 // has_any_vermin_micro
+	HasFemale                         bool   `json:"hasFemale" legend:"plus" related:""`                         // has_female
+	HasMale                           bool   `json:"hasMale" legend:"plus" related:""`                           // has_male
+	LargeRoaming                      bool   `json:"largeRoaming" legend:"plus" related:""`                      // large_roaming
+	LooseClusters                     bool   `json:"looseClusters" legend:"plus" related:""`                     // loose_clusters
+	MatesToBreed                      bool   `json:"matesToBreed" legend:"plus" related:""`                      // mates_to_breed
+	Mundane                           bool   `json:"mundane" legend:"plus" related:""`                           // mundane
+	NamePlural                        string `json:"namePlural" legend:"plus" related:""`                        // name_plural
+	NameSingular                      string `json:"nameSingular" legend:"plus" related:""`                      // name_singular
+	OccursAsEntityRace                bool   `json:"occursAsEntityRace" legend:"plus" related:""`                // occurs_as_entity_race
+	Savage                            bool   `json:"savage" legend:"plus" related:""`                            // savage
+	SmallRace                         bool   `json:"smallRace" legend:"plus" related:""`                         // small_race
+	TwoGenders                        bool   `json:"twoGenders" legend:"plus" related:""`                        // two_genders
+	Ubiquitous                        bool   `json:"ubiquitous" legend:"plus" related:""`                        // ubiquitous
+	VerminEater                       bool   `json:"verminEater" legend:"plus" related:""`                       // vermin_eater
+	VerminFish                        bool   `json:"verminFish" legend:"plus" related:""`                        // vermin_fish
+	VerminGrounder                    bool   `json:"verminGrounder" legend:"plus" related:""`                    // vermin_grounder
+	VerminRotter                      bool   `json:"verminRotter" legend:"plus" related:""`                      // vermin_rotter
+	VerminSoil                        bool   `json:"verminSoil" legend:"plus" related:""`                        // vermin_soil
+	VerminSoilColony                  bool   `json:"verminSoilColony" legend:"plus" related:""`                  // vermin_soil_colony
 }
 
 func NewCreature() *Creature {
@@ -1491,9 +1491,9 @@ func (x *Creature) MarshalJSON() ([]byte, error) {
 }
 
 type DanceForm struct {
-	Description string `json:"description" legend:"base"` // description
-	Id_         int    `json:"id" legend:"both"`          // id
-	Name_       string `json:"name" legend:"plus"`        // name
+	Description string `json:"description" legend:"base" related:""` // description
+	Id_         int    `json:"id" legend:"both" related:""`          // id
+	Name_       string `json:"name" legend:"plus" related:""`        // name
 }
 
 func NewDanceForm() *DanceForm {
@@ -1519,37 +1519,37 @@ func (x *DanceForm) MarshalJSON() ([]byte, error) {
 }
 
 type DfWorld struct {
-	Altname                                string                                   `json:"altname" legend:"plus"`                                // altname
-	Artifacts                              map[int]*Artifact                        `json:"artifacts" legend:"both"`                              // artifacts
-	CreatureRaw                            []*Creature                              `json:"creatureRaw" legend:"plus"`                            // creature_raw
-	DanceForms                             map[int]*DanceForm                       `json:"danceForms" legend:"both"`                             // dance_forms
-	Entities                               map[int]*Entity                          `json:"entities" legend:"both"`                               // entities
-	EntityPopulations                      map[int]*EntityPopulation                `json:"entityPopulations" legend:"both"`                      // entity_populations
-	HistoricalEras                         []*HistoricalEra                         `json:"historicalEras" legend:"both"`                         // historical_eras
-	HistoricalEventCollections             map[int]*HistoricalEventCollection       `json:"historicalEventCollections" legend:"both"`             // historical_event_collections
-	HistoricalEventRelationshipSupplements []*HistoricalEventRelationshipSupplement `json:"historicalEventRelationshipSupplements" legend:"plus"` // historical_event_relationship_supplements
-	HistoricalEventRelationships           []*HistoricalEventRelationship           `json:"historicalEventRelationships" legend:"plus"`           // historical_event_relationships
-	HistoricalEvents                       map[int]*HistoricalEvent                 `json:"historicalEvents" legend:"both"`                       // historical_events
-	HistoricalFigures                      map[int]*HistoricalFigure                `json:"historicalFigures" legend:"both"`                      // historical_figures
-	Identities                             map[int]*Identity                        `json:"identities" legend:"plus"`                             // identities
-	Landmasses                             map[int]*Landmass                        `json:"landmasses" legend:"plus"`                             // landmasses
-	MountainPeaks                          map[int]*MountainPeak                    `json:"mountainPeaks" legend:"plus"`                          // mountain_peaks
-	MusicalForms                           map[int]*MusicalForm                     `json:"musicalForms" legend:"both"`                           // musical_forms
-	Name_                                  string                                   `json:"name" legend:"plus"`                                   // name
-	PoeticForms                            map[int]*PoeticForm                      `json:"poeticForms" legend:"both"`                            // poetic_forms
-	Regions                                map[int]*Region                          `json:"regions" legend:"both"`                                // regions
-	Rivers                                 []*River                                 `json:"rivers" legend:"plus"`                                 // rivers
-	Sites                                  map[int]*Site                            `json:"sites" legend:"both"`                                  // sites
-	UndergroundRegions                     map[int]*UndergroundRegion               `json:"undergroundRegions" legend:"both"`                     // underground_regions
-	WorldConstructions                     map[int]*WorldConstruction               `json:"worldConstructions" legend:"both"`                     // world_constructions
-	WrittenContents                        map[int]*WrittenContent                  `json:"writtenContents" legend:"both"`                        // written_contents
-	EndYear                                int                                      `json:"endYear" legend:"add"`                                 // EndYear
-	FilePath                               string                                   `json:"filePath" legend:"add"`                                // FilePath
-	Height                                 int                                      `json:"height" legend:"add"`                                  // Height
-	MapData                                []byte                                   `json:"mapData" legend:"add"`                                 // MapData
-	MapReady                               bool                                     `json:"mapReady" legend:"add"`                                // MapReady
-	PlusFilePath                           string                                   `json:"plusFilePath" legend:"add"`                            // PlusFilePath
-	Width                                  int                                      `json:"width" legend:"add"`                                   // Width
+	Altname                                string                                   `json:"altname" legend:"plus" related:""`                                // altname
+	Artifacts                              map[int]*Artifact                        `json:"artifacts" legend:"both" related:""`                              // artifacts
+	CreatureRaw                            []*Creature                              `json:"creatureRaw" legend:"plus" related:""`                            // creature_raw
+	DanceForms                             map[int]*DanceForm                       `json:"danceForms" legend:"both" related:""`                             // dance_forms
+	Entities                               map[int]*Entity                          `json:"entities" legend:"both" related:""`                               // entities
+	EntityPopulations                      map[int]*EntityPopulation                `json:"entityPopulations" legend:"both" related:""`                      // entity_populations
+	HistoricalEras                         []*HistoricalEra                         `json:"historicalEras" legend:"both" related:""`                         // historical_eras
+	HistoricalEventCollections             map[int]*HistoricalEventCollection       `json:"historicalEventCollections" legend:"both" related:""`             // historical_event_collections
+	HistoricalEventRelationshipSupplements []*HistoricalEventRelationshipSupplement `json:"historicalEventRelationshipSupplements" legend:"plus" related:""` // historical_event_relationship_supplements
+	HistoricalEventRelationships           []*HistoricalEventRelationship           `json:"historicalEventRelationships" legend:"plus" related:""`           // historical_event_relationships
+	HistoricalEvents                       map[int]*HistoricalEvent                 `json:"historicalEvents" legend:"both" related:""`                       // historical_events
+	HistoricalFigures                      map[int]*HistoricalFigure                `json:"historicalFigures" legend:"both" related:""`                      // historical_figures
+	Identities                             map[int]*Identity                        `json:"identities" legend:"plus" related:""`                             // identities
+	Landmasses                             map[int]*Landmass                        `json:"landmasses" legend:"plus" related:""`                             // landmasses
+	MountainPeaks                          map[int]*MountainPeak                    `json:"mountainPeaks" legend:"plus" related:""`                          // mountain_peaks
+	MusicalForms                           map[int]*MusicalForm                     `json:"musicalForms" legend:"both" related:""`                           // musical_forms
+	Name_                                  string                                   `json:"name" legend:"plus" related:""`                                   // name
+	PoeticForms                            map[int]*PoeticForm                      `json:"poeticForms" legend:"both" related:""`                            // poetic_forms
+	Regions                                map[int]*Region                          `json:"regions" legend:"both" related:""`                                // regions
+	Rivers                                 []*River                                 `json:"rivers" legend:"plus" related:""`                                 // rivers
+	Sites                                  map[int]*Site                            `json:"sites" legend:"both" related:""`                                  // sites
+	UndergroundRegions                     map[int]*UndergroundRegion               `json:"undergroundRegions" legend:"both" related:""`                     // underground_regions
+	WorldConstructions                     map[int]*WorldConstruction               `json:"worldConstructions" legend:"both" related:""`                     // world_constructions
+	WrittenContents                        map[int]*WrittenContent                  `json:"writtenContents" legend:"both" related:""`                        // written_contents
+	EndYear                                int                                      `json:"endYear" legend:"add" related:""`                                 // EndYear
+	FilePath                               string                                   `json:"filePath" legend:"add" related:""`                                // FilePath
+	Height                                 int                                      `json:"height" legend:"add" related:""`                                  // Height
+	MapData                                []byte                                   `json:"mapData" legend:"add" related:""`                                 // MapData
+	MapReady                               bool                                     `json:"mapReady" legend:"add" related:""`                                // MapReady
+	PlusFilePath                           string                                   `json:"plusFilePath" legend:"add" related:""`                            // PlusFilePath
+	Width                                  int                                      `json:"width" legend:"add" related:""`                                   // Width
 }
 
 func NewDfWorld() *DfWorld {
@@ -1975,22 +1975,22 @@ func (s EntityWeapon) MarshalJSON() ([]byte, error) {
 }
 
 type Entity struct {
-	Child                    []int                       `json:"child" legend:"plus"`                    // child
-	Claims                   string                      `json:"claims" legend:"plus"`                   // claims
-	EntityLink               []*EntityEntityLink         `json:"entityLink" legend:"plus"`               // entity_link
-	EntityPosition           []*EntityPosition           `json:"entityPosition" legend:"plus"`           // entity_position
-	EntityPositionAssignment []*EntityPositionAssignment `json:"entityPositionAssignment" legend:"plus"` // entity_position_assignment
-	HistfigId                []int                       `json:"histfigId" legend:"plus"`                // histfig_id
-	Honor                    []*Honor                    `json:"honor" legend:"base"`                    // honor
-	Id_                      int                         `json:"id" legend:"both"`                       // id
-	Name_                    string                      `json:"name" legend:"base"`                     // name
-	Occasion                 []*Occasion                 `json:"occasion" legend:"plus"`                 // occasion
-	Profession               EntityProfession            `json:"profession" legend:"plus"`               // profession
-	Race                     string                      `json:"race" legend:"plus"`                     // race
-	Type_                    EntityType                  `json:"type" legend:"plus"`                     // type
-	Weapon                   []EntityWeapon              `json:"weapon" legend:"plus"`                   // weapon
-	WorshipId                []int                       `json:"worshipId" legend:"plus"`                // worship_id
-	Sites                    []int                       `json:"sites" legend:"add"`                     // Sites
+	Child                    []int                       `json:"child" legend:"plus" related:""`                    // child
+	Claims                   string                      `json:"claims" legend:"plus" related:""`                   // claims
+	EntityLink               []*EntityEntityLink         `json:"entityLink" legend:"plus" related:""`               // entity_link
+	EntityPosition           []*EntityPosition           `json:"entityPosition" legend:"plus" related:""`           // entity_position
+	EntityPositionAssignment []*EntityPositionAssignment `json:"entityPositionAssignment" legend:"plus" related:""` // entity_position_assignment
+	HistfigId                []int                       `json:"histfigId" legend:"plus" related:""`                // histfig_id
+	Honor                    []*Honor                    `json:"honor" legend:"base" related:""`                    // honor
+	Id_                      int                         `json:"id" legend:"both" related:""`                       // id
+	Name_                    string                      `json:"name" legend:"base" related:""`                     // name
+	Occasion                 []*Occasion                 `json:"occasion" legend:"plus" related:""`                 // occasion
+	Profession               EntityProfession            `json:"profession" legend:"plus" related:""`               // profession
+	Race                     string                      `json:"race" legend:"plus" related:""`                     // race
+	Type_                    EntityType                  `json:"type" legend:"plus" related:""`                     // type
+	Weapon                   []EntityWeapon              `json:"weapon" legend:"plus" related:""`                   // weapon
+	WorshipId                []int                       `json:"worshipId" legend:"plus" related:""`                // worship_id
+	Sites                    []int                       `json:"sites" legend:"add" related:""`                     // Sites
 }
 
 func NewEntity() *Entity {
@@ -2070,9 +2070,9 @@ func (s EntityEntityLinkType) MarshalJSON() ([]byte, error) {
 }
 
 type EntityEntityLink struct {
-	Strength int                  `json:"strength" legend:"plus"` // strength
-	Target   int                  `json:"target" legend:"plus"`   // target
-	Type_    EntityEntityLinkType `json:"type" legend:"plus"`     // type
+	Strength int                  `json:"strength" legend:"plus" related:""` // strength
+	Target   int                  `json:"target" legend:"plus" related:""`   // target
+	Type_    EntityEntityLinkType `json:"type" legend:"plus" related:""`     // type
 }
 
 func NewEntityEntityLink() *EntityEntityLink {
@@ -2100,10 +2100,10 @@ func (x *EntityEntityLink) MarshalJSON() ([]byte, error) {
 }
 
 type EntityFormerPositionLink struct {
-	EndYear           int `json:"endYear" legend:"base"`           // end_year
-	EntityId          int `json:"entityId" legend:"base"`          // entity_id
-	PositionProfileId int `json:"positionProfileId" legend:"base"` // position_profile_id
-	StartYear         int `json:"startYear" legend:"base"`         // start_year
+	EndYear           int `json:"endYear" legend:"base" related:""`           // end_year
+	EntityId          int `json:"entityId" legend:"base" related:""`          // entity_id
+	PositionProfileId int `json:"positionProfileId" legend:"base" related:""` // position_profile_id
+	StartYear         int `json:"startYear" legend:"base" related:""`         // start_year
 }
 
 func NewEntityFormerPositionLink() *EntityFormerPositionLink {
@@ -2136,10 +2136,10 @@ func (x *EntityFormerPositionLink) MarshalJSON() ([]byte, error) {
 }
 
 type EntityFormerSquadLink struct {
-	EndYear   int `json:"endYear" legend:"base"`   // end_year
-	EntityId  int `json:"entityId" legend:"base"`  // entity_id
-	SquadId   int `json:"squadId" legend:"base"`   // squad_id
-	StartYear int `json:"startYear" legend:"base"` // start_year
+	EndYear   int `json:"endYear" legend:"base" related:""`   // end_year
+	EntityId  int `json:"entityId" legend:"base" related:""`  // entity_id
+	SquadId   int `json:"squadId" legend:"base" related:""`   // squad_id
+	StartYear int `json:"startYear" legend:"base" related:""` // start_year
 }
 
 func NewEntityFormerSquadLink() *EntityFormerSquadLink {
@@ -2172,9 +2172,9 @@ func (x *EntityFormerSquadLink) MarshalJSON() ([]byte, error) {
 }
 
 type EntityPopulation struct {
-	CivId int    `json:"civId" legend:"plus"` // civ_id
-	Id_   int    `json:"id" legend:"both"`    // id
-	Race  string `json:"race" legend:"plus"`  // race
+	CivId int    `json:"civId" legend:"plus" related:""` // civ_id
+	Id_   int    `json:"id" legend:"both" related:""`    // id
+	Race  string `json:"race" legend:"plus" related:""`  // race
 }
 
 func NewEntityPopulation() *EntityPopulation {
@@ -2202,13 +2202,13 @@ func (x *EntityPopulation) MarshalJSON() ([]byte, error) {
 }
 
 type EntityPosition struct {
-	Id_          int    `json:"id" legend:"plus"`           // id
-	Name_        string `json:"name" legend:"plus"`         // name
-	NameFemale   string `json:"nameFemale" legend:"plus"`   // name_female
-	NameMale     string `json:"nameMale" legend:"plus"`     // name_male
-	Spouse       string `json:"spouse" legend:"plus"`       // spouse
-	SpouseFemale string `json:"spouseFemale" legend:"plus"` // spouse_female
-	SpouseMale   string `json:"spouseMale" legend:"plus"`   // spouse_male
+	Id_          int    `json:"id" legend:"plus" related:""`           // id
+	Name_        string `json:"name" legend:"plus" related:""`         // name
+	NameFemale   string `json:"nameFemale" legend:"plus" related:""`   // name_female
+	NameMale     string `json:"nameMale" legend:"plus" related:""`     // name_male
+	Spouse       string `json:"spouse" legend:"plus" related:""`       // spouse
+	SpouseFemale string `json:"spouseFemale" legend:"plus" related:""` // spouse_female
+	SpouseMale   string `json:"spouseMale" legend:"plus" related:""`   // spouse_male
 }
 
 func NewEntityPosition() *EntityPosition {
@@ -2238,10 +2238,10 @@ func (x *EntityPosition) MarshalJSON() ([]byte, error) {
 }
 
 type EntityPositionAssignment struct {
-	Histfig    int `json:"histfig" legend:"plus"`    // histfig
-	Id_        int `json:"id" legend:"plus"`         // id
-	PositionId int `json:"positionId" legend:"plus"` // position_id
-	SquadId    int `json:"squadId" legend:"plus"`    // squad_id
+	Histfig    int `json:"histfig" legend:"plus" related:""`    // histfig
+	Id_        int `json:"id" legend:"plus" related:""`         // id
+	PositionId int `json:"positionId" legend:"plus" related:""` // position_id
+	SquadId    int `json:"squadId" legend:"plus" related:""`    // squad_id
 }
 
 func NewEntityPositionAssignment() *EntityPositionAssignment {
@@ -2276,9 +2276,9 @@ func (x *EntityPositionAssignment) MarshalJSON() ([]byte, error) {
 }
 
 type EntityPositionLink struct {
-	EntityId          int `json:"entityId" legend:"base"`          // entity_id
-	PositionProfileId int `json:"positionProfileId" legend:"base"` // position_profile_id
-	StartYear         int `json:"startYear" legend:"base"`         // start_year
+	EntityId          int `json:"entityId" legend:"base" related:""`          // entity_id
+	PositionProfileId int `json:"positionProfileId" legend:"base" related:""` // position_profile_id
+	StartYear         int `json:"startYear" legend:"base" related:""`         // start_year
 }
 
 func NewEntityPositionLink() *EntityPositionLink {
@@ -2307,21 +2307,21 @@ func (x *EntityPositionLink) MarshalJSON() ([]byte, error) {
 }
 
 type EntityReputation struct {
-	EntityId                int `json:"entityId" legend:"base"`                // entity_id
-	FirstAgelessSeasonCount int `json:"firstAgelessSeasonCount" legend:"base"` // first_ageless_season_count
-	FirstAgelessYear        int `json:"firstAgelessYear" legend:"base"`        // first_ageless_year
-	RepBard                 int `json:"repBard" legend:"base"`                 // rep_bard
-	RepEnemyFighter         int `json:"repEnemyFighter" legend:"base"`         // rep_enemy_fighter
-	RepHero                 int `json:"repHero" legend:"base"`                 // rep_hero
-	RepHunter               int `json:"repHunter" legend:"base"`               // rep_hunter
-	RepKiller               int `json:"repKiller" legend:"base"`               // rep_killer
-	RepKnowledgePreserver   int `json:"repKnowledgePreserver" legend:"base"`   // rep_knowledge_preserver
-	RepPoet                 int `json:"repPoet" legend:"base"`                 // rep_poet
-	RepProtectorOfWeak      int `json:"repProtectorOfWeak" legend:"base"`      // rep_protector_of_weak
-	RepStoryteller          int `json:"repStoryteller" legend:"base"`          // rep_storyteller
-	RepThief                int `json:"repThief" legend:"base"`                // rep_thief
-	RepTreasureHunter       int `json:"repTreasureHunter" legend:"base"`       // rep_treasure_hunter
-	UnsolvedMurders         int `json:"unsolvedMurders" legend:"base"`         // unsolved_murders
+	EntityId                int `json:"entityId" legend:"base" related:""`                // entity_id
+	FirstAgelessSeasonCount int `json:"firstAgelessSeasonCount" legend:"base" related:""` // first_ageless_season_count
+	FirstAgelessYear        int `json:"firstAgelessYear" legend:"base" related:""`        // first_ageless_year
+	RepBard                 int `json:"repBard" legend:"base" related:""`                 // rep_bard
+	RepEnemyFighter         int `json:"repEnemyFighter" legend:"base" related:""`         // rep_enemy_fighter
+	RepHero                 int `json:"repHero" legend:"base" related:""`                 // rep_hero
+	RepHunter               int `json:"repHunter" legend:"base" related:""`               // rep_hunter
+	RepKiller               int `json:"repKiller" legend:"base" related:""`               // rep_killer
+	RepKnowledgePreserver   int `json:"repKnowledgePreserver" legend:"base" related:""`   // rep_knowledge_preserver
+	RepPoet                 int `json:"repPoet" legend:"base" related:""`                 // rep_poet
+	RepProtectorOfWeak      int `json:"repProtectorOfWeak" legend:"base" related:""`      // rep_protector_of_weak
+	RepStoryteller          int `json:"repStoryteller" legend:"base" related:""`          // rep_storyteller
+	RepThief                int `json:"repThief" legend:"base" related:""`                // rep_thief
+	RepTreasureHunter       int `json:"repTreasureHunter" legend:"base" related:""`       // rep_treasure_hunter
+	UnsolvedMurders         int `json:"unsolvedMurders" legend:"base" related:""`         // unsolved_murders
 }
 
 func NewEntityReputation() *EntityReputation {
@@ -2398,10 +2398,10 @@ func (x *EntityReputation) MarshalJSON() ([]byte, error) {
 }
 
 type EntitySquadLink struct {
-	EntityId      int `json:"entityId" legend:"base"`      // entity_id
-	SquadId       int `json:"squadId" legend:"base"`       // squad_id
-	SquadPosition int `json:"squadPosition" legend:"base"` // squad_position
-	StartYear     int `json:"startYear" legend:"base"`     // start_year
+	EntityId      int `json:"entityId" legend:"base" related:""`      // entity_id
+	SquadId       int `json:"squadId" legend:"base" related:""`       // squad_id
+	SquadPosition int `json:"squadPosition" legend:"base" related:""` // squad_position
+	StartYear     int `json:"startYear" legend:"base" related:""`     // start_year
 }
 
 func NewEntitySquadLink() *EntitySquadLink {
@@ -2526,8 +2526,8 @@ func (s FeatureType) MarshalJSON() ([]byte, error) {
 }
 
 type Feature struct {
-	Reference int         `json:"reference" legend:"plus"` // reference
-	Type_     FeatureType `json:"type" legend:"plus"`      // type
+	Reference int         `json:"reference" legend:"plus" related:""` // reference
+	Type_     FeatureType `json:"type" legend:"plus" related:""`      // type
 }
 
 func NewFeature() *Feature {
@@ -2648,9 +2648,9 @@ func (s HfLinkLinkType) MarshalJSON() ([]byte, error) {
 }
 
 type HfLink struct {
-	Hfid         int            `json:"hfid" legend:"base"`         // hfid
-	LinkStrength int            `json:"linkStrength" legend:"base"` // link_strength
-	LinkType     HfLinkLinkType `json:"linkType" legend:"base"`     // link_type
+	Hfid         int            `json:"hfid" legend:"base" related:""`         // hfid
+	LinkStrength int            `json:"linkStrength" legend:"base" related:""` // link_strength
+	LinkType     HfLinkLinkType `json:"linkType" legend:"base" related:""`     // link_type
 }
 
 func NewHfLink() *HfLink {
@@ -2678,8 +2678,8 @@ func (x *HfLink) MarshalJSON() ([]byte, error) {
 }
 
 type HfSkill struct {
-	Skill   string `json:"skill" legend:"base"`   // skill
-	TotalIp int    `json:"totalIp" legend:"base"` // total_ip
+	Skill   string `json:"skill" legend:"base" related:""`   // skill
+	TotalIp int    `json:"totalIp" legend:"base" related:""` // total_ip
 }
 
 func NewHfSkill() *HfSkill {
@@ -2701,8 +2701,8 @@ func (x *HfSkill) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEra struct {
-	Name_     string `json:"name" legend:"base"`      // name
-	StartYear int    `json:"startYear" legend:"base"` // start_year
+	Name_     string `json:"name" legend:"base" related:""`      // name
+	StartYear int    `json:"startYear" legend:"base" related:""` // start_year
 }
 
 func NewHistoricalEra() *HistoricalEra {
@@ -2725,11 +2725,11 @@ func (x *HistoricalEra) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEvent struct {
-	Id_        int `json:"id" legend:"both"`        // id
-	Seconds72  int `json:"seconds72" legend:"base"` // seconds72
-	Year       int `json:"year" legend:"base"`      // year
+	Id_        int `json:"id" legend:"both" related:""`        // id
+	Seconds72  int `json:"seconds72" legend:"base" related:""` // seconds72
+	Year       int `json:"year" legend:"base" related:""`      // year
 	Details    HistoricalEventDetails
-	Collection int `json:"collection" legend:"add"` // Collection
+	Collection int `json:"collection" legend:"add" related:""` // Collection
 }
 
 func NewHistoricalEvent() *HistoricalEvent {
@@ -2765,9 +2765,9 @@ func (x *HistoricalEvent) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventAddHfEntityHonor struct {
-	EntityId int `json:"entityId" legend:"base"` // entity_id
-	Hfid     int `json:"hfid" legend:"base"`     // hfid
-	HonorId  int `json:"honorId" legend:"base"`  // honor_id
+	EntityId int `json:"entityId" legend:"base" related:""` // entity_id
+	Hfid     int `json:"hfid" legend:"base" related:""`     // hfid
+	HonorId  int `json:"honorId" legend:"base" related:""`  // honor_id
 }
 
 func NewHistoricalEventAddHfEntityHonor() *HistoricalEventAddHfEntityHonor {
@@ -2789,6 +2789,7 @@ func (x *HistoricalEventAddHfEntityHonor) RelatedToWrittenContent(id int) bool  
 func (x *HistoricalEventAddHfEntityHonor) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventAddHfEntityHonor) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAddHfEntityHonor) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventAddHfEntityHonor) CheckFields() {
 }
@@ -2912,13 +2913,13 @@ func (s HistoricalEventAddHfEntityLinkLinkType) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventAddHfEntityLink struct {
-	AppointerHfid int                                `json:"appointerHfid" legend:"both"` // appointer_hfid
-	CivId         int                                `json:"civId" legend:"base"`         // civ_id
-	Hfid          int                                `json:"hfid" legend:"base"`          // hfid
-	Link          HistoricalEventAddHfEntityLinkLink `json:"link" legend:"base"`          // link
-	Position      string                             `json:"position" legend:"plus"`      // position
-	PositionId    int                                `json:"positionId" legend:"base"`    // position_id
-	PromiseToHfid int                                `json:"promiseToHfid" legend:"both"` // promise_to_hfid
+	AppointerHfid int                                `json:"appointerHfid" legend:"both" related:""` // appointer_hfid
+	CivId         int                                `json:"civId" legend:"base" related:""`         // civ_id
+	Hfid          int                                `json:"hfid" legend:"base" related:""`          // hfid
+	Link          HistoricalEventAddHfEntityLinkLink `json:"link" legend:"base" related:""`          // link
+	Position      string                             `json:"position" legend:"plus" related:""`      // position
+	PositionId    int                                `json:"positionId" legend:"base" related:""`    // position_id
+	PromiseToHfid int                                `json:"promiseToHfid" legend:"both" related:""` // promise_to_hfid
 }
 
 func NewHistoricalEventAddHfEntityLink() *HistoricalEventAddHfEntityLink {
@@ -2944,6 +2945,7 @@ func (x *HistoricalEventAddHfEntityLink) RelatedToWrittenContent(id int) bool   
 func (x *HistoricalEventAddHfEntityLink) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventAddHfEntityLink) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAddHfEntityLink) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventAddHfEntityLink) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventAddHfEntityLink) CheckFields() {
 }
@@ -3035,10 +3037,10 @@ func (s HistoricalEventAddHfHfLinkLinkType) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventAddHfHfLink struct {
-	Hfid         int                                     `json:"hfid" legend:"base"`        // hfid
-	HfidTarget   int                                     `json:"hfidTarget" legend:"base"`  // hfid_target
-	LinkType     HistoricalEventAddHfHfLinkLinkType      `json:"linkType" legend:"plus"`    // link_type
-	Relationship HistoricalEventRelationshipRelationship `json:"relationship" legend:"add"` // Relationship
+	Hfid         int                                     `json:"hfid" legend:"base" related:""`        // hfid
+	HfidTarget   int                                     `json:"hfidTarget" legend:"base" related:""`  // hfid_target
+	LinkType     HistoricalEventAddHfHfLinkLinkType      `json:"linkType" legend:"plus" related:""`    // link_type
+	Relationship HistoricalEventRelationshipRelationship `json:"relationship" legend:"add" related:""` // Relationship
 }
 
 func NewHistoricalEventAddHfHfLink() *HistoricalEventAddHfHfLink {
@@ -3061,6 +3063,7 @@ func (x *HistoricalEventAddHfHfLink) RelatedToWrittenContent(id int) bool    { r
 func (x *HistoricalEventAddHfHfLink) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventAddHfHfLink) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAddHfHfLink) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventAddHfHfLink) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventAddHfHfLink) CheckFields() {
 }
@@ -3128,11 +3131,11 @@ func (s HistoricalEventAddHfSiteLinkLinkType) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventAddHfSiteLink struct {
-	Civ       int                                  `json:"civ" legend:"plus"`       // civ
-	Histfig   int                                  `json:"histfig" legend:"plus"`   // histfig
-	LinkType  HistoricalEventAddHfSiteLinkLinkType `json:"linkType" legend:"plus"`  // link_type
-	SiteId    int                                  `json:"siteId" legend:"base"`    // site_id
-	Structure int                                  `json:"structure" legend:"plus"` // structure
+	Civ       int                                  `json:"civ" legend:"plus" related:""`       // civ
+	Histfig   int                                  `json:"histfig" legend:"plus" related:""`   // histfig
+	LinkType  HistoricalEventAddHfSiteLinkLinkType `json:"linkType" legend:"plus" related:""`  // link_type
+	SiteId    int                                  `json:"siteId" legend:"base" related:""`    // site_id
+	Structure int                                  `json:"structure" legend:"plus" related:""` // structure
 }
 
 func NewHistoricalEventAddHfSiteLink() *HistoricalEventAddHfSiteLink {
@@ -3157,6 +3160,7 @@ func (x *HistoricalEventAddHfSiteLink) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventAddHfSiteLink) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventAddHfSiteLink) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAddHfSiteLink) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventAddHfSiteLink) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventAddHfSiteLink) CheckFields() {
 	if x.Civ != x.SiteId {
@@ -3218,11 +3222,11 @@ func (s HistoricalEventAgreementConcludedTopic) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventAgreementConcluded struct {
-	Destination int                                    `json:"destination" legend:"plus"` // destination
-	Result      int                                    `json:"result" legend:"plus"`      // result
-	Site        int                                    `json:"site" legend:"plus"`        // site
-	Source      int                                    `json:"source" legend:"plus"`      // source
-	Topic       HistoricalEventAgreementConcludedTopic `json:"topic" legend:"plus"`       // topic
+	Destination int                                    `json:"destination" legend:"plus" related:""` // destination
+	Result      int                                    `json:"result" legend:"plus" related:""`      // result
+	Site        int                                    `json:"site" legend:"plus" related:""`        // site
+	Source      int                                    `json:"source" legend:"plus" related:""`      // source
+	Topic       HistoricalEventAgreementConcludedTopic `json:"topic" legend:"plus" related:""`       // topic
 }
 
 func NewHistoricalEventAgreementConcluded() *HistoricalEventAgreementConcluded {
@@ -3247,6 +3251,7 @@ func (x *HistoricalEventAgreementConcluded) RelatedToWrittenContent(id int) bool
 func (x *HistoricalEventAgreementConcluded) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventAgreementConcluded) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAgreementConcluded) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventAgreementConcluded) CheckFields() {
 }
@@ -3564,29 +3569,29 @@ func (s HistoricalEventAgreementFormedTopValue) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventAgreementFormed struct {
-	Action                    HistoricalEventAgreementFormedAction                `json:"action" legend:"base"`                    // action
-	AgreementId               int                                                 `json:"agreementId" legend:"base"`               // agreement_id
-	AgreementSubjectId        int                                                 `json:"agreementSubjectId" legend:"base"`        // agreement_subject_id
-	AllyDefenseBonus          int                                                 `json:"allyDefenseBonus" legend:"base"`          // ally_defense_bonus
-	CoconspiratorBonus        int                                                 `json:"coconspiratorBonus" legend:"base"`        // coconspirator_bonus
-	ConcluderHfid             int                                                 `json:"concluderHfid" legend:"base"`             // concluder_hfid
-	Delegated                 bool                                                `json:"delegated" legend:"base"`                 // delegated
-	FailedJudgmentTest        bool                                                `json:"failedJudgmentTest" legend:"base"`        // failed_judgment_test
-	Method                    HistoricalEventAgreementFormedMethod                `json:"method" legend:"base"`                    // method
-	Reason                    HistoricalEventAgreementFormedReason                `json:"reason" legend:"base"`                    // reason
-	RelevantEntityId          int                                                 `json:"relevantEntityId" legend:"base"`          // relevant_entity_id
-	RelevantIdForMethod       int                                                 `json:"relevantIdForMethod" legend:"base"`       // relevant_id_for_method
-	RelevantPositionProfileId int                                                 `json:"relevantPositionProfileId" legend:"base"` // relevant_position_profile_id
-	Successful                bool                                                `json:"successful" legend:"base"`                // successful
-	TopFacet                  HistoricalEventAgreementFormedTopFacet              `json:"topFacet" legend:"base"`                  // top_facet
-	TopFacetModifier          int                                                 `json:"topFacetModifier" legend:"base"`          // top_facet_modifier
-	TopFacetRating            int                                                 `json:"topFacetRating" legend:"base"`            // top_facet_rating
-	TopRelationshipFactor     HistoricalEventAgreementFormedTopRelationshipFactor `json:"topRelationshipFactor" legend:"base"`     // top_relationship_factor
-	TopRelationshipModifier   int                                                 `json:"topRelationshipModifier" legend:"base"`   // top_relationship_modifier
-	TopRelationshipRating     int                                                 `json:"topRelationshipRating" legend:"base"`     // top_relationship_rating
-	TopValue                  HistoricalEventAgreementFormedTopValue              `json:"topValue" legend:"base"`                  // top_value
-	TopValueModifier          int                                                 `json:"topValueModifier" legend:"base"`          // top_value_modifier
-	TopValueRating            int                                                 `json:"topValueRating" legend:"base"`            // top_value_rating
+	Action                    HistoricalEventAgreementFormedAction                `json:"action" legend:"base" related:""`                    // action
+	AgreementId               int                                                 `json:"agreementId" legend:"base" related:""`               // agreement_id
+	AgreementSubjectId        int                                                 `json:"agreementSubjectId" legend:"base" related:""`        // agreement_subject_id
+	AllyDefenseBonus          int                                                 `json:"allyDefenseBonus" legend:"base" related:""`          // ally_defense_bonus
+	CoconspiratorBonus        int                                                 `json:"coconspiratorBonus" legend:"base" related:""`        // coconspirator_bonus
+	ConcluderHfid             int                                                 `json:"concluderHfid" legend:"base" related:""`             // concluder_hfid
+	Delegated                 bool                                                `json:"delegated" legend:"base" related:""`                 // delegated
+	FailedJudgmentTest        bool                                                `json:"failedJudgmentTest" legend:"base" related:""`        // failed_judgment_test
+	Method                    HistoricalEventAgreementFormedMethod                `json:"method" legend:"base" related:""`                    // method
+	Reason                    HistoricalEventAgreementFormedReason                `json:"reason" legend:"base" related:""`                    // reason
+	RelevantEntityId          int                                                 `json:"relevantEntityId" legend:"base" related:""`          // relevant_entity_id
+	RelevantIdForMethod       int                                                 `json:"relevantIdForMethod" legend:"base" related:""`       // relevant_id_for_method
+	RelevantPositionProfileId int                                                 `json:"relevantPositionProfileId" legend:"base" related:""` // relevant_position_profile_id
+	Successful                bool                                                `json:"successful" legend:"base" related:""`                // successful
+	TopFacet                  HistoricalEventAgreementFormedTopFacet              `json:"topFacet" legend:"base" related:""`                  // top_facet
+	TopFacetModifier          int                                                 `json:"topFacetModifier" legend:"base" related:""`          // top_facet_modifier
+	TopFacetRating            int                                                 `json:"topFacetRating" legend:"base" related:""`            // top_facet_rating
+	TopRelationshipFactor     HistoricalEventAgreementFormedTopRelationshipFactor `json:"topRelationshipFactor" legend:"base" related:""`     // top_relationship_factor
+	TopRelationshipModifier   int                                                 `json:"topRelationshipModifier" legend:"base" related:""`   // top_relationship_modifier
+	TopRelationshipRating     int                                                 `json:"topRelationshipRating" legend:"base" related:""`     // top_relationship_rating
+	TopValue                  HistoricalEventAgreementFormedTopValue              `json:"topValue" legend:"base" related:""`                  // top_value
+	TopValueModifier          int                                                 `json:"topValueModifier" legend:"base" related:""`          // top_value_modifier
+	TopValueRating            int                                                 `json:"topValueRating" legend:"base" related:""`            // top_value_rating
 }
 
 func NewHistoricalEventAgreementFormed() *HistoricalEventAgreementFormed {
@@ -3621,6 +3626,7 @@ func (x *HistoricalEventAgreementFormed) RelatedToWrittenContent(id int) bool   
 func (x *HistoricalEventAgreementFormed) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventAgreementFormed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAgreementFormed) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventAgreementFormed) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventAgreementFormed) CheckFields() {
 }
@@ -3731,10 +3737,10 @@ func (s HistoricalEventAgreementMadeTopic) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventAgreementMade struct {
-	Destination int                               `json:"destination" legend:"plus"` // destination
-	SiteId      int                               `json:"siteId" legend:"base"`      // site_id
-	Source      int                               `json:"source" legend:"plus"`      // source
-	Topic       HistoricalEventAgreementMadeTopic `json:"topic" legend:"plus"`       // topic
+	Destination int                               `json:"destination" legend:"plus" related:""` // destination
+	SiteId      int                               `json:"siteId" legend:"base" related:""`      // site_id
+	Source      int                               `json:"source" legend:"plus" related:""`      // source
+	Topic       HistoricalEventAgreementMadeTopic `json:"topic" legend:"plus" related:""`       // topic
 }
 
 func NewHistoricalEventAgreementMade() *HistoricalEventAgreementMade {
@@ -3758,6 +3764,7 @@ func (x *HistoricalEventAgreementMade) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventAgreementMade) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventAgreementMade) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAgreementMade) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventAgreementMade) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventAgreementMade) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -3828,10 +3835,10 @@ func (s HistoricalEventAgreementRejectedTopic) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventAgreementRejected struct {
-	Destination int                                   `json:"destination" legend:"plus"` // destination
-	SiteId      int                                   `json:"siteId" legend:"base"`      // site_id
-	Source      int                                   `json:"source" legend:"plus"`      // source
-	Topic       HistoricalEventAgreementRejectedTopic `json:"topic" legend:"plus"`       // topic
+	Destination int                                   `json:"destination" legend:"plus" related:""` // destination
+	SiteId      int                                   `json:"siteId" legend:"base" related:""`      // site_id
+	Source      int                                   `json:"source" legend:"plus" related:""`      // source
+	Topic       HistoricalEventAgreementRejectedTopic `json:"topic" legend:"plus" related:""`       // topic
 }
 
 func NewHistoricalEventAgreementRejected() *HistoricalEventAgreementRejected {
@@ -3855,6 +3862,7 @@ func (x *HistoricalEventAgreementRejected) RelatedToWrittenContent(id int) bool 
 func (x *HistoricalEventAgreementRejected) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventAgreementRejected) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAgreementRejected) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventAgreementRejected) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -3952,12 +3960,12 @@ func (s HistoricalEventArtifactClaimFormedClaim) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventArtifactClaimFormed struct {
-	ArtifactId        int                                            `json:"artifactId" legend:"base"`        // artifact_id
-	Circumstance      HistoricalEventArtifactClaimFormedCircumstance `json:"circumstance" legend:"base"`      // circumstance
-	Claim             HistoricalEventArtifactClaimFormedClaim        `json:"claim" legend:"base"`             // claim
-	EntityId          int                                            `json:"entityId" legend:"base"`          // entity_id
-	HistFigureId      int                                            `json:"histFigureId" legend:"base"`      // hist_figure_id
-	PositionProfileId int                                            `json:"positionProfileId" legend:"base"` // position_profile_id
+	ArtifactId        int                                            `json:"artifactId" legend:"base" related:""`        // artifact_id
+	Circumstance      HistoricalEventArtifactClaimFormedCircumstance `json:"circumstance" legend:"base" related:""`      // circumstance
+	Claim             HistoricalEventArtifactClaimFormedClaim        `json:"claim" legend:"base" related:""`             // claim
+	EntityId          int                                            `json:"entityId" legend:"base" related:""`          // entity_id
+	HistFigureId      int                                            `json:"histFigureId" legend:"base" related:""`      // hist_figure_id
+	PositionProfileId int                                            `json:"positionProfileId" legend:"base" related:""` // position_profile_id
 }
 
 func NewHistoricalEventArtifactClaimFormed() *HistoricalEventArtifactClaimFormed {
@@ -3982,6 +3990,7 @@ func (x *HistoricalEventArtifactClaimFormed) RelatedToWrittenContent(id int) boo
 func (x *HistoricalEventArtifactClaimFormed) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventArtifactClaimFormed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactClaimFormed) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventArtifactClaimFormed) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactClaimFormed) CheckFields() {
 }
@@ -4010,14 +4019,14 @@ func (x *HistoricalEventArtifactClaimFormed) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventArtifactCopied struct {
-	ArtifactId        int  `json:"artifactId" legend:"base"`        // artifact_id
-	DestEntityId      int  `json:"destEntityId" legend:"base"`      // dest_entity_id
-	DestSiteId        int  `json:"destSiteId" legend:"base"`        // dest_site_id
-	DestStructureId   int  `json:"destStructureId" legend:"base"`   // dest_structure_id
-	FromOriginal      bool `json:"fromOriginal" legend:"base"`      // from_original
-	SourceEntityId    int  `json:"sourceEntityId" legend:"base"`    // source_entity_id
-	SourceSiteId      int  `json:"sourceSiteId" legend:"base"`      // source_site_id
-	SourceStructureId int  `json:"sourceStructureId" legend:"base"` // source_structure_id
+	ArtifactId        int  `json:"artifactId" legend:"base" related:""`        // artifact_id
+	DestEntityId      int  `json:"destEntityId" legend:"base" related:""`      // dest_entity_id
+	DestSiteId        int  `json:"destSiteId" legend:"base" related:""`        // dest_site_id
+	DestStructureId   int  `json:"destStructureId" legend:"base" related:""`   // dest_structure_id
+	FromOriginal      bool `json:"fromOriginal" legend:"base" related:""`      // from_original
+	SourceEntityId    int  `json:"sourceEntityId" legend:"base" related:""`    // source_entity_id
+	SourceSiteId      int  `json:"sourceSiteId" legend:"base" related:""`      // source_site_id
+	SourceStructureId int  `json:"sourceStructureId" legend:"base" related:""` // source_structure_id
 }
 
 func NewHistoricalEventArtifactCopied() *HistoricalEventArtifactCopied {
@@ -4049,6 +4058,7 @@ func (x *HistoricalEventArtifactCopied) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventArtifactCopied) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventArtifactCopied) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactCopied) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventArtifactCopied) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactCopied) CheckFields() {
 }
@@ -4108,14 +4118,14 @@ func (s HistoricalEventArtifactCreatedReason) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventArtifactCreated struct {
-	ArtifactId   int                                         `json:"artifactId" legend:"both"`   // artifact_id
-	Circumstance *HistoricalEventArtifactCreatedCircumstance `json:"circumstance" legend:"plus"` // circumstance
-	HistFigureId int                                         `json:"histFigureId" legend:"base"` // hist_figure_id
-	NameOnly     bool                                        `json:"nameOnly" legend:"base"`     // name_only
-	Reason       HistoricalEventArtifactCreatedReason        `json:"reason" legend:"plus"`       // reason
-	SanctifyHf   int                                         `json:"sanctifyHf" legend:"plus"`   // sanctify_hf
-	SiteId       int                                         `json:"siteId" legend:"base"`       // site_id
-	UnitId       int                                         `json:"unitId" legend:"base"`       // unit_id
+	ArtifactId   int                                         `json:"artifactId" legend:"both" related:""`   // artifact_id
+	Circumstance *HistoricalEventArtifactCreatedCircumstance `json:"circumstance" legend:"plus" related:""` // circumstance
+	HistFigureId int                                         `json:"histFigureId" legend:"base" related:""` // hist_figure_id
+	NameOnly     bool                                        `json:"nameOnly" legend:"base" related:""`     // name_only
+	Reason       HistoricalEventArtifactCreatedReason        `json:"reason" legend:"plus" related:""`       // reason
+	SanctifyHf   int                                         `json:"sanctifyHf" legend:"plus" related:""`   // sanctify_hf
+	SiteId       int                                         `json:"siteId" legend:"base" related:""`       // site_id
+	UnitId       int                                         `json:"unitId" legend:"base" related:""`       // unit_id
 }
 
 func NewHistoricalEventArtifactCreated() *HistoricalEventArtifactCreated {
@@ -4141,6 +4151,7 @@ func (x *HistoricalEventArtifactCreated) RelatedToWrittenContent(id int) bool   
 func (x *HistoricalEventArtifactCreated) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventArtifactCreated) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactCreated) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventArtifactCreated) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactCreated) CheckFields() {
 	if x.SanctifyHf != x.HistFigureId {
@@ -4217,8 +4228,8 @@ func (s HistoricalEventArtifactCreatedCircumstanceType) MarshalJSON() ([]byte, e
 }
 
 type HistoricalEventArtifactCreatedCircumstance struct {
-	Defeated int                                            `json:"defeated" legend:"plus"` // defeated
-	Type_    HistoricalEventArtifactCreatedCircumstanceType `json:"type" legend:"plus"`     // type
+	Defeated int                                            `json:"defeated" legend:"plus" related:""` // defeated
+	Type_    HistoricalEventArtifactCreatedCircumstanceType `json:"type" legend:"plus" related:""`     // type
 }
 
 func NewHistoricalEventArtifactCreatedCircumstance() *HistoricalEventArtifactCreatedCircumstance {
@@ -4242,9 +4253,9 @@ func (x *HistoricalEventArtifactCreatedCircumstance) MarshalJSON() ([]byte, erro
 }
 
 type HistoricalEventArtifactDestroyed struct {
-	ArtifactId    int `json:"artifactId" legend:"base"`    // artifact_id
-	DestroyerEnid int `json:"destroyerEnid" legend:"base"` // destroyer_enid
-	SiteId        int `json:"siteId" legend:"base"`        // site_id
+	ArtifactId    int `json:"artifactId" legend:"base" related:""`    // artifact_id
+	DestroyerEnid int `json:"destroyerEnid" legend:"base" related:""` // destroyer_enid
+	SiteId        int `json:"siteId" legend:"base" related:""`        // site_id
 }
 
 func NewHistoricalEventArtifactDestroyed() *HistoricalEventArtifactDestroyed {
@@ -4266,6 +4277,7 @@ func (x *HistoricalEventArtifactDestroyed) RelatedToWrittenContent(id int) bool 
 func (x *HistoricalEventArtifactDestroyed) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventArtifactDestroyed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactDestroyed) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventArtifactDestroyed) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactDestroyed) CheckFields() {
 }
@@ -4285,11 +4297,11 @@ func (x *HistoricalEventArtifactDestroyed) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventArtifactFound struct {
-	ArtifactId     int `json:"artifactId" legend:"base"`     // artifact_id
-	HistFigureId   int `json:"histFigureId" legend:"base"`   // hist_figure_id
-	SiteId         int `json:"siteId" legend:"base"`         // site_id
-	SitePropertyId int `json:"sitePropertyId" legend:"base"` // site_property_id
-	UnitId         int `json:"unitId" legend:"base"`         // unit_id
+	ArtifactId     int `json:"artifactId" legend:"base" related:""`     // artifact_id
+	HistFigureId   int `json:"histFigureId" legend:"base" related:""`   // hist_figure_id
+	SiteId         int `json:"siteId" legend:"base" related:""`         // site_id
+	SitePropertyId int `json:"sitePropertyId" legend:"base" related:""` // site_property_id
+	UnitId         int `json:"unitId" legend:"base" related:""`         // unit_id
 }
 
 func NewHistoricalEventArtifactFound() *HistoricalEventArtifactFound {
@@ -4313,6 +4325,7 @@ func (x *HistoricalEventArtifactFound) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventArtifactFound) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventArtifactFound) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactFound) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventArtifactFound) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactFound) CheckFields() {
 }
@@ -4365,13 +4378,13 @@ func (s HistoricalEventArtifactGivenReason) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventArtifactGiven struct {
-	ArtifactId           int                                `json:"artifactId" legend:"base"`           // artifact_id
-	GiverEntityId        int                                `json:"giverEntityId" legend:"base"`        // giver_entity_id
-	GiverHistFigureId    int                                `json:"giverHistFigureId" legend:"base"`    // giver_hist_figure_id
-	Inherited            bool                               `json:"inherited" legend:"base"`            // inherited
-	Reason               HistoricalEventArtifactGivenReason `json:"reason" legend:"base"`               // reason
-	ReceiverEntityId     int                                `json:"receiverEntityId" legend:"base"`     // receiver_entity_id
-	ReceiverHistFigureId int                                `json:"receiverHistFigureId" legend:"base"` // receiver_hist_figure_id
+	ArtifactId           int                                `json:"artifactId" legend:"base" related:""`           // artifact_id
+	GiverEntityId        int                                `json:"giverEntityId" legend:"base" related:""`        // giver_entity_id
+	GiverHistFigureId    int                                `json:"giverHistFigureId" legend:"base" related:""`    // giver_hist_figure_id
+	Inherited            bool                               `json:"inherited" legend:"base" related:""`            // inherited
+	Reason               HistoricalEventArtifactGivenReason `json:"reason" legend:"base" related:""`               // reason
+	ReceiverEntityId     int                                `json:"receiverEntityId" legend:"base" related:""`     // receiver_entity_id
+	ReceiverHistFigureId int                                `json:"receiverHistFigureId" legend:"base" related:""` // receiver_hist_figure_id
 }
 
 func NewHistoricalEventArtifactGiven() *HistoricalEventArtifactGiven {
@@ -4399,6 +4412,7 @@ func (x *HistoricalEventArtifactGiven) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventArtifactGiven) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventArtifactGiven) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactGiven) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventArtifactGiven) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactGiven) CheckFields() {
 }
@@ -4428,11 +4442,11 @@ func (x *HistoricalEventArtifactGiven) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventArtifactLost struct {
-	ArtifactId     int `json:"artifactId" legend:"base"`     // artifact_id
-	FeatureLayerId int `json:"featureLayerId" legend:"base"` // feature_layer_id
-	SiteId         int `json:"siteId" legend:"base"`         // site_id
-	SitePropertyId int `json:"sitePropertyId" legend:"base"` // site_property_id
-	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
+	ArtifactId     int `json:"artifactId" legend:"base" related:""`     // artifact_id
+	FeatureLayerId int `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	SiteId         int `json:"siteId" legend:"base" related:""`         // site_id
+	SitePropertyId int `json:"sitePropertyId" legend:"base" related:""` // site_property_id
+	SubregionId    int `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventArtifactLost() *HistoricalEventArtifactLost {
@@ -4456,6 +4470,7 @@ func (x *HistoricalEventArtifactLost) RelatedToWrittenContent(id int) bool    { 
 func (x *HistoricalEventArtifactLost) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventArtifactLost) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactLost) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventArtifactLost) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactLost) CheckFields() {
 }
@@ -4540,16 +4555,16 @@ func (s HistoricalEventArtifactPossessedReason) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventArtifactPossessed struct {
-	ArtifactId     int                                          `json:"artifactId" legend:"base"`     // artifact_id
-	Circumstance   HistoricalEventArtifactPossessedCircumstance `json:"circumstance" legend:"base"`   // circumstance
-	CircumstanceId int                                          `json:"circumstanceId" legend:"base"` // circumstance_id
-	FeatureLayerId int                                          `json:"featureLayerId" legend:"base"` // feature_layer_id
-	HistFigureId   int                                          `json:"histFigureId" legend:"base"`   // hist_figure_id
-	Reason         HistoricalEventArtifactPossessedReason       `json:"reason" legend:"base"`         // reason
-	ReasonId       int                                          `json:"reasonId" legend:"base"`       // reason_id
-	SiteId         int                                          `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int                                          `json:"subregionId" legend:"base"`    // subregion_id
-	UnitId         int                                          `json:"unitId" legend:"base"`         // unit_id
+	ArtifactId     int                                          `json:"artifactId" legend:"base" related:""`     // artifact_id
+	Circumstance   HistoricalEventArtifactPossessedCircumstance `json:"circumstance" legend:"base" related:""`   // circumstance
+	CircumstanceId int                                          `json:"circumstanceId" legend:"base" related:""` // circumstance_id
+	FeatureLayerId int                                          `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	HistFigureId   int                                          `json:"histFigureId" legend:"base" related:""`   // hist_figure_id
+	Reason         HistoricalEventArtifactPossessedReason       `json:"reason" legend:"base" related:""`         // reason
+	ReasonId       int                                          `json:"reasonId" legend:"base" related:""`       // reason_id
+	SiteId         int                                          `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int                                          `json:"subregionId" legend:"base" related:""`    // subregion_id
+	UnitId         int                                          `json:"unitId" legend:"base" related:""`         // unit_id
 }
 
 func NewHistoricalEventArtifactPossessed() *HistoricalEventArtifactPossessed {
@@ -4576,6 +4591,7 @@ func (x *HistoricalEventArtifactPossessed) RelatedToWrittenContent(id int) bool 
 func (x *HistoricalEventArtifactPossessed) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventArtifactPossessed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactPossessed) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventArtifactPossessed) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactPossessed) CheckFields() {
 }
@@ -4616,13 +4632,13 @@ func (x *HistoricalEventArtifactPossessed) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventArtifactRecovered struct {
-	ArtifactId     int `json:"artifactId" legend:"base"`     // artifact_id
-	FeatureLayerId int `json:"featureLayerId" legend:"base"` // feature_layer_id
-	HistFigureId   int `json:"histFigureId" legend:"base"`   // hist_figure_id
-	SiteId         int `json:"siteId" legend:"base"`         // site_id
-	StructureId    int `json:"structureId" legend:"base"`    // structure_id
-	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
-	UnitId         int `json:"unitId" legend:"base"`         // unit_id
+	ArtifactId     int `json:"artifactId" legend:"base" related:""`     // artifact_id
+	FeatureLayerId int `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	HistFigureId   int `json:"histFigureId" legend:"base" related:""`   // hist_figure_id
+	SiteId         int `json:"siteId" legend:"base" related:""`         // site_id
+	StructureId    int `json:"structureId" legend:"base" related:""`    // structure_id
+	SubregionId    int `json:"subregionId" legend:"base" related:""`    // subregion_id
+	UnitId         int `json:"unitId" legend:"base" related:""`         // unit_id
 }
 
 func NewHistoricalEventArtifactRecovered() *HistoricalEventArtifactRecovered {
@@ -4650,6 +4666,7 @@ func (x *HistoricalEventArtifactRecovered) RelatedToWrittenContent(id int) bool 
 func (x *HistoricalEventArtifactRecovered) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventArtifactRecovered) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactRecovered) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventArtifactRecovered) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactRecovered) CheckFields() {
 }
@@ -4681,10 +4698,10 @@ func (x *HistoricalEventArtifactRecovered) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventArtifactStored struct {
-	ArtifactId   int `json:"artifactId" legend:"base"`   // artifact_id
-	HistFigureId int `json:"histFigureId" legend:"base"` // hist_figure_id
-	SiteId       int `json:"siteId" legend:"base"`       // site_id
-	UnitId       int `json:"unitId" legend:"base"`       // unit_id
+	ArtifactId   int `json:"artifactId" legend:"base" related:""`   // artifact_id
+	HistFigureId int `json:"histFigureId" legend:"base" related:""` // hist_figure_id
+	SiteId       int `json:"siteId" legend:"base" related:""`       // site_id
+	UnitId       int `json:"unitId" legend:"base" related:""`       // unit_id
 }
 
 func NewHistoricalEventArtifactStored() *HistoricalEventArtifactStored {
@@ -4707,6 +4724,7 @@ func (x *HistoricalEventArtifactStored) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventArtifactStored) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventArtifactStored) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactStored) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventArtifactStored) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactStored) CheckFields() {
 }
@@ -4729,11 +4747,11 @@ func (x *HistoricalEventArtifactStored) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventArtifactTransformed struct {
-	HistFigureId  int `json:"histFigureId" legend:"base"`  // hist_figure_id
-	NewArtifactId int `json:"newArtifactId" legend:"base"` // new_artifact_id
-	OldArtifactId int `json:"oldArtifactId" legend:"base"` // old_artifact_id
-	SiteId        int `json:"siteId" legend:"base"`        // site_id
-	UnitId        int `json:"unitId" legend:"base"`        // unit_id
+	HistFigureId  int `json:"histFigureId" legend:"base" related:""`  // hist_figure_id
+	NewArtifactId int `json:"newArtifactId" legend:"base" related:""` // new_artifact_id
+	OldArtifactId int `json:"oldArtifactId" legend:"base" related:""` // old_artifact_id
+	SiteId        int `json:"siteId" legend:"base" related:""`        // site_id
+	UnitId        int `json:"unitId" legend:"base" related:""`        // unit_id
 }
 
 func NewHistoricalEventArtifactTransformed() *HistoricalEventArtifactTransformed {
@@ -4759,6 +4777,7 @@ func (x *HistoricalEventArtifactTransformed) RelatedToWrittenContent(id int) boo
 func (x *HistoricalEventArtifactTransformed) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventArtifactTransformed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactTransformed) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventArtifactTransformed) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactTransformed) CheckFields() {
 }
@@ -4784,12 +4803,12 @@ func (x *HistoricalEventArtifactTransformed) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventAssumeIdentity struct {
-	IdentityCaste string `json:"identityCaste" legend:"plus"` // identity_caste
-	IdentityId    int    `json:"identityId" legend:"base"`    // identity_id
-	IdentityName  string `json:"identityName" legend:"plus"`  // identity_name
-	IdentityRace  string `json:"identityRace" legend:"plus"`  // identity_race
-	TargetEnid    int    `json:"targetEnid" legend:"base"`    // target_enid
-	TricksterHfid int    `json:"tricksterHfid" legend:"base"` // trickster_hfid
+	IdentityCaste string `json:"identityCaste" legend:"plus" related:""` // identity_caste
+	IdentityId    int    `json:"identityId" legend:"base" related:""`    // identity_id
+	IdentityName  string `json:"identityName" legend:"plus" related:""`  // identity_name
+	IdentityRace  string `json:"identityRace" legend:"plus" related:""`  // identity_race
+	TargetEnid    int    `json:"targetEnid" legend:"base" related:""`    // target_enid
+	TricksterHfid int    `json:"tricksterHfid" legend:"base" related:""` // trickster_hfid
 }
 
 func NewHistoricalEventAssumeIdentity() *HistoricalEventAssumeIdentity {
@@ -4813,6 +4832,7 @@ func (x *HistoricalEventAssumeIdentity) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventAssumeIdentity) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventAssumeIdentity) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAssumeIdentity) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventAssumeIdentity) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventAssumeIdentity) CheckFields() {
 }
@@ -4835,16 +4855,16 @@ func (x *HistoricalEventAssumeIdentity) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventAttackedSite struct {
-	ASupportMercEnid    int `json:"aSupportMercEnid" legend:"base"`    // a_support_merc_enid
-	AttackerCivId       int `json:"attackerCivId" legend:"base"`       // attacker_civ_id
-	AttackerGeneralHfid int `json:"attackerGeneralHfid" legend:"base"` // attacker_general_hfid
-	AttackerMercEnid    int `json:"attackerMercEnid" legend:"base"`    // attacker_merc_enid
-	DSupportMercEnid    int `json:"dSupportMercEnid" legend:"base"`    // d_support_merc_enid
-	DefenderCivId       int `json:"defenderCivId" legend:"base"`       // defender_civ_id
-	DefenderGeneralHfid int `json:"defenderGeneralHfid" legend:"base"` // defender_general_hfid
-	DefenderMercEnid    int `json:"defenderMercEnid" legend:"base"`    // defender_merc_enid
-	SiteCivId           int `json:"siteCivId" legend:"base"`           // site_civ_id
-	SiteId              int `json:"siteId" legend:"base"`              // site_id
+	ASupportMercEnid    int `json:"aSupportMercEnid" legend:"base" related:""`    // a_support_merc_enid
+	AttackerCivId       int `json:"attackerCivId" legend:"base" related:""`       // attacker_civ_id
+	AttackerGeneralHfid int `json:"attackerGeneralHfid" legend:"base" related:""` // attacker_general_hfid
+	AttackerMercEnid    int `json:"attackerMercEnid" legend:"base" related:""`    // attacker_merc_enid
+	DSupportMercEnid    int `json:"dSupportMercEnid" legend:"base" related:""`    // d_support_merc_enid
+	DefenderCivId       int `json:"defenderCivId" legend:"base" related:""`       // defender_civ_id
+	DefenderGeneralHfid int `json:"defenderGeneralHfid" legend:"base" related:""` // defender_general_hfid
+	DefenderMercEnid    int `json:"defenderMercEnid" legend:"base" related:""`    // defender_merc_enid
+	SiteCivId           int `json:"siteCivId" legend:"base" related:""`           // site_civ_id
+	SiteId              int `json:"siteId" legend:"base" related:""`              // site_id
 }
 
 func NewHistoricalEventAttackedSite() *HistoricalEventAttackedSite {
@@ -4877,6 +4897,7 @@ func (x *HistoricalEventAttackedSite) RelatedToWrittenContent(id int) bool    { 
 func (x *HistoricalEventAttackedSite) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventAttackedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAttackedSite) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventAttackedSite) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventAttackedSite) CheckFields() {
 }
@@ -5065,22 +5086,22 @@ func (s HistoricalEventBodyAbusedPileType) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventBodyAbused struct {
-	AbuseType      HistoricalEventBodyAbusedAbuseType   `json:"abuseType" legend:"plus"`      // abuse_type
-	Bodies         []int                                `json:"bodies" legend:"plus"`         // bodies
-	Civ            int                                  `json:"civ" legend:"plus"`            // civ
-	Coords         string                               `json:"coords" legend:"base"`         // coords
-	FeatureLayerId int                                  `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Histfig        int                                  `json:"histfig" legend:"plus"`        // histfig
-	Interaction    int                                  `json:"interaction" legend:"plus"`    // interaction
-	ItemMat        string                               `json:"itemMat" legend:"plus"`        // item_mat
-	ItemSubtype    HistoricalEventBodyAbusedItemSubtype `json:"itemSubtype" legend:"plus"`    // item_subtype
-	ItemType       HistoricalEventBodyAbusedItemType    `json:"itemType" legend:"plus"`       // item_type
-	PileType       HistoricalEventBodyAbusedPileType    `json:"pileType" legend:"plus"`       // pile_type
-	SiteId         int                                  `json:"siteId" legend:"base"`         // site_id
-	Structure      int                                  `json:"structure" legend:"plus"`      // structure
-	SubregionId    int                                  `json:"subregionId" legend:"base"`    // subregion_id
-	Tree           int                                  `json:"tree" legend:"plus"`           // tree
-	VictimEntity   int                                  `json:"victimEntity" legend:"plus"`   // victim_entity
+	AbuseType      HistoricalEventBodyAbusedAbuseType   `json:"abuseType" legend:"plus" related:""`      // abuse_type
+	Bodies         []int                                `json:"bodies" legend:"plus" related:""`         // bodies
+	Civ            int                                  `json:"civ" legend:"plus" related:""`            // civ
+	Coords         string                               `json:"coords" legend:"base" related:""`         // coords
+	FeatureLayerId int                                  `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Histfig        int                                  `json:"histfig" legend:"plus" related:""`        // histfig
+	Interaction    int                                  `json:"interaction" legend:"plus" related:""`    // interaction
+	ItemMat        string                               `json:"itemMat" legend:"plus" related:""`        // item_mat
+	ItemSubtype    HistoricalEventBodyAbusedItemSubtype `json:"itemSubtype" legend:"plus" related:""`    // item_subtype
+	ItemType       HistoricalEventBodyAbusedItemType    `json:"itemType" legend:"plus" related:""`       // item_type
+	PileType       HistoricalEventBodyAbusedPileType    `json:"pileType" legend:"plus" related:""`       // pile_type
+	SiteId         int                                  `json:"siteId" legend:"base" related:""`         // site_id
+	Structure      int                                  `json:"structure" legend:"plus" related:""`      // structure
+	SubregionId    int                                  `json:"subregionId" legend:"base" related:""`    // subregion_id
+	Tree           int                                  `json:"tree" legend:"plus" related:""`           // tree
+	VictimEntity   int                                  `json:"victimEntity" legend:"plus" related:""`   // victim_entity
 }
 
 func NewHistoricalEventBodyAbused() *HistoricalEventBodyAbused {
@@ -5114,6 +5135,7 @@ func (x *HistoricalEventBodyAbused) RelatedToWrittenContent(id int) bool    { re
 func (x *HistoricalEventBodyAbused) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventBodyAbused) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventBodyAbused) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventBodyAbused) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventBodyAbused) CheckFields() {
 	if x.Civ != x.FeatureLayerId {
@@ -5223,14 +5245,14 @@ func (x *HistoricalEventBodyAbused) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventBuildingProfileAcquired struct {
-	AcquirerEnid      int  `json:"acquirerEnid" legend:"base"`      // acquirer_enid
-	AcquirerHfid      int  `json:"acquirerHfid" legend:"base"`      // acquirer_hfid
-	BuildingProfileId int  `json:"buildingProfileId" legend:"base"` // building_profile_id
-	Inherited         bool `json:"inherited" legend:"base"`         // inherited
-	LastOwnerHfid     int  `json:"lastOwnerHfid" legend:"base"`     // last_owner_hfid
-	PurchasedUnowned  bool `json:"purchasedUnowned" legend:"base"`  // purchased_unowned
-	RebuiltRuined     bool `json:"rebuiltRuined" legend:"base"`     // rebuilt_ruined
-	SiteId            int  `json:"siteId" legend:"base"`            // site_id
+	AcquirerEnid      int  `json:"acquirerEnid" legend:"base" related:""`      // acquirer_enid
+	AcquirerHfid      int  `json:"acquirerHfid" legend:"base" related:""`      // acquirer_hfid
+	BuildingProfileId int  `json:"buildingProfileId" legend:"base" related:""` // building_profile_id
+	Inherited         bool `json:"inherited" legend:"base" related:""`         // inherited
+	LastOwnerHfid     int  `json:"lastOwnerHfid" legend:"base" related:""`     // last_owner_hfid
+	PurchasedUnowned  bool `json:"purchasedUnowned" legend:"base" related:""`  // purchased_unowned
+	RebuiltRuined     bool `json:"rebuiltRuined" legend:"base" related:""`     // rebuilt_ruined
+	SiteId            int  `json:"siteId" legend:"base" related:""`            // site_id
 }
 
 func NewHistoricalEventBuildingProfileAcquired() *HistoricalEventBuildingProfileAcquired {
@@ -5262,6 +5284,7 @@ func (x *HistoricalEventBuildingProfileAcquired) RelatedToWrittenContent(id int)
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToDanceForm(id int) bool      { return false }
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToPoeticForm(id int) bool     { return false }
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToMountain(id int) bool       { return false }
 
 func (x *HistoricalEventBuildingProfileAcquired) CheckFields() {
 }
@@ -5290,12 +5313,12 @@ func (x *HistoricalEventBuildingProfileAcquired) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCeremony struct {
-	CivId          int `json:"civId" legend:"base"`          // civ_id
-	FeatureLayerId int `json:"featureLayerId" legend:"base"` // feature_layer_id
-	OccasionId     int `json:"occasionId" legend:"base"`     // occasion_id
-	ScheduleId     int `json:"scheduleId" legend:"base"`     // schedule_id
-	SiteId         int `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
+	CivId          int `json:"civId" legend:"base" related:""`          // civ_id
+	FeatureLayerId int `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	OccasionId     int `json:"occasionId" legend:"base" related:""`     // occasion_id
+	ScheduleId     int `json:"scheduleId" legend:"base" related:""`     // schedule_id
+	SiteId         int `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventCeremony() *HistoricalEventCeremony {
@@ -5320,6 +5343,7 @@ func (x *HistoricalEventCeremony) RelatedToWrittenContent(id int) bool    { retu
 func (x *HistoricalEventCeremony) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCeremony) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCeremony) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCeremony) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCeremony) CheckFields() {
 }
@@ -5375,13 +5399,13 @@ func (s HistoricalEventChangeHfBodyStateBodyState) MarshalJSON() ([]byte, error)
 }
 
 type HistoricalEventChangeHfBodyState struct {
-	BodyState      HistoricalEventChangeHfBodyStateBodyState `json:"bodyState" legend:"base"`      // body_state
-	Coords         string                                    `json:"coords" legend:"base"`         // coords
-	FeatureLayerId int                                       `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Hfid           int                                       `json:"hfid" legend:"base"`           // hfid
-	SiteId         int                                       `json:"siteId" legend:"base"`         // site_id
-	StructureId    int                                       `json:"structureId" legend:"base"`    // structure_id
-	SubregionId    int                                       `json:"subregionId" legend:"base"`    // subregion_id
+	BodyState      HistoricalEventChangeHfBodyStateBodyState `json:"bodyState" legend:"base" related:""`      // body_state
+	Coords         string                                    `json:"coords" legend:"base" related:""`         // coords
+	FeatureLayerId int                                       `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Hfid           int                                       `json:"hfid" legend:"base" related:""`           // hfid
+	SiteId         int                                       `json:"siteId" legend:"base" related:""`         // site_id
+	StructureId    int                                       `json:"structureId" legend:"base" related:""`    // structure_id
+	SubregionId    int                                       `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventChangeHfBodyState() *HistoricalEventChangeHfBodyState {
@@ -5407,6 +5431,7 @@ func (x *HistoricalEventChangeHfBodyState) RelatedToWrittenContent(id int) bool 
 func (x *HistoricalEventChangeHfBodyState) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventChangeHfBodyState) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventChangeHfBodyState) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventChangeHfBodyState) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventChangeHfBodyState) CheckFields() {
 }
@@ -5436,12 +5461,12 @@ func (x *HistoricalEventChangeHfBodyState) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventChangeHfJob struct {
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Hfid           int    `json:"hfid" legend:"both"`           // hfid
-	NewJob         string `json:"newJob" legend:"plus"`         // new_job
-	OldJob         string `json:"oldJob" legend:"plus"`         // old_job
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	FeatureLayerId int    `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Hfid           int    `json:"hfid" legend:"both" related:""`           // hfid
+	NewJob         string `json:"newJob" legend:"plus" related:""`         // new_job
+	OldJob         string `json:"oldJob" legend:"plus" related:""`         // old_job
+	SiteId         int    `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int    `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventChangeHfJob() *HistoricalEventChangeHfJob {
@@ -5464,6 +5489,7 @@ func (x *HistoricalEventChangeHfJob) RelatedToWrittenContent(id int) bool    { r
 func (x *HistoricalEventChangeHfJob) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventChangeHfJob) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventChangeHfJob) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventChangeHfJob) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventChangeHfJob) CheckFields() {
 }
@@ -5685,14 +5711,14 @@ func (s HistoricalEventChangeHfStateState) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventChangeHfState struct {
-	Coords         string                             `json:"coords" legend:"base"`         // coords
-	FeatureLayerId int                                `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Hfid           int                                `json:"hfid" legend:"both"`           // hfid
-	Mood           HistoricalEventChangeHfStateMood   `json:"mood" legend:"base"`           // mood
-	Reason         HistoricalEventChangeHfStateReason `json:"reason" legend:"both"`         // reason
-	SiteId         int                                `json:"siteId" legend:"base"`         // site_id
-	State          HistoricalEventChangeHfStateState  `json:"state" legend:"both"`          // state
-	SubregionId    int                                `json:"subregionId" legend:"base"`    // subregion_id
+	Coords         string                             `json:"coords" legend:"base" related:""`         // coords
+	FeatureLayerId int                                `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Hfid           int                                `json:"hfid" legend:"both" related:""`           // hfid
+	Mood           HistoricalEventChangeHfStateMood   `json:"mood" legend:"base" related:""`           // mood
+	Reason         HistoricalEventChangeHfStateReason `json:"reason" legend:"both" related:""`         // reason
+	SiteId         int                                `json:"siteId" legend:"base" related:""`         // site_id
+	State          HistoricalEventChangeHfStateState  `json:"state" legend:"both" related:""`          // state
+	SubregionId    int                                `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventChangeHfState() *HistoricalEventChangeHfState {
@@ -5715,6 +5741,7 @@ func (x *HistoricalEventChangeHfState) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventChangeHfState) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventChangeHfState) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventChangeHfState) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventChangeHfState) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventChangeHfState) CheckFields() {
 }
@@ -5747,12 +5774,12 @@ func (x *HistoricalEventChangeHfState) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventChangedCreatureType struct {
-	ChangeeHfid int    `json:"changeeHfid" legend:"base"` // changee_hfid
-	ChangerHfid int    `json:"changerHfid" legend:"base"` // changer_hfid
-	NewCaste    string `json:"newCaste" legend:"both"`    // new_caste
-	NewRace     string `json:"newRace" legend:"both"`     // new_race
-	OldCaste    string `json:"oldCaste" legend:"both"`    // old_caste
-	OldRace     string `json:"oldRace" legend:"both"`     // old_race
+	ChangeeHfid int    `json:"changeeHfid" legend:"base" related:""` // changee_hfid
+	ChangerHfid int    `json:"changerHfid" legend:"base" related:""` // changer_hfid
+	NewCaste    string `json:"newCaste" legend:"both" related:""`    // new_caste
+	NewRace     string `json:"newRace" legend:"both" related:""`     // new_race
+	OldCaste    string `json:"oldCaste" legend:"both" related:""`    // old_caste
+	OldRace     string `json:"oldRace" legend:"both" related:""`     // old_race
 }
 
 func NewHistoricalEventChangedCreatureType() *HistoricalEventChangedCreatureType {
@@ -5775,6 +5802,7 @@ func (x *HistoricalEventChangedCreatureType) RelatedToWrittenContent(id int) boo
 func (x *HistoricalEventChangedCreatureType) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventChangedCreatureType) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventChangedCreatureType) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventChangedCreatureType) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventChangedCreatureType) CheckFields() {
 }
@@ -5907,13 +5935,13 @@ func (s HistoricalEventCollectionType) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollection struct {
-	EndSeconds72   int   `json:"endSeconds72" legend:"base"`   // end_seconds72
-	EndYear        int   `json:"endYear" legend:"base"`        // end_year
-	Event          []int `json:"event" legend:"base"`          // event
-	Eventcol       []int `json:"eventcol" legend:"base"`       // eventcol
-	Id_            int   `json:"id" legend:"base"`             // id
-	StartSeconds72 int   `json:"startSeconds72" legend:"base"` // start_seconds72
-	StartYear      int   `json:"startYear" legend:"base"`      // start_year
+	EndSeconds72   int   `json:"endSeconds72" legend:"base" related:""`   // end_seconds72
+	EndYear        int   `json:"endYear" legend:"base" related:""`        // end_year
+	Event          []int `json:"event" legend:"base" related:""`          // event
+	Eventcol       []int `json:"eventcol" legend:"base" related:""`       // eventcol
+	Id_            int   `json:"id" legend:"base" related:""`             // id
+	StartSeconds72 int   `json:"startSeconds72" legend:"base" related:""` // start_seconds72
+	StartYear      int   `json:"startYear" legend:"base" related:""`      // start_year
 	Details        HistoricalEventCollectionDetails
 }
 
@@ -5956,15 +5984,15 @@ func (x *HistoricalEventCollection) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionAbduction struct {
-	AttackingEnid  int    `json:"attackingEnid" legend:"base"`  // attacking_enid
-	Coords         string `json:"coords" legend:"base"`         // coords
-	DefendingEnid  int    `json:"defendingEnid" legend:"base"`  // defending_enid
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Ordinal        int    `json:"ordinal" legend:"base"`        // ordinal
-	ParentEventcol int    `json:"parentEventcol" legend:"base"` // parent_eventcol
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
-	TargetHfids    []int  `json:"targetHfids" legend:"add"`     // TargetHfids
+	AttackingEnid  int    `json:"attackingEnid" legend:"base" related:""`  // attacking_enid
+	Coords         string `json:"coords" legend:"base" related:""`         // coords
+	DefendingEnid  int    `json:"defendingEnid" legend:"base" related:""`  // defending_enid
+	FeatureLayerId int    `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Ordinal        int    `json:"ordinal" legend:"base" related:""`        // ordinal
+	ParentEventcol int    `json:"parentEventcol" legend:"base" related:""` // parent_eventcol
+	SiteId         int    `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int    `json:"subregionId" legend:"base" related:""`    // subregion_id
+	TargetHfids    []int  `json:"targetHfids" legend:"add" related:""`     // TargetHfids
 }
 
 func NewHistoricalEventCollectionAbduction() *HistoricalEventCollectionAbduction {
@@ -5992,6 +6020,7 @@ func (x *HistoricalEventCollectionAbduction) RelatedToWrittenContent(id int) boo
 func (x *HistoricalEventCollectionAbduction) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionAbduction) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionAbduction) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionAbduction) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionAbduction) CheckFields() {
 }
@@ -6057,36 +6086,36 @@ func (s HistoricalEventCollectionBattleOutcome) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionBattle struct {
-	ASupportMercEnid        int                                    `json:"aSupportMercEnid" legend:"base"`        // a_support_merc_enid
-	ASupportMercHfid        []int                                  `json:"aSupportMercHfid" legend:"base"`        // a_support_merc_hfid
-	AttackingHfid           []int                                  `json:"attackingHfid" legend:"base"`           // attacking_hfid
-	AttackingMercEnid       int                                    `json:"attackingMercEnid" legend:"base"`       // attacking_merc_enid
-	AttackingSquadAnimated  []bool                                 `json:"attackingSquadAnimated" legend:"base"`  // attacking_squad_animated
-	AttackingSquadDeaths    []int                                  `json:"attackingSquadDeaths" legend:"base"`    // attacking_squad_deaths
-	AttackingSquadEntityPop []int                                  `json:"attackingSquadEntityPop" legend:"base"` // attacking_squad_entity_pop
-	AttackingSquadNumber    []int                                  `json:"attackingSquadNumber" legend:"base"`    // attacking_squad_number
-	AttackingSquadRace      []string                               `json:"attackingSquadRace" legend:"base"`      // attacking_squad_race
-	AttackingSquadSite      []int                                  `json:"attackingSquadSite" legend:"base"`      // attacking_squad_site
-	CompanyMerc             []bool                                 `json:"companyMerc" legend:"base"`             // company_merc
-	Coords                  string                                 `json:"coords" legend:"base"`                  // coords
-	DSupportMercEnid        int                                    `json:"dSupportMercEnid" legend:"base"`        // d_support_merc_enid
-	DSupportMercHfid        []int                                  `json:"dSupportMercHfid" legend:"base"`        // d_support_merc_hfid
-	DefendingHfid           []int                                  `json:"defendingHfid" legend:"base"`           // defending_hfid
-	DefendingMercEnid       int                                    `json:"defendingMercEnid" legend:"base"`       // defending_merc_enid
-	DefendingSquadAnimated  []bool                                 `json:"defendingSquadAnimated" legend:"base"`  // defending_squad_animated
-	DefendingSquadDeaths    []int                                  `json:"defendingSquadDeaths" legend:"base"`    // defending_squad_deaths
-	DefendingSquadEntityPop []int                                  `json:"defendingSquadEntityPop" legend:"base"` // defending_squad_entity_pop
-	DefendingSquadNumber    []int                                  `json:"defendingSquadNumber" legend:"base"`    // defending_squad_number
-	DefendingSquadRace      []string                               `json:"defendingSquadRace" legend:"base"`      // defending_squad_race
-	DefendingSquadSite      []int                                  `json:"defendingSquadSite" legend:"base"`      // defending_squad_site
-	FeatureLayerId          int                                    `json:"featureLayerId" legend:"base"`          // feature_layer_id
-	IndividualMerc          []bool                                 `json:"individualMerc" legend:"base"`          // individual_merc
-	Name_                   string                                 `json:"name" legend:"base"`                    // name
-	NoncomHfid              []int                                  `json:"noncomHfid" legend:"base"`              // noncom_hfid
-	Outcome                 HistoricalEventCollectionBattleOutcome `json:"outcome" legend:"base"`                 // outcome
-	SiteId                  int                                    `json:"siteId" legend:"base"`                  // site_id
-	SubregionId             int                                    `json:"subregionId" legend:"base"`             // subregion_id
-	WarEventcol             int                                    `json:"warEventcol" legend:"base"`             // war_eventcol
+	ASupportMercEnid        int                                    `json:"aSupportMercEnid" legend:"base" related:""`        // a_support_merc_enid
+	ASupportMercHfid        []int                                  `json:"aSupportMercHfid" legend:"base" related:""`        // a_support_merc_hfid
+	AttackingHfid           []int                                  `json:"attackingHfid" legend:"base" related:""`           // attacking_hfid
+	AttackingMercEnid       int                                    `json:"attackingMercEnid" legend:"base" related:""`       // attacking_merc_enid
+	AttackingSquadAnimated  []bool                                 `json:"attackingSquadAnimated" legend:"base" related:""`  // attacking_squad_animated
+	AttackingSquadDeaths    []int                                  `json:"attackingSquadDeaths" legend:"base" related:""`    // attacking_squad_deaths
+	AttackingSquadEntityPop []int                                  `json:"attackingSquadEntityPop" legend:"base" related:""` // attacking_squad_entity_pop
+	AttackingSquadNumber    []int                                  `json:"attackingSquadNumber" legend:"base" related:""`    // attacking_squad_number
+	AttackingSquadRace      []string                               `json:"attackingSquadRace" legend:"base" related:""`      // attacking_squad_race
+	AttackingSquadSite      []int                                  `json:"attackingSquadSite" legend:"base" related:""`      // attacking_squad_site
+	CompanyMerc             []bool                                 `json:"companyMerc" legend:"base" related:""`             // company_merc
+	Coords                  string                                 `json:"coords" legend:"base" related:""`                  // coords
+	DSupportMercEnid        int                                    `json:"dSupportMercEnid" legend:"base" related:""`        // d_support_merc_enid
+	DSupportMercHfid        []int                                  `json:"dSupportMercHfid" legend:"base" related:""`        // d_support_merc_hfid
+	DefendingHfid           []int                                  `json:"defendingHfid" legend:"base" related:""`           // defending_hfid
+	DefendingMercEnid       int                                    `json:"defendingMercEnid" legend:"base" related:""`       // defending_merc_enid
+	DefendingSquadAnimated  []bool                                 `json:"defendingSquadAnimated" legend:"base" related:""`  // defending_squad_animated
+	DefendingSquadDeaths    []int                                  `json:"defendingSquadDeaths" legend:"base" related:""`    // defending_squad_deaths
+	DefendingSquadEntityPop []int                                  `json:"defendingSquadEntityPop" legend:"base" related:""` // defending_squad_entity_pop
+	DefendingSquadNumber    []int                                  `json:"defendingSquadNumber" legend:"base" related:""`    // defending_squad_number
+	DefendingSquadRace      []string                               `json:"defendingSquadRace" legend:"base" related:""`      // defending_squad_race
+	DefendingSquadSite      []int                                  `json:"defendingSquadSite" legend:"base" related:""`      // defending_squad_site
+	FeatureLayerId          int                                    `json:"featureLayerId" legend:"base" related:""`          // feature_layer_id
+	IndividualMerc          []bool                                 `json:"individualMerc" legend:"base" related:""`          // individual_merc
+	Name_                   string                                 `json:"name" legend:"base" related:""`                    // name
+	NoncomHfid              []int                                  `json:"noncomHfid" legend:"base" related:""`              // noncom_hfid
+	Outcome                 HistoricalEventCollectionBattleOutcome `json:"outcome" legend:"base" related:""`                 // outcome
+	SiteId                  int                                    `json:"siteId" legend:"base" related:""`                  // site_id
+	SubregionId             int                                    `json:"subregionId" legend:"base" related:""`             // subregion_id
+	WarEventcol             int                                    `json:"warEventcol" legend:"base" related:""`             // war_eventcol
 }
 
 func NewHistoricalEventCollectionBattle() *HistoricalEventCollectionBattle {
@@ -6120,6 +6149,7 @@ func (x *HistoricalEventCollectionBattle) RelatedToWrittenContent(id int) bool  
 func (x *HistoricalEventCollectionBattle) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionBattle) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionBattle) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionBattle) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionBattle) CheckFields() {
 }
@@ -6178,14 +6208,14 @@ func (x *HistoricalEventCollectionBattle) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionBeastAttack struct {
-	Coords         string `json:"coords" legend:"base"`         // coords
-	DefendingEnid  int    `json:"defendingEnid" legend:"base"`  // defending_enid
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Ordinal        int    `json:"ordinal" legend:"base"`        // ordinal
-	ParentEventcol int    `json:"parentEventcol" legend:"base"` // parent_eventcol
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
-	AttackerHfIds  []int  `json:"attackerHfIds" legend:"add"`   // AttackerHfIds
+	Coords         string `json:"coords" legend:"base" related:""`         // coords
+	DefendingEnid  int    `json:"defendingEnid" legend:"base" related:""`  // defending_enid
+	FeatureLayerId int    `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Ordinal        int    `json:"ordinal" legend:"base" related:""`        // ordinal
+	ParentEventcol int    `json:"parentEventcol" legend:"base" related:""` // parent_eventcol
+	SiteId         int    `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int    `json:"subregionId" legend:"base" related:""`    // subregion_id
+	AttackerHfIds  []int  `json:"attackerHfIds" legend:"add" related:""`   // AttackerHfIds
 }
 
 func NewHistoricalEventCollectionBeastAttack() *HistoricalEventCollectionBeastAttack {
@@ -6214,6 +6244,7 @@ func (x *HistoricalEventCollectionBeastAttack) RelatedToWrittenContent(id int) b
 func (x *HistoricalEventCollectionBeastAttack) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionBeastAttack) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionBeastAttack) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionBeastAttack) CheckFields() {
 }
@@ -6244,8 +6275,8 @@ func (x *HistoricalEventCollectionBeastAttack) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionCeremony struct {
-	Ordinal          int `json:"ordinal" legend:"base"`         // ordinal
-	OccasionEventcol int `json:"occasionEventcol" legend:"add"` // OccasionEventcol
+	Ordinal          int `json:"ordinal" legend:"base" related:""`         // ordinal
+	OccasionEventcol int `json:"occasionEventcol" legend:"add" related:""` // OccasionEventcol
 }
 
 func NewHistoricalEventCollectionCeremony() *HistoricalEventCollectionCeremony {
@@ -6266,6 +6297,7 @@ func (x *HistoricalEventCollectionCeremony) RelatedToWrittenContent(id int) bool
 func (x *HistoricalEventCollectionCeremony) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionCeremony) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionCeremony) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionCeremony) CheckFields() {
 }
@@ -6282,8 +6314,8 @@ func (x *HistoricalEventCollectionCeremony) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionCompetition struct {
-	Ordinal          int `json:"ordinal" legend:"base"`         // ordinal
-	OccasionEventcol int `json:"occasionEventcol" legend:"add"` // OccasionEventcol
+	Ordinal          int `json:"ordinal" legend:"base" related:""`         // ordinal
+	OccasionEventcol int `json:"occasionEventcol" legend:"add" related:""` // OccasionEventcol
 }
 
 func NewHistoricalEventCollectionCompetition() *HistoricalEventCollectionCompetition {
@@ -6304,6 +6336,7 @@ func (x *HistoricalEventCollectionCompetition) RelatedToWrittenContent(id int) b
 func (x *HistoricalEventCollectionCompetition) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionCompetition) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionCompetition) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionCompetition) CheckFields() {
 }
@@ -6320,14 +6353,14 @@ func (x *HistoricalEventCollectionCompetition) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionDuel struct {
-	AttackingHfid  int    `json:"attackingHfid" legend:"base"`  // attacking_hfid
-	Coords         string `json:"coords" legend:"base"`         // coords
-	DefendingHfid  int    `json:"defendingHfid" legend:"base"`  // defending_hfid
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Ordinal        int    `json:"ordinal" legend:"base"`        // ordinal
-	ParentEventcol int    `json:"parentEventcol" legend:"base"` // parent_eventcol
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	AttackingHfid  int    `json:"attackingHfid" legend:"base" related:""`  // attacking_hfid
+	Coords         string `json:"coords" legend:"base" related:""`         // coords
+	DefendingHfid  int    `json:"defendingHfid" legend:"base" related:""`  // defending_hfid
+	FeatureLayerId int    `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Ordinal        int    `json:"ordinal" legend:"base" related:""`        // ordinal
+	ParentEventcol int    `json:"parentEventcol" legend:"base" related:""` // parent_eventcol
+	SiteId         int    `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int    `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventCollectionDuel() *HistoricalEventCollectionDuel {
@@ -6355,6 +6388,7 @@ func (x *HistoricalEventCollectionDuel) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventCollectionDuel) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionDuel) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionDuel) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionDuel) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionDuel) CheckFields() {
 }
@@ -6387,9 +6421,9 @@ func (x *HistoricalEventCollectionDuel) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionEntityOverthrown struct {
-	Ordinal        int `json:"ordinal" legend:"base"`        // ordinal
-	SiteId         int `json:"siteId" legend:"base"`         // site_id
-	TargetEntityId int `json:"targetEntityId" legend:"base"` // target_entity_id
+	Ordinal        int `json:"ordinal" legend:"base" related:""`        // ordinal
+	SiteId         int `json:"siteId" legend:"base" related:""`         // site_id
+	TargetEntityId int `json:"targetEntityId" legend:"base" related:""` // target_entity_id
 }
 
 func NewHistoricalEventCollectionEntityOverthrown() *HistoricalEventCollectionEntityOverthrown {
@@ -6419,6 +6453,7 @@ func (x *HistoricalEventCollectionEntityOverthrown) RelatedToWrittenContent(id i
 func (x *HistoricalEventCollectionEntityOverthrown) RelatedToDanceForm(id int) bool   { return false }
 func (x *HistoricalEventCollectionEntityOverthrown) RelatedToMusicalForm(id int) bool { return false }
 func (x *HistoricalEventCollectionEntityOverthrown) RelatedToPoeticForm(id int) bool  { return false }
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToMountain(id int) bool    { return false }
 
 func (x *HistoricalEventCollectionEntityOverthrown) CheckFields() {
 }
@@ -6438,9 +6473,9 @@ func (x *HistoricalEventCollectionEntityOverthrown) MarshalJSON() ([]byte, error
 }
 
 type HistoricalEventCollectionInsurrection struct {
-	Ordinal    int `json:"ordinal" legend:"base"`    // ordinal
-	SiteId     int `json:"siteId" legend:"base"`     // site_id
-	TargetEnid int `json:"targetEnid" legend:"base"` // target_enid
+	Ordinal    int `json:"ordinal" legend:"base" related:""`    // ordinal
+	SiteId     int `json:"siteId" legend:"base" related:""`     // site_id
+	TargetEnid int `json:"targetEnid" legend:"base" related:""` // target_enid
 }
 
 func NewHistoricalEventCollectionInsurrection() *HistoricalEventCollectionInsurrection {
@@ -6464,6 +6499,7 @@ func (x *HistoricalEventCollectionInsurrection) RelatedToWrittenContent(id int) 
 func (x *HistoricalEventCollectionInsurrection) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionInsurrection) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionInsurrection) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionInsurrection) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionInsurrection) CheckFields() {
 }
@@ -6483,8 +6519,8 @@ func (x *HistoricalEventCollectionInsurrection) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionJourney struct {
-	Ordinal        int   `json:"ordinal" legend:"base"`       // ordinal
-	TravellerHfIds []int `json:"travellerHfIds" legend:"add"` // TravellerHfIds
+	Ordinal        int   `json:"ordinal" legend:"base" related:""`       // ordinal
+	TravellerHfIds []int `json:"travellerHfIds" legend:"add" related:""` // TravellerHfIds
 }
 
 func NewHistoricalEventCollectionJourney() *HistoricalEventCollectionJourney {
@@ -6504,6 +6540,7 @@ func (x *HistoricalEventCollectionJourney) RelatedToWrittenContent(id int) bool 
 func (x *HistoricalEventCollectionJourney) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionJourney) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionJourney) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionJourney) CheckFields() {
 }
@@ -6518,9 +6555,9 @@ func (x *HistoricalEventCollectionJourney) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionOccasion struct {
-	CivId      int `json:"civId" legend:"base"`      // civ_id
-	OccasionId int `json:"occasionId" legend:"base"` // occasion_id
-	Ordinal    int `json:"ordinal" legend:"base"`    // ordinal
+	CivId      int `json:"civId" legend:"base" related:""`      // civ_id
+	OccasionId int `json:"occasionId" legend:"base" related:""` // occasion_id
+	Ordinal    int `json:"ordinal" legend:"base" related:""`    // ordinal
 }
 
 func NewHistoricalEventCollectionOccasion() *HistoricalEventCollectionOccasion {
@@ -6542,6 +6579,7 @@ func (x *HistoricalEventCollectionOccasion) RelatedToWrittenContent(id int) bool
 func (x *HistoricalEventCollectionOccasion) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionOccasion) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionOccasion) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionOccasion) CheckFields() {
 }
@@ -6561,8 +6599,8 @@ func (x *HistoricalEventCollectionOccasion) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionPerformance struct {
-	Ordinal          int `json:"ordinal" legend:"base"`         // ordinal
-	OccasionEventcol int `json:"occasionEventcol" legend:"add"` // OccasionEventcol
+	Ordinal          int `json:"ordinal" legend:"base" related:""`         // ordinal
+	OccasionEventcol int `json:"occasionEventcol" legend:"add" related:""` // OccasionEventcol
 }
 
 func NewHistoricalEventCollectionPerformance() *HistoricalEventCollectionPerformance {
@@ -6583,6 +6621,7 @@ func (x *HistoricalEventCollectionPerformance) RelatedToWrittenContent(id int) b
 func (x *HistoricalEventCollectionPerformance) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionPerformance) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionPerformance) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionPerformance) CheckFields() {
 }
@@ -6599,9 +6638,9 @@ func (x *HistoricalEventCollectionPerformance) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionPersecution struct {
-	Ordinal        int `json:"ordinal" legend:"base"`        // ordinal
-	SiteId         int `json:"siteId" legend:"base"`         // site_id
-	TargetEntityId int `json:"targetEntityId" legend:"base"` // target_entity_id
+	Ordinal        int `json:"ordinal" legend:"base" related:""`        // ordinal
+	SiteId         int `json:"siteId" legend:"base" related:""`         // site_id
+	TargetEntityId int `json:"targetEntityId" legend:"base" related:""` // target_entity_id
 }
 
 func NewHistoricalEventCollectionPersecution() *HistoricalEventCollectionPersecution {
@@ -6625,6 +6664,7 @@ func (x *HistoricalEventCollectionPersecution) RelatedToWrittenContent(id int) b
 func (x *HistoricalEventCollectionPersecution) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionPersecution) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionPersecution) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionPersecution) CheckFields() {
 }
@@ -6644,8 +6684,8 @@ func (x *HistoricalEventCollectionPersecution) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionProcession struct {
-	Ordinal          int `json:"ordinal" legend:"base"`         // ordinal
-	OccasionEventcol int `json:"occasionEventcol" legend:"add"` // OccasionEventcol
+	Ordinal          int `json:"ordinal" legend:"base" related:""`         // ordinal
+	OccasionEventcol int `json:"occasionEventcol" legend:"add" related:""` // OccasionEventcol
 }
 
 func NewHistoricalEventCollectionProcession() *HistoricalEventCollectionProcession {
@@ -6666,6 +6706,7 @@ func (x *HistoricalEventCollectionProcession) RelatedToWrittenContent(id int) bo
 func (x *HistoricalEventCollectionProcession) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionProcession) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionProcession) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionProcession) CheckFields() {
 }
@@ -6709,9 +6750,9 @@ func (s HistoricalEventCollectionPurgeAdjective) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionPurge struct {
-	Adjective HistoricalEventCollectionPurgeAdjective `json:"adjective" legend:"base"` // adjective
-	Ordinal   int                                     `json:"ordinal" legend:"base"`   // ordinal
-	SiteId    int                                     `json:"siteId" legend:"base"`    // site_id
+	Adjective HistoricalEventCollectionPurgeAdjective `json:"adjective" legend:"base" related:""` // adjective
+	Ordinal   int                                     `json:"ordinal" legend:"base" related:""`   // ordinal
+	SiteId    int                                     `json:"siteId" legend:"base" related:""`    // site_id
 }
 
 func NewHistoricalEventCollectionPurge() *HistoricalEventCollectionPurge {
@@ -6732,6 +6773,7 @@ func (x *HistoricalEventCollectionPurge) RelatedToWrittenContent(id int) bool   
 func (x *HistoricalEventCollectionPurge) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionPurge) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionPurge) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionPurge) CheckFields() {
 }
@@ -6751,14 +6793,14 @@ func (x *HistoricalEventCollectionPurge) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionRaid struct {
-	AttackingEnid  int    `json:"attackingEnid" legend:"base"`  // attacking_enid
-	Coords         string `json:"coords" legend:"base"`         // coords
-	DefendingEnid  int    `json:"defendingEnid" legend:"base"`  // defending_enid
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Ordinal        int    `json:"ordinal" legend:"base"`        // ordinal
-	ParentEventcol int    `json:"parentEventcol" legend:"base"` // parent_eventcol
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	AttackingEnid  int    `json:"attackingEnid" legend:"base" related:""`  // attacking_enid
+	Coords         string `json:"coords" legend:"base" related:""`         // coords
+	DefendingEnid  int    `json:"defendingEnid" legend:"base" related:""`  // defending_enid
+	FeatureLayerId int    `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Ordinal        int    `json:"ordinal" legend:"base" related:""`        // ordinal
+	ParentEventcol int    `json:"parentEventcol" legend:"base" related:""` // parent_eventcol
+	SiteId         int    `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int    `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventCollectionRaid() *HistoricalEventCollectionRaid {
@@ -6786,6 +6828,7 @@ func (x *HistoricalEventCollectionRaid) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventCollectionRaid) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionRaid) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionRaid) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionRaid) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionRaid) CheckFields() {
 }
@@ -6818,11 +6861,11 @@ func (x *HistoricalEventCollectionRaid) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionSiteConquered struct {
-	AttackingEnid int `json:"attackingEnid" legend:"base"` // attacking_enid
-	DefendingEnid int `json:"defendingEnid" legend:"base"` // defending_enid
-	Ordinal       int `json:"ordinal" legend:"base"`       // ordinal
-	SiteId        int `json:"siteId" legend:"base"`        // site_id
-	WarEventcol   int `json:"warEventcol" legend:"base"`   // war_eventcol
+	AttackingEnid int `json:"attackingEnid" legend:"base" related:""` // attacking_enid
+	DefendingEnid int `json:"defendingEnid" legend:"base" related:""` // defending_enid
+	Ordinal       int `json:"ordinal" legend:"base" related:""`       // ordinal
+	SiteId        int `json:"siteId" legend:"base" related:""`        // site_id
+	WarEventcol   int `json:"warEventcol" legend:"base" related:""`   // war_eventcol
 }
 
 func NewHistoricalEventCollectionSiteConquered() *HistoricalEventCollectionSiteConquered {
@@ -6852,6 +6895,7 @@ func (x *HistoricalEventCollectionSiteConquered) RelatedToWrittenContent(id int)
 func (x *HistoricalEventCollectionSiteConquered) RelatedToDanceForm(id int) bool      { return false }
 func (x *HistoricalEventCollectionSiteConquered) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventCollectionSiteConquered) RelatedToPoeticForm(id int) bool     { return false }
+func (x *HistoricalEventCollectionSiteConquered) RelatedToMountain(id int) bool       { return false }
 
 func (x *HistoricalEventCollectionSiteConquered) CheckFields() {
 }
@@ -6877,14 +6921,14 @@ func (x *HistoricalEventCollectionSiteConquered) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionTheft struct {
-	AttackingEnid  int    `json:"attackingEnid" legend:"base"`  // attacking_enid
-	Coords         string `json:"coords" legend:"base"`         // coords
-	DefendingEnid  int    `json:"defendingEnid" legend:"base"`  // defending_enid
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Ordinal        int    `json:"ordinal" legend:"base"`        // ordinal
-	ParentEventcol int    `json:"parentEventcol" legend:"base"` // parent_eventcol
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	AttackingEnid  int    `json:"attackingEnid" legend:"base" related:""`  // attacking_enid
+	Coords         string `json:"coords" legend:"base" related:""`         // coords
+	DefendingEnid  int    `json:"defendingEnid" legend:"base" related:""`  // defending_enid
+	FeatureLayerId int    `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Ordinal        int    `json:"ordinal" legend:"base" related:""`        // ordinal
+	ParentEventcol int    `json:"parentEventcol" legend:"base" related:""` // parent_eventcol
+	SiteId         int    `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int    `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventCollectionTheft() *HistoricalEventCollectionTheft {
@@ -6912,6 +6956,7 @@ func (x *HistoricalEventCollectionTheft) RelatedToWrittenContent(id int) bool   
 func (x *HistoricalEventCollectionTheft) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionTheft) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionTheft) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionTheft) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionTheft) CheckFields() {
 }
@@ -6944,9 +6989,9 @@ func (x *HistoricalEventCollectionTheft) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCollectionWar struct {
-	AggressorEntId int    `json:"aggressorEntId" legend:"base"` // aggressor_ent_id
-	DefenderEntId  int    `json:"defenderEntId" legend:"base"`  // defender_ent_id
-	Name_          string `json:"name" legend:"base"`           // name
+	AggressorEntId int    `json:"aggressorEntId" legend:"base" related:""` // aggressor_ent_id
+	DefenderEntId  int    `json:"defenderEntId" legend:"base" related:""`  // defender_ent_id
+	Name_          string `json:"name" legend:"base" related:""`           // name
 }
 
 func NewHistoricalEventCollectionWar() *HistoricalEventCollectionWar {
@@ -6968,6 +7013,7 @@ func (x *HistoricalEventCollectionWar) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventCollectionWar) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCollectionWar) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionWar) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCollectionWar) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionWar) CheckFields() {
 }
@@ -6985,14 +7031,14 @@ func (x *HistoricalEventCollectionWar) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCompetition struct {
-	CivId          int   `json:"civId" legend:"base"`          // civ_id
-	CompetitorHfid []int `json:"competitorHfid" legend:"base"` // competitor_hfid
-	FeatureLayerId int   `json:"featureLayerId" legend:"base"` // feature_layer_id
-	OccasionId     int   `json:"occasionId" legend:"base"`     // occasion_id
-	ScheduleId     int   `json:"scheduleId" legend:"base"`     // schedule_id
-	SiteId         int   `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int   `json:"subregionId" legend:"base"`    // subregion_id
-	WinnerHfid     int   `json:"winnerHfid" legend:"base"`     // winner_hfid
+	CivId          int   `json:"civId" legend:"base" related:""`          // civ_id
+	CompetitorHfid []int `json:"competitorHfid" legend:"base" related:""` // competitor_hfid
+	FeatureLayerId int   `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	OccasionId     int   `json:"occasionId" legend:"base" related:""`     // occasion_id
+	ScheduleId     int   `json:"scheduleId" legend:"base" related:""`     // schedule_id
+	SiteId         int   `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int   `json:"subregionId" legend:"base" related:""`    // subregion_id
+	WinnerHfid     int   `json:"winnerHfid" legend:"base" related:""`     // winner_hfid
 }
 
 func NewHistoricalEventCompetition() *HistoricalEventCompetition {
@@ -7020,6 +7066,7 @@ func (x *HistoricalEventCompetition) RelatedToWrittenContent(id int) bool    { r
 func (x *HistoricalEventCompetition) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCompetition) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCompetition) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCompetition) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCompetition) CheckFields() {
 }
@@ -7099,11 +7146,11 @@ func (s HistoricalEventCreateEntityPositionReason) MarshalJSON() ([]byte, error)
 }
 
 type HistoricalEventCreateEntityPosition struct {
-	Civ      int                                       `json:"civ" legend:"plus"`      // civ
-	Histfig  int                                       `json:"histfig" legend:"plus"`  // histfig
-	Position string                                    `json:"position" legend:"plus"` // position
-	Reason   HistoricalEventCreateEntityPositionReason `json:"reason" legend:"plus"`   // reason
-	SiteCiv  int                                       `json:"siteCiv" legend:"plus"`  // site_civ
+	Civ      int                                       `json:"civ" legend:"plus" related:""`      // civ
+	Histfig  int                                       `json:"histfig" legend:"plus" related:""`  // histfig
+	Position string                                    `json:"position" legend:"plus" related:""` // position
+	Reason   HistoricalEventCreateEntityPositionReason `json:"reason" legend:"plus" related:""`   // reason
+	SiteCiv  int                                       `json:"siteCiv" legend:"plus" related:""`  // site_civ
 }
 
 func NewHistoricalEventCreateEntityPosition() *HistoricalEventCreateEntityPosition {
@@ -7127,6 +7174,7 @@ func (x *HistoricalEventCreateEntityPosition) RelatedToWrittenContent(id int) bo
 func (x *HistoricalEventCreateEntityPosition) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCreateEntityPosition) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCreateEntityPosition) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCreateEntityPosition) CheckFields() {
 }
@@ -7150,11 +7198,11 @@ func (x *HistoricalEventCreateEntityPosition) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCreatedSite struct {
-	BuilderHfid   int `json:"builderHfid" legend:"base"`   // builder_hfid
-	CivId         int `json:"civId" legend:"base"`         // civ_id
-	ResidentCivId int `json:"residentCivId" legend:"base"` // resident_civ_id
-	SiteCivId     int `json:"siteCivId" legend:"base"`     // site_civ_id
-	SiteId        int `json:"siteId" legend:"base"`        // site_id
+	BuilderHfid   int `json:"builderHfid" legend:"base" related:""`   // builder_hfid
+	CivId         int `json:"civId" legend:"base" related:""`         // civ_id
+	ResidentCivId int `json:"residentCivId" legend:"base" related:""` // resident_civ_id
+	SiteCivId     int `json:"siteCivId" legend:"base" related:""`     // site_civ_id
+	SiteId        int `json:"siteId" legend:"base" related:""`        // site_id
 }
 
 func NewHistoricalEventCreatedSite() *HistoricalEventCreatedSite {
@@ -7180,6 +7228,7 @@ func (x *HistoricalEventCreatedSite) RelatedToWrittenContent(id int) bool    { r
 func (x *HistoricalEventCreatedSite) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCreatedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCreatedSite) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCreatedSite) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCreatedSite) CheckFields() {
 }
@@ -7237,13 +7286,13 @@ func (s HistoricalEventCreatedStructureRebuild) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCreatedStructure struct {
-	BuilderHfid int                                    `json:"builderHfid" legend:"base"` // builder_hfid
-	CivId       int                                    `json:"civId" legend:"base"`       // civ_id
-	Rebuild     HistoricalEventCreatedStructureRebuild `json:"rebuild" legend:"plus"`     // rebuild
-	Rebuilt     bool                                   `json:"rebuilt" legend:"base"`     // rebuilt
-	SiteCivId   int                                    `json:"siteCivId" legend:"base"`   // site_civ_id
-	SiteId      int                                    `json:"siteId" legend:"base"`      // site_id
-	StructureId int                                    `json:"structureId" legend:"base"` // structure_id
+	BuilderHfid int                                    `json:"builderHfid" legend:"base" related:""` // builder_hfid
+	CivId       int                                    `json:"civId" legend:"base" related:""`       // civ_id
+	Rebuild     HistoricalEventCreatedStructureRebuild `json:"rebuild" legend:"plus" related:""`     // rebuild
+	Rebuilt     bool                                   `json:"rebuilt" legend:"base" related:""`     // rebuilt
+	SiteCivId   int                                    `json:"siteCivId" legend:"base" related:""`   // site_civ_id
+	SiteId      int                                    `json:"siteId" legend:"base" related:""`      // site_id
+	StructureId int                                    `json:"structureId" legend:"base" related:""` // structure_id
 }
 
 func NewHistoricalEventCreatedStructure() *HistoricalEventCreatedStructure {
@@ -7271,6 +7320,7 @@ func (x *HistoricalEventCreatedStructure) RelatedToWrittenContent(id int) bool  
 func (x *HistoricalEventCreatedStructure) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCreatedStructure) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCreatedStructure) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCreatedStructure) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCreatedStructure) CheckFields() {
 }
@@ -7300,12 +7350,12 @@ func (x *HistoricalEventCreatedStructure) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventCreatedWorldConstruction struct {
-	CivId      int `json:"civId" legend:"base"`      // civ_id
-	MasterWcid int `json:"masterWcid" legend:"base"` // master_wcid
-	SiteCivId  int `json:"siteCivId" legend:"base"`  // site_civ_id
-	SiteId1    int `json:"siteId1" legend:"base"`    // site_id1
-	SiteId2    int `json:"siteId2" legend:"base"`    // site_id2
-	Wcid       int `json:"wcid" legend:"base"`       // wcid
+	CivId      int `json:"civId" legend:"base" related:""`      // civ_id
+	MasterWcid int `json:"masterWcid" legend:"base" related:""` // master_wcid
+	SiteCivId  int `json:"siteCivId" legend:"base" related:""`  // site_civ_id
+	SiteId1    int `json:"siteId1" legend:"base" related:""`    // site_id1
+	SiteId2    int `json:"siteId2" legend:"base" related:""`    // site_id2
+	Wcid       int `json:"wcid" legend:"base" related:""`       // wcid
 }
 
 func NewHistoricalEventCreatedWorldConstruction() *HistoricalEventCreatedWorldConstruction {
@@ -7338,6 +7388,7 @@ func (x *HistoricalEventCreatedWorldConstruction) RelatedToWrittenContent(id int
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToDanceForm(id int) bool      { return false }
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToPoeticForm(id int) bool     { return false }
+func (x *HistoricalEventCreatedWorldConstruction) RelatedToMountain(id int) bool       { return false }
 
 func (x *HistoricalEventCreatedWorldConstruction) CheckFields() {
 }
@@ -7366,14 +7417,14 @@ func (x *HistoricalEventCreatedWorldConstruction) MarshalJSON() ([]byte, error) 
 }
 
 type HistoricalEventCreatureDevoured struct {
-	Caste          string `json:"caste" legend:"plus"`          // caste
-	Eater          int    `json:"eater" legend:"plus"`          // eater
-	Entity         int    `json:"entity" legend:"plus"`         // entity
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Race           string `json:"race" legend:"plus"`           // race
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
-	Victim         int    `json:"victim" legend:"plus"`         // victim
+	Caste          string `json:"caste" legend:"plus" related:""`          // caste
+	Eater          int    `json:"eater" legend:"plus" related:""`          // eater
+	Entity         int    `json:"entity" legend:"plus" related:""`         // entity
+	FeatureLayerId int    `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Race           string `json:"race" legend:"plus" related:""`           // race
+	SiteId         int    `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int    `json:"subregionId" legend:"base" related:""`    // subregion_id
+	Victim         int    `json:"victim" legend:"plus" related:""`         // victim
 }
 
 func NewHistoricalEventCreatureDevoured() *HistoricalEventCreatureDevoured {
@@ -7398,6 +7449,7 @@ func (x *HistoricalEventCreatureDevoured) RelatedToWrittenContent(id int) bool  
 func (x *HistoricalEventCreatureDevoured) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventCreatureDevoured) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCreatureDevoured) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventCreatureDevoured) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventCreatureDevoured) CheckFields() {
 	if x.Eater != x.FeatureLayerId {
@@ -7524,14 +7576,14 @@ func (s HistoricalEventDanceFormCreatedReason) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventDanceFormCreated struct {
-	Circumstance   HistoricalEventDanceFormCreatedCircumstance `json:"circumstance" legend:"base"`   // circumstance
-	CircumstanceId int                                         `json:"circumstanceId" legend:"base"` // circumstance_id
-	FormId         int                                         `json:"formId" legend:"base"`         // form_id
-	HistFigureId   int                                         `json:"histFigureId" legend:"base"`   // hist_figure_id
-	Reason         HistoricalEventDanceFormCreatedReason       `json:"reason" legend:"base"`         // reason
-	ReasonId       int                                         `json:"reasonId" legend:"base"`       // reason_id
-	SiteId         int                                         `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int                                         `json:"subregionId" legend:"base"`    // subregion_id
+	Circumstance   HistoricalEventDanceFormCreatedCircumstance `json:"circumstance" legend:"base" related:""`    // circumstance
+	CircumstanceId int                                         `json:"circumstanceId" legend:"base" related:""`  // circumstance_id
+	FormId         int                                         `json:"formId" legend:"base" related:"danceForm"` // form_id
+	HistFigureId   int                                         `json:"histFigureId" legend:"base" related:""`    // hist_figure_id
+	Reason         HistoricalEventDanceFormCreatedReason       `json:"reason" legend:"base" related:""`          // reason
+	ReasonId       int                                         `json:"reasonId" legend:"base" related:""`        // reason_id
+	SiteId         int                                         `json:"siteId" legend:"base" related:""`          // site_id
+	SubregionId    int                                         `json:"subregionId" legend:"base" related:""`     // subregion_id
 }
 
 func NewHistoricalEventDanceFormCreated() *HistoricalEventDanceFormCreated {
@@ -7556,6 +7608,7 @@ func (x *HistoricalEventDanceFormCreated) RelatedToWrittenContent(id int) bool  
 func (x *HistoricalEventDanceFormCreated) RelatedToDanceForm(id int) bool         { return x.FormId == id }
 func (x *HistoricalEventDanceFormCreated) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventDanceFormCreated) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventDanceFormCreated) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventDanceFormCreated) CheckFields() {
 }
@@ -7590,11 +7643,11 @@ func (x *HistoricalEventDanceFormCreated) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventDestroyedSite struct {
-	AttackerCivId   int  `json:"attackerCivId" legend:"base"`   // attacker_civ_id
-	DefenderCivId   int  `json:"defenderCivId" legend:"base"`   // defender_civ_id
-	NoDefeatMention bool `json:"noDefeatMention" legend:"base"` // no_defeat_mention
-	SiteCivId       int  `json:"siteCivId" legend:"base"`       // site_civ_id
-	SiteId          int  `json:"siteId" legend:"base"`          // site_id
+	AttackerCivId   int  `json:"attackerCivId" legend:"base" related:""`   // attacker_civ_id
+	DefenderCivId   int  `json:"defenderCivId" legend:"base" related:""`   // defender_civ_id
+	NoDefeatMention bool `json:"noDefeatMention" legend:"base" related:""` // no_defeat_mention
+	SiteCivId       int  `json:"siteCivId" legend:"base" related:""`       // site_civ_id
+	SiteId          int  `json:"siteId" legend:"base" related:""`          // site_id
 }
 
 func NewHistoricalEventDestroyedSite() *HistoricalEventDestroyedSite {
@@ -7619,6 +7672,7 @@ func (x *HistoricalEventDestroyedSite) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventDestroyedSite) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventDestroyedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventDestroyedSite) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventDestroyedSite) CheckFields() {
 }
@@ -7642,9 +7696,9 @@ func (x *HistoricalEventDestroyedSite) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventDiplomatLost struct {
-	Entity   int `json:"entity" legend:"plus"`   // entity
-	Involved int `json:"involved" legend:"plus"` // involved
-	SiteId   int `json:"siteId" legend:"base"`   // site_id
+	Entity   int `json:"entity" legend:"plus" related:""`   // entity
+	Involved int `json:"involved" legend:"plus" related:""` // involved
+	SiteId   int `json:"siteId" legend:"base" related:""`   // site_id
 }
 
 func NewHistoricalEventDiplomatLost() *HistoricalEventDiplomatLost {
@@ -7668,6 +7722,7 @@ func (x *HistoricalEventDiplomatLost) RelatedToWrittenContent(id int) bool    { 
 func (x *HistoricalEventDiplomatLost) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventDiplomatLost) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventDiplomatLost) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventDiplomatLost) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventDiplomatLost) CheckFields() {
 	if x.Entity != x.SiteId {
@@ -7693,8 +7748,8 @@ func (x *HistoricalEventDiplomatLost) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventEntityAllianceFormed struct {
-	InitiatingEnid int   `json:"initiatingEnid" legend:"base"` // initiating_enid
-	JoiningEnid    []int `json:"joiningEnid" legend:"base"`    // joining_enid
+	InitiatingEnid int   `json:"initiatingEnid" legend:"base" related:""` // initiating_enid
+	JoiningEnid    []int `json:"joiningEnid" legend:"base" related:""`    // joining_enid
 }
 
 func NewHistoricalEventEntityAllianceFormed() *HistoricalEventEntityAllianceFormed {
@@ -7716,6 +7771,7 @@ func (x *HistoricalEventEntityAllianceFormed) RelatedToWrittenContent(id int) bo
 func (x *HistoricalEventEntityAllianceFormed) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventEntityAllianceFormed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityAllianceFormed) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventEntityAllianceFormed) CheckFields() {
 }
@@ -7730,10 +7786,10 @@ func (x *HistoricalEventEntityAllianceFormed) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventEntityBreachFeatureLayer struct {
-	CivEntityId    int `json:"civEntityId" legend:"base"`    // civ_entity_id
-	FeatureLayerId int `json:"featureLayerId" legend:"base"` // feature_layer_id
-	SiteEntityId   int `json:"siteEntityId" legend:"base"`   // site_entity_id
-	SiteId         int `json:"siteId" legend:"base"`         // site_id
+	CivEntityId    int `json:"civEntityId" legend:"base" related:""`    // civ_entity_id
+	FeatureLayerId int `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	SiteEntityId   int `json:"siteEntityId" legend:"base" related:""`   // site_entity_id
+	SiteId         int `json:"siteId" legend:"base" related:""`         // site_id
 }
 
 func NewHistoricalEventEntityBreachFeatureLayer() *HistoricalEventEntityBreachFeatureLayer {
@@ -7762,6 +7818,7 @@ func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToWrittenContent(id int
 func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToDanceForm(id int) bool      { return false }
 func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToPoeticForm(id int) bool     { return false }
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToMountain(id int) bool       { return false }
 
 func (x *HistoricalEventEntityBreachFeatureLayer) CheckFields() {
 }
@@ -7784,10 +7841,10 @@ func (x *HistoricalEventEntityBreachFeatureLayer) MarshalJSON() ([]byte, error) 
 }
 
 type HistoricalEventEntityCreated struct {
-	CreatorHfid int `json:"creatorHfid" legend:"base"` // creator_hfid
-	EntityId    int `json:"entityId" legend:"base"`    // entity_id
-	SiteId      int `json:"siteId" legend:"base"`      // site_id
-	StructureId int `json:"structureId" legend:"base"` // structure_id
+	CreatorHfid int `json:"creatorHfid" legend:"base" related:""` // creator_hfid
+	EntityId    int `json:"entityId" legend:"base" related:""`    // entity_id
+	SiteId      int `json:"siteId" legend:"base" related:""`      // site_id
+	StructureId int `json:"structureId" legend:"base" related:""` // structure_id
 }
 
 func NewHistoricalEventEntityCreated() *HistoricalEventEntityCreated {
@@ -7812,6 +7869,7 @@ func (x *HistoricalEventEntityCreated) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventEntityCreated) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventEntityCreated) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityCreated) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventEntityCreated) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventEntityCreated) CheckFields() {
 }
@@ -7866,8 +7924,8 @@ func (s HistoricalEventEntityDissolvedReason) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventEntityDissolved struct {
-	EntityId int                                  `json:"entityId" legend:"base"` // entity_id
-	Reason   HistoricalEventEntityDissolvedReason `json:"reason" legend:"base"`   // reason
+	EntityId int                                  `json:"entityId" legend:"base" related:""` // entity_id
+	Reason   HistoricalEventEntityDissolvedReason `json:"reason" legend:"base" related:""`   // reason
 }
 
 func NewHistoricalEventEntityDissolved() *HistoricalEventEntityDissolved {
@@ -7887,6 +7945,7 @@ func (x *HistoricalEventEntityDissolved) RelatedToWrittenContent(id int) bool   
 func (x *HistoricalEventEntityDissolved) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventEntityDissolved) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityDissolved) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventEntityDissolved) CheckFields() {
 }
@@ -7903,9 +7962,9 @@ func (x *HistoricalEventEntityDissolved) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventEntityEquipmentPurchase struct {
-	EntityId          int   `json:"entityId" legend:"base"`          // entity_id
-	Hfid              []int `json:"hfid" legend:"base"`              // hfid
-	NewEquipmentLevel int   `json:"newEquipmentLevel" legend:"base"` // new_equipment_level
+	EntityId          int   `json:"entityId" legend:"base" related:""`          // entity_id
+	Hfid              []int `json:"hfid" legend:"base" related:""`              // hfid
+	NewEquipmentLevel int   `json:"newEquipmentLevel" legend:"base" related:""` // new_equipment_level
 }
 
 func NewHistoricalEventEntityEquipmentPurchase() *HistoricalEventEntityEquipmentPurchase {
@@ -7934,6 +7993,7 @@ func (x *HistoricalEventEntityEquipmentPurchase) RelatedToWrittenContent(id int)
 func (x *HistoricalEventEntityEquipmentPurchase) RelatedToDanceForm(id int) bool      { return false }
 func (x *HistoricalEventEntityEquipmentPurchase) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventEntityEquipmentPurchase) RelatedToPoeticForm(id int) bool     { return false }
+func (x *HistoricalEventEntityEquipmentPurchase) RelatedToMountain(id int) bool       { return false }
 
 func (x *HistoricalEventEntityEquipmentPurchase) CheckFields() {
 }
@@ -7951,9 +8011,9 @@ func (x *HistoricalEventEntityEquipmentPurchase) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventEntityExpelsHf struct {
-	EntityId int `json:"entityId" legend:"base"` // entity_id
-	Hfid     int `json:"hfid" legend:"base"`     // hfid
-	SiteId   int `json:"siteId" legend:"base"`   // site_id
+	EntityId int `json:"entityId" legend:"base" related:""` // entity_id
+	Hfid     int `json:"hfid" legend:"base" related:""`     // hfid
+	SiteId   int `json:"siteId" legend:"base" related:""`   // site_id
 }
 
 func NewHistoricalEventEntityExpelsHf() *HistoricalEventEntityExpelsHf {
@@ -7975,6 +8035,7 @@ func (x *HistoricalEventEntityExpelsHf) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventEntityExpelsHf) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventEntityExpelsHf) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityExpelsHf) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventEntityExpelsHf) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventEntityExpelsHf) CheckFields() {
 }
@@ -7994,8 +8055,8 @@ func (x *HistoricalEventEntityExpelsHf) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventEntityFledSite struct {
-	FledCivId int `json:"fledCivId" legend:"base"` // fled_civ_id
-	SiteId    int `json:"siteId" legend:"base"`    // site_id
+	FledCivId int `json:"fledCivId" legend:"base" related:""` // fled_civ_id
+	SiteId    int `json:"siteId" legend:"base" related:""`    // site_id
 }
 
 func NewHistoricalEventEntityFledSite() *HistoricalEventEntityFledSite {
@@ -8016,6 +8077,7 @@ func (x *HistoricalEventEntityFledSite) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventEntityFledSite) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventEntityFledSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityFledSite) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventEntityFledSite) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventEntityFledSite) CheckFields() {
 }
@@ -8032,11 +8094,11 @@ func (x *HistoricalEventEntityFledSite) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventEntityIncorporated struct {
-	JoinedEntityId       int  `json:"joinedEntityId" legend:"base"`       // joined_entity_id
-	JoinerEntityId       int  `json:"joinerEntityId" legend:"base"`       // joiner_entity_id
-	LeaderHfid           int  `json:"leaderHfid" legend:"base"`           // leader_hfid
-	PartialIncorporation bool `json:"partialIncorporation" legend:"base"` // partial_incorporation
-	SiteId               int  `json:"siteId" legend:"base"`               // site_id
+	JoinedEntityId       int  `json:"joinedEntityId" legend:"base" related:""`       // joined_entity_id
+	JoinerEntityId       int  `json:"joinerEntityId" legend:"base" related:""`       // joiner_entity_id
+	LeaderHfid           int  `json:"leaderHfid" legend:"base" related:""`           // leader_hfid
+	PartialIncorporation bool `json:"partialIncorporation" legend:"base" related:""` // partial_incorporation
+	SiteId               int  `json:"siteId" legend:"base" related:""`               // site_id
 }
 
 func NewHistoricalEventEntityIncorporated() *HistoricalEventEntityIncorporated {
@@ -8061,6 +8123,7 @@ func (x *HistoricalEventEntityIncorporated) RelatedToWrittenContent(id int) bool
 func (x *HistoricalEventEntityIncorporated) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventEntityIncorporated) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityIncorporated) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventEntityIncorporated) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventEntityIncorporated) CheckFields() {
 }
@@ -8138,10 +8201,10 @@ func (s HistoricalEventEntityLawLawRemove) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventEntityLaw struct {
-	EntityId     int                               `json:"entityId" legend:"base"`     // entity_id
-	HistFigureId int                               `json:"histFigureId" legend:"base"` // hist_figure_id
-	LawAdd       HistoricalEventEntityLawLawAdd    `json:"lawAdd" legend:"base"`       // law_add
-	LawRemove    HistoricalEventEntityLawLawRemove `json:"lawRemove" legend:"base"`    // law_remove
+	EntityId     int                               `json:"entityId" legend:"base" related:""`     // entity_id
+	HistFigureId int                               `json:"histFigureId" legend:"base" related:""` // hist_figure_id
+	LawAdd       HistoricalEventEntityLawLawAdd    `json:"lawAdd" legend:"base" related:""`       // law_add
+	LawRemove    HistoricalEventEntityLawLawRemove `json:"lawRemove" legend:"base" related:""`    // law_remove
 }
 
 func NewHistoricalEventEntityLaw() *HistoricalEventEntityLaw {
@@ -8162,6 +8225,7 @@ func (x *HistoricalEventEntityLaw) RelatedToWrittenContent(id int) bool    { ret
 func (x *HistoricalEventEntityLaw) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventEntityLaw) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityLaw) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventEntityLaw) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventEntityLaw) CheckFields() {
 }
@@ -8184,13 +8248,13 @@ func (x *HistoricalEventEntityLaw) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventEntityOverthrown struct {
-	ConspiratorHfid   []int `json:"conspiratorHfid" legend:"base"`   // conspirator_hfid
-	EntityId          int   `json:"entityId" legend:"base"`          // entity_id
-	InstigatorHfid    int   `json:"instigatorHfid" legend:"base"`    // instigator_hfid
-	OverthrownHfid    int   `json:"overthrownHfid" legend:"base"`    // overthrown_hfid
-	PosTakerHfid      int   `json:"posTakerHfid" legend:"base"`      // pos_taker_hfid
-	PositionProfileId int   `json:"positionProfileId" legend:"base"` // position_profile_id
-	SiteId            int   `json:"siteId" legend:"base"`            // site_id
+	ConspiratorHfid   []int `json:"conspiratorHfid" legend:"base" related:""`   // conspirator_hfid
+	EntityId          int   `json:"entityId" legend:"base" related:""`          // entity_id
+	InstigatorHfid    int   `json:"instigatorHfid" legend:"base" related:""`    // instigator_hfid
+	OverthrownHfid    int   `json:"overthrownHfid" legend:"base" related:""`    // overthrown_hfid
+	PosTakerHfid      int   `json:"posTakerHfid" legend:"base" related:""`      // pos_taker_hfid
+	PositionProfileId int   `json:"positionProfileId" legend:"base" related:""` // position_profile_id
+	SiteId            int   `json:"siteId" legend:"base" related:""`            // site_id
 }
 
 func NewHistoricalEventEntityOverthrown() *HistoricalEventEntityOverthrown {
@@ -8217,6 +8281,7 @@ func (x *HistoricalEventEntityOverthrown) RelatedToWrittenContent(id int) bool  
 func (x *HistoricalEventEntityOverthrown) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventEntityOverthrown) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityOverthrown) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventEntityOverthrown) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventEntityOverthrown) CheckFields() {
 }
@@ -8246,17 +8311,17 @@ func (x *HistoricalEventEntityOverthrown) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventEntityPersecuted struct {
-	DestroyedStructureId        int   `json:"destroyedStructureId" legend:"base"`        // destroyed_structure_id
-	ExpelledCreature            []int `json:"expelledCreature" legend:"base"`            // expelled_creature
-	ExpelledHfid                []int `json:"expelledHfid" legend:"base"`                // expelled_hfid
-	ExpelledNumber              []int `json:"expelledNumber" legend:"base"`              // expelled_number
-	ExpelledPopId               []int `json:"expelledPopId" legend:"base"`               // expelled_pop_id
-	PersecutorEnid              int   `json:"persecutorEnid" legend:"base"`              // persecutor_enid
-	PersecutorHfid              int   `json:"persecutorHfid" legend:"base"`              // persecutor_hfid
-	PropertyConfiscatedFromHfid []int `json:"propertyConfiscatedFromHfid" legend:"base"` // property_confiscated_from_hfid
-	ShrineAmountDestroyed       int   `json:"shrineAmountDestroyed" legend:"base"`       // shrine_amount_destroyed
-	SiteId                      int   `json:"siteId" legend:"base"`                      // site_id
-	TargetEnid                  int   `json:"targetEnid" legend:"base"`                  // target_enid
+	DestroyedStructureId        int   `json:"destroyedStructureId" legend:"base" related:""`        // destroyed_structure_id
+	ExpelledCreature            []int `json:"expelledCreature" legend:"base" related:""`            // expelled_creature
+	ExpelledHfid                []int `json:"expelledHfid" legend:"base" related:""`                // expelled_hfid
+	ExpelledNumber              []int `json:"expelledNumber" legend:"base" related:""`              // expelled_number
+	ExpelledPopId               []int `json:"expelledPopId" legend:"base" related:""`               // expelled_pop_id
+	PersecutorEnid              int   `json:"persecutorEnid" legend:"base" related:""`              // persecutor_enid
+	PersecutorHfid              int   `json:"persecutorHfid" legend:"base" related:""`              // persecutor_hfid
+	PropertyConfiscatedFromHfid []int `json:"propertyConfiscatedFromHfid" legend:"base" related:""` // property_confiscated_from_hfid
+	ShrineAmountDestroyed       int   `json:"shrineAmountDestroyed" legend:"base" related:""`       // shrine_amount_destroyed
+	SiteId                      int   `json:"siteId" legend:"base" related:""`                      // site_id
+	TargetEnid                  int   `json:"targetEnid" legend:"base" related:""`                  // target_enid
 }
 
 func NewHistoricalEventEntityPersecuted() *HistoricalEventEntityPersecuted {
@@ -8287,6 +8352,7 @@ func (x *HistoricalEventEntityPersecuted) RelatedToWrittenContent(id int) bool  
 func (x *HistoricalEventEntityPersecuted) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventEntityPersecuted) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityPersecuted) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventEntityPersecuted) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventEntityPersecuted) CheckFields() {
 }
@@ -8347,10 +8413,10 @@ func (s HistoricalEventEntityPrimaryCriminalsAction) MarshalJSON() ([]byte, erro
 }
 
 type HistoricalEventEntityPrimaryCriminals struct {
-	Action      HistoricalEventEntityPrimaryCriminalsAction `json:"action" legend:"plus"`      // action
-	EntityId    int                                         `json:"entityId" legend:"base"`    // entity_id
-	SiteId      int                                         `json:"siteId" legend:"base"`      // site_id
-	StructureId int                                         `json:"structureId" legend:"base"` // structure_id
+	Action      HistoricalEventEntityPrimaryCriminalsAction `json:"action" legend:"plus" related:""`      // action
+	EntityId    int                                         `json:"entityId" legend:"base" related:""`    // entity_id
+	SiteId      int                                         `json:"siteId" legend:"base" related:""`      // site_id
+	StructureId int                                         `json:"structureId" legend:"base" related:""` // structure_id
 }
 
 func NewHistoricalEventEntityPrimaryCriminals() *HistoricalEventEntityPrimaryCriminals {
@@ -8374,6 +8440,7 @@ func (x *HistoricalEventEntityPrimaryCriminals) RelatedToWrittenContent(id int) 
 func (x *HistoricalEventEntityPrimaryCriminals) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventEntityPrimaryCriminals) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityPrimaryCriminals) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventEntityPrimaryCriminals) CheckFields() {
 }
@@ -8396,8 +8463,8 @@ func (x *HistoricalEventEntityPrimaryCriminals) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventEntityRampagedInSite struct {
-	RampageCivId int `json:"rampageCivId" legend:"base"` // rampage_civ_id
-	SiteId       int `json:"siteId" legend:"base"`       // site_id
+	RampageCivId int `json:"rampageCivId" legend:"base" related:""` // rampage_civ_id
+	SiteId       int `json:"siteId" legend:"base" related:""`       // site_id
 }
 
 func NewHistoricalEventEntityRampagedInSite() *HistoricalEventEntityRampagedInSite {
@@ -8420,6 +8487,7 @@ func (x *HistoricalEventEntityRampagedInSite) RelatedToWrittenContent(id int) bo
 func (x *HistoricalEventEntityRampagedInSite) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventEntityRampagedInSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityRampagedInSite) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventEntityRampagedInSite) CheckFields() {
 }
@@ -8463,10 +8531,10 @@ func (s HistoricalEventEntityRelocateAction) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventEntityRelocate struct {
-	Action      HistoricalEventEntityRelocateAction `json:"action" legend:"plus"`      // action
-	EntityId    int                                 `json:"entityId" legend:"base"`    // entity_id
-	SiteId      int                                 `json:"siteId" legend:"base"`      // site_id
-	StructureId int                                 `json:"structureId" legend:"base"` // structure_id
+	Action      HistoricalEventEntityRelocateAction `json:"action" legend:"plus" related:""`      // action
+	EntityId    int                                 `json:"entityId" legend:"base" related:""`    // entity_id
+	SiteId      int                                 `json:"siteId" legend:"base" related:""`      // site_id
+	StructureId int                                 `json:"structureId" legend:"base" related:""` // structure_id
 }
 
 func NewHistoricalEventEntityRelocate() *HistoricalEventEntityRelocate {
@@ -8490,6 +8558,7 @@ func (x *HistoricalEventEntityRelocate) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventEntityRelocate) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventEntityRelocate) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityRelocate) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventEntityRelocate) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventEntityRelocate) CheckFields() {
 }
@@ -8539,9 +8608,9 @@ func (s HistoricalEventEntitySearchedSiteResult) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventEntitySearchedSite struct {
-	Result        HistoricalEventEntitySearchedSiteResult `json:"result" legend:"base"`        // result
-	SearcherCivId int                                     `json:"searcherCivId" legend:"base"` // searcher_civ_id
-	SiteId        int                                     `json:"siteId" legend:"base"`        // site_id
+	Result        HistoricalEventEntitySearchedSiteResult `json:"result" legend:"base" related:""`        // result
+	SearcherCivId int                                     `json:"searcherCivId" legend:"base" related:""` // searcher_civ_id
+	SiteId        int                                     `json:"siteId" legend:"base" related:""`        // site_id
 }
 
 func NewHistoricalEventEntitySearchedSite() *HistoricalEventEntitySearchedSite {
@@ -8564,6 +8633,7 @@ func (x *HistoricalEventEntitySearchedSite) RelatedToWrittenContent(id int) bool
 func (x *HistoricalEventEntitySearchedSite) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventEntitySearchedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntitySearchedSite) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventEntitySearchedSite) CheckFields() {
 }
@@ -8610,12 +8680,12 @@ func (s HistoricalEventFailedFrameAttemptCrime) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventFailedFrameAttempt struct {
-	ConvicterEnid int                                    `json:"convicterEnid" legend:"base"` // convicter_enid
-	Crime         HistoricalEventFailedFrameAttemptCrime `json:"crime" legend:"base"`         // crime
-	FooledHfid    int                                    `json:"fooledHfid" legend:"base"`    // fooled_hfid
-	FramerHfid    int                                    `json:"framerHfid" legend:"base"`    // framer_hfid
-	PlotterHfid   int                                    `json:"plotterHfid" legend:"base"`   // plotter_hfid
-	TargetHfid    int                                    `json:"targetHfid" legend:"base"`    // target_hfid
+	ConvicterEnid int                                    `json:"convicterEnid" legend:"base" related:""` // convicter_enid
+	Crime         HistoricalEventFailedFrameAttemptCrime `json:"crime" legend:"base" related:""`         // crime
+	FooledHfid    int                                    `json:"fooledHfid" legend:"base" related:""`    // fooled_hfid
+	FramerHfid    int                                    `json:"framerHfid" legend:"base" related:""`    // framer_hfid
+	PlotterHfid   int                                    `json:"plotterHfid" legend:"base" related:""`   // plotter_hfid
+	TargetHfid    int                                    `json:"targetHfid" legend:"base" related:""`    // target_hfid
 }
 
 func NewHistoricalEventFailedFrameAttempt() *HistoricalEventFailedFrameAttempt {
@@ -8643,6 +8713,7 @@ func (x *HistoricalEventFailedFrameAttempt) RelatedToWrittenContent(id int) bool
 func (x *HistoricalEventFailedFrameAttempt) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventFailedFrameAttempt) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventFailedFrameAttempt) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventFailedFrameAttempt) CheckFields() {
 }
@@ -8936,31 +9007,31 @@ func (s HistoricalEventFailedIntrigueCorruptionTopValue) MarshalJSON() ([]byte, 
 }
 
 type HistoricalEventFailedIntrigueCorruption struct {
-	Action                    HistoricalEventFailedIntrigueCorruptionAction                `json:"action" legend:"base"`                    // action
-	AllyDefenseBonus          int                                                          `json:"allyDefenseBonus" legend:"base"`          // ally_defense_bonus
-	CoconspiratorBonus        int                                                          `json:"coconspiratorBonus" legend:"base"`        // coconspirator_bonus
-	CorruptorHfid             int                                                          `json:"corruptorHfid" legend:"base"`             // corruptor_hfid
-	CorruptorIdentity         int                                                          `json:"corruptorIdentity" legend:"base"`         // corruptor_identity
-	FailedJudgmentTest        bool                                                         `json:"failedJudgmentTest" legend:"base"`        // failed_judgment_test
-	FeatureLayerId            int                                                          `json:"featureLayerId" legend:"base"`            // feature_layer_id
-	LureHfid                  int                                                          `json:"lureHfid" legend:"base"`                  // lure_hfid
-	Method                    HistoricalEventFailedIntrigueCorruptionMethod                `json:"method" legend:"base"`                    // method
-	RelevantEntityId          int                                                          `json:"relevantEntityId" legend:"base"`          // relevant_entity_id
-	RelevantIdForMethod       int                                                          `json:"relevantIdForMethod" legend:"base"`       // relevant_id_for_method
-	RelevantPositionProfileId int                                                          `json:"relevantPositionProfileId" legend:"base"` // relevant_position_profile_id
-	SiteId                    int                                                          `json:"siteId" legend:"base"`                    // site_id
-	SubregionId               int                                                          `json:"subregionId" legend:"base"`               // subregion_id
-	TargetHfid                int                                                          `json:"targetHfid" legend:"base"`                // target_hfid
-	TargetIdentity            int                                                          `json:"targetIdentity" legend:"base"`            // target_identity
-	TopFacet                  HistoricalEventFailedIntrigueCorruptionTopFacet              `json:"topFacet" legend:"base"`                  // top_facet
-	TopFacetModifier          int                                                          `json:"topFacetModifier" legend:"base"`          // top_facet_modifier
-	TopFacetRating            int                                                          `json:"topFacetRating" legend:"base"`            // top_facet_rating
-	TopRelationshipFactor     HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor `json:"topRelationshipFactor" legend:"base"`     // top_relationship_factor
-	TopRelationshipModifier   int                                                          `json:"topRelationshipModifier" legend:"base"`   // top_relationship_modifier
-	TopRelationshipRating     int                                                          `json:"topRelationshipRating" legend:"base"`     // top_relationship_rating
-	TopValue                  HistoricalEventFailedIntrigueCorruptionTopValue              `json:"topValue" legend:"base"`                  // top_value
-	TopValueModifier          int                                                          `json:"topValueModifier" legend:"base"`          // top_value_modifier
-	TopValueRating            int                                                          `json:"topValueRating" legend:"base"`            // top_value_rating
+	Action                    HistoricalEventFailedIntrigueCorruptionAction                `json:"action" legend:"base" related:""`                    // action
+	AllyDefenseBonus          int                                                          `json:"allyDefenseBonus" legend:"base" related:""`          // ally_defense_bonus
+	CoconspiratorBonus        int                                                          `json:"coconspiratorBonus" legend:"base" related:""`        // coconspirator_bonus
+	CorruptorHfid             int                                                          `json:"corruptorHfid" legend:"base" related:""`             // corruptor_hfid
+	CorruptorIdentity         int                                                          `json:"corruptorIdentity" legend:"base" related:""`         // corruptor_identity
+	FailedJudgmentTest        bool                                                         `json:"failedJudgmentTest" legend:"base" related:""`        // failed_judgment_test
+	FeatureLayerId            int                                                          `json:"featureLayerId" legend:"base" related:""`            // feature_layer_id
+	LureHfid                  int                                                          `json:"lureHfid" legend:"base" related:""`                  // lure_hfid
+	Method                    HistoricalEventFailedIntrigueCorruptionMethod                `json:"method" legend:"base" related:""`                    // method
+	RelevantEntityId          int                                                          `json:"relevantEntityId" legend:"base" related:""`          // relevant_entity_id
+	RelevantIdForMethod       int                                                          `json:"relevantIdForMethod" legend:"base" related:""`       // relevant_id_for_method
+	RelevantPositionProfileId int                                                          `json:"relevantPositionProfileId" legend:"base" related:""` // relevant_position_profile_id
+	SiteId                    int                                                          `json:"siteId" legend:"base" related:""`                    // site_id
+	SubregionId               int                                                          `json:"subregionId" legend:"base" related:""`               // subregion_id
+	TargetHfid                int                                                          `json:"targetHfid" legend:"base" related:""`                // target_hfid
+	TargetIdentity            int                                                          `json:"targetIdentity" legend:"base" related:""`            // target_identity
+	TopFacet                  HistoricalEventFailedIntrigueCorruptionTopFacet              `json:"topFacet" legend:"base" related:""`                  // top_facet
+	TopFacetModifier          int                                                          `json:"topFacetModifier" legend:"base" related:""`          // top_facet_modifier
+	TopFacetRating            int                                                          `json:"topFacetRating" legend:"base" related:""`            // top_facet_rating
+	TopRelationshipFactor     HistoricalEventFailedIntrigueCorruptionTopRelationshipFactor `json:"topRelationshipFactor" legend:"base" related:""`     // top_relationship_factor
+	TopRelationshipModifier   int                                                          `json:"topRelationshipModifier" legend:"base" related:""`   // top_relationship_modifier
+	TopRelationshipRating     int                                                          `json:"topRelationshipRating" legend:"base" related:""`     // top_relationship_rating
+	TopValue                  HistoricalEventFailedIntrigueCorruptionTopValue              `json:"topValue" legend:"base" related:""`                  // top_value
+	TopValueModifier          int                                                          `json:"topValueModifier" legend:"base" related:""`          // top_value_modifier
+	TopValueRating            int                                                          `json:"topValueRating" legend:"base" related:""`            // top_value_rating
 }
 
 func NewHistoricalEventFailedIntrigueCorruption() *HistoricalEventFailedIntrigueCorruption {
@@ -9008,6 +9079,7 @@ func (x *HistoricalEventFailedIntrigueCorruption) RelatedToWrittenContent(id int
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToDanceForm(id int) bool      { return false }
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToPoeticForm(id int) bool     { return false }
+func (x *HistoricalEventFailedIntrigueCorruption) RelatedToMountain(id int) bool       { return false }
 
 func (x *HistoricalEventFailedIntrigueCorruption) CheckFields() {
 }
@@ -9091,17 +9163,17 @@ func (x *HistoricalEventFailedIntrigueCorruption) MarshalJSON() ([]byte, error) 
 }
 
 type HistoricalEventFieldBattle struct {
-	ASupportMercEnid    int    `json:"aSupportMercEnid" legend:"base"`    // a_support_merc_enid
-	AttackerCivId       int    `json:"attackerCivId" legend:"base"`       // attacker_civ_id
-	AttackerGeneralHfid int    `json:"attackerGeneralHfid" legend:"base"` // attacker_general_hfid
-	AttackerMercEnid    int    `json:"attackerMercEnid" legend:"base"`    // attacker_merc_enid
-	Coords              string `json:"coords" legend:"base"`              // coords
-	DSupportMercEnid    int    `json:"dSupportMercEnid" legend:"base"`    // d_support_merc_enid
-	DefenderCivId       int    `json:"defenderCivId" legend:"base"`       // defender_civ_id
-	DefenderGeneralHfid int    `json:"defenderGeneralHfid" legend:"base"` // defender_general_hfid
-	DefenderMercEnid    int    `json:"defenderMercEnid" legend:"base"`    // defender_merc_enid
-	FeatureLayerId      int    `json:"featureLayerId" legend:"base"`      // feature_layer_id
-	SubregionId         int    `json:"subregionId" legend:"base"`         // subregion_id
+	ASupportMercEnid    int    `json:"aSupportMercEnid" legend:"base" related:""`    // a_support_merc_enid
+	AttackerCivId       int    `json:"attackerCivId" legend:"base" related:""`       // attacker_civ_id
+	AttackerGeneralHfid int    `json:"attackerGeneralHfid" legend:"base" related:""` // attacker_general_hfid
+	AttackerMercEnid    int    `json:"attackerMercEnid" legend:"base" related:""`    // attacker_merc_enid
+	Coords              string `json:"coords" legend:"base" related:""`              // coords
+	DSupportMercEnid    int    `json:"dSupportMercEnid" legend:"base" related:""`    // d_support_merc_enid
+	DefenderCivId       int    `json:"defenderCivId" legend:"base" related:""`       // defender_civ_id
+	DefenderGeneralHfid int    `json:"defenderGeneralHfid" legend:"base" related:""` // defender_general_hfid
+	DefenderMercEnid    int    `json:"defenderMercEnid" legend:"base" related:""`    // defender_merc_enid
+	FeatureLayerId      int    `json:"featureLayerId" legend:"base" related:""`      // feature_layer_id
+	SubregionId         int    `json:"subregionId" legend:"base" related:""`         // subregion_id
 }
 
 func NewHistoricalEventFieldBattle() *HistoricalEventFieldBattle {
@@ -9134,6 +9206,7 @@ func (x *HistoricalEventFieldBattle) RelatedToWrittenContent(id int) bool    { r
 func (x *HistoricalEventFieldBattle) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventFieldBattle) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventFieldBattle) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventFieldBattle) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventFieldBattle) CheckFields() {
 }
@@ -9175,9 +9248,9 @@ func (x *HistoricalEventFieldBattle) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventFirstContact struct {
-	ContactedEnid int `json:"contactedEnid" legend:"base"` // contacted_enid
-	ContactorEnid int `json:"contactorEnid" legend:"base"` // contactor_enid
-	SiteId        int `json:"siteId" legend:"base"`        // site_id
+	ContactedEnid int `json:"contactedEnid" legend:"base" related:""` // contacted_enid
+	ContactorEnid int `json:"contactorEnid" legend:"base" related:""` // contactor_enid
+	SiteId        int `json:"siteId" legend:"base" related:""`        // site_id
 }
 
 func NewHistoricalEventFirstContact() *HistoricalEventFirstContact {
@@ -9201,6 +9274,7 @@ func (x *HistoricalEventFirstContact) RelatedToWrittenContent(id int) bool    { 
 func (x *HistoricalEventFirstContact) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventFirstContact) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventFirstContact) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventFirstContact) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventFirstContact) CheckFields() {
 }
@@ -9220,11 +9294,11 @@ func (x *HistoricalEventFirstContact) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventGamble struct {
-	GamblerHfid int `json:"gamblerHfid" legend:"base"` // gambler_hfid
-	NewAccount  int `json:"newAccount" legend:"base"`  // new_account
-	OldAccount  int `json:"oldAccount" legend:"base"`  // old_account
-	SiteId      int `json:"siteId" legend:"base"`      // site_id
-	StructureId int `json:"structureId" legend:"base"` // structure_id
+	GamblerHfid int `json:"gamblerHfid" legend:"base" related:""` // gambler_hfid
+	NewAccount  int `json:"newAccount" legend:"base" related:""`  // new_account
+	OldAccount  int `json:"oldAccount" legend:"base" related:""`  // old_account
+	SiteId      int `json:"siteId" legend:"base" related:""`      // site_id
+	StructureId int `json:"structureId" legend:"base" related:""` // structure_id
 }
 
 func NewHistoricalEventGamble() *HistoricalEventGamble {
@@ -9250,6 +9324,7 @@ func (x *HistoricalEventGamble) RelatedToWrittenContent(id int) bool    { return
 func (x *HistoricalEventGamble) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventGamble) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventGamble) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventGamble) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventGamble) CheckFields() {
 }
@@ -9275,11 +9350,11 @@ func (x *HistoricalEventGamble) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfAbducted struct {
-	FeatureLayerId int `json:"featureLayerId" legend:"base"` // feature_layer_id
-	SiteId         int `json:"siteId" legend:"base"`         // site_id
-	SnatcherHfid   int `json:"snatcherHfid" legend:"base"`   // snatcher_hfid
-	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
-	TargetHfid     int `json:"targetHfid" legend:"base"`     // target_hfid
+	FeatureLayerId int `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	SiteId         int `json:"siteId" legend:"base" related:""`         // site_id
+	SnatcherHfid   int `json:"snatcherHfid" legend:"base" related:""`   // snatcher_hfid
+	SubregionId    int `json:"subregionId" legend:"base" related:""`    // subregion_id
+	TargetHfid     int `json:"targetHfid" legend:"base" related:""`     // target_hfid
 }
 
 func NewHistoricalEventHfAbducted() *HistoricalEventHfAbducted {
@@ -9305,6 +9380,7 @@ func (x *HistoricalEventHfAbducted) RelatedToWrittenContent(id int) bool    { re
 func (x *HistoricalEventHfAbducted) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfAbducted) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfAbducted) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfAbducted) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfAbducted) CheckFields() {
 }
@@ -9330,10 +9406,10 @@ func (x *HistoricalEventHfAbducted) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfAttackedSite struct {
-	AttackerHfid  int `json:"attackerHfid" legend:"base"`  // attacker_hfid
-	DefenderCivId int `json:"defenderCivId" legend:"base"` // defender_civ_id
-	SiteCivId     int `json:"siteCivId" legend:"base"`     // site_civ_id
-	SiteId        int `json:"siteId" legend:"base"`        // site_id
+	AttackerHfid  int `json:"attackerHfid" legend:"base" related:""`  // attacker_hfid
+	DefenderCivId int `json:"defenderCivId" legend:"base" related:""` // defender_civ_id
+	SiteCivId     int `json:"siteCivId" legend:"base" related:""`     // site_civ_id
+	SiteId        int `json:"siteId" legend:"base" related:""`        // site_id
 }
 
 func NewHistoricalEventHfAttackedSite() *HistoricalEventHfAttackedSite {
@@ -9358,6 +9434,7 @@ func (x *HistoricalEventHfAttackedSite) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventHfAttackedSite) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfAttackedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfAttackedSite) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfAttackedSite) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfAttackedSite) CheckFields() {
 }
@@ -9439,13 +9516,13 @@ func (s HistoricalEventHfConfrontedSituation) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfConfronted struct {
-	Coords         string                               `json:"coords" legend:"base"`         // coords
-	FeatureLayerId int                                  `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Hfid           int                                  `json:"hfid" legend:"base"`           // hfid
-	Reason         []HistoricalEventHfConfrontedReason  `json:"reason" legend:"base"`         // reason
-	SiteId         int                                  `json:"siteId" legend:"base"`         // site_id
-	Situation      HistoricalEventHfConfrontedSituation `json:"situation" legend:"base"`      // situation
-	SubregionId    int                                  `json:"subregionId" legend:"base"`    // subregion_id
+	Coords         string                               `json:"coords" legend:"base" related:""`         // coords
+	FeatureLayerId int                                  `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Hfid           int                                  `json:"hfid" legend:"base" related:""`           // hfid
+	Reason         []HistoricalEventHfConfrontedReason  `json:"reason" legend:"base" related:""`         // reason
+	SiteId         int                                  `json:"siteId" legend:"base" related:""`         // site_id
+	Situation      HistoricalEventHfConfrontedSituation `json:"situation" legend:"base" related:""`      // situation
+	SubregionId    int                                  `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventHfConfronted() *HistoricalEventHfConfronted {
@@ -9468,6 +9545,7 @@ func (x *HistoricalEventHfConfronted) RelatedToWrittenContent(id int) bool    { 
 func (x *HistoricalEventHfConfronted) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfConfronted) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfConfronted) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfConfronted) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfConfronted) CheckFields() {
 }
@@ -9577,33 +9655,33 @@ func (s HistoricalEventHfConvictedCrime) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfConvicted struct {
-	Beating                        bool                            `json:"beating" legend:"base"`                        // beating
-	CoconspiratorHfid              int                             `json:"coconspiratorHfid" legend:"base"`              // coconspirator_hfid
-	ConfessedAfterApbArrestEnid    int                             `json:"confessedAfterApbArrestEnid" legend:"base"`    // confessed_after_apb_arrest_enid
-	ContactHfid                    int                             `json:"contactHfid" legend:"base"`                    // contact_hfid
-	ConvictIsContact               bool                            `json:"convictIsContact" legend:"base"`               // convict_is_contact
-	ConvictedHfid                  int                             `json:"convictedHfid" legend:"base"`                  // convicted_hfid
-	ConvicterEnid                  int                             `json:"convicterEnid" legend:"base"`                  // convicter_enid
-	CorruptConvicterHfid           int                             `json:"corruptConvicterHfid" legend:"base"`           // corrupt_convicter_hfid
-	Crime                          HistoricalEventHfConvictedCrime `json:"crime" legend:"base"`                          // crime
-	DeathPenalty                   bool                            `json:"deathPenalty" legend:"base"`                   // death_penalty
-	DidNotRevealAllInInterrogation bool                            `json:"didNotRevealAllInInterrogation" legend:"base"` // did_not_reveal_all_in_interrogation
-	Exiled                         bool                            `json:"exiled" legend:"base"`                         // exiled
-	FooledHfid                     int                             `json:"fooledHfid" legend:"base"`                     // fooled_hfid
-	FramerHfid                     int                             `json:"framerHfid" legend:"base"`                     // framer_hfid
-	Hammerstrokes                  int                             `json:"hammerstrokes" legend:"base"`                  // hammerstrokes
-	HeldFirmInInterrogation        bool                            `json:"heldFirmInInterrogation" legend:"base"`        // held_firm_in_interrogation
-	ImplicatedHfid                 []int                           `json:"implicatedHfid" legend:"base"`                 // implicated_hfid
-	InterrogatorHfid               int                             `json:"interrogatorHfid" legend:"base"`               // interrogator_hfid
-	NoPrisonAvailable              bool                            `json:"noPrisonAvailable" legend:"base"`              // no_prison_available
-	PlotterHfid                    int                             `json:"plotterHfid" legend:"base"`                    // plotter_hfid
-	PrisonMonths                   int                             `json:"prisonMonths" legend:"base"`                   // prison_months
-	SurveiledCoconspirator         bool                            `json:"surveiledCoconspirator" legend:"base"`         // surveiled_coconspirator
-	SurveiledContact               bool                            `json:"surveiledContact" legend:"base"`               // surveiled_contact
-	SurveiledConvicted             bool                            `json:"surveiledConvicted" legend:"base"`             // surveiled_convicted
-	SurveiledTarget                bool                            `json:"surveiledTarget" legend:"base"`                // surveiled_target
-	TargetHfid                     int                             `json:"targetHfid" legend:"base"`                     // target_hfid
-	WrongfulConviction             bool                            `json:"wrongfulConviction" legend:"base"`             // wrongful_conviction
+	Beating                        bool                            `json:"beating" legend:"base" related:""`                        // beating
+	CoconspiratorHfid              int                             `json:"coconspiratorHfid" legend:"base" related:""`              // coconspirator_hfid
+	ConfessedAfterApbArrestEnid    int                             `json:"confessedAfterApbArrestEnid" legend:"base" related:""`    // confessed_after_apb_arrest_enid
+	ContactHfid                    int                             `json:"contactHfid" legend:"base" related:""`                    // contact_hfid
+	ConvictIsContact               bool                            `json:"convictIsContact" legend:"base" related:""`               // convict_is_contact
+	ConvictedHfid                  int                             `json:"convictedHfid" legend:"base" related:""`                  // convicted_hfid
+	ConvicterEnid                  int                             `json:"convicterEnid" legend:"base" related:""`                  // convicter_enid
+	CorruptConvicterHfid           int                             `json:"corruptConvicterHfid" legend:"base" related:""`           // corrupt_convicter_hfid
+	Crime                          HistoricalEventHfConvictedCrime `json:"crime" legend:"base" related:""`                          // crime
+	DeathPenalty                   bool                            `json:"deathPenalty" legend:"base" related:""`                   // death_penalty
+	DidNotRevealAllInInterrogation bool                            `json:"didNotRevealAllInInterrogation" legend:"base" related:""` // did_not_reveal_all_in_interrogation
+	Exiled                         bool                            `json:"exiled" legend:"base" related:""`                         // exiled
+	FooledHfid                     int                             `json:"fooledHfid" legend:"base" related:""`                     // fooled_hfid
+	FramerHfid                     int                             `json:"framerHfid" legend:"base" related:""`                     // framer_hfid
+	Hammerstrokes                  int                             `json:"hammerstrokes" legend:"base" related:""`                  // hammerstrokes
+	HeldFirmInInterrogation        bool                            `json:"heldFirmInInterrogation" legend:"base" related:""`        // held_firm_in_interrogation
+	ImplicatedHfid                 []int                           `json:"implicatedHfid" legend:"base" related:""`                 // implicated_hfid
+	InterrogatorHfid               int                             `json:"interrogatorHfid" legend:"base" related:""`               // interrogator_hfid
+	NoPrisonAvailable              bool                            `json:"noPrisonAvailable" legend:"base" related:""`              // no_prison_available
+	PlotterHfid                    int                             `json:"plotterHfid" legend:"base" related:""`                    // plotter_hfid
+	PrisonMonths                   int                             `json:"prisonMonths" legend:"base" related:""`                   // prison_months
+	SurveiledCoconspirator         bool                            `json:"surveiledCoconspirator" legend:"base" related:""`         // surveiled_coconspirator
+	SurveiledContact               bool                            `json:"surveiledContact" legend:"base" related:""`               // surveiled_contact
+	SurveiledConvicted             bool                            `json:"surveiledConvicted" legend:"base" related:""`             // surveiled_convicted
+	SurveiledTarget                bool                            `json:"surveiledTarget" legend:"base" related:""`                // surveiled_target
+	TargetHfid                     int                             `json:"targetHfid" legend:"base" related:""`                     // target_hfid
+	WrongfulConviction             bool                            `json:"wrongfulConviction" legend:"base" related:""`             // wrongful_conviction
 }
 
 func NewHistoricalEventHfConvicted() *HistoricalEventHfConvicted {
@@ -9639,6 +9717,7 @@ func (x *HistoricalEventHfConvicted) RelatedToWrittenContent(id int) bool    { r
 func (x *HistoricalEventHfConvicted) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfConvicted) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfConvicted) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfConvicted) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfConvicted) CheckFields() {
 }
@@ -9704,10 +9783,10 @@ func (x *HistoricalEventHfConvicted) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfDestroyedSite struct {
-	AttackerHfid  int `json:"attackerHfid" legend:"base"`  // attacker_hfid
-	DefenderCivId int `json:"defenderCivId" legend:"base"` // defender_civ_id
-	SiteCivId     int `json:"siteCivId" legend:"base"`     // site_civ_id
-	SiteId        int `json:"siteId" legend:"base"`        // site_id
+	AttackerHfid  int `json:"attackerHfid" legend:"base" related:""`  // attacker_hfid
+	DefenderCivId int `json:"defenderCivId" legend:"base" related:""` // defender_civ_id
+	SiteCivId     int `json:"siteCivId" legend:"base" related:""`     // site_civ_id
+	SiteId        int `json:"siteId" legend:"base" related:""`        // site_id
 }
 
 func NewHistoricalEventHfDestroyedSite() *HistoricalEventHfDestroyedSite {
@@ -9732,6 +9811,7 @@ func (x *HistoricalEventHfDestroyedSite) RelatedToWrittenContent(id int) bool   
 func (x *HistoricalEventHfDestroyedSite) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfDestroyedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfDestroyedSite) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfDestroyedSite) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfDestroyedSite) CheckFields() {
 }
@@ -10369,24 +10449,24 @@ func (s HistoricalEventHfDiedShooterItemType) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfDied struct {
-	Cause               HistoricalEventHfDiedCause              `json:"cause" legend:"base"`               // cause
-	FeatureLayerId      int                                     `json:"featureLayerId" legend:"base"`      // feature_layer_id
-	Hfid                int                                     `json:"hfid" legend:"base"`                // hfid
-	ItemSubtype         string                                  `json:"itemSubtype" legend:"plus"`         // item_subtype
-	ItemType            string                                  `json:"itemType" legend:"plus"`            // item_type
-	Mat                 string                                  `json:"mat" legend:"plus"`                 // mat
-	ShooterArtifactId   int                                     `json:"shooterArtifactId" legend:"plus"`   // shooter_artifact_id
-	ShooterItem         int                                     `json:"shooterItem" legend:"plus"`         // shooter_item
-	ShooterItemSubtype  HistoricalEventHfDiedShooterItemSubtype `json:"shooterItemSubtype" legend:"plus"`  // shooter_item_subtype
-	ShooterItemType     HistoricalEventHfDiedShooterItemType    `json:"shooterItemType" legend:"plus"`     // shooter_item_type
-	ShooterMat          string                                  `json:"shooterMat" legend:"plus"`          // shooter_mat
-	SiteId              int                                     `json:"siteId" legend:"base"`              // site_id
-	SlayerCaste         string                                  `json:"slayerCaste" legend:"both"`         // slayer_caste
-	SlayerHfid          int                                     `json:"slayerHfid" legend:"base"`          // slayer_hfid
-	SlayerItemId        int                                     `json:"slayerItemId" legend:"base"`        // slayer_item_id
-	SlayerRace          string                                  `json:"slayerRace" legend:"both"`          // slayer_race
-	SlayerShooterItemId int                                     `json:"slayerShooterItemId" legend:"base"` // slayer_shooter_item_id
-	SubregionId         int                                     `json:"subregionId" legend:"base"`         // subregion_id
+	Cause               HistoricalEventHfDiedCause              `json:"cause" legend:"base" related:""`               // cause
+	FeatureLayerId      int                                     `json:"featureLayerId" legend:"base" related:""`      // feature_layer_id
+	Hfid                int                                     `json:"hfid" legend:"base" related:""`                // hfid
+	ItemSubtype         string                                  `json:"itemSubtype" legend:"plus" related:""`         // item_subtype
+	ItemType            string                                  `json:"itemType" legend:"plus" related:""`            // item_type
+	Mat                 string                                  `json:"mat" legend:"plus" related:""`                 // mat
+	ShooterArtifactId   int                                     `json:"shooterArtifactId" legend:"plus" related:""`   // shooter_artifact_id
+	ShooterItem         int                                     `json:"shooterItem" legend:"plus" related:""`         // shooter_item
+	ShooterItemSubtype  HistoricalEventHfDiedShooterItemSubtype `json:"shooterItemSubtype" legend:"plus" related:""`  // shooter_item_subtype
+	ShooterItemType     HistoricalEventHfDiedShooterItemType    `json:"shooterItemType" legend:"plus" related:""`     // shooter_item_type
+	ShooterMat          string                                  `json:"shooterMat" legend:"plus" related:""`          // shooter_mat
+	SiteId              int                                     `json:"siteId" legend:"base" related:""`              // site_id
+	SlayerCaste         string                                  `json:"slayerCaste" legend:"both" related:""`         // slayer_caste
+	SlayerHfid          int                                     `json:"slayerHfid" legend:"base" related:""`          // slayer_hfid
+	SlayerItemId        int                                     `json:"slayerItemId" legend:"base" related:""`        // slayer_item_id
+	SlayerRace          string                                  `json:"slayerRace" legend:"both" related:""`          // slayer_race
+	SlayerShooterItemId int                                     `json:"slayerShooterItemId" legend:"base" related:""` // slayer_shooter_item_id
+	SubregionId         int                                     `json:"subregionId" legend:"base" related:""`         // subregion_id
 }
 
 func NewHistoricalEventHfDied() *HistoricalEventHfDied {
@@ -10416,6 +10496,7 @@ func (x *HistoricalEventHfDied) RelatedToWrittenContent(id int) bool    { return
 func (x *HistoricalEventHfDied) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfDied) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfDied) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfDied) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfDied) CheckFields() {
 	if x.ShooterArtifactId != x.FeatureLayerId {
@@ -10537,10 +10618,10 @@ func (s HistoricalEventHfDisturbedStructureAction) MarshalJSON() ([]byte, error)
 }
 
 type HistoricalEventHfDisturbedStructure struct {
-	Action      HistoricalEventHfDisturbedStructureAction `json:"action" legend:"plus"`      // action
-	HistFigId   int                                       `json:"histFigId" legend:"base"`   // hist_fig_id
-	SiteId      int                                       `json:"siteId" legend:"base"`      // site_id
-	StructureId int                                       `json:"structureId" legend:"base"` // structure_id
+	Action      HistoricalEventHfDisturbedStructureAction `json:"action" legend:"plus" related:""`      // action
+	HistFigId   int                                       `json:"histFigId" legend:"base" related:""`   // hist_fig_id
+	SiteId      int                                       `json:"siteId" legend:"base" related:""`      // site_id
+	StructureId int                                       `json:"structureId" legend:"base" related:""` // structure_id
 }
 
 func NewHistoricalEventHfDisturbedStructure() *HistoricalEventHfDisturbedStructure {
@@ -10564,6 +10645,7 @@ func (x *HistoricalEventHfDisturbedStructure) RelatedToWrittenContent(id int) bo
 func (x *HistoricalEventHfDisturbedStructure) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfDisturbedStructure) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfDisturbedStructure) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfDisturbedStructure) CheckFields() {
 }
@@ -10586,13 +10668,13 @@ func (x *HistoricalEventHfDisturbedStructure) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfDoesInteraction struct {
-	DoerHfid          int    `json:"doerHfid" legend:"base"`          // doer_hfid
-	Interaction       string `json:"interaction" legend:"base"`       // interaction
-	InteractionAction string `json:"interactionAction" legend:"plus"` // interaction_action
-	Region            int    `json:"region" legend:"plus"`            // region
-	Site              int    `json:"site" legend:"plus"`              // site
-	Source            int    `json:"source" legend:"plus"`            // source
-	TargetHfid        int    `json:"targetHfid" legend:"base"`        // target_hfid
+	DoerHfid          int    `json:"doerHfid" legend:"base" related:""`          // doer_hfid
+	Interaction       string `json:"interaction" legend:"base" related:""`       // interaction
+	InteractionAction string `json:"interactionAction" legend:"plus" related:""` // interaction_action
+	Region            int    `json:"region" legend:"plus" related:""`            // region
+	Site              int    `json:"site" legend:"plus" related:""`              // site
+	Source            int    `json:"source" legend:"plus" related:""`            // source
+	TargetHfid        int    `json:"targetHfid" legend:"base" related:""`        // target_hfid
 }
 
 func NewHistoricalEventHfDoesInteraction() *HistoricalEventHfDoesInteraction {
@@ -10618,6 +10700,7 @@ func (x *HistoricalEventHfDoesInteraction) RelatedToWrittenContent(id int) bool 
 func (x *HistoricalEventHfDoesInteraction) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfDoesInteraction) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfDoesInteraction) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfDoesInteraction) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfDoesInteraction) CheckFields() {
 	if x.InteractionAction != x.Interaction && x.InteractionAction != "" && x.Interaction != "" {
@@ -10666,10 +10749,10 @@ func (x *HistoricalEventHfDoesInteraction) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfEnslaved struct {
-	EnslavedHfid  int `json:"enslavedHfid" legend:"base"`  // enslaved_hfid
-	MovedToSiteId int `json:"movedToSiteId" legend:"base"` // moved_to_site_id
-	PayerEntityId int `json:"payerEntityId" legend:"base"` // payer_entity_id
-	SellerHfid    int `json:"sellerHfid" legend:"base"`    // seller_hfid
+	EnslavedHfid  int `json:"enslavedHfid" legend:"base" related:""`  // enslaved_hfid
+	MovedToSiteId int `json:"movedToSiteId" legend:"base" related:""` // moved_to_site_id
+	PayerEntityId int `json:"payerEntityId" legend:"base" related:""` // payer_entity_id
+	SellerHfid    int `json:"sellerHfid" legend:"base" related:""`    // seller_hfid
 }
 
 func NewHistoricalEventHfEnslaved() *HistoricalEventHfEnslaved {
@@ -10694,6 +10777,7 @@ func (x *HistoricalEventHfEnslaved) RelatedToWrittenContent(id int) bool    { re
 func (x *HistoricalEventHfEnslaved) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfEnslaved) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfEnslaved) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfEnslaved) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfEnslaved) CheckFields() {
 }
@@ -10716,12 +10800,12 @@ func (x *HistoricalEventHfEnslaved) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfEquipmentPurchase struct {
-	FeatureLayerId int `json:"featureLayerId" legend:"base"` // feature_layer_id
-	GroupHfid      int `json:"groupHfid" legend:"base"`      // group_hfid
-	Quality        int `json:"quality" legend:"base"`        // quality
-	SiteId         int `json:"siteId" legend:"base"`         // site_id
-	StructureId    int `json:"structureId" legend:"base"`    // structure_id
-	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
+	FeatureLayerId int `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	GroupHfid      int `json:"groupHfid" legend:"base" related:""`      // group_hfid
+	Quality        int `json:"quality" legend:"base" related:""`        // quality
+	SiteId         int `json:"siteId" legend:"base" related:""`         // site_id
+	StructureId    int `json:"structureId" legend:"base" related:""`    // structure_id
+	SubregionId    int `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventHfEquipmentPurchase() *HistoricalEventHfEquipmentPurchase {
@@ -10748,6 +10832,7 @@ func (x *HistoricalEventHfEquipmentPurchase) RelatedToWrittenContent(id int) boo
 func (x *HistoricalEventHfEquipmentPurchase) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfEquipmentPurchase) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfEquipmentPurchase) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfEquipmentPurchase) CheckFields() {
 }
@@ -10776,12 +10861,12 @@ func (x *HistoricalEventHfEquipmentPurchase) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfFreed struct {
-	FreeingCivId int   `json:"freeingCivId" legend:"base"` // freeing_civ_id
-	FreeingHfid  int   `json:"freeingHfid" legend:"base"`  // freeing_hfid
-	HoldingCivId int   `json:"holdingCivId" legend:"base"` // holding_civ_id
-	RescuedHfid  []int `json:"rescuedHfid" legend:"base"`  // rescued_hfid
-	SiteCivId    int   `json:"siteCivId" legend:"base"`    // site_civ_id
-	SiteId       int   `json:"siteId" legend:"base"`       // site_id
+	FreeingCivId int   `json:"freeingCivId" legend:"base" related:""` // freeing_civ_id
+	FreeingHfid  int   `json:"freeingHfid" legend:"base" related:""`  // freeing_hfid
+	HoldingCivId int   `json:"holdingCivId" legend:"base" related:""` // holding_civ_id
+	RescuedHfid  []int `json:"rescuedHfid" legend:"base" related:""`  // rescued_hfid
+	SiteCivId    int   `json:"siteCivId" legend:"base" related:""`    // site_civ_id
+	SiteId       int   `json:"siteId" legend:"base" related:""`       // site_id
 }
 
 func NewHistoricalEventHfFreed() *HistoricalEventHfFreed {
@@ -10809,6 +10894,7 @@ func (x *HistoricalEventHfFreed) RelatedToWrittenContent(id int) bool    { retur
 func (x *HistoricalEventHfFreed) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfFreed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfFreed) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfFreed) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfFreed) CheckFields() {
 }
@@ -10862,8 +10948,8 @@ func (s HistoricalEventHfGainsSecretGoalSecretGoal) MarshalJSON() ([]byte, error
 }
 
 type HistoricalEventHfGainsSecretGoal struct {
-	Hfid       int                                        `json:"hfid" legend:"base"`       // hfid
-	SecretGoal HistoricalEventHfGainsSecretGoalSecretGoal `json:"secretGoal" legend:"base"` // secret_goal
+	Hfid       int                                        `json:"hfid" legend:"base" related:""`       // hfid
+	SecretGoal HistoricalEventHfGainsSecretGoalSecretGoal `json:"secretGoal" legend:"base" related:""` // secret_goal
 }
 
 func NewHistoricalEventHfGainsSecretGoal() *HistoricalEventHfGainsSecretGoal {
@@ -10883,6 +10969,7 @@ func (x *HistoricalEventHfGainsSecretGoal) RelatedToWrittenContent(id int) bool 
 func (x *HistoricalEventHfGainsSecretGoal) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfGainsSecretGoal) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfGainsSecretGoal) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfGainsSecretGoal) CheckFields() {
 }
@@ -10899,12 +10986,12 @@ func (x *HistoricalEventHfGainsSecretGoal) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfInterrogated struct {
-	ArrestingEnid           int  `json:"arrestingEnid" legend:"base"`           // arresting_enid
-	HeldFirmInInterrogation bool `json:"heldFirmInInterrogation" legend:"base"` // held_firm_in_interrogation
-	ImplicatedHfid          int  `json:"implicatedHfid" legend:"base"`          // implicated_hfid
-	InterrogatorHfid        int  `json:"interrogatorHfid" legend:"base"`        // interrogator_hfid
-	TargetHfid              int  `json:"targetHfid" legend:"base"`              // target_hfid
-	WantedAndRecognized     bool `json:"wantedAndRecognized" legend:"base"`     // wanted_and_recognized
+	ArrestingEnid           int  `json:"arrestingEnid" legend:"base" related:""`           // arresting_enid
+	HeldFirmInInterrogation bool `json:"heldFirmInInterrogation" legend:"base" related:""` // held_firm_in_interrogation
+	ImplicatedHfid          int  `json:"implicatedHfid" legend:"base" related:""`          // implicated_hfid
+	InterrogatorHfid        int  `json:"interrogatorHfid" legend:"base" related:""`        // interrogator_hfid
+	TargetHfid              int  `json:"targetHfid" legend:"base" related:""`              // target_hfid
+	WantedAndRecognized     bool `json:"wantedAndRecognized" legend:"base" related:""`     // wanted_and_recognized
 }
 
 func NewHistoricalEventHfInterrogated() *HistoricalEventHfInterrogated {
@@ -10929,6 +11016,7 @@ func (x *HistoricalEventHfInterrogated) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventHfInterrogated) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfInterrogated) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfInterrogated) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfInterrogated) CheckFields() {
 }
@@ -10980,11 +11068,11 @@ func (s HistoricalEventHfLearnsSecretSecretText) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfLearnsSecret struct {
-	ArtifactId  int                                     `json:"artifactId" legend:"base"`  // artifact_id
-	Interaction string                                  `json:"interaction" legend:"base"` // interaction
-	SecretText  HistoricalEventHfLearnsSecretSecretText `json:"secretText" legend:"plus"`  // secret_text
-	StudentHfid int                                     `json:"studentHfid" legend:"base"` // student_hfid
-	TeacherHfid int                                     `json:"teacherHfid" legend:"base"` // teacher_hfid
+	ArtifactId  int                                     `json:"artifactId" legend:"base" related:""`  // artifact_id
+	Interaction string                                  `json:"interaction" legend:"base" related:""` // interaction
+	SecretText  HistoricalEventHfLearnsSecretSecretText `json:"secretText" legend:"plus" related:""`  // secret_text
+	StudentHfid int                                     `json:"studentHfid" legend:"base" related:""` // student_hfid
+	TeacherHfid int                                     `json:"teacherHfid" legend:"base" related:""` // teacher_hfid
 }
 
 func NewHistoricalEventHfLearnsSecret() *HistoricalEventHfLearnsSecret {
@@ -11008,6 +11096,7 @@ func (x *HistoricalEventHfLearnsSecret) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventHfLearnsSecret) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfLearnsSecret) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfLearnsSecret) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfLearnsSecret) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfLearnsSecret) CheckFields() {
 }
@@ -11031,12 +11120,12 @@ func (x *HistoricalEventHfLearnsSecret) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfNewPet struct {
-	Coords         string `json:"coords" legend:"base"`         // coords
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	GroupHfid      int    `json:"groupHfid" legend:"base"`      // group_hfid
-	Pets           string `json:"pets" legend:"plus"`           // pets
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	Coords         string `json:"coords" legend:"base" related:""`         // coords
+	FeatureLayerId int    `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	GroupHfid      int    `json:"groupHfid" legend:"base" related:""`      // group_hfid
+	Pets           string `json:"pets" legend:"plus" related:""`           // pets
+	SiteId         int    `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int    `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventHfNewPet() *HistoricalEventHfNewPet {
@@ -11059,6 +11148,7 @@ func (x *HistoricalEventHfNewPet) RelatedToWrittenContent(id int) bool    { retu
 func (x *HistoricalEventHfNewPet) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfNewPet) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfNewPet) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfNewPet) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfNewPet) CheckFields() {
 	if x.Pets != x.Coords && x.Pets != "" && x.Coords != "" {
@@ -11086,11 +11176,11 @@ func (x *HistoricalEventHfNewPet) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfPerformedHorribleExperiments struct {
-	FeatureLayerId int `json:"featureLayerId" legend:"base"` // feature_layer_id
-	GroupHfid      int `json:"groupHfid" legend:"base"`      // group_hfid
-	SiteId         int `json:"siteId" legend:"base"`         // site_id
-	StructureId    int `json:"structureId" legend:"base"`    // structure_id
-	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
+	FeatureLayerId int `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	GroupHfid      int `json:"groupHfid" legend:"base" related:""`      // group_hfid
+	SiteId         int `json:"siteId" legend:"base" related:""`         // site_id
+	StructureId    int `json:"structureId" legend:"base" related:""`    // structure_id
+	SubregionId    int `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventHfPerformedHorribleExperiments() *HistoricalEventHfPerformedHorribleExperiments {
@@ -11132,6 +11222,7 @@ func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToMusicalForm(id 
 func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToPoeticForm(id int) bool {
 	return false
 }
+func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToMountain(id int) bool { return false }
 
 func (x *HistoricalEventHfPerformedHorribleExperiments) CheckFields() {
 }
@@ -11184,10 +11275,10 @@ func (s HistoricalEventHfPrayedInsideStructureAction) MarshalJSON() ([]byte, err
 }
 
 type HistoricalEventHfPrayedInsideStructure struct {
-	Action      HistoricalEventHfPrayedInsideStructureAction `json:"action" legend:"plus"`      // action
-	HistFigId   int                                          `json:"histFigId" legend:"base"`   // hist_fig_id
-	SiteId      int                                          `json:"siteId" legend:"base"`      // site_id
-	StructureId int                                          `json:"structureId" legend:"base"` // structure_id
+	Action      HistoricalEventHfPrayedInsideStructureAction `json:"action" legend:"plus" related:""`      // action
+	HistFigId   int                                          `json:"histFigId" legend:"base" related:""`   // hist_fig_id
+	SiteId      int                                          `json:"siteId" legend:"base" related:""`      // site_id
+	StructureId int                                          `json:"structureId" legend:"base" related:""` // structure_id
 }
 
 func NewHistoricalEventHfPrayedInsideStructure() *HistoricalEventHfPrayedInsideStructure {
@@ -11213,6 +11304,7 @@ func (x *HistoricalEventHfPrayedInsideStructure) RelatedToWrittenContent(id int)
 func (x *HistoricalEventHfPrayedInsideStructure) RelatedToDanceForm(id int) bool      { return false }
 func (x *HistoricalEventHfPrayedInsideStructure) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventHfPrayedInsideStructure) RelatedToPoeticForm(id int) bool     { return false }
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToMountain(id int) bool       { return false }
 
 func (x *HistoricalEventHfPrayedInsideStructure) CheckFields() {
 }
@@ -11267,11 +11359,11 @@ func (s HistoricalEventHfPreachTopic) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfPreach struct {
-	Entity1     int                          `json:"entity1" legend:"base"`     // entity_1
-	Entity2     int                          `json:"entity2" legend:"base"`     // entity_2
-	SiteHfid    int                          `json:"siteHfid" legend:"base"`    // site_hfid
-	SpeakerHfid int                          `json:"speakerHfid" legend:"base"` // speaker_hfid
-	Topic       HistoricalEventHfPreachTopic `json:"topic" legend:"base"`       // topic
+	Entity1     int                          `json:"entity1" legend:"base" related:""`     // entity_1
+	Entity2     int                          `json:"entity2" legend:"base" related:""`     // entity_2
+	SiteHfid    int                          `json:"siteHfid" legend:"base" related:""`    // site_hfid
+	SpeakerHfid int                          `json:"speakerHfid" legend:"base" related:""` // speaker_hfid
+	Topic       HistoricalEventHfPreachTopic `json:"topic" legend:"base" related:""`       // topic
 }
 
 func NewHistoricalEventHfPreach() *HistoricalEventHfPreach {
@@ -11298,6 +11390,7 @@ func (x *HistoricalEventHfPreach) RelatedToWrittenContent(id int) bool    { retu
 func (x *HistoricalEventHfPreach) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfPreach) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfPreach) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfPreach) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfPreach) CheckFields() {
 }
@@ -11350,10 +11443,10 @@ func (s HistoricalEventHfProfanedStructureAction) MarshalJSON() ([]byte, error) 
 }
 
 type HistoricalEventHfProfanedStructure struct {
-	Action      HistoricalEventHfProfanedStructureAction `json:"action" legend:"plus"`      // action
-	HistFigId   int                                      `json:"histFigId" legend:"base"`   // hist_fig_id
-	SiteId      int                                      `json:"siteId" legend:"base"`      // site_id
-	StructureId int                                      `json:"structureId" legend:"base"` // structure_id
+	Action      HistoricalEventHfProfanedStructureAction `json:"action" legend:"plus" related:""`      // action
+	HistFigId   int                                      `json:"histFigId" legend:"base" related:""`   // hist_fig_id
+	SiteId      int                                      `json:"siteId" legend:"base" related:""`      // site_id
+	StructureId int                                      `json:"structureId" legend:"base" related:""` // structure_id
 }
 
 func NewHistoricalEventHfProfanedStructure() *HistoricalEventHfProfanedStructure {
@@ -11377,6 +11470,7 @@ func (x *HistoricalEventHfProfanedStructure) RelatedToWrittenContent(id int) boo
 func (x *HistoricalEventHfProfanedStructure) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfProfanedStructure) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfProfanedStructure) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfProfanedStructure) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfProfanedStructure) CheckFields() {
 }
@@ -11399,11 +11493,11 @@ func (x *HistoricalEventHfProfanedStructure) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfRansomed struct {
-	MovedToSiteId int `json:"movedToSiteId" legend:"base"` // moved_to_site_id
-	PayerEntityId int `json:"payerEntityId" legend:"base"` // payer_entity_id
-	PayerHfid     int `json:"payerHfid" legend:"base"`     // payer_hfid
-	RansomedHfid  int `json:"ransomedHfid" legend:"base"`  // ransomed_hfid
-	RansomerHfid  int `json:"ransomerHfid" legend:"base"`  // ransomer_hfid
+	MovedToSiteId int `json:"movedToSiteId" legend:"base" related:""` // moved_to_site_id
+	PayerEntityId int `json:"payerEntityId" legend:"base" related:""` // payer_entity_id
+	PayerHfid     int `json:"payerHfid" legend:"base" related:""`     // payer_hfid
+	RansomedHfid  int `json:"ransomedHfid" legend:"base" related:""`  // ransomed_hfid
+	RansomerHfid  int `json:"ransomerHfid" legend:"base" related:""`  // ransomer_hfid
 }
 
 func NewHistoricalEventHfRansomed() *HistoricalEventHfRansomed {
@@ -11429,6 +11523,7 @@ func (x *HistoricalEventHfRansomed) RelatedToWrittenContent(id int) bool    { re
 func (x *HistoricalEventHfRansomed) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfRansomed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfRansomed) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfRansomed) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfRansomed) CheckFields() {
 }
@@ -11454,17 +11549,19 @@ func (x *HistoricalEventHfRansomed) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfReachSummit struct {
-	Coords         string `json:"coords" legend:"base"`         // coords
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Group          []int  `json:"group" legend:"plus"`          // group
-	GroupHfid      []int  `json:"groupHfid" legend:"base"`      // group_hfid
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	Coords         string `json:"coords" legend:"base" related:""`                // coords
+	FeatureLayerId int    `json:"featureLayerId" legend:"base" related:""`        // feature_layer_id
+	Group          []int  `json:"group" legend:"plus" related:""`                 // group
+	GroupHfid      []int  `json:"groupHfid" legend:"base" related:""`             // group_hfid
+	SubregionId    int    `json:"subregionId" legend:"base" related:""`           // subregion_id
+	MountainPeakId int    `json:"mountainPeakId" legend:"add" related:"mountain"` // MountainPeakId
 }
 
 func NewHistoricalEventHfReachSummit() *HistoricalEventHfReachSummit {
 	return &HistoricalEventHfReachSummit{
 		FeatureLayerId: -1,
 		SubregionId:    -1,
+		MountainPeakId: -1,
 	}
 }
 func (x *HistoricalEventHfReachSummit) Type() string                           { return "hf reach summit" }
@@ -11479,6 +11576,7 @@ func (x *HistoricalEventHfReachSummit) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventHfReachSummit) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfReachSummit) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfReachSummit) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfReachSummit) RelatedToMountain(id int) bool          { return x.MountainPeakId == id }
 
 func (x *HistoricalEventHfReachSummit) CheckFields() {
 }
@@ -11493,6 +11591,9 @@ func (x *HistoricalEventHfReachSummit) MarshalJSON() ([]byte, error) {
 	d["groupHfid"] = x.GroupHfid
 	if x.SubregionId != -1 {
 		d["subregionId"] = x.SubregionId
+	}
+	if x.MountainPeakId != -1 {
+		d["mountainPeakId"] = x.MountainPeakId
 	}
 	return json.Marshal(d)
 }
@@ -11525,12 +11626,12 @@ func (s HistoricalEventHfRecruitedUnitTypeForEntityUnitType) MarshalJSON() ([]by
 }
 
 type HistoricalEventHfRecruitedUnitTypeForEntity struct {
-	EntityId       int                                                 `json:"entityId" legend:"base"`       // entity_id
-	FeatureLayerId int                                                 `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Hfid           int                                                 `json:"hfid" legend:"base"`           // hfid
-	SiteId         int                                                 `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int                                                 `json:"subregionId" legend:"base"`    // subregion_id
-	UnitType       HistoricalEventHfRecruitedUnitTypeForEntityUnitType `json:"unitType" legend:"base"`       // unit_type
+	EntityId       int                                                 `json:"entityId" legend:"base" related:""`       // entity_id
+	FeatureLayerId int                                                 `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Hfid           int                                                 `json:"hfid" legend:"base" related:""`           // hfid
+	SiteId         int                                                 `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int                                                 `json:"subregionId" legend:"base" related:""`    // subregion_id
+	UnitType       HistoricalEventHfRecruitedUnitTypeForEntityUnitType `json:"unitType" legend:"base" related:""`       // unit_type
 }
 
 func NewHistoricalEventHfRecruitedUnitTypeForEntity() *HistoricalEventHfRecruitedUnitTypeForEntity {
@@ -11568,6 +11669,7 @@ func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToWrittenContent(id
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToDanceForm(id int) bool   { return false }
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToMusicalForm(id int) bool { return false }
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToPoeticForm(id int) bool  { return false }
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToMountain(id int) bool    { return false }
 
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) CheckFields() {
 }
@@ -11655,14 +11757,14 @@ func (s HistoricalEventHfRelationshipDeniedRelationship) MarshalJSON() ([]byte, 
 }
 
 type HistoricalEventHfRelationshipDenied struct {
-	FeatureLayerId int                                             `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Reason         HistoricalEventHfRelationshipDeniedReason       `json:"reason" legend:"base"`         // reason
-	ReasonId       int                                             `json:"reasonId" legend:"base"`       // reason_id
-	Relationship   HistoricalEventHfRelationshipDeniedRelationship `json:"relationship" legend:"base"`   // relationship
-	SeekerHfid     int                                             `json:"seekerHfid" legend:"base"`     // seeker_hfid
-	SiteId         int                                             `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int                                             `json:"subregionId" legend:"base"`    // subregion_id
-	TargetHfid     int                                             `json:"targetHfid" legend:"base"`     // target_hfid
+	FeatureLayerId int                                             `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Reason         HistoricalEventHfRelationshipDeniedReason       `json:"reason" legend:"base" related:""`         // reason
+	ReasonId       int                                             `json:"reasonId" legend:"base" related:""`       // reason_id
+	Relationship   HistoricalEventHfRelationshipDeniedRelationship `json:"relationship" legend:"base" related:""`   // relationship
+	SeekerHfid     int                                             `json:"seekerHfid" legend:"base" related:""`     // seeker_hfid
+	SiteId         int                                             `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int                                             `json:"subregionId" legend:"base" related:""`    // subregion_id
+	TargetHfid     int                                             `json:"targetHfid" legend:"base" related:""`     // target_hfid
 }
 
 func NewHistoricalEventHfRelationshipDenied() *HistoricalEventHfRelationshipDenied {
@@ -11691,6 +11793,7 @@ func (x *HistoricalEventHfRelationshipDenied) RelatedToWrittenContent(id int) bo
 func (x *HistoricalEventHfRelationshipDenied) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfRelationshipDenied) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfRelationshipDenied) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfRelationshipDenied) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfRelationshipDenied) CheckFields() {
 }
@@ -11725,11 +11828,11 @@ func (x *HistoricalEventHfRelationshipDenied) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfReunion struct {
-	FeatureLayerId int   `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Group1Hfid     int   `json:"group1Hfid" legend:"base"`     // group_1_hfid
-	Group2Hfid     []int `json:"group2Hfid" legend:"base"`     // group_2_hfid
-	SiteId         int   `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int   `json:"subregionId" legend:"base"`    // subregion_id
+	FeatureLayerId int   `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Group1Hfid     int   `json:"group1Hfid" legend:"base" related:""`     // group_1_hfid
+	Group2Hfid     []int `json:"group2Hfid" legend:"base" related:""`     // group_2_hfid
+	SiteId         int   `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int   `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventHfReunion() *HistoricalEventHfReunion {
@@ -11754,6 +11857,7 @@ func (x *HistoricalEventHfReunion) RelatedToWrittenContent(id int) bool    { ret
 func (x *HistoricalEventHfReunion) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfReunion) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfReunion) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfReunion) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfReunion) CheckFields() {
 }
@@ -11854,14 +11958,14 @@ func (s HistoricalEventHfRevivedGhost) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfRevived struct {
-	ActorHfid      int                           `json:"actorHfid" legend:"base"`      // actor_hfid
-	Disturbance    bool                          `json:"disturbance" legend:"base"`    // disturbance
-	FeatureLayerId int                           `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Ghost          HistoricalEventHfRevivedGhost `json:"ghost" legend:"base"`          // ghost
-	Hfid           int                           `json:"hfid" legend:"base"`           // hfid
-	RaisedBefore   bool                          `json:"raisedBefore" legend:"base"`   // raised_before
-	SiteId         int                           `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int                           `json:"subregionId" legend:"base"`    // subregion_id
+	ActorHfid      int                           `json:"actorHfid" legend:"base" related:""`      // actor_hfid
+	Disturbance    bool                          `json:"disturbance" legend:"base" related:""`    // disturbance
+	FeatureLayerId int                           `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Ghost          HistoricalEventHfRevivedGhost `json:"ghost" legend:"base" related:""`          // ghost
+	Hfid           int                           `json:"hfid" legend:"base" related:""`           // hfid
+	RaisedBefore   bool                          `json:"raisedBefore" legend:"base" related:""`   // raised_before
+	SiteId         int                           `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int                           `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventHfRevived() *HistoricalEventHfRevived {
@@ -11885,6 +11989,7 @@ func (x *HistoricalEventHfRevived) RelatedToWrittenContent(id int) bool    { ret
 func (x *HistoricalEventHfRevived) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfRevived) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfRevived) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfRevived) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfRevived) CheckFields() {
 }
@@ -11997,12 +12102,12 @@ func (s HistoricalEventHfSimpleBattleEventSubtype) MarshalJSON() ([]byte, error)
 }
 
 type HistoricalEventHfSimpleBattleEvent struct {
-	FeatureLayerId int                                       `json:"featureLayerId" legend:"base"` // feature_layer_id
-	Group1Hfid     int                                       `json:"group1Hfid" legend:"base"`     // group_1_hfid
-	Group2Hfid     int                                       `json:"group2Hfid" legend:"base"`     // group_2_hfid
-	SiteId         int                                       `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int                                       `json:"subregionId" legend:"base"`    // subregion_id
-	Subtype        HistoricalEventHfSimpleBattleEventSubtype `json:"subtype" legend:"base"`        // subtype
+	FeatureLayerId int                                       `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	Group1Hfid     int                                       `json:"group1Hfid" legend:"base" related:""`     // group_1_hfid
+	Group2Hfid     int                                       `json:"group2Hfid" legend:"base" related:""`     // group_2_hfid
+	SiteId         int                                       `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int                                       `json:"subregionId" legend:"base" related:""`    // subregion_id
+	Subtype        HistoricalEventHfSimpleBattleEventSubtype `json:"subtype" legend:"base" related:""`        // subtype
 }
 
 func NewHistoricalEventHfSimpleBattleEvent() *HistoricalEventHfSimpleBattleEvent {
@@ -12028,6 +12133,7 @@ func (x *HistoricalEventHfSimpleBattleEvent) RelatedToWrittenContent(id int) boo
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfSimpleBattleEvent) CheckFields() {
 }
@@ -12056,12 +12162,12 @@ func (x *HistoricalEventHfSimpleBattleEvent) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfTravel struct {
-	Coords         string `json:"coords" legend:"base"`         // coords
-	FeatureLayerId int    `json:"featureLayerId" legend:"base"` // feature_layer_id
-	GroupHfid      []int  `json:"groupHfid" legend:"base"`      // group_hfid
-	Return         bool   `json:"return" legend:"base"`         // return
-	SiteId         int    `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int    `json:"subregionId" legend:"base"`    // subregion_id
+	Coords         string `json:"coords" legend:"base" related:""`         // coords
+	FeatureLayerId int    `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	GroupHfid      []int  `json:"groupHfid" legend:"base" related:""`      // group_hfid
+	Return         bool   `json:"return" legend:"base" related:""`         // return
+	SiteId         int    `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int    `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventHfTravel() *HistoricalEventHfTravel {
@@ -12083,6 +12189,7 @@ func (x *HistoricalEventHfTravel) RelatedToWrittenContent(id int) bool    { retu
 func (x *HistoricalEventHfTravel) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfTravel) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfTravel) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfTravel) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfTravel) CheckFields() {
 }
@@ -12105,10 +12212,10 @@ func (x *HistoricalEventHfTravel) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfViewedArtifact struct {
-	ArtifactId  int `json:"artifactId" legend:"base"`  // artifact_id
-	HistFigId   int `json:"histFigId" legend:"base"`   // hist_fig_id
-	SiteId      int `json:"siteId" legend:"base"`      // site_id
-	StructureId int `json:"structureId" legend:"base"` // structure_id
+	ArtifactId  int `json:"artifactId" legend:"base" related:""`  // artifact_id
+	HistFigId   int `json:"histFigId" legend:"base" related:""`   // hist_fig_id
+	SiteId      int `json:"siteId" legend:"base" related:""`      // site_id
+	StructureId int `json:"structureId" legend:"base" related:""` // structure_id
 }
 
 func NewHistoricalEventHfViewedArtifact() *HistoricalEventHfViewedArtifact {
@@ -12133,6 +12240,7 @@ func (x *HistoricalEventHfViewedArtifact) RelatedToWrittenContent(id int) bool  
 func (x *HistoricalEventHfViewedArtifact) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfViewedArtifact) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfViewedArtifact) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfViewedArtifact) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfViewedArtifact) CheckFields() {
 }
@@ -12234,17 +12342,17 @@ func (s HistoricalEventHfWoundedPartLost) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfWounded struct {
-	BodyPart       int                                `json:"bodyPart" legend:"plus"`       // body_part
-	FeatureLayerId int                                `json:"featureLayerId" legend:"base"` // feature_layer_id
-	InjuryType     HistoricalEventHfWoundedInjuryType `json:"injuryType" legend:"plus"`     // injury_type
-	PartLost       HistoricalEventHfWoundedPartLost   `json:"partLost" legend:"plus"`       // part_lost
-	SiteId         int                                `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int                                `json:"subregionId" legend:"base"`    // subregion_id
-	WasTorture     bool                               `json:"wasTorture" legend:"base"`     // was_torture
-	WoundeeCaste   int                                `json:"woundeeCaste" legend:"plus"`   // woundee_caste
-	WoundeeHfid    int                                `json:"woundeeHfid" legend:"base"`    // woundee_hfid
-	WoundeeRace    int                                `json:"woundeeRace" legend:"plus"`    // woundee_race
-	WounderHfid    int                                `json:"wounderHfid" legend:"base"`    // wounder_hfid
+	BodyPart       int                                `json:"bodyPart" legend:"plus" related:""`       // body_part
+	FeatureLayerId int                                `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	InjuryType     HistoricalEventHfWoundedInjuryType `json:"injuryType" legend:"plus" related:""`     // injury_type
+	PartLost       HistoricalEventHfWoundedPartLost   `json:"partLost" legend:"plus" related:""`       // part_lost
+	SiteId         int                                `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int                                `json:"subregionId" legend:"base" related:""`    // subregion_id
+	WasTorture     bool                               `json:"wasTorture" legend:"base" related:""`     // was_torture
+	WoundeeCaste   int                                `json:"woundeeCaste" legend:"plus" related:""`   // woundee_caste
+	WoundeeHfid    int                                `json:"woundeeHfid" legend:"base" related:""`    // woundee_hfid
+	WoundeeRace    int                                `json:"woundeeRace" legend:"plus" related:""`    // woundee_race
+	WounderHfid    int                                `json:"wounderHfid" legend:"base" related:""`    // wounder_hfid
 }
 
 func NewHistoricalEventHfWounded() *HistoricalEventHfWounded {
@@ -12273,6 +12381,7 @@ func (x *HistoricalEventHfWounded) RelatedToWrittenContent(id int) bool    { ret
 func (x *HistoricalEventHfWounded) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHfWounded) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfWounded) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfWounded) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHfWounded) CheckFields() {
 	if x.BodyPart != x.FeatureLayerId {
@@ -12705,36 +12814,36 @@ func (s HistoricalEventHfsFormedIntrigueRelationshipTopValue) MarshalJSON() ([]b
 }
 
 type HistoricalEventHfsFormedIntrigueRelationship struct {
-	Action                    HistoricalEventHfsFormedIntrigueRelationshipAction                `json:"action" legend:"base"`                    // action
-	AllyDefenseBonus          int                                                               `json:"allyDefenseBonus" legend:"base"`          // ally_defense_bonus
-	Circumstance              HistoricalEventHfsFormedIntrigueRelationshipCircumstance          `json:"circumstance" legend:"base"`              // circumstance
-	CircumstanceId            int                                                               `json:"circumstanceId" legend:"base"`            // circumstance_id
-	CoconspiratorBonus        int                                                               `json:"coconspiratorBonus" legend:"base"`        // coconspirator_bonus
-	CorruptorHfid             int                                                               `json:"corruptorHfid" legend:"base"`             // corruptor_hfid
-	CorruptorIdentity         int                                                               `json:"corruptorIdentity" legend:"base"`         // corruptor_identity
-	CorruptorSeenAs           HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs       `json:"corruptorSeenAs" legend:"base"`           // corruptor_seen_as
-	FailedJudgmentTest        bool                                                              `json:"failedJudgmentTest" legend:"base"`        // failed_judgment_test
-	FeatureLayerId            int                                                               `json:"featureLayerId" legend:"base"`            // feature_layer_id
-	LureHfid                  int                                                               `json:"lureHfid" legend:"base"`                  // lure_hfid
-	Method                    HistoricalEventHfsFormedIntrigueRelationshipMethod                `json:"method" legend:"base"`                    // method
-	RelevantEntityId          int                                                               `json:"relevantEntityId" legend:"base"`          // relevant_entity_id
-	RelevantIdForMethod       int                                                               `json:"relevantIdForMethod" legend:"base"`       // relevant_id_for_method
-	RelevantPositionProfileId int                                                               `json:"relevantPositionProfileId" legend:"base"` // relevant_position_profile_id
-	SiteId                    int                                                               `json:"siteId" legend:"base"`                    // site_id
-	SubregionId               int                                                               `json:"subregionId" legend:"base"`               // subregion_id
-	Successful                bool                                                              `json:"successful" legend:"base"`                // successful
-	TargetHfid                int                                                               `json:"targetHfid" legend:"base"`                // target_hfid
-	TargetIdentity            int                                                               `json:"targetIdentity" legend:"base"`            // target_identity
-	TargetSeenAs              HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs          `json:"targetSeenAs" legend:"base"`              // target_seen_as
-	TopFacet                  HistoricalEventHfsFormedIntrigueRelationshipTopFacet              `json:"topFacet" legend:"base"`                  // top_facet
-	TopFacetModifier          int                                                               `json:"topFacetModifier" legend:"base"`          // top_facet_modifier
-	TopFacetRating            int                                                               `json:"topFacetRating" legend:"base"`            // top_facet_rating
-	TopRelationshipFactor     HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor `json:"topRelationshipFactor" legend:"base"`     // top_relationship_factor
-	TopRelationshipModifier   int                                                               `json:"topRelationshipModifier" legend:"base"`   // top_relationship_modifier
-	TopRelationshipRating     int                                                               `json:"topRelationshipRating" legend:"base"`     // top_relationship_rating
-	TopValue                  HistoricalEventHfsFormedIntrigueRelationshipTopValue              `json:"topValue" legend:"base"`                  // top_value
-	TopValueModifier          int                                                               `json:"topValueModifier" legend:"base"`          // top_value_modifier
-	TopValueRating            int                                                               `json:"topValueRating" legend:"base"`            // top_value_rating
+	Action                    HistoricalEventHfsFormedIntrigueRelationshipAction                `json:"action" legend:"base" related:""`                    // action
+	AllyDefenseBonus          int                                                               `json:"allyDefenseBonus" legend:"base" related:""`          // ally_defense_bonus
+	Circumstance              HistoricalEventHfsFormedIntrigueRelationshipCircumstance          `json:"circumstance" legend:"base" related:""`              // circumstance
+	CircumstanceId            int                                                               `json:"circumstanceId" legend:"base" related:""`            // circumstance_id
+	CoconspiratorBonus        int                                                               `json:"coconspiratorBonus" legend:"base" related:""`        // coconspirator_bonus
+	CorruptorHfid             int                                                               `json:"corruptorHfid" legend:"base" related:""`             // corruptor_hfid
+	CorruptorIdentity         int                                                               `json:"corruptorIdentity" legend:"base" related:""`         // corruptor_identity
+	CorruptorSeenAs           HistoricalEventHfsFormedIntrigueRelationshipCorruptorSeenAs       `json:"corruptorSeenAs" legend:"base" related:""`           // corruptor_seen_as
+	FailedJudgmentTest        bool                                                              `json:"failedJudgmentTest" legend:"base" related:""`        // failed_judgment_test
+	FeatureLayerId            int                                                               `json:"featureLayerId" legend:"base" related:""`            // feature_layer_id
+	LureHfid                  int                                                               `json:"lureHfid" legend:"base" related:""`                  // lure_hfid
+	Method                    HistoricalEventHfsFormedIntrigueRelationshipMethod                `json:"method" legend:"base" related:""`                    // method
+	RelevantEntityId          int                                                               `json:"relevantEntityId" legend:"base" related:""`          // relevant_entity_id
+	RelevantIdForMethod       int                                                               `json:"relevantIdForMethod" legend:"base" related:""`       // relevant_id_for_method
+	RelevantPositionProfileId int                                                               `json:"relevantPositionProfileId" legend:"base" related:""` // relevant_position_profile_id
+	SiteId                    int                                                               `json:"siteId" legend:"base" related:""`                    // site_id
+	SubregionId               int                                                               `json:"subregionId" legend:"base" related:""`               // subregion_id
+	Successful                bool                                                              `json:"successful" legend:"base" related:""`                // successful
+	TargetHfid                int                                                               `json:"targetHfid" legend:"base" related:""`                // target_hfid
+	TargetIdentity            int                                                               `json:"targetIdentity" legend:"base" related:""`            // target_identity
+	TargetSeenAs              HistoricalEventHfsFormedIntrigueRelationshipTargetSeenAs          `json:"targetSeenAs" legend:"base" related:""`              // target_seen_as
+	TopFacet                  HistoricalEventHfsFormedIntrigueRelationshipTopFacet              `json:"topFacet" legend:"base" related:""`                  // top_facet
+	TopFacetModifier          int                                                               `json:"topFacetModifier" legend:"base" related:""`          // top_facet_modifier
+	TopFacetRating            int                                                               `json:"topFacetRating" legend:"base" related:""`            // top_facet_rating
+	TopRelationshipFactor     HistoricalEventHfsFormedIntrigueRelationshipTopRelationshipFactor `json:"topRelationshipFactor" legend:"base" related:""`     // top_relationship_factor
+	TopRelationshipModifier   int                                                               `json:"topRelationshipModifier" legend:"base" related:""`   // top_relationship_modifier
+	TopRelationshipRating     int                                                               `json:"topRelationshipRating" legend:"base" related:""`     // top_relationship_rating
+	TopValue                  HistoricalEventHfsFormedIntrigueRelationshipTopValue              `json:"topValue" legend:"base" related:""`                  // top_value
+	TopValueModifier          int                                                               `json:"topValueModifier" legend:"base" related:""`          // top_value_modifier
+	TopValueRating            int                                                               `json:"topValueRating" legend:"base" related:""`            // top_value_rating
 }
 
 func NewHistoricalEventHfsFormedIntrigueRelationship() *HistoricalEventHfsFormedIntrigueRelationship {
@@ -12791,6 +12900,7 @@ func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToMusicalForm(id i
 	return false
 }
 func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToPoeticForm(id int) bool { return false }
+func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToMountain(id int) bool   { return false }
 
 func (x *HistoricalEventHfsFormedIntrigueRelationship) CheckFields() {
 }
@@ -12946,15 +13056,15 @@ func (s HistoricalEventHfsFormedReputationRelationshipHfRep2Of1) MarshalJSON() (
 }
 
 type HistoricalEventHfsFormedReputationRelationship struct {
-	FeatureLayerId int                                                     `json:"featureLayerId" legend:"base"` // feature_layer_id
-	HfRep1Of2      HistoricalEventHfsFormedReputationRelationshipHfRep1Of2 `json:"hfRep1Of2" legend:"base"`      // hf_rep_1_of_2
-	HfRep2Of1      HistoricalEventHfsFormedReputationRelationshipHfRep2Of1 `json:"hfRep2Of1" legend:"base"`      // hf_rep_2_of_1
-	Hfid1          int                                                     `json:"hfid1" legend:"base"`          // hfid1
-	Hfid2          int                                                     `json:"hfid2" legend:"base"`          // hfid2
-	IdentityId1    int                                                     `json:"identityId1" legend:"base"`    // identity_id1
-	IdentityId2    int                                                     `json:"identityId2" legend:"base"`    // identity_id2
-	SiteId         int                                                     `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int                                                     `json:"subregionId" legend:"base"`    // subregion_id
+	FeatureLayerId int                                                     `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	HfRep1Of2      HistoricalEventHfsFormedReputationRelationshipHfRep1Of2 `json:"hfRep1Of2" legend:"base" related:""`      // hf_rep_1_of_2
+	HfRep2Of1      HistoricalEventHfsFormedReputationRelationshipHfRep2Of1 `json:"hfRep2Of1" legend:"base" related:""`      // hf_rep_2_of_1
+	Hfid1          int                                                     `json:"hfid1" legend:"base" related:""`          // hfid1
+	Hfid2          int                                                     `json:"hfid2" legend:"base" related:""`          // hfid2
+	IdentityId1    int                                                     `json:"identityId1" legend:"base" related:""`    // identity_id1
+	IdentityId2    int                                                     `json:"identityId2" legend:"base" related:""`    // identity_id2
+	SiteId         int                                                     `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int                                                     `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventHfsFormedReputationRelationship() *HistoricalEventHfsFormedReputationRelationship {
@@ -13002,6 +13112,7 @@ func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToMusicalForm(id
 func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToPoeticForm(id int) bool {
 	return false
 }
+func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToMountain(id int) bool { return false }
 
 func (x *HistoricalEventHfsFormedReputationRelationship) CheckFields() {
 }
@@ -13039,8 +13150,8 @@ func (x *HistoricalEventHfsFormedReputationRelationship) MarshalJSON() ([]byte, 
 }
 
 type HistoricalEventHolyCityDeclaration struct {
-	ReligionId int `json:"religionId" legend:"base"` // religion_id
-	SiteId     int `json:"siteId" legend:"base"`     // site_id
+	ReligionId int `json:"religionId" legend:"base" related:""` // religion_id
+	SiteId     int `json:"siteId" legend:"base" related:""`     // site_id
 }
 
 func NewHistoricalEventHolyCityDeclaration() *HistoricalEventHolyCityDeclaration {
@@ -13061,6 +13172,7 @@ func (x *HistoricalEventHolyCityDeclaration) RelatedToWrittenContent(id int) boo
 func (x *HistoricalEventHolyCityDeclaration) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventHolyCityDeclaration) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHolyCityDeclaration) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventHolyCityDeclaration) CheckFields() {
 }
@@ -13109,9 +13221,9 @@ func (s HistoricalEventInsurrectionStartedOutcome) MarshalJSON() ([]byte, error)
 }
 
 type HistoricalEventInsurrectionStarted struct {
-	Outcome     HistoricalEventInsurrectionStartedOutcome `json:"outcome" legend:"base"`     // outcome
-	SiteId      int                                       `json:"siteId" legend:"base"`      // site_id
-	TargetCivId int                                       `json:"targetCivId" legend:"base"` // target_civ_id
+	Outcome     HistoricalEventInsurrectionStartedOutcome `json:"outcome" legend:"base" related:""`     // outcome
+	SiteId      int                                       `json:"siteId" legend:"base" related:""`      // site_id
+	TargetCivId int                                       `json:"targetCivId" legend:"base" related:""` // target_civ_id
 }
 
 func NewHistoricalEventInsurrectionStarted() *HistoricalEventInsurrectionStarted {
@@ -13132,6 +13244,7 @@ func (x *HistoricalEventInsurrectionStarted) RelatedToWrittenContent(id int) boo
 func (x *HistoricalEventInsurrectionStarted) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventInsurrectionStarted) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventInsurrectionStarted) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventInsurrectionStarted) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventInsurrectionStarted) CheckFields() {
 }
@@ -13193,20 +13306,20 @@ func (s HistoricalEventItemStolenTheftMethod) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventItemStolen struct {
-	Circumstance   *HistoricalEventItemStolenCircumstance `json:"circumstance" legend:"both"`   // circumstance
-	CircumstanceId int                                    `json:"circumstanceId" legend:"base"` // circumstance_id
-	Entity         int                                    `json:"entity" legend:"plus"`         // entity
-	Histfig        int                                    `json:"histfig" legend:"plus"`        // histfig
-	Item           int                                    `json:"item" legend:"plus"`           // item
-	ItemSubtype    string                                 `json:"itemSubtype" legend:"plus"`    // item_subtype
-	ItemType       string                                 `json:"itemType" legend:"plus"`       // item_type
-	Mat            string                                 `json:"mat" legend:"plus"`            // mat
-	Matindex       int                                    `json:"matindex" legend:"plus"`       // matindex
-	Mattype        int                                    `json:"mattype" legend:"plus"`        // mattype
-	Site           int                                    `json:"site" legend:"plus"`           // site
-	StashSite      int                                    `json:"stashSite" legend:"plus"`      // stash_site
-	Structure      int                                    `json:"structure" legend:"plus"`      // structure
-	TheftMethod    HistoricalEventItemStolenTheftMethod   `json:"theftMethod" legend:"plus"`    // theft_method
+	Circumstance   *HistoricalEventItemStolenCircumstance `json:"circumstance" legend:"both" related:""`   // circumstance
+	CircumstanceId int                                    `json:"circumstanceId" legend:"base" related:""` // circumstance_id
+	Entity         int                                    `json:"entity" legend:"plus" related:""`         // entity
+	Histfig        int                                    `json:"histfig" legend:"plus" related:""`        // histfig
+	Item           int                                    `json:"item" legend:"plus" related:""`           // item
+	ItemSubtype    string                                 `json:"itemSubtype" legend:"plus" related:""`    // item_subtype
+	ItemType       string                                 `json:"itemType" legend:"plus" related:""`       // item_type
+	Mat            string                                 `json:"mat" legend:"plus" related:""`            // mat
+	Matindex       int                                    `json:"matindex" legend:"plus" related:""`       // matindex
+	Mattype        int                                    `json:"mattype" legend:"plus" related:""`        // mattype
+	Site           int                                    `json:"site" legend:"plus" related:""`           // site
+	StashSite      int                                    `json:"stashSite" legend:"plus" related:""`      // stash_site
+	Structure      int                                    `json:"structure" legend:"plus" related:""`      // structure
+	TheftMethod    HistoricalEventItemStolenTheftMethod   `json:"theftMethod" legend:"plus" related:""`    // theft_method
 }
 
 func NewHistoricalEventItemStolen() *HistoricalEventItemStolen {
@@ -13238,6 +13351,7 @@ func (x *HistoricalEventItemStolen) RelatedToWrittenContent(id int) bool    { re
 func (x *HistoricalEventItemStolen) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventItemStolen) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventItemStolen) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventItemStolen) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventItemStolen) CheckFields() {
 	if x.Entity != x.CircumstanceId {
@@ -13348,10 +13462,10 @@ func (s HistoricalEventItemStolenCircumstanceType) MarshalJSON() ([]byte, error)
 }
 
 type HistoricalEventItemStolenCircumstance struct {
-	Defeated            int                                       `json:"defeated" legend:"plus"`            // defeated
-	HistEventCollection int                                       `json:"histEventCollection" legend:"plus"` // hist_event_collection
-	Murdered            int                                       `json:"murdered" legend:"plus"`            // murdered
-	Type_               HistoricalEventItemStolenCircumstanceType `json:"type" legend:"plus"`                // type
+	Defeated            int                                       `json:"defeated" legend:"plus" related:""`            // defeated
+	HistEventCollection int                                       `json:"histEventCollection" legend:"plus" related:""` // hist_event_collection
+	Murdered            int                                       `json:"murdered" legend:"plus" related:""`            // murdered
+	Type_               HistoricalEventItemStolenCircumstanceType `json:"type" legend:"plus" related:""`                // type
 }
 
 func NewHistoricalEventItemStolenCircumstance() *HistoricalEventItemStolenCircumstance {
@@ -14775,9 +14889,9 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) MarshalJSON() ([]byte, erro
 }
 
 type HistoricalEventKnowledgeDiscovered struct {
-	First     bool                                        `json:"first" legend:"base"`     // first
-	Hfid      int                                         `json:"hfid" legend:"base"`      // hfid
-	Knowledge HistoricalEventKnowledgeDiscoveredKnowledge `json:"knowledge" legend:"base"` // knowledge
+	First     bool                                        `json:"first" legend:"base" related:""`     // first
+	Hfid      int                                         `json:"hfid" legend:"base" related:""`      // hfid
+	Knowledge HistoricalEventKnowledgeDiscoveredKnowledge `json:"knowledge" legend:"base" related:""` // knowledge
 }
 
 func NewHistoricalEventKnowledgeDiscovered() *HistoricalEventKnowledgeDiscovered {
@@ -14797,6 +14911,7 @@ func (x *HistoricalEventKnowledgeDiscovered) RelatedToWrittenContent(id int) boo
 func (x *HistoricalEventKnowledgeDiscovered) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventKnowledgeDiscovered) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventKnowledgeDiscovered) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventKnowledgeDiscovered) CheckFields() {
 }
@@ -14995,14 +15110,14 @@ func (s HistoricalEventMasterpieceArchConstructedSkillAtTime) MarshalJSON() ([]b
 }
 
 type HistoricalEventMasterpieceArchConstructed struct {
-	BuildingCustom  int                                                      `json:"buildingCustom" legend:"plus"`  // building_custom
-	BuildingSubtype HistoricalEventMasterpieceArchConstructedBuildingSubtype `json:"buildingSubtype" legend:"plus"` // building_subtype
-	BuildingType    HistoricalEventMasterpieceArchConstructedBuildingType    `json:"buildingType" legend:"plus"`    // building_type
-	EntityId        int                                                      `json:"entityId" legend:"base"`        // entity_id
-	Hfid            int                                                      `json:"hfid" legend:"base"`            // hfid
-	SiteId          int                                                      `json:"siteId" legend:"base"`          // site_id
-	SkillAtTime     HistoricalEventMasterpieceArchConstructedSkillAtTime     `json:"skillAtTime" legend:"both"`     // skill_at_time
-	Unk2            int                                                      `json:"unk2" legend:"plus"`            // unk_2
+	BuildingCustom  int                                                      `json:"buildingCustom" legend:"plus" related:""`  // building_custom
+	BuildingSubtype HistoricalEventMasterpieceArchConstructedBuildingSubtype `json:"buildingSubtype" legend:"plus" related:""` // building_subtype
+	BuildingType    HistoricalEventMasterpieceArchConstructedBuildingType    `json:"buildingType" legend:"plus" related:""`    // building_type
+	EntityId        int                                                      `json:"entityId" legend:"base" related:""`        // entity_id
+	Hfid            int                                                      `json:"hfid" legend:"base" related:""`            // hfid
+	SiteId          int                                                      `json:"siteId" legend:"base" related:""`          // site_id
+	SkillAtTime     HistoricalEventMasterpieceArchConstructedSkillAtTime     `json:"skillAtTime" legend:"both" related:""`     // skill_at_time
+	Unk2            int                                                      `json:"unk2" legend:"plus" related:""`            // unk_2
 }
 
 func NewHistoricalEventMasterpieceArchConstructed() *HistoricalEventMasterpieceArchConstructed {
@@ -15036,6 +15151,7 @@ func (x *HistoricalEventMasterpieceArchConstructed) RelatedToWrittenContent(id i
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToDanceForm(id int) bool   { return false }
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToMusicalForm(id int) bool { return false }
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToPoeticForm(id int) bool  { return false }
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToMountain(id int) bool    { return false }
 
 func (x *HistoricalEventMasterpieceArchConstructed) CheckFields() {
 	if x.BuildingCustom != x.EntityId {
@@ -15169,19 +15285,19 @@ func (s HistoricalEventMasterpieceDyeSkillAtTime) MarshalJSON() ([]byte, error) 
 }
 
 type HistoricalEventMasterpieceDye struct {
-	DyeMat      string                                   `json:"dyeMat" legend:"plus"`      // dye_mat
-	DyeMatIndex int                                      `json:"dyeMatIndex" legend:"plus"` // dye_mat_index
-	EntityId    int                                      `json:"entityId" legend:"base"`    // entity_id
-	Hfid        int                                      `json:"hfid" legend:"base"`        // hfid
-	ItemType    HistoricalEventMasterpieceDyeItemType    `json:"itemType" legend:"plus"`    // item_type
-	Maker       int                                      `json:"maker" legend:"plus"`       // maker
-	MakerEntity int                                      `json:"makerEntity" legend:"plus"` // maker_entity
-	Mat         HistoricalEventMasterpieceDyeMat         `json:"mat" legend:"plus"`         // mat
-	MatIndex    int                                      `json:"matIndex" legend:"plus"`    // mat_index
-	Site        int                                      `json:"site" legend:"plus"`        // site
-	SiteId      int                                      `json:"siteId" legend:"base"`      // site_id
-	SkillAtTime HistoricalEventMasterpieceDyeSkillAtTime `json:"skillAtTime" legend:"both"` // skill_at_time
-	Unk2        int                                      `json:"unk2" legend:"plus"`        // unk_2
+	DyeMat      string                                   `json:"dyeMat" legend:"plus" related:""`      // dye_mat
+	DyeMatIndex int                                      `json:"dyeMatIndex" legend:"plus" related:""` // dye_mat_index
+	EntityId    int                                      `json:"entityId" legend:"base" related:""`    // entity_id
+	Hfid        int                                      `json:"hfid" legend:"base" related:""`        // hfid
+	ItemType    HistoricalEventMasterpieceDyeItemType    `json:"itemType" legend:"plus" related:""`    // item_type
+	Maker       int                                      `json:"maker" legend:"plus" related:""`       // maker
+	MakerEntity int                                      `json:"makerEntity" legend:"plus" related:""` // maker_entity
+	Mat         HistoricalEventMasterpieceDyeMat         `json:"mat" legend:"plus" related:""`         // mat
+	MatIndex    int                                      `json:"matIndex" legend:"plus" related:""`    // mat_index
+	Site        int                                      `json:"site" legend:"plus" related:""`        // site
+	SiteId      int                                      `json:"siteId" legend:"base" related:""`      // site_id
+	SkillAtTime HistoricalEventMasterpieceDyeSkillAtTime `json:"skillAtTime" legend:"both" related:""` // skill_at_time
+	Unk2        int                                      `json:"unk2" legend:"plus" related:""`        // unk_2
 }
 
 func NewHistoricalEventMasterpieceDye() *HistoricalEventMasterpieceDye {
@@ -15213,6 +15329,7 @@ func (x *HistoricalEventMasterpieceDye) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventMasterpieceDye) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventMasterpieceDye) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventMasterpieceDye) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventMasterpieceDye) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventMasterpieceDye) CheckFields() {
 	if x.DyeMatIndex != x.EntityId {
@@ -15314,12 +15431,12 @@ func (x *HistoricalEventMasterpieceDye) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventMasterpieceEngraving struct {
-	ArtId       int    `json:"artId" legend:"plus"`       // art_id
-	ArtSubid    int    `json:"artSubid" legend:"plus"`    // art_subid
-	EntityId    int    `json:"entityId" legend:"base"`    // entity_id
-	Hfid        int    `json:"hfid" legend:"base"`        // hfid
-	SiteId      int    `json:"siteId" legend:"base"`      // site_id
-	SkillAtTime string `json:"skillAtTime" legend:"both"` // skill_at_time
+	ArtId       int    `json:"artId" legend:"plus" related:""`       // art_id
+	ArtSubid    int    `json:"artSubid" legend:"plus" related:""`    // art_subid
+	EntityId    int    `json:"entityId" legend:"base" related:""`    // entity_id
+	Hfid        int    `json:"hfid" legend:"base" related:""`        // hfid
+	SiteId      int    `json:"siteId" legend:"base" related:""`      // site_id
+	SkillAtTime string `json:"skillAtTime" legend:"both" related:""` // skill_at_time
 }
 
 func NewHistoricalEventMasterpieceEngraving() *HistoricalEventMasterpieceEngraving {
@@ -15343,6 +15460,7 @@ func (x *HistoricalEventMasterpieceEngraving) RelatedToWrittenContent(id int) bo
 func (x *HistoricalEventMasterpieceEngraving) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventMasterpieceEngraving) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventMasterpieceEngraving) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventMasterpieceEngraving) CheckFields() {
 	if x.ArtId != x.EntityId {
@@ -15613,16 +15731,16 @@ func (s HistoricalEventMasterpieceFoodSkillAtTime) MarshalJSON() ([]byte, error)
 }
 
 type HistoricalEventMasterpieceFood struct {
-	EntityId    int                                       `json:"entityId" legend:"base"`    // entity_id
-	Hfid        int                                       `json:"hfid" legend:"base"`        // hfid
-	ItemId      int                                       `json:"itemId" legend:"plus"`      // item_id
-	ItemSubtype HistoricalEventMasterpieceFoodItemSubtype `json:"itemSubtype" legend:"plus"` // item_subtype
-	ItemType    HistoricalEventMasterpieceFoodItemType    `json:"itemType" legend:"plus"`    // item_type
-	Maker       int                                       `json:"maker" legend:"plus"`       // maker
-	MakerEntity int                                       `json:"makerEntity" legend:"plus"` // maker_entity
-	Site        int                                       `json:"site" legend:"plus"`        // site
-	SiteId      int                                       `json:"siteId" legend:"base"`      // site_id
-	SkillAtTime HistoricalEventMasterpieceFoodSkillAtTime `json:"skillAtTime" legend:"both"` // skill_at_time
+	EntityId    int                                       `json:"entityId" legend:"base" related:""`    // entity_id
+	Hfid        int                                       `json:"hfid" legend:"base" related:""`        // hfid
+	ItemId      int                                       `json:"itemId" legend:"plus" related:""`      // item_id
+	ItemSubtype HistoricalEventMasterpieceFoodItemSubtype `json:"itemSubtype" legend:"plus" related:""` // item_subtype
+	ItemType    HistoricalEventMasterpieceFoodItemType    `json:"itemType" legend:"plus" related:""`    // item_type
+	Maker       int                                       `json:"maker" legend:"plus" related:""`       // maker
+	MakerEntity int                                       `json:"makerEntity" legend:"plus" related:""` // maker_entity
+	Site        int                                       `json:"site" legend:"plus" related:""`        // site
+	SiteId      int                                       `json:"siteId" legend:"base" related:""`      // site_id
+	SkillAtTime HistoricalEventMasterpieceFoodSkillAtTime `json:"skillAtTime" legend:"both" related:""` // skill_at_time
 }
 
 func NewHistoricalEventMasterpieceFood() *HistoricalEventMasterpieceFood {
@@ -15652,6 +15770,7 @@ func (x *HistoricalEventMasterpieceFood) RelatedToWrittenContent(id int) bool   
 func (x *HistoricalEventMasterpieceFood) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventMasterpieceFood) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventMasterpieceFood) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventMasterpieceFood) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventMasterpieceFood) CheckFields() {
 	if x.ItemId != x.EntityId {
@@ -15728,16 +15847,16 @@ func (x *HistoricalEventMasterpieceFood) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventMasterpieceItem struct {
-	EntityId    int    `json:"entityId" legend:"base"`    // entity_id
-	Hfid        int    `json:"hfid" legend:"base"`        // hfid
-	ItemId      int    `json:"itemId" legend:"plus"`      // item_id
-	ItemSubtype string `json:"itemSubtype" legend:"plus"` // item_subtype
-	ItemType    string `json:"itemType" legend:"plus"`    // item_type
-	Mat         string `json:"mat" legend:"plus"`         // mat
-	MatIndex    int    `json:"matIndex" legend:"plus"`    // mat_index
-	MatType     int    `json:"matType" legend:"plus"`     // mat_type
-	SiteId      int    `json:"siteId" legend:"base"`      // site_id
-	SkillAtTime string `json:"skillAtTime" legend:"both"` // skill_at_time
+	EntityId    int    `json:"entityId" legend:"base" related:""`    // entity_id
+	Hfid        int    `json:"hfid" legend:"base" related:""`        // hfid
+	ItemId      int    `json:"itemId" legend:"plus" related:""`      // item_id
+	ItemSubtype string `json:"itemSubtype" legend:"plus" related:""` // item_subtype
+	ItemType    string `json:"itemType" legend:"plus" related:""`    // item_type
+	Mat         string `json:"mat" legend:"plus" related:""`         // mat
+	MatIndex    int    `json:"matIndex" legend:"plus" related:""`    // mat_index
+	MatType     int    `json:"matType" legend:"plus" related:""`     // mat_type
+	SiteId      int    `json:"siteId" legend:"base" related:""`      // site_id
+	SkillAtTime string `json:"skillAtTime" legend:"both" related:""` // skill_at_time
 }
 
 func NewHistoricalEventMasterpieceItem() *HistoricalEventMasterpieceItem {
@@ -15762,6 +15881,7 @@ func (x *HistoricalEventMasterpieceItem) RelatedToWrittenContent(id int) bool   
 func (x *HistoricalEventMasterpieceItem) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventMasterpieceItem) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventMasterpieceItem) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventMasterpieceItem) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventMasterpieceItem) CheckFields() {
 	if x.ItemId != x.EntityId {
@@ -16020,22 +16140,22 @@ func (s HistoricalEventMasterpieceItemImprovementSkillAtTime) MarshalJSON() ([]b
 }
 
 type HistoricalEventMasterpieceItemImprovement struct {
-	ArtId              int                                                      `json:"artId" legend:"plus"`              // art_id
-	ArtSubid           int                                                      `json:"artSubid" legend:"plus"`           // art_subid
-	EntityId           int                                                      `json:"entityId" legend:"base"`           // entity_id
-	Hfid               int                                                      `json:"hfid" legend:"base"`               // hfid
-	ImpMat             string                                                   `json:"impMat" legend:"plus"`             // imp_mat
-	ImprovementSubtype int                                                      `json:"improvementSubtype" legend:"plus"` // improvement_subtype
-	ImprovementType    HistoricalEventMasterpieceItemImprovementImprovementType `json:"improvementType" legend:"plus"`    // improvement_type
-	ItemSubtype        string                                                   `json:"itemSubtype" legend:"plus"`        // item_subtype
-	ItemType           string                                                   `json:"itemType" legend:"plus"`           // item_type
-	Maker              int                                                      `json:"maker" legend:"plus"`              // maker
-	MakerEntity        int                                                      `json:"makerEntity" legend:"plus"`        // maker_entity
-	Mat                string                                                   `json:"mat" legend:"plus"`                // mat
-	Site               int                                                      `json:"site" legend:"plus"`               // site
-	SiteId             int                                                      `json:"siteId" legend:"base"`             // site_id
-	SkillAtTime        HistoricalEventMasterpieceItemImprovementSkillAtTime     `json:"skillAtTime" legend:"both"`        // skill_at_time
-	Unk2               int                                                      `json:"unk2" legend:"plus"`               // unk_2
+	ArtId              int                                                      `json:"artId" legend:"plus" related:""`              // art_id
+	ArtSubid           int                                                      `json:"artSubid" legend:"plus" related:""`           // art_subid
+	EntityId           int                                                      `json:"entityId" legend:"base" related:""`           // entity_id
+	Hfid               int                                                      `json:"hfid" legend:"base" related:""`               // hfid
+	ImpMat             string                                                   `json:"impMat" legend:"plus" related:""`             // imp_mat
+	ImprovementSubtype int                                                      `json:"improvementSubtype" legend:"plus" related:""` // improvement_subtype
+	ImprovementType    HistoricalEventMasterpieceItemImprovementImprovementType `json:"improvementType" legend:"plus" related:""`    // improvement_type
+	ItemSubtype        string                                                   `json:"itemSubtype" legend:"plus" related:""`        // item_subtype
+	ItemType           string                                                   `json:"itemType" legend:"plus" related:""`           // item_type
+	Maker              int                                                      `json:"maker" legend:"plus" related:""`              // maker
+	MakerEntity        int                                                      `json:"makerEntity" legend:"plus" related:""`        // maker_entity
+	Mat                string                                                   `json:"mat" legend:"plus" related:""`                // mat
+	Site               int                                                      `json:"site" legend:"plus" related:""`               // site
+	SiteId             int                                                      `json:"siteId" legend:"base" related:""`             // site_id
+	SkillAtTime        HistoricalEventMasterpieceItemImprovementSkillAtTime     `json:"skillAtTime" legend:"both" related:""`        // skill_at_time
+	Unk2               int                                                      `json:"unk2" legend:"plus" related:""`               // unk_2
 }
 
 func NewHistoricalEventMasterpieceItemImprovement() *HistoricalEventMasterpieceItemImprovement {
@@ -16076,6 +16196,7 @@ func (x *HistoricalEventMasterpieceItemImprovement) RelatedToWrittenContent(id i
 func (x *HistoricalEventMasterpieceItemImprovement) RelatedToDanceForm(id int) bool   { return false }
 func (x *HistoricalEventMasterpieceItemImprovement) RelatedToMusicalForm(id int) bool { return false }
 func (x *HistoricalEventMasterpieceItemImprovement) RelatedToPoeticForm(id int) bool  { return false }
+func (x *HistoricalEventMasterpieceItemImprovement) RelatedToMountain(id int) bool    { return false }
 
 func (x *HistoricalEventMasterpieceItemImprovement) CheckFields() {
 	if x.ArtId != x.EntityId {
@@ -16189,10 +16310,10 @@ func (x *HistoricalEventMasterpieceItemImprovement) MarshalJSON() ([]byte, error
 }
 
 type HistoricalEventMasterpieceLost struct {
-	CreationEvent int    `json:"creationEvent" legend:"plus"` // creation_event
-	Histfig       int    `json:"histfig" legend:"plus"`       // histfig
-	Method        string `json:"method" legend:"plus"`        // method
-	Site          int    `json:"site" legend:"plus"`          // site
+	CreationEvent int    `json:"creationEvent" legend:"plus" related:""` // creation_event
+	Histfig       int    `json:"histfig" legend:"plus" related:""`       // histfig
+	Method        string `json:"method" legend:"plus" related:""`        // method
+	Site          int    `json:"site" legend:"plus" related:""`          // site
 }
 
 func NewHistoricalEventMasterpieceLost() *HistoricalEventMasterpieceLost {
@@ -16214,6 +16335,7 @@ func (x *HistoricalEventMasterpieceLost) RelatedToWrittenContent(id int) bool   
 func (x *HistoricalEventMasterpieceLost) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventMasterpieceLost) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventMasterpieceLost) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventMasterpieceLost) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventMasterpieceLost) CheckFields() {
 }
@@ -16234,11 +16356,11 @@ func (x *HistoricalEventMasterpieceLost) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventMerchant struct {
-	DepotEntityId  int  `json:"depotEntityId" legend:"base"`  // depot_entity_id
-	Hardship       bool `json:"hardship" legend:"base"`       // hardship
-	LostValue      bool `json:"lostValue" legend:"base"`      // lost_value
-	SiteId         int  `json:"siteId" legend:"base"`         // site_id
-	TraderEntityId int  `json:"traderEntityId" legend:"base"` // trader_entity_id
+	DepotEntityId  int  `json:"depotEntityId" legend:"base" related:""`  // depot_entity_id
+	Hardship       bool `json:"hardship" legend:"base" related:""`       // hardship
+	LostValue      bool `json:"lostValue" legend:"base" related:""`      // lost_value
+	SiteId         int  `json:"siteId" legend:"base" related:""`         // site_id
+	TraderEntityId int  `json:"traderEntityId" legend:"base" related:""` // trader_entity_id
 }
 
 func NewHistoricalEventMerchant() *HistoricalEventMerchant {
@@ -16262,6 +16384,7 @@ func (x *HistoricalEventMerchant) RelatedToWrittenContent(id int) bool    { retu
 func (x *HistoricalEventMerchant) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventMerchant) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventMerchant) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventMerchant) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventMerchant) CheckFields() {
 }
@@ -16325,10 +16448,10 @@ func (s HistoricalEventModifiedBuildingModification) MarshalJSON() ([]byte, erro
 }
 
 type HistoricalEventModifiedBuilding struct {
-	Modification HistoricalEventModifiedBuildingModification `json:"modification" legend:"base"` // modification
-	ModifierHfid int                                         `json:"modifierHfid" legend:"base"` // modifier_hfid
-	SiteId       int                                         `json:"siteId" legend:"base"`       // site_id
-	StructureId  int                                         `json:"structureId" legend:"base"`  // structure_id
+	Modification HistoricalEventModifiedBuildingModification `json:"modification" legend:"base" related:""` // modification
+	ModifierHfid int                                         `json:"modifierHfid" legend:"base" related:""` // modifier_hfid
+	SiteId       int                                         `json:"siteId" legend:"base" related:""`       // site_id
+	StructureId  int                                         `json:"structureId" legend:"base" related:""`  // structure_id
 }
 
 func NewHistoricalEventModifiedBuilding() *HistoricalEventModifiedBuilding {
@@ -16352,6 +16475,7 @@ func (x *HistoricalEventModifiedBuilding) RelatedToWrittenContent(id int) bool  
 func (x *HistoricalEventModifiedBuilding) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventModifiedBuilding) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventModifiedBuilding) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventModifiedBuilding) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventModifiedBuilding) CheckFields() {
 }
@@ -16443,13 +16567,13 @@ func (s HistoricalEventMusicalFormCreatedReason) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventMusicalFormCreated struct {
-	Circumstance   HistoricalEventMusicalFormCreatedCircumstance `json:"circumstance" legend:"base"`   // circumstance
-	CircumstanceId int                                           `json:"circumstanceId" legend:"base"` // circumstance_id
-	FormId         int                                           `json:"formId" legend:"base"`         // form_id
-	HistFigureId   int                                           `json:"histFigureId" legend:"base"`   // hist_figure_id
-	Reason         HistoricalEventMusicalFormCreatedReason       `json:"reason" legend:"base"`         // reason
-	ReasonId       int                                           `json:"reasonId" legend:"base"`       // reason_id
-	SiteId         int                                           `json:"siteId" legend:"base"`         // site_id
+	Circumstance   HistoricalEventMusicalFormCreatedCircumstance `json:"circumstance" legend:"base" related:""`      // circumstance
+	CircumstanceId int                                           `json:"circumstanceId" legend:"base" related:""`    // circumstance_id
+	FormId         int                                           `json:"formId" legend:"base" related:"musicalForm"` // form_id
+	HistFigureId   int                                           `json:"histFigureId" legend:"base" related:""`      // hist_figure_id
+	Reason         HistoricalEventMusicalFormCreatedReason       `json:"reason" legend:"base" related:""`            // reason
+	ReasonId       int                                           `json:"reasonId" legend:"base" related:""`          // reason_id
+	SiteId         int                                           `json:"siteId" legend:"base" related:""`            // site_id
 }
 
 func NewHistoricalEventMusicalFormCreated() *HistoricalEventMusicalFormCreated {
@@ -16473,6 +16597,7 @@ func (x *HistoricalEventMusicalFormCreated) RelatedToWrittenContent(id int) bool
 func (x *HistoricalEventMusicalFormCreated) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventMusicalFormCreated) RelatedToMusicalForm(id int) bool       { return x.FormId == id }
 func (x *HistoricalEventMusicalFormCreated) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventMusicalFormCreated) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventMusicalFormCreated) CheckFields() {
 }
@@ -16504,12 +16629,12 @@ func (x *HistoricalEventMusicalFormCreated) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventNewSiteLeader struct {
-	AttackerCivId int `json:"attackerCivId" legend:"base"` // attacker_civ_id
-	DefenderCivId int `json:"defenderCivId" legend:"base"` // defender_civ_id
-	NewLeaderHfid int `json:"newLeaderHfid" legend:"base"` // new_leader_hfid
-	NewSiteCivId  int `json:"newSiteCivId" legend:"base"`  // new_site_civ_id
-	SiteCivId     int `json:"siteCivId" legend:"base"`     // site_civ_id
-	SiteId        int `json:"siteId" legend:"base"`        // site_id
+	AttackerCivId int `json:"attackerCivId" legend:"base" related:""` // attacker_civ_id
+	DefenderCivId int `json:"defenderCivId" legend:"base" related:""` // defender_civ_id
+	NewLeaderHfid int `json:"newLeaderHfid" legend:"base" related:""` // new_leader_hfid
+	NewSiteCivId  int `json:"newSiteCivId" legend:"base" related:""`  // new_site_civ_id
+	SiteCivId     int `json:"siteCivId" legend:"base" related:""`     // site_civ_id
+	SiteId        int `json:"siteId" legend:"base" related:""`        // site_id
 }
 
 func NewHistoricalEventNewSiteLeader() *HistoricalEventNewSiteLeader {
@@ -16536,6 +16661,7 @@ func (x *HistoricalEventNewSiteLeader) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventNewSiteLeader) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventNewSiteLeader) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventNewSiteLeader) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventNewSiteLeader) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventNewSiteLeader) CheckFields() {
 }
@@ -16591,10 +16717,10 @@ func (s HistoricalEventPeaceAcceptedTopic) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventPeaceAccepted struct {
-	Destination int                               `json:"destination" legend:"plus"` // destination
-	SiteId      int                               `json:"siteId" legend:"base"`      // site_id
-	Source      int                               `json:"source" legend:"plus"`      // source
-	Topic       HistoricalEventPeaceAcceptedTopic `json:"topic" legend:"plus"`       // topic
+	Destination int                               `json:"destination" legend:"plus" related:""` // destination
+	SiteId      int                               `json:"siteId" legend:"base" related:""`      // site_id
+	Source      int                               `json:"source" legend:"plus" related:""`      // source
+	Topic       HistoricalEventPeaceAcceptedTopic `json:"topic" legend:"plus" related:""`       // topic
 }
 
 func NewHistoricalEventPeaceAccepted() *HistoricalEventPeaceAccepted {
@@ -16618,6 +16744,7 @@ func (x *HistoricalEventPeaceAccepted) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventPeaceAccepted) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventPeaceAccepted) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventPeaceAccepted) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventPeaceAccepted) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -16673,10 +16800,10 @@ func (s HistoricalEventPeaceRejectedTopic) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventPeaceRejected struct {
-	Destination int                               `json:"destination" legend:"plus"` // destination
-	SiteId      int                               `json:"siteId" legend:"base"`      // site_id
-	Source      int                               `json:"source" legend:"plus"`      // source
-	Topic       HistoricalEventPeaceRejectedTopic `json:"topic" legend:"plus"`       // topic
+	Destination int                               `json:"destination" legend:"plus" related:""` // destination
+	SiteId      int                               `json:"siteId" legend:"base" related:""`      // site_id
+	Source      int                               `json:"source" legend:"plus" related:""`      // source
+	Topic       HistoricalEventPeaceRejectedTopic `json:"topic" legend:"plus" related:""`       // topic
 }
 
 func NewHistoricalEventPeaceRejected() *HistoricalEventPeaceRejected {
@@ -16700,6 +16827,7 @@ func (x *HistoricalEventPeaceRejected) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventPeaceRejected) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventPeaceRejected) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventPeaceRejected) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventPeaceRejected) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -16728,12 +16856,12 @@ func (x *HistoricalEventPeaceRejected) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventPerformance struct {
-	CivId          int `json:"civId" legend:"base"`          // civ_id
-	FeatureLayerId int `json:"featureLayerId" legend:"base"` // feature_layer_id
-	OccasionId     int `json:"occasionId" legend:"base"`     // occasion_id
-	ScheduleId     int `json:"scheduleId" legend:"base"`     // schedule_id
-	SiteId         int `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
+	CivId          int `json:"civId" legend:"base" related:""`          // civ_id
+	FeatureLayerId int `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	OccasionId     int `json:"occasionId" legend:"base" related:""`     // occasion_id
+	ScheduleId     int `json:"scheduleId" legend:"base" related:""`     // schedule_id
+	SiteId         int `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventPerformance() *HistoricalEventPerformance {
@@ -16758,6 +16886,7 @@ func (x *HistoricalEventPerformance) RelatedToWrittenContent(id int) bool    { r
 func (x *HistoricalEventPerformance) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventPerformance) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventPerformance) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventPerformance) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventPerformance) CheckFields() {
 }
@@ -16786,15 +16915,15 @@ func (x *HistoricalEventPerformance) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventPlunderedSite struct {
-	AttackerCivId   int  `json:"attackerCivId" legend:"base"`   // attacker_civ_id
-	DefenderCivId   int  `json:"defenderCivId" legend:"base"`   // defender_civ_id
-	Detected        bool `json:"detected" legend:"base"`        // detected
-	NoDefeatMention bool `json:"noDefeatMention" legend:"base"` // no_defeat_mention
-	SiteCivId       int  `json:"siteCivId" legend:"base"`       // site_civ_id
-	SiteId          int  `json:"siteId" legend:"base"`          // site_id
-	TookItems       bool `json:"tookItems" legend:"base"`       // took_items
-	TookLivestock   bool `json:"tookLivestock" legend:"base"`   // took_livestock
-	WasRaid         bool `json:"wasRaid" legend:"base"`         // was_raid
+	AttackerCivId   int  `json:"attackerCivId" legend:"base" related:""`   // attacker_civ_id
+	DefenderCivId   int  `json:"defenderCivId" legend:"base" related:""`   // defender_civ_id
+	Detected        bool `json:"detected" legend:"base" related:""`        // detected
+	NoDefeatMention bool `json:"noDefeatMention" legend:"base" related:""` // no_defeat_mention
+	SiteCivId       int  `json:"siteCivId" legend:"base" related:""`       // site_civ_id
+	SiteId          int  `json:"siteId" legend:"base" related:""`          // site_id
+	TookItems       bool `json:"tookItems" legend:"base" related:""`       // took_items
+	TookLivestock   bool `json:"tookLivestock" legend:"base" related:""`   // took_livestock
+	WasRaid         bool `json:"wasRaid" legend:"base" related:""`         // was_raid
 }
 
 func NewHistoricalEventPlunderedSite() *HistoricalEventPlunderedSite {
@@ -16819,6 +16948,7 @@ func (x *HistoricalEventPlunderedSite) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventPlunderedSite) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventPlunderedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventPlunderedSite) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventPlunderedSite) CheckFields() {
 }
@@ -16878,11 +17008,11 @@ func (s HistoricalEventPoeticFormCreatedCircumstance) MarshalJSON() ([]byte, err
 }
 
 type HistoricalEventPoeticFormCreated struct {
-	Circumstance HistoricalEventPoeticFormCreatedCircumstance `json:"circumstance" legend:"base"` // circumstance
-	FormId       int                                          `json:"formId" legend:"base"`       // form_id
-	HistFigureId int                                          `json:"histFigureId" legend:"base"` // hist_figure_id
-	SiteId       int                                          `json:"siteId" legend:"base"`       // site_id
-	SubregionId  int                                          `json:"subregionId" legend:"base"`  // subregion_id
+	Circumstance HistoricalEventPoeticFormCreatedCircumstance `json:"circumstance" legend:"base" related:""`     // circumstance
+	FormId       int                                          `json:"formId" legend:"base" related:"poeticForm"` // form_id
+	HistFigureId int                                          `json:"histFigureId" legend:"base" related:""`     // hist_figure_id
+	SiteId       int                                          `json:"siteId" legend:"base" related:""`           // site_id
+	SubregionId  int                                          `json:"subregionId" legend:"base" related:""`      // subregion_id
 }
 
 func NewHistoricalEventPoeticFormCreated() *HistoricalEventPoeticFormCreated {
@@ -16905,6 +17035,7 @@ func (x *HistoricalEventPoeticFormCreated) RelatedToWrittenContent(id int) bool 
 func (x *HistoricalEventPoeticFormCreated) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventPoeticFormCreated) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventPoeticFormCreated) RelatedToPoeticForm(id int) bool        { return x.FormId == id }
+func (x *HistoricalEventPoeticFormCreated) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventPoeticFormCreated) CheckFields() {
 }
@@ -16930,12 +17061,12 @@ func (x *HistoricalEventPoeticFormCreated) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventProcession struct {
-	CivId          int `json:"civId" legend:"base"`          // civ_id
-	FeatureLayerId int `json:"featureLayerId" legend:"base"` // feature_layer_id
-	OccasionId     int `json:"occasionId" legend:"base"`     // occasion_id
-	ScheduleId     int `json:"scheduleId" legend:"base"`     // schedule_id
-	SiteId         int `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int `json:"subregionId" legend:"base"`    // subregion_id
+	CivId          int `json:"civId" legend:"base" related:""`          // civ_id
+	FeatureLayerId int `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	OccasionId     int `json:"occasionId" legend:"base" related:""`     // occasion_id
+	ScheduleId     int `json:"scheduleId" legend:"base" related:""`     // schedule_id
+	SiteId         int `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventProcession() *HistoricalEventProcession {
@@ -16960,6 +17091,7 @@ func (x *HistoricalEventProcession) RelatedToWrittenContent(id int) bool    { re
 func (x *HistoricalEventProcession) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventProcession) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventProcession) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventProcession) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventProcession) CheckFields() {
 }
@@ -16988,9 +17120,9 @@ func (x *HistoricalEventProcession) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventRazedStructure struct {
-	CivId       int `json:"civId" legend:"base"`       // civ_id
-	SiteId      int `json:"siteId" legend:"base"`      // site_id
-	StructureId int `json:"structureId" legend:"base"` // structure_id
+	CivId       int `json:"civId" legend:"base" related:""`       // civ_id
+	SiteId      int `json:"siteId" legend:"base" related:""`      // site_id
+	StructureId int `json:"structureId" legend:"base" related:""` // structure_id
 }
 
 func NewHistoricalEventRazedStructure() *HistoricalEventRazedStructure {
@@ -17014,6 +17146,7 @@ func (x *HistoricalEventRazedStructure) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventRazedStructure) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventRazedStructure) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventRazedStructure) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventRazedStructure) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventRazedStructure) CheckFields() {
 }
@@ -17033,10 +17166,10 @@ func (x *HistoricalEventRazedStructure) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventReclaimSite struct {
-	CivId     int  `json:"civId" legend:"base"`     // civ_id
-	SiteCivId int  `json:"siteCivId" legend:"base"` // site_civ_id
-	SiteId    int  `json:"siteId" legend:"base"`    // site_id
-	Unretire  bool `json:"unretire" legend:"base"`  // unretire
+	CivId     int  `json:"civId" legend:"base" related:""`     // civ_id
+	SiteCivId int  `json:"siteCivId" legend:"base" related:""` // site_civ_id
+	SiteId    int  `json:"siteId" legend:"base" related:""`    // site_id
+	Unretire  bool `json:"unretire" legend:"base" related:""`  // unretire
 }
 
 func NewHistoricalEventReclaimSite() *HistoricalEventReclaimSite {
@@ -17060,6 +17193,7 @@ func (x *HistoricalEventReclaimSite) RelatedToWrittenContent(id int) bool    { r
 func (x *HistoricalEventReclaimSite) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventReclaimSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventReclaimSite) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventReclaimSite) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventReclaimSite) CheckFields() {
 }
@@ -17080,12 +17214,12 @@ func (x *HistoricalEventReclaimSite) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventRegionpopIncorporatedIntoEntity struct {
-	JoinEntityId   int `json:"joinEntityId" legend:"base"`   // join_entity_id
-	PopFlid        int `json:"popFlid" legend:"base"`        // pop_flid
-	PopNumberMoved int `json:"popNumberMoved" legend:"base"` // pop_number_moved
-	PopRace        int `json:"popRace" legend:"base"`        // pop_race
-	PopSrid        int `json:"popSrid" legend:"base"`        // pop_srid
-	SiteId         int `json:"siteId" legend:"base"`         // site_id
+	JoinEntityId   int `json:"joinEntityId" legend:"base" related:""`   // join_entity_id
+	PopFlid        int `json:"popFlid" legend:"base" related:""`        // pop_flid
+	PopNumberMoved int `json:"popNumberMoved" legend:"base" related:""` // pop_number_moved
+	PopRace        int `json:"popRace" legend:"base" related:""`        // pop_race
+	PopSrid        int `json:"popSrid" legend:"base" related:""`        // pop_srid
+	SiteId         int `json:"siteId" legend:"base" related:""`         // site_id
 }
 
 func NewHistoricalEventRegionpopIncorporatedIntoEntity() *HistoricalEventRegionpopIncorporatedIntoEntity {
@@ -17130,6 +17264,7 @@ func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToMusicalForm(id
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToPoeticForm(id int) bool {
 	return false
 }
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToMountain(id int) bool { return false }
 
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) CheckFields() {
 }
@@ -17260,11 +17395,11 @@ func (s HistoricalEventRelationshipRelationship) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventRelationship struct {
-	Event        int                                     `json:"event" legend:"plus"`        // event
-	Relationship HistoricalEventRelationshipRelationship `json:"relationship" legend:"plus"` // relationship
-	SourceHf     int                                     `json:"sourceHf" legend:"plus"`     // source_hf
-	TargetHf     int                                     `json:"targetHf" legend:"plus"`     // target_hf
-	Year         int                                     `json:"year" legend:"plus"`         // year
+	Event        int                                     `json:"event" legend:"plus" related:""`        // event
+	Relationship HistoricalEventRelationshipRelationship `json:"relationship" legend:"plus" related:""` // relationship
+	SourceHf     int                                     `json:"sourceHf" legend:"plus" related:""`     // source_hf
+	TargetHf     int                                     `json:"targetHf" legend:"plus" related:""`     // target_hf
+	Year         int                                     `json:"year" legend:"plus" related:""`         // year
 }
 
 func NewHistoricalEventRelationship() *HistoricalEventRelationship {
@@ -17300,10 +17435,10 @@ func (x *HistoricalEventRelationship) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventRelationshipSupplement struct {
-	Event        int `json:"event" legend:"plus"`        // event
-	OccasionType int `json:"occasionType" legend:"plus"` // occasion_type
-	Site         int `json:"site" legend:"plus"`         // site
-	Unk1         int `json:"unk1" legend:"plus"`         // unk_1
+	Event        int `json:"event" legend:"plus" related:""`        // event
+	OccasionType int `json:"occasionType" legend:"plus" related:""` // occasion_type
+	Site         int `json:"site" legend:"plus" related:""`         // site
+	Unk1         int `json:"unk1" legend:"plus" related:""`         // unk_1
 }
 
 func NewHistoricalEventRelationshipSupplement() *HistoricalEventRelationshipSupplement {
@@ -17420,11 +17555,11 @@ func (s HistoricalEventRemoveHfEntityLinkLinkType) MarshalJSON() ([]byte, error)
 }
 
 type HistoricalEventRemoveHfEntityLink struct {
-	CivId      int                                   `json:"civId" legend:"base"`      // civ_id
-	Hfid       int                                   `json:"hfid" legend:"base"`       // hfid
-	Link       HistoricalEventRemoveHfEntityLinkLink `json:"link" legend:"base"`       // link
-	Position   string                                `json:"position" legend:"plus"`   // position
-	PositionId int                                   `json:"positionId" legend:"base"` // position_id
+	CivId      int                                   `json:"civId" legend:"base" related:""`      // civ_id
+	Hfid       int                                   `json:"hfid" legend:"base" related:""`       // hfid
+	Link       HistoricalEventRemoveHfEntityLinkLink `json:"link" legend:"base" related:""`       // link
+	Position   string                                `json:"position" legend:"plus" related:""`   // position
+	PositionId int                                   `json:"positionId" legend:"base" related:""` // position_id
 }
 
 func NewHistoricalEventRemoveHfEntityLink() *HistoricalEventRemoveHfEntityLink {
@@ -17446,6 +17581,7 @@ func (x *HistoricalEventRemoveHfEntityLink) RelatedToWrittenContent(id int) bool
 func (x *HistoricalEventRemoveHfEntityLink) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventRemoveHfEntityLink) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventRemoveHfEntityLink) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventRemoveHfEntityLink) CheckFields() {
 }
@@ -17469,8 +17605,8 @@ func (x *HistoricalEventRemoveHfEntityLink) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventRemoveHfHfLink struct {
-	Hfid       int `json:"hfid" legend:"base"`       // hfid
-	HfidTarget int `json:"hfidTarget" legend:"base"` // hfid_target
+	Hfid       int `json:"hfid" legend:"base" related:""`       // hfid
+	HfidTarget int `json:"hfidTarget" legend:"base" related:""` // hfid_target
 }
 
 func NewHistoricalEventRemoveHfHfLink() *HistoricalEventRemoveHfHfLink {
@@ -17493,6 +17629,7 @@ func (x *HistoricalEventRemoveHfHfLink) RelatedToWrittenContent(id int) bool    
 func (x *HistoricalEventRemoveHfHfLink) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventRemoveHfHfLink) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventRemoveHfHfLink) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventRemoveHfHfLink) CheckFields() {
 }
@@ -17546,11 +17683,11 @@ func (s HistoricalEventRemoveHfSiteLinkLinkType) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventRemoveHfSiteLink struct {
-	Civ       int                                     `json:"civ" legend:"plus"`       // civ
-	Histfig   int                                     `json:"histfig" legend:"plus"`   // histfig
-	LinkType  HistoricalEventRemoveHfSiteLinkLinkType `json:"linkType" legend:"plus"`  // link_type
-	SiteId    int                                     `json:"siteId" legend:"base"`    // site_id
-	Structure int                                     `json:"structure" legend:"plus"` // structure
+	Civ       int                                     `json:"civ" legend:"plus" related:""`       // civ
+	Histfig   int                                     `json:"histfig" legend:"plus" related:""`   // histfig
+	LinkType  HistoricalEventRemoveHfSiteLinkLinkType `json:"linkType" legend:"plus" related:""`  // link_type
+	SiteId    int                                     `json:"siteId" legend:"base" related:""`    // site_id
+	Structure int                                     `json:"structure" legend:"plus" related:""` // structure
 }
 
 func NewHistoricalEventRemoveHfSiteLink() *HistoricalEventRemoveHfSiteLink {
@@ -17575,6 +17712,7 @@ func (x *HistoricalEventRemoveHfSiteLink) RelatedToWrittenContent(id int) bool  
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventRemoveHfSiteLink) CheckFields() {
 	if x.Civ != x.SiteId {
@@ -17609,11 +17747,11 @@ func (x *HistoricalEventRemoveHfSiteLink) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventReplacedStructure struct {
-	CivId     int `json:"civId" legend:"base"`     // civ_id
-	NewAbId   int `json:"newAbId" legend:"base"`   // new_ab_id
-	OldAbId   int `json:"oldAbId" legend:"base"`   // old_ab_id
-	SiteCivId int `json:"siteCivId" legend:"base"` // site_civ_id
-	SiteId    int `json:"siteId" legend:"base"`    // site_id
+	CivId     int `json:"civId" legend:"base" related:""`     // civ_id
+	NewAbId   int `json:"newAbId" legend:"base" related:""`   // new_ab_id
+	OldAbId   int `json:"oldAbId" legend:"base" related:""`   // old_ab_id
+	SiteCivId int `json:"siteCivId" legend:"base" related:""` // site_civ_id
+	SiteId    int `json:"siteId" legend:"base" related:""`    // site_id
 }
 
 func NewHistoricalEventReplacedStructure() *HistoricalEventReplacedStructure {
@@ -17639,6 +17777,7 @@ func (x *HistoricalEventReplacedStructure) RelatedToWrittenContent(id int) bool 
 func (x *HistoricalEventReplacedStructure) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventReplacedStructure) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventReplacedStructure) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventReplacedStructure) CheckFields() {
 }
@@ -17664,10 +17803,10 @@ func (x *HistoricalEventReplacedStructure) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventSiteDied struct {
-	Abandoned bool `json:"abandoned" legend:"base"` // abandoned
-	CivId     int  `json:"civId" legend:"base"`     // civ_id
-	SiteCivId int  `json:"siteCivId" legend:"base"` // site_civ_id
-	SiteId    int  `json:"siteId" legend:"base"`    // site_id
+	Abandoned bool `json:"abandoned" legend:"base" related:""` // abandoned
+	CivId     int  `json:"civId" legend:"base" related:""`     // civ_id
+	SiteCivId int  `json:"siteCivId" legend:"base" related:""` // site_civ_id
+	SiteId    int  `json:"siteId" legend:"base" related:""`    // site_id
 }
 
 func NewHistoricalEventSiteDied() *HistoricalEventSiteDied {
@@ -17691,6 +17830,7 @@ func (x *HistoricalEventSiteDied) RelatedToWrittenContent(id int) bool    { retu
 func (x *HistoricalEventSiteDied) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventSiteDied) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSiteDied) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventSiteDied) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventSiteDied) CheckFields() {
 }
@@ -17763,11 +17903,11 @@ func (s HistoricalEventSiteDisputeDispute) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventSiteDispute struct {
-	Dispute   HistoricalEventSiteDisputeDispute `json:"dispute" legend:"base"`   // dispute
-	EntityId1 int                               `json:"entityId1" legend:"base"` // entity_id_1
-	EntityId2 int                               `json:"entityId2" legend:"base"` // entity_id_2
-	SiteId1   int                               `json:"siteId1" legend:"base"`   // site_id_1
-	SiteId2   int                               `json:"siteId2" legend:"base"`   // site_id_2
+	Dispute   HistoricalEventSiteDisputeDispute `json:"dispute" legend:"base" related:""`   // dispute
+	EntityId1 int                               `json:"entityId1" legend:"base" related:""` // entity_id_1
+	EntityId2 int                               `json:"entityId2" legend:"base" related:""` // entity_id_2
+	SiteId1   int                               `json:"siteId1" legend:"base" related:""`   // site_id_1
+	SiteId2   int                               `json:"siteId2" legend:"base" related:""`   // site_id_2
 }
 
 func NewHistoricalEventSiteDispute() *HistoricalEventSiteDispute {
@@ -17792,6 +17932,7 @@ func (x *HistoricalEventSiteDispute) RelatedToWrittenContent(id int) bool    { r
 func (x *HistoricalEventSiteDispute) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventSiteDispute) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSiteDispute) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventSiteDispute) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventSiteDispute) CheckFields() {
 }
@@ -17817,10 +17958,10 @@ func (x *HistoricalEventSiteDispute) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventSiteRetired struct {
-	CivId     int  `json:"civId" legend:"base"`     // civ_id
-	First     bool `json:"first" legend:"base"`     // first
-	SiteCivId int  `json:"siteCivId" legend:"base"` // site_civ_id
-	SiteId    int  `json:"siteId" legend:"base"`    // site_id
+	CivId     int  `json:"civId" legend:"base" related:""`     // civ_id
+	First     bool `json:"first" legend:"base" related:""`     // first
+	SiteCivId int  `json:"siteCivId" legend:"base" related:""` // site_civ_id
+	SiteId    int  `json:"siteId" legend:"base" related:""`    // site_id
 }
 
 func NewHistoricalEventSiteRetired() *HistoricalEventSiteRetired {
@@ -17844,6 +17985,7 @@ func (x *HistoricalEventSiteRetired) RelatedToWrittenContent(id int) bool    { r
 func (x *HistoricalEventSiteRetired) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventSiteRetired) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSiteRetired) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventSiteRetired) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventSiteRetired) CheckFields() {
 }
@@ -17864,10 +18006,10 @@ func (x *HistoricalEventSiteRetired) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventSiteSurrendered struct {
-	AttackerCivId int `json:"attackerCivId" legend:"base"` // attacker_civ_id
-	DefenderCivId int `json:"defenderCivId" legend:"base"` // defender_civ_id
-	SiteCivId     int `json:"siteCivId" legend:"base"`     // site_civ_id
-	SiteId        int `json:"siteId" legend:"base"`        // site_id
+	AttackerCivId int `json:"attackerCivId" legend:"base" related:""` // attacker_civ_id
+	DefenderCivId int `json:"defenderCivId" legend:"base" related:""` // defender_civ_id
+	SiteCivId     int `json:"siteCivId" legend:"base" related:""`     // site_civ_id
+	SiteId        int `json:"siteId" legend:"base" related:""`        // site_id
 }
 
 func NewHistoricalEventSiteSurrendered() *HistoricalEventSiteSurrendered {
@@ -17892,6 +18034,7 @@ func (x *HistoricalEventSiteSurrendered) RelatedToWrittenContent(id int) bool   
 func (x *HistoricalEventSiteSurrendered) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventSiteSurrendered) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSiteSurrendered) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventSiteSurrendered) CheckFields() {
 }
@@ -17914,11 +18057,11 @@ func (x *HistoricalEventSiteSurrendered) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventSiteTakenOver struct {
-	AttackerCivId int `json:"attackerCivId" legend:"base"` // attacker_civ_id
-	DefenderCivId int `json:"defenderCivId" legend:"base"` // defender_civ_id
-	NewSiteCivId  int `json:"newSiteCivId" legend:"base"`  // new_site_civ_id
-	SiteCivId     int `json:"siteCivId" legend:"base"`     // site_civ_id
-	SiteId        int `json:"siteId" legend:"base"`        // site_id
+	AttackerCivId int `json:"attackerCivId" legend:"base" related:""` // attacker_civ_id
+	DefenderCivId int `json:"defenderCivId" legend:"base" related:""` // defender_civ_id
+	NewSiteCivId  int `json:"newSiteCivId" legend:"base" related:""`  // new_site_civ_id
+	SiteCivId     int `json:"siteCivId" legend:"base" related:""`     // site_civ_id
+	SiteId        int `json:"siteId" legend:"base" related:""`        // site_id
 }
 
 func NewHistoricalEventSiteTakenOver() *HistoricalEventSiteTakenOver {
@@ -17944,6 +18087,7 @@ func (x *HistoricalEventSiteTakenOver) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventSiteTakenOver) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventSiteTakenOver) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSiteTakenOver) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventSiteTakenOver) CheckFields() {
 }
@@ -18006,11 +18150,11 @@ func (s HistoricalEventSiteTributeForcedSeason) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventSiteTributeForced struct {
-	AttackerCivId int                                    `json:"attackerCivId" legend:"base"` // attacker_civ_id
-	DefenderCivId int                                    `json:"defenderCivId" legend:"base"` // defender_civ_id
-	Season        HistoricalEventSiteTributeForcedSeason `json:"season" legend:"base"`        // season
-	SiteCivId     int                                    `json:"siteCivId" legend:"base"`     // site_civ_id
-	SiteId        int                                    `json:"siteId" legend:"base"`        // site_id
+	AttackerCivId int                                    `json:"attackerCivId" legend:"base" related:""` // attacker_civ_id
+	DefenderCivId int                                    `json:"defenderCivId" legend:"base" related:""` // defender_civ_id
+	Season        HistoricalEventSiteTributeForcedSeason `json:"season" legend:"base" related:""`        // season
+	SiteCivId     int                                    `json:"siteCivId" legend:"base" related:""`     // site_civ_id
+	SiteId        int                                    `json:"siteId" legend:"base" related:""`        // site_id
 }
 
 func NewHistoricalEventSiteTributeForced() *HistoricalEventSiteTributeForced {
@@ -18035,6 +18179,7 @@ func (x *HistoricalEventSiteTributeForced) RelatedToWrittenContent(id int) bool 
 func (x *HistoricalEventSiteTributeForced) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventSiteTributeForced) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSiteTributeForced) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventSiteTributeForced) CheckFields() {
 }
@@ -18060,10 +18205,10 @@ func (x *HistoricalEventSiteTributeForced) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventSneakIntoSite struct {
-	AttackerCivId int `json:"attackerCivId" legend:"base"` // attacker_civ_id
-	DefenderCivId int `json:"defenderCivId" legend:"base"` // defender_civ_id
-	SiteCivId     int `json:"siteCivId" legend:"base"`     // site_civ_id
-	SiteId        int `json:"siteId" legend:"base"`        // site_id
+	AttackerCivId int `json:"attackerCivId" legend:"base" related:""` // attacker_civ_id
+	DefenderCivId int `json:"defenderCivId" legend:"base" related:""` // defender_civ_id
+	SiteCivId     int `json:"siteCivId" legend:"base" related:""`     // site_civ_id
+	SiteId        int `json:"siteId" legend:"base" related:""`        // site_id
 }
 
 func NewHistoricalEventSneakIntoSite() *HistoricalEventSneakIntoSite {
@@ -18088,6 +18233,7 @@ func (x *HistoricalEventSneakIntoSite) RelatedToWrittenContent(id int) bool    {
 func (x *HistoricalEventSneakIntoSite) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventSneakIntoSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSneakIntoSite) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventSneakIntoSite) CheckFields() {
 }
@@ -18110,10 +18256,10 @@ func (x *HistoricalEventSneakIntoSite) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventSpottedLeavingSite struct {
-	LeaverCivId int `json:"leaverCivId" legend:"base"` // leaver_civ_id
-	SiteCivId   int `json:"siteCivId" legend:"base"`   // site_civ_id
-	SiteId      int `json:"siteId" legend:"base"`      // site_id
-	SpotterHfid int `json:"spotterHfid" legend:"base"` // spotter_hfid
+	LeaverCivId int `json:"leaverCivId" legend:"base" related:""` // leaver_civ_id
+	SiteCivId   int `json:"siteCivId" legend:"base" related:""`   // site_civ_id
+	SiteId      int `json:"siteId" legend:"base" related:""`      // site_id
+	SpotterHfid int `json:"spotterHfid" legend:"base" related:""` // spotter_hfid
 }
 
 func NewHistoricalEventSpottedLeavingSite() *HistoricalEventSpottedLeavingSite {
@@ -18138,6 +18284,7 @@ func (x *HistoricalEventSpottedLeavingSite) RelatedToWrittenContent(id int) bool
 func (x *HistoricalEventSpottedLeavingSite) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventSpottedLeavingSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSpottedLeavingSite) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventSpottedLeavingSite) CheckFields() {
 }
@@ -18160,23 +18307,23 @@ func (x *HistoricalEventSpottedLeavingSite) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventSquadVsSquad struct {
-	AHfid           []int `json:"aHfid" legend:"base"`           // a_hfid
-	ALeaderHfid     int   `json:"aLeaderHfid" legend:"base"`     // a_leader_hfid
-	ALeadershipRoll int   `json:"aLeadershipRoll" legend:"base"` // a_leadership_roll
-	ASquadId        int   `json:"aSquadId" legend:"base"`        // a_squad_id
-	DEffect         int   `json:"dEffect" legend:"base"`         // d_effect
-	DHfid           []int `json:"dHfid" legend:"base"`           // d_hfid
-	DInteraction    int   `json:"dInteraction" legend:"base"`    // d_interaction
-	DLeaderHfid     int   `json:"dLeaderHfid" legend:"base"`     // d_leader_hfid
-	DLeadershipRoll int   `json:"dLeadershipRoll" legend:"base"` // d_leadership_roll
-	DNumber         int   `json:"dNumber" legend:"base"`         // d_number
-	DRace           int   `json:"dRace" legend:"base"`           // d_race
-	DSlain          int   `json:"dSlain" legend:"base"`          // d_slain
-	DSquadId        int   `json:"dSquadId" legend:"base"`        // d_squad_id
-	FeatureLayerId  int   `json:"featureLayerId" legend:"base"`  // feature_layer_id
-	SiteId          int   `json:"siteId" legend:"base"`          // site_id
-	StructureId     int   `json:"structureId" legend:"base"`     // structure_id
-	SubregionId     int   `json:"subregionId" legend:"base"`     // subregion_id
+	AHfid           []int `json:"aHfid" legend:"base" related:""`           // a_hfid
+	ALeaderHfid     int   `json:"aLeaderHfid" legend:"base" related:""`     // a_leader_hfid
+	ALeadershipRoll int   `json:"aLeadershipRoll" legend:"base" related:""` // a_leadership_roll
+	ASquadId        int   `json:"aSquadId" legend:"base" related:""`        // a_squad_id
+	DEffect         int   `json:"dEffect" legend:"base" related:""`         // d_effect
+	DHfid           []int `json:"dHfid" legend:"base" related:""`           // d_hfid
+	DInteraction    int   `json:"dInteraction" legend:"base" related:""`    // d_interaction
+	DLeaderHfid     int   `json:"dLeaderHfid" legend:"base" related:""`     // d_leader_hfid
+	DLeadershipRoll int   `json:"dLeadershipRoll" legend:"base" related:""` // d_leadership_roll
+	DNumber         int   `json:"dNumber" legend:"base" related:""`         // d_number
+	DRace           int   `json:"dRace" legend:"base" related:""`           // d_race
+	DSlain          int   `json:"dSlain" legend:"base" related:""`          // d_slain
+	DSquadId        int   `json:"dSquadId" legend:"base" related:""`        // d_squad_id
+	FeatureLayerId  int   `json:"featureLayerId" legend:"base" related:""`  // feature_layer_id
+	SiteId          int   `json:"siteId" legend:"base" related:""`          // site_id
+	StructureId     int   `json:"structureId" legend:"base" related:""`     // structure_id
+	SubregionId     int   `json:"subregionId" legend:"base" related:""`     // subregion_id
 }
 
 func NewHistoricalEventSquadVsSquad() *HistoricalEventSquadVsSquad {
@@ -18214,6 +18361,7 @@ func (x *HistoricalEventSquadVsSquad) RelatedToWrittenContent(id int) bool    { 
 func (x *HistoricalEventSquadVsSquad) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventSquadVsSquad) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSquadVsSquad) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventSquadVsSquad) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventSquadVsSquad) CheckFields() {
 }
@@ -18323,16 +18471,16 @@ func (s HistoricalEventTacticalSituationSituation) MarshalJSON() ([]byte, error)
 }
 
 type HistoricalEventTacticalSituation struct {
-	ATacticianHfid int                                       `json:"aTacticianHfid" legend:"base"` // a_tactician_hfid
-	ATacticsRoll   int                                       `json:"aTacticsRoll" legend:"base"`   // a_tactics_roll
-	DTacticianHfid int                                       `json:"dTacticianHfid" legend:"base"` // d_tactician_hfid
-	DTacticsRoll   int                                       `json:"dTacticsRoll" legend:"base"`   // d_tactics_roll
-	FeatureLayerId int                                       `json:"featureLayerId" legend:"base"` // feature_layer_id
-	SiteId         int                                       `json:"siteId" legend:"base"`         // site_id
-	Situation      HistoricalEventTacticalSituationSituation `json:"situation" legend:"base"`      // situation
-	Start          bool                                      `json:"start" legend:"base"`          // start
-	StructureId    int                                       `json:"structureId" legend:"base"`    // structure_id
-	SubregionId    int                                       `json:"subregionId" legend:"base"`    // subregion_id
+	ATacticianHfid int                                       `json:"aTacticianHfid" legend:"base" related:""` // a_tactician_hfid
+	ATacticsRoll   int                                       `json:"aTacticsRoll" legend:"base" related:""`   // a_tactics_roll
+	DTacticianHfid int                                       `json:"dTacticianHfid" legend:"base" related:""` // d_tactician_hfid
+	DTacticsRoll   int                                       `json:"dTacticsRoll" legend:"base" related:""`   // d_tactics_roll
+	FeatureLayerId int                                       `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	SiteId         int                                       `json:"siteId" legend:"base" related:""`         // site_id
+	Situation      HistoricalEventTacticalSituationSituation `json:"situation" legend:"base" related:""`      // situation
+	Start          bool                                      `json:"start" legend:"base" related:""`          // start
+	StructureId    int                                       `json:"structureId" legend:"base" related:""`    // structure_id
+	SubregionId    int                                       `json:"subregionId" legend:"base" related:""`    // subregion_id
 }
 
 func NewHistoricalEventTacticalSituation() *HistoricalEventTacticalSituation {
@@ -18363,6 +18511,7 @@ func (x *HistoricalEventTacticalSituation) RelatedToWrittenContent(id int) bool 
 func (x *HistoricalEventTacticalSituation) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventTacticalSituation) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventTacticalSituation) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventTacticalSituation) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventTacticalSituation) CheckFields() {
 }
@@ -18401,14 +18550,14 @@ func (x *HistoricalEventTacticalSituation) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventTrade struct {
-	AccountShift     int `json:"accountShift" legend:"base"`     // account_shift
-	Allotment        int `json:"allotment" legend:"base"`        // allotment
-	AllotmentIndex   int `json:"allotmentIndex" legend:"base"`   // allotment_index
-	DestSiteId       int `json:"destSiteId" legend:"base"`       // dest_site_id
-	ProductionZoneId int `json:"productionZoneId" legend:"base"` // production_zone_id
-	SourceSiteId     int `json:"sourceSiteId" legend:"base"`     // source_site_id
-	TraderEntityId   int `json:"traderEntityId" legend:"base"`   // trader_entity_id
-	TraderHfid       int `json:"traderHfid" legend:"base"`       // trader_hfid
+	AccountShift     int `json:"accountShift" legend:"base" related:""`     // account_shift
+	Allotment        int `json:"allotment" legend:"base" related:""`        // allotment
+	AllotmentIndex   int `json:"allotmentIndex" legend:"base" related:""`   // allotment_index
+	DestSiteId       int `json:"destSiteId" legend:"base" related:""`       // dest_site_id
+	ProductionZoneId int `json:"productionZoneId" legend:"base" related:""` // production_zone_id
+	SourceSiteId     int `json:"sourceSiteId" legend:"base" related:""`     // source_site_id
+	TraderEntityId   int `json:"traderEntityId" legend:"base" related:""`   // trader_entity_id
+	TraderHfid       int `json:"traderHfid" legend:"base" related:""`       // trader_hfid
 }
 
 func NewHistoricalEventTrade() *HistoricalEventTrade {
@@ -18437,6 +18586,7 @@ func (x *HistoricalEventTrade) RelatedToWrittenContent(id int) bool    { return 
 func (x *HistoricalEventTrade) RelatedToDanceForm(id int) bool         { return false }
 func (x *HistoricalEventTrade) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventTrade) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventTrade) RelatedToMountain(id int) bool          { return false }
 
 func (x *HistoricalEventTrade) CheckFields() {
 }
@@ -18540,14 +18690,14 @@ func (s HistoricalEventWrittenContentComposedReason) MarshalJSON() ([]byte, erro
 }
 
 type HistoricalEventWrittenContentComposed struct {
-	Circumstance   HistoricalEventWrittenContentComposedCircumstance `json:"circumstance" legend:"base"`   // circumstance
-	CircumstanceId int                                               `json:"circumstanceId" legend:"base"` // circumstance_id
-	HistFigureId   int                                               `json:"histFigureId" legend:"base"`   // hist_figure_id
-	Reason         HistoricalEventWrittenContentComposedReason       `json:"reason" legend:"base"`         // reason
-	ReasonId       int                                               `json:"reasonId" legend:"base"`       // reason_id
-	SiteId         int                                               `json:"siteId" legend:"base"`         // site_id
-	SubregionId    int                                               `json:"subregionId" legend:"base"`    // subregion_id
-	WcId           int                                               `json:"wcId" legend:"base"`           // wc_id
+	Circumstance   HistoricalEventWrittenContentComposedCircumstance `json:"circumstance" legend:"base" related:""`   // circumstance
+	CircumstanceId int                                               `json:"circumstanceId" legend:"base" related:""` // circumstance_id
+	HistFigureId   int                                               `json:"histFigureId" legend:"base" related:""`   // hist_figure_id
+	Reason         HistoricalEventWrittenContentComposedReason       `json:"reason" legend:"base" related:""`         // reason
+	ReasonId       int                                               `json:"reasonId" legend:"base" related:""`       // reason_id
+	SiteId         int                                               `json:"siteId" legend:"base" related:""`         // site_id
+	SubregionId    int                                               `json:"subregionId" legend:"base" related:""`    // subregion_id
+	WcId           int                                               `json:"wcId" legend:"base" related:""`           // wc_id
 }
 
 func NewHistoricalEventWrittenContentComposed() *HistoricalEventWrittenContentComposed {
@@ -18576,6 +18726,7 @@ func (x *HistoricalEventWrittenContentComposed) RelatedToWrittenContent(id int) 
 func (x *HistoricalEventWrittenContentComposed) RelatedToDanceForm(id int) bool   { return false }
 func (x *HistoricalEventWrittenContentComposed) RelatedToMusicalForm(id int) bool { return false }
 func (x *HistoricalEventWrittenContentComposed) RelatedToPoeticForm(id int) bool  { return false }
+func (x *HistoricalEventWrittenContentComposed) RelatedToMountain(id int) bool    { return false }
 
 func (x *HistoricalEventWrittenContentComposed) CheckFields() {
 }
@@ -18702,52 +18853,52 @@ func (s HistoricalFigureGoal) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalFigure struct {
-	ActiveInteraction               []string                           `json:"activeInteraction" legend:"base"`               // active_interaction
-	Adventurer                      bool                               `json:"adventurer" legend:"base"`                      // adventurer
-	Animated                        bool                               `json:"animated" legend:"base"`                        // animated
-	AnimatedString                  string                             `json:"animatedString" legend:"base"`                  // animated_string
-	Appeared                        int                                `json:"appeared" legend:"base"`                        // appeared
-	AssociatedType                  string                             `json:"associatedType" legend:"base"`                  // associated_type
-	BirthSeconds72                  int                                `json:"birthSeconds72" legend:"base"`                  // birth_seconds72
-	BirthYear                       int                                `json:"birthYear" legend:"base"`                       // birth_year
-	BreedId                         int                                `json:"breedId" legend:"base"`                         // breed_id
-	Caste                           string                             `json:"caste" legend:"base"`                           // caste
-	CurrentIdentityId               int                                `json:"currentIdentityId" legend:"base"`               // current_identity_id
-	DeathSeconds72                  int                                `json:"deathSeconds72" legend:"base"`                  // death_seconds72
-	DeathYear                       int                                `json:"deathYear" legend:"base"`                       // death_year
-	Deity                           bool                               `json:"deity" legend:"base"`                           // deity
-	EntPopId                        int                                `json:"entPopId" legend:"base"`                        // ent_pop_id
-	EntityFormerPositionLink        []*EntityFormerPositionLink        `json:"entityFormerPositionLink" legend:"base"`        // entity_former_position_link
-	EntityFormerSquadLink           []*EntityFormerSquadLink           `json:"entityFormerSquadLink" legend:"base"`           // entity_former_squad_link
-	EntityLink                      []*HistoricalFigureEntityLink      `json:"entityLink" legend:"base"`                      // entity_link
-	EntityPositionLink              []*EntityPositionLink              `json:"entityPositionLink" legend:"base"`              // entity_position_link
-	EntityReputation                []*EntityReputation                `json:"entityReputation" legend:"base"`                // entity_reputation
-	EntitySquadLink                 []*EntitySquadLink                 `json:"entitySquadLink" legend:"base"`                 // entity_squad_link
-	Force                           bool                               `json:"force" legend:"base"`                           // force
-	Ghost                           bool                               `json:"ghost" legend:"base"`                           // ghost
-	Goal                            []HistoricalFigureGoal             `json:"goal" legend:"base"`                            // goal
-	HfLink                          []*HfLink                          `json:"hfLink" legend:"base"`                          // hf_link
-	HfSkill                         []*HfSkill                         `json:"hfSkill" legend:"base"`                         // hf_skill
-	HoldsArtifact                   []int                              `json:"holdsArtifact" legend:"base"`                   // holds_artifact
-	HonorEntity                     []*HonorEntity                     `json:"honorEntity" legend:"base"`                     // honor_entity
-	Id_                             int                                `json:"id" legend:"both"`                              // id
-	InteractionKnowledge            []string                           `json:"interactionKnowledge" legend:"base"`            // interaction_knowledge
-	IntrigueActor                   []*IntrigueActor                   `json:"intrigueActor" legend:"base"`                   // intrigue_actor
-	IntriguePlot                    []*IntriguePlot                    `json:"intriguePlot" legend:"base"`                    // intrigue_plot
-	JourneyPet                      []string                           `json:"journeyPet" legend:"base"`                      // journey_pet
-	Name_                           string                             `json:"name" legend:"base"`                            // name
-	Race                            string                             `json:"race" legend:"both"`                            // race
-	RelationshipProfileHfHistorical []*RelationshipProfileHfHistorical `json:"relationshipProfileHfHistorical" legend:"base"` // relationship_profile_hf_historical
-	RelationshipProfileHfIdentity   []*RelationshipProfileHfIdentity   `json:"relationshipProfileHfIdentity" legend:"base"`   // relationship_profile_hf_identity
-	RelationshipProfileHfVisual     []*RelationshipProfileHfVisual     `json:"relationshipProfileHfVisual" legend:"base"`     // relationship_profile_hf_visual
-	Sex                             int                                `json:"sex" legend:"plus"`                             // sex
-	SiteLink                        []*SiteLink                        `json:"siteLink" legend:"base"`                        // site_link
-	SiteProperty                    []*HistoricalFigureSiteProperty    `json:"siteProperty" legend:"base"`                    // site_property
-	Sphere                          []string                           `json:"sphere" legend:"base"`                          // sphere
-	UsedIdentityId                  []int                              `json:"usedIdentityId" legend:"base"`                  // used_identity_id
-	VagueRelationship               []*VagueRelationship               `json:"vagueRelationship" legend:"base"`               // vague_relationship
-	Vampire                         bool                               `json:"vampire" legend:"add"`                          // Vampire
-	Werebeast                       bool                               `json:"werebeast" legend:"add"`                        // Werebeast
+	ActiveInteraction               []string                           `json:"activeInteraction" legend:"base" related:""`               // active_interaction
+	Adventurer                      bool                               `json:"adventurer" legend:"base" related:""`                      // adventurer
+	Animated                        bool                               `json:"animated" legend:"base" related:""`                        // animated
+	AnimatedString                  string                             `json:"animatedString" legend:"base" related:""`                  // animated_string
+	Appeared                        int                                `json:"appeared" legend:"base" related:""`                        // appeared
+	AssociatedType                  string                             `json:"associatedType" legend:"base" related:""`                  // associated_type
+	BirthSeconds72                  int                                `json:"birthSeconds72" legend:"base" related:""`                  // birth_seconds72
+	BirthYear                       int                                `json:"birthYear" legend:"base" related:""`                       // birth_year
+	BreedId                         int                                `json:"breedId" legend:"base" related:""`                         // breed_id
+	Caste                           string                             `json:"caste" legend:"base" related:""`                           // caste
+	CurrentIdentityId               int                                `json:"currentIdentityId" legend:"base" related:""`               // current_identity_id
+	DeathSeconds72                  int                                `json:"deathSeconds72" legend:"base" related:""`                  // death_seconds72
+	DeathYear                       int                                `json:"deathYear" legend:"base" related:""`                       // death_year
+	Deity                           bool                               `json:"deity" legend:"base" related:""`                           // deity
+	EntPopId                        int                                `json:"entPopId" legend:"base" related:""`                        // ent_pop_id
+	EntityFormerPositionLink        []*EntityFormerPositionLink        `json:"entityFormerPositionLink" legend:"base" related:""`        // entity_former_position_link
+	EntityFormerSquadLink           []*EntityFormerSquadLink           `json:"entityFormerSquadLink" legend:"base" related:""`           // entity_former_squad_link
+	EntityLink                      []*HistoricalFigureEntityLink      `json:"entityLink" legend:"base" related:""`                      // entity_link
+	EntityPositionLink              []*EntityPositionLink              `json:"entityPositionLink" legend:"base" related:""`              // entity_position_link
+	EntityReputation                []*EntityReputation                `json:"entityReputation" legend:"base" related:""`                // entity_reputation
+	EntitySquadLink                 []*EntitySquadLink                 `json:"entitySquadLink" legend:"base" related:""`                 // entity_squad_link
+	Force                           bool                               `json:"force" legend:"base" related:""`                           // force
+	Ghost                           bool                               `json:"ghost" legend:"base" related:""`                           // ghost
+	Goal                            []HistoricalFigureGoal             `json:"goal" legend:"base" related:""`                            // goal
+	HfLink                          []*HfLink                          `json:"hfLink" legend:"base" related:""`                          // hf_link
+	HfSkill                         []*HfSkill                         `json:"hfSkill" legend:"base" related:""`                         // hf_skill
+	HoldsArtifact                   []int                              `json:"holdsArtifact" legend:"base" related:""`                   // holds_artifact
+	HonorEntity                     []*HonorEntity                     `json:"honorEntity" legend:"base" related:""`                     // honor_entity
+	Id_                             int                                `json:"id" legend:"both" related:""`                              // id
+	InteractionKnowledge            []string                           `json:"interactionKnowledge" legend:"base" related:""`            // interaction_knowledge
+	IntrigueActor                   []*IntrigueActor                   `json:"intrigueActor" legend:"base" related:""`                   // intrigue_actor
+	IntriguePlot                    []*IntriguePlot                    `json:"intriguePlot" legend:"base" related:""`                    // intrigue_plot
+	JourneyPet                      []string                           `json:"journeyPet" legend:"base" related:""`                      // journey_pet
+	Name_                           string                             `json:"name" legend:"base" related:""`                            // name
+	Race                            string                             `json:"race" legend:"both" related:""`                            // race
+	RelationshipProfileHfHistorical []*RelationshipProfileHfHistorical `json:"relationshipProfileHfHistorical" legend:"base" related:""` // relationship_profile_hf_historical
+	RelationshipProfileHfIdentity   []*RelationshipProfileHfIdentity   `json:"relationshipProfileHfIdentity" legend:"base" related:""`   // relationship_profile_hf_identity
+	RelationshipProfileHfVisual     []*RelationshipProfileHfVisual     `json:"relationshipProfileHfVisual" legend:"base" related:""`     // relationship_profile_hf_visual
+	Sex                             int                                `json:"sex" legend:"plus" related:""`                             // sex
+	SiteLink                        []*SiteLink                        `json:"siteLink" legend:"base" related:""`                        // site_link
+	SiteProperty                    []*HistoricalFigureSiteProperty    `json:"siteProperty" legend:"base" related:""`                    // site_property
+	Sphere                          []string                           `json:"sphere" legend:"base" related:""`                          // sphere
+	UsedIdentityId                  []int                              `json:"usedIdentityId" legend:"base" related:""`                  // used_identity_id
+	VagueRelationship               []*VagueRelationship               `json:"vagueRelationship" legend:"base" related:""`               // vague_relationship
+	Vampire                         bool                               `json:"vampire" legend:"add" related:""`                          // Vampire
+	Werebeast                       bool                               `json:"werebeast" legend:"add" related:""`                        // Werebeast
 }
 
 func NewHistoricalFigure() *HistoricalFigure {
@@ -18929,9 +19080,9 @@ func (s HistoricalFigureEntityLinkLinkType) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalFigureEntityLink struct {
-	EntityId     int                                `json:"entityId" legend:"base"`     // entity_id
-	LinkStrength int                                `json:"linkStrength" legend:"base"` // link_strength
-	LinkType     HistoricalFigureEntityLinkLinkType `json:"linkType" legend:"base"`     // link_type
+	EntityId     int                                `json:"entityId" legend:"base" related:""`     // entity_id
+	LinkStrength int                                `json:"linkStrength" legend:"base" related:""` // link_strength
+	LinkType     HistoricalFigureEntityLinkLinkType `json:"linkType" legend:"base" related:""`     // link_type
 }
 
 func NewHistoricalFigureEntityLink() *HistoricalFigureEntityLink {
@@ -18959,8 +19110,8 @@ func (x *HistoricalFigureEntityLink) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalFigureSiteProperty struct {
-	PropertyId int `json:"propertyId" legend:"base"` // property_id
-	SiteId     int `json:"siteId" legend:"base"`     // site_id
+	PropertyId int `json:"propertyId" legend:"base" related:""` // property_id
+	SiteId     int `json:"siteId" legend:"base" related:""`     // site_id
 }
 
 func NewHistoricalFigureSiteProperty() *HistoricalFigureSiteProperty {
@@ -19052,18 +19203,18 @@ func (s HonorRequiredSkill) MarshalJSON() ([]byte, error) {
 }
 
 type Honor struct {
-	ExemptEpid                    int                `json:"exemptEpid" legend:"base"`                    // exempt_epid
-	ExemptFormerEpid              int                `json:"exemptFormerEpid" legend:"base"`              // exempt_former_epid
-	GivesPrecedence               int                `json:"givesPrecedence" legend:"base"`               // gives_precedence
-	GrantedToEverybody            bool               `json:"grantedToEverybody" legend:"base"`            // granted_to_everybody
-	Id_                           int                `json:"id" legend:"base"`                            // id
-	Name_                         string             `json:"name" legend:"base"`                          // name
-	RequiredBattles               int                `json:"requiredBattles" legend:"base"`               // required_battles
-	RequiredKills                 int                `json:"requiredKills" legend:"base"`                 // required_kills
-	RequiredSkill                 HonorRequiredSkill `json:"requiredSkill" legend:"base"`                 // required_skill
-	RequiredSkillIpTotal          int                `json:"requiredSkillIpTotal" legend:"base"`          // required_skill_ip_total
-	RequiredYears                 int                `json:"requiredYears" legend:"base"`                 // required_years
-	RequiresAnyMeleeOrRangedSkill bool               `json:"requiresAnyMeleeOrRangedSkill" legend:"base"` // requires_any_melee_or_ranged_skill
+	ExemptEpid                    int                `json:"exemptEpid" legend:"base" related:""`                    // exempt_epid
+	ExemptFormerEpid              int                `json:"exemptFormerEpid" legend:"base" related:""`              // exempt_former_epid
+	GivesPrecedence               int                `json:"givesPrecedence" legend:"base" related:""`               // gives_precedence
+	GrantedToEverybody            bool               `json:"grantedToEverybody" legend:"base" related:""`            // granted_to_everybody
+	Id_                           int                `json:"id" legend:"base" related:""`                            // id
+	Name_                         string             `json:"name" legend:"base" related:""`                          // name
+	RequiredBattles               int                `json:"requiredBattles" legend:"base" related:""`               // required_battles
+	RequiredKills                 int                `json:"requiredKills" legend:"base" related:""`                 // required_kills
+	RequiredSkill                 HonorRequiredSkill `json:"requiredSkill" legend:"base" related:""`                 // required_skill
+	RequiredSkillIpTotal          int                `json:"requiredSkillIpTotal" legend:"base" related:""`          // required_skill_ip_total
+	RequiredYears                 int                `json:"requiredYears" legend:"base" related:""`                 // required_years
+	RequiresAnyMeleeOrRangedSkill bool               `json:"requiresAnyMeleeOrRangedSkill" legend:"base" related:""` // requires_any_melee_or_ranged_skill
 }
 
 func NewHonor() *Honor {
@@ -19121,10 +19272,10 @@ func (x *Honor) MarshalJSON() ([]byte, error) {
 }
 
 type HonorEntity struct {
-	Battles int   `json:"battles" legend:"base"` // battles
-	Entity  int   `json:"entity" legend:"base"`  // entity
-	HonorId []int `json:"honorId" legend:"base"` // honor_id
-	Kills   int   `json:"kills" legend:"base"`   // kills
+	Battles int   `json:"battles" legend:"base" related:""` // battles
+	Entity  int   `json:"entity" legend:"base" related:""`  // entity
+	HonorId []int `json:"honorId" legend:"base" related:""` // honor_id
+	Kills   int   `json:"kills" legend:"base" related:""`   // kills
 }
 
 func NewHonorEntity() *HonorEntity {
@@ -19251,16 +19402,16 @@ func (s IdentityProfession) MarshalJSON() ([]byte, error) {
 }
 
 type Identity struct {
-	BirthSecond int                `json:"birthSecond" legend:"plus"` // birth_second
-	BirthYear   int                `json:"birthYear" legend:"plus"`   // birth_year
-	Caste       string             `json:"caste" legend:"plus"`       // caste
-	EntityId    int                `json:"entityId" legend:"plus"`    // entity_id
-	HistfigId   int                `json:"histfigId" legend:"plus"`   // histfig_id
-	Id_         int                `json:"id" legend:"plus"`          // id
-	Name_       string             `json:"name" legend:"plus"`        // name
-	NemesisId   int                `json:"nemesisId" legend:"plus"`   // nemesis_id
-	Profession  IdentityProfession `json:"profession" legend:"plus"`  // profession
-	Race        string             `json:"race" legend:"plus"`        // race
+	BirthSecond int                `json:"birthSecond" legend:"plus" related:""` // birth_second
+	BirthYear   int                `json:"birthYear" legend:"plus" related:""`   // birth_year
+	Caste       string             `json:"caste" legend:"plus" related:""`       // caste
+	EntityId    int                `json:"entityId" legend:"plus" related:""`    // entity_id
+	HistfigId   int                `json:"histfigId" legend:"plus" related:""`   // histfig_id
+	Id_         int                `json:"id" legend:"plus" related:""`          // id
+	Name_       string             `json:"name" legend:"plus" related:""`        // name
+	NemesisId   int                `json:"nemesisId" legend:"plus" related:""`   // nemesis_id
+	Profession  IdentityProfession `json:"profession" legend:"plus" related:""`  // profession
+	Race        string             `json:"race" legend:"plus" related:""`        // race
 }
 
 func NewIdentity() *Identity {
@@ -19489,16 +19640,16 @@ func (s IntrigueActorStrategy) MarshalJSON() ([]byte, error) {
 }
 
 type IntrigueActor struct {
-	EntityId                 int                   `json:"entityId" legend:"base"`                 // entity_id
-	HandleActorId            int                   `json:"handleActorId" legend:"base"`            // handle_actor_id
-	Hfid                     int                   `json:"hfid" legend:"base"`                     // hfid
-	LocalId                  int                   `json:"localId" legend:"base"`                  // local_id
-	PromisedActorImmortality bool                  `json:"promisedActorImmortality" legend:"base"` // promised_actor_immortality
-	PromisedMeImmortality    bool                  `json:"promisedMeImmortality" legend:"base"`    // promised_me_immortality
-	Role                     IntrigueActorRole     `json:"role" legend:"base"`                     // role
-	Strategy                 IntrigueActorStrategy `json:"strategy" legend:"base"`                 // strategy
-	StrategyEnid             int                   `json:"strategyEnid" legend:"base"`             // strategy_enid
-	StrategyEppid            int                   `json:"strategyEppid" legend:"base"`            // strategy_eppid
+	EntityId                 int                   `json:"entityId" legend:"base" related:""`                 // entity_id
+	HandleActorId            int                   `json:"handleActorId" legend:"base" related:""`            // handle_actor_id
+	Hfid                     int                   `json:"hfid" legend:"base" related:""`                     // hfid
+	LocalId                  int                   `json:"localId" legend:"base" related:""`                  // local_id
+	PromisedActorImmortality bool                  `json:"promisedActorImmortality" legend:"base" related:""` // promised_actor_immortality
+	PromisedMeImmortality    bool                  `json:"promisedMeImmortality" legend:"base" related:""`    // promised_me_immortality
+	Role                     IntrigueActorRole     `json:"role" legend:"base" related:""`                     // role
+	Strategy                 IntrigueActorStrategy `json:"strategy" legend:"base" related:""`                 // strategy
+	StrategyEnid             int                   `json:"strategyEnid" legend:"base" related:""`             // strategy_enid
+	StrategyEppid            int                   `json:"strategyEppid" legend:"base" related:""`            // strategy_eppid
 }
 
 func NewIntrigueActor() *IntrigueActor {
@@ -19649,17 +19800,17 @@ func (s IntriguePlotType) MarshalJSON() ([]byte, error) {
 }
 
 type IntriguePlot struct {
-	ActorId           int              `json:"actorId" legend:"base"`           // actor_id
-	ArtifactId        int              `json:"artifactId" legend:"base"`        // artifact_id
-	DelegatedPlotHfid int              `json:"delegatedPlotHfid" legend:"base"` // delegated_plot_hfid
-	DelegatedPlotId   int              `json:"delegatedPlotId" legend:"base"`   // delegated_plot_id
-	EntityId          int              `json:"entityId" legend:"base"`          // entity_id
-	LocalId           int              `json:"localId" legend:"base"`           // local_id
-	OnHold            bool             `json:"onHold" legend:"base"`            // on_hold
-	ParentPlotHfid    int              `json:"parentPlotHfid" legend:"base"`    // parent_plot_hfid
-	ParentPlotId      int              `json:"parentPlotId" legend:"base"`      // parent_plot_id
-	PlotActor         []*PlotActor     `json:"plotActor" legend:"base"`         // plot_actor
-	Type_             IntriguePlotType `json:"type" legend:"base"`              // type
+	ActorId           int              `json:"actorId" legend:"base" related:""`           // actor_id
+	ArtifactId        int              `json:"artifactId" legend:"base" related:""`        // artifact_id
+	DelegatedPlotHfid int              `json:"delegatedPlotHfid" legend:"base" related:""` // delegated_plot_hfid
+	DelegatedPlotId   int              `json:"delegatedPlotId" legend:"base" related:""`   // delegated_plot_id
+	EntityId          int              `json:"entityId" legend:"base" related:""`          // entity_id
+	LocalId           int              `json:"localId" legend:"base" related:""`           // local_id
+	OnHold            bool             `json:"onHold" legend:"base" related:""`            // on_hold
+	ParentPlotHfid    int              `json:"parentPlotHfid" legend:"base" related:""`    // parent_plot_hfid
+	ParentPlotId      int              `json:"parentPlotId" legend:"base" related:""`      // parent_plot_id
+	PlotActor         []*PlotActor     `json:"plotActor" legend:"base" related:""`         // plot_actor
+	Type_             IntriguePlotType `json:"type" legend:"base" related:""`              // type
 }
 
 func NewIntriguePlot() *IntriguePlot {
@@ -19713,10 +19864,10 @@ func (x *IntriguePlot) MarshalJSON() ([]byte, error) {
 }
 
 type Item struct {
-	NameString              string `json:"nameString" legend:"base"`              // name_string
-	PageNumber              int    `json:"pageNumber" legend:"base"`              // page_number
-	PageWrittenContentId    int    `json:"pageWrittenContentId" legend:"base"`    // page_written_content_id
-	WritingWrittenContentId int    `json:"writingWrittenContentId" legend:"base"` // writing_written_content_id
+	NameString              string `json:"nameString" legend:"base" related:""`              // name_string
+	PageNumber              int    `json:"pageNumber" legend:"base" related:""`              // page_number
+	PageWrittenContentId    int    `json:"pageWrittenContentId" legend:"base" related:""`    // page_written_content_id
+	WritingWrittenContentId int    `json:"writingWrittenContentId" legend:"base" related:""` // writing_written_content_id
 }
 
 func NewItem() *Item {
@@ -19746,10 +19897,10 @@ func (x *Item) MarshalJSON() ([]byte, error) {
 }
 
 type Landmass struct {
-	Coord1 string `json:"coord1" legend:"plus"` // coord_1
-	Coord2 string `json:"coord2" legend:"plus"` // coord_2
-	Id_    int    `json:"id" legend:"plus"`     // id
-	Name_  string `json:"name" legend:"plus"`   // name
+	Coord1 string `json:"coord1" legend:"plus" related:""` // coord_1
+	Coord2 string `json:"coord2" legend:"plus" related:""` // coord_2
+	Id_    int    `json:"id" legend:"plus" related:""`     // id
+	Name_  string `json:"name" legend:"plus" related:""`   // name
 }
 
 func NewLandmass() *Landmass {
@@ -19776,11 +19927,11 @@ func (x *Landmass) MarshalJSON() ([]byte, error) {
 }
 
 type MountainPeak struct {
-	Coords    string `json:"coords" legend:"plus"`    // coords
-	Height    int    `json:"height" legend:"plus"`    // height
-	Id_       int    `json:"id" legend:"plus"`        // id
-	IsVolcano bool   `json:"isVolcano" legend:"plus"` // is_volcano
-	Name_     string `json:"name" legend:"plus"`      // name
+	Coords    string `json:"coords" legend:"plus" related:""`    // coords
+	Height    int    `json:"height" legend:"plus" related:""`    // height
+	Id_       int    `json:"id" legend:"plus" related:""`        // id
+	IsVolcano bool   `json:"isVolcano" legend:"plus" related:""` // is_volcano
+	Name_     string `json:"name" legend:"plus" related:""`      // name
 }
 
 func NewMountainPeak() *MountainPeak {
@@ -19811,9 +19962,9 @@ func (x *MountainPeak) MarshalJSON() ([]byte, error) {
 }
 
 type MusicalForm struct {
-	Description string `json:"description" legend:"base"` // description
-	Id_         int    `json:"id" legend:"both"`          // id
-	Name_       string `json:"name" legend:"plus"`        // name
+	Description string `json:"description" legend:"base" related:""` // description
+	Id_         int    `json:"id" legend:"both" related:""`          // id
+	Name_       string `json:"name" legend:"plus" related:""`        // name
 }
 
 func NewMusicalForm() *MusicalForm {
@@ -19839,10 +19990,10 @@ func (x *MusicalForm) MarshalJSON() ([]byte, error) {
 }
 
 type Occasion struct {
-	Event    int         `json:"event" legend:"plus"`    // event
-	Id_      int         `json:"id" legend:"plus"`       // id
-	Name_    string      `json:"name" legend:"plus"`     // name
-	Schedule []*Schedule `json:"schedule" legend:"plus"` // schedule
+	Event    int         `json:"event" legend:"plus" related:""`    // event
+	Id_      int         `json:"id" legend:"plus" related:""`       // id
+	Name_    string      `json:"name" legend:"plus" related:""`     // name
+	Schedule []*Schedule `json:"schedule" legend:"plus" related:""` // schedule
 }
 
 func NewOccasion() *Occasion {
@@ -19909,10 +20060,10 @@ func (s PlotActorPlotRole) MarshalJSON() ([]byte, error) {
 }
 
 type PlotActor struct {
-	ActorId               int               `json:"actorId" legend:"base"`               // actor_id
-	AgreementHasMessenger bool              `json:"agreementHasMessenger" legend:"base"` // agreement_has_messenger
-	AgreementId           int               `json:"agreementId" legend:"base"`           // agreement_id
-	PlotRole              PlotActorPlotRole `json:"plotRole" legend:"base"`              // plot_role
+	ActorId               int               `json:"actorId" legend:"base" related:""`               // actor_id
+	AgreementHasMessenger bool              `json:"agreementHasMessenger" legend:"base" related:""` // agreement_has_messenger
+	AgreementId           int               `json:"agreementId" legend:"base" related:""`           // agreement_id
+	PlotRole              PlotActorPlotRole `json:"plotRole" legend:"base" related:""`              // plot_role
 }
 
 func NewPlotActor() *PlotActor {
@@ -19941,9 +20092,9 @@ func (x *PlotActor) MarshalJSON() ([]byte, error) {
 }
 
 type PoeticForm struct {
-	Description string `json:"description" legend:"base"` // description
-	Id_         int    `json:"id" legend:"both"`          // id
-	Name_       string `json:"name" legend:"plus"`        // name
+	Description string `json:"description" legend:"base" related:""` // description
+	Id_         int    `json:"id" legend:"both" related:""`          // id
+	Name_       string `json:"name" legend:"plus" related:""`        // name
 }
 
 func NewPoeticForm() *PoeticForm {
@@ -20066,8 +20217,8 @@ func (s ReferenceType) MarshalJSON() ([]byte, error) {
 }
 
 type Reference struct {
-	Id_   int           `json:"id" legend:"plus"`   // id
-	Type_ ReferenceType `json:"type" legend:"plus"` // type
+	Id_   int           `json:"id" legend:"plus" related:""`   // id
+	Type_ ReferenceType `json:"type" legend:"plus" related:""` // type
 }
 
 func NewReference() *Reference {
@@ -20202,12 +20353,12 @@ func (s RegionType) MarshalJSON() ([]byte, error) {
 }
 
 type Region struct {
-	Coords   string         `json:"coords" legend:"plus"`   // coords
-	Evilness RegionEvilness `json:"evilness" legend:"plus"` // evilness
-	ForceId  int            `json:"forceId" legend:"plus"`  // force_id
-	Id_      int            `json:"id" legend:"both"`       // id
-	Name_    string         `json:"name" legend:"base"`     // name
-	Type_    RegionType     `json:"type" legend:"base"`     // type
+	Coords   string         `json:"coords" legend:"plus" related:""`   // coords
+	Evilness RegionEvilness `json:"evilness" legend:"plus" related:""` // evilness
+	ForceId  int            `json:"forceId" legend:"plus" related:""`  // force_id
+	Id_      int            `json:"id" legend:"both" related:""`       // id
+	Name_    string         `json:"name" legend:"base" related:""`     // name
+	Type_    RegionType     `json:"type" legend:"base" related:""`     // type
 }
 
 func NewRegion() *Region {
@@ -20243,19 +20394,19 @@ func (x *Region) MarshalJSON() ([]byte, error) {
 }
 
 type RelationshipProfileHfHistorical struct {
-	Fear            int `json:"fear" legend:"base"`            // fear
-	HfId            int `json:"hfId" legend:"base"`            // hf_id
-	Love            int `json:"love" legend:"base"`            // love
-	Loyalty         int `json:"loyalty" legend:"base"`         // loyalty
-	RepEnemyFighter int `json:"repEnemyFighter" legend:"base"` // rep_enemy_fighter
-	RepHero         int `json:"repHero" legend:"base"`         // rep_hero
-	RepHunter       int `json:"repHunter" legend:"base"`       // rep_hunter
-	RepKiller       int `json:"repKiller" legend:"base"`       // rep_killer
-	RepPsychopath   int `json:"repPsychopath" legend:"base"`   // rep_psychopath
-	RepStoryteller  int `json:"repStoryteller" legend:"base"`  // rep_storyteller
-	RepViolent      int `json:"repViolent" legend:"base"`      // rep_violent
-	Respect         int `json:"respect" legend:"base"`         // respect
-	Trust           int `json:"trust" legend:"base"`           // trust
+	Fear            int `json:"fear" legend:"base" related:""`            // fear
+	HfId            int `json:"hfId" legend:"base" related:""`            // hf_id
+	Love            int `json:"love" legend:"base" related:""`            // love
+	Loyalty         int `json:"loyalty" legend:"base" related:""`         // loyalty
+	RepEnemyFighter int `json:"repEnemyFighter" legend:"base" related:""` // rep_enemy_fighter
+	RepHero         int `json:"repHero" legend:"base" related:""`         // rep_hero
+	RepHunter       int `json:"repHunter" legend:"base" related:""`       // rep_hunter
+	RepKiller       int `json:"repKiller" legend:"base" related:""`       // rep_killer
+	RepPsychopath   int `json:"repPsychopath" legend:"base" related:""`   // rep_psychopath
+	RepStoryteller  int `json:"repStoryteller" legend:"base" related:""`  // rep_storyteller
+	RepViolent      int `json:"repViolent" legend:"base" related:""`      // rep_violent
+	Respect         int `json:"respect" legend:"base" related:""`         // respect
+	Trust           int `json:"trust" legend:"base" related:""`           // trust
 }
 
 func NewRelationshipProfileHfHistorical() *RelationshipProfileHfHistorical {
@@ -20324,13 +20475,13 @@ func (x *RelationshipProfileHfHistorical) MarshalJSON() ([]byte, error) {
 }
 
 type RelationshipProfileHfIdentity struct {
-	Fear          int `json:"fear" legend:"base"`          // fear
-	Id_           int `json:"id" legend:"base"`            // id
-	Love          int `json:"love" legend:"base"`          // love
-	Loyalty       int `json:"loyalty" legend:"base"`       // loyalty
-	RepPsychopath int `json:"repPsychopath" legend:"base"` // rep_psychopath
-	Respect       int `json:"respect" legend:"base"`       // respect
-	Trust         int `json:"trust" legend:"base"`         // trust
+	Fear          int `json:"fear" legend:"base" related:""`          // fear
+	Id_           int `json:"id" legend:"base" related:""`            // id
+	Love          int `json:"love" legend:"base" related:""`          // love
+	Loyalty       int `json:"loyalty" legend:"base" related:""`       // loyalty
+	RepPsychopath int `json:"repPsychopath" legend:"base" related:""` // rep_psychopath
+	Respect       int `json:"respect" legend:"base" related:""`       // respect
+	Trust         int `json:"trust" legend:"base" related:""`         // trust
 }
 
 func NewRelationshipProfileHfIdentity() *RelationshipProfileHfIdentity {
@@ -20377,27 +20528,27 @@ func (x *RelationshipProfileHfIdentity) MarshalJSON() ([]byte, error) {
 }
 
 type RelationshipProfileHfVisual struct {
-	Fear                 int   `json:"fear" legend:"base"`                 // fear
-	HfId                 int   `json:"hfId" legend:"base"`                 // hf_id
-	KnownIdentityId      []int `json:"knownIdentityId" legend:"base"`      // known_identity_id
-	LastMeetSeconds72    int   `json:"lastMeetSeconds72" legend:"base"`    // last_meet_seconds72
-	LastMeetYear         int   `json:"lastMeetYear" legend:"base"`         // last_meet_year
-	Love                 int   `json:"love" legend:"base"`                 // love
-	Loyalty              int   `json:"loyalty" legend:"base"`              // loyalty
-	MeetCount            int   `json:"meetCount" legend:"base"`            // meet_count
-	RepBonded            int   `json:"repBonded" legend:"base"`            // rep_bonded
-	RepComrade           int   `json:"repComrade" legend:"base"`           // rep_comrade
-	RepFlatterer         int   `json:"repFlatterer" legend:"base"`         // rep_flatterer
-	RepFriendly          int   `json:"repFriendly" legend:"base"`          // rep_friendly
-	RepHero              int   `json:"repHero" legend:"base"`              // rep_hero
-	RepHunter            int   `json:"repHunter" legend:"base"`            // rep_hunter
-	RepInformationSource int   `json:"repInformationSource" legend:"base"` // rep_information_source
-	RepKiller            int   `json:"repKiller" legend:"base"`            // rep_killer
-	RepPsychopath        int   `json:"repPsychopath" legend:"base"`        // rep_psychopath
-	RepQuarreler         int   `json:"repQuarreler" legend:"base"`         // rep_quarreler
-	RepTradePartner      int   `json:"repTradePartner" legend:"base"`      // rep_trade_partner
-	Respect              int   `json:"respect" legend:"base"`              // respect
-	Trust                int   `json:"trust" legend:"base"`                // trust
+	Fear                 int   `json:"fear" legend:"base" related:""`                 // fear
+	HfId                 int   `json:"hfId" legend:"base" related:""`                 // hf_id
+	KnownIdentityId      []int `json:"knownIdentityId" legend:"base" related:""`      // known_identity_id
+	LastMeetSeconds72    int   `json:"lastMeetSeconds72" legend:"base" related:""`    // last_meet_seconds72
+	LastMeetYear         int   `json:"lastMeetYear" legend:"base" related:""`         // last_meet_year
+	Love                 int   `json:"love" legend:"base" related:""`                 // love
+	Loyalty              int   `json:"loyalty" legend:"base" related:""`              // loyalty
+	MeetCount            int   `json:"meetCount" legend:"base" related:""`            // meet_count
+	RepBonded            int   `json:"repBonded" legend:"base" related:""`            // rep_bonded
+	RepComrade           int   `json:"repComrade" legend:"base" related:""`           // rep_comrade
+	RepFlatterer         int   `json:"repFlatterer" legend:"base" related:""`         // rep_flatterer
+	RepFriendly          int   `json:"repFriendly" legend:"base" related:""`          // rep_friendly
+	RepHero              int   `json:"repHero" legend:"base" related:""`              // rep_hero
+	RepHunter            int   `json:"repHunter" legend:"base" related:""`            // rep_hunter
+	RepInformationSource int   `json:"repInformationSource" legend:"base" related:""` // rep_information_source
+	RepKiller            int   `json:"repKiller" legend:"base" related:""`            // rep_killer
+	RepPsychopath        int   `json:"repPsychopath" legend:"base" related:""`        // rep_psychopath
+	RepQuarreler         int   `json:"repQuarreler" legend:"base" related:""`         // rep_quarreler
+	RepTradePartner      int   `json:"repTradePartner" legend:"base" related:""`      // rep_trade_partner
+	Respect              int   `json:"respect" legend:"base" related:""`              // respect
+	Trust                int   `json:"trust" legend:"base" related:""`                // trust
 }
 
 func NewRelationshipProfileHfVisual() *RelationshipProfileHfVisual {
@@ -20495,9 +20646,9 @@ func (x *RelationshipProfileHfVisual) MarshalJSON() ([]byte, error) {
 }
 
 type River struct {
-	EndPos string `json:"endPos" legend:"plus"` // end_pos
-	Name_  string `json:"name" legend:"plus"`   // name
-	Path   string `json:"path" legend:"plus"`   // path
+	EndPos string `json:"endPos" legend:"plus" related:""` // end_pos
+	Name_  string `json:"name" legend:"plus" related:""`   // name
+	Path   string `json:"path" legend:"plus" related:""`   // path
 }
 
 func NewRiver() *River {
@@ -20773,13 +20924,13 @@ func (s ScheduleType) MarshalJSON() ([]byte, error) {
 }
 
 type Schedule struct {
-	Feature     []*Feature          `json:"feature" legend:"plus"`     // feature
-	Id_         int                 `json:"id" legend:"plus"`          // id
-	ItemSubtype ScheduleItemSubtype `json:"itemSubtype" legend:"plus"` // item_subtype
-	ItemType    ScheduleItemType    `json:"itemType" legend:"plus"`    // item_type
-	Reference   int                 `json:"reference" legend:"plus"`   // reference
-	Reference2  int                 `json:"reference2" legend:"plus"`  // reference2
-	Type_       ScheduleType        `json:"type" legend:"plus"`        // type
+	Feature     []*Feature          `json:"feature" legend:"plus" related:""`     // feature
+	Id_         int                 `json:"id" legend:"plus" related:""`          // id
+	ItemSubtype ScheduleItemSubtype `json:"itemSubtype" legend:"plus" related:""` // item_subtype
+	ItemType    ScheduleItemType    `json:"itemType" legend:"plus" related:""`    // item_type
+	Reference   int                 `json:"reference" legend:"plus" related:""`   // reference
+	Reference2  int                 `json:"reference2" legend:"plus" related:""`  // reference2
+	Type_       ScheduleType        `json:"type" legend:"plus" related:""`        // type
 }
 
 func NewSchedule() *Schedule {
@@ -20942,16 +21093,16 @@ func (s SiteType) MarshalJSON() ([]byte, error) {
 }
 
 type Site struct {
-	CivId          int                       `json:"civId" legend:"plus"`          // civ_id
-	Coords         string                    `json:"coords" legend:"base"`         // coords
-	CurOwnerId     int                       `json:"curOwnerId" legend:"plus"`     // cur_owner_id
-	Id_            int                       `json:"id" legend:"both"`             // id
-	Name_          string                    `json:"name" legend:"base"`           // name
-	Rectangle      string                    `json:"rectangle" legend:"base"`      // rectangle
-	SiteProperties map[int]*SiteSiteProperty `json:"siteProperties" legend:"base"` // site_properties
-	Structures     map[int]*Structure        `json:"structures" legend:"both"`     // structures
-	Type_          SiteType                  `json:"type" legend:"base"`           // type
-	Ruin           bool                      `json:"ruin" legend:"add"`            // Ruin
+	CivId          int                       `json:"civId" legend:"plus" related:""`          // civ_id
+	Coords         string                    `json:"coords" legend:"base" related:""`         // coords
+	CurOwnerId     int                       `json:"curOwnerId" legend:"plus" related:""`     // cur_owner_id
+	Id_            int                       `json:"id" legend:"both" related:""`             // id
+	Name_          string                    `json:"name" legend:"base" related:""`           // name
+	Rectangle      string                    `json:"rectangle" legend:"base" related:""`      // rectangle
+	SiteProperties map[int]*SiteSiteProperty `json:"siteProperties" legend:"base" related:""` // site_properties
+	Structures     map[int]*Structure        `json:"structures" legend:"both" related:""`     // structures
+	Type_          SiteType                  `json:"type" legend:"base" related:""`           // type
+	Ruin           bool                      `json:"ruin" legend:"add" related:""`            // Ruin
 }
 
 func NewSite() *Site {
@@ -21056,11 +21207,11 @@ func (s SiteLinkLinkType) MarshalJSON() ([]byte, error) {
 }
 
 type SiteLink struct {
-	EntityId     int              `json:"entityId" legend:"base"`     // entity_id
-	LinkType     SiteLinkLinkType `json:"linkType" legend:"base"`     // link_type
-	OccupationId int              `json:"occupationId" legend:"base"` // occupation_id
-	SiteId       int              `json:"siteId" legend:"base"`       // site_id
-	SubId        int              `json:"subId" legend:"base"`        // sub_id
+	EntityId     int              `json:"entityId" legend:"base" related:""`     // entity_id
+	LinkType     SiteLinkLinkType `json:"linkType" legend:"base" related:""`     // link_type
+	OccupationId int              `json:"occupationId" legend:"base" related:""` // occupation_id
+	SiteId       int              `json:"siteId" legend:"base" related:""`       // site_id
+	SubId        int              `json:"subId" legend:"base" related:""`        // sub_id
 }
 
 func NewSiteLink() *SiteLink {
@@ -21123,10 +21274,10 @@ func (s SiteSitePropertyType) MarshalJSON() ([]byte, error) {
 }
 
 type SiteSiteProperty struct {
-	Id_         int                  `json:"id" legend:"base"`          // id
-	OwnerHfid   int                  `json:"ownerHfid" legend:"base"`   // owner_hfid
-	StructureId int                  `json:"structureId" legend:"base"` // structure_id
-	Type_       SiteSitePropertyType `json:"type" legend:"base"`        // type
+	Id_         int                  `json:"id" legend:"base" related:""`          // id
+	OwnerHfid   int                  `json:"ownerHfid" legend:"base" related:""`   // owner_hfid
+	StructureId int                  `json:"structureId" legend:"base" related:""` // structure_id
+	Type_       SiteSitePropertyType `json:"type" legend:"base" related:""`        // type
 }
 
 func NewSiteSiteProperty() *SiteSiteProperty {
@@ -21282,21 +21433,21 @@ func (s StructureType) MarshalJSON() ([]byte, error) {
 }
 
 type Structure struct {
-	CopiedArtifactId []int            `json:"copiedArtifactId" legend:"base"` // copied_artifact_id
-	Deity            int              `json:"deity" legend:"plus"`            // deity
-	DeityType        int              `json:"deityType" legend:"plus"`        // deity_type
-	DungeonType      int              `json:"dungeonType" legend:"plus"`      // dungeon_type
-	EntityId         int              `json:"entityId" legend:"base"`         // entity_id
-	Id_              int              `json:"id" legend:"plus"`               // id
-	Inhabitant       []int            `json:"inhabitant" legend:"plus"`       // inhabitant
-	LocalId          int              `json:"localId" legend:"base"`          // local_id
-	Name_            string           `json:"name" legend:"both"`             // name
-	Name2            string           `json:"name2" legend:"plus"`            // name2
-	Religion         int              `json:"religion" legend:"plus"`         // religion
-	Subtype          StructureSubtype `json:"subtype" legend:"base"`          // subtype
-	Type_            StructureType    `json:"type" legend:"both"`             // type
-	WorshipHfid      int              `json:"worshipHfid" legend:"base"`      // worship_hfid
-	SiteId           int              `json:"siteId" legend:"add"`            // SiteId
+	CopiedArtifactId []int            `json:"copiedArtifactId" legend:"base" related:""` // copied_artifact_id
+	Deity            int              `json:"deity" legend:"plus" related:""`            // deity
+	DeityType        int              `json:"deityType" legend:"plus" related:""`        // deity_type
+	DungeonType      int              `json:"dungeonType" legend:"plus" related:""`      // dungeon_type
+	EntityId         int              `json:"entityId" legend:"base" related:""`         // entity_id
+	Id_              int              `json:"id" legend:"plus" related:""`               // id
+	Inhabitant       []int            `json:"inhabitant" legend:"plus" related:""`       // inhabitant
+	LocalId          int              `json:"localId" legend:"base" related:""`          // local_id
+	Name_            string           `json:"name" legend:"both" related:""`             // name
+	Name2            string           `json:"name2" legend:"plus" related:""`            // name2
+	Religion         int              `json:"religion" legend:"plus" related:""`         // religion
+	Subtype          StructureSubtype `json:"subtype" legend:"base" related:""`          // subtype
+	Type_            StructureType    `json:"type" legend:"both" related:""`             // type
+	WorshipHfid      int              `json:"worshipHfid" legend:"base" related:""`      // worship_hfid
+	SiteId           int              `json:"siteId" legend:"add" related:""`            // SiteId
 }
 
 func NewStructure() *Structure {
@@ -21435,10 +21586,10 @@ func (s UndergroundRegionType) MarshalJSON() ([]byte, error) {
 }
 
 type UndergroundRegion struct {
-	Coords string                `json:"coords" legend:"plus"` // coords
-	Depth  int                   `json:"depth" legend:"base"`  // depth
-	Id_    int                   `json:"id" legend:"both"`     // id
-	Type_  UndergroundRegionType `json:"type" legend:"base"`   // type
+	Coords string                `json:"coords" legend:"plus" related:""` // coords
+	Depth  int                   `json:"depth" legend:"base" related:""`  // depth
+	Id_    int                   `json:"id" legend:"both" related:""`     // id
+	Type_  UndergroundRegionType `json:"type" legend:"base" related:""`   // type
 }
 
 func NewUndergroundRegion() *UndergroundRegion {
@@ -21469,20 +21620,20 @@ func (x *UndergroundRegion) MarshalJSON() ([]byte, error) {
 }
 
 type VagueRelationship struct {
-	ArtisticBuddy              bool `json:"artisticBuddy" legend:"base"`              // artistic_buddy
-	AtheleticRival             bool `json:"atheleticRival" legend:"base"`             // atheletic_rival
-	AthleteBuddy               bool `json:"athleteBuddy" legend:"base"`               // athlete_buddy
-	BusinessRival              bool `json:"businessRival" legend:"base"`              // business_rival
-	ChildhoodFriend            bool `json:"childhoodFriend" legend:"base"`            // childhood_friend
-	Grudge                     bool `json:"grudge" legend:"base"`                     // grudge
-	Hfid                       int  `json:"hfid" legend:"base"`                       // hfid
-	JealousObsession           bool `json:"jealousObsession" legend:"base"`           // jealous_obsession
-	JealousRelationshipGrudge  bool `json:"jealousRelationshipGrudge" legend:"base"`  // jealous_relationship_grudge
-	PersecutionGrudge          bool `json:"persecutionGrudge" legend:"base"`          // persecution_grudge
-	ReligiousPersecutionGrudge bool `json:"religiousPersecutionGrudge" legend:"base"` // religious_persecution_grudge
-	ScholarBuddy               bool `json:"scholarBuddy" legend:"base"`               // scholar_buddy
-	SupernaturalGrudge         bool `json:"supernaturalGrudge" legend:"base"`         // supernatural_grudge
-	WarBuddy                   bool `json:"warBuddy" legend:"base"`                   // war_buddy
+	ArtisticBuddy              bool `json:"artisticBuddy" legend:"base" related:""`              // artistic_buddy
+	AtheleticRival             bool `json:"atheleticRival" legend:"base" related:""`             // atheletic_rival
+	AthleteBuddy               bool `json:"athleteBuddy" legend:"base" related:""`               // athlete_buddy
+	BusinessRival              bool `json:"businessRival" legend:"base" related:""`              // business_rival
+	ChildhoodFriend            bool `json:"childhoodFriend" legend:"base" related:""`            // childhood_friend
+	Grudge                     bool `json:"grudge" legend:"base" related:""`                     // grudge
+	Hfid                       int  `json:"hfid" legend:"base" related:""`                       // hfid
+	JealousObsession           bool `json:"jealousObsession" legend:"base" related:""`           // jealous_obsession
+	JealousRelationshipGrudge  bool `json:"jealousRelationshipGrudge" legend:"base" related:""`  // jealous_relationship_grudge
+	PersecutionGrudge          bool `json:"persecutionGrudge" legend:"base" related:""`          // persecution_grudge
+	ReligiousPersecutionGrudge bool `json:"religiousPersecutionGrudge" legend:"base" related:""` // religious_persecution_grudge
+	ScholarBuddy               bool `json:"scholarBuddy" legend:"base" related:""`               // scholar_buddy
+	SupernaturalGrudge         bool `json:"supernaturalGrudge" legend:"base" related:""`         // supernatural_grudge
+	WarBuddy                   bool `json:"warBuddy" legend:"base" related:""`                   // war_buddy
 }
 
 func NewVagueRelationship() *VagueRelationship {
@@ -21553,10 +21704,10 @@ func (s WorldConstructionType) MarshalJSON() ([]byte, error) {
 }
 
 type WorldConstruction struct {
-	Coords string                `json:"coords" legend:"plus"` // coords
-	Id_    int                   `json:"id" legend:"plus"`     // id
-	Name_  string                `json:"name" legend:"plus"`   // name
-	Type_  WorldConstructionType `json:"type" legend:"plus"`   // type
+	Coords string                `json:"coords" legend:"plus" related:""` // coords
+	Id_    int                   `json:"id" legend:"plus" related:""`     // id
+	Name_  string                `json:"name" legend:"plus" related:""`   // name
+	Type_  WorldConstructionType `json:"type" legend:"plus" related:""`   // type
 }
 
 func NewWorldConstruction() *WorldConstruction {
@@ -21889,17 +22040,17 @@ func (s WrittenContentType) MarshalJSON() ([]byte, error) {
 }
 
 type WrittenContent struct {
-	AuthorHfid int                `json:"authorHfid" legend:"base"` // author_hfid
-	AuthorRoll int                `json:"authorRoll" legend:"base"` // author_roll
-	Form       WrittenContentForm `json:"form" legend:"base"`       // form
-	FormId     int                `json:"formId" legend:"base"`     // form_id
-	Id_        int                `json:"id" legend:"both"`         // id
-	PageEnd    int                `json:"pageEnd" legend:"plus"`    // page_end
-	PageStart  int                `json:"pageStart" legend:"plus"`  // page_start
-	Reference  []*Reference       `json:"reference" legend:"plus"`  // reference
-	Style      []string           `json:"style" legend:"both"`      // style
-	Title      string             `json:"title" legend:"both"`      // title
-	Type_      WrittenContentType `json:"type" legend:"plus"`       // type
+	AuthorHfid int                `json:"authorHfid" legend:"base" related:""` // author_hfid
+	AuthorRoll int                `json:"authorRoll" legend:"base" related:""` // author_roll
+	Form       WrittenContentForm `json:"form" legend:"base" related:""`       // form
+	FormId     int                `json:"formId" legend:"base" related:""`     // form_id
+	Id_        int                `json:"id" legend:"both" related:""`         // id
+	PageEnd    int                `json:"pageEnd" legend:"plus" related:""`    // page_end
+	PageStart  int                `json:"pageStart" legend:"plus" related:""`  // page_start
+	Reference  []*Reference       `json:"reference" legend:"plus" related:""`  // reference
+	Style      []string           `json:"style" legend:"both" related:""`      // style
+	Title      string             `json:"title" legend:"both" related:""`      // title
+	Type_      WrittenContentType `json:"type" legend:"plus" related:""`       // type
 }
 
 func NewWrittenContent() *WrittenContent {

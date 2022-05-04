@@ -3,8 +3,8 @@
 {{define "title"}}{{ title .Name }}{{end}}
 
 {{define "content"}}
-<h3>{{ title .Name }}</h3>
-<p>{{ .Type }}</p>
+<h1>{{ title .Name }}</h1>
+<p>{{ if .IsVolcano }}volcano{{else}}mountain{{end}}</p>
 
 <h5>Events</h5>
 
