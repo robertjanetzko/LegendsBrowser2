@@ -1,6 +1,7 @@
 package model
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
@@ -8,6 +9,7 @@ import (
 )
 
 func (w *DfWorld) process() {
+	w.addRelationshipEvents()
 
 	// set site in structure
 	for _, site := range w.Sites {
@@ -136,6 +138,21 @@ func (w *DfWorld) addEntitySite(entityId, siteId int) {
 	if e, ok := w.Entities[entityId]; ok {
 		if !slices.Contains(e.Sites, siteId) {
 			e.Sites = append(e.Sites, siteId)
+		}
+	}
+}
+
+func (w *DfWorld) addRelationshipEvents() {
+	for _, r := range w.HistoricalEventRelationships {
+		fmt.Println(r)
+		w.HistoricalEvents[r.Event] = &HistoricalEvent{
+			Id_:  r.Event,
+			Year: r.Year,
+			Details: &HistoricalEventAddHfHfLink{
+				Hfid:         r.SourceHf,
+				HfidTarget:   r.TargetHf,
+				Relationship: r.Relationship,
+			},
 		}
 	}
 }

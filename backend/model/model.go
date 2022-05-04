@@ -3035,9 +3035,10 @@ func (s HistoricalEventAddHfHfLinkLinkType) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventAddHfHfLink struct {
-	Hfid       int                                `json:"hfid" legend:"base"`       // hfid
-	HfidTarget int                                `json:"hfidTarget" legend:"base"` // hfid_target
-	LinkType   HistoricalEventAddHfHfLinkLinkType `json:"linkType" legend:"plus"`   // link_type
+	Hfid         int                                     `json:"hfid" legend:"base"`        // hfid
+	HfidTarget   int                                     `json:"hfidTarget" legend:"base"`  // hfid_target
+	LinkType     HistoricalEventAddHfHfLinkLinkType      `json:"linkType" legend:"plus"`    // link_type
+	Relationship HistoricalEventRelationshipRelationship `json:"relationship" legend:"add"` // Relationship
 }
 
 func NewHistoricalEventAddHfHfLink() *HistoricalEventAddHfHfLink {
@@ -3075,6 +3076,7 @@ func (x *HistoricalEventAddHfHfLink) MarshalJSON() ([]byte, error) {
 	if x.LinkType != 0 {
 		d["linkType"] = x.LinkType
 	}
+	d["relationship"] = x.Relationship
 	return json.Marshal(d)
 }
 
@@ -23016,7 +23018,7 @@ func parseDfWorldPlus(p *util.XMLParser, obj *DfWorld) (*DfWorld, error) {
 			case "artifacts":
 				parseMapPlus(p, &obj.Artifacts, parseArtifactPlus)
 			case "creature_raw":
-				parseArray(p, &obj.CreatureRaw, parseCreature)
+				parseArrayPlus(p, &obj.CreatureRaw, parseCreaturePlus)
 			case "dance_forms":
 				parseMapPlus(p, &obj.DanceForms, parseDanceFormPlus)
 			case "entities":
@@ -23024,13 +23026,13 @@ func parseDfWorldPlus(p *util.XMLParser, obj *DfWorld) (*DfWorld, error) {
 			case "entity_populations":
 				parseMapPlus(p, &obj.EntityPopulations, parseEntityPopulationPlus)
 			case "historical_eras":
-				parseArray(p, &obj.HistoricalEras, parseHistoricalEra)
+				parseArrayPlus(p, &obj.HistoricalEras, parseHistoricalEraPlus)
 			case "historical_event_collections":
 				parseMapPlus(p, &obj.HistoricalEventCollections, parseHistoricalEventCollectionPlus)
 			case "historical_event_relationship_supplements":
-				parseArray(p, &obj.HistoricalEventRelationshipSupplements, parseHistoricalEventRelationshipSupplement)
+				parseArrayPlus(p, &obj.HistoricalEventRelationshipSupplements, parseHistoricalEventRelationshipSupplementPlus)
 			case "historical_event_relationships":
-				parseArray(p, &obj.HistoricalEventRelationships, parseHistoricalEventRelationship)
+				parseArrayPlus(p, &obj.HistoricalEventRelationships, parseHistoricalEventRelationshipPlus)
 			case "historical_events":
 				parseMapPlus(p, &obj.HistoricalEvents, parseHistoricalEventPlus)
 			case "historical_figures":
@@ -23054,7 +23056,7 @@ func parseDfWorldPlus(p *util.XMLParser, obj *DfWorld) (*DfWorld, error) {
 			case "regions":
 				parseMapPlus(p, &obj.Regions, parseRegionPlus)
 			case "rivers":
-				parseArray(p, &obj.Rivers, parseRiver)
+				parseArrayPlus(p, &obj.Rivers, parseRiverPlus)
 			case "sites":
 				parseMapPlus(p, &obj.Sites, parseSitePlus)
 			case "underground_regions":

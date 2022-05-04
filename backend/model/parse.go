@@ -166,6 +166,24 @@ func parseArray[T any](p *util.XMLParser, dest *[]T, creator func(*util.XMLParse
 	}
 }
 
+func parseArrayPlus[T any](p *util.XMLParser, dest *[]T, creator func(*util.XMLParser, T) (T, error)) {
+	for {
+		t, _, err := p.Token()
+		if err != nil {
+			return // nil, err
+		}
+		switch t {
+		case util.StartElement:
+			var x T
+			x, _ = creator(p, x)
+			*dest = append(*dest, x)
+
+		case util.EndElement:
+			return
+		}
+	}
+}
+
 func parseMap[T Identifiable](p *util.XMLParser, dest *map[int]T, creator func(*util.XMLParser) (T, error)) {
 	for {
 		t, _, err := p.Token()

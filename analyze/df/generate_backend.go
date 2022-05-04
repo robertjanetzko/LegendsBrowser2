@@ -374,7 +374,12 @@ func (f Field) StartAction(obj Object, plus bool) string {
 		gen := fmt.Sprintf("parse%s", *f.ElementType)
 
 		if f.Type == "array" {
-			return fmt.Sprintf("parseArray(p, &obj.%s, %s)", f.Name, gen)
+			if !plus {
+				return fmt.Sprintf("parseArray(p, &obj.%s, %s)", f.Name, gen)
+			} else {
+				gen = fmt.Sprintf("parse%sPlus", *f.ElementType)
+				return fmt.Sprintf("parseArrayPlus(p, &obj.%s, %s)", f.Name, gen)
+			}
 		}
 
 		if f.Type == "map" {

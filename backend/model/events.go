@@ -58,12 +58,15 @@ func (x *HistoricalEventAddHfHfLink) Html(c *Context) string {
 	case HistoricalEventAddHfHfLinkLinkType_Master:
 		return h + " began an apprenticeship under " + t
 	case HistoricalEventAddHfHfLinkLinkType_PetOwner:
-		return h + " became the owner of " + t
+		return t + " became the owner of " + h
 	case HistoricalEventAddHfHfLinkLinkType_Prisoner:
 		return h + " imprisoned " + t
 	case HistoricalEventAddHfHfLinkLinkType_Spouse:
 		return h + " married " + t
 	default:
+		if x.Relationship != HistoricalEventRelationshipRelationship_Unknown {
+			return h + " and " + t + " became " + x.Relationship.String() + "s" // TODO Texts
+		}
 		return h + " LINKED TO " + t
 	}
 }
@@ -883,7 +886,6 @@ func (x *HistoricalEventHfDied) Html(c *Context) string {
 
 	if x.SlayerItemId != -1 {
 		slayer += " with " + c.artifact(x.SlayerItemId)
-	} else {
 	}
 	switch x.Cause {
 	case HistoricalEventHfDiedCause_Behead, HistoricalEventHfDiedCause_ExecBeheaded:

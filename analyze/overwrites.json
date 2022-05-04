@@ -74,6 +74,12 @@
                 "Type": "int"
             }
         ],
+        "HistoricalEventAddHfHfLink": [
+            {
+                "Name": "Relationship",
+                "Type": "HistoricalEventRelationshipRelationship"
+            }
+        ],
         "HistoricalEventCollectionAbduction": [
             {
                 "Name": "TargetHfids",

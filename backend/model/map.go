@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"image"
 	"image/png"
-	_ "image/png"
 	"io/ioutil"
 	"os"
 	"path/filepath"
