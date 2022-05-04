@@ -1,45 +1,49 @@
 {{template "layout.html" .}}
 
-{{define "title"}}Art Forms{{end}}
+{{define "title"}}Geography{{end}}
 
 {{define "content"}}
-<h3>Art Forms</h3>
+<h3>Geography</h3>
 
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        {{- range $t, $v := .DanceForms }}
+        {{- range $t, $v := .Regions }}
         <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{
             len $v
             }})</button>
         {{- end}}
-        {{- range $t, $v := .MusicalForms }}
+        {{- range $t, $v := .Landmasses }}
         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{ len $v
             }})</button>
         {{- end}}
-        {{- range $t, $v := .PoeticForms }}
+        {{- range $t, $v := .MountainPeaks }}
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{ len $v
+            }})</button>
+        {{- end}}
+        {{- range $t, $v := .Rivers }}
         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{ len $v
             }})</button>
         {{- end}}
     </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
-    {{- range $t, $v := .DanceForms }}
+    {{- range $t, $v := .Regions }}
     <div class="tab-pane active" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
         <table class="table table-hover table-sm table-borderless">
             <tr>
                 <th width="100%">Name</th>
-                <th>Size</th>
+                <th>Type</th>
             </tr>
             {{- range $v }}{{- if not (eq .Name "") }}
             <tr>
-                <td>{{ danceForm .Id }}</td>
-                <td></td>
+                <td>{{ region .Id }}</td>
+                <td>{{ .Type }}</td>
             </tr>
             {{- end}}{{- end}}
         </table>
     </div>
     {{- end}}
-    {{- range $t, $v := .MusicalForms }}
+    {{- range $t, $v := .Landmasses }}
     <div class="tab-pane" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
         <table class="table table-hover table-sm table-borderless">
             <tr>
@@ -48,23 +52,39 @@
             </tr>
             {{- range $v }}{{- if not (eq .Name "") }}
             <tr>
-                <td>{{ musicalForm .Id }}</td>
+                <td>{{ landmass .Id }}</td>
                 <td></td>
             </tr>
             {{- end}}{{- end}}
         </table>
     </div>
     {{- end}}
-    {{- range $t, $v := .PoeticForms }}
+    {{- range $t, $v := .MountainPeaks }}
+    <div class="tab-pane" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
+        <table class="table table-hover table-sm table-borderless object-table">
+            <tr>
+                <th width="100%">Name</th>
+                <th>Type</th>
+            </tr>
+            {{- range $v }}{{- if not (eq .Name "") }}
+            <tr>
+                <td>{{ mountain .Id }}</td>
+                <td>{{ if .IsVolcano }}volcano{{else}}mountain{{end}}</td>
+            </tr>
+            {{- end}}{{- end}}
+        </table>
+    </div>
+    {{- end}}
+    {{- range $t, $v := .Rivers }}
     <div class="tab-pane" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
         <table class="table table-hover table-sm table-borderless object-table">
             <tr>
                 <th width="100%">Name</th>
                 <th>Size</th>
             </tr>
-            {{- range $v }}{{- if not (eq .Name "") }}
+            {{- range $i, $r := $v }}{{- if not (eq .Name "") }}
             <tr>
-                <td>{{ poeticForm .Id }}</td>
+                <td>{{ river $i }}</td>
                 <td></td>
             </tr>
             {{- end}}{{- end}}

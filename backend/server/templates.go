@@ -47,8 +47,9 @@ func (srv *DfServer) LoadTemplates() {
 		"musicalForm":          func(id int) template.HTML { return model.LinkMusicalForm(srv.context.world, id) },
 		"poeticForm":           func(id int) template.HTML { return model.LinkPoeticForm(srv.context.world, id) },
 		"writtenContent":       func(id int) template.HTML { return model.LinkWrittenContent(srv.context.world, id) },
-		"landmass":             func(id int) template.HTML { return model.LinkWrittenContent(srv.context.world, id) }, // TODO
-		"mountain":             func(id int) template.HTML { return model.LinkWrittenContent(srv.context.world, id) }, // TODO
+		"landmass":             func(id int) template.HTML { return model.LinkLandmass(srv.context.world, id) },
+		"mountain":             func(id int) template.HTML { return model.LinkMountain(srv.context.world, id) },
+		"river":                func(id int) template.HTML { return model.LinkRiver(srv.context.world, id) },
 		"events": func(obj any) *model.EventList {
 			return model.NewEventList(srv.context.world, obj)
 		},

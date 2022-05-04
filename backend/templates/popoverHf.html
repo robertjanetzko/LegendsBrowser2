@@ -4,3 +4,20 @@
 <i class="fa-solid fa-mars fa-xs"></i>
 {{end}}
 {{ .Race }} (*{{ .BirthYear }}{{ if ge .DeathYear 0 }} †{{ .DeathYear }}{{ end }})
+
+{{- if or (ne 0 (len .EntityFormerPositionLink)) (ne 0 (len .EntityPositionLink)) }}
+<ul class="mb-0">
+    {{- range $i := .EntityPositionLink }}
+    <li>
+        {{ ((getEntity $i.EntityId).Position $i.PositionProfileId).GenderName $ }} of {{ entity $i.EntityId }} (since {{
+        $i.StartYear }})
+    </li>
+    {{- end }}
+    {{- range $i := .EntityFormerPositionLink }}
+    <li>
+        {{ ((getEntity $i.EntityId).Position $i.PositionProfileId).GenderName $ }} of {{ entity $i.EntityId }} ({{
+        $i.StartYear }} - {{ $i.EndYear }})
+    </li>
+    {{- end }}
+</ul>
+{{- end }}

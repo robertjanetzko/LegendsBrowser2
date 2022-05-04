@@ -50,6 +50,22 @@ func StartServer(world *model.DfWorld, static embed.FS) error {
 	srv.RegisterWorldResourcePage("/entity/{id}", "entity.html", func(id int) any { return srv.context.world.Entities[id] })
 	srv.RegisterWorldResourcePage("/popover/entity/{id}", "popoverEntity.html", func(id int) any { return srv.context.world.Entities[id] })
 
+	srv.RegisterWorldPage("/geography", "geography.html", func(p Parms) any {
+		return &struct {
+			Regions       map[string][]*model.Region
+			Landmasses    map[string][]*model.Landmass
+			MountainPeaks map[string][]*model.MountainPeak
+			Rivers        map[string][]*model.River
+		}{
+			Regions:       singleGroup(srv.context.world.Regions, "region"),
+			Landmasses:    singleGroup(srv.context.world.Landmasses, "landmass"),
+			MountainPeaks: singleGroup(srv.context.world.MountainPeaks, "mountain"),
+			Rivers: map[string][]*model.River{
+				"rivers": srv.context.world.Rivers,
+			},
+		}
+	})
+
 	srv.RegisterWorldPage("/regions", "regions.html", func(p Parms) any { return groupByType(srv.context.world.Regions) })
 	srv.RegisterWorldResourcePage("/region/{id}", "region.html", func(id int) any { return srv.context.world.Regions[id] })
 	srv.RegisterWorldResourcePage("/popover/region/{id}", "popoverRegion.html", func(id int) any { return srv.context.world.Regions[id] })
@@ -192,6 +208,10 @@ func flatGrouped[K comparable, U any, V namedTyped](input map[K]U, mapper func(U
 	}
 
 	return output
+}
+
+func singleGroup[K comparable, T model.Named](input map[K]T, group string) map[string][]T {
+	return groupBy(input, func(t T) string { return group }, func(t T) bool { return t.Name() != "" }, func(t T) string { return t.Name() })
 }
 
 func groupByType[K comparable, T namedTyped](input map[K]T) map[string][]T {

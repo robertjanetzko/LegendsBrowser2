@@ -2,6 +2,10 @@ a {
     text-decoration: none;
 }
 
+.popover {
+    max-width: fit-content;
+}
+
 .object-table td {
     white-space: nowrap;
 }

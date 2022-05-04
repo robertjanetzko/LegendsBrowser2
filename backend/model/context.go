@@ -170,21 +170,34 @@ func (c *Context) place(structureId, siteId int, sitePrefix string, regionId int
 
 func (c *Context) mountain(id int) string {
 	if x, ok := c.World.MountainPeaks[id]; ok {
-		return fmt.Sprintf(`<a class="mountain" href="/site/%d">%s</a>`, x.Id(), util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="mountain" href="/mountain/%d"><i class="fa-solid %s"></i> %s</a>`,
+			x.Id(), util.If(x.IsVolcano, "fa-volcano", "fa-mountain"), util.Title(x.Name()))
 	}
 	return "UNKNOWN MOUNTAIN"
 }
 
+func (c *Context) landmass(id int) string {
+	if x, ok := c.World.Landmasses[id]; ok {
+		return fmt.Sprintf(`<a class="landmass" href="/landmass/%d">%s</a>`, x.Id(), util.Title(x.Name()))
+	}
+	return "UNKNOWN LANDMASS"
+}
+
+func (c *Context) river(id int) string {
+	x := c.World.Rivers[id]
+	return fmt.Sprintf(`<a class="river" href="/river/%d">%s</a>`, id, util.Title(x.Name()))
+}
+
 func (c *Context) identity(id int) string {
 	if x, ok := c.World.Identities[id]; ok {
-		return fmt.Sprintf(`<a class="identity" href="/region/%d">%s</a>`, x.Id(), util.Title(x.Name()))
+		return fmt.Sprintf(`<a class="identity" href="/identity/%d">%s</a>`, x.Id(), util.Title(x.Name()))
 	}
 	return "UNKNOWN IDENTITY"
 }
 
 func (c *Context) fullIdentity(id int) string {
 	if x, ok := c.World.Identities[id]; ok {
-		return fmt.Sprintf(`&quot;the %s <a class="identity" href="/region/%d">%s</a> of %s&quot;`, x.Profession.String(), x.Id(), util.Title(x.Name()), c.entity(x.EntityId))
+		return fmt.Sprintf(`&quot;the %s <a class="identity" href="/identity/%d">%s</a> of %s&quot;`, x.Profession.String(), x.Id(), util.Title(x.Name()), c.entity(x.EntityId))
 	}
 	return "UNKNOWN IDENTITY"
 }

@@ -24,6 +24,9 @@ var LinkMusicalForm = func(w *DfWorld, id int) template.HTML { return template.H
 var LinkPoeticForm = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).poeticForm(id)) }
 var LinkWrittenContent = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).writtenContent(id)) }
 var LinkCollection = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).collection(id)) }
+var LinkMountain = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).mountain(id)) }
+var LinkLandmass = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).landmass(id)) }
+var LinkRiver = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).river(id)) }
 
 var AddMapSite = func(w *DfWorld, id int) template.HTML {
 	if site, ok := w.Sites[id]; ok {

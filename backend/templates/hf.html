@@ -29,13 +29,14 @@
         <ul>
             {{- range $i := .EntityFormerPositionLink }}
             <li>
-                {{ ((getEntity $i.EntityId).Position $i.PositionProfileId).Name }} of {{ entity $i.EntityId }} ({{
+                {{ ((getEntity $i.EntityId).Position $i.PositionProfileId).GenderName $ }} of {{ entity $i.EntityId }} ({{
                 $i.StartYear }} - {{ $i.EndYear }})
             </li>
             {{- end }}
             {{- range $i := .EntityPositionLink }}
             <li>
-                of {{ entity $i.EntityId }}
+                {{ ((getEntity $i.EntityId).Position $i.PositionProfileId).GenderName $ }} of {{ entity $i.EntityId }} (since {{
+                $i.StartYear }})
             </li>
             {{- end }}
         </ul>

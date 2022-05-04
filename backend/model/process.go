@@ -1,7 +1,6 @@
 package model
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
@@ -57,6 +56,21 @@ func (w *DfWorld) processEvents() {
 			w.addEntitySite(d.SiteCivId, d.SiteId)
 			w.addEntitySite(d.SiteCivId, d.SiteId)
 			w.Sites[d.SiteId].Ruin = false
+		case *HistoricalEventAddHfEntityLink:
+			if d.Link == HistoricalEventAddHfEntityLinkLink_Position {
+				if hf, ok := w.HistoricalFigures[d.Hfid]; ok {
+					for _, l := range hf.EntityPositionLink {
+						if l.EntityId == d.CivId && l.StartYear == e.Year {
+							l.PositionProfileId = d.PositionId
+						}
+					}
+					for _, l := range hf.EntityFormerPositionLink {
+						if l.EntityId == d.CivId && l.StartYear == e.Year {
+							l.PositionProfileId = d.PositionId
+						}
+					}
+				}
+			}
 		}
 	}
 }
@@ -144,7 +158,6 @@ func (w *DfWorld) addEntitySite(entityId, siteId int) {
 
 func (w *DfWorld) addRelationshipEvents() {
 	for _, r := range w.HistoricalEventRelationships {
-		fmt.Println(r)
 		w.HistoricalEvents[r.Event] = &HistoricalEvent{
 			Id_:  r.Event,
 			Year: r.Year,

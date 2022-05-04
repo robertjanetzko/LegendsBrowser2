@@ -105,6 +105,10 @@ func (e *Entity) Position(id int) *EntityPosition {
 	return &EntityPosition{Name_: "UNKNOWN POSITION"}
 }
 
+func (e *Entity) PositionByIndex(index int) *EntityPosition {
+	return e.EntityPosition[len(e.EntityPosition)-1-index]
+}
+
 func (p *EntityPosition) GenderName(hf *HistoricalFigure) string {
 	if hf.Female() && p.NameFemale != "" {
 		return p.NameFemale
