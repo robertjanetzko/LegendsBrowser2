@@ -97,6 +97,7 @@ func StartServer(world *model.DfWorld, static embed.FS) error {
 
 	srv.RegisterWorldPage("/events", "eventTypes.html", func(p Parms) any { return srv.context.world.AllEventTypes() })
 	srv.RegisterWorldPage("/events/{type}", "eventType.html", func(p Parms) any { return srv.context.world.EventsOfType(p["type"]) })
+	srv.RegisterWorldResourcePage("/event/{id}", "event.html", func(id int) any { return srv.context.world.HistoricalEvents[id] })
 
 	srv.RegisterWorldPage("/collections", "collections.html", func(p Parms) any {
 		return groupBy(srv.context.world.HistoricalEventCollections,

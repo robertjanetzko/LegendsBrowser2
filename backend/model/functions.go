@@ -160,19 +160,16 @@ func replacHfDescription(s, prefix, suffix string, input map[int]*HistoricalFigu
 
 func replaceDescription[T NamedIdentifiable](s, prefix, suffix string, input map[int]T, namer func(T) string, mapper func(int) string) string {
 	r := "(" + prefix + `)([^.]+?)(` + suffix + ")"
-	fmt.Println(">", r)
 	reg := regexp.MustCompile(r)
 	res := reg.FindStringSubmatch(s)
 	if res == nil {
 		return s
 	}
 
-	fmt.Println(strings.Join(res, " / "))
-
 	name := strings.ToLower(res[2])
 	for id, v := range input {
 		if strings.ToLower(namer(v)) == name {
-			return reg.ReplaceAllString(s, res[1]+mapper(id)+" ("+name+")"+res[3])
+			return reg.ReplaceAllString(s, res[1]+mapper(id)+res[3])
 		}
 	}
 	return s

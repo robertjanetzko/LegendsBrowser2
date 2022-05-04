@@ -1,0 +1,11 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Event {{ .Id }}{{end}}
+
+{{define "content"}}
+<h3>Event {{ .Id }}</h3>
+
+{{ story .Id }}
+
+<p>{{ json . }}</p>
+{{- end }}
