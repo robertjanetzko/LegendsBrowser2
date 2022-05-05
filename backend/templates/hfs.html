@@ -1,0 +1,76 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Historical Figures{{end}}
+
+{{define "content"}}
+<h3>Historical Figures</h3>
+
+{{ json .Params }}
+
+<div class="row">
+    <div class="col-md-10">
+        <table class="table table-hover table-sm table-borderless object-table">
+            <tr>
+                <th>Name</th>
+                <th>Race</th>
+                <th>Lived</th>
+            </tr>
+            {{- range .Hfs }}{{- if not (eq .Name "") }}
+            <tr>
+                <td><a class="hf" href="/hf/{{.Id}}">{{ title .Name }}</a></td>
+                <td>{{ .Race }}</td>
+                <td>
+                    {{- if eq .DeathYear -1 }}
+                    from {{ .BirthYear }} till now
+                    {{- else }}
+                    from {{ .BirthYear }} till {{ .DeathYear }}
+                    {{- end }}
+                </td>
+            </tr>
+            {{- end}}{{- end}}
+        </table>
+    </div>
+    <div class="col-md-2">
+        <h5>Filter</h5>
+        <form action="/hfs" method="GET">
+            <div class="checkbox"><label><input class="filter" type="checkbox" name="leader" value="1" {{if eq .Params.leader "1"
+                        }}checked{{end}}> Leader</label></div>
+            <div class="checkbox"><label><input class="filter" type="checkbox" name="deity" value="1" {{if eq .Params.deity "1"
+                        }}checked{{end}}> Deity</label></div>
+            <div class="checkbox"><label><input class="filter" type="checkbox" name="force" value="1" {{if eq .Params.force "1"
+                        }}checked{{end}}> Force</label></div>
+            <div class="checkbox"><label><input class="filter" type="checkbox" name="vampire" value="1" {{if eq .Params.vampire "1"
+                        }}checked{{end}}> Vampire</label></div>
+            <div class="checkbox"><label><input class="filter" type="checkbox" name="werebeast" value="1" {{if eq .Params.werebeast "1"
+                        }}checked{{end}}> Werebeast</label></div>
+            <div class="checkbox"><label><input class="filter" type="checkbox" name="necromancer" value="1" {{if eq .Params.necromancer "1"
+                        }}checked{{end}}> Necromancer</label></div>
+            <div class="checkbox"><label><input class="filter" type="checkbox" name="alive" value="1" {{if eq .Params.alive "1"
+                        }}checked{{end}}> Alive</label></div>
+            <div class="checkbox"><label><input class="filter" type="checkbox" name="ghost" value="1" {{if eq .Params.ghost "1"
+                        }}checked{{end}}> Ghost</label></div>
+            <div class="checkbox"><label><input class="filter" type="checkbox" name="adventurer" value="1" {{if eq .Params.adventurer "1"
+                        }}checked{{end}}> Adventurer</label></div>
+            <div class="select form-group">
+                <select class="form-control" name="race">
+                    <option class="text-muted" value="">Race</option>
+                    <option value="black bear">black bear</option>
+
+                </select>
+            </div>
+            <h4>Sorting</h4>
+            <div class="select form-group">
+                <select class="form-control" name="sort">
+                    <option value="">Default</option>
+                    <option value="name">Name</option>
+                    <option value="race">Race</option>
+                    <option value="birth">Birth</option>
+                    <option value="death">Death</option>
+                    <option value="kills">Kills</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Refresh</button>
+        </form>
+    </div>
+</div>
+{{- end }}

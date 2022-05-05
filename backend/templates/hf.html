@@ -10,10 +10,14 @@
 <i class="fa-solid fa-mars fa-xs"></i>
 {{end}}
 {{ .Race }}
+{{ if .Deity}}deity{{end}}
+{{ if .Force}}force{{end}}
 {{ if .Vampire}}vampire{{end}}
 {{ if .Werebeast}}werebeast{{end}}
 {{ if .Necromancer}}necromancer{{end}}
+{{ if not (or .Deity .Force)}}
 (*{{ .BirthYear }}{{ if ge .DeathYear 0 }} †{{ .DeathYear }}{{ end }})
+{{ end }}
 
 <div class="row mt-3">
     <div class="col-4">

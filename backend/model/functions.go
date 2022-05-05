@@ -9,6 +9,7 @@ import (
 )
 
 var LinkHf = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).hf(id)) }
+var LinkHfShort = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).hfShort(id)) }
 var LinkHfList = func(w *DfWorld, id []int) template.HTML { return template.HTML((&Context{World: w}).hfList(id)) }
 var LinkEntity = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).entity(id)) }
 var LinkSite = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).site(id, "")) }

@@ -54,6 +54,10 @@
         ],
         "HistoricalFigure": [
             {
+                "Name": "Leader",
+                "Type": "bool"
+            },
+            {
                 "Name": "Werebeast",
                 "Type": "bool"
             },
@@ -79,6 +83,10 @@
             }
         ],
         "Entity": [
+            {
+                "Name": "Leaders",
+                "Type": "[]*EntityLeader"
+            },
             {
                 "Name": "Sites",
                 "Type": "[]int"

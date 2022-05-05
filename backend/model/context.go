@@ -57,7 +57,7 @@ func (c *Context) hfUnrelated(id int) string {
 
 func (c *Context) hfShort(id int) string {
 	if x, ok := c.World.HistoricalFigures[id]; ok {
-		return fmt.Sprintf(`<a class="hf" href="/hf/%d">%s</a>`, x.Id(), util.Title(x.FirstName()))
+		return fmt.Sprintf(`<a class="hf" href="/hf/%d">%s%s</a>`, x.Id(), hfIcon(x), util.Title(x.FirstName()))
 	}
 	return "UNKNOWN HISTORICAL FIGURE"
 }
@@ -73,12 +73,20 @@ func (c *Context) hfRelated(id, to int) string {
 	if x, ok := c.World.HistoricalFigures[id]; ok {
 		if t, ok := c.World.HistoricalFigures[to]; ok {
 			if y, ok := util.Find(t.HfLink, func(l *HfLink) bool { return l.Hfid == id }); ok {
-				return fmt.Sprintf(`%s %s <a class="hf" href="/hf/%d">%s</a>`, t.PossesivePronoun(), y.LinkType, x.Id(), util.Title(x.Name()))
+				return fmt.Sprintf(`%s %s <a class="hf" href="/hf/%d">%s%s</a>`, t.PossesivePronoun(), y.LinkType, x.Id(), hfIcon(x), util.Title(x.Name()))
 			}
 		}
 		return hf(x)
 	}
 	return "UNKNOWN HISTORICAL FIGURE"
+}
+
+func hfIcon(x *HistoricalFigure) string {
+	switch {
+	case x.Leader:
+		return `<i class="fa-solid fa-crown fa-xs"></i> `
+	}
+	return ""
 }
 
 func hf(x *HistoricalFigure) string {
@@ -98,7 +106,7 @@ func hf(x *HistoricalFigure) string {
 	if x.Vampire {
 		r += " vampire"
 	}
-	return fmt.Sprintf(`the %s <a class="hf" href="/hf/%d">%s</a>`, r, x.Id(), util.Title(x.Name()))
+	return fmt.Sprintf(`the %s <a class="hf" href="/hf/%d">%s%s</a>`, r, x.Id(), hfIcon(x), util.Title(x.Name()))
 }
 
 func (c *Context) hfList(ids []int) string {
@@ -152,7 +160,7 @@ func (c *Context) siteStructure(siteId, structureId int, prefix string) string {
 
 func (c *Context) site(id int, prefix string) string {
 	if x, ok := c.World.Sites[id]; ok {
-		return fmt.Sprintf(`%s <a class="site%s" href="/site/%d"><i class="%s fa-xs"></i> %s</a>`, prefix, util.If(x.Ruin, " ruin", ""), x.Id(), x.Icon(), util.Title(x.Name()))
+		return fmt.Sprintf(`%s <a class="site" href="/site/%d"><i class="%s fa-xs%s"></i> %s</a>`, prefix, x.Id(), x.Icon(), util.If(x.Ruin, " ruin", ""), util.Title(x.Name()))
 	}
 	return "UNKNOWN SITE"
 }
@@ -160,7 +168,7 @@ func (c *Context) site(id int, prefix string) string {
 func (c *Context) structure(siteId, structureId int) string {
 	if x, ok := c.World.Sites[siteId]; ok {
 		if y, ok := x.Structures[structureId]; ok {
-			return fmt.Sprintf(`<a class="structure%s" href="/site/%d/structure/%d"><i class="%s fa-xs"></i> %s</a>`, util.If(y.Ruin, " ruin", ""), siteId, structureId, y.Icon(), util.Title(y.Name()))
+			return fmt.Sprintf(`<a class="structure" href="/site/%d/structure/%d"><i class="%s fa-xs%s"></i> %s</a>`, siteId, structureId, y.Icon(), util.If(y.Ruin, " ruin", ""), util.Title(y.Name()))
 		}
 	}
 	return "UNKNOWN STRUCTURE"

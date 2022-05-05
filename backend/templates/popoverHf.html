@@ -3,7 +3,15 @@
 {{else}}
 <i class="fa-solid fa-mars fa-xs"></i>
 {{end}}
-{{ .Race }} (*{{ .BirthYear }}{{ if ge .DeathYear 0 }} †{{ .DeathYear }}{{ end }})
+{{ .Race }}
+{{ if .Deity}}deity{{end}}
+{{ if .Force}}force{{end}}
+{{ if .Vampire}}vampire{{end}}
+{{ if .Werebeast}}werebeast{{end}}
+{{ if .Necromancer}}necromancer{{end}}
+{{ if not (or .Deity .Force)}}
+(*{{ .BirthYear }}{{ if ge .DeathYear 0 }} †{{ .DeathYear }}{{ end }})
+{{ end }}
 
 {{- if or (ne 0 (len .EntityFormerPositionLink)) (ne 0 (len .EntityPositionLink)) }}
 <ul class="mb-0">

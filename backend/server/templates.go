@@ -30,6 +30,7 @@ func (srv *DfServer) LoadTemplates() {
 				srv.context.world.Width, srv.context.world.Height))
 		},
 		"hf":                   func(id int) template.HTML { return model.LinkHf(srv.context.world, id) },
+		"hfShort":              func(id int) template.HTML { return model.LinkHfShort(srv.context.world, id) },
 		"getHf":                func(id int) *model.HistoricalFigure { return srv.context.world.HistoricalFigures[id] },
 		"hfList":               func(ids []int) template.HTML { return model.LinkHfList(srv.context.world, ids) },
 		"entity":               func(id int) template.HTML { return model.LinkEntity(srv.context.world, id) },

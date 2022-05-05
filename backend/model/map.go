@@ -74,17 +74,13 @@ func (w *DfWorld) LoadDimensions() {
 	}
 
 	fmt.Println("Found Worldgen", path)
-
 	content, err := ioutil.ReadFile(path)
 	if err != nil {
 		return
 	}
 
-	text := string(content)
-	fmt.Println(text)
-
 	r := regexp.MustCompile(`\[DIM:(\d+):(\d+)\]`)
-	result := r.FindAllStringSubmatch(text, 1)
+	result := r.FindAllStringSubmatch(string(content), 1)
 	if result == nil {
 		return
 	}

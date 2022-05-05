@@ -18,7 +18,12 @@ func (srv *DfServer) RegisterWorldPage(path string, template string, accessor fu
 			return
 		}
 
-		data := accessor(mux.Vars(r))
+		params := mux.Vars(r)
+		for k, v := range r.URL.Query() {
+			params[k] = v[0]
+		}
+
+		data := accessor(params)
 		if data == nil || (reflect.ValueOf(data).Kind() == reflect.Ptr && reflect.ValueOf(data).IsNil()) {
 			srv.notFound(w)
 			return

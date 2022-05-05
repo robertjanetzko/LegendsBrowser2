@@ -106,6 +106,7 @@ func StartServer(config *Config, world *model.DfWorld, static embed.FS) error {
 	srv.RegisterWorldResourcePage("/writtencontent/{id}", "writtencontent.html", func(id int) any { return srv.context.world.WrittenContents[id] })
 	srv.RegisterWorldResourcePage("/popover/writtencontent/{id}", "popoverWrittencontent.html", func(id int) any { return srv.context.world.WrittenContents[id] })
 
+	srv.RegisterWorldPage("/hfs", "hfs.html", srv.searchHf)
 	srv.RegisterWorldResourcePage("/hf/{id}", "hf.html", func(id int) any { return srv.context.world.HistoricalFigures[id] })
 	srv.RegisterWorldResourcePage("/popover/hf/{id}", "popoverHf.html", func(id int) any { return srv.context.world.HistoricalFigures[id] })
 
@@ -170,6 +171,48 @@ func (srv *DfServer) findStructure(p Parms) any {
 		return site.Structures[structureId]
 	}
 	return nil
+}
+
+func (srv *DfServer) searchHf(p Parms) any {
+	var list []*model.HistoricalFigure
+
+	for _, hf := range srv.context.world.HistoricalFigures {
+		if p["leader"] == "1" && !hf.Leader {
+			continue
+		}
+		if p["deity"] == "1" && !hf.Deity {
+			continue
+		}
+		if p["force"] == "1" && !hf.Force {
+			continue
+		}
+		if p["vampire"] == "1" && !hf.Vampire {
+			continue
+		}
+		if p["werebeast"] == "1" && !hf.Werebeast {
+			continue
+		}
+		if p["necromancer"] == "1" && !hf.Necromancer {
+			continue
+		}
+		if p["alive"] == "1" && hf.DeathYear != -1 {
+			continue
+		}
+		if p["ghost"] == "1" && false { // TODO ghost
+			continue
+		}
+		if p["adventurer"] == "1" && !hf.Adventurer {
+			continue
+		}
+		list = append(list, hf)
+	}
+
+	sort.Slice(list, func(i, j int) bool { return list[i].Name_ < list[j].Name_ })
+
+	return map[string]any{
+		"Params": p,
+		"Hfs":    list,
+	}
 }
 
 func (srv *DfServer) notFound(w http.ResponseWriter) {

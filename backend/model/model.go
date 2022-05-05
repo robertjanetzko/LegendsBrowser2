@@ -1990,6 +1990,7 @@ type Entity struct {
 	Type_                    EntityType                   `json:"type" legend:"plus" related:""`                     // type
 	Weapon                   []EntityWeapon               `json:"weapon" legend:"plus" related:""`                   // weapon
 	WorshipId                []int                        `json:"worshipId" legend:"plus" related:""`                // worship_id
+	Leaders                  []*EntityLeader              `json:"leaders" legend:"add" related:""`                   // Leaders
 	Sites                    []int                        `json:"sites" legend:"add" related:""`                     // Sites
 	Wars                     []*HistoricalEventCollection `json:"wars" legend:"add" related:""`                      // Wars
 }
@@ -2029,6 +2030,7 @@ func (x *Entity) MarshalJSON() ([]byte, error) {
 	}
 	d["weapon"] = x.Weapon
 	d["worshipId"] = x.WorshipId
+	d["leaders"] = x.Leaders
 	d["sites"] = x.Sites
 	d["wars"] = x.Wars
 	return json.Marshal(d)
@@ -18900,6 +18902,7 @@ type HistoricalFigure struct {
 	Sphere                          []string                           `json:"sphere" legend:"base" related:""`                          // sphere
 	UsedIdentityId                  []int                              `json:"usedIdentityId" legend:"base" related:""`                  // used_identity_id
 	VagueRelationship               []*VagueRelationship               `json:"vagueRelationship" legend:"base" related:""`               // vague_relationship
+	Leader                          bool                               `json:"leader" legend:"add" related:""`                           // Leader
 	Necromancer                     bool                               `json:"necromancer" legend:"add" related:""`                      // Necromancer
 	NecromancerSince                int                                `json:"necromancerSince" legend:"add" related:""`                 // NecromancerSince
 	Vampire                         bool                               `json:"vampire" legend:"add" related:""`                          // Vampire
@@ -19022,6 +19025,7 @@ func (x *HistoricalFigure) MarshalJSON() ([]byte, error) {
 	d["sphere"] = x.Sphere
 	d["usedIdentityId"] = x.UsedIdentityId
 	d["vagueRelationship"] = x.VagueRelationship
+	d["leader"] = x.Leader
 	d["necromancer"] = x.Necromancer
 	if x.NecromancerSince != -1 {
 		d["necromancerSince"] = x.NecromancerSince

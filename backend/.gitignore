@@ -1,2 +1,4 @@
 resources/frontend/*
 same.json
+conf.json
+_conf.json

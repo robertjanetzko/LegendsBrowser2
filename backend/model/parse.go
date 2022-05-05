@@ -143,6 +143,7 @@ BaseLoop:
 	// ioutil.WriteFile("same.json", same, 0644)
 
 	world.LoadMap()
+	world.LoadHistory()
 
 	world.process()
 
