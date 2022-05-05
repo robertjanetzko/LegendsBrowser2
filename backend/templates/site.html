@@ -27,7 +27,7 @@
             {{- range .Structures }}
             <tr>
                 <td>{{ structure $.Id .Id }}</td>
-                <td>{{ .Type }}</td>
+                <td>{{ .Type }}{{if .Ruin}} (ruin){{end}}</td>
             </tr>
             {{- end}}
         </table>

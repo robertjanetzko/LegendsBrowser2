@@ -1,1 +1,4 @@
 {{ .Race }} {{ .Type }}
+{{- if gt (len .WorshipId) 0 }}
+centered around the worship of {{ hfList .WorshipId }}
+{{- end }}

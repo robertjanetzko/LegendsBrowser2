@@ -11,6 +11,7 @@ type Context struct {
 	World *DfWorld
 	HfId  int
 	Story bool
+	Event *HistoricalEvent
 }
 
 func NewContext(w *DfWorld, ref any) *Context {
@@ -24,6 +25,12 @@ func NewContext(w *DfWorld, ref any) *Context {
 	return c
 }
 
+func (c *Context) WithEvent(e *HistoricalEvent) *Context {
+	c2 := *c
+	c2.Event = e
+	return &c2
+}
+
 func (c *Context) hf(id int) string {
 	if c.HfId != -1 {
 		if c.HfId == id {
@@ -33,7 +40,17 @@ func (c *Context) hf(id int) string {
 		}
 	}
 	if x, ok := c.World.HistoricalFigures[id]; ok {
-		return fmt.Sprintf(`the %s <a class="hf" href="/hf/%d">%s</a>`, x.Race+util.If(x.Deity, " deity", "")+util.If(x.Force, " force", ""), x.Id(), util.Title(x.Name()))
+		return hf(x)
+	}
+	return "UNKNOWN HISTORICAL FIGURE"
+}
+
+func (c *Context) hfUnrelated(id int) string {
+	if c.HfId != -1 && c.HfId == id {
+		return c.hfShort(id)
+	}
+	if x, ok := c.World.HistoricalFigures[id]; ok {
+		return hf(x)
 	}
 	return "UNKNOWN HISTORICAL FIGURE"
 }
@@ -59,9 +76,29 @@ func (c *Context) hfRelated(id, to int) string {
 				return fmt.Sprintf(`%s %s <a class="hf" href="/hf/%d">%s</a>`, t.PossesivePronoun(), y.LinkType, x.Id(), util.Title(x.Name()))
 			}
 		}
-		return fmt.Sprintf(`the %s <a class="hf" href="/hf/%d">%s</a>`, x.Race+util.If(x.Deity, " deity", "")+util.If(x.Force, " force", ""), x.Id(), util.Title(x.Name()))
+		return hf(x)
 	}
 	return "UNKNOWN HISTORICAL FIGURE"
+}
+
+func hf(x *HistoricalFigure) string {
+	r := x.Race
+	if x.Deity {
+		r += " deity"
+	}
+	if x.Force {
+		r += " deity"
+	}
+	if x.Necromancer {
+		r += " necromancer"
+	}
+	if x.Werebeast {
+		r += " werebeast"
+	}
+	if x.Vampire {
+		r += " vampire"
+	}
+	return fmt.Sprintf(`the %s <a class="hf" href="/hf/%d">%s</a>`, r, x.Id(), util.Title(x.Name()))
 }
 
 func (c *Context) hfList(ids []int) string {

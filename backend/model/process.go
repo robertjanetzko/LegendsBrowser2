@@ -1,6 +1,7 @@
 package model
 
 import (
+	"sort"
 	"strings"
 
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
@@ -19,6 +20,15 @@ func (w *DfWorld) process() {
 
 	w.processEvents()
 	w.processCollections()
+	w.processHistoricalFigures()
+
+	for _, e := range w.Entities {
+		idx := slices.Index(e.Child, e.Id_)
+		if idx != -1 {
+			e.Child = append(e.Child[:idx], e.Child[idx+1:]...)
+		}
+		sort.Slice(e.Wars, func(i, j int) bool { return e.Wars[i].Id_ < e.Wars[j].Id_ })
+	}
 
 	// check events texts
 	for _, e := range w.HistoricalEvents {
@@ -32,9 +42,16 @@ func (w *DfWorld) processEvents() {
 		case *HistoricalEventHfDoesInteraction:
 			if strings.HasPrefix(d.Interaction, "DEITY_CURSE_WEREBEAST_") {
 				w.HistoricalFigures[d.TargetHfid].Werebeast = true
+				w.HistoricalFigures[d.TargetHfid].WerebeastSince = e.Year
 			}
 			if strings.HasPrefix(d.Interaction, "DEITY_CURSE_VAMPIRE_") {
 				w.HistoricalFigures[d.TargetHfid].Vampire = true
+				w.HistoricalFigures[d.TargetHfid].VampireSince = e.Year
+			}
+		case *HistoricalEventHfLearnsSecret:
+			if strings.HasPrefix(d.Interaction, "SECRET_") {
+				w.HistoricalFigures[d.StudentHfid].Necromancer = true
+				w.HistoricalFigures[d.StudentHfid].NecromancerSince = e.Year
 			}
 		case *HistoricalEventCreatedSite:
 			w.addEntitySite(d.CivId, d.SiteId)
@@ -174,6 +191,13 @@ func (w *DfWorld) processCollections() {
 					}
 				}
 			}
+		case *HistoricalEventCollectionWar:
+			if e, ok := w.Entities[cd.AggressorEntId]; ok {
+				e.Wars = append(e.Wars, col)
+			}
+			if e, ok := w.Entities[cd.DefenderEntId]; ok {
+				e.Wars = append(e.Wars, col)
+			}
 		}
 	}
 }
@@ -201,4 +225,20 @@ func (w *DfWorld) addRelationshipEvents() {
 			},
 		}
 	}
+}
+
+func (w *DfWorld) processHistoricalFigures() {
+	// for _, hf := range w.HistoricalFigures {
+	// 	for _, i := range hf.ActiveInteraction {
+	// 		if strings.HasPrefix(i, "DEITY_CURSE_WEREBEAST_") {
+	// 			hf.Werebeast = true
+	// 		}
+	// 		if strings.HasPrefix(i, "DEITY_CURSE_VAMPIRE_") {
+	// 			hf.Vampire = true
+	// 		}
+	// 		if strings.HasPrefix(i, "SECRET_") {
+	// 			hf.Necromancer = true
+	// 		}
+	// 	}
+	// }
 }

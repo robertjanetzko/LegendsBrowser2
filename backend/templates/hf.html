@@ -9,7 +9,11 @@
 {{else}}
 <i class="fa-solid fa-mars fa-xs"></i>
 {{end}}
-{{ .Race }} (*{{ .BirthYear }}{{ if ge .DeathYear 0 }} †{{ .DeathYear }}{{ end }})
+{{ .Race }}
+{{ if .Vampire}}vampire{{end}}
+{{ if .Werebeast}}werebeast{{end}}
+{{ if .Necromancer}}necromancer{{end}}
+(*{{ .BirthYear }}{{ if ge .DeathYear 0 }} †{{ .DeathYear }}{{ end }})
 
 <div class="row mt-3">
     <div class="col-4">

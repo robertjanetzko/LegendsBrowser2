@@ -1975,22 +1975,23 @@ func (s EntityWeapon) MarshalJSON() ([]byte, error) {
 }
 
 type Entity struct {
-	Child                    []int                       `json:"child" legend:"plus" related:""`                    // child
-	Claims                   string                      `json:"claims" legend:"plus" related:""`                   // claims
-	EntityLink               []*EntityEntityLink         `json:"entityLink" legend:"plus" related:""`               // entity_link
-	EntityPosition           []*EntityPosition           `json:"entityPosition" legend:"plus" related:""`           // entity_position
-	EntityPositionAssignment []*EntityPositionAssignment `json:"entityPositionAssignment" legend:"plus" related:""` // entity_position_assignment
-	HistfigId                []int                       `json:"histfigId" legend:"plus" related:""`                // histfig_id
-	Honor                    []*Honor                    `json:"honor" legend:"base" related:""`                    // honor
-	Id_                      int                         `json:"id" legend:"both" related:""`                       // id
-	Name_                    string                      `json:"name" legend:"base" related:""`                     // name
-	Occasion                 []*Occasion                 `json:"occasion" legend:"plus" related:""`                 // occasion
-	Profession               EntityProfession            `json:"profession" legend:"plus" related:""`               // profession
-	Race                     string                      `json:"race" legend:"plus" related:""`                     // race
-	Type_                    EntityType                  `json:"type" legend:"plus" related:""`                     // type
-	Weapon                   []EntityWeapon              `json:"weapon" legend:"plus" related:""`                   // weapon
-	WorshipId                []int                       `json:"worshipId" legend:"plus" related:""`                // worship_id
-	Sites                    []int                       `json:"sites" legend:"add" related:""`                     // Sites
+	Child                    []int                        `json:"child" legend:"plus" related:""`                    // child
+	Claims                   string                       `json:"claims" legend:"plus" related:""`                   // claims
+	EntityLink               []*EntityEntityLink          `json:"entityLink" legend:"plus" related:""`               // entity_link
+	EntityPosition           []*EntityPosition            `json:"entityPosition" legend:"plus" related:""`           // entity_position
+	EntityPositionAssignment []*EntityPositionAssignment  `json:"entityPositionAssignment" legend:"plus" related:""` // entity_position_assignment
+	HistfigId                []int                        `json:"histfigId" legend:"plus" related:""`                // histfig_id
+	Honor                    []*Honor                     `json:"honor" legend:"base" related:""`                    // honor
+	Id_                      int                          `json:"id" legend:"both" related:""`                       // id
+	Name_                    string                       `json:"name" legend:"base" related:""`                     // name
+	Occasion                 []*Occasion                  `json:"occasion" legend:"plus" related:""`                 // occasion
+	Profession               EntityProfession             `json:"profession" legend:"plus" related:""`               // profession
+	Race                     string                       `json:"race" legend:"plus" related:""`                     // race
+	Type_                    EntityType                   `json:"type" legend:"plus" related:""`                     // type
+	Weapon                   []EntityWeapon               `json:"weapon" legend:"plus" related:""`                   // weapon
+	WorshipId                []int                        `json:"worshipId" legend:"plus" related:""`                // worship_id
+	Sites                    []int                        `json:"sites" legend:"add" related:""`                     // Sites
+	Wars                     []*HistoricalEventCollection `json:"wars" legend:"add" related:""`                      // Wars
 }
 
 func NewEntity() *Entity {
@@ -2029,6 +2030,7 @@ func (x *Entity) MarshalJSON() ([]byte, error) {
 	d["weapon"] = x.Weapon
 	d["worshipId"] = x.WorshipId
 	d["sites"] = x.Sites
+	d["wars"] = x.Wars
 	return json.Marshal(d)
 }
 
@@ -4818,10 +4820,8 @@ func NewHistoricalEventAssumeIdentity() *HistoricalEventAssumeIdentity {
 		TricksterHfid: -1,
 	}
 }
-func (x *HistoricalEventAssumeIdentity) Type() string { return "assume identity" }
-func (x *HistoricalEventAssumeIdentity) RelatedToEntity(id int) bool {
-	return x.IdentityId == id || x.TargetEnid == id
-}
+func (x *HistoricalEventAssumeIdentity) Type() string                           { return "assume identity" }
+func (x *HistoricalEventAssumeIdentity) RelatedToEntity(id int) bool            { return x.TargetEnid == id }
 func (x *HistoricalEventAssumeIdentity) RelatedToHf(id int) bool                { return x.TricksterHfid == id }
 func (x *HistoricalEventAssumeIdentity) RelatedToArtifact(id int) bool          { return false }
 func (x *HistoricalEventAssumeIdentity) RelatedToSite(id int) bool              { return false }
@@ -9064,7 +9064,7 @@ func NewHistoricalEventFailedIntrigueCorruption() *HistoricalEventFailedIntrigue
 }
 func (x *HistoricalEventFailedIntrigueCorruption) Type() string { return "failed intrigue corruption" }
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToEntity(id int) bool {
-	return x.CorruptorIdentity == id || x.RelevantEntityId == id || x.TargetIdentity == id
+	return x.RelevantEntityId == id
 }
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToHf(id int) bool {
 	return x.CorruptorHfid == id || x.LureHfid == id || x.TargetHfid == id
@@ -12879,7 +12879,7 @@ func (x *HistoricalEventHfsFormedIntrigueRelationship) Type() string {
 	return "hfs formed intrigue relationship"
 }
 func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToEntity(id int) bool {
-	return x.CorruptorIdentity == id || x.RelevantEntityId == id || x.TargetIdentity == id
+	return x.RelevantEntityId == id
 }
 func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToHf(id int) bool {
 	return x.CorruptorHfid == id || x.LureHfid == id || x.TargetHfid == id
@@ -13086,9 +13086,7 @@ func NewHistoricalEventHfsFormedReputationRelationship() *HistoricalEventHfsForm
 func (x *HistoricalEventHfsFormedReputationRelationship) Type() string {
 	return "hfs formed reputation relationship"
 }
-func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToEntity(id int) bool {
-	return x.IdentityId1 == id || x.IdentityId2 == id
-}
+func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToEntity(id int) bool { return false }
 func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToHf(id int) bool {
 	return x.Hfid1 == id || x.Hfid2 == id
 }
@@ -18902,8 +18900,12 @@ type HistoricalFigure struct {
 	Sphere                          []string                           `json:"sphere" legend:"base" related:""`                          // sphere
 	UsedIdentityId                  []int                              `json:"usedIdentityId" legend:"base" related:""`                  // used_identity_id
 	VagueRelationship               []*VagueRelationship               `json:"vagueRelationship" legend:"base" related:""`               // vague_relationship
+	Necromancer                     bool                               `json:"necromancer" legend:"add" related:""`                      // Necromancer
+	NecromancerSince                int                                `json:"necromancerSince" legend:"add" related:""`                 // NecromancerSince
 	Vampire                         bool                               `json:"vampire" legend:"add" related:""`                          // Vampire
+	VampireSince                    int                                `json:"vampireSince" legend:"add" related:""`                     // VampireSince
 	Werebeast                       bool                               `json:"werebeast" legend:"add" related:""`                        // Werebeast
+	WerebeastSince                  int                                `json:"werebeastSince" legend:"add" related:""`                   // WerebeastSince
 }
 
 func NewHistoricalFigure() *HistoricalFigure {
@@ -18918,6 +18920,9 @@ func NewHistoricalFigure() *HistoricalFigure {
 		EntPopId:          -1,
 		Id_:               -1,
 		Sex:               -1,
+		NecromancerSince:  -1,
+		VampireSince:      -1,
+		WerebeastSince:    -1,
 	}
 }
 func (x *HistoricalFigure) Id() int      { return x.Id_ }
@@ -19017,8 +19022,18 @@ func (x *HistoricalFigure) MarshalJSON() ([]byte, error) {
 	d["sphere"] = x.Sphere
 	d["usedIdentityId"] = x.UsedIdentityId
 	d["vagueRelationship"] = x.VagueRelationship
+	d["necromancer"] = x.Necromancer
+	if x.NecromancerSince != -1 {
+		d["necromancerSince"] = x.NecromancerSince
+	}
 	d["vampire"] = x.Vampire
+	if x.VampireSince != -1 {
+		d["vampireSince"] = x.VampireSince
+	}
 	d["werebeast"] = x.Werebeast
+	if x.WerebeastSince != -1 {
+		d["werebeastSince"] = x.WerebeastSince
+	}
 	return json.Marshal(d)
 }
 

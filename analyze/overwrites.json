@@ -60,12 +60,32 @@
             {
                 "Name": "Vampire",
                 "Type": "bool"
+            },
+            {
+                "Name": "Necromancer",
+                "Type": "bool"
+            },
+            {
+                "Name": "WerebeastSince",
+                "Type": "int"
+            },
+            {
+                "Name": "VampireSince",
+                "Type": "int"
+            },
+            {
+                "Name": "NecromancerSince",
+                "Type": "int"
             }
         ],
         "Entity": [
             {
                 "Name": "Sites",
                 "Type": "[]int"
+            },
+            {
+                "Name": "Wars",
+                "Type": "[]*HistoricalEventCollection"
             }
         ],
         "Site": [

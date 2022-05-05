@@ -44,8 +44,8 @@ func (x *HistoricalEventAddHfEntityLink) Html(c *Context) string {
 }
 
 func (x *HistoricalEventAddHfHfLink) Html(c *Context) string {
-	h := c.hf(x.Hfid)
-	t := c.hf(x.HfidTarget)
+	h := c.hfUnrelated(x.Hfid)
+	t := c.hfUnrelated(x.HfidTarget)
 	switch x.LinkType {
 	case HistoricalEventAddHfHfLinkLinkType_Apprentice:
 		return h + " became the master of " + t
@@ -2056,7 +2056,7 @@ func (x *HistoricalEventRemoveHfEntityLink) Html(c *Context) string {
 }
 
 func (x *HistoricalEventRemoveHfHfLink) Html(c *Context) string {
-	return c.hf(x.Hfid) + " divorced " + c.hfRelated(x.HfidTarget, x.Hfid)
+	return c.hfUnrelated(x.Hfid) + " divorced " + c.hfUnrelated(x.HfidTarget)
 }
 
 func (x *HistoricalEventRemoveHfSiteLink) Html(c *Context) string {
