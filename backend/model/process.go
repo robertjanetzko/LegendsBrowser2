@@ -39,6 +39,7 @@ func (w *DfWorld) processEvents() {
 		case *HistoricalEventCreatedSite:
 			w.addEntitySite(d.CivId, d.SiteId)
 			w.addEntitySite(d.SiteCivId, d.SiteId)
+			w.Sites[d.SiteId].Ruin = false
 		case *HistoricalEventDestroyedSite:
 			w.addEntitySite(d.DefenderCivId, d.SiteId)
 			w.addEntitySite(d.SiteCivId, d.SiteId)
@@ -48,6 +49,7 @@ func (w *DfWorld) processEvents() {
 			w.addEntitySite(d.SiteCivId, d.SiteId)
 			w.addEntitySite(d.DefenderCivId, d.SiteId)
 			w.addEntitySite(d.NewSiteCivId, d.SiteId)
+			w.Sites[d.SiteId].Ruin = false
 		case *HistoricalEventHfDestroyedSite:
 			w.addEntitySite(d.SiteCivId, d.SiteId)
 			w.addEntitySite(d.DefenderCivId, d.SiteId)
@@ -74,6 +76,31 @@ func (w *DfWorld) processEvents() {
 		case *HistoricalEventHfReachSummit:
 			id, _, _ := util.FindInMap(w.MountainPeaks, func(m *MountainPeak) bool { return m.Coords == d.Coords })
 			d.MountainPeakId = id
+		case *HistoricalEventCreatedWorldConstruction:
+			if master, ok := w.WorldConstructions[d.MasterWcid]; ok {
+				master.Parts = append(master.Parts, d.Wcid)
+			}
+		case *HistoricalEventBuildingProfileAcquired:
+			if site, ok := w.Sites[d.SiteId]; ok {
+				if property, ok := site.SiteProperties[d.BuildingProfileId]; ok {
+					if structure, ok := site.Structures[property.StructureId]; ok {
+						structure.Ruin = false
+					}
+					d.StructureId = property.StructureId
+				}
+			}
+		case *HistoricalEventRazedStructure:
+			if site, ok := w.Sites[d.SiteId]; ok {
+				if structure, ok := site.Structures[d.StructureId]; ok {
+					structure.Ruin = true
+				}
+			}
+		case *HistoricalEventReplacedStructure:
+			if site, ok := w.Sites[d.SiteId]; ok {
+				if structure, ok := site.Structures[d.OldAbId]; ok {
+					structure.Ruin = true
+				}
+			}
 		}
 	}
 }

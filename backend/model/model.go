@@ -5245,14 +5245,15 @@ func (x *HistoricalEventBodyAbused) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventBuildingProfileAcquired struct {
-	AcquirerEnid      int  `json:"acquirerEnid" legend:"base" related:""`      // acquirer_enid
-	AcquirerHfid      int  `json:"acquirerHfid" legend:"base" related:""`      // acquirer_hfid
-	BuildingProfileId int  `json:"buildingProfileId" legend:"base" related:""` // building_profile_id
-	Inherited         bool `json:"inherited" legend:"base" related:""`         // inherited
-	LastOwnerHfid     int  `json:"lastOwnerHfid" legend:"base" related:""`     // last_owner_hfid
-	PurchasedUnowned  bool `json:"purchasedUnowned" legend:"base" related:""`  // purchased_unowned
-	RebuiltRuined     bool `json:"rebuiltRuined" legend:"base" related:""`     // rebuilt_ruined
-	SiteId            int  `json:"siteId" legend:"base" related:""`            // site_id
+	AcquirerEnid      int  `json:"acquirerEnid" legend:"base" related:""`        // acquirer_enid
+	AcquirerHfid      int  `json:"acquirerHfid" legend:"base" related:""`        // acquirer_hfid
+	BuildingProfileId int  `json:"buildingProfileId" legend:"base" related:""`   // building_profile_id
+	Inherited         bool `json:"inherited" legend:"base" related:""`           // inherited
+	LastOwnerHfid     int  `json:"lastOwnerHfid" legend:"base" related:""`       // last_owner_hfid
+	PurchasedUnowned  bool `json:"purchasedUnowned" legend:"base" related:""`    // purchased_unowned
+	RebuiltRuined     bool `json:"rebuiltRuined" legend:"base" related:""`       // rebuilt_ruined
+	SiteId            int  `json:"siteId" legend:"base" related:""`              // site_id
+	StructureId       int  `json:"structureId" legend:"add" related:"structure"` // StructureId
 }
 
 func NewHistoricalEventBuildingProfileAcquired() *HistoricalEventBuildingProfileAcquired {
@@ -5262,6 +5263,7 @@ func NewHistoricalEventBuildingProfileAcquired() *HistoricalEventBuildingProfile
 		BuildingProfileId: -1,
 		LastOwnerHfid:     -1,
 		SiteId:            -1,
+		StructureId:       -1,
 	}
 }
 func (x *HistoricalEventBuildingProfileAcquired) Type() string { return "building profile acquired" }
@@ -5274,7 +5276,7 @@ func (x *HistoricalEventBuildingProfileAcquired) RelatedToHf(id int) bool {
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToArtifact(id int) bool { return false }
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToSite(id int) bool     { return x.SiteId == id }
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToStructure(siteId, id int) bool {
-	return false
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
 }
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToRegion(id int) bool { return false }
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToWorldConstruction(id int) bool {
@@ -5308,6 +5310,9 @@ func (x *HistoricalEventBuildingProfileAcquired) MarshalJSON() ([]byte, error) {
 	d["rebuiltRuined"] = x.RebuiltRuined
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
 	}
 	return json.Marshal(d)
 }
@@ -21447,6 +21452,7 @@ type Structure struct {
 	Subtype          StructureSubtype `json:"subtype" legend:"base" related:""`          // subtype
 	Type_            StructureType    `json:"type" legend:"both" related:""`             // type
 	WorshipHfid      int              `json:"worshipHfid" legend:"base" related:""`      // worship_hfid
+	Ruin             bool             `json:"ruin" legend:"add" related:""`              // Ruin
 	SiteId           int              `json:"siteId" legend:"add" related:""`            // SiteId
 }
 
@@ -21542,6 +21548,7 @@ func (x *Structure) MarshalJSON() ([]byte, error) {
 	if x.WorshipHfid != -1 {
 		d["worshipHfid"] = x.WorshipHfid
 	}
+	d["ruin"] = x.Ruin
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
 	}
@@ -21708,6 +21715,7 @@ type WorldConstruction struct {
 	Id_    int                   `json:"id" legend:"plus" related:""`     // id
 	Name_  string                `json:"name" legend:"plus" related:""`   // name
 	Type_  WorldConstructionType `json:"type" legend:"plus" related:""`   // type
+	Parts  []int                 `json:"parts" legend:"add" related:""`   // Parts
 }
 
 func NewWorldConstruction() *WorldConstruction {
@@ -21732,6 +21740,7 @@ func (x *WorldConstruction) MarshalJSON() ([]byte, error) {
 	if x.Type_ != 0 {
 		d["type"] = x.Type_
 	}
+	d["parts"] = x.Parts
 	return json.Marshal(d)
 }
 

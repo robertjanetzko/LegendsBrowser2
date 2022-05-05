@@ -89,6 +89,9 @@ func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			}
 			return
 		} else {
+			h.server.context.config.LastFile = p.Current
+			h.server.context.config.Save()
+
 			h.server.context.isLoading = true
 			h.server.context.world = nil
 			go loadWorld(h.server, p.Current)

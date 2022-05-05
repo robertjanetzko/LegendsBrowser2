@@ -28,12 +28,7 @@ type DfServer struct {
 	context   *DfServerContext
 }
 
-func StartServer(world *model.DfWorld, static embed.FS) error {
-	config, err := LoadConfig()
-	if err != nil {
-		return err
-	}
-
+func StartServer(config *Config, world *model.DfWorld, static embed.FS) error {
 	srv := &DfServer{
 		router: mux.NewRouter().StrictSlash(true),
 		context: &DfServerContext{

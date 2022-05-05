@@ -20,7 +20,8 @@ var static embed.FS
 func main() {
 	f := flag.String("f", "", "open a file")
 	p := flag.Bool("p", false, "start profiling")
-	d := flag.Bool("d", false, "debug templates")
+	c := flag.String("c", "", "config file")
+	l := flag.Bool("l", false, "open last file")
 	flag.Parse()
 
 	if *p {
@@ -30,9 +31,18 @@ func main() {
 		}()
 	}
 
-	templates.DebugTemplates = *d
+	config, err := server.LoadConfig(*c)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	templates.DebugTemplates = config.DebugTemplates
 
 	var world *model.DfWorld
+
+	if *l {
+		*f = config.LastFile
+	}
 
 	if len(*f) > 0 {
 		w, err := model.Parse(*f, nil)
@@ -44,7 +54,7 @@ func main() {
 		world = w
 	}
 
-	err := server.StartServer(world, static)
+	err = server.StartServer(config, world, static)
 	if err != nil {
 		log.Fatal(err)
 	}

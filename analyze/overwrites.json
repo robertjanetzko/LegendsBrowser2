@@ -8,7 +8,8 @@
         "HistoricalEventDanceFormCreated.FormId": "danceForm",
         "HistoricalEventMusicalFormCreated.FormId": "musicalForm",
         "HistoricalEventPoeticFormCreated.FormId": "poeticForm",
-        "HistoricalEventHfReachSummit.MountainPeakId": "mountain"
+        "HistoricalEventHfReachSummit.MountainPeakId": "mountain",
+        "HistoricalEventBuildingProfileAcquired.StructureId": "structure"
     },
     "AdditionalFields": {
         "DfWorld": [
@@ -45,6 +46,10 @@
             {
                 "Name": "SiteId",
                 "Type": "int"
+            },
+            {
+                "Name": "Ruin",
+                "Type": "bool"
             }
         ],
         "HistoricalFigure": [
@@ -79,6 +84,12 @@
             {
                 "Name": "Relationship",
                 "Type": "HistoricalEventRelationshipRelationship"
+            }
+        ],
+        "HistoricalEventBuildingProfileAcquired": [
+            {
+                "Name": "StructureId",
+                "Type": "int"
             }
         ],
         "HistoricalEventHfReachSummit": [
@@ -127,6 +138,12 @@
             {
                 "Name": "OccasionEventcol",
                 "Type": "int"
+            }
+        ],
+        "WorldConstruction": [
+            {
+                "Name": "Parts",
+                "Type": "[]int"
             }
         ]
     }

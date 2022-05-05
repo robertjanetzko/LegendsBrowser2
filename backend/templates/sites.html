@@ -19,12 +19,14 @@
         <table class="table table-hover table-sm table-borderless object-table">
             <tr>
                 <th width="100%">Name</th>
-                <th>Size</th>
+                <th>Structures</th>
+                <th>Properties</th>
             </tr>
             {{- range $v }}{{- if not (eq .Name "") }}
             <tr>
                 <td>{{ site .Id }}</td>
-                <td></td>
+                <td>{{ len .Structures }}</td>
+                <td>{{ len .SiteProperties }}</td>
             </tr>
             {{- end}}{{- end}}
         </table>

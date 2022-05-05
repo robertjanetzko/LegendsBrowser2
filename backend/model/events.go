@@ -407,8 +407,17 @@ func (x *HistoricalEventBodyAbused) Html(c *Context) string {
 }
 
 func (x *HistoricalEventBuildingProfileAcquired) Html(c *Context) string {
-	return util.If(x.AcquirerEnid != -1, c.entity(x.AcquirerEnid), c.hf(x.AcquirerHfid)) +
-		util.If(x.PurchasedUnowned, " purchased ", " inherited ") +
+	mode := " acquired "
+	switch {
+	case x.PurchasedUnowned:
+		mode = " purchased "
+	case x.RebuiltRuined:
+		mode = " rebuilt "
+	case x.Inherited:
+		mode = " iinherited "
+	}
+
+	return util.If(x.AcquirerEnid != -1, c.entity(x.AcquirerEnid), c.hf(x.AcquirerHfid)) + mode +
 		c.property(x.SiteId, x.BuildingProfileId) + c.site(x.SiteId, " in") +
 		util.If(x.LastOwnerHfid != -1, " formerly owned by "+c.hfRelated(x.LastOwnerHfid, x.AcquirerHfid), "")
 }

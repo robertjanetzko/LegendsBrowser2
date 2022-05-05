@@ -5,8 +5,17 @@
 {{define "content"}}
 <h3>{{ title .Name }}</h3>
 <p>{{ .Type }}</p>
-<h5>Events</h5>
 
+{{- if gt (len .Parts) 0 }}
+<h5>Parts</h5>
+<ul>
+    {{- range .Parts }}
+    <li>{{ worldConstruction . }}</li>
+    {{- end }}
+</ul>
+{{- end }}
+
+<h5>Events</h5>
 {{ template "events.html" events . }}
 
 <p>{{ json . }}</p>

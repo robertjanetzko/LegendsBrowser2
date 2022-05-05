@@ -115,7 +115,7 @@ func (c *Context) siteStructure(siteId, structureId int, prefix string) string {
 
 func (c *Context) site(id int, prefix string) string {
 	if x, ok := c.World.Sites[id]; ok {
-		return fmt.Sprintf(`%s <a class="site" href="/site/%d"><i class="%s fa-xs"></i> %s</a>`, prefix, x.Id(), x.Icon(), util.Title(x.Name()))
+		return fmt.Sprintf(`%s <a class="site%s" href="/site/%d"><i class="%s fa-xs"></i> %s</a>`, prefix, util.If(x.Ruin, " ruin", ""), x.Id(), x.Icon(), util.Title(x.Name()))
 	}
 	return "UNKNOWN SITE"
 }
@@ -123,7 +123,7 @@ func (c *Context) site(id int, prefix string) string {
 func (c *Context) structure(siteId, structureId int) string {
 	if x, ok := c.World.Sites[siteId]; ok {
 		if y, ok := x.Structures[structureId]; ok {
-			return fmt.Sprintf(`<a class="structure" href="/site/%d/structure/%d"><i class="%s fa-xs"></i> %s</a>`, siteId, structureId, y.Icon(), util.Title(y.Name()))
+			return fmt.Sprintf(`<a class="structure%s" href="/site/%d/structure/%d"><i class="%s fa-xs"></i> %s</a>`, util.If(y.Ruin, " ruin", ""), siteId, structureId, y.Icon(), util.Title(y.Name()))
 		}
 	}
 	return "UNKNOWN STRUCTURE"

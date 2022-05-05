@@ -34,6 +34,14 @@ td.object {
     color: #bbb;
 }
 
+.site.ruin {
+    color: #b4a675;
+}
+
+.structure.ruin {
+    color: #94702a;
+}
+
 .worldconstruction {
     color: #777777;
 }

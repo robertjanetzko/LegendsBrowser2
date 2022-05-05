@@ -9,14 +9,20 @@ import (
 )
 
 type Config struct {
-	LastPath string
-	LastFile string
+	path           string
+	LastPath       string
+	LastFile       string
+	DebugTemplates bool `json:"DebugTemplates,omitempty"`
 }
 
-func LoadConfig() (*Config, error) {
-	path, err := configPath()
-	if err != nil {
-		return nil, err
+func LoadConfig(path string) (*Config, error) {
+	var err error
+
+	if path == "" {
+		path, err = configPath()
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	data, err := ioutil.ReadFile(path)
@@ -29,7 +35,7 @@ func LoadConfig() (*Config, error) {
 				return nil, err
 			}
 
-			return &Config{LastPath: home}, nil
+			return &Config{LastPath: home, path: path}, nil
 		} else {
 			return nil, err
 		}
@@ -37,13 +43,20 @@ func LoadConfig() (*Config, error) {
 
 	c := &Config{}
 	json.Unmarshal(data, c)
+	c.path = path
 	return c, nil
 }
 
 func (c *Config) Save() error {
-	path, err := configPath()
-	if err != nil {
-		return err
+	var err error
+
+	path := c.path
+
+	if path == "" {
+		path, err = configPath()
+		if err != nil {
+			return err
+		}
 	}
 
 	file, err := json.MarshalIndent(c, "", "  ")

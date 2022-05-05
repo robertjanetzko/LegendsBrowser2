@@ -12,5 +12,5 @@ buildMacOs:
 	genisoimage -D -V "LegendsBrowser" -no-pad -r -apple -o /tmp/build/uncompressed.dmg /tmp/build/macos
 	dmg dmg /tmp/build/uncompressed.dmg ../bin/LegendsBrowser.dmg
 
-run:
-	cd backend && go run main.go
+runLast:
+	go run main.go -c conf.json -l=true
