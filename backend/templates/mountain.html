@@ -3,12 +3,15 @@
 {{define "title"}}{{ title .Name }}{{end}}
 
 {{define "content"}}
-<h1>{{ title .Name }}</h1>
+<h3>{{ title .Name }}</h3>
 <p>{{ if .IsVolcano }}volcano{{else}}mountain{{end}}</p>
 
+<dl class="row">
+    <dt class="col-2 col-lg-1">Height</dt>
+    <dd class="col-10 col-lg-11">{{ .Height }}</dd>
+</dl>
+
 <h5>Events</h5>
+{{ template "events.html" events . }} <p>{{ json . }}</p>
 
-{{ template "events.html" events . }}
-
-<p>{{ json . }}</p>
 {{- end }}

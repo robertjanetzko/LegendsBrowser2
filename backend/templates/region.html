@@ -6,8 +6,14 @@
 <h3>{{ title .Name }}</h3>
 <p>{{ .Type }}</p>
 
-<h5>Events</h5>
+{{- if ne .ForceId -1 -}}
+<dl class="row">
+    <dt class="col-2 col-lg-1">Force</dt>
+    <dd class="col-10 col-lg-11">{{ hf .ForceId }}</dd>
+</dl>
+{{- end -}}
 
+<h5>Events</h5>
 {{ template "events.html" events . }}
 
 <p>{{ json . }}</p>

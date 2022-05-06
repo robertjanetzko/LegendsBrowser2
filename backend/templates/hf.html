@@ -4,20 +4,37 @@
 
 {{define "content"}}
 <h3>{{ title .Name }}</h3>
-{{if .Female }}
-<i class="fa-solid fa-venus fa-xs"></i>
-{{else}}
-<i class="fa-solid fa-mars fa-xs"></i>
-{{end}}
-{{ .Race }}
-{{ if .Deity}}deity{{end}}
-{{ if .Force}}force{{end}}
-{{ if .Vampire}}vampire{{end}}
-{{ if .Werebeast}}werebeast{{end}}
-{{ if .Necromancer}}necromancer{{end}}
-{{ if not (or .Deity .Force)}}
-(*{{ .BirthYear }}{{ if ge .DeathYear 0 }} †{{ .DeathYear }}{{ end }})
-{{ end }}
+<p>
+    {{if .Female }}
+    <i class="fa-solid fa-venus fa-xs"></i>
+    {{else}}
+    <i class="fa-solid fa-mars fa-xs"></i>
+    {{end}}
+    {{ .Race }}
+    {{ if .Deity}}deity{{end}}
+    {{ if .Force}}force{{end}}
+    {{ if .Vampire}}vampire{{end}}
+    {{ if .Werebeast}}werebeast{{end}}
+    {{ if .Necromancer}}necromancer{{end}}
+    {{ if not (or .Deity .Force)}}
+    (*{{ .BirthYear }}{{ if ge .DeathYear 0 }} †{{ .DeathYear }}{{ end }})
+    {{ end }}
+</p>
+
+<dl class="row">
+    {{- if gt (len .Sphere) 0 -}}
+    <dt class="col-2 col-lg-1">Spheres</dt>
+    <dd class="col-10 col-lg-11">{{ andList .Sphere }}</dd>
+    {{- end -}}
+    {{- if gt (len .Goal) 0 -}}
+    <dt class="col-2 col-lg-1">Goals</dt>
+    <dd class="col-10 col-lg-11">{{ .Goals }}</dd>
+    {{- end -}}
+    {{- if gt (len .JourneyPet) 0 -}}
+    <dt class="col-2 col-lg-1">Pets</dt>
+    <dd class="col-10 col-lg-11">{{ .Pets }}</dd>
+    {{- end -}}
+</dl>
 
 <div class="row mt-3">
     <div class="col-4">

@@ -149,6 +149,14 @@ func (hf *HistoricalFigure) FirstName() string {
 	return strings.Split(hf.Name_, " ")[0]
 }
 
+func (hf *HistoricalFigure) Goals() string {
+	return andList(util.Map(hf.Goal, func(g HistoricalFigureGoal) string { return g.String() }))
+}
+
+func (hf *HistoricalFigure) Pets() string {
+	return andList(util.Map(hf.JourneyPet, func(g string) string { return articled(strings.ToLower(g)) }))
+}
+
 func (x *Honor) Requirement() string {
 	var list []string
 	if x.RequiresAnyMeleeOrRangedSkill {
