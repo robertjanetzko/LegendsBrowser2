@@ -96,6 +96,10 @@ func (e *Entity) Type() string {
 	return e.Type_.String()
 }
 
+func (e *Entity) Weapons() []string {
+	return util.Map(e.Weapon, func(w EntityWeapon) string { return w.String() })
+}
+
 func (e *Entity) Position(id int) *EntityPosition {
 	for _, p := range e.EntityPosition {
 		if p.Id_ == id {

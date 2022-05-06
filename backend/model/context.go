@@ -85,6 +85,18 @@ func hfIcon(x *HistoricalFigure) string {
 	switch {
 	case x.Leader:
 		return `<i class="fa-solid fa-crown fa-xs"></i> `
+	case x.Deity:
+		return `<i class="fa-solid fa-hands-holding fa-xs"></i> `
+	case x.Force:
+		return `<i class="fa-solid fa-hands-holding-circle fa-xs"></i> `
+	case x.Adventurer:
+		return `<i class="fa-solid fa-person-hiking fa-xs"></i> `
+	case x.Necromancer:
+		return `<i class="fa-solid fa-book-skull fa-xs"></i> `
+	case x.Werebeast:
+		return `<i class="fa-solid fa-moon fa-xs"></i> `
+	case x.Vampire:
+		return `<i class="fa-solid fa-droplet fa-xs"></i> `
 	}
 	return ""
 }

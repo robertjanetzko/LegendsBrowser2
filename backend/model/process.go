@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
+	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
 )
 
@@ -23,6 +24,14 @@ func (w *DfWorld) process() {
 	w.processHistoricalFigures()
 
 	for _, e := range w.Entities {
+		if len(e.Sites) > 0 {
+			if site, ok := w.Sites[e.Sites[0]]; ok {
+				if site.Type_ == SiteType_Tower {
+					e.Necromancer = true
+				}
+			}
+		}
+
 		idx := slices.Index(e.Child, e.Id_)
 		if idx != -1 {
 			e.Child = append(e.Child[:idx], e.Child[idx+1:]...)
@@ -37,7 +46,10 @@ func (w *DfWorld) process() {
 }
 
 func (w *DfWorld) processEvents() {
-	for _, e := range w.HistoricalEvents {
+	list := maps.Values(w.HistoricalEvents)
+	sort.Slice(list, func(i, j int) bool { return list[i].Id_ < list[j].Id_ })
+
+	for _, e := range list {
 		switch d := e.Details.(type) {
 		case *HistoricalEventHfDoesInteraction:
 			if strings.HasPrefix(d.Interaction, "DEITY_CURSE_WEREBEAST_") {
@@ -123,7 +135,10 @@ func (w *DfWorld) processEvents() {
 }
 
 func (w *DfWorld) processCollections() {
-	for _, col := range w.HistoricalEventCollections {
+	list := maps.Values(w.HistoricalEventCollections)
+	sort.Slice(list, func(i, j int) bool { return list[i].Id_ < list[j].Id_ })
+
+	for _, col := range list {
 		for _, eventId := range col.Event {
 			if e, ok := w.HistoricalEvents[eventId]; ok {
 				e.Collection = col.Id_

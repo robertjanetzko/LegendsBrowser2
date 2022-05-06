@@ -23,6 +23,7 @@ func (srv *DfServer) LoadTemplates() {
 		},
 		"title":   util.Title,
 		"kebab":   func(s string) string { return strcase.ToKebab(s) },
+		"andList": model.AndList,
 		"world":   func() *model.DfWorld { return srv.context.world },
 		"context": func(r any) *model.Context { return model.NewContext(srv.context.world, r) },
 		"initMap": func() template.HTML {

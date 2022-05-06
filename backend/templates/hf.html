@@ -127,7 +127,8 @@
         <ul>
             {{- range $i := .IntriguePlot }}
             <li>
-                {{ .Type_ }}{{if .OnHold}} (on hold){{end}}
+                {{ .Type_ }} {{ if ne .ArtifactId -1 }}{{ artifact .ArtifactId}}{{end}}
+                {{if .OnHold}} (on hold){{end}}
             </li>
             {{- end }}
         </ul>

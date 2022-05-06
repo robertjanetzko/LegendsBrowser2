@@ -73,13 +73,6 @@
                         onInput: value => $.get("/search?term=" + value, data => ac.setData(data)),
                         onSelectItem: ({ label, value }) => window.location = value
                     });
-
-                    // later, when you need to change the dataset
-
-                    ac.setData([
-                        { label: 'New York JFK', value: 'JFK' },
-                        { label: 'Moscow SVO', value: 'SVO' },
-                    ]);
                 </script>
             </div>
         </div>

@@ -129,8 +129,10 @@ func StartServer(config *Config, world *model.DfWorld, static embed.FS) error {
 			Civilizations map[string][]*model.Entity
 		}{
 			Civilizations: groupBy(srv.context.world.Entities,
-				func(e *model.Entity) string { return e.Race },
-				func(e *model.Entity) bool { return e.Name() != "" && e.Type_ == model.EntityType_Civilization },
+				func(e *model.Entity) string { return util.If(e.Necromancer, "necromancer", e.Race) },
+				func(e *model.Entity) bool {
+					return e.Name() != "" && (e.Type_ == model.EntityType_Civilization || e.Necromancer)
+				},
 				func(e *model.Entity) string { return e.Name() }),
 		}
 	})

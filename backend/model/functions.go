@@ -45,6 +45,8 @@ var AddMapSite = func(w *DfWorld, id int) template.HTML {
 	}
 }
 
+var AndList = func(s []string) template.HTML { return template.HTML(andList(s)) }
+
 func andList(list []string) string {
 	if len(list) > 1 {
 		return strings.Join(list[:len(list)-1], ", ") + " and " + list[len(list)-1]

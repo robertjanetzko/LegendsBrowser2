@@ -1,4 +1,15 @@
 {{ .Race }} {{ .Type }}
+{{- if .Profession }}
+of {{ .Profession }}s
+{{- end }}
+{{- if and (eq .Type "religion") (gt (len .WorshipId) 0) }}
+<br />centered around the worship of {{ hfList .WorshipId }}
+{{- end }}
+{{- if eq .Type "militaryunit" }}
 {{- if gt (len .WorshipId) 0 }}
-centered around the worship of {{ hfList .WorshipId }}
+<br />devoted to the worship of {{ hfList .WorshipId }}
+{{- end }}
+{{- if gt (len .WorshipId) 0 }}
+<br />dedicated to the mastery of {{ andList .Weapons }}
+{{- end }}
 {{- end }}

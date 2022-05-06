@@ -5,9 +5,20 @@
 {{define "content"}}
 <h3>{{ title .Name }}</h3>
 <p>
-    {{ .Race }} {{ .Type }}
-    {{- if gt (len .WorshipId) 0 }}
+    {{ .Race }}{{ if .Necromancer}} necromancer{{end}} {{ .Type }}
+    {{- if .Profession }}
+    of {{ .Profession }}s
+    {{- end }}
+    {{- if and (eq .Type "religion") (gt (len .WorshipId) 0) }}
     centered around the worship of {{ hfList .WorshipId }}
+    {{- end }}
+    {{- if eq .Type "militaryunit" }}
+    {{- if gt (len .WorshipId) 0 }}
+    devoted to the worship of {{ hfList .WorshipId }}
+    {{- end }}
+    {{- if gt (len .WorshipId) 0 }}
+    , dedicated to the mastery of {{ andList .Weapons }}
+    {{- end }}
     {{- end }}
 </p>
 

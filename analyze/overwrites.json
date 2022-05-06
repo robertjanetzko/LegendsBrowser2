@@ -80,9 +80,17 @@
             {
                 "Name": "NecromancerSince",
                 "Type": "int"
+            },
+            {
+                "Name": "NecromancerSince",
+                "Type": "int"
             }
         ],
         "Entity": [
+            {
+                "Name": "Necromancer",
+                "Type": "bool"
+            },
             {
                 "Name": "Leaders",
                 "Type": "[]*EntityLeader"

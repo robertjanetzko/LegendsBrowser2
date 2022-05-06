@@ -1,5 +1,6 @@
 a {
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .popover {
