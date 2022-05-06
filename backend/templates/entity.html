@@ -9,6 +9,9 @@
     {{- if .Profession }}
     of {{ .Profession }}s
     {{- end }}
+    {{- if ne .Parent -1 }}
+    of {{ entity .Parent }}
+    {{- end }}
     {{- if and (eq .Type "religion") (gt (len .WorshipId) 0) }}
     centered around the worship of {{ hfList .WorshipId }}
     {{- end }}
@@ -24,26 +27,28 @@
 
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        {{ $active := " active"}}
         {{- if gt (len .Leaders) 0 }}
-        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#nav-leaders" type="button" role="tab">Sites</button>
-        {{- end}}
+        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-leaders" type="button" role="tab">Leaders</button>
+        {{ $active = ""}}{{- end}}
         {{- if gt (len .Sites) 0 }}
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-sites" type="button" role="tab">Sites</button>
-        {{- end}}
+        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-sites" type="button" role="tab">Sites</button>
+        {{ $active = ""}}{{- end}}
         {{- if gt (len .HistfigId) 0 }}
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-members" type="button" role="tab">Members</button>
-        {{- end}}
+        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-members" type="button" role="tab">Members</button>
+        {{ $active = ""}}{{- end}}
         {{- if gt (len .Child) 0 }}
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-children" type="button" role="tab">Groups</button>
-        {{- end}}
+        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-children" type="button" role="tab">Groups</button>
+        {{ $active = ""}}{{- end}}
         {{- if gt (len .Wars) 0 }}
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-wars" type="button" role="tab">Wars</button>
-        {{- end}}
+        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-wars" type="button" role="tab">Wars</button>
+        {{ $active = ""}}{{- end}}
     </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
+    {{ $active := " active"}}
     {{- if gt (len .Leaders) 0 }}
-    <div class="tab-pane active" id="nav-leaders" role="tabpanel">
+    <div class="tab-pane{{$active}}" id="nav-leaders" role="tabpanel">
         <table class="table table-hover table-sm table-borderless object-table">
             <tr>
                 <th>Date</th>
@@ -64,9 +69,9 @@
             {{- end}}
         </table>
     </div>
-    {{- end}}
+    {{ $active = ""}}{{- end}}
     {{- if gt (len .Sites) 0 }}
-    <div class="tab-pane" id="nav-sites" role="tabpanel">
+    <div class="tab-pane{{$active}}" id="nav-sites" role="tabpanel">
         <table class="table table-hover table-sm table-borderless">
             <tr>
                 <th>Name</th>
@@ -80,9 +85,9 @@
             {{- end}}
         </table>
     </div>
-    {{- end}}
+    {{ $active = ""}}{{- end}}
     {{- if gt (len .HistfigId) 0 }}
-    <div class="tab-pane" id="nav-members" role="tabpanel">
+    <div class="tab-pane{{$active}}" id="nav-members" role="tabpanel">
         <table class="table table-hover table-sm table-borderless object-table">
             <tr>
                 <th width="100%">Type</th>
@@ -94,9 +99,9 @@
             {{- end}}
         </table>
     </div>
-    {{- end}}
+    {{ $active = ""}}{{- end}}
     {{- if gt (len .Child) 0 }}
-    <div class="tab-pane" id="nav-children" role="tabpanel">
+    <div class="tab-pane{{$active}}" id="nav-children" role="tabpanel">
         <table class="table table-hover table-sm table-borderless object-table">
             <tr>
                 <th width="100%">Type</th>
@@ -108,9 +113,9 @@
             {{- end}}
         </table>
     </div>
-    {{- end}}
+    {{ $active = ""}}{{- end}}
     {{- if gt (len .Wars) 0 }}
-    <div class="tab-pane" id="nav-wars" role="tabpanel">
+    <div class="tab-pane{{$active}}" id="nav-wars" role="tabpanel">
         <table class="table table-hover table-sm table-borderless object-table">
             <tr>
                 <th>Year</th>
@@ -140,7 +145,7 @@
             {{- end}}
         </table>
     </div>
-    {{- end}}
+    {{ $active = ""}}{{- end}}
 </div>
 
 <h5>Events</h5>

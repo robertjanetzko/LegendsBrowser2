@@ -1,6 +1,9 @@
-{{ .Race }} {{ .Type }}
+{{ .Race }}{{ if .Necromancer}} necromancer{{end}} {{ .Type }}
 {{- if .Profession }}
 of {{ .Profession }}s
+{{- end }}
+{{- if ne .Parent -1 }}
+of {{ entity .Parent }}
 {{- end }}
 {{- if and (eq .Type "religion") (gt (len .WorshipId) 0) }}
 <br />centered around the worship of {{ hfList .WorshipId }}

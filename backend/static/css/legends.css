@@ -86,6 +86,11 @@ td.object {
 
 
 @media (prefers-color-scheme: dark) {
+    .bg-light {
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+    }
+
     a {
         color: #337ab7;
     }

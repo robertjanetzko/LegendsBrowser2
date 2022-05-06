@@ -32,6 +32,12 @@ func (w *DfWorld) process() {
 			}
 		}
 
+		for _, l := range e.EntityLink {
+			if l.Type_ == EntityEntityLinkType_PARENT {
+				e.Parent = l.Target
+			}
+		}
+
 		idx := slices.Index(e.Child, e.Id_)
 		if idx != -1 {
 			e.Child = append(e.Child[:idx], e.Child[idx+1:]...)

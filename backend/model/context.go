@@ -94,9 +94,12 @@ func hfIcon(x *HistoricalFigure) string {
 	case x.Necromancer:
 		return `<i class="fa-solid fa-book-skull fa-xs"></i> `
 	case x.Werebeast:
-		return `<i class="fa-solid fa-moon fa-xs"></i> `
+		return `<i class="fa-solid fa-cloud-moon fa-xs"></i> `
 	case x.Vampire:
 		return `<i class="fa-solid fa-droplet fa-xs"></i> `
+	}
+	if len(x.SiteLink) > 0 && x.SiteLink[0].LinkType == SiteLinkLinkType_Lair {
+		return `<i class="fa-solid fa-paw fa-xs"></i> `
 	}
 	return ""
 }
@@ -138,7 +141,23 @@ func (c *Context) artifact(id int) string {
 
 func (c *Context) entity(id int) string {
 	if x, ok := c.World.Entities[id]; ok {
-		return fmt.Sprintf(`<a class="entity" href="/entity/%d"><i class="%s fa-xs"></i> %s</a>`, x.Id(), x.Icon(), util.Title(x.Name()))
+		c := ""
+		switch x.Race {
+		case "dwarf":
+			c = ` style="color:#FFCC33"`
+		case "elf":
+			c = ` style="color:#99FF00"`
+		case "human":
+			c = ` style="color:#0000CC"`
+		case "kobold":
+			c = ` style="color:#333"`
+		case "goblin":
+			c = ` style="color:#CC0000"`
+		}
+		if x.Necromancer {
+			c = ` style="color:#A0A"`
+		}
+		return fmt.Sprintf(`<a class="entity" href="/entity/%d"><i class="%s fa-xs" %s></i> %s</a>`, x.Id(), x.Icon(), c, util.Title(x.Name()))
 	}
 	return "UNKNOWN ENTITY"
 }

@@ -88,6 +88,10 @@
         ],
         "Entity": [
             {
+                "Name": "Parent",
+                "Type": "int"
+            },
+            {
                 "Name": "Necromancer",
                 "Type": "bool"
             },

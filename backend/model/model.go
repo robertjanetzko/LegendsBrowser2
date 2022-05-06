@@ -1992,13 +1992,15 @@ type Entity struct {
 	WorshipId                []int                        `json:"worshipId" legend:"plus" related:""`                // worship_id
 	Leaders                  []*EntityLeader              `json:"leaders" legend:"add" related:""`                   // Leaders
 	Necromancer              bool                         `json:"necromancer" legend:"add" related:""`               // Necromancer
+	Parent                   int                          `json:"parent" legend:"add" related:""`                    // Parent
 	Sites                    []int                        `json:"sites" legend:"add" related:""`                     // Sites
 	Wars                     []*HistoricalEventCollection `json:"wars" legend:"add" related:""`                      // Wars
 }
 
 func NewEntity() *Entity {
 	return &Entity{
-		Id_: -1,
+		Id_:    -1,
+		Parent: -1,
 	}
 }
 func (x *Entity) Id() int      { return x.Id_ }
@@ -2033,6 +2035,9 @@ func (x *Entity) MarshalJSON() ([]byte, error) {
 	d["worshipId"] = x.WorshipId
 	d["leaders"] = x.Leaders
 	d["necromancer"] = x.Necromancer
+	if x.Parent != -1 {
+		d["parent"] = x.Parent
+	}
 	d["sites"] = x.Sites
 	d["wars"] = x.Wars
 	return json.Marshal(d)

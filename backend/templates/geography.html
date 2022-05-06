@@ -7,28 +7,29 @@
 
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        {{ $active := " active"}}
         {{- range $t, $v := .Regions }}
-        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{
-            len $v
-            }})</button>
-        {{- end}}
+        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{
+            len $v }})</button>
+        {{ $active = ""}}{{- end}}
         {{- range $t, $v := .Landmasses }}
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{ len $v
-            }})</button>
-        {{- end}}
+        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{ len
+            $v }})</button>
+        {{ $active = ""}}{{- end}}
         {{- range $t, $v := .MountainPeaks }}
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{ len $v
-            }})</button>
-        {{- end}}
+        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{ len
+            $v }})</button>
+        {{ $active = ""}}{{- end}}
         {{- range $t, $v := .Rivers }}
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{ len $v
-            }})</button>
-        {{- end}}
+        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{ len
+            $v }})</button>
+        {{ $active = ""}}{{- end}}
     </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
+    {{ $active := " active"}}
     {{- range $t, $v := .Regions }}
-    <div class="tab-pane active" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="tab-pane{{$active}}" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
         <table class="table table-hover table-sm table-borderless">
             <tr>
                 <th width="100%">Name</th>
@@ -42,9 +43,9 @@
             {{- end}}{{- end}}
         </table>
     </div>
-    {{- end}}
+    {{ $active = ""}}{{- end}}
     {{- range $t, $v := .Landmasses }}
-    <div class="tab-pane" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="tab-pane{{$active}}" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
         <table class="table table-hover table-sm table-borderless">
             <tr>
                 <th width="100%">Name</th>
@@ -58,9 +59,9 @@
             {{- end}}{{- end}}
         </table>
     </div>
-    {{- end}}
+    {{ $active = ""}}{{- end}}
     {{- range $t, $v := .MountainPeaks }}
-    <div class="tab-pane" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="tab-pane{{$active}}" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
         <table class="table table-hover table-sm table-borderless object-table">
             <tr>
                 <th width="100%">Name</th>
@@ -74,9 +75,9 @@
             {{- end}}{{- end}}
         </table>
     </div>
-    {{- end}}
+    {{ $active = ""}}{{- end}}
     {{- range $t, $v := .Rivers }}
-    <div class="tab-pane" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="tab-pane{{$active}}" id="nav-{{kebab $t}}" role="tabpanel" aria-labelledby="nav-home-tab">
         <table class="table table-hover table-sm table-borderless object-table">
             <tr>
                 <th width="100%">Name</th>
@@ -90,7 +91,7 @@
             {{- end}}{{- end}}
         </table>
     </div>
-    {{- end}}
+    {{ $active = ""}}{{- end}}
 </div>
 
 {{- end }}
