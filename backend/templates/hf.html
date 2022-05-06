@@ -37,6 +37,7 @@
 </dl>
 
 <div class="row mt-3">
+    {{- if or (ne 0 (len .SiteLink)) (ne 0 (len .EntityFormerPositionLink)) (ne 0 (len .EntityPositionLink)) }}
     <div class="col-4">
         {{- if ne 0 (len .SiteLink) }}
         <h5>Sites</h5>
@@ -67,6 +68,7 @@
         </ul>
         {{- end }}
     </div>
+    {{- end }}
     {{- if ne 0 (len .HfLink) }}
     <div class="col-4">
         <h5>Related Figures</h5>
