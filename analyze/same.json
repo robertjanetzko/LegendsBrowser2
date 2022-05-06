@@ -148,6 +148,7 @@
   },
   "Structure": {},
   "WrittenContent": {
-    "Author": "AuthorHfid"
+    "Author": "AuthorHfid",
+    "Type": "Form"
   }
 }

@@ -21802,6 +21802,58 @@ const (
 
 func parseWrittenContentForm(s string) WrittenContentForm {
 	switch s {
+	case "AlternateHistory":
+		return WrittenContentForm_AlternateHistory
+	case "Atlas":
+		return WrittenContentForm_Atlas
+	case "Autobiography":
+		return WrittenContentForm_Autobiography
+	case "BiographicalDictionary":
+		return WrittenContentForm_BiographicalDictionary
+	case "Biography":
+		return WrittenContentForm_Biography
+	case "Choreography":
+		return WrittenContentForm_Choreography
+	case "Chronicle":
+		return WrittenContentForm_Chronicle
+	case "ComparativeBiography":
+		return WrittenContentForm_ComparativeBiography
+	case "CulturalComparison":
+		return WrittenContentForm_CulturalComparison
+	case "CulturalHistory":
+		return WrittenContentForm_CulturalHistory
+	case "Dialog":
+		return WrittenContentForm_Dialog
+	case "Dictionary":
+		return WrittenContentForm_Dictionary
+	case "Encyclopedia":
+		return WrittenContentForm_Encyclopedia
+	case "Essay":
+		return WrittenContentForm_Essay
+	case "Genealogy":
+		return WrittenContentForm_Genealogy
+	case "Guide":
+		return WrittenContentForm_Guide
+	case "Letter":
+		return WrittenContentForm_Letter
+	case "Manual":
+		return WrittenContentForm_Manual
+	case "MusicalComposition":
+		return WrittenContentForm_MusicalComposition
+	case "Novel":
+		return WrittenContentForm_Novel
+	case "Play":
+		return WrittenContentForm_Play
+	case "Poem":
+		return WrittenContentForm_Poem
+	case "ShortStory":
+		return WrittenContentForm_ShortStory
+	case "StarCatalogue":
+		return WrittenContentForm_StarCatalogue
+	case "StarChart":
+		return WrittenContentForm_StarChart
+	case "TreatiseOnTechnologicalEvolution":
+		return WrittenContentForm_TreatiseOnTechnologicalEvolution
 	case "alternate history":
 		return WrittenContentForm_AlternateHistory
 	case "atlas":
@@ -22083,7 +22135,6 @@ type WrittenContent struct {
 	Reference  []*Reference       `json:"reference" legend:"plus" related:""`  // reference
 	Style      []string           `json:"style" legend:"both" related:""`      // style
 	Title      string             `json:"title" legend:"both" related:""`      // title
-	Type_      WrittenContentType `json:"type" legend:"plus" related:""`       // type
 }
 
 func NewWrittenContent() *WrittenContent {
@@ -22146,9 +22197,6 @@ func (x *WrittenContent) MarshalJSON() ([]byte, error) {
 	d["reference"] = x.Reference
 	d["style"] = x.Style
 	d["title"] = x.Title
-	if x.Type_ != 0 {
-		d["type"] = x.Type_
-	}
 	return json.Marshal(d)
 }
 
@@ -41008,7 +41056,7 @@ func parseWrittenContentPlus(p *util.XMLParser, obj *WrittenContent) (*WrittenCo
 				if err != nil {
 					return nil, err
 				}
-				obj.Type_ = parseWrittenContentType(txt(data))
+				obj.Form = parseWrittenContentForm(txt(data))
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()

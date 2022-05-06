@@ -194,7 +194,7 @@ func (w *WrittenContent) Name() string {
 }
 
 func (w *WrittenContent) Type() string {
-	return w.Type_.String()
+	return w.Form.String()
 }
 
 func (w *DanceForm) Type() string {

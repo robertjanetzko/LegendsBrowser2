@@ -400,6 +400,11 @@ func (f Field) StartAction(obj Object, plus bool) string {
 			n = f.CorrectedName(obj)
 		}
 
+		name2, ok := sameFields[obj.Name][strings.TrimSuffix(n, "_")]
+		if ok {
+			n = name2
+		}
+
 		s := "data, err := p.Value()\nif err != nil { return nil, err }\n"
 
 		if !f.Multiple {
@@ -577,7 +582,7 @@ func (f Field) CorrectedName(obj Object) string {
 		}
 		return f.Name
 	}
-	n, ok := sameFields[obj.Name][f.Name]
+	n, ok := sameFields[obj.Name][strings.TrimSuffix(f.Name, "_")]
 	if ok {
 		return n
 	}
