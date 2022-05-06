@@ -9,7 +9,8 @@
         "HistoricalEventMusicalFormCreated.FormId": "musicalForm",
         "HistoricalEventPoeticFormCreated.FormId": "poeticForm",
         "HistoricalEventHfReachSummit.MountainPeakId": "mountain",
-        "HistoricalEventBuildingProfileAcquired.StructureId": "structure"
+        "HistoricalEventBuildingProfileAcquired.StructureId": "structure",
+        "HistoricalEventHfPreach.SiteHfid": "site"
     },
     "AdditionalFields": {
         "DfWorld": [

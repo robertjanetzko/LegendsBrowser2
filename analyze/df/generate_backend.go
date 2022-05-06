@@ -511,7 +511,7 @@ func (obj Object) RelatedToMountain() string {
 func (obj Object) Related(relation string, regex *regexp.Regexp, init string) string {
 	var list []string
 	for n, f := range obj.Fields {
-		if f.Type == "int" && !f.SameField(obj) && (relation == f.Related || regex.MatchString(n)) {
+		if f.Type == "int" && !f.SameField(obj) && (relation == f.Related || (f.Related == "" && regex.MatchString(n))) {
 			if !f.Multiple {
 				list = append(list, fmt.Sprintf("x.%s == id", f.Name))
 			} else {

@@ -11373,11 +11373,11 @@ func (s HistoricalEventHfPreachTopic) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventHfPreach struct {
-	Entity1     int                          `json:"entity1" legend:"base" related:""`     // entity_1
-	Entity2     int                          `json:"entity2" legend:"base" related:""`     // entity_2
-	SiteHfid    int                          `json:"siteHfid" legend:"base" related:""`    // site_hfid
-	SpeakerHfid int                          `json:"speakerHfid" legend:"base" related:""` // speaker_hfid
-	Topic       HistoricalEventHfPreachTopic `json:"topic" legend:"base" related:""`       // topic
+	Entity1     int                          `json:"entity1" legend:"base" related:""`      // entity_1
+	Entity2     int                          `json:"entity2" legend:"base" related:""`      // entity_2
+	SiteHfid    int                          `json:"siteHfid" legend:"base" related:"site"` // site_hfid
+	SpeakerHfid int                          `json:"speakerHfid" legend:"base" related:""`  // speaker_hfid
+	Topic       HistoricalEventHfPreachTopic `json:"topic" legend:"base" related:""`        // topic
 }
 
 func NewHistoricalEventHfPreach() *HistoricalEventHfPreach {
@@ -11392,11 +11392,9 @@ func (x *HistoricalEventHfPreach) Type() string { return "hf preach" }
 func (x *HistoricalEventHfPreach) RelatedToEntity(id int) bool {
 	return x.Entity1 == id || x.Entity2 == id
 }
-func (x *HistoricalEventHfPreach) RelatedToHf(id int) bool {
-	return x.SiteHfid == id || x.SpeakerHfid == id
-}
+func (x *HistoricalEventHfPreach) RelatedToHf(id int) bool                { return x.SpeakerHfid == id }
 func (x *HistoricalEventHfPreach) RelatedToArtifact(id int) bool          { return false }
-func (x *HistoricalEventHfPreach) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventHfPreach) RelatedToSite(id int) bool              { return x.SiteHfid == id }
 func (x *HistoricalEventHfPreach) RelatedToStructure(siteId, id int) bool { return false }
 func (x *HistoricalEventHfPreach) RelatedToRegion(id int) bool            { return false }
 func (x *HistoricalEventHfPreach) RelatedToWorldConstruction(id int) bool { return false }
