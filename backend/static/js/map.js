@@ -151,7 +151,7 @@ function addWc(id, y, x, color) {
     attachTooltip(polygon, urlToolTip("worldconstruction", id));
 }
 
-function addRegion(name, y1, x1, y2, x2, color) {
+function addLandmass(id, y1, x1, y2, x2, color) {
     x1--; y2++;
     var polygon = L.polygon(
         [coord(y1, x1), coord(y2, x1), coord(y2, x2), coord(y1, x2)], {
@@ -160,7 +160,7 @@ function addRegion(name, y1, x1, y2, x2, color) {
         weight: 1
     }).addTo(landmassesLayer);
 
-    attachTooltip(polygon, name);
+    attachTooltip(polygon, urlToolTip("landmass", id));
 }
 
 function addMountain(id, y, x, color) {
@@ -209,4 +209,17 @@ function addBattle(name, y, x) {
     miny = Math.min(y, miny);
     maxx = Math.max(x, maxx);
     maxy = Math.max(y, maxy);
+}
+
+function addRegion(id, coords, fillColor) {
+    var polygon = L.polygon(coords, { color: '#fff', opacity: 1, fillOpacity: 0, weight: 1 }).addTo(regionsLayer);
+    attachTooltip(polygon, urlToolTip('region', id));
+
+    polygon.on('mouseover', function (e) { this.setStyle({ weight: 10 }); });
+    polygon.on('mouseout', function (e) { this.setStyle({ weight: 3 }); });
+
+    if (fillColor != "transparent") {
+        var evilPolygon = L.polygon(polygon.getLatLngs(), { color: 'transparent', opacity: 1, fillColor: fillColor, fillOpacity: .3, interactive: false });
+        evilPolygon.addTo(evilnessLayer);
+    }
 }
