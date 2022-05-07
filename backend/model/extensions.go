@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
+	"golang.org/x/exp/maps"
 )
 
 func (w *DfWorld) AllEventTypes() []string {
@@ -60,6 +61,16 @@ func (w *DfWorld) SiteHistory(siteId int) []*HistoricalEvent {
 		}
 	}
 	sort.Slice(list, func(a, b int) bool { return list[a].Id_ < list[b].Id_ })
+	return list
+}
+
+func (w *DfWorld) Races() []string {
+	races := make(map[string]bool)
+	for _, hf := range w.HistoricalFigures {
+		races[hf.Race] = true
+	}
+	list := maps.Keys(races)
+	sort.Strings(list)
 	return list
 }
 

@@ -90,12 +90,14 @@ func (srv *DfServer) LoadTemplates() {
 		"html": func(value any) template.HTML {
 			return template.HTML(fmt.Sprint(value))
 		},
-		"bytes":      func(s int64) string { return humanize.Bytes(uint64(s)) },
-		"first":      util.FirstInMap,
-		"ifFirst":    func(m any, k string, r string) string { return util.If(util.FirstInMap(m, k), r, "") },
-		"strip":      util.Strip,
-		"string":     util.String,
-		"capitalize": util.Capitalize,
+		"bytes":           func(s int64) string { return humanize.Bytes(uint64(s)) },
+		"first":           util.FirstInMap,
+		"ifFirst":         func(m any, k string, r string) string { return util.If(util.FirstInMap(m, k), r, "") },
+		"strip":           util.Strip,
+		"string":          util.String,
+		"capitalize":      util.Capitalize,
+		"add":             func(a, b int) int { return a + b },
+		"breakYearColumn": func(c, m int) bool { return (c % ((m + 2) / 4)) == 0 },
 	}
 	srv.templates = templates.New(functions)
 }

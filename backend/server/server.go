@@ -12,6 +12,7 @@ import (
 	"github.com/robertjanetzko/LegendsBrowser2/backend/model"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/templates"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
+	"golang.org/x/exp/constraints"
 )
 
 type DfServerContext struct {
@@ -118,6 +119,19 @@ func StartServer(config *Config, world *model.DfWorld, static embed.FS) error {
 	srv.RegisterWorldPage("/identities", "identities.html", func(p Parms) any { return srv.context.world.Identities })
 	srv.RegisterWorldResourcePage("/identity/{id}", "identity.html", func(id int) any { return srv.context.world.Identities[id] })
 	srv.RegisterWorldResourcePage("/popover/identity/{id}", "popoverIdentity.html", func(id int) any { return srv.context.world.Identities[id] })
+
+	srv.RegisterWorldPage("/years", "years.html", func(p Parms) any {
+		return groupBy(srv.context.world.HistoricalEvents,
+			func(e *model.HistoricalEvent) int { return e.Year },
+			func(e *model.HistoricalEvent) bool { return true },
+			func(e *model.HistoricalEvent) int { return e.Id_ })
+	})
+	srv.RegisterWorldResourcePage("/year/{id}", "year.html", func(id int) any {
+		return util.FilterMap(srv.context.world.HistoricalEvents,
+			func(v *model.HistoricalEvent) bool { return v.Year == id },
+			func(a, b *model.HistoricalEvent) bool { return a.Id_ < b.Id_ },
+		)
+	})
 
 	srv.RegisterWorldPage("/events", "eventTypes.html", func(p Parms) any { return srv.context.world.AllEventTypes() })
 	srv.RegisterWorldPage("/events/{type}", "eventType.html", func(p Parms) any { return srv.context.world.EventsOfType(p["type"]) })
@@ -236,7 +250,18 @@ func (srv *DfServer) searchHf(p Parms) any {
 		list = append(list, hf)
 	}
 
-	sort.Slice(list, func(i, j int) bool { return list[i].Name_ < list[j].Name_ })
+	switch p["sort"] {
+	case "race":
+		sort.Slice(list, func(i, j int) bool { return list[i].Race < list[j].Race })
+	case "birth":
+		sort.Slice(list, func(i, j int) bool { return list[i].BirthYear < list[j].BirthYear })
+	case "death":
+		sort.Slice(list, func(i, j int) bool { return list[i].DeathYear < list[j].DeathYear })
+	case "kills":
+		sort.Slice(list, func(i, j int) bool { return len(list[i].Kills) > len(list[j].Kills) })
+	default:
+		sort.Slice(list, func(i, j int) bool { return list[i].Name_ < list[j].Name_ })
+	}
 
 	return map[string]any{
 		"Params": p,
@@ -288,8 +313,8 @@ func groupByType[K comparable, T namedTyped](input map[K]T) map[string][]T {
 	return groupBy(input, func(t T) string { return t.Type() }, func(t T) bool { return t.Name() != "" }, func(t T) string { return t.Name() })
 }
 
-func groupBy[K comparable, T any](input map[K]T, mapper func(T) string, filter func(T) bool, sortMapper func(T) string) map[string][]T {
-	output := make(map[string][]T)
+func groupBy[K comparable, N comparable, T any, S constraints.Ordered](input map[K]T, mapper func(T) N, filter func(T) bool, sortMapper func(T) S) map[N][]T {
+	output := make(map[N][]T)
 
 	for _, v := range input {
 		k := mapper(v)

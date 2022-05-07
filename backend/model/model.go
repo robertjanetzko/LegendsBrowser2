@@ -19059,6 +19059,7 @@ type HistoricalFigure struct {
 	Sphere                          []string                           `json:"sphere" legend:"base" related:""`                          // sphere
 	UsedIdentityId                  []int                              `json:"usedIdentityId" legend:"base" related:""`                  // used_identity_id
 	VagueRelationship               []*VagueRelationship               `json:"vagueRelationship" legend:"base" related:""`               // vague_relationship
+	Kills                           []int                              `json:"kills" legend:"add" related:""`                            // Kills
 	Leader                          bool                               `json:"leader" legend:"add" related:""`                           // Leader
 	Necromancer                     bool                               `json:"necromancer" legend:"add" related:""`                      // Necromancer
 	NecromancerSince                int                                `json:"necromancerSince" legend:"add" related:""`                 // NecromancerSince
@@ -19182,6 +19183,7 @@ func (x *HistoricalFigure) MarshalJSON() ([]byte, error) {
 	d["sphere"] = x.Sphere
 	d["usedIdentityId"] = x.UsedIdentityId
 	d["vagueRelationship"] = x.VagueRelationship
+	d["kills"] = x.Kills
 	d["leader"] = x.Leader
 	d["necromancer"] = x.Necromancer
 	if x.NecromancerSince != -1 {

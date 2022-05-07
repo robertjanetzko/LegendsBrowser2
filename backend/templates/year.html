@@ -1,0 +1,12 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Year {{(index . 0).Year}}{{end}}
+
+{{define "content"}}
+
+<h3>Year {{(index . 0).Year}}</h3>
+
+<h5>Events</h5>
+{{ template "events.html" events . }}
+
+{{- end }}

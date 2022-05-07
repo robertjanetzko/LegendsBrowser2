@@ -14,6 +14,7 @@
                 <th>Name</th>
                 <th>Race</th>
                 <th>Lived</th>
+                <th>Kills</th>
             </tr>
             {{- range .Hfs }}{{- if not (eq .Name "") }}
             <tr>
@@ -26,6 +27,7 @@
                     from {{ .BirthYear }} till {{ .DeathYear }}
                     {{- end }}
                 </td>
+                <td>{{ len .Kills }}</td>
             </tr>
             {{- end}}{{- end}}
         </table>
@@ -51,25 +53,26 @@
                         }}checked{{end}}> Ghost</label></div>
             <div class="checkbox"><label><input class="filter" type="checkbox" name="adventurer" value="1" {{if eq .Params.adventurer "1"
                         }}checked{{end}}> Adventurer</label></div>
-            <div class="select form-group">
+            <div class="select form-group mt-1 mb-3">
                 <select class="form-control" name="race">
                     <option class="text-muted" value="">Race</option>
-                    <option value="black bear">black bear</option>
-
+                    {{- range world.Races -}}
+                    <option value="{{ . }}" {{if eq $.Params.race . }}selected{{end}}>{{ . }}</option>
+                    {{- end -}}
                 </select>
             </div>
             <h4>Sorting</h4>
             <div class="select form-group">
                 <select class="form-control" name="sort">
                     <option value="">Default</option>
-                    <option value="name">Name</option>
-                    <option value="race">Race</option>
-                    <option value="birth">Birth</option>
-                    <option value="death">Death</option>
-                    <option value="kills">Kills</option>
+                    <option value="name" {{if eq .Params.sort "name" }}selected{{end}}>Name</option>
+                    <option value="race" {{if eq .Params.sort "race" }}selected{{end}}>Race</option>
+                    <option value="birth" {{if eq .Params.sort "birth" }}selected{{end}}>Birth</option>
+                    <option value="death" {{if eq .Params.sort "death" }}selected{{end}}>Death</option>
+                    <option value="kills" {{if eq .Params.sort "kills" }}selected{{end}}>Kills</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Refresh</button>
+            <button type="submit" class="btn btn-primary mt-4">Refresh</button>
         </form>
     </div>
 </div>

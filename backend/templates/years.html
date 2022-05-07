@@ -1,0 +1,25 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Years{{end}}
+
+{{define "content"}}
+<h3>Years</h3>
+<div class="row">
+    <div class="col-md-3">
+        <ul>
+            {{ $c := 0}}
+            {{ range $y, $e := . }}
+            {{ $c = add $c 1 }}
+            {{ if breakYearColumn $c (len $) }}
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <ul>
+            {{end}}
+            <li><a href="/year/{{ $y }}">Year {{ $y }}</a> ({{len $e}} events)</li>
+            {{ end }}
+        </ul>
+    </div>
+</div>
+
+{{- end }}

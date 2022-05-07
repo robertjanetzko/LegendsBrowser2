@@ -85,6 +85,10 @@
             {
                 "Name": "NecromancerSince",
                 "Type": "int"
+            },
+            {
+                "Name": "Kills",
+                "Type": "[]int"
             }
         ],
         "Entity": [

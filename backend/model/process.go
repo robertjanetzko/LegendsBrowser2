@@ -150,6 +150,10 @@ func (w *DfWorld) processEvents() {
 					id.HistfigId = hf.Id_
 				}
 			}
+		case *HistoricalEventHfDied:
+			if hf, ok := w.HistoricalFigures[d.SlayerHfid]; ok {
+				hf.Kills = append(hf.Kills, d.Hfid)
+			}
 		}
 	}
 }

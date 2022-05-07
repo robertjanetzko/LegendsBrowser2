@@ -90,6 +90,17 @@ func Map[U, V any](list []U, mapper func(U) V) []V {
 	return newList
 }
 
+func FilterMap[K comparable, V any](input map[K]V, predicate func(V) bool, sorter func(V, V) bool) []V {
+	var list []V
+	for _, v := range input {
+		if predicate(v) {
+			list = append(list, v)
+		}
+	}
+	sort.Slice(list, func(i, j int) bool { return sorter(list[i], list[j]) })
+	return list
+}
+
 type Identifiable interface {
 	Id() int
 }
