@@ -21131,6 +21131,7 @@ type Site struct {
 	SiteProperties map[int]*SiteSiteProperty `json:"siteProperties" legend:"base" related:""` // site_properties
 	Structures     map[int]*Structure        `json:"structures" legend:"both" related:""`     // structures
 	Type_          SiteType                  `json:"type" legend:"base" related:""`           // type
+	Owner          int                       `json:"owner" legend:"add" related:""`           // Owner
 	Ruin           bool                      `json:"ruin" legend:"add" related:""`            // Ruin
 }
 
@@ -21141,6 +21142,7 @@ func NewSite() *Site {
 		Id_:            -1,
 		SiteProperties: make(map[int]*SiteSiteProperty),
 		Structures:     make(map[int]*Structure),
+		Owner:          -1,
 	}
 }
 func (x *Site) Id() int      { return x.Id_ }
@@ -21168,6 +21170,9 @@ func (x *Site) MarshalJSON() ([]byte, error) {
 	d["structures"] = x.Structures
 	if x.Type_ != 0 {
 		d["type"] = x.Type_
+	}
+	if x.Owner != -1 {
+		d["owner"] = x.Owner
 	}
 	d["ruin"] = x.Ruin
 	return json.Marshal(d)

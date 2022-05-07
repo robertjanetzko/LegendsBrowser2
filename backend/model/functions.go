@@ -82,7 +82,11 @@ var AddMapSite = func(w *DfWorld, id int) template.HTML {
 		c2 := strings.Split(coords[1], ",")
 		x2, _ := strconv.ParseFloat(c2[0], 32)
 		y2, _ := strconv.ParseFloat(c2[1], 32)
-		return template.HTML(fmt.Sprintf(`<script>addSite("%s", %f, %f, %f, %f, "#FF0", "")</script>`, site.Name(), x1/16.0, y1/16.0-1, x2/16.0, y2/16.0-1))
+		c := "#ff0"
+		if e, ok := w.Entities[site.Owner]; ok {
+			c = e.Color()
+		}
+		return template.HTML(fmt.Sprintf(`<script>addSite("%s", %f, %f, %f, %f, "%s", "")</script>`, site.Name(), x1/16.0, y1/16.0-1, x2/16.0, y2/16.0-1, c))
 	} else {
 		return ""
 	}

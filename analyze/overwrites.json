@@ -111,6 +111,10 @@
         ],
         "Site": [
             {
+                "Name": "Owner",
+                "Type": "int"
+            },
+            {
                 "Name": "Ruin",
                 "Type": "bool"
             }

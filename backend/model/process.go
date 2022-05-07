@@ -76,6 +76,7 @@ func (w *DfWorld) processEvents() {
 			w.addEntitySite(d.CivId, d.SiteId)
 			w.addEntitySite(d.SiteCivId, d.SiteId)
 			w.Sites[d.SiteId].Ruin = false
+			w.Sites[d.SiteId].Owner = d.SiteCivId
 		case *HistoricalEventDestroyedSite:
 			w.addEntitySite(d.DefenderCivId, d.SiteId)
 			w.addEntitySite(d.SiteCivId, d.SiteId)
@@ -86,6 +87,7 @@ func (w *DfWorld) processEvents() {
 			w.addEntitySite(d.DefenderCivId, d.SiteId)
 			w.addEntitySite(d.NewSiteCivId, d.SiteId)
 			w.Sites[d.SiteId].Ruin = false
+			w.Sites[d.SiteId].Owner = d.NewSiteCivId
 		case *HistoricalEventHfDestroyedSite:
 			w.addEntitySite(d.SiteCivId, d.SiteId)
 			w.addEntitySite(d.DefenderCivId, d.SiteId)
@@ -94,6 +96,7 @@ func (w *DfWorld) processEvents() {
 			w.addEntitySite(d.SiteCivId, d.SiteId)
 			w.addEntitySite(d.SiteCivId, d.SiteId)
 			w.Sites[d.SiteId].Ruin = false
+			w.Sites[d.SiteId].Owner = d.SiteCivId
 		case *HistoricalEventAddHfEntityLink:
 			if d.Link == HistoricalEventAddHfEntityLinkLink_Position {
 				if hf, ok := w.HistoricalFigures[d.Hfid]; ok {

@@ -141,21 +141,9 @@ func (c *Context) artifact(id int) string {
 
 func (c *Context) entity(id int) string {
 	if x, ok := c.World.Entities[id]; ok {
-		c := ""
-		switch x.Race {
-		case "dwarf":
-			c = ` style="color:#FFCC33"`
-		case "elf":
-			c = ` style="color:#99FF00"`
-		case "human":
-			c = ` style="color:#0000CC"`
-		case "kobold":
-			c = ` style="color:#333"`
-		case "goblin":
-			c = ` style="color:#CC0000"`
-		}
-		if x.Necromancer {
-			c = ` style="color:#A0A"`
+		c := x.Color()
+		if c != "" {
+			c = fmt.Sprintf(` style="color:%s"`, c)
 		}
 		return fmt.Sprintf(`<a class="entity" href="/entity/%d"><i class="%s fa-xs" %s></i> %s</a>`, x.Id(), x.Icon(), c, util.Title(x.Name()))
 	}

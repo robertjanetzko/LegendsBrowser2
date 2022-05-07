@@ -96,6 +96,26 @@ func (e *Entity) Type() string {
 	return e.Type_.String()
 }
 
+func (x *Entity) Color() string {
+	c := ""
+	switch x.Race {
+	case "dwarf":
+		c = `#FFCC33`
+	case "elf":
+		c = `#99FF00`
+	case "human":
+		c = `#0000CC`
+	case "kobold":
+		c = `#333`
+	case "goblin":
+		c = `#CC0000`
+	}
+	if x.Necromancer {
+		c = `#A0A`
+	}
+	return c
+}
+
 func (e *Entity) Weapons() []string {
 	return util.Map(e.Weapon, func(w EntityWeapon) string { return w.String() })
 }
