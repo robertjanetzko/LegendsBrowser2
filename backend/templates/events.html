@@ -1,7 +1,7 @@
 <ul class="mb-0">
     {{- range $event := .Events }}
-    <li>
-        [{{ $event.Id }}] In {{ time $event.Year $event.Seconds72 }},
+    <li data-event-id="{{ $event.Id }}">
+        In {{ time $event.Year $event.Seconds72 }},
         {{ html ($event.Details.Html ($.Context.WithEvent $event)) }}
         {{ if ne .Collection -1 }} <a class="collection" href="/collection/{{.Collection}}"><i
                 class="fa-solid fa-magnifying-glass fa-xs"></i></a>{{end}}

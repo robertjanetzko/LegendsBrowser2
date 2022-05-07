@@ -37,6 +37,7 @@ func main() {
 		log.Fatal(err)
 	}
 
+	server.DebugJSON = config.DebugJSON
 	templates.DebugTemplates = config.DebugTemplates
 
 	var world *model.DfWorld

@@ -13,6 +13,7 @@ type Config struct {
 	LastPath       string
 	LastFile       string
 	DebugTemplates bool `json:"DebugTemplates,omitempty"`
+	DebugJSON      bool `json:"DebugJSON,omitempty"`
 }
 
 func LoadConfig(path string) (*Config, error) {

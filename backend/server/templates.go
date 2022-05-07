@@ -12,9 +12,17 @@ import (
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
 
+var DebugJSON = false
+
 func (srv *DfServer) LoadTemplates() {
 	functions := template.FuncMap{
-		"json": util.Json,
+		"json": func(obj any) template.HTML {
+			if !DebugJSON {
+				return ""
+			} else {
+				return util.Json(obj)
+			}
+		},
 		"check": func(condition bool, v any) any {
 			if condition {
 				return v
