@@ -1,3 +1,4 @@
+{{ artifact .Id }}<br />
 {{- if or (ne .ItemType "") (ne .ItemSubtype "")}}
 {{.Mat}} {{if ne .ItemSubtype ""}}{{.ItemSubtype}}{{else}}{{.ItemType}}{{end}}
 {{- end}}

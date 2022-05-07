@@ -1,1 +1,2 @@
-{{ .Type }}{{if .Ruin}} (ruin){{end}}
+{{ site .Id }}<br>
+{{ .Type }}{{if .Ruin}} (ruin){{end}}{{ if ne .Owner -1}} of {{ entity .Owner }}{{end}}

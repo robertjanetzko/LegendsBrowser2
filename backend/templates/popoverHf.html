@@ -1,3 +1,4 @@
+{{ hf .Id }}<br />
 {{if .Female }}
 <i class="fa-solid fa-venus fa-xs"></i>
 {{else}}
@@ -12,7 +13,6 @@
 {{ if not (or .Deity .Force)}}
 (*{{ .BirthYear }}{{ if ge .DeathYear 0 }} †{{ .DeathYear }}{{ end }})
 {{ end }}
-
 {{- if or (ne 0 (len .EntityFormerPositionLink)) (ne 0 (len .EntityPositionLink)) }}
 <ul class="mb-0">
     {{- range $i := .EntityPositionLink }}

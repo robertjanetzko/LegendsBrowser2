@@ -105,7 +105,18 @@ function attachTooltip(layer, tip) {
     layer.bindTooltip(tip, { direction: 'top' }).bindPopup(tip);
 }
 
-function addSite(name, y1, x1, y2, x2, color, glyph) {
+function urlToolTip(type, id) {
+    return function (layer) {
+        return $.ajax({
+            url: "/popover/" + type + "/" + id,
+            async: false
+        }).responseText;
+    }
+}
+
+var myIcon = L.divIcon({ className: 'fa-solid fa-mountain fa-xl' });
+
+function addSite(id, y1, x1, y2, x2, color, glyph) {
     /* resize tiny sites like lairs */
     var MIN_SIZE = .3;
     if (y2 - y1 < MIN_SIZE) {
@@ -116,7 +127,6 @@ function addSite(name, y1, x1, y2, x2, color, glyph) {
         x1 = (x1 + x2) / 2 - MIN_SIZE / 2;
         x2 = x1 + MIN_SIZE;
     }
-    /* TODO: use glyph of the site instead of a polygon? */
     var polygon = L.polygon(
         [coord(y1, x1), coord(y2, x1), coord(y2, x2), coord(y1, x2)], {
         color: color,
@@ -124,17 +134,21 @@ function addSite(name, y1, x1, y2, x2, color, glyph) {
         weight: 3
     }).addTo(sitesLayer);
 
-    attachTooltip(polygon, name);
+    /* TODO: use glyph of the site instead of a polygon? */
+    // var marker = L.marker(coord(y1, x1), { icon: myIcon }).addTo(sitesLayer);
+    // attachTooltip(marker, urlToolTip("site", id));
+
+    attachTooltip(polygon, urlToolTip("site", id));
 }
 
-function addWc(name, y, x, color) {
+function addWc(id, y, x, color) {
     var polygon = L.polygon(square(y, x, structureOffset), {
         color: color,
         opacity: 1, fillOpacity: 0.7,
         weight: 3
     }).addTo(constructionsLayer);
 
-    attachTooltip(polygon, name);
+    attachTooltip(polygon, urlToolTip("worldconstruction", id));
 }
 
 function addRegion(name, y1, x1, y2, x2, color) {
@@ -149,7 +163,7 @@ function addRegion(name, y1, x1, y2, x2, color) {
     attachTooltip(polygon, name);
 }
 
-function addMountain(name, y, x, color) {
+function addMountain(id, y, x, color) {
     x = worldWidth - x - 1;
     var polygon = L.polygon(
         [[x + mountainOffset / 2, y + mountainOffset], [x + mountainOffset / 2, y + 1 - mountainOffset], [x + 1 - mountainOffset, y + 0.5]], {
@@ -158,7 +172,7 @@ function addMountain(name, y, x, color) {
         weight: 3
     }).addTo(mountainsLayer);
 
-    attachTooltip(polygon, name);
+    attachTooltip(polygon, urlToolTip("mountain", id));
 
     minx = Math.min(x, minx);
     miny = Math.min(y, miny);

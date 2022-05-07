@@ -86,7 +86,10 @@ var AddMapSite = func(w *DfWorld, id int) template.HTML {
 		if e, ok := w.Entities[site.Owner]; ok {
 			c = e.Color()
 		}
-		return template.HTML(fmt.Sprintf(`<script>addSite("%s", %f, %f, %f, %f, "%s", "")</script>`, site.Name(), x1/16.0, y1/16.0-1, x2/16.0, y2/16.0-1, c))
+		if site.Ruin {
+			c = "#aaa"
+		}
+		return template.HTML(fmt.Sprintf(`<script>addSite(%d, %f, %f, %f, %f, "%s", "")</script>`, site.Id_, x1/16.0, y1/16.0-1, x2/16.0, y2/16.0-1, c))
 	} else {
 		return ""
 	}
@@ -97,7 +100,7 @@ var AddMapMountain = func(w *DfWorld, id int) template.HTML {
 		c1 := strings.Split(m.Coords, ",")
 		x, _ := strconv.Atoi(c1[0])
 		y, _ := strconv.Atoi(c1[1])
-		return template.HTML(fmt.Sprintf(`<script>addMountain('%s', %d, %d, '#666')</script>`, m.Name_, x, y))
+		return template.HTML(fmt.Sprintf(`<script>addMountain(%d, %d, %d, '#666')</script>`, m.Id_, x, y))
 	}
 	return ""
 }
@@ -113,7 +116,7 @@ var AddMapWorldConstruction = func(w *DfWorld, id int) template.HTML {
 			r += "var polyline = L.polyline(["
 			r += strings.Join(util.Map(x.Line(), func(c Coord) string { return fmt.Sprintf(`coord(%d+0.5,%d-0.5)`, c.X, c.Y) }), ",")
 			r += "], {color: '" + color + "', opacity: 1, weight: 3}).addTo(constructionsLayer);\n"
-			r += "attachTooltip(polyline, '" + x.Name_ + "');\n"
+			r += fmt.Sprintf(`attachTooltip(polyline, urlToolTip('worldconstruction', %d));`, x.Id_)
 			r += "polyline.on('mouseover', function (e) { this.setStyle({weight: 10}); });\n"
 			r += "polyline.on('mouseout', function (e) { this.setStyle({ weight: 3}); });\n"
 			r += "</script>"

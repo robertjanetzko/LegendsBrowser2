@@ -61,8 +61,13 @@ func StartServer(config *Config, world *model.DfWorld, static embed.FS) error {
 		}
 	})
 	srv.RegisterWorldResourcePage("/landmass/{id}", "landmass.html", func(id int) any { return srv.context.world.Landmasses[id] })
+	srv.RegisterWorldResourcePage("/popover/landmass/{id}", "popoverLandmass.html", func(id int) any { return srv.context.world.Landmasses[id] })
+
 	srv.RegisterWorldResourcePage("/mountain/{id}", "mountain.html", func(id int) any { return srv.context.world.MountainPeaks[id] })
+	srv.RegisterWorldResourcePage("/popover/mountain/{id}", "popoverMountain.html", func(id int) any { return srv.context.world.MountainPeaks[id] })
+
 	srv.RegisterWorldResourcePage("/river/{id}", "river.html", func(id int) any { return srv.context.world.Rivers[id] })
+	srv.RegisterWorldResourcePage("/popover/river/{id}", "popoverRiver.html", func(id int) any { return srv.context.world.Rivers[id] })
 
 	srv.RegisterWorldPage("/regions", "regions.html", func(p Parms) any { return groupByType(srv.context.world.Regions) })
 	srv.RegisterWorldResourcePage("/region/{id}", "region.html", func(id int) any { return srv.context.world.Regions[id] })
