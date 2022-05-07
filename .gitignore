@@ -2,7 +2,7 @@
 *legends_plus.xml
 legendsbrowser
 *.pprof
-*.png
+/*.png
 /*.json
 .DS_Store
 bin
