@@ -115,6 +115,10 @@ func StartServer(config *Config, world *model.DfWorld, static embed.FS) error {
 	srv.RegisterWorldResourcePage("/hf/{id}", "hf.html", func(id int) any { return srv.context.world.HistoricalFigures[id] })
 	srv.RegisterWorldResourcePage("/popover/hf/{id}", "popoverHf.html", func(id int) any { return srv.context.world.HistoricalFigures[id] })
 
+	srv.RegisterWorldPage("/identities", "identities.html", func(p Parms) any { return srv.context.world.Identities })
+	srv.RegisterWorldResourcePage("/identity/{id}", "identity.html", func(id int) any { return srv.context.world.Identities[id] })
+	srv.RegisterWorldResourcePage("/popover/identity/{id}", "popoverIdentity.html", func(id int) any { return srv.context.world.Identities[id] })
+
 	srv.RegisterWorldPage("/events", "eventTypes.html", func(p Parms) any { return srv.context.world.AllEventTypes() })
 	srv.RegisterWorldPage("/events/{type}", "eventType.html", func(p Parms) any { return srv.context.world.EventsOfType(p["type"]) })
 	srv.RegisterWorldResourcePage("/event/{id}", "event.html", func(id int) any { return srv.context.world.HistoricalEvents[id] })

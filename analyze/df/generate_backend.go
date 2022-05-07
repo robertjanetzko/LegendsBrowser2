@@ -143,6 +143,7 @@ func (x *{{ $obj.Name }}) RelatedToDanceForm(id int) bool { return {{ $obj.Relat
 func (x *{{ $obj.Name }}) RelatedToMusicalForm(id int) bool { return {{ $obj.RelatedToMusicalForm }} }
 func (x *{{ $obj.Name }}) RelatedToPoeticForm(id int) bool { return {{ $obj.RelatedToPoeticForm }} }
 func (x *{{ $obj.Name }}) RelatedToMountain(id int) bool { return {{ $obj.RelatedToMountain }} }
+func (x *{{ $obj.Name }}) RelatedToIdentity(id int) bool { return {{ $obj.RelatedToIdentity }} }
 {{- end }}
 
 func (x *{{ $obj.Name }}) CheckFields() {
@@ -473,6 +474,7 @@ var structureRegex, _ = regexp.Compile("(structure(_id)?)$")
 var regionRegex, _ = regexp.Compile("(region_id|srid)$")
 var worldConstructionRegex, _ = regexp.Compile("(wcid)$")
 var writtenContentRegex, _ = regexp.Compile("^wc_id$")
+var identityRegex, _ = regexp.Compile("identity")
 
 var noRegex, _ = regexp.Compile("^XXXXX$")
 
@@ -511,6 +513,9 @@ func (obj Object) RelatedToPoeticForm() string {
 }
 func (obj Object) RelatedToMountain() string {
 	return obj.Related("mountain", noRegex, "")
+}
+func (obj Object) RelatedToIdentity() string {
+	return obj.Related("identity", identityRegex, "")
 }
 
 func (obj Object) Related(relation string, regex *regexp.Regexp, init string) string {

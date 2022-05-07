@@ -274,3 +274,7 @@ func (r *Reference) Html(c *Context) template.HTML {
 	}
 	return template.HTML(r.Type_.String())
 }
+
+func (r *River) Id() int {
+	return r.Id_
+}

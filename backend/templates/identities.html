@@ -1,0 +1,21 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Identities{{end}}
+
+{{define "content"}}
+<h3>Identities</h3>
+
+<table class="table table-hover table-sm table-borderless object-table">
+    <tr>
+        <th>Name</th>
+        <th>Used By</th>
+    </tr>
+    {{- range . }}{{- if not (eq .Name "") }}
+    <tr>
+        <td>{{ identity .Id }}</td>
+        <td>{{ hf .HistfigId }}</td>
+    </tr>
+    {{- end}}{{- end}}
+</table>
+
+{{- end }}

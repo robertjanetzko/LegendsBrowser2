@@ -31,6 +31,7 @@ var LinkCollection = func(w *DfWorld, id int) template.HTML { return template.HT
 var LinkMountain = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).mountain(id)) }
 var LinkLandmass = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).landmass(id)) }
 var LinkRiver = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).river(id)) }
+var LinkIdentity = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).identity(id)) }
 
 var AddMapLandmass = func(w *DfWorld, id int) template.HTML {
 	if x, ok := w.Landmasses[id]; ok {

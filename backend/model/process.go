@@ -10,6 +10,10 @@ import (
 )
 
 func (w *DfWorld) process() {
+	for id, r := range w.Rivers {
+		r.Id_ = id
+	}
+
 	w.addRelationshipEvents()
 
 	// set site in structure
@@ -138,6 +142,12 @@ func (w *DfWorld) processEvents() {
 			if site, ok := w.Sites[d.SiteId]; ok {
 				if structure, ok := site.Structures[d.OldAbId]; ok {
 					structure.Ruin = true
+				}
+			}
+		case *HistoricalEventAssumeIdentity:
+			if hf, ok := w.HistoricalFigures[d.TricksterHfid]; ok {
+				if id, ok := w.Identities[d.IdentityId]; ok {
+					id.HistfigId = hf.Id_
 				}
 			}
 		}

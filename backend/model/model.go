@@ -2801,6 +2801,7 @@ func (x *HistoricalEventAddHfEntityHonor) RelatedToDanceForm(id int) bool       
 func (x *HistoricalEventAddHfEntityHonor) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAddHfEntityHonor) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventAddHfEntityHonor) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventAddHfEntityHonor) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventAddHfEntityHonor) CheckFields() {
 }
@@ -2957,6 +2958,7 @@ func (x *HistoricalEventAddHfEntityLink) RelatedToDanceForm(id int) bool        
 func (x *HistoricalEventAddHfEntityLink) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAddHfEntityLink) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventAddHfEntityLink) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventAddHfEntityLink) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventAddHfEntityLink) CheckFields() {
 }
@@ -3075,6 +3077,7 @@ func (x *HistoricalEventAddHfHfLink) RelatedToDanceForm(id int) bool         { r
 func (x *HistoricalEventAddHfHfLink) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAddHfHfLink) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventAddHfHfLink) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventAddHfHfLink) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventAddHfHfLink) CheckFields() {
 }
@@ -3172,6 +3175,7 @@ func (x *HistoricalEventAddHfSiteLink) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventAddHfSiteLink) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAddHfSiteLink) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventAddHfSiteLink) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventAddHfSiteLink) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventAddHfSiteLink) CheckFields() {
 	if x.Civ != x.SiteId {
@@ -3263,6 +3267,7 @@ func (x *HistoricalEventAgreementConcluded) RelatedToDanceForm(id int) bool     
 func (x *HistoricalEventAgreementConcluded) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAgreementConcluded) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventAgreementConcluded) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventAgreementConcluded) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventAgreementConcluded) CheckFields() {
 }
@@ -3638,6 +3643,7 @@ func (x *HistoricalEventAgreementFormed) RelatedToDanceForm(id int) bool        
 func (x *HistoricalEventAgreementFormed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAgreementFormed) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventAgreementFormed) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventAgreementFormed) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventAgreementFormed) CheckFields() {
 }
@@ -3776,6 +3782,7 @@ func (x *HistoricalEventAgreementMade) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventAgreementMade) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAgreementMade) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventAgreementMade) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventAgreementMade) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventAgreementMade) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -3874,6 +3881,7 @@ func (x *HistoricalEventAgreementRejected) RelatedToDanceForm(id int) bool      
 func (x *HistoricalEventAgreementRejected) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAgreementRejected) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventAgreementRejected) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventAgreementRejected) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventAgreementRejected) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -4002,6 +4010,7 @@ func (x *HistoricalEventArtifactClaimFormed) RelatedToDanceForm(id int) bool    
 func (x *HistoricalEventArtifactClaimFormed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactClaimFormed) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventArtifactClaimFormed) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventArtifactClaimFormed) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactClaimFormed) CheckFields() {
 }
@@ -4070,6 +4079,7 @@ func (x *HistoricalEventArtifactCopied) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventArtifactCopied) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactCopied) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventArtifactCopied) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventArtifactCopied) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactCopied) CheckFields() {
 }
@@ -4163,6 +4173,7 @@ func (x *HistoricalEventArtifactCreated) RelatedToDanceForm(id int) bool        
 func (x *HistoricalEventArtifactCreated) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactCreated) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventArtifactCreated) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventArtifactCreated) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactCreated) CheckFields() {
 	if x.SanctifyHf != x.HistFigureId {
@@ -4289,6 +4300,7 @@ func (x *HistoricalEventArtifactDestroyed) RelatedToDanceForm(id int) bool      
 func (x *HistoricalEventArtifactDestroyed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactDestroyed) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventArtifactDestroyed) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventArtifactDestroyed) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactDestroyed) CheckFields() {
 }
@@ -4337,6 +4349,7 @@ func (x *HistoricalEventArtifactFound) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventArtifactFound) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactFound) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventArtifactFound) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventArtifactFound) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactFound) CheckFields() {
 }
@@ -4424,6 +4437,7 @@ func (x *HistoricalEventArtifactGiven) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventArtifactGiven) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactGiven) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventArtifactGiven) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventArtifactGiven) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactGiven) CheckFields() {
 }
@@ -4482,6 +4496,7 @@ func (x *HistoricalEventArtifactLost) RelatedToDanceForm(id int) bool         { 
 func (x *HistoricalEventArtifactLost) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactLost) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventArtifactLost) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventArtifactLost) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactLost) CheckFields() {
 }
@@ -4603,6 +4618,7 @@ func (x *HistoricalEventArtifactPossessed) RelatedToDanceForm(id int) bool      
 func (x *HistoricalEventArtifactPossessed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactPossessed) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventArtifactPossessed) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventArtifactPossessed) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactPossessed) CheckFields() {
 }
@@ -4678,6 +4694,7 @@ func (x *HistoricalEventArtifactRecovered) RelatedToDanceForm(id int) bool      
 func (x *HistoricalEventArtifactRecovered) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactRecovered) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventArtifactRecovered) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventArtifactRecovered) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactRecovered) CheckFields() {
 }
@@ -4736,6 +4753,7 @@ func (x *HistoricalEventArtifactStored) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventArtifactStored) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactStored) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventArtifactStored) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventArtifactStored) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactStored) CheckFields() {
 }
@@ -4789,6 +4807,7 @@ func (x *HistoricalEventArtifactTransformed) RelatedToDanceForm(id int) bool    
 func (x *HistoricalEventArtifactTransformed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventArtifactTransformed) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventArtifactTransformed) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventArtifactTransformed) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactTransformed) CheckFields() {
 }
@@ -4842,6 +4861,7 @@ func (x *HistoricalEventAssumeIdentity) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventAssumeIdentity) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAssumeIdentity) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventAssumeIdentity) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventAssumeIdentity) RelatedToIdentity(id int) bool          { return x.IdentityId == id }
 
 func (x *HistoricalEventAssumeIdentity) CheckFields() {
 }
@@ -4907,6 +4927,7 @@ func (x *HistoricalEventAttackedSite) RelatedToDanceForm(id int) bool         { 
 func (x *HistoricalEventAttackedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAttackedSite) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventAttackedSite) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventAttackedSite) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventAttackedSite) CheckFields() {
 }
@@ -5145,6 +5166,7 @@ func (x *HistoricalEventBodyAbused) RelatedToDanceForm(id int) bool         { re
 func (x *HistoricalEventBodyAbused) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventBodyAbused) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventBodyAbused) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventBodyAbused) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventBodyAbused) CheckFields() {
 	if x.Civ != x.FeatureLayerId {
@@ -5296,6 +5318,7 @@ func (x *HistoricalEventBuildingProfileAcquired) RelatedToDanceForm(id int) bool
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToPoeticForm(id int) bool     { return false }
 func (x *HistoricalEventBuildingProfileAcquired) RelatedToMountain(id int) bool       { return false }
+func (x *HistoricalEventBuildingProfileAcquired) RelatedToIdentity(id int) bool       { return false }
 
 func (x *HistoricalEventBuildingProfileAcquired) CheckFields() {
 }
@@ -5358,6 +5381,7 @@ func (x *HistoricalEventCeremony) RelatedToDanceForm(id int) bool         { retu
 func (x *HistoricalEventCeremony) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCeremony) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCeremony) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCeremony) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCeremony) CheckFields() {
 }
@@ -5446,6 +5470,7 @@ func (x *HistoricalEventChangeHfBodyState) RelatedToDanceForm(id int) bool      
 func (x *HistoricalEventChangeHfBodyState) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventChangeHfBodyState) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventChangeHfBodyState) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventChangeHfBodyState) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventChangeHfBodyState) CheckFields() {
 }
@@ -5504,6 +5529,7 @@ func (x *HistoricalEventChangeHfJob) RelatedToDanceForm(id int) bool         { r
 func (x *HistoricalEventChangeHfJob) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventChangeHfJob) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventChangeHfJob) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventChangeHfJob) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventChangeHfJob) CheckFields() {
 }
@@ -5756,6 +5782,7 @@ func (x *HistoricalEventChangeHfState) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventChangeHfState) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventChangeHfState) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventChangeHfState) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventChangeHfState) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventChangeHfState) CheckFields() {
 }
@@ -5817,6 +5844,7 @@ func (x *HistoricalEventChangedCreatureType) RelatedToDanceForm(id int) bool    
 func (x *HistoricalEventChangedCreatureType) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventChangedCreatureType) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventChangedCreatureType) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventChangedCreatureType) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventChangedCreatureType) CheckFields() {
 }
@@ -6035,6 +6063,7 @@ func (x *HistoricalEventCollectionAbduction) RelatedToDanceForm(id int) bool    
 func (x *HistoricalEventCollectionAbduction) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionAbduction) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionAbduction) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionAbduction) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionAbduction) CheckFields() {
 }
@@ -6164,6 +6193,7 @@ func (x *HistoricalEventCollectionBattle) RelatedToDanceForm(id int) bool       
 func (x *HistoricalEventCollectionBattle) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionBattle) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionBattle) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionBattle) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionBattle) CheckFields() {
 }
@@ -6259,6 +6289,7 @@ func (x *HistoricalEventCollectionBeastAttack) RelatedToDanceForm(id int) bool  
 func (x *HistoricalEventCollectionBeastAttack) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionBeastAttack) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionBeastAttack) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionBeastAttack) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionBeastAttack) CheckFields() {
 }
@@ -6312,6 +6343,7 @@ func (x *HistoricalEventCollectionCeremony) RelatedToDanceForm(id int) bool     
 func (x *HistoricalEventCollectionCeremony) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionCeremony) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionCeremony) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionCeremony) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionCeremony) CheckFields() {
 }
@@ -6351,6 +6383,7 @@ func (x *HistoricalEventCollectionCompetition) RelatedToDanceForm(id int) bool  
 func (x *HistoricalEventCollectionCompetition) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionCompetition) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionCompetition) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionCompetition) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionCompetition) CheckFields() {
 }
@@ -6403,6 +6436,7 @@ func (x *HistoricalEventCollectionDuel) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventCollectionDuel) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionDuel) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionDuel) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionDuel) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionDuel) CheckFields() {
 }
@@ -6468,6 +6502,7 @@ func (x *HistoricalEventCollectionEntityOverthrown) RelatedToDanceForm(id int) b
 func (x *HistoricalEventCollectionEntityOverthrown) RelatedToMusicalForm(id int) bool { return false }
 func (x *HistoricalEventCollectionEntityOverthrown) RelatedToPoeticForm(id int) bool  { return false }
 func (x *HistoricalEventCollectionEntityOverthrown) RelatedToMountain(id int) bool    { return false }
+func (x *HistoricalEventCollectionEntityOverthrown) RelatedToIdentity(id int) bool    { return false }
 
 func (x *HistoricalEventCollectionEntityOverthrown) CheckFields() {
 }
@@ -6514,6 +6549,7 @@ func (x *HistoricalEventCollectionInsurrection) RelatedToDanceForm(id int) bool 
 func (x *HistoricalEventCollectionInsurrection) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionInsurrection) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionInsurrection) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionInsurrection) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionInsurrection) CheckFields() {
 }
@@ -6555,6 +6591,7 @@ func (x *HistoricalEventCollectionJourney) RelatedToDanceForm(id int) bool      
 func (x *HistoricalEventCollectionJourney) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionJourney) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionJourney) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionJourney) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionJourney) CheckFields() {
 }
@@ -6594,6 +6631,7 @@ func (x *HistoricalEventCollectionOccasion) RelatedToDanceForm(id int) bool     
 func (x *HistoricalEventCollectionOccasion) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionOccasion) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionOccasion) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionOccasion) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionOccasion) CheckFields() {
 }
@@ -6636,6 +6674,7 @@ func (x *HistoricalEventCollectionPerformance) RelatedToDanceForm(id int) bool  
 func (x *HistoricalEventCollectionPerformance) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionPerformance) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionPerformance) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionPerformance) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionPerformance) CheckFields() {
 }
@@ -6679,6 +6718,7 @@ func (x *HistoricalEventCollectionPersecution) RelatedToDanceForm(id int) bool  
 func (x *HistoricalEventCollectionPersecution) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionPersecution) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionPersecution) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionPersecution) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionPersecution) CheckFields() {
 }
@@ -6721,6 +6761,7 @@ func (x *HistoricalEventCollectionProcession) RelatedToDanceForm(id int) bool   
 func (x *HistoricalEventCollectionProcession) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionProcession) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionProcession) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionProcession) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionProcession) CheckFields() {
 }
@@ -6788,6 +6829,7 @@ func (x *HistoricalEventCollectionPurge) RelatedToDanceForm(id int) bool        
 func (x *HistoricalEventCollectionPurge) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionPurge) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionPurge) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionPurge) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionPurge) CheckFields() {
 }
@@ -6843,6 +6885,7 @@ func (x *HistoricalEventCollectionRaid) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventCollectionRaid) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionRaid) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionRaid) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionRaid) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionRaid) CheckFields() {
 }
@@ -6910,6 +6953,7 @@ func (x *HistoricalEventCollectionSiteConquered) RelatedToDanceForm(id int) bool
 func (x *HistoricalEventCollectionSiteConquered) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventCollectionSiteConquered) RelatedToPoeticForm(id int) bool     { return false }
 func (x *HistoricalEventCollectionSiteConquered) RelatedToMountain(id int) bool       { return false }
+func (x *HistoricalEventCollectionSiteConquered) RelatedToIdentity(id int) bool       { return false }
 
 func (x *HistoricalEventCollectionSiteConquered) CheckFields() {
 }
@@ -6971,6 +7015,7 @@ func (x *HistoricalEventCollectionTheft) RelatedToDanceForm(id int) bool        
 func (x *HistoricalEventCollectionTheft) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionTheft) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionTheft) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionTheft) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionTheft) CheckFields() {
 }
@@ -7028,6 +7073,7 @@ func (x *HistoricalEventCollectionWar) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventCollectionWar) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCollectionWar) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCollectionWar) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCollectionWar) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCollectionWar) CheckFields() {
 }
@@ -7081,6 +7127,7 @@ func (x *HistoricalEventCompetition) RelatedToDanceForm(id int) bool         { r
 func (x *HistoricalEventCompetition) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCompetition) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCompetition) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCompetition) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCompetition) CheckFields() {
 }
@@ -7189,6 +7236,7 @@ func (x *HistoricalEventCreateEntityPosition) RelatedToDanceForm(id int) bool   
 func (x *HistoricalEventCreateEntityPosition) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCreateEntityPosition) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCreateEntityPosition) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCreateEntityPosition) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCreateEntityPosition) CheckFields() {
 }
@@ -7243,6 +7291,7 @@ func (x *HistoricalEventCreatedSite) RelatedToDanceForm(id int) bool         { r
 func (x *HistoricalEventCreatedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCreatedSite) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCreatedSite) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCreatedSite) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCreatedSite) CheckFields() {
 }
@@ -7335,6 +7384,7 @@ func (x *HistoricalEventCreatedStructure) RelatedToDanceForm(id int) bool       
 func (x *HistoricalEventCreatedStructure) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCreatedStructure) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCreatedStructure) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCreatedStructure) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCreatedStructure) CheckFields() {
 }
@@ -7403,6 +7453,7 @@ func (x *HistoricalEventCreatedWorldConstruction) RelatedToDanceForm(id int) boo
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToPoeticForm(id int) bool     { return false }
 func (x *HistoricalEventCreatedWorldConstruction) RelatedToMountain(id int) bool       { return false }
+func (x *HistoricalEventCreatedWorldConstruction) RelatedToIdentity(id int) bool       { return false }
 
 func (x *HistoricalEventCreatedWorldConstruction) CheckFields() {
 }
@@ -7464,6 +7515,7 @@ func (x *HistoricalEventCreatureDevoured) RelatedToDanceForm(id int) bool       
 func (x *HistoricalEventCreatureDevoured) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventCreatureDevoured) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventCreatureDevoured) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventCreatureDevoured) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventCreatureDevoured) CheckFields() {
 	if x.Eater != x.FeatureLayerId {
@@ -7623,6 +7675,7 @@ func (x *HistoricalEventDanceFormCreated) RelatedToDanceForm(id int) bool       
 func (x *HistoricalEventDanceFormCreated) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventDanceFormCreated) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventDanceFormCreated) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventDanceFormCreated) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventDanceFormCreated) CheckFields() {
 }
@@ -7687,6 +7740,7 @@ func (x *HistoricalEventDestroyedSite) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventDestroyedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventDestroyedSite) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventDestroyedSite) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventDestroyedSite) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventDestroyedSite) CheckFields() {
 }
@@ -7737,6 +7791,7 @@ func (x *HistoricalEventDiplomatLost) RelatedToDanceForm(id int) bool         { 
 func (x *HistoricalEventDiplomatLost) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventDiplomatLost) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventDiplomatLost) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventDiplomatLost) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventDiplomatLost) CheckFields() {
 	if x.Entity != x.SiteId {
@@ -7786,6 +7841,7 @@ func (x *HistoricalEventEntityAllianceFormed) RelatedToDanceForm(id int) bool   
 func (x *HistoricalEventEntityAllianceFormed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityAllianceFormed) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventEntityAllianceFormed) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventEntityAllianceFormed) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventEntityAllianceFormed) CheckFields() {
 }
@@ -7833,6 +7889,7 @@ func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToDanceForm(id int) boo
 func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToPoeticForm(id int) bool     { return false }
 func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToMountain(id int) bool       { return false }
+func (x *HistoricalEventEntityBreachFeatureLayer) RelatedToIdentity(id int) bool       { return false }
 
 func (x *HistoricalEventEntityBreachFeatureLayer) CheckFields() {
 }
@@ -7884,6 +7941,7 @@ func (x *HistoricalEventEntityCreated) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventEntityCreated) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityCreated) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventEntityCreated) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventEntityCreated) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventEntityCreated) CheckFields() {
 }
@@ -7960,6 +8018,7 @@ func (x *HistoricalEventEntityDissolved) RelatedToDanceForm(id int) bool        
 func (x *HistoricalEventEntityDissolved) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityDissolved) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventEntityDissolved) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventEntityDissolved) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventEntityDissolved) CheckFields() {
 }
@@ -8008,6 +8067,7 @@ func (x *HistoricalEventEntityEquipmentPurchase) RelatedToDanceForm(id int) bool
 func (x *HistoricalEventEntityEquipmentPurchase) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventEntityEquipmentPurchase) RelatedToPoeticForm(id int) bool     { return false }
 func (x *HistoricalEventEntityEquipmentPurchase) RelatedToMountain(id int) bool       { return false }
+func (x *HistoricalEventEntityEquipmentPurchase) RelatedToIdentity(id int) bool       { return false }
 
 func (x *HistoricalEventEntityEquipmentPurchase) CheckFields() {
 }
@@ -8050,6 +8110,7 @@ func (x *HistoricalEventEntityExpelsHf) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventEntityExpelsHf) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityExpelsHf) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventEntityExpelsHf) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventEntityExpelsHf) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventEntityExpelsHf) CheckFields() {
 }
@@ -8092,6 +8153,7 @@ func (x *HistoricalEventEntityFledSite) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventEntityFledSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityFledSite) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventEntityFledSite) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventEntityFledSite) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventEntityFledSite) CheckFields() {
 }
@@ -8138,6 +8200,7 @@ func (x *HistoricalEventEntityIncorporated) RelatedToDanceForm(id int) bool     
 func (x *HistoricalEventEntityIncorporated) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityIncorporated) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventEntityIncorporated) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventEntityIncorporated) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventEntityIncorporated) CheckFields() {
 }
@@ -8240,6 +8303,7 @@ func (x *HistoricalEventEntityLaw) RelatedToDanceForm(id int) bool         { ret
 func (x *HistoricalEventEntityLaw) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityLaw) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventEntityLaw) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventEntityLaw) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventEntityLaw) CheckFields() {
 }
@@ -8296,6 +8360,7 @@ func (x *HistoricalEventEntityOverthrown) RelatedToDanceForm(id int) bool       
 func (x *HistoricalEventEntityOverthrown) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityOverthrown) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventEntityOverthrown) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventEntityOverthrown) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventEntityOverthrown) CheckFields() {
 }
@@ -8367,6 +8432,7 @@ func (x *HistoricalEventEntityPersecuted) RelatedToDanceForm(id int) bool       
 func (x *HistoricalEventEntityPersecuted) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityPersecuted) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventEntityPersecuted) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventEntityPersecuted) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventEntityPersecuted) CheckFields() {
 }
@@ -8455,6 +8521,7 @@ func (x *HistoricalEventEntityPrimaryCriminals) RelatedToDanceForm(id int) bool 
 func (x *HistoricalEventEntityPrimaryCriminals) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityPrimaryCriminals) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventEntityPrimaryCriminals) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventEntityPrimaryCriminals) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventEntityPrimaryCriminals) CheckFields() {
 }
@@ -8502,6 +8569,7 @@ func (x *HistoricalEventEntityRampagedInSite) RelatedToDanceForm(id int) bool   
 func (x *HistoricalEventEntityRampagedInSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityRampagedInSite) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventEntityRampagedInSite) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventEntityRampagedInSite) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventEntityRampagedInSite) CheckFields() {
 }
@@ -8573,6 +8641,7 @@ func (x *HistoricalEventEntityRelocate) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventEntityRelocate) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntityRelocate) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventEntityRelocate) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventEntityRelocate) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventEntityRelocate) CheckFields() {
 }
@@ -8648,6 +8717,7 @@ func (x *HistoricalEventEntitySearchedSite) RelatedToDanceForm(id int) bool     
 func (x *HistoricalEventEntitySearchedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventEntitySearchedSite) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventEntitySearchedSite) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventEntitySearchedSite) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventEntitySearchedSite) CheckFields() {
 }
@@ -8728,6 +8798,7 @@ func (x *HistoricalEventFailedFrameAttempt) RelatedToDanceForm(id int) bool     
 func (x *HistoricalEventFailedFrameAttempt) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventFailedFrameAttempt) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventFailedFrameAttempt) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventFailedFrameAttempt) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventFailedFrameAttempt) CheckFields() {
 }
@@ -9094,6 +9165,9 @@ func (x *HistoricalEventFailedIntrigueCorruption) RelatedToDanceForm(id int) boo
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToPoeticForm(id int) bool     { return false }
 func (x *HistoricalEventFailedIntrigueCorruption) RelatedToMountain(id int) bool       { return false }
+func (x *HistoricalEventFailedIntrigueCorruption) RelatedToIdentity(id int) bool {
+	return x.CorruptorIdentity == id || x.TargetIdentity == id
+}
 
 func (x *HistoricalEventFailedIntrigueCorruption) CheckFields() {
 }
@@ -9221,6 +9295,7 @@ func (x *HistoricalEventFieldBattle) RelatedToDanceForm(id int) bool         { r
 func (x *HistoricalEventFieldBattle) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventFieldBattle) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventFieldBattle) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventFieldBattle) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventFieldBattle) CheckFields() {
 }
@@ -9289,6 +9364,7 @@ func (x *HistoricalEventFirstContact) RelatedToDanceForm(id int) bool         { 
 func (x *HistoricalEventFirstContact) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventFirstContact) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventFirstContact) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventFirstContact) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventFirstContact) CheckFields() {
 }
@@ -9339,6 +9415,7 @@ func (x *HistoricalEventGamble) RelatedToDanceForm(id int) bool         { return
 func (x *HistoricalEventGamble) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventGamble) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventGamble) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventGamble) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventGamble) CheckFields() {
 }
@@ -9395,6 +9472,7 @@ func (x *HistoricalEventHfAbducted) RelatedToDanceForm(id int) bool         { re
 func (x *HistoricalEventHfAbducted) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfAbducted) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfAbducted) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfAbducted) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfAbducted) CheckFields() {
 }
@@ -9449,6 +9527,7 @@ func (x *HistoricalEventHfAttackedSite) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventHfAttackedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfAttackedSite) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfAttackedSite) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfAttackedSite) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfAttackedSite) CheckFields() {
 }
@@ -9560,6 +9639,7 @@ func (x *HistoricalEventHfConfronted) RelatedToDanceForm(id int) bool         { 
 func (x *HistoricalEventHfConfronted) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfConfronted) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfConfronted) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfConfronted) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfConfronted) CheckFields() {
 }
@@ -9732,6 +9812,7 @@ func (x *HistoricalEventHfConvicted) RelatedToDanceForm(id int) bool         { r
 func (x *HistoricalEventHfConvicted) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfConvicted) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfConvicted) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfConvicted) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfConvicted) CheckFields() {
 }
@@ -9826,6 +9907,7 @@ func (x *HistoricalEventHfDestroyedSite) RelatedToDanceForm(id int) bool        
 func (x *HistoricalEventHfDestroyedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfDestroyedSite) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfDestroyedSite) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfDestroyedSite) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfDestroyedSite) CheckFields() {
 }
@@ -10511,6 +10593,7 @@ func (x *HistoricalEventHfDied) RelatedToDanceForm(id int) bool         { return
 func (x *HistoricalEventHfDied) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfDied) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfDied) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfDied) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfDied) CheckFields() {
 	if x.ShooterArtifactId != x.FeatureLayerId {
@@ -10660,6 +10743,7 @@ func (x *HistoricalEventHfDisturbedStructure) RelatedToDanceForm(id int) bool   
 func (x *HistoricalEventHfDisturbedStructure) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfDisturbedStructure) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfDisturbedStructure) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfDisturbedStructure) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfDisturbedStructure) CheckFields() {
 }
@@ -10715,6 +10799,7 @@ func (x *HistoricalEventHfDoesInteraction) RelatedToDanceForm(id int) bool      
 func (x *HistoricalEventHfDoesInteraction) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfDoesInteraction) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfDoesInteraction) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfDoesInteraction) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfDoesInteraction) CheckFields() {
 	if x.InteractionAction != x.Interaction && x.InteractionAction != "" && x.Interaction != "" {
@@ -10792,6 +10877,7 @@ func (x *HistoricalEventHfEnslaved) RelatedToDanceForm(id int) bool         { re
 func (x *HistoricalEventHfEnslaved) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfEnslaved) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfEnslaved) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfEnslaved) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfEnslaved) CheckFields() {
 }
@@ -10847,6 +10933,7 @@ func (x *HistoricalEventHfEquipmentPurchase) RelatedToDanceForm(id int) bool    
 func (x *HistoricalEventHfEquipmentPurchase) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfEquipmentPurchase) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfEquipmentPurchase) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfEquipmentPurchase) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfEquipmentPurchase) CheckFields() {
 }
@@ -10909,6 +10996,7 @@ func (x *HistoricalEventHfFreed) RelatedToDanceForm(id int) bool         { retur
 func (x *HistoricalEventHfFreed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfFreed) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfFreed) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfFreed) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfFreed) CheckFields() {
 }
@@ -10984,6 +11072,7 @@ func (x *HistoricalEventHfGainsSecretGoal) RelatedToDanceForm(id int) bool      
 func (x *HistoricalEventHfGainsSecretGoal) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfGainsSecretGoal) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfGainsSecretGoal) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfGainsSecretGoal) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfGainsSecretGoal) CheckFields() {
 }
@@ -11031,6 +11120,7 @@ func (x *HistoricalEventHfInterrogated) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventHfInterrogated) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfInterrogated) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfInterrogated) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfInterrogated) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfInterrogated) CheckFields() {
 }
@@ -11111,6 +11201,7 @@ func (x *HistoricalEventHfLearnsSecret) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventHfLearnsSecret) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfLearnsSecret) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfLearnsSecret) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfLearnsSecret) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfLearnsSecret) CheckFields() {
 }
@@ -11163,6 +11254,7 @@ func (x *HistoricalEventHfNewPet) RelatedToDanceForm(id int) bool         { retu
 func (x *HistoricalEventHfNewPet) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfNewPet) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfNewPet) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfNewPet) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfNewPet) CheckFields() {
 	if x.Pets != x.Coords && x.Pets != "" && x.Coords != "" {
@@ -11237,6 +11329,7 @@ func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToPoeticForm(id i
 	return false
 }
 func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToMountain(id int) bool { return false }
+func (x *HistoricalEventHfPerformedHorribleExperiments) RelatedToIdentity(id int) bool { return false }
 
 func (x *HistoricalEventHfPerformedHorribleExperiments) CheckFields() {
 }
@@ -11319,6 +11412,7 @@ func (x *HistoricalEventHfPrayedInsideStructure) RelatedToDanceForm(id int) bool
 func (x *HistoricalEventHfPrayedInsideStructure) RelatedToMusicalForm(id int) bool    { return false }
 func (x *HistoricalEventHfPrayedInsideStructure) RelatedToPoeticForm(id int) bool     { return false }
 func (x *HistoricalEventHfPrayedInsideStructure) RelatedToMountain(id int) bool       { return false }
+func (x *HistoricalEventHfPrayedInsideStructure) RelatedToIdentity(id int) bool       { return false }
 
 func (x *HistoricalEventHfPrayedInsideStructure) CheckFields() {
 }
@@ -11403,6 +11497,7 @@ func (x *HistoricalEventHfPreach) RelatedToDanceForm(id int) bool         { retu
 func (x *HistoricalEventHfPreach) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfPreach) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfPreach) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfPreach) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfPreach) CheckFields() {
 }
@@ -11483,6 +11578,7 @@ func (x *HistoricalEventHfProfanedStructure) RelatedToDanceForm(id int) bool    
 func (x *HistoricalEventHfProfanedStructure) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfProfanedStructure) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfProfanedStructure) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfProfanedStructure) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfProfanedStructure) CheckFields() {
 }
@@ -11536,6 +11632,7 @@ func (x *HistoricalEventHfRansomed) RelatedToDanceForm(id int) bool         { re
 func (x *HistoricalEventHfRansomed) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfRansomed) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfRansomed) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfRansomed) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfRansomed) CheckFields() {
 }
@@ -11589,6 +11686,7 @@ func (x *HistoricalEventHfReachSummit) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventHfReachSummit) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfReachSummit) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfReachSummit) RelatedToMountain(id int) bool          { return x.MountainPeakId == id }
+func (x *HistoricalEventHfReachSummit) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfReachSummit) CheckFields() {
 }
@@ -11682,6 +11780,7 @@ func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToDanceForm(id int)
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToMusicalForm(id int) bool { return false }
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToPoeticForm(id int) bool  { return false }
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToMountain(id int) bool    { return false }
+func (x *HistoricalEventHfRecruitedUnitTypeForEntity) RelatedToIdentity(id int) bool    { return false }
 
 func (x *HistoricalEventHfRecruitedUnitTypeForEntity) CheckFields() {
 }
@@ -11806,6 +11905,7 @@ func (x *HistoricalEventHfRelationshipDenied) RelatedToDanceForm(id int) bool   
 func (x *HistoricalEventHfRelationshipDenied) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfRelationshipDenied) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfRelationshipDenied) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfRelationshipDenied) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfRelationshipDenied) CheckFields() {
 }
@@ -11870,6 +11970,7 @@ func (x *HistoricalEventHfReunion) RelatedToDanceForm(id int) bool         { ret
 func (x *HistoricalEventHfReunion) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfReunion) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfReunion) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfReunion) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfReunion) CheckFields() {
 }
@@ -12002,6 +12103,7 @@ func (x *HistoricalEventHfRevived) RelatedToDanceForm(id int) bool         { ret
 func (x *HistoricalEventHfRevived) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfRevived) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfRevived) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfRevived) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfRevived) CheckFields() {
 }
@@ -12146,6 +12248,7 @@ func (x *HistoricalEventHfSimpleBattleEvent) RelatedToDanceForm(id int) bool    
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfSimpleBattleEvent) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfSimpleBattleEvent) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfSimpleBattleEvent) CheckFields() {
 }
@@ -12202,6 +12305,7 @@ func (x *HistoricalEventHfTravel) RelatedToDanceForm(id int) bool         { retu
 func (x *HistoricalEventHfTravel) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfTravel) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfTravel) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfTravel) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfTravel) CheckFields() {
 }
@@ -12253,6 +12357,7 @@ func (x *HistoricalEventHfViewedArtifact) RelatedToDanceForm(id int) bool       
 func (x *HistoricalEventHfViewedArtifact) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfViewedArtifact) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfViewedArtifact) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfViewedArtifact) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfViewedArtifact) CheckFields() {
 }
@@ -12394,6 +12499,7 @@ func (x *HistoricalEventHfWounded) RelatedToDanceForm(id int) bool         { ret
 func (x *HistoricalEventHfWounded) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHfWounded) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHfWounded) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfWounded) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfWounded) CheckFields() {
 	if x.BodyPart != x.FeatureLayerId {
@@ -12913,6 +13019,9 @@ func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToMusicalForm(id i
 }
 func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToPoeticForm(id int) bool { return false }
 func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToMountain(id int) bool   { return false }
+func (x *HistoricalEventHfsFormedIntrigueRelationship) RelatedToIdentity(id int) bool {
+	return x.CorruptorIdentity == id || x.TargetIdentity == id
+}
 
 func (x *HistoricalEventHfsFormedIntrigueRelationship) CheckFields() {
 }
@@ -13123,6 +13232,9 @@ func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToPoeticForm(id 
 	return false
 }
 func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToMountain(id int) bool { return false }
+func (x *HistoricalEventHfsFormedReputationRelationship) RelatedToIdentity(id int) bool {
+	return x.IdentityId1 == id || x.IdentityId2 == id
+}
 
 func (x *HistoricalEventHfsFormedReputationRelationship) CheckFields() {
 }
@@ -13183,6 +13295,7 @@ func (x *HistoricalEventHolyCityDeclaration) RelatedToDanceForm(id int) bool    
 func (x *HistoricalEventHolyCityDeclaration) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventHolyCityDeclaration) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventHolyCityDeclaration) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHolyCityDeclaration) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHolyCityDeclaration) CheckFields() {
 }
@@ -13255,6 +13368,7 @@ func (x *HistoricalEventInsurrectionStarted) RelatedToDanceForm(id int) bool    
 func (x *HistoricalEventInsurrectionStarted) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventInsurrectionStarted) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventInsurrectionStarted) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventInsurrectionStarted) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventInsurrectionStarted) CheckFields() {
 }
@@ -13362,6 +13476,7 @@ func (x *HistoricalEventItemStolen) RelatedToDanceForm(id int) bool         { re
 func (x *HistoricalEventItemStolen) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventItemStolen) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventItemStolen) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventItemStolen) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventItemStolen) CheckFields() {
 	if x.Entity != x.CircumstanceId {
@@ -14922,6 +15037,7 @@ func (x *HistoricalEventKnowledgeDiscovered) RelatedToDanceForm(id int) bool    
 func (x *HistoricalEventKnowledgeDiscovered) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventKnowledgeDiscovered) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventKnowledgeDiscovered) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventKnowledgeDiscovered) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventKnowledgeDiscovered) CheckFields() {
 }
@@ -15162,6 +15278,7 @@ func (x *HistoricalEventMasterpieceArchConstructed) RelatedToDanceForm(id int) b
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToMusicalForm(id int) bool { return false }
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToPoeticForm(id int) bool  { return false }
 func (x *HistoricalEventMasterpieceArchConstructed) RelatedToMountain(id int) bool    { return false }
+func (x *HistoricalEventMasterpieceArchConstructed) RelatedToIdentity(id int) bool    { return false }
 
 func (x *HistoricalEventMasterpieceArchConstructed) CheckFields() {
 	if x.BuildingCustom != x.EntityId {
@@ -15340,6 +15457,7 @@ func (x *HistoricalEventMasterpieceDye) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventMasterpieceDye) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventMasterpieceDye) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventMasterpieceDye) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventMasterpieceDye) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventMasterpieceDye) CheckFields() {
 	if x.DyeMatIndex != x.EntityId {
@@ -15471,6 +15589,7 @@ func (x *HistoricalEventMasterpieceEngraving) RelatedToDanceForm(id int) bool   
 func (x *HistoricalEventMasterpieceEngraving) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventMasterpieceEngraving) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventMasterpieceEngraving) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventMasterpieceEngraving) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventMasterpieceEngraving) CheckFields() {
 	if x.ArtId != x.EntityId {
@@ -15781,6 +15900,7 @@ func (x *HistoricalEventMasterpieceFood) RelatedToDanceForm(id int) bool        
 func (x *HistoricalEventMasterpieceFood) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventMasterpieceFood) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventMasterpieceFood) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventMasterpieceFood) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventMasterpieceFood) CheckFields() {
 	if x.ItemId != x.EntityId {
@@ -15892,6 +16012,7 @@ func (x *HistoricalEventMasterpieceItem) RelatedToDanceForm(id int) bool        
 func (x *HistoricalEventMasterpieceItem) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventMasterpieceItem) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventMasterpieceItem) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventMasterpieceItem) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventMasterpieceItem) CheckFields() {
 	if x.ItemId != x.EntityId {
@@ -16207,6 +16328,7 @@ func (x *HistoricalEventMasterpieceItemImprovement) RelatedToDanceForm(id int) b
 func (x *HistoricalEventMasterpieceItemImprovement) RelatedToMusicalForm(id int) bool { return false }
 func (x *HistoricalEventMasterpieceItemImprovement) RelatedToPoeticForm(id int) bool  { return false }
 func (x *HistoricalEventMasterpieceItemImprovement) RelatedToMountain(id int) bool    { return false }
+func (x *HistoricalEventMasterpieceItemImprovement) RelatedToIdentity(id int) bool    { return false }
 
 func (x *HistoricalEventMasterpieceItemImprovement) CheckFields() {
 	if x.ArtId != x.EntityId {
@@ -16346,6 +16468,7 @@ func (x *HistoricalEventMasterpieceLost) RelatedToDanceForm(id int) bool        
 func (x *HistoricalEventMasterpieceLost) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventMasterpieceLost) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventMasterpieceLost) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventMasterpieceLost) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventMasterpieceLost) CheckFields() {
 }
@@ -16395,6 +16518,7 @@ func (x *HistoricalEventMerchant) RelatedToDanceForm(id int) bool         { retu
 func (x *HistoricalEventMerchant) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventMerchant) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventMerchant) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventMerchant) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventMerchant) CheckFields() {
 }
@@ -16486,6 +16610,7 @@ func (x *HistoricalEventModifiedBuilding) RelatedToDanceForm(id int) bool       
 func (x *HistoricalEventModifiedBuilding) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventModifiedBuilding) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventModifiedBuilding) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventModifiedBuilding) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventModifiedBuilding) CheckFields() {
 }
@@ -16608,6 +16733,7 @@ func (x *HistoricalEventMusicalFormCreated) RelatedToDanceForm(id int) bool     
 func (x *HistoricalEventMusicalFormCreated) RelatedToMusicalForm(id int) bool       { return x.FormId == id }
 func (x *HistoricalEventMusicalFormCreated) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventMusicalFormCreated) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventMusicalFormCreated) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventMusicalFormCreated) CheckFields() {
 }
@@ -16672,6 +16798,7 @@ func (x *HistoricalEventNewSiteLeader) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventNewSiteLeader) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventNewSiteLeader) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventNewSiteLeader) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventNewSiteLeader) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventNewSiteLeader) CheckFields() {
 }
@@ -16755,6 +16882,7 @@ func (x *HistoricalEventPeaceAccepted) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventPeaceAccepted) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventPeaceAccepted) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventPeaceAccepted) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventPeaceAccepted) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventPeaceAccepted) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -16838,6 +16966,7 @@ func (x *HistoricalEventPeaceRejected) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventPeaceRejected) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventPeaceRejected) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventPeaceRejected) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventPeaceRejected) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventPeaceRejected) CheckFields() {
 	if x.Destination != x.SiteId {
@@ -16897,6 +17026,7 @@ func (x *HistoricalEventPerformance) RelatedToDanceForm(id int) bool         { r
 func (x *HistoricalEventPerformance) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventPerformance) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventPerformance) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventPerformance) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventPerformance) CheckFields() {
 }
@@ -16959,6 +17089,7 @@ func (x *HistoricalEventPlunderedSite) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventPlunderedSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventPlunderedSite) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventPlunderedSite) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventPlunderedSite) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventPlunderedSite) CheckFields() {
 }
@@ -17046,6 +17177,7 @@ func (x *HistoricalEventPoeticFormCreated) RelatedToDanceForm(id int) bool      
 func (x *HistoricalEventPoeticFormCreated) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventPoeticFormCreated) RelatedToPoeticForm(id int) bool        { return x.FormId == id }
 func (x *HistoricalEventPoeticFormCreated) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventPoeticFormCreated) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventPoeticFormCreated) CheckFields() {
 }
@@ -17102,6 +17234,7 @@ func (x *HistoricalEventProcession) RelatedToDanceForm(id int) bool         { re
 func (x *HistoricalEventProcession) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventProcession) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventProcession) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventProcession) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventProcession) CheckFields() {
 }
@@ -17157,6 +17290,7 @@ func (x *HistoricalEventRazedStructure) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventRazedStructure) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventRazedStructure) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventRazedStructure) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventRazedStructure) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventRazedStructure) CheckFields() {
 }
@@ -17204,6 +17338,7 @@ func (x *HistoricalEventReclaimSite) RelatedToDanceForm(id int) bool         { r
 func (x *HistoricalEventReclaimSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventReclaimSite) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventReclaimSite) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventReclaimSite) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventReclaimSite) CheckFields() {
 }
@@ -17275,6 +17410,7 @@ func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToPoeticForm(id 
 	return false
 }
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToMountain(id int) bool { return false }
+func (x *HistoricalEventRegionpopIncorporatedIntoEntity) RelatedToIdentity(id int) bool { return false }
 
 func (x *HistoricalEventRegionpopIncorporatedIntoEntity) CheckFields() {
 }
@@ -17592,6 +17728,7 @@ func (x *HistoricalEventRemoveHfEntityLink) RelatedToDanceForm(id int) bool     
 func (x *HistoricalEventRemoveHfEntityLink) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventRemoveHfEntityLink) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventRemoveHfEntityLink) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventRemoveHfEntityLink) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventRemoveHfEntityLink) CheckFields() {
 }
@@ -17640,6 +17777,7 @@ func (x *HistoricalEventRemoveHfHfLink) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventRemoveHfHfLink) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventRemoveHfHfLink) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventRemoveHfHfLink) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventRemoveHfHfLink) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventRemoveHfHfLink) CheckFields() {
 }
@@ -17723,6 +17861,7 @@ func (x *HistoricalEventRemoveHfSiteLink) RelatedToDanceForm(id int) bool       
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventRemoveHfSiteLink) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventRemoveHfSiteLink) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventRemoveHfSiteLink) CheckFields() {
 	if x.Civ != x.SiteId {
@@ -17788,6 +17927,7 @@ func (x *HistoricalEventReplacedStructure) RelatedToDanceForm(id int) bool      
 func (x *HistoricalEventReplacedStructure) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventReplacedStructure) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventReplacedStructure) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventReplacedStructure) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventReplacedStructure) CheckFields() {
 }
@@ -17841,6 +17981,7 @@ func (x *HistoricalEventSiteDied) RelatedToDanceForm(id int) bool         { retu
 func (x *HistoricalEventSiteDied) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSiteDied) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventSiteDied) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventSiteDied) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventSiteDied) CheckFields() {
 }
@@ -17943,6 +18084,7 @@ func (x *HistoricalEventSiteDispute) RelatedToDanceForm(id int) bool         { r
 func (x *HistoricalEventSiteDispute) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSiteDispute) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventSiteDispute) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventSiteDispute) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventSiteDispute) CheckFields() {
 }
@@ -17996,6 +18138,7 @@ func (x *HistoricalEventSiteRetired) RelatedToDanceForm(id int) bool         { r
 func (x *HistoricalEventSiteRetired) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSiteRetired) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventSiteRetired) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventSiteRetired) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventSiteRetired) CheckFields() {
 }
@@ -18045,6 +18188,7 @@ func (x *HistoricalEventSiteSurrendered) RelatedToDanceForm(id int) bool        
 func (x *HistoricalEventSiteSurrendered) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSiteSurrendered) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventSiteSurrendered) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventSiteSurrendered) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventSiteSurrendered) CheckFields() {
 }
@@ -18098,6 +18242,7 @@ func (x *HistoricalEventSiteTakenOver) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventSiteTakenOver) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSiteTakenOver) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventSiteTakenOver) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventSiteTakenOver) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventSiteTakenOver) CheckFields() {
 }
@@ -18190,6 +18335,7 @@ func (x *HistoricalEventSiteTributeForced) RelatedToDanceForm(id int) bool      
 func (x *HistoricalEventSiteTributeForced) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSiteTributeForced) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventSiteTributeForced) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventSiteTributeForced) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventSiteTributeForced) CheckFields() {
 }
@@ -18244,6 +18390,7 @@ func (x *HistoricalEventSneakIntoSite) RelatedToDanceForm(id int) bool         {
 func (x *HistoricalEventSneakIntoSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSneakIntoSite) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventSneakIntoSite) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventSneakIntoSite) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventSneakIntoSite) CheckFields() {
 }
@@ -18295,6 +18442,7 @@ func (x *HistoricalEventSpottedLeavingSite) RelatedToDanceForm(id int) bool     
 func (x *HistoricalEventSpottedLeavingSite) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSpottedLeavingSite) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventSpottedLeavingSite) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventSpottedLeavingSite) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventSpottedLeavingSite) CheckFields() {
 }
@@ -18372,6 +18520,7 @@ func (x *HistoricalEventSquadVsSquad) RelatedToDanceForm(id int) bool         { 
 func (x *HistoricalEventSquadVsSquad) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventSquadVsSquad) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventSquadVsSquad) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventSquadVsSquad) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventSquadVsSquad) CheckFields() {
 }
@@ -18522,6 +18671,7 @@ func (x *HistoricalEventTacticalSituation) RelatedToDanceForm(id int) bool      
 func (x *HistoricalEventTacticalSituation) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventTacticalSituation) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventTacticalSituation) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventTacticalSituation) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventTacticalSituation) CheckFields() {
 }
@@ -18597,6 +18747,7 @@ func (x *HistoricalEventTrade) RelatedToDanceForm(id int) bool         { return 
 func (x *HistoricalEventTrade) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventTrade) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventTrade) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventTrade) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventTrade) CheckFields() {
 }
@@ -18737,6 +18888,7 @@ func (x *HistoricalEventWrittenContentComposed) RelatedToDanceForm(id int) bool 
 func (x *HistoricalEventWrittenContentComposed) RelatedToMusicalForm(id int) bool { return false }
 func (x *HistoricalEventWrittenContentComposed) RelatedToPoeticForm(id int) bool  { return false }
 func (x *HistoricalEventWrittenContentComposed) RelatedToMountain(id int) bool    { return false }
+func (x *HistoricalEventWrittenContentComposed) RelatedToIdentity(id int) bool    { return false }
 
 func (x *HistoricalEventWrittenContentComposed) CheckFields() {
 }
@@ -20678,10 +20830,13 @@ type River struct {
 	EndPos string `json:"endPos" legend:"plus" related:""` // end_pos
 	Name_  string `json:"name" legend:"plus" related:""`   // name
 	Path   string `json:"path" legend:"plus" related:""`   // path
+	Id_    int    `json:"id" legend:"add" related:""`      // Id
 }
 
 func NewRiver() *River {
-	return &River{}
+	return &River{
+		Id_: -1,
+	}
 }
 func (x *River) Name() string { return x.Name_ }
 
@@ -20693,6 +20848,9 @@ func (x *River) MarshalJSON() ([]byte, error) {
 	d["endPos"] = x.EndPos
 	d["name"] = x.Name_
 	d["path"] = x.Path
+	if x.Id_ != -1 {
+		d["id"] = x.Id_
+	}
 	return json.Marshal(d)
 }
 

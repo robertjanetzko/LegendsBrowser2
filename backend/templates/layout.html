@@ -42,10 +42,11 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/geography">Geography</a></li>
-                            <li><a class="dropdown-item" href="/hfs">Historical Figures</a></li>
                             <li><a class="dropdown-item" href="/entities">Entities</a></li>
                             <li><a class="dropdown-item" href="/sites">Sites</a></li>
                             <li><a class="dropdown-item" href="/structures">Structures</a></li>
+                            <li><a class="dropdown-item" href="/hfs">Historical Figures</a></li>
+                            <li><a class="dropdown-item" href="/identities">Identities</a></li>
                             <li><a class="dropdown-item" href="/worldconstructions">World Constructions</a></li>
                             <li><a class="dropdown-item" href="/artifacts">Artifacts</a></li>
                             <li><a class="dropdown-item" href="/artforms">Art Forms</a></li>
@@ -100,7 +101,7 @@
             }).responseText;
         }
 
-        $('a.entity,a.hf,a.region,a.site,a.structure,a.worldconstruction,a.artifact,a.writtencontent,a.collection').each(function () {
+        $('a.entity,a.hf,a.region,a.site,a.structure,a.worldconstruction,a.artifact,a.writtencontent,a.collection,a.landmass,a.mountain,a.identity,a.river').each(function () {
             var popover = new bootstrap.Popover($(this), { content: loadLinkPopoverData, trigger: "hover", placement: "top", html: true })
         })
     </script>
