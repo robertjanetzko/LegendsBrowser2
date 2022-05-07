@@ -37,7 +37,6 @@ func (srv *DfServer) LoadTemplates() {
 		"entity":               func(id int) template.HTML { return model.LinkEntity(srv.context.world, id) },
 		"getEntity":            func(id int) *model.Entity { return srv.context.world.Entities[id] },
 		"site":                 func(id int) template.HTML { return model.LinkSite(srv.context.world, id) },
-		"addSite":              func(id int) template.HTML { return model.AddMapSite(srv.context.world, id) },
 		"getSite":              func(id int) *model.Site { return srv.context.world.Sites[id] },
 		"structure":            func(siteId, id int) template.HTML { return model.LinkStructure(srv.context.world, siteId, id) },
 		"region":               func(id int) template.HTML { return model.LinkRegion(srv.context.world, id) },
@@ -53,6 +52,14 @@ func (srv *DfServer) LoadTemplates() {
 		"landmass":             func(id int) template.HTML { return model.LinkLandmass(srv.context.world, id) },
 		"mountain":             func(id int) template.HTML { return model.LinkMountain(srv.context.world, id) },
 		"river":                func(id int) template.HTML { return model.LinkRiver(srv.context.world, id) },
+
+		"addLandmass":          func(id int) template.HTML { return model.AddMapLandmass(srv.context.world, id) },
+		"addRegion":            func(id int) template.HTML { return model.AddMapRegion(srv.context.world, id) },
+		"addSite":              func(id int) template.HTML { return model.AddMapSite(srv.context.world, id) },
+		"addMountain":          func(id int) template.HTML { return model.AddMapMountain(srv.context.world, id) },
+		"addWorldConstruction": func(id int) template.HTML { return model.AddMapWorldConstruction(srv.context.world, id) },
+		"addRiver":             func(id int) template.HTML { return model.AddMapRiver(srv.context.world, id) },
+
 		"events": func(obj any) *model.EventList {
 			return model.NewEventList(srv.context.world, obj)
 		},

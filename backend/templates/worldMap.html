@@ -1,0 +1,34 @@
+{{template "layout.html" .}}
+
+{{define "title"}}Legends Browser{{end}}
+
+{{define "content"}}
+
+<div id="map" style="width: 100%; height: 1000px"></div>
+{{initMap}}
+
+{{- range .Landmasses }}
+{{ addLandmass .Id }}
+{{- end }}
+
+{{- range .Regions }}
+{{ addRegion .Id }}
+{{- end }}
+
+{{- range .Sites }}
+{{ addSite .Id }}
+{{- end }}
+
+{{- range .MountainPeaks }}
+{{ addMountain .Id }}
+{{- end }}
+
+{{- range .WorldConstructions }}
+{{ addWorldConstruction .Id }}
+{{- end }}
+
+{{- range $id, $r := .Rivers }}
+{{ addRiver $id }}
+{{- end }}
+
+{{- end }}

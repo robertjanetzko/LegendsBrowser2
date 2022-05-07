@@ -3,6 +3,11 @@ a {
     white-space: nowrap;
 }
 
+.leaflet-container {
+    background: rgba(122, 122, 122, 0.1) !important;
+    outline: 0;
+}
+
 .popover {
     max-width: fit-content;
 }

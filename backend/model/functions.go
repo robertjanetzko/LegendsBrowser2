@@ -6,6 +6,8 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 )
 
 var LinkHf = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).hf(id)) }
@@ -30,6 +32,47 @@ var LinkMountain = func(w *DfWorld, id int) template.HTML { return template.HTML
 var LinkLandmass = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).landmass(id)) }
 var LinkRiver = func(w *DfWorld, id int) template.HTML { return template.HTML((&Context{World: w}).river(id)) }
 
+var AddMapLandmass = func(w *DfWorld, id int) template.HTML {
+	if x, ok := w.Landmasses[id]; ok {
+		c1 := strings.Split(x.Coord1, ",")
+		x1, _ := strconv.Atoi(c1[0])
+		y1, _ := strconv.Atoi(c1[1])
+		c2 := strings.Split(x.Coord2, ",")
+		x2, _ := strconv.Atoi(c2[0])
+		y2, _ := strconv.Atoi(c2[1])
+		return template.HTML(fmt.Sprintf(`<script>addRegion('%s', %d, %d, %d, %d, '#FFF')</script>`, x.Name_, x1, y1, x2, y2))
+	}
+	return ""
+}
+
+var AddMapRegion = func(w *DfWorld, id int) template.HTML {
+	if x, ok := w.Regions[id]; ok {
+		r := "<script>"
+		r += "var polygon = L.polygon(["
+		r += strings.Join(util.Map(x.Outline(), func(c Coord) string { return fmt.Sprintf(`coord(%d,%d)`, c.X, c.Y-1) }), ",")
+		r += "], { color : '#fff', opacity: 1, fillOpacity: 0, weight : 1 }).addTo(regionsLayer);\n"
+		r += "attachTooltip(polygon, '" + x.Name_ + "');\n"
+
+		r += "polygon.on('mouseover', function (e) { this.setStyle({weight: 10}); });\n"
+		r += "polygon.on('mouseout', function (e) { this.setStyle({ weight: 3}); });\n"
+
+		fillColor := "transparent"
+		switch x.Evilness {
+		case RegionEvilness_Evil:
+			fillColor = "fuchsia"
+		case RegionEvilness_Good:
+			fillColor = "aqua"
+		}
+		if fillColor != "transparent" {
+			r += "var evilPolygon = L.polygon(polygon.getLatLngs(), { color: 'transparent', opacity: 1, fillColor: '" + fillColor + "', fillOpacity: .3, interactive: false });\n"
+			r += "evilPolygon.addTo(evilnessLayer);\n"
+		}
+		r += "</script>"
+		return template.HTML(r)
+	}
+	return ""
+}
+
 var AddMapSite = func(w *DfWorld, id int) template.HTML {
 	if site, ok := w.Sites[id]; ok {
 		coords := strings.Split(site.Rectangle, ":")
@@ -43,6 +86,41 @@ var AddMapSite = func(w *DfWorld, id int) template.HTML {
 	} else {
 		return ""
 	}
+}
+
+var AddMapMountain = func(w *DfWorld, id int) template.HTML {
+	if m, ok := w.MountainPeaks[id]; ok {
+		c1 := strings.Split(m.Coords, ",")
+		x, _ := strconv.Atoi(c1[0])
+		y, _ := strconv.Atoi(c1[1])
+		return template.HTML(fmt.Sprintf(`<script>addMountain('%s', %d, %d, '#666')</script>`, m.Name_, x, y))
+	}
+	return ""
+}
+
+var AddMapWorldConstruction = func(w *DfWorld, id int) template.HTML {
+	if x, ok := w.WorldConstructions[id]; ok {
+		color := util.If(x.Type_ == WorldConstructionType_Tunnel, "#000", "#fff")
+		line := x.Line()
+		if len(line) == 1 {
+			return template.HTML(fmt.Sprintf(`<script>addWc('%s', %d, %d, '%s')</script>`, x.Name_, line[0].X, line[0].Y, color))
+		} else {
+			r := "<script>"
+			r += "var polyline = L.polyline(["
+			r += strings.Join(util.Map(x.Line(), func(c Coord) string { return fmt.Sprintf(`coord(%d+0.5,%d-0.5)`, c.X, c.Y) }), ",")
+			r += "], {color: '" + color + "', opacity: 1, weight: 3}).addTo(constructionsLayer);\n"
+			r += "attachTooltip(polyline, '" + x.Name_ + "');\n"
+			r += "polyline.on('mouseover', function (e) { this.setStyle({weight: 10}); });\n"
+			r += "polyline.on('mouseout', function (e) { this.setStyle({ weight: 3}); });\n"
+			r += "</script>"
+			return template.HTML(r)
+		}
+	}
+	return ""
+}
+
+var AddMapRiver = func(w *DfWorld, id int) template.HTML {
+	return ""
 }
 
 var AndList = func(s []string) template.HTML { return template.HTML(andList(s)) }

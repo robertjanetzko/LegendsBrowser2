@@ -46,9 +46,10 @@ func (w *DfWorld) process() {
 	}
 
 	// check events texts
-	for _, e := range w.HistoricalEvents {
-		e.Details.Html(&Context{World: w})
-	}
+	// for _, e := range w.HistoricalEvents {
+	// 	e.Details.Html(&Context{World: w})
+	// }
+
 }
 
 func (w *DfWorld) processEvents() {

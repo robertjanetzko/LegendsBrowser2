@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	_ "net/http/pprof"
@@ -47,11 +48,11 @@ func main() {
 	if len(*f) > 0 {
 		w, err := model.Parse(*f, nil)
 		if err != nil {
-			log.Fatal(err)
+			fmt.Println(err)
+		} else {
+			runtime.GC()
+			world = w
 		}
-
-		runtime.GC()
-		world = w
 	}
 
 	err = server.StartServer(config, world, static)

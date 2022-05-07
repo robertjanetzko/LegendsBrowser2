@@ -87,3 +87,115 @@ func (w *DfWorld) LoadDimensions() {
 	w.Width, _ = strconv.Atoi(result[0][2])
 	w.Height, _ = strconv.Atoi(result[0][1])
 }
+
+type Coord struct {
+	X, Y int
+}
+
+func Coords(s string) []Coord {
+	var coords []Coord
+	for _, c := range strings.Split(s, "|") {
+		if c == "" {
+			continue
+		}
+		d := strings.Split(c, ",")
+		x, _ := strconv.Atoi(d[0])
+		y, _ := strconv.Atoi(d[1])
+		coords = append(coords, Coord{X: x, Y: y})
+	}
+	return coords
+}
+
+func maxCoords(coords []Coord) Coord {
+	var max Coord
+	for _, c := range coords {
+		if c.X > max.X {
+			max.X = c.X
+		}
+		if c.Y > max.Y {
+			max.Y = c.Y
+		}
+	}
+	return max
+}
+
+func (r *Region) Outline() []Coord {
+	var outline []Coord
+	// if (cacheOutline != null)
+	// 	return cacheOutline;
+
+	/* draw the region in a matrix */
+	coords := Coords(r.Coords)
+	max := maxCoords(coords)
+
+	var region = make([][]bool, max.X+3)
+	for i := range region {
+		region[i] = make([]bool, max.Y+3)
+	}
+	for _, c := range coords {
+		region[c.X+1][c.Y+1] = true
+	}
+
+	var curdir, prevdir rune
+	curdir = 'n'
+	if len(coords) == 1 || coords[0].X == coords[1].X-1 {
+		curdir = 'e'
+	}
+
+	x0 := coords[0].X + 1
+	y0 := coords[0].Y + 1
+	x := x0
+	y := y0
+
+	/* follow the outline by keeping the right hand inside */
+Loop:
+	for {
+		if !(x != x0 || y != y0 || prevdir == 0) {
+			break Loop
+		}
+
+		prevdir = curdir
+		switch {
+		case curdir == 'n' && y > 1:
+			y -= 1
+			if region[x-1][y-1] {
+				curdir = 'w'
+			} else if !region[x][y-1] {
+				curdir = 'e'
+			}
+		case curdir == 's' && y < max.Y+2:
+			y += 1
+			if region[x][y] {
+				curdir = 'e'
+			} else if !region[x-1][y] {
+				curdir = 'w'
+			}
+		case curdir == 'w' && x > 1:
+			x -= 1
+			if region[x-1][y] {
+				curdir = 's'
+			} else if !region[x-1][y-1] {
+				curdir = 'n'
+			}
+		case curdir == 'e' && x < max.X+2:
+			x += 1
+			if region[x][y-1] {
+				curdir = 'n'
+			} else if !region[x][y] {
+				curdir = 's'
+			}
+		}
+		if curdir != prevdir {
+			/* change of direction: record point */
+			outline = append(outline, Coord{X: x - 1, Y: y - 1})
+			if len(outline) > 256*10 {
+				break Loop
+			}
+		}
+	}
+	return outline
+}
+
+func (x *WorldConstruction) Line() []Coord {
+	return Coords(x.Coords)
+}

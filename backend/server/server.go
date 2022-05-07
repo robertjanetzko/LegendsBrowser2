@@ -124,6 +124,24 @@ func StartServer(config *Config, world *model.DfWorld, static embed.FS) error {
 	srv.RegisterWorldResourcePage("/collection/{id}", "collection.html", func(id int) any { return srv.context.world.HistoricalEventCollections[id] })
 	srv.RegisterWorldResourcePage("/popover/collection/{id}", "popoverCollection.html", func(id int) any { return srv.context.world.HistoricalEventCollections[id] })
 
+	srv.RegisterWorldPage("/worldmap", "worldMap.html", func(p Parms) any {
+		return &struct {
+			Landmasses         map[int]*model.Landmass
+			Regions            map[int]*model.Region
+			Sites              map[int]*model.Site
+			MountainPeaks      map[int]*model.MountainPeak
+			WorldConstructions map[int]*model.WorldConstruction
+			Rivers             []*model.River
+		}{
+			Landmasses:         srv.context.world.Landmasses,
+			Regions:            srv.context.world.Regions,
+			Sites:              srv.context.world.Sites,
+			MountainPeaks:      srv.context.world.MountainPeaks,
+			WorldConstructions: srv.context.world.WorldConstructions,
+			Rivers:             srv.context.world.Rivers,
+		}
+	})
+
 	srv.RegisterWorldPage("/", "index.html", func(p Parms) any {
 		return &struct {
 			Civilizations map[string][]*model.Entity
