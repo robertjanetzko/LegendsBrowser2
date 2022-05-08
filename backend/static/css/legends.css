@@ -8,6 +8,11 @@ a {
     outline: 0;
 }
 
+.object-map {
+    float: right !important;
+    margin-top: -7px;
+}
+
 .popover {
     max-width: fit-content;
 }
