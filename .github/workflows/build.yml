@@ -19,15 +19,25 @@ jobs:
         go-version: 1.18
 
     - name: Build MacOS
-      run: cd backend && GOOS=darwin GOARCH=amd64 go build -o ../bin/legendsbrowser-mac
+      run: cd backend && GOOS=darwin GOARCH=amd64 go build -o ../bin/legendsbrowser-mac-intel
     - name: Build Linux
       run: cd backend && GOOS=linux GOARCH=amd64 go build -o ../bin/legendsbrowser-linux-x64
     - name: Build Windows
       run: cd backend && GOOS=windows GOARCH=amd64 go build -o ../bin/legendsbrowser-win-x64.exe
 
-    - name: Upload Artifacts
+    - name: Upload MacOS Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: dist-without-markdown
-        path: |
-          bin
+        name: mac-os
+        path: bin/legendsbrowser-mac-intel
+    - name: Upload Linux Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: linux
+        path: bin/legendsbrowser-linux-x64
+    - name: Upload MacOS Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows
+        path: bin/legendsbrowser-win-x64.exe
+        
