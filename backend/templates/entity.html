@@ -3,161 +3,169 @@
 {{define "title"}}{{ title .Name }}{{end}}
 
 {{define "content"}}
-<h3>{{ title .Name }}</h3>
-<p>
-    {{ .Race }}{{ if .Necromancer}} necromancer{{end}} {{ .Type }}
-    {{- if .Profession }}
-    of {{ .Profession }}s
-    {{- end }}
-    {{- if ne .Parent -1 }}
-    of {{ entity .Parent }}
-    {{- end }}
-    {{- if and (eq .Type "religion") (gt (len .WorshipId) 0) }}
-    centered around the worship of {{ hfList .WorshipId }}
-    {{- end }}
-    {{- if eq .Type "militaryunit" }}
-    {{- if gt (len .WorshipId) 0 }}
-    devoted to the worship of {{ hfList .WorshipId }}
-    {{- end }}
-    {{- if gt (len .WorshipId) 0 }}
-    , dedicated to the mastery of {{ andList .Weapons }}
-    {{- end }}
-    {{- end }}
-</p>
+<div class="page-header">
+    <div class="page-tabs">
 
-{{- if gt (len .Sites) 0 }}
-<div class="object-map">
-    <div id="map" style="width: 300px; height: 300px"></div>
-    <!-- <img class="site-map" src="$suburi/sitemap/$site.id" width="300" /> -->
-</div>
-{{initMap}}
-{{- range .Sites }}
-{{ addSite . false }}
-{{- end }}
-{{- end }}
+        <h3>{{ title .Name }}</h3>
+        <p>
+            {{ .Race }}{{ if .Necromancer}} necromancer{{end}} {{ .Type }}
+            {{- if .Profession }}
+            of {{ .Profession }}s
+            {{- end }}
+            {{- if ne .Parent -1 }}
+            of {{ entity .Parent }}
+            {{- end }}
+            {{- if and (eq .Type "religion") (gt (len .WorshipId) 0) }}
+            centered around the worship of {{ hfList .WorshipId }}
+            {{- end }}
+            {{- if eq .Type "militaryunit" }}
+            {{- if gt (len .WorshipId) 0 }}
+            devoted to the worship of {{ hfList .WorshipId }}
+            {{- end }}
+            {{- if gt (len .WorshipId) 0 }}
+            , dedicated to the mastery of {{ andList .Weapons }}
+            {{- end }}
+            {{- end }}
+        </p>
 
-<nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        {{ $active := " active"}}
-        {{- if gt (len .Leaders) 0 }}
-        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-leaders" type="button" role="tab">Leaders</button>
-        {{ $active = ""}}{{- end}}
-        {{- if gt (len .Sites) 0 }}
-        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-sites" type="button" role="tab">Sites</button>
-        {{ $active = ""}}{{- end}}
-        {{- if gt (len .HistfigId) 0 }}
-        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-members" type="button" role="tab">Members</button>
-        {{ $active = ""}}{{- end}}
-        {{- if gt (len .Child) 0 }}
-        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-children" type="button" role="tab">Groups</button>
-        {{ $active = ""}}{{- end}}
-        {{- if gt (len .Wars) 0 }}
-        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-wars" type="button" role="tab">Wars</button>
-        {{ $active = ""}}{{- end}}
-    </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-    {{ $active := " active"}}
-    {{- if gt (len .Leaders) 0 }}
-    <div class="tab-pane{{$active}}" id="nav-leaders" role="tabpanel">
-        <table class="table table-hover table-sm table-borderless object-table">
-            <tr>
-                <th>Date</th>
-                <th width="100%">Name</th>
-            </tr>
-            {{- range .Leaders }}
-            <tr>
-                <td>
-                    {{- if eq .EndYear -1 }}
-                    since {{ .StartYear }}
-                    {{- else }}
-                    from {{ .StartYear }} till {{ .EndYear }}
-                    {{- end }}
-                </td>
-                <td>
-                    {{ hf .Hf.Id }}</td>
-            </tr>
-            {{- end}}
-        </table>
-    </div>
-    {{ $active = ""}}{{- end}}
-    {{- if gt (len .Sites) 0 }}
-    <div class="tab-pane{{$active}}" id="nav-sites" role="tabpanel">
-        <table class="table table-hover table-sm table-borderless">
-            <tr>
-                <th>Name</th>
-                <th width="100%">History</th>
-            </tr>
-            {{- range .Sites }}
-            <tr>
-                <td class="object" style="vertical-align: top;"> {{ site . }}</td>
-                <td> {{ template "events.html" events (history .) }}</td>
-            </tr>
-            {{- end}}
-        </table>
-    </div>
-    {{ $active = ""}}{{- end}}
-    {{- if gt (len .HistfigId) 0 }}
-    <div class="tab-pane{{$active}}" id="nav-members" role="tabpanel">
-        <table class="table table-hover table-sm table-borderless object-table">
-            <tr>
-                <th width="100%">Type</th>
-            </tr>
-            {{- range .HistfigId }}
-            <tr>
-                <td>{{ hf .}}</td>
-            </tr>
-            {{- end}}
-        </table>
-    </div>
-    {{ $active = ""}}{{- end}}
-    {{- if gt (len .Child) 0 }}
-    <div class="tab-pane{{$active}}" id="nav-children" role="tabpanel">
-        <table class="table table-hover table-sm table-borderless object-table">
-            <tr>
-                <th width="100%">Type</th>
-            </tr>
-            {{- range .Child }}
-            <tr>
-                <td>{{ entity .}}</td>
-            </tr>
-            {{- end}}
-        </table>
-    </div>
-    {{ $active = ""}}{{- end}}
-    {{- if gt (len .Wars) 0 }}
-    <div class="tab-pane{{$active}}" id="nav-wars" role="tabpanel">
-        <table class="table table-hover table-sm table-borderless object-table">
-            <tr>
-                <th>Year</th>
-                <th>Name</th>
-                <th width="100%">Enemy</th>
-            </tr>
-            {{- range .Wars }}
-            <tr>
-                <td>
-                    {{- if eq .StartYear .EndYear}}
-                    In {{ .StartYear }}
-                    {{- else if eq .EndYear -1 }}
-                    Since {{ .StartYear }}
-                    {{- else }}
-                    From {{ .StartYear }} till {{ .EndYear }}
-                    {{- end }}
-                </td>
-                <td>{{ collection .Id}}</td>
-                <td>
-                    {{- if eq $.Id .Details.AggressorEntId}}
-                    attacking {{ entity .Details.DefenderEntId }}
-                    {{- else }}
-                    defending against {{ entity .Details.AggressorEntId }}
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                {{ $active := " active"}}
+                {{- if gt (len .Leaders) 0 }}
+                <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-leaders" type="button"
+                    role="tab">Leaders</button>
+                {{ $active = ""}}{{- end}}
+                {{- if gt (len .Sites) 0 }}
+                <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-sites" type="button" role="tab">Sites</button>
+                {{ $active = ""}}{{- end}}
+                {{- if gt (len .HistfigId) 0 }}
+                <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-members" type="button"
+                    role="tab">Members</button>
+                {{ $active = ""}}{{- end}}
+                {{- if gt (len .Child) 0 }}
+                <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-children" type="button"
+                    role="tab">Groups</button>
+                {{ $active = ""}}{{- end}}
+                {{- if gt (len .Wars) 0 }}
+                <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-wars" type="button" role="tab">Wars</button>
+                {{ $active = ""}}{{- end}}
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            {{ $active := " active"}}
+            {{- if gt (len .Leaders) 0 }}
+            <div class="tab-pane{{$active}}" id="nav-leaders" role="tabpanel">
+                <table class="table table-hover table-sm table-borderless object-table">
+                    <tr>
+                        <th>Date</th>
+                        <th width="100%">Name</th>
+                    </tr>
+                    {{- range .Leaders }}
+                    <tr>
+                        <td>
+                            {{- if eq .EndYear -1 }}
+                            since {{ .StartYear }}
+                            {{- else }}
+                            from {{ .StartYear }} till {{ .EndYear }}
+                            {{- end }}
+                        </td>
+                        <td>
+                            {{ hf .Hf.Id }}</td>
+                    </tr>
                     {{- end}}
-                </td>
-            </tr>
-            {{- end}}
-        </table>
+                </table>
+            </div>
+            {{ $active = ""}}{{- end}}
+            {{- if gt (len .Sites) 0 }}
+            <div class="tab-pane{{$active}}" id="nav-sites" role="tabpanel">
+                <table class="table table-hover table-sm table-borderless">
+                    <tr>
+                        <th>Name</th>
+                        <th width="100%">History</th>
+                    </tr>
+                    {{- range .Sites }}
+                    <tr>
+                        <td class="object" style="vertical-align: top;"> {{ site . }}</td>
+                        <td> {{ template "events.html" events (history .) }}</td>
+                    </tr>
+                    {{- end}}
+                </table>
+            </div>
+            {{ $active = ""}}{{- end}}
+            {{- if gt (len .HistfigId) 0 }}
+            <div class="tab-pane{{$active}}" id="nav-members" role="tabpanel">
+                <table class="table table-hover table-sm table-borderless object-table">
+                    <tr>
+                        <th width="100%">Type</th>
+                    </tr>
+                    {{- range .HistfigId }}
+                    <tr>
+                        <td>{{ hf .}}</td>
+                    </tr>
+                    {{- end}}
+                </table>
+            </div>
+            {{ $active = ""}}{{- end}}
+            {{- if gt (len .Child) 0 }}
+            <div class="tab-pane{{$active}}" id="nav-children" role="tabpanel">
+                <table class="table table-hover table-sm table-borderless object-table">
+                    <tr>
+                        <th width="100%">Type</th>
+                    </tr>
+                    {{- range .Child }}
+                    <tr>
+                        <td>{{ entity .}}</td>
+                    </tr>
+                    {{- end}}
+                </table>
+            </div>
+            {{ $active = ""}}{{- end}}
+            {{- if gt (len .Wars) 0 }}
+            <div class="tab-pane{{$active}}" id="nav-wars" role="tabpanel">
+                <table class="table table-hover table-sm table-borderless object-table">
+                    <tr>
+                        <th>Year</th>
+                        <th>Name</th>
+                        <th width="100%">Enemy</th>
+                    </tr>
+                    {{- range .Wars }}
+                    <tr>
+                        <td>
+                            {{- if eq .StartYear .EndYear}}
+                            In {{ .StartYear }}
+                            {{- else if eq .EndYear -1 }}
+                            Since {{ .StartYear }}
+                            {{- else }}
+                            From {{ .StartYear }} till {{ .EndYear }}
+                            {{- end }}
+                        </td>
+                        <td>{{ collection .Id}}</td>
+                        <td>
+                            {{- if eq $.Id .Details.AggressorEntId}}
+                            attacking {{ entity .Details.DefenderEntId }}
+                            {{- else }}
+                            defending against {{ entity .Details.AggressorEntId }}
+                            {{- end}}
+                        </td>
+                    </tr>
+                    {{- end}}
+                </table>
+            </div>
+            {{ $active = ""}}{{- end}}
+        </div>
     </div>
-    {{ $active = ""}}{{- end}}
+    {{- if gt (len .Sites) 0 }}
+    <div class="page-map">
+        <div id="map" style="width: 300px; height: 300px"></div>
+        <!-- <img class="site-map" src="$suburi/sitemap/$site.id" width="300" /> -->
+        {{initMap}}
+        {{- range .Sites }}
+        {{ addSite . false }}
+        {{- end }}
+    </div>
+    {{- end }}
 </div>
+
 
 <h5>Events</h5>
 

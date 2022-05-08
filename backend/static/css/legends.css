@@ -8,9 +8,24 @@ a {
     outline: 0;
 }
 
+.page-header {
+    display: flex;
+    width: 100%;
+}
+
+.page-tabs {
+    flex: 100%;
+    margin-right: 16px;
+}
+
+.page-map {
+    flex: 300px;
+}
+
 .object-map {
     float: right !important;
-    margin-top: -7px;
+    margin-left: 16px;
+    margin-bottom: 16px;
 }
 
 .popover {
