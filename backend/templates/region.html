@@ -3,15 +3,15 @@
 {{define "title"}}{{ title .Name }}{{end}}
 
 {{define "content"}}
-<h3>{{ title .Name }}</h3>
-<p>{{ .Type }}</p>
-
 <div class="object-map">
     <div id="map" style="width: 300px; height: 300px"></div>
 </div>
 {{initMap}}
 {{ addRegion .Id }}
 <script>map.addLayer(regionsLayer);</script>
+
+<h3>{{ title .Name }}</h3>
+<p>{{ .Type }}</p>
 
 {{- if ne .ForceId -1 -}}
 <dl class="row">
