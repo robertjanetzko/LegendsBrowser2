@@ -24,3 +24,10 @@ jobs:
       run: cd backend && GOOS=linux GOARCH=amd64 go build -o ../bin/legendsbrowser-linux-x64
     - name: Build Windows
       run: cd backend && GOOS=windows GOARCH=amd64 go build -o ../bin/legendsbrowser-win-x64.exe
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist-without-markdown
+        path: |
+          bin
