@@ -24,6 +24,7 @@
   <integer>1</integer>
   <key>NSHighResolutionCapable</key><true/>
   <key>NSSupportsAutomaticGraphicsSwitching</key><true/>
-  <key>LSBackgroundOnly</key><true/>
+  <key>LSUIElement</key><true/>
+  <key>LSBackgroundOnly</key><false/>
 </dict>
 </plist>
