@@ -61,7 +61,7 @@ var AddMapRegion = func(w *DfWorld, id int) template.HTML {
 	return ""
 }
 
-var AddMapSite = func(w *DfWorld, id int) template.HTML {
+var AddMapSite = func(w *DfWorld, id int, color bool) template.HTML {
 	if site, ok := w.Sites[id]; ok {
 		coords := strings.Split(site.Rectangle, ":")
 		c1 := strings.Split(coords[0], ",")
@@ -77,18 +77,25 @@ var AddMapSite = func(w *DfWorld, id int) template.HTML {
 		if site.Ruin {
 			c = "#aaa"
 		}
+		if !color {
+			c = "#fff"
+		}
 		return template.HTML(fmt.Sprintf(`<script>addSite(%d, %f, %f, %f, %f, "%s", "")</script>`, site.Id_, x1/16.0, y1/16.0-1, x2/16.0, y2/16.0-1, c))
 	} else {
 		return ""
 	}
 }
 
-var AddMapMountain = func(w *DfWorld, id int) template.HTML {
+var AddMapMountain = func(w *DfWorld, id int, color bool) template.HTML {
 	if m, ok := w.MountainPeaks[id]; ok {
 		c1 := strings.Split(m.Coords, ",")
 		x, _ := strconv.Atoi(c1[0])
 		y, _ := strconv.Atoi(c1[1])
-		return template.HTML(fmt.Sprintf(`<script>addMountain(%d, %d, %d, '#666')</script>`, m.Id_, x, y))
+		c := "#666"
+		if !color {
+			c = "#fff"
+		}
+		return template.HTML(fmt.Sprintf(`<script>addMountain(%d, %d, %d, '%s')</script>`, m.Id_, x, y, c))
 	}
 	return ""
 }

@@ -64,8 +64,8 @@ func (srv *DfServer) LoadTemplates() {
 
 		"addLandmass":          func(id int) template.HTML { return model.AddMapLandmass(srv.context.world, id) },
 		"addRegion":            func(id int) template.HTML { return model.AddMapRegion(srv.context.world, id) },
-		"addSite":              func(id int) template.HTML { return model.AddMapSite(srv.context.world, id) },
-		"addMountain":          func(id int) template.HTML { return model.AddMapMountain(srv.context.world, id) },
+		"addSite":              func(id int, color bool) template.HTML { return model.AddMapSite(srv.context.world, id, color) },
+		"addMountain":          func(id int, color bool) template.HTML { return model.AddMapMountain(srv.context.world, id, color) },
 		"addWorldConstruction": func(id int) template.HTML { return model.AddMapWorldConstruction(srv.context.world, id) },
 		"addRiver":             func(id int) template.HTML { return model.AddMapRiver(srv.context.world, id) },
 

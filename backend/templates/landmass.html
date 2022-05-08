@@ -6,5 +6,12 @@
 <h1>{{ title .Name }}</h1>
 <p>landmass</p>
 
+<div class="object-map">
+    <div id="map" style="width: 300px; height: 300px"></div>
+</div>
+{{initMap}}
+{{ addLandmass .Id }}
+<script>map.addLayer(landmassesLayer);</script>
+
 <p>{{ json . }}</p>
 {{- end }}

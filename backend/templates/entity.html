@@ -25,6 +25,17 @@
     {{- end }}
 </p>
 
+{{- if gt (len .Sites) 0 }}
+<div class="object-map">
+    <div id="map" style="width: 300px; height: 300px"></div>
+    <!-- <img class="site-map" src="$suburi/sitemap/$site.id" width="300" /> -->
+</div>
+{{initMap}}
+{{- range .Sites }}
+{{ addSite . false }}
+{{- end }}
+{{- end }}
+
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         {{ $active := " active"}}

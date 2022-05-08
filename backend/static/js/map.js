@@ -62,8 +62,6 @@ var overlayMaps = {
     "Evilness": evilnessLayer,
 };
 
-L.control.layers(null, overlayMaps).addTo(map);
-
 var imageLayer = L.imageOverlay(imageUrl, imageBounds, { opacity: 0.5 });
 imageLayer.addTo(map);
 

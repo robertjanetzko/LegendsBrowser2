@@ -6,7 +6,7 @@
 
 <div id="map" style="width: 100%; height: 1000px"></div>
 {{initMap}}
-
+<script>L.control.layers(null, overlayMaps).addTo(map);</script>
 {{- range .Landmasses }}
 {{ addLandmass .Id }}
 {{- end }}
@@ -16,11 +16,11 @@
 {{- end }}
 
 {{- range .Sites }}
-{{ addSite .Id }}
+{{ addSite .Id true }}
 {{- end }}
 
 {{- range .MountainPeaks }}
-{{ addMountain .Id }}
+{{ addMountain .Id true }}
 {{- end }}
 
 {{- range .WorldConstructions }}

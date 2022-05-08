@@ -6,6 +6,12 @@
 <h3>{{ title .Name }}</h3>
 {{ .Type_ }} in {{ site .SiteId }}
 
+<div class="object-map">
+    <div id="map" style="width: 300px; height: 300px"></div>
+</div>
+{{initMap}}
+{{ addSite .SiteId false }}
+
 <h5 class="mt-3">Events</h5>
 {{ template "events.html" events . }}
 

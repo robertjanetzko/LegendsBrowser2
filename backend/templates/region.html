@@ -6,6 +6,13 @@
 <h3>{{ title .Name }}</h3>
 <p>{{ .Type }}</p>
 
+<div class="object-map">
+    <div id="map" style="width: 300px; height: 300px"></div>
+</div>
+{{initMap}}
+{{ addRegion .Id }}
+<script>map.addLayer(regionsLayer);</script>
+
 {{- if ne .ForceId -1 -}}
 <dl class="row">
     <dt class="col-2 col-lg-1">Force</dt>

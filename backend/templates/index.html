@@ -21,7 +21,7 @@
 {{- range $race, $civs := .Civilizations }}
 {{- range $civs }}
 {{- range .Sites }}
-{{ addSite . }}
+{{ addSite . true }}
 {{- end }}
 {{- end }}
 {{- end }}

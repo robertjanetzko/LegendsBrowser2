@@ -6,6 +6,12 @@
 <h3>{{ title .Name }}</h3>
 <p>{{ .Type }}</p>
 
+<div class="object-map">
+    <div id="map" style="width: 300px; height: 300px"></div>
+</div>
+{{initMap}}
+{{ addWorldConstruction .Id }}
+
 {{- if gt (len .Parts) 0 }}
 <h5>Parts</h5>
 <ul>
