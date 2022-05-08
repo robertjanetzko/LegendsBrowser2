@@ -1,4 +1,4 @@
-name: Go
+name: Build LegendsBrowser
 
 on:
   push:
@@ -21,6 +21,6 @@ jobs:
     - name: Build MacOS
       run: cd backend && GOOS=darwin GOARCH=amd64 go build -o ../bin/legendsbrowser-mac
     - name: Build Linux
-      run: GOOS=linux GOARCH=amd64 go build -o ../bin/legendsbrowser-linux-x64
+      run: cd backend && GOOS=linux GOARCH=amd64 go build -o ../bin/legendsbrowser-linux-x64
     - name: Build Windows
       run: cd backend && GOOS=windows GOARCH=amd64 go build -o ../bin/legendsbrowser-win-x64.exe
