@@ -51,8 +51,24 @@ func (w *DfWorld) process() {
 	}
 
 	if !w.Plus {
+		trimRace := func(s string) string { return strings.Trim(strcase.ToDelimited(s, ' '), " 0123456789") }
 		for _, hf := range w.HistoricalFigures {
-			hf.Race = strings.Trim(strcase.ToDelimited(hf.Race, ' '), " 0123456789")
+			hf.Race = trimRace(hf.Race)
+		}
+
+		for _, e := range w.Entities {
+			if len(e.Leaders) > 0 {
+				switch r := e.Leaders[0].Hf.Race; {
+				case r == "demon":
+					e.Race = "goblin"
+				default:
+					e.Race = r
+				}
+			} else {
+				if !strings.Contains(e.Name_, " ") {
+					e.Race = "kobold"
+				}
+			}
 		}
 
 		for _, a := range w.DanceForms {
@@ -63,6 +79,117 @@ func (w *DfWorld) process() {
 		}
 		for _, a := range w.PoeticForms {
 			a.Name_ = a.Description[:strings.Index(a.Description, " is a ")]
+		}
+
+		setEntityType := func(id int, t EntityType) {
+			if c, ok := w.Entities[id]; ok {
+				if c.Type_ == EntityType_Unknown {
+					c.Type_ = t
+				}
+			}
+		}
+		setParent := func(id, parent int) {
+			if id == -1 || parent == -1 {
+				return
+			}
+			if c, ok := w.Entities[parent]; ok {
+				if c.Parent != -1 {
+					parent = c.Parent
+				}
+			}
+			if c, ok := w.Entities[id]; ok {
+				c.Parent = parent
+				if p, ok := w.Entities[parent]; ok {
+					c.Race = p.Race
+				}
+			}
+			if c, ok := w.Entities[parent]; ok {
+				c.Child = append(c.Child, id)
+			}
+		}
+
+		list := maps.Values(w.HistoricalEvents)
+		sort.Slice(list, func(i, j int) bool { return list[i].Id_ < list[j].Id_ })
+		for _, e := range list {
+			switch d := e.Details.(type) {
+			case *HistoricalEventCreatedSite:
+				setParent(d.SiteCivId, d.CivId)
+				setEntityType(d.CivId, EntityType_Civilization)
+				setEntityType(d.SiteCivId, EntityType_Sitegovernment)
+			case *HistoricalEventDestroyedSite:
+				setParent(d.SiteCivId, d.DefenderCivId)
+				setEntityType(d.AttackerCivId, EntityType_Civilization)
+				setEntityType(d.DefenderCivId, EntityType_Civilization)
+				setEntityType(d.SiteCivId, EntityType_Sitegovernment)
+			case *HistoricalEventSiteTakenOver:
+				setParent(d.SiteCivId, d.DefenderCivId)
+				setParent(d.NewSiteCivId, d.AttackerCivId)
+				setEntityType(d.DefenderCivId, EntityType_Civilization)
+				setEntityType(d.SiteCivId, EntityType_Sitegovernment)
+				setEntityType(d.AttackerCivId, EntityType_Civilization)
+				setEntityType(d.NewSiteCivId, EntityType_Sitegovernment)
+			case *HistoricalEventHfDestroyedSite:
+				setParent(d.SiteCivId, d.DefenderCivId)
+				setEntityType(d.DefenderCivId, EntityType_Civilization)
+				setEntityType(d.SiteCivId, EntityType_Sitegovernment)
+			case *HistoricalEventReclaimSite:
+				setParent(d.SiteCivId, d.CivId)
+				setEntityType(d.CivId, EntityType_Civilization)
+				setEntityType(d.SiteCivId, EntityType_Sitegovernment)
+			case *HistoricalEventCreatedStructure:
+				setParent(d.SiteCivId, d.CivId)
+				setEntityType(d.CivId, EntityType_Civilization)
+				setEntityType(d.SiteCivId, EntityType_Sitegovernment)
+				if site, ok := w.Sites[d.SiteId]; ok {
+					if structure, ok := site.Structures[d.StructureId]; ok {
+						if structure.Type_ == StructureType_Guildhall {
+							setEntityType(d.SiteCivId, EntityType_Guild)
+						}
+					}
+				}
+			case *HistoricalEventChangedCreatureType:
+				d.NewRace = trimRace(d.NewRace)
+				d.OldRace = trimRace(d.OldRace)
+			case *HistoricalEventCreatureDevoured:
+				if col, ok := w.HistoricalEventCollections[e.Collection]; ok {
+					if cd, ok := col.Details.(*HistoricalEventCollectionBeastAttack); ok {
+						if len(cd.AttackerHfIds) > 0 {
+							d.Eater = cd.AttackerHfIds[0]
+						}
+					}
+				}
+				d.Race = "creature"
+			case *HistoricalEventHfNewPet:
+				d.Pets = "creature" // TODO from hf pets?
+			case *HistoricalEventItemStolen:
+				if col, ok := w.HistoricalEventCollections[e.Collection]; ok {
+					if cd, ok := col.Details.(*HistoricalEventCollectionBeastAttack); ok {
+						if len(cd.AttackerHfIds) > 0 {
+							d.Histfig = cd.AttackerHfIds[0]
+						}
+						d.Site = cd.SiteId
+					}
+				}
+				d.ItemType = "item"
+			case *HistoricalEventMasterpieceItem:
+				d.ItemType = "item"
+			}
+		}
+
+		for _, e := range w.Entities {
+			switch e.Race {
+			case "dwarf":
+				e.EntityPosition = dwarfPositions
+			case "elf":
+				e.EntityPosition = elfPositions
+			case "human":
+				e.EntityPosition = humanPositions
+			case "goblin":
+				e.EntityPosition = goblinPositions
+			}
+			for i, p := range e.EntityPosition {
+				p.Id_ = i
+			}
 		}
 	}
 
@@ -83,18 +210,22 @@ func (w *DfWorld) processEvents() {
 	for _, e := range list {
 		switch d := e.Details.(type) {
 		case *HistoricalEventHfDoesInteraction:
-			if strings.HasPrefix(d.Interaction, "DEITY_CURSE_WEREBEAST_") {
-				w.HistoricalFigures[d.TargetHfid].Werebeast = true
-				w.HistoricalFigures[d.TargetHfid].WerebeastSince = e.Year
-			}
-			if strings.HasPrefix(d.Interaction, "DEITY_CURSE_VAMPIRE_") {
-				w.HistoricalFigures[d.TargetHfid].Vampire = true
-				w.HistoricalFigures[d.TargetHfid].VampireSince = e.Year
+			if hf, ok := w.HistoricalFigures[d.TargetHfid]; ok {
+				if strings.HasPrefix(d.Interaction, "DEITY_CURSE_WEREBEAST_") {
+					hf.Werebeast = true
+					hf.WerebeastSince = e.Year
+				}
+				if strings.HasPrefix(d.Interaction, "DEITY_CURSE_VAMPIRE_") {
+					hf.Vampire = true
+					hf.VampireSince = e.Year
+				}
 			}
 		case *HistoricalEventHfLearnsSecret:
 			if strings.HasPrefix(d.Interaction, "SECRET_") {
-				w.HistoricalFigures[d.StudentHfid].Necromancer = true
-				w.HistoricalFigures[d.StudentHfid].NecromancerSince = e.Year
+				if hf, ok := w.HistoricalFigures[d.StudentHfid]; ok {
+					hf.Necromancer = true
+					hf.NecromancerSince = e.Year
+				}
 			}
 		case *HistoricalEventCreatedSite:
 			w.addEntitySite(d.CivId, d.SiteId)
