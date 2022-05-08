@@ -4,6 +4,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/iancoleman/strcase"
 	"github.com/robertjanetzko/LegendsBrowser2/backend/util"
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
@@ -49,10 +50,29 @@ func (w *DfWorld) process() {
 		sort.Slice(e.Wars, func(i, j int) bool { return e.Wars[i].Id_ < e.Wars[j].Id_ })
 	}
 
+	if !w.Plus {
+		for _, hf := range w.HistoricalFigures {
+			hf.Race = strings.Trim(strcase.ToDelimited(hf.Race, ' '), " 0123456789")
+		}
+
+		for _, a := range w.DanceForms {
+			a.Name_ = a.Description[:strings.Index(a.Description, " is a ")]
+		}
+		for _, a := range w.MusicalForms {
+			a.Name_ = a.Description[:strings.Index(a.Description, " is a ")]
+		}
+		for _, a := range w.PoeticForms {
+			a.Name_ = a.Description[:strings.Index(a.Description, " is a ")]
+		}
+	}
+
 	// check events texts
-	// for _, e := range w.HistoricalEvents {
-	// 	e.Details.Html(&Context{World: w})
-	// }
+	for _, e := range w.HistoricalEvents {
+		e.Details.Html(&Context{World: w})
+	}
+	for _, e := range w.HistoricalEventCollections {
+		e.Details.Html(e, &Context{World: w})
+	}
 
 }
 

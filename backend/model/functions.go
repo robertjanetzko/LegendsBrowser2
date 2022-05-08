@@ -49,14 +49,16 @@ var AddMapLandmass = func(w *DfWorld, id int) template.HTML {
 var AddMapRegion = func(w *DfWorld, id int) template.HTML {
 	if x, ok := w.Regions[id]; ok {
 		coords := strings.Join(util.Map(x.Outline(), func(c Coord) string { return fmt.Sprintf(`coord(%d,%d)`, c.X, c.Y-1) }), ",")
-		fillColor := "transparent"
-		switch x.Evilness {
-		case RegionEvilness_Evil:
-			fillColor = "fuchsia"
-		case RegionEvilness_Good:
-			fillColor = "aqua"
+		if len(coords) > 0 {
+			fillColor := "transparent"
+			switch x.Evilness {
+			case RegionEvilness_Evil:
+				fillColor = "fuchsia"
+			case RegionEvilness_Good:
+				fillColor = "aqua"
+			}
+			return template.HTML(fmt.Sprintf(`<script>addRegion(%d, [%s], '%s')</script>`, x.Id_, coords, fillColor))
 		}
-		return template.HTML(fmt.Sprintf(`<script>addRegion(%d, [%s], '%s')</script>`, x.Id_, coords, fillColor))
 	}
 	return ""
 }

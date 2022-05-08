@@ -81,15 +81,17 @@ func (x *HistoricalEventCollectionCeremony) Html(e *HistoricalEventCollection, c
 		if event, ok := c.World.HistoricalEvents[e.Event[0]]; ok {
 			if d, ok := event.Details.(*HistoricalEventCeremony); ok {
 				if entity, ok := c.World.Entities[d.CivId]; ok {
-					occ := entity.Occasion[d.OccasionId]
-					if len(occ.Schedule) > 1 {
-						switch d.ScheduleId {
-						case 0:
-							r = "opening ceremony"
-						case len(occ.Schedule) - 1:
-							r = "closing ceremony"
-						default:
-							r = "main ceremony"
+					if d.OccasionId < len(entity.Occasion) {
+						occ := entity.Occasion[d.OccasionId]
+						if len(occ.Schedule) > 1 {
+							switch d.ScheduleId {
+							case 0:
+								r = "opening ceremony"
+							case len(occ.Schedule) - 1:
+								r = "closing ceremony"
+							default:
+								r = "main ceremony"
+							}
 						}
 					}
 				}
@@ -105,8 +107,12 @@ func (x *HistoricalEventCollectionCompetition) Html(e *HistoricalEventCollection
 		if event, ok := c.World.HistoricalEvents[e.Event[0]]; ok {
 			if d, ok := event.Details.(*HistoricalEventCompetition); ok {
 				if entity, ok := c.World.Entities[d.CivId]; ok {
-					occ := entity.Occasion[d.OccasionId]
-					r = occ.Schedule[d.ScheduleId].Type_.String()
+					if d.OccasionId < len(entity.Occasion) {
+						occ := entity.Occasion[d.OccasionId]
+						if d.ScheduleId < len(occ.Schedule) {
+							r = occ.Schedule[d.ScheduleId].Type_.String()
+						}
+					}
 				}
 			}
 		}
@@ -137,8 +143,10 @@ func (x *HistoricalEventCollectionJourney) Html(e *HistoricalEventCollection, c 
 
 func (x *HistoricalEventCollectionOccasion) Html(e *HistoricalEventCollection, c *Context) string {
 	if civ, ok := c.World.Entities[x.CivId]; ok {
-		occ := civ.Occasion[x.OccasionId]
-		return util.If(x.Ordinal > 1, "the "+ord(x.Ordinal)+"occasion of ", "") + e.Link(occ.Name_)
+		if x.OccasionId < len(civ.Occasion) {
+			occ := civ.Occasion[x.OccasionId]
+			return util.If(x.Ordinal > 1, "the "+ord(x.Ordinal)+"occasion of ", "") + e.Link(occ.Name_)
+		}
 	}
 	return util.If(x.Ordinal > 1, "the "+ord(x.Ordinal)+"occasion of ", "") + e.Link("UNKNOWN OCCASION")
 }
@@ -149,8 +157,12 @@ func (x *HistoricalEventCollectionPerformance) Html(e *HistoricalEventCollection
 		if event, ok := c.World.HistoricalEvents[e.Event[0]]; ok {
 			if d, ok := event.Details.(*HistoricalEventPerformance); ok {
 				if entity, ok := c.World.Entities[d.CivId]; ok {
-					occ := entity.Occasion[d.OccasionId]
-					r = occ.Schedule[d.ScheduleId].Type_.String()
+					if d.OccasionId < len(entity.Occasion) {
+						occ := entity.Occasion[d.OccasionId]
+						if d.ScheduleId < len(occ.Schedule) {
+							r = occ.Schedule[d.ScheduleId].Type_.String()
+						}
+					}
 				}
 			}
 		}

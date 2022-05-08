@@ -121,6 +121,10 @@ func maxCoords(coords []Coord) Coord {
 
 func (r *Region) Outline() []Coord {
 	var outline []Coord
+
+	if r.Coords == "" {
+		return outline
+	}
 	// if (cacheOutline != null)
 	// 	return cacheOutline;
 

@@ -1548,6 +1548,7 @@ type DfWorld struct {
 	Height                                 int                                      `json:"height" legend:"add" related:""`                                  // Height
 	MapData                                []byte                                   `json:"mapData" legend:"add" related:""`                                 // MapData
 	MapReady                               bool                                     `json:"mapReady" legend:"add" related:""`                                // MapReady
+	Plus                                   bool                                     `json:"plus" legend:"add" related:""`                                    // Plus
 	PlusFilePath                           string                                   `json:"plusFilePath" legend:"add" related:""`                            // PlusFilePath
 	Width                                  int                                      `json:"width" legend:"add" related:""`                                   // Width
 }
@@ -1616,6 +1617,7 @@ func (x *DfWorld) MarshalJSON() ([]byte, error) {
 	}
 	d["mapData"] = x.MapData
 	d["mapReady"] = x.MapReady
+	d["plus"] = x.Plus
 	d["plusFilePath"] = x.PlusFilePath
 	if x.Width != -1 {
 		d["width"] = x.Width

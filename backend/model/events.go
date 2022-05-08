@@ -425,11 +425,13 @@ func (x *HistoricalEventBuildingProfileAcquired) Html(c *Context) string {
 func (x *HistoricalEventCeremony) Html(c *Context) string {
 	r := c.entity(x.CivId) + " held a ceremony in " + c.site(x.SiteId, "")
 	if e, ok := c.World.Entities[x.CivId]; ok {
-		o := e.Occasion[x.OccasionId]
-		r += " as part of " + o.Name()
-		s := o.Schedule[x.ScheduleId]
-		if len(s.Feature) > 0 {
-			r += ". The event featured " + andList(util.Map(s.Feature, c.feature))
+		if x.OccasionId < len(e.Occasion) {
+			o := e.Occasion[x.OccasionId]
+			r += " as part of " + o.Name()
+			s := o.Schedule[x.ScheduleId]
+			if len(s.Feature) > 0 {
+				r += ". The event featured " + andList(util.Map(s.Feature, c.feature))
+			}
 		}
 	}
 	return r
@@ -449,16 +451,12 @@ func (x *HistoricalEventChangeHfBodyState) Html(c *Context) string {
 }
 
 func (x *HistoricalEventChangeHfJob) Html(c *Context) string {
-	w := ""
-	if x.SubregionId != -1 {
-		w = " in " + c.region(x.SubregionId)
-	}
-	if x.SiteId != -1 {
-		w = " in " + c.site(x.SiteId, "")
-	}
+	w := c.location(x.SiteId, " in", x.SubregionId, " in")
 	old := articled(strcase.ToDelimited(x.OldJob, ' '))
 	new := articled(strcase.ToDelimited(x.NewJob, ' '))
-	if x.OldJob == "standard" {
+	if x.OldJob == "" && x.NewJob == "" {
+		return c.hf(x.Hfid) + " became a UNKNOWN JOB" + w
+	} else if x.OldJob == "standard" {
 		return c.hf(x.Hfid) + " became " + new + w
 	} else if x.NewJob == "standard" {
 		return c.hf(x.Hfid) + " stopped being " + old + w
@@ -502,7 +500,7 @@ func (x *HistoricalEventChangeHfState) Html(c *Context) string {
 			return c.hf(x.Hfid) + " fled " + c.site(x.SiteId, "to")
 		case HistoricalEventChangeHfStateReason_ConvictionExile, HistoricalEventChangeHfStateReason_ExiledAfterConviction:
 			return c.hf(x.Hfid) + " departed " + c.site(x.SiteId, "to") + r
-		case HistoricalEventChangeHfStateReason_None:
+		default:
 			return c.hf(x.Hfid) + " settled " + c.location(x.SiteId, "in", x.SubregionId, "in")
 		}
 	case HistoricalEventChangeHfStateState_Visiting:
@@ -543,10 +541,19 @@ func (x *HistoricalEventChangedCreatureType) Html(c *Context) string {
 }
 
 func (x *HistoricalEventCompetition) Html(c *Context) string {
-	e := c.World.Entities[x.CivId]
-	o := e.Occasion[x.OccasionId]
-	s := o.Schedule[x.ScheduleId]
-	return c.entity(x.CivId) + " held a " + strcase.ToDelimited(s.Type_.String(), ' ') + c.site(x.SiteId, " in") + " as part of the " + o.Name() +
+	oName := "UNKNOWN OCCASION"
+	sType := "competition"
+	if e, ok := c.World.Entities[x.CivId]; ok {
+		if x.OccasionId < len(e.Occasion) {
+			o := e.Occasion[x.OccasionId]
+			oName = o.Name_
+			if x.ScheduleId < len(o.Schedule) {
+				s := o.Schedule[x.ScheduleId]
+				sType = strcase.ToDelimited(s.Type_.String(), ' ')
+			}
+		}
+	}
+	return c.entity(x.CivId) + " held a " + sType + c.site(x.SiteId, " in") + " as part of the " + oName +
 		". Competing " + util.If(len(x.CompetitorHfid) > 1, "were ", "was ") + c.hfList(x.CompetitorHfid) + ". " +
 		util.Capitalize(c.hf(x.WinnerHfid)) + " was the victor"
 }
@@ -1976,14 +1983,21 @@ func (x *HistoricalEventPeaceRejected) Html(c *Context) string {
 
 func (x *HistoricalEventPerformance) Html(c *Context) string {
 	r := c.entity(x.CivId) + " held "
+	oName := "UNKNOWN OCCASION"
+	sType := "a performance"
 	if e, ok := c.World.Entities[x.CivId]; ok {
-		o := e.Occasion[x.OccasionId]
-		s := o.Schedule[x.ScheduleId]
-		r += c.schedule(s)
-		r += " as part of " + o.Name()
-		r += c.site(x.SiteId, " in")
-		r += string(util.Json(s))
+		if x.OccasionId < len(e.Occasion) {
+			o := e.Occasion[x.OccasionId]
+			oName = o.Name_
+			if x.ScheduleId < len(o.Schedule) {
+				s := o.Schedule[x.ScheduleId]
+				sType = c.schedule(s)
+			}
+		}
 	}
+	r += sType
+	r += " as part of " + oName
+	r += c.site(x.SiteId, " in")
 	return r
 }
 
@@ -2005,21 +2019,23 @@ func (x *HistoricalEventPoeticFormCreated) Html(c *Context) string {
 func (x *HistoricalEventProcession) Html(c *Context) string {
 	r := c.entity(x.CivId) + " held a procession in " + c.site(x.SiteId, "")
 	if e, ok := c.World.Entities[x.CivId]; ok {
-		o := e.Occasion[x.OccasionId]
-		r += " as part of " + o.Name()
-		s := o.Schedule[x.ScheduleId]
-		if s.Reference != -1 {
-			r += ". It started at " + c.structure(x.SiteId, s.Reference)
-			if s.Reference2 != -1 && s.Reference2 != s.Reference {
-				r += " and ended at " + c.structure(x.SiteId, s.Reference2)
-			} else {
-				r += " and returned there after following its route"
+		if x.OccasionId < len(e.Occasion) {
+			o := e.Occasion[x.OccasionId]
+			r += " as part of " + o.Name()
+			s := o.Schedule[x.ScheduleId]
+			if s.Reference != -1 {
+				r += ". It started at " + c.structure(x.SiteId, s.Reference)
+				if s.Reference2 != -1 && s.Reference2 != s.Reference {
+					r += " and ended at " + c.structure(x.SiteId, s.Reference2)
+				} else {
+					r += " and returned there after following its route"
+				}
 			}
+			if len(s.Feature) > 0 {
+				r += ". The event featured " + andList(util.Map(s.Feature, c.feature))
+			}
+			r += string(util.Json(s))
 		}
-		if len(s.Feature) > 0 {
-			r += ". The event featured " + andList(util.Map(s.Feature, c.feature))
-		}
-		r += string(util.Json(s))
 	}
 	return r
 }

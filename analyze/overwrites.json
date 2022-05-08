@@ -41,6 +41,10 @@
             {
                 "Name": "EndYear",
                 "Type": "int"
+            },
+            {
+                "Name": "Plus",
+                "Type": "bool"
             }
         ],
         "Structure": [

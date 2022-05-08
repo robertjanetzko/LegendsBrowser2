@@ -99,7 +99,7 @@ BaseLoop:
 
 	bar.Finish()
 
-	plus := true
+	plus := false
 
 	if plus {
 		file = strings.Replace(file, "-legends.xml", "-legends_plus.xml", 1)
@@ -131,6 +131,7 @@ BaseLoop:
 				}
 			}
 		}
+		world.Plus = true
 		world.PlusFilePath = file
 
 		bar.Finish()
