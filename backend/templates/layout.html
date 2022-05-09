@@ -2,21 +2,23 @@
 <html lang="en">
 
 <head>
+    <base href="{{suburi}}/">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{block "title" .}}{{end}}</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/bootstrap-dark.css" rel="stylesheet">
-    <link href="/css/bootstrap-icons.css" rel="stylesheet">
-    <link href="/css/all.min.css" rel="stylesheet">
-    <link href="/css/legends.css" rel="stylesheet">
-    <script src="/js/jquery-3.6.0.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/autocomplete.js"></script>
-    <link href="/leaflet/leaflet.css" rel="stylesheet">
-    <script src="/leaflet/leaflet.js"></script>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap-dark.css" rel="stylesheet">
+    <link href="./css/bootstrap-icons.css" rel="stylesheet">
+    <link href="./css/all.min.css" rel="stylesheet">
+    <link href="./css/legends.css" rel="stylesheet">
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/autocomplete.js"></script>
+    <link href="./leaflet/leaflet.css" rel="stylesheet">
+    <script src="./leaflet/leaflet.js"></script>
 </head>
 
 <body>
@@ -30,10 +32,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Civilizations</a>
+                        <a class="nav-link" href="./">Civilizations</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/worldmap">World Map</a>
+                        <a class="nav-link" href="./worldmap">World Map</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -41,26 +43,26 @@
                             Objects
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/geography">Geography</a></li>
-                            <li><a class="dropdown-item" href="/entities">Entities</a></li>
-                            <li><a class="dropdown-item" href="/sites">Sites</a></li>
-                            <li><a class="dropdown-item" href="/structures">Structures</a></li>
-                            <li><a class="dropdown-item" href="/hfs">Historical Figures</a></li>
-                            <li><a class="dropdown-item" href="/identities">Identities</a></li>
-                            <li><a class="dropdown-item" href="/worldconstructions">World Constructions</a></li>
-                            <li><a class="dropdown-item" href="/artifacts">Artifacts</a></li>
-                            <li><a class="dropdown-item" href="/artforms">Art Forms</a></li>
-                            <li><a class="dropdown-item" href="/writtencontents">Written Contents</a></li>
+                            <li><a class="dropdown-item" href="./geography">Geography</a></li>
+                            <li><a class="dropdown-item" href="./entities">Entities</a></li>
+                            <li><a class="dropdown-item" href="./sites">Sites</a></li>
+                            <li><a class="dropdown-item" href="./structures">Structures</a></li>
+                            <li><a class="dropdown-item" href="./hfs">Historical Figures</a></li>
+                            <li><a class="dropdown-item" href="./identities">Identities</a></li>
+                            <li><a class="dropdown-item" href="./worldconstructions">World Constructions</a></li>
+                            <li><a class="dropdown-item" href="./artifacts">Artifacts</a></li>
+                            <li><a class="dropdown-item" href="./artforms">Art Forms</a></li>
+                            <li><a class="dropdown-item" href="./writtencontents">Written Contents</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/years">Years</a>
+                        <a class="nav-link" href="./years">Years</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/collections">Collections</a>
+                        <a class="nav-link" href="./collections">Collections</a>
                     </li>
                 </ul>
-                <form class="d-flex" action="/search" method="get">
+                <form class="d-flex" action="./search" method="get">
                     <div class="input-group">
                         <input id="search" class="form-control" name="search" type="search" placeholder="Search" aria-label="Search"
                             autocomplete="off">
@@ -71,8 +73,8 @@
                     const ac = new Autocomplete(document.getElementById("search"), {
                         data: [{ label: "I'm a label", value: 42 }],
                         maximumItems: 50,
-                        onInput: value => $.get("/search?term=" + value, data => ac.setData(data)),
-                        onSelectItem: ({ label, value }) => window.location = value
+                        onInput: value => $.get("./search?term=" + value, data => ac.setData(data)),
+                        onSelectItem: ({ label, value }) => window.location = "." + value
                     });
                 </script>
             </div>
@@ -96,7 +98,7 @@
 
         function loadLinkPopoverData() {
             return $.ajax({
-                url: "/popover" + this.getAttribute("href"),
+                url: "./popover" + this.getAttribute("href").substring(1),
                 async: false
             }).responseText;
         }

@@ -14,7 +14,7 @@
 <script>
     setInterval(() => {
         $.ajax({
-            url: "/load/progress",
+            url: "./load/progress",
             context: document.body,
             success: function (data) {
                 $("#msg").text(data.msg);

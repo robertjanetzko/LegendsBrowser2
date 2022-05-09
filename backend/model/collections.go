@@ -9,7 +9,7 @@ import (
 )
 
 func (x *HistoricalEventCollection) Link(s string) string {
-	return fmt.Sprintf(`<a class="collection %s" href="/collection/%d">%s</a>`, strcase.ToKebab(x.Details.Type()), x.Id_, util.Title(s))
+	return fmt.Sprintf(`<a class="collection %s" href="./collection/%d">%s</a>`, strcase.ToKebab(x.Details.Type()), x.Id_, util.Title(s))
 }
 
 func (x *HistoricalEventCollection) ParentId() int {

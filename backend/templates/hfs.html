@@ -18,7 +18,7 @@
             </tr>
             {{- range .Hfs }}{{- if not (eq .Name "") }}
             <tr>
-                <td><a class="hf" href="/hf/{{.Id}}">{{ title .Name }}</a></td>
+                <td><a class="hf" href="./hf/{{.Id}}">{{ title .Name }}</a></td>
                 <td>{{ .Race }}</td>
                 <td>
                     {{- if eq .DeathYear -1 }}
@@ -34,7 +34,7 @@
     </div>
     <div class="col-md-2">
         <h5>Filter</h5>
-        <form action="/hfs" method="GET">
+        <form action="./hfs" method="GET">
             <div class="checkbox"><label><input class="filter" type="checkbox" name="leader" value="1" {{if eq .Params.leader "1"
                         }}checked{{end}}> Leader</label></div>
             <div class="checkbox"><label><input class="filter" type="checkbox" name="deity" value="1" {{if eq .Params.deity "1"

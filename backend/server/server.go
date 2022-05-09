@@ -39,6 +39,12 @@ func StartServer(config *Config, world *model.DfWorld, static embed.FS) error {
 			progress:  &model.LoadProgress{},
 		},
 	}
+
+	root := srv.router
+	if srv.context.config.SubUri != "" {
+		srv.router = srv.router.PathPrefix("/legends").Subrouter()
+	}
+
 	srv.loader = &loadHandler{server: srv}
 	srv.LoadTemplates()
 
@@ -196,10 +202,8 @@ func StartServer(config *Config, world *model.DfWorld, static embed.FS) error {
 	}
 	srv.router.PathPrefix("/").Handler(spa)
 
-	OpenBrowser("http://localhost:8080")
-
-	fmt.Println("Serving at :8080")
-	http.ListenAndServe(":8080", srv.router)
+	OpenBrowser(fmt.Sprintf("http://localhost:%d", config.Port))
+	http.ListenAndServe(fmt.Sprintf(":%d", config.Port), root)
 	return nil
 }
 

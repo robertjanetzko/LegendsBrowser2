@@ -21,7 +21,7 @@ func OpenBrowser(url string) {
 	}
 	if err != nil {
 		fmt.Println(err)
-		fmt.Println("navigate to http://localhost:8080 in your browser")
+		fmt.Println("navigate to " + url + " in your browser")
 	}
 
 }

@@ -48,6 +48,14 @@ func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if h.server.context.config.ServerMode {
+		err := h.server.templates.Render(w, "serverMode.html", nil)
+		if err != nil {
+			httpError(w, err)
+		}
+		return
+	}
+
 	var partitions []string
 	if runtime.GOOS == "windows" {
 		ps, _ := disk.Partitions(false)
@@ -95,11 +103,11 @@ func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			h.server.context.isLoading = true
 			h.server.context.world = nil
 			go loadWorld(h.server, p.Current)
-			http.Redirect(w, r, "/", http.StatusSeeOther)
+			http.Redirect(w, r, h.server.context.config.SubUri+"/", http.StatusSeeOther)
 			return
 		}
 	}
-	http.Redirect(w, r, "/load", http.StatusSeeOther)
+	http.Redirect(w, r, h.server.context.config.SubUri+"/load", http.StatusSeeOther)
 }
 
 func isLegendsXml(f fs.FileInfo) bool {
@@ -126,6 +134,6 @@ func (srv *DfServer) renderLoading(w http.ResponseWriter, r *http.Request) {
 			httpError(w, err)
 		}
 	} else {
-		http.Redirect(w, r, "/load", http.StatusSeeOther)
+		http.Redirect(w, r, srv.context.config.SubUri+"/load", http.StatusSeeOther)
 	}
 }

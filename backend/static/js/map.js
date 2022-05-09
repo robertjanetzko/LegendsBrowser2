@@ -49,7 +49,7 @@ map.fitBounds(bounds);
 
 map.options.minZoom = map.getZoom();
 
-var imageUrl = '/map'
+var imageUrl = './map'
 var imageBounds = [[0, 0],
 [worldWidth, worldHeight]];
 
@@ -106,7 +106,7 @@ function attachTooltip(layer, tip) {
 function urlToolTip(type, id) {
     return function (layer) {
         return $.ajax({
-            url: "/popover/" + type + "/" + id,
+            url: "./popover/" + type + "/" + id,
             async: false
         }).responseText;
     }

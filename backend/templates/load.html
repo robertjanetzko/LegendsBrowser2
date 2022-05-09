@@ -14,14 +14,14 @@
 
     {{- range .Partitions }}
     <tr>
-        <td><a href="/load?p={{ . }}"><i class="bi bi-hdd"></i> {{ . }}</a></td>
+        <td><a href="./load?p={{ . }}"><i class="bi bi-hdd"></i> {{ . }}</a></td>
         <td></td>
         <td></td>
     </tr>
     {{- end }}
 
     <tr>
-        <td><a href="/load?p={{ (printf `%s/..` $.Current) }}&x=1"><i class="bi bi-folder2"></i> ..</a></td>
+        <td><a href="./load?p={{ (printf `%s/..` $.Current) }}&x=1"><i class="bi bi-folder2"></i> ..</a></td>
         <td></td>
         <td></td>
     </tr>
@@ -29,7 +29,7 @@
     {{- range $f := .List }}{{- if $f.IsDir }}
     <tr>
         <td>
-            <a href="/load?p={{ (printf `%s/%s` $.Current $f.Name) }}"><i class="bi bi-folder2"></i> {{$f.Name}}</a>
+            <a href="./load?p={{ (printf `%s/%s` $.Current $f.Name) }}"><i class="bi bi-folder2"></i> {{$f.Name}}</a>
         </td>
         <td></td>
         <td></td>
@@ -39,7 +39,7 @@
     {{- range $f := .List }}{{- if isLegendsXml $f }}
     <tr>
         <td>
-            <a class="loadable" href="/load?p={{ (printf `%s/%s` $.Current $f.Name) }}"><i class="bi bi-filetype-xml"></i> {{$f.Name}}</a>
+            <a class="loadable" href="./load?p={{ (printf `%s/%s` $.Current $f.Name) }}"><i class="bi bi-filetype-xml"></i> {{$f.Name}}</a>
         </td>
         <td>{{ bytes $f.Size }}</td>
         <td>{{ $f.ModTime.Format "02 Jan 06 15:04" }}</td>
