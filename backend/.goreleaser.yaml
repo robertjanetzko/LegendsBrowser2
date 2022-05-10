@@ -1,11 +1,19 @@
 builds:
-  - binary: legendsbrowser
+  - id: linux/macos-amd64
+    binary: legendsbrowser
     env:
       - CGO_ENABLED=0
     goos:
       - linux
-      - windows
       - darwin
+    goarch:
+      - amd64
+  - id: windows-amd64
+    binary: LegendsBrowser
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - windows
     goarch:
       - amd64
 archives:
