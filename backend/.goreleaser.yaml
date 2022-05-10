@@ -1,0 +1,23 @@
+builds:
+  - binary: legendsbrowser
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+archives:
+  - format: zip
+    name_template: "legendsbrowser-{{ .Version }}-{{ .Os }}"
+    replacements:
+      darwin: macos
+      linux: linux
+      windows: win
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
