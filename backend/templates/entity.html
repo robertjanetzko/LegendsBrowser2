@@ -154,6 +154,8 @@
             {{ $active = ""}}{{- end}}
         </div>
     </div>
+
+    {{ if world.MapReady }}
     {{- if gt (len .Sites) 0 }}
     <div class="page-map">
         <div id="map" style="width: 300px; height: 300px"></div>
@@ -163,6 +165,7 @@
         {{ addSite . false }}
         {{- end }}
     </div>
+    {{- end }}
     {{- end }}
 </div>
 

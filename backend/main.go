@@ -29,6 +29,14 @@ var rootCmd = &cobra.Command{
 	Use:   "legendsbrowser",
 	Short: "A Legends Browser for Dwarf Fortress",
 	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println(`
+      __                              __        ____                                   
+     / /   ___  ____  ___  ____  ____/ /____   / __ )_________ _      __________  _____
+    / /   / _ \/ __ \/ _ \/ __ \/ __  / ___/  / __  / ___/ __ \ | /| / / ___/ _ \/ ___/
+   / /___/  __/ /_/ /  __/ / / / /_/ (__  )  / /_/ / /  / /_/ / |/ |/ (__  )  __/ /    
+  /_____/\___/\__, /\___/_/ /_/\__,_/____/  /_____/_/   \____/|__/|__/____/\___/_/     
+             /____/                                                                    ` + "\n ")
+
 		if *p {
 			defer profile.Start(profile.ProfilePath(".")).Stop()
 			go func() {

@@ -2,7 +2,6 @@ package server
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -31,9 +30,7 @@ func LoadConfig(path string) (*Config, error) {
 
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
-		fmt.Println("OPEN", err)
 		if os.IsNotExist(err) {
-			fmt.Println("EX", err)
 			home, err := os.UserHomeDir()
 			if err != nil {
 				return nil, err

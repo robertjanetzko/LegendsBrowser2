@@ -3,11 +3,14 @@
 {{define "title"}}{{ title .Name }}{{end}}
 
 {{define "content"}}
+
+{{ if world.MapReady }}
 <div class="object-map">
     <div id="map" style="width: 300px; height: 300px"></div>
 </div>
 {{initMap}}
 {{ addMountain .Id false }}
+{{- end }}
 
 <h3>{{ title .Name }}</h3>
 <p>{{ if .IsVolcano }}volcano{{else}}mountain{{end}}</p>

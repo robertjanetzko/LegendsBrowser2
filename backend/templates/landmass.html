@@ -3,12 +3,14 @@
 {{define "title"}}{{ title .Name }}{{end}}
 
 {{define "content"}}
+{{ if world.MapReady }}
 <div class="object-map">
     <div id="map" style="width: 300px; height: 300px"></div>
 </div>
 {{initMap}}
 {{ addLandmass .Id }}
 <script>map.addLayer(landmassesLayer);</script>
+{{- end }}
 
 <h1>{{ title .Name }}</h1>
 <p>landmass</p>

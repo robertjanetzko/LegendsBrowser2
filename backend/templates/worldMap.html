@@ -4,6 +4,7 @@
 
 {{define "content"}}
 
+{{ if world.MapReady }}
 <div id="map" style="width: 100%; height: 1000px"></div>
 {{initMap}}
 <script>L.control.layers(null, overlayMaps).addTo(map);</script>
@@ -29,6 +30,9 @@
 
 {{- range $id, $r := .Rivers }}
 {{ addRiver $id }}
+{{- end }}
+{{ else }}
+No map data available
 {{- end }}
 
 {{- end }}

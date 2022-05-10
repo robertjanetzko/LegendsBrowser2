@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"io/fs"
 	"io/ioutil"
 	"net/http"
@@ -28,13 +27,9 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// prepend the path with the path to the static directory
 	path = h.staticPath + path
 
-	fmt.Println(path)
-
 	_, err := h.staticFS.Open(path)
 	if os.IsNotExist(err) {
-		fmt.Println("ERR")
 		// file does not exist, serve index.html
-		fmt.Println(path)
 		file, err := h.staticFS.Open(h.staticPath + "/" + h.indexPath)
 		if err != nil {
 			h.server.notFound(w)

@@ -4,10 +4,13 @@ import (
 	"fmt"
 	"os/exec"
 	"runtime"
+	"strings"
 )
 
 func OpenBrowser(url string) {
 	var err error
+
+	fmt.Println()
 
 	switch runtime.GOOS {
 	case "linux":
@@ -21,7 +24,13 @@ func OpenBrowser(url string) {
 	}
 	if err != nil {
 		fmt.Println(err)
-		fmt.Println("navigate to " + url + " in your browser")
 	}
+
+	s := "If your web browser doesn't open automatically, navigate to " + url + " manually"
+	t := strings.Repeat("=", len(s))
+	fmt.Println()
+	fmt.Println(t)
+	fmt.Println(s)
+	fmt.Println(t)
 
 }

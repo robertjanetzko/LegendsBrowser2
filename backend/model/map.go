@@ -18,6 +18,8 @@ import (
 func (w *DfWorld) LoadMap() {
 	w.LoadDimensions()
 
+	fmt.Println("")
+
 	path := ""
 	files, err := filepath.Glob(strings.ReplaceAll(w.FilePath, "-legends.xml", "-world_map.*"))
 	if err == nil && len(files) > 0 {
@@ -29,6 +31,7 @@ func (w *DfWorld) LoadMap() {
 	}
 
 	if path == "" {
+		fmt.Println("no world map found")
 		return
 	}
 
@@ -38,13 +41,13 @@ func (w *DfWorld) LoadMap() {
 		return
 	}
 
-	fmt.Println("Found Map", path)
+	fmt.Println("found world map", path)
 	img, format, err := image.Decode(mapImage)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println("loaded img", format)
+	fmt.Println("loaded world map imgage as", format)
 	buf := new(bytes.Buffer)
 	err = png.Encode(buf, img)
 	if err != nil {
@@ -56,6 +59,8 @@ func (w *DfWorld) LoadMap() {
 }
 
 func (w *DfWorld) LoadDimensions() {
+	fmt.Println("")
+
 	files, err := filepath.Glob(filepath.Join(filepath.Dir(w.FilePath), "*-world_gen_param.txt"))
 	if err != nil {
 		fmt.Println(err)
@@ -70,18 +75,21 @@ func (w *DfWorld) LoadDimensions() {
 		}
 	}
 	if path == "" {
+		fmt.Println("no worldgen params found")
 		return
 	}
 
-	fmt.Println("Found Worldgen", path)
+	fmt.Println("found worldgen params", path)
 	content, err := ioutil.ReadFile(path)
 	if err != nil {
+		fmt.Println(err)
 		return
 	}
 
 	r := regexp.MustCompile(`\[DIM:(\d+):(\d+)\]`)
 	result := r.FindAllStringSubmatch(string(content), 1)
 	if result == nil {
+		fmt.Println("no world dimensions found")
 		return
 	}
 	w.Width, _ = strconv.Atoi(result[0][2])

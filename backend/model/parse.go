@@ -28,7 +28,7 @@ func NewLegendsDecoder(file string) (*xml.Decoder, *os.File, *pb.ProgressBar, er
 		fmt.Println(err)
 	}
 
-	fmt.Println("Successfully Opened", file)
+	fmt.Println("Loading:", file)
 
 	converter := util.NewConvertReader(xmlFile)
 	barReader := bar.NewProxyReader(converter)
@@ -50,7 +50,7 @@ func NewLegendsParser(file string) (*util.XMLParser, *os.File, *pb.ProgressBar, 
 		fmt.Println(err)
 	}
 
-	fmt.Println("Successfully Opened", file)
+	fmt.Println("\nLoading:", file)
 
 	barReader := bar.NewProxyReader(xmlFile)
 	d := util.NewXMLParser(bufio.NewReader(barReader))
@@ -100,10 +100,14 @@ BaseLoop:
 	bar.Finish()
 
 	plus := false
+	file = strings.Replace(file, "-legends.xml", "-legends_plus.xml", 1)
+	if _, err := os.Stat(file); err == nil {
+		plus = true
+	} else {
+		fmt.Println("\nno legends_plus.xml found")
+	}
 
 	if plus {
-		file = strings.Replace(file, "-legends.xml", "-legends_plus.xml", 1)
-
 		p, xmlFile, bar, err = NewLegendsParser(file)
 		if lp != nil {
 			lp.Message = "Loading " + file

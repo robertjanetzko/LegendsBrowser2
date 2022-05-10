@@ -1,8 +1,10 @@
 package model
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -17,15 +19,20 @@ type EntityLeader struct {
 }
 
 func (w *DfWorld) LoadHistory() {
-	w.LoadDimensions()
+	fmt.Println("")
 
 	path := strings.ReplaceAll(w.FilePath, "-legends.xml", "-world_history.txt")
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
-		fmt.Println(err)
+		if errors.Is(err, os.ErrNotExist) {
+			fmt.Println("no world history found")
+		} else {
+			fmt.Println(err)
+		}
 		return
 	}
 
+	fmt.Println("found world history", path)
 	leaderRegEx := regexp.MustCompile(`  \[\*\] (.+?) \(.*?Reign Began: (-?\d+)\)`)
 	results := regexp.MustCompile(`\n([^ ].*?), [^\n]+(?:\n [^\n]+)*`).FindAllStringSubmatch(util.ConvertCp473(data), -1)
 	for _, result := range results {

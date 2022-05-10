@@ -63,12 +63,14 @@
             </div>
         </div>
     </div>
+    {{ if world.MapReady }}
     <div class="page-map">
         <div id="map" style="width: 300px; height: 300px"></div>
         <!-- <img class="site-map" src="$suburi/sitemap/$site.id" width="300" /> -->
         {{initMap}}
         {{ addSite .Id false }}
     </div>
+    {{- end }}
 </div>
 
 <h5 class="mt-3">Events</h5>

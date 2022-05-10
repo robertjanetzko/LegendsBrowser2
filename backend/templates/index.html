@@ -16,12 +16,14 @@
     {{- end }}
 </ul>
 
+{{ if world.MapReady }}
 <div id="map" style="height: 400px"></div>
 {{initMap}}
 {{- range $race, $civs := .Civilizations }}
 {{- range $civs }}
 {{- range .Sites }}
 {{ addSite . true }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
