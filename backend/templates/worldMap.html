@@ -4,6 +4,10 @@
 
 {{define "content"}}
 
+{{- if ne world.Name "" -}}
+<h3>{{world.Name}} - {{world.Altname}}</h3>
+{{- end }}
+
 {{ if world.MapReady }}
 <div id="map" style="width: 100%; height: 1000px"></div>
 {{initMap}}

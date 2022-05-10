@@ -3,6 +3,21 @@
 {{define "title"}}Legends Browser{{end}}
 
 {{define "content"}}
+
+{{ if world.MapReady }}
+<div class="object-map">
+    {{- if ne world.Name "" -}}
+    <h3>{{world.Name}} - {{world.Altname}}</h3>
+    {{- end }}
+    <div id="map" style="width: 750px; height: 750px"></div>
+</div>
+{{initMap}}
+{{- range $race, $civs := .Civilizations }}{{- range $civs }}{{- range .Sites }}
+{{ addSite . true }}
+{{- end }}{{- end }}{{- end }}
+{{- end }}
+
+
 <h3>Civilizations</h3>
 
 <ul>
@@ -15,17 +30,5 @@
     </ul>
     {{- end }}
 </ul>
-
-{{ if world.MapReady }}
-<div id="map" style="height: 400px"></div>
-{{initMap}}
-{{- range $race, $civs := .Civilizations }}
-{{- range $civs }}
-{{- range .Sites }}
-{{ addSite . true }}
-{{- end }}
-{{- end }}
-{{- end }}
-{{- end }}
 
 {{- end }}

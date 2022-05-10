@@ -32,6 +32,10 @@ func (w *DfWorld) LoadHistory() {
 		return
 	}
 
+	lines := strings.Split(string(data), "\n")
+	w.Name_ = lines[0]
+	w.Altname = lines[1]
+
 	fmt.Println("found world history", path)
 	leaderRegEx := regexp.MustCompile(`  \[\*\] (.+?) \(.*?Reign Began: (-?\d+)\)`)
 	results := regexp.MustCompile(`\n([^ ].*?), [^\n]+(?:\n [^\n]+)*`).FindAllStringSubmatch(util.ConvertCp473(data), -1)
