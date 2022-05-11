@@ -189,7 +189,7 @@ function coord(y, x) {
     return [x, y];
 }
 
-function addBattle(name, y, x) {
+function addBattle(id, y, x) {
     x = worldWidth - x - 1;
     var polygon = L.polygon(
         [[x + 0.5, y + battleOffset],
@@ -201,7 +201,7 @@ function addBattle(name, y, x) {
         weight: 3
     }).addTo(map);
 
-    attachTooltip(polygon, name);
+    attachTooltip(polygon, urlToolTip("collection", id));
 
     minx = Math.min(x, minx);
     miny = Math.min(y, miny);

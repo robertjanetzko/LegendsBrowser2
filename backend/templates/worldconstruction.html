@@ -10,6 +10,9 @@
 </div>
 {{initMap}}
 {{ addWorldConstruction .Id }}
+{{- range .Parts }}
+{{ addWorldConstruction . }}
+{{- end }}
 {{- end }}
 
 <h3>{{ title .Name }}</h3>

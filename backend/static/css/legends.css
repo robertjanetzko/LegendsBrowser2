@@ -28,6 +28,12 @@ a {
     margin-bottom: 16px;
 }
 
+.page-tabs .tab-content {
+    overflow-y: auto;
+    max-height: 300px;
+    margin-bottom: 16px;
+}
+
 .popover {
     max-width: fit-content;
 }

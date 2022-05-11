@@ -9,16 +9,16 @@
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         {{ $active := " active"}}
         {{- range $t, $v := .DanceForms }}
-        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{
-            len $v }})</button>
+        <a class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{
+            len $v }})</a>
         {{ $active = ""}}{{- end}}
         {{- range $t, $v := .MusicalForms }}
-        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{ len
-            $v }})</button>
+        <a class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{ len
+            $v }})</a>
         {{ $active = ""}}{{- end}}
         {{- range $t, $v := .PoeticForms }}
-        <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{ len
-            $v }})</button>
+        <a class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button" role="tab">{{$t}} ({{ len
+            $v }})</a>
         {{ $active = ""}}{{- end}}
     </div>
 </nav>

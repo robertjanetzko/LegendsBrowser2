@@ -8,8 +8,8 @@
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         {{- range $t, $v := .}}
-        <button class="nav-link{{ ifFirst $ $t " active" }}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button"
-            role="tab">{{$t}} ({{ len $v }})</button>
+        <a class="nav-link{{ ifFirst $ $t " active" }}" data-bs-toggle="tab" data-bs-target="#nav-{{kebab $t}}" type="button"
+            role="tab">{{$t}} ({{ len $v }})</a>
         {{- end}}
     </div>
 </nav>

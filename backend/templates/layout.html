@@ -89,12 +89,13 @@
         var hash = document.location.hash;
         if (hash && hash.startsWith("#nav-")) {
             var hashPieces = hash.split('?');
-            activeTab = $('.nav-link[data-bs-target="' + hashPieces[0] + '"]');
-            console.log(hashPieces[0], activeTab);
-            activeTab && activeTab.click()
+
+            var someTabTriggerEl = document.querySelector('.nav-link[data-bs-target="' + hashPieces[0] + '"]')
+            var tab = new bootstrap.Tab(someTabTriggerEl)
+            tab.show()
         }
 
-        $('.nav-tabs button').on('click', function (e) {
+        $('.nav-tabs button,.nav-tabs a').on('click', function (e) {
             window.location.hash = $(this).data("bs-target")
         });
 

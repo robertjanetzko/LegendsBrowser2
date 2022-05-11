@@ -127,6 +127,45 @@ var AddMapRiver = func(w *DfWorld, id int) template.HTML {
 	return ""
 }
 
+func AddMapCollection(w *DfWorld, id int) template.HTML {
+	if x, ok := w.HistoricalEventCollections[id]; ok {
+		r := ""
+		switch d := x.Details.(type) {
+		case *HistoricalEventCollectionBeastAttack:
+			r += string(AddMapSite(w, d.SiteId, false))
+		case *HistoricalEventCollectionDuel:
+			c1 := strings.Split(d.Coords, ",")
+			x, _ := strconv.Atoi(c1[0])
+			y, _ := strconv.Atoi(c1[1])
+			r += fmt.Sprintf(`<script>addBattle(%d, %d, %d)</script>`, id, x, y)
+		case *HistoricalEventCollectionSiteConquered:
+			r += string(AddMapSite(w, d.SiteId, false))
+		case *HistoricalEventCollectionBattle:
+			if d.SiteId != -1 {
+				r += string(AddMapSite(w, d.SiteId, false))
+			}
+
+			for _, s := range d.AttackingSquadSite {
+				r += string(AddMapSite(w, s, true))
+			}
+			for _, s := range d.DefendingSquadSite {
+				r += string(AddMapSite(w, s, true))
+			}
+
+			c1 := strings.Split(d.Coords, ",")
+			x, _ := strconv.Atoi(c1[0])
+			y, _ := strconv.Atoi(c1[1])
+			r += fmt.Sprintf(`<script>addBattle(%d, %d, %d)</script>`, id, x, y)
+		case *HistoricalEventCollectionWar:
+			for _, y := range x.Eventcol {
+				r += string(AddMapCollection(w, y))
+			}
+		}
+		return template.HTML(r)
+	}
+	return ""
+}
+
 var AndList = func(s []string) template.HTML { return template.HTML(andList(s)) }
 
 func andList(list []string) string {

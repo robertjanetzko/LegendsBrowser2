@@ -32,22 +32,19 @@
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 {{ $active := " active"}}
                 {{- if gt (len .Leaders) 0 }}
-                <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-leaders" type="button"
-                    role="tab">Leaders</button>
+                <a class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-leaders" type="button" role="tab">Leaders</a>
                 {{ $active = ""}}{{- end}}
                 {{- if gt (len .Sites) 0 }}
-                <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-sites" type="button" role="tab">Sites</button>
+                <a class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-sites" type="button" role="tab">Sites</a>
                 {{ $active = ""}}{{- end}}
                 {{- if gt (len .HistfigId) 0 }}
-                <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-members" type="button"
-                    role="tab">Members</button>
+                <a class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-members" type="button" role="tab">Members</a>
                 {{ $active = ""}}{{- end}}
                 {{- if gt (len .Child) 0 }}
-                <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-children" type="button"
-                    role="tab">Groups</button>
+                <a class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-children" type="button" role="tab">Groups</a>
                 {{ $active = ""}}{{- end}}
                 {{- if gt (len .Wars) 0 }}
-                <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-wars" type="button" role="tab">Wars</button>
+                <a class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-wars" type="button" role="tab">Wars</a>
                 {{ $active = ""}}{{- end}}
             </div>
         </nav>

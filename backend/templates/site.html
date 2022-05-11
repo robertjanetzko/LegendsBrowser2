@@ -8,19 +8,21 @@
         <h3>{{ title .Name }}</h3>
         <p>{{ .Type_ }}</p>
 
+        {{ $history := history .Id }}
+
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 {{ $active := " active"}}
                 {{- if gt (len .Structures) 0 }}
-                <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-structures" type="button"
-                    role="tab">Structures</button>
+                <a class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-structures" type="button" role="tab">Structures</a>
                 {{ $active = ""}}{{- end}}
                 {{- if gt (len .SiteProperties) 0 }}
-                <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-site-properties" type="button"
-                    role="tab">Properties</button>
+                <a class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-site-properties" type="button"
+                    role="tab">Properties</a>
                 {{ $active = ""}}{{- end}}
-                <button class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-history" type="button"
-                    role="tab">History</button>
+                {{- if gt (len $history) 0 }}
+                <a class="nav-link{{$active}}" data-bs-toggle="tab" data-bs-target="#nav-history" type="button" role="tab">History</a>
+                {{ $active = ""}}{{- end}}
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -58,9 +60,12 @@
                 </table>
             </div>
             {{ $active = ""}}{{- end}}
-            <div class="tab-pane{{$active}}" id="nav-history" role="tabpanel">
-                {{ template "events.html" events (history .Id) }}
+            {{ $history := history .Id }}
+            {{- if gt (len $history) 0 }}
+            <div class="tab-pane{{$active}} pt-3" id="nav-history" role="tabpanel">
+                {{ template "events.html" events $history }}
             </div>
+            {{ $active = ""}}{{- end}}
         </div>
     </div>
     {{ if world.MapReady }}

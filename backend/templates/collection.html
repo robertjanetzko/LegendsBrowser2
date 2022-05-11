@@ -4,6 +4,14 @@
 
 {{define "content"}}
 
+{{ if world.MapReady }}
+<div class="object-map">
+    <div id="map" style="width: 300px; height: 300px"></div>
+</div>
+{{initMap}}
+{{ addCollection .Id }}
+{{- end }}
+
 <h3>{{ html (capitalize (string (collection .Id))) }}</h3>
 
 {{- if eq .Type "occasion" }}{{- with getOccasion .Details.CivId .Details.OccasionId }}{{- if ne .Event -1 }}
