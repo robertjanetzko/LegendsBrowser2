@@ -34,4 +34,4 @@ It is a complete rewrite of the original Legends Browser, available at https://g
 ### Troubleshooting ###
 
 * If you find any bugs, feel free to open an issue here on github
-* If you have questions there is a forum thread http://www.bay12forums.com/smf/index.php?topic=155307.0
+* If you have questions there is a forum thread http://www.bay12forums.com/smf/index.php?topic=179848.0
