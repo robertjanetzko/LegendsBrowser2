@@ -8,7 +8,6 @@ It is a complete rewrite of the original Legends Browser, available at https://g
 * Works in the browser of your choice (just launch an open http://localhost:58881)
 * Recreates Legends Mode from dwarf fortress, with objects being accessible as links
 * Add several statistics and overviews
-* supports LNP processed and archived legends_archive.zip
 
 ### Using Legends Browser ###
 
@@ -34,6 +33,5 @@ It is a complete rewrite of the original Legends Browser, available at https://g
 
 ### Troubleshooting ###
 
-* Development is still in a very early stage, so you may find bugs
 * If you find any bugs, feel free to open an issue here on github
 * If you have questions there is a forum thread http://www.bay12forums.com/smf/index.php?topic=155307.0
