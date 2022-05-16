@@ -1015,6 +1015,7 @@ func InitSameFields() {
 				"SiteId":    true,
 			},
 		},
+		"HistoricalEventSabotage":               {},
 		"HistoricalEventSiteDied":               {},
 		"HistoricalEventSiteDispute":            {},
 		"HistoricalEventSiteRetired":            {},
@@ -2576,6 +2577,7 @@ const (
 	HfLinkLinkType_FormerApprentice
 	HfLinkLinkType_FormerMaster
 	HfLinkLinkType_FormerSpouse
+	HfLinkLinkType_Imprisoner
 	HfLinkLinkType_Lover
 	HfLinkLinkType_Master
 	HfLinkLinkType_Mother
@@ -2604,6 +2606,8 @@ func parseHfLinkLinkType(s string) HfLinkLinkType {
 		return HfLinkLinkType_FormerMaster
 	case "former spouse":
 		return HfLinkLinkType_FormerSpouse
+	case "imprisoner":
+		return HfLinkLinkType_Imprisoner
 	case "lover":
 		return HfLinkLinkType_Lover
 	case "master":
@@ -2640,6 +2644,8 @@ func (s HfLinkLinkType) String() string {
 		return "former master"
 	case HfLinkLinkType_FormerSpouse:
 		return "former spouse"
+	case HfLinkLinkType_Imprisoner:
+		return "imprisoner"
 	case HfLinkLinkType_Lover:
 		return "lover"
 	case HfLinkLinkType_Master:
@@ -9680,6 +9686,7 @@ const (
 	HistoricalEventHfConvictedCrime_DisorderlyConduct
 	HistoricalEventHfConvictedCrime_Embezzlement
 	HistoricalEventHfConvictedCrime_Espionage
+	HistoricalEventHfConvictedCrime_Kidnapping
 	HistoricalEventHfConvictedCrime_Murder
 	HistoricalEventHfConvictedCrime_Theft
 	HistoricalEventHfConvictedCrime_Treason
@@ -9704,6 +9711,8 @@ func parseHistoricalEventHfConvictedCrime(s string) HistoricalEventHfConvictedCr
 		return HistoricalEventHfConvictedCrime_Embezzlement
 	case "espionage":
 		return HistoricalEventHfConvictedCrime_Espionage
+	case "kidnapping":
+		return HistoricalEventHfConvictedCrime_Kidnapping
 	case "murder":
 		return HistoricalEventHfConvictedCrime_Murder
 	case "theft":
@@ -9734,6 +9743,8 @@ func (s HistoricalEventHfConvictedCrime) String() string {
 		return "embezzlement"
 	case HistoricalEventHfConvictedCrime_Espionage:
 		return "espionage"
+	case HistoricalEventHfConvictedCrime_Kidnapping:
+		return "kidnapping"
 	case HistoricalEventHfConvictedCrime_Murder:
 		return "murder"
 	case HistoricalEventHfConvictedCrime_Theft:
@@ -13797,13 +13808,18 @@ const (
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersSieveAlgorithmForPrimes
 	HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersUniquePrimeFactorization
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodAnesthesia
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodAsylumForMentallyIll
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodAutopsy
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodCataractSurgery
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodCauterization
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodFractureImmobilization
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodFractureTreatment
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodHerniaSurgery
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodHospitalLab
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodLithotomySurgery
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodMedicalSchool
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodPhysicalExamination
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodProfessionalHospitalStaff
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSpecializedWards
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryDraining
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryExcision
@@ -13835,6 +13851,8 @@ const (
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPrognosis
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryCirculation
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryMedicine
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryReactionTime
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryRelapse
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheorySpecializedSurgicalInstruments
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheorySurgicalModels
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryTheVoice
@@ -13848,10 +13866,12 @@ const (
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolHerbalRemedies
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolMineralRemedies
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolMudBagsAsSurgicalModels
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolOrthopedicCast
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolPlantsAsSurgicalModels
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolScalpel
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolSurgicalNeedles
 	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolSurgicalScissors
+	HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolTractionBench
 	HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistMethodDissection
 	HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistObservationAnatomy
 	HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistObservationDiseases
@@ -14245,8 +14265,12 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MathematicsNumbersUniquePrimeFactorization
 	case "medicine:method:anesthesia":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodAnesthesia
+	case "medicine:method:asylum for mentally ill":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodAsylumForMentallyIll
 	case "medicine:method:autopsy":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodAutopsy
+	case "medicine:method:cataract surgery":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodCataractSurgery
 	case "medicine:method:cauterization":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodCauterization
 	case "medicine:method:fracture immobilization":
@@ -14255,10 +14279,16 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodFractureTreatment
 	case "medicine:method:hernia surgery":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodHerniaSurgery
+	case "medicine:method:hospital lab":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodHospitalLab
 	case "medicine:method:lithotomy surgery":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodLithotomySurgery
+	case "medicine:method:medical school":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodMedicalSchool
 	case "medicine:method:physical examination":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodPhysicalExamination
+	case "medicine:method:professional hospital staff":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodProfessionalHospitalStaff
 	case "medicine:method:specialized wards":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSpecializedWards
 	case "medicine:method:surgery draining":
@@ -14321,6 +14351,10 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryCirculation
 	case "medicine:theory:pulmonary medicine":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryMedicine
+	case "medicine:theory:reaction time":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryReactionTime
+	case "medicine:theory:relapse":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryRelapse
 	case "medicine:theory:specialized surgical instruments":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheorySpecializedSurgicalInstruments
 	case "medicine:theory:surgical models":
@@ -14347,6 +14381,8 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolMineralRemedies
 	case "medicine:tool:mud bags as surgical models":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolMudBagsAsSurgicalModels
+	case "medicine:tool:orthopedic cast":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolOrthopedicCast
 	case "medicine:tool:plants as surgical models":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolPlantsAsSurgicalModels
 	case "medicine:tool:scalpel":
@@ -14355,6 +14391,8 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolSurgicalNeedles
 	case "medicine:tool:surgical scissors":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolSurgicalScissors
+	case "medicine:tool:traction bench":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolTractionBench
 	case "naturalist:method:dissection":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistMethodDissection
 	case "naturalist:observation:anatomy":
@@ -14799,8 +14837,12 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "mathematics numbers unique prime factorization"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodAnesthesia:
 		return "medicine method anesthesia"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodAsylumForMentallyIll:
+		return "medicine method asylum for mentally ill"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodAutopsy:
 		return "medicine method autopsy"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodCataractSurgery:
+		return "medicine method cataract surgery"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodCauterization:
 		return "medicine method cauterization"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodFractureImmobilization:
@@ -14809,10 +14851,16 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "medicine method fracture treatment"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodHerniaSurgery:
 		return "medicine method hernia surgery"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodHospitalLab:
+		return "medicine method hospital lab"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodLithotomySurgery:
 		return "medicine method lithotomy surgery"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodMedicalSchool:
+		return "medicine method medical school"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodPhysicalExamination:
 		return "medicine method physical examination"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodProfessionalHospitalStaff:
+		return "medicine method professional hospital staff"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSpecializedWards:
 		return "medicine method specialized wards"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineMethodSurgeryDraining:
@@ -14875,6 +14923,10 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "medicine theory pulmonary circulation"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryPulmonaryMedicine:
 		return "medicine theory pulmonary medicine"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryReactionTime:
+		return "medicine theory reaction time"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheoryRelapse:
+		return "medicine theory relapse"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheorySpecializedSurgicalInstruments:
 		return "medicine theory specialized surgical instruments"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineTheorySurgicalModels:
@@ -14901,6 +14953,8 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "medicine tool mineral remedies"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolMudBagsAsSurgicalModels:
 		return "medicine tool mud bags as surgical models"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolOrthopedicCast:
+		return "medicine tool orthopedic cast"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolPlantsAsSurgicalModels:
 		return "medicine tool plants as surgical models"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolScalpel:
@@ -14909,6 +14963,8 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "medicine tool surgical needles"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolSurgicalScissors:
 		return "medicine tool surgical scissors"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_MedicineToolTractionBench:
+		return "medicine tool traction bench"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistMethodDissection:
 		return "naturalist method dissection"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_NaturalistObservationAnatomy:
@@ -17950,6 +18006,53 @@ func (x *HistoricalEventReplacedStructure) MarshalJSON() ([]byte, error) {
 	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
+}
+
+type HistoricalEventSabotage struct {
+	SaboteurHfid int `json:"saboteurHfid" legend:"base" related:""` // saboteur_hfid
+	SiteId       int `json:"siteId" legend:"base" related:""`       // site_id
+	TargetHfid   int `json:"targetHfid" legend:"base" related:""`   // target_hfid
+}
+
+func NewHistoricalEventSabotage() *HistoricalEventSabotage {
+	return &HistoricalEventSabotage{
+		SaboteurHfid: -1,
+		SiteId:       -1,
+		TargetHfid:   -1,
+	}
+}
+func (x *HistoricalEventSabotage) Type() string                { return "sabotage" }
+func (x *HistoricalEventSabotage) RelatedToEntity(id int) bool { return false }
+func (x *HistoricalEventSabotage) RelatedToHf(id int) bool {
+	return x.SaboteurHfid == id || x.TargetHfid == id
+}
+func (x *HistoricalEventSabotage) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventSabotage) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventSabotage) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventSabotage) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventSabotage) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventSabotage) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventSabotage) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventSabotage) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventSabotage) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventSabotage) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventSabotage) RelatedToIdentity(id int) bool          { return false }
+
+func (x *HistoricalEventSabotage) CheckFields() {
+}
+
+func (x *HistoricalEventSabotage) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.SaboteurHfid != -1 {
+		d["saboteurHfid"] = x.SaboteurHfid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.TargetHfid != -1 {
+		d["targetHfid"] = x.TargetHfid
 	}
 	return json.Marshal(d)
 }
@@ -21351,6 +21454,7 @@ const (
 	SiteLinkLinkType_HomeStructure
 	SiteLinkLinkType_Lair
 	SiteLinkLinkType_Occupation
+	SiteLinkLinkType_PrisonBuildingProfile
 	SiteLinkLinkType_SeatOfPower
 )
 
@@ -21370,6 +21474,8 @@ func parseSiteLinkLinkType(s string) SiteLinkLinkType {
 		return SiteLinkLinkType_Lair
 	case "occupation":
 		return SiteLinkLinkType_Occupation
+	case "prison building profile":
+		return SiteLinkLinkType_PrisonBuildingProfile
 	case "seat of power":
 		return SiteLinkLinkType_SeatOfPower
 	}
@@ -21392,6 +21498,8 @@ func (s SiteLinkLinkType) String() string {
 		return "lair"
 	case SiteLinkLinkType_Occupation:
 		return "occupation"
+	case SiteLinkLinkType_PrisonBuildingProfile:
+		return "prison building profile"
 	case SiteLinkLinkType_SeatOfPower:
 		return "seat of power"
 	}
@@ -24803,6 +24911,8 @@ func parseHistoricalEvent(p *util.XMLParser) (*HistoricalEvent, error) {
 					obj.Details, err = parseHistoricalEventRemoveHfSiteLink(p)
 				case "replaced structure":
 					obj.Details, err = parseHistoricalEventReplacedStructure(p)
+				case "sabotage":
+					obj.Details, err = parseHistoricalEventSabotage(p)
 				case "site died":
 					obj.Details, err = parseHistoricalEventSiteDied(p)
 				case "site dispute":
@@ -37333,6 +37443,70 @@ func parseHistoricalEventReplacedStructurePlus(p *util.XMLParser, obj *Historica
 					return nil, err
 				}
 				obj.SiteCivId = num(data)
+			default:
+				// fmt.Println("unknown field", n)
+				p.Skip()
+			}
+
+		case util.EndElement:
+			obj.CheckFields()
+			return obj, nil
+		}
+	}
+}
+func parseHistoricalEventSabotage(p *util.XMLParser) (*HistoricalEventSabotage, error) {
+	var obj = NewHistoricalEventSabotage()
+
+	for {
+		t, n, err := p.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t {
+		case util.StartElement:
+			switch n {
+			case "saboteur_hfid":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SaboteurHfid = num(data)
+			case "site_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SiteId = num(data)
+			case "target_hfid":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.TargetHfid = num(data)
+			default:
+				// fmt.Println("unknown field", n)
+				p.Skip()
+			}
+
+		case util.EndElement:
+			obj.CheckFields()
+			return obj, nil
+		}
+	}
+}
+func parseHistoricalEventSabotagePlus(p *util.XMLParser, obj *HistoricalEventSabotage) (*HistoricalEventSabotage, error) {
+	if obj == nil {
+		obj = NewHistoricalEventSabotage()
+	}
+
+	for {
+		t, n, err := p.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t {
+		case util.StartElement:
+			switch n {
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()

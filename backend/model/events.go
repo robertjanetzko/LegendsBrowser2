@@ -2213,3 +2213,7 @@ func (x *HistoricalEventWrittenContentComposed) Html(c *Context) string {
 	}
 	return c.writtenContent(x.WcId) + " was authored by " + c.hf(x.HistFigureId) + c.location(x.SiteId, " in", x.SubregionId, " in") + reason + circumstance
 }
+
+func (x *HistoricalEventSabotage) Html(c *Context) string {
+	return c.hf(x.SaboteurHfid) + " sabotaged the activities of " + c.hfRelated(x.TargetHfid, x.SaboteurHfid) + c.site(x.SiteId, " at")
+}

@@ -5393,6 +5393,8 @@
         "HUMAN": true,
         "KOBOLD": true,
         "REPTILE_MAN": true,
+        "SERPENT_MAN": true,
+        "TROLL": true,
         "amphibian man": true,
         "cave dragon": true,
         "cave fish man": true,
@@ -7314,6 +7316,7 @@
         "disorderly conduct": true,
         "embezzlement": true,
         "espionage": true,
+        "kidnapping": true,
         "murder": true,
         "theft": true,
         "treason": true,
@@ -7764,7 +7767,8 @@
       "Values": {
         "DEFAULT": true,
         "FEMALE": true,
-        "MALE": true
+        "MALE": true,
+        "WORKER": true
       },
       "Enum": true
     },
@@ -10040,13 +10044,18 @@
         "mathematics:numbers:sieve algorithm for primes": true,
         "mathematics:numbers:unique prime factorization": true,
         "medicine:method:anesthesia": true,
+        "medicine:method:asylum for mentally ill": true,
         "medicine:method:autopsy": true,
+        "medicine:method:cataract surgery": true,
         "medicine:method:cauterization": true,
         "medicine:method:fracture immobilization": true,
         "medicine:method:fracture treatment": true,
         "medicine:method:hernia surgery": true,
+        "medicine:method:hospital lab": true,
         "medicine:method:lithotomy surgery": true,
+        "medicine:method:medical school": true,
         "medicine:method:physical examination": true,
+        "medicine:method:professional hospital staff": true,
         "medicine:method:specialized wards": true,
         "medicine:method:surgery draining": true,
         "medicine:method:surgery excision": true,
@@ -10078,6 +10087,8 @@
         "medicine:theory:prognosis": true,
         "medicine:theory:pulmonary circulation": true,
         "medicine:theory:pulmonary medicine": true,
+        "medicine:theory:reaction time": true,
+        "medicine:theory:relapse": true,
         "medicine:theory:specialized surgical instruments": true,
         "medicine:theory:surgical models": true,
         "medicine:theory:the voice": true,
@@ -10091,10 +10102,12 @@
         "medicine:tool:herbal remedies": true,
         "medicine:tool:mineral remedies": true,
         "medicine:tool:mud bags as surgical models": true,
+        "medicine:tool:orthopedic cast": true,
         "medicine:tool:plants as surgical models": true,
         "medicine:tool:scalpel": true,
         "medicine:tool:surgical needles": true,
         "medicine:tool:surgical scissors": true,
+        "medicine:tool:traction bench": true,
         "naturalist:method:dissection": true,
         "naturalist:observation:anatomy": true,
         "naturalist:observation:diseases": true,
@@ -11866,6 +11879,33 @@
       "Values": {},
       "Enum": true
     },
+    "df_world|historical_events|historical_event+Sabotage|saboteur_hfid": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+Sabotage|site_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+Sabotage|target_hfid": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
     "df_world|historical_events|historical_event+SiteDied|abandoned": {
       "IsString": true,
       "NoBool": false,
@@ -13236,6 +13276,7 @@
         "former apprentice": true,
         "former master": true,
         "former spouse": true,
+        "imprisoner": true,
         "lover": true,
         "master": true,
         "mother": true,
@@ -14101,6 +14142,7 @@
         "home structure": true,
         "lair": true,
         "occupation": true,
+        "prison building profile": true,
         "seat of power": true
       },
       "Enum": true
@@ -16259,6 +16301,11 @@
         "name": "ReplacedStructure",
         "base": "replaced structure",
         "plus": "replaced_building"
+      },
+      "Sabotage": {
+        "name": "Sabotage",
+        "base": "sabotage",
+        "plus": ""
       },
       "SiteDied": {
         "name": "SiteDied",

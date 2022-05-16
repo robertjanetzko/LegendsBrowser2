@@ -1,6 +1,7 @@
 package model
 
 import (
+	"fmt"
 	"sort"
 	"strings"
 
@@ -10,7 +11,10 @@ import (
 	"golang.org/x/exp/slices"
 )
 
+var CheckAfterLoading = false
+
 func (w *DfWorld) process() {
+	fmt.Println("\nprocessing...")
 	for id, r := range w.Rivers {
 		r.Id_ = id
 	}
@@ -194,13 +198,16 @@ func (w *DfWorld) process() {
 	}
 
 	// check events texts
-	for _, e := range w.HistoricalEvents {
-		e.Details.Html(&Context{World: w})
-	}
-	for _, e := range w.HistoricalEventCollections {
-		e.Details.Html(e, &Context{World: w})
+	if CheckAfterLoading {
+		for _, e := range w.HistoricalEvents {
+			e.Details.Html(&Context{World: w})
+		}
+		for _, e := range w.HistoricalEventCollections {
+			e.Details.Html(e, &Context{World: w})
+		}
 	}
 
+	fmt.Println("world ready")
 }
 
 func (w *DfWorld) processEvents() {
