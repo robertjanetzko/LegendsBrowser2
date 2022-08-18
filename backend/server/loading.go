@@ -107,6 +107,10 @@ func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+	if err != nil {
+		httpError(w, err)
+		return
+	}
 	http.Redirect(w, r, h.server.context.config.SubUri+"/load", http.StatusSeeOther)
 }
 

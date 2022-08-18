@@ -16,5 +16,9 @@
 			"jinliming2.vscode-go-template",
 			"golang.go"
 		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": []
 	}
 }
