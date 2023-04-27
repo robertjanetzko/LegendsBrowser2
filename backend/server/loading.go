@@ -108,10 +108,11 @@ func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	if err != nil {
-		httpError(w, err)
-		return
+		if !os.IsNotExist(err) {
+			httpError(w, err)
+		}
 	}
-	http.Redirect(w, r, h.server.context.config.SubUri+"/load", http.StatusSeeOther)
+	http.Redirect(w, r, h.server.context.config.SubUri+"/load?p=%2f", http.StatusSeeOther)
 }
 
 func isLegendsXml(f fs.FileInfo) bool {
