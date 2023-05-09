@@ -4086,6 +4086,15 @@
       "Values": {},
       "Enum": true
     },
+    "df_world|historical_events|historical_event+ArtifactCreated|entity_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
     "df_world|historical_events|historical_event+ArtifactCreated|hist_figure_id": {
       "IsString": false,
       "NoBool": true,
@@ -5390,6 +5399,7 @@
         "DWARF": true,
         "ELF": true,
         "GOBLIN": true,
+        "GORLAK": true,
         "HUMAN": true,
         "KOBOLD": true,
         "REPTILE_MAN": true,
@@ -7125,6 +7135,42 @@
       "Values": {},
       "Enum": true
     },
+    "df_world|historical_events|historical_event+HfAskedAboutArtifact|artifact_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+HfAskedAboutArtifact|hist_fig_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+HfAskedAboutArtifact|site_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+HfAskedAboutArtifact|structure_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
     "df_world|historical_events|historical_event+HfAttackedSite|attacker_hfid": {
       "IsString": false,
       "NoBool": true,
@@ -7153,6 +7199,51 @@
       "Enum": true
     },
     "df_world|historical_events|historical_event+HfAttackedSite|site_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+HfCarouse|feature_layer_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+HfCarouse|group_hfid": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": true,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+HfCarouse|site_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+HfCarouse|structure_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+HfCarouse|subregion_id": {
       "IsString": false,
       "NoBool": true,
       "Multiple": false,
@@ -7766,8 +7857,11 @@
       "Plus": true,
       "Values": {
         "DEFAULT": true,
+        "DRONE": true,
         "FEMALE": true,
         "MALE": true,
+        "QUEEN": true,
+        "SOLDIER": true,
         "WORKER": true
       },
       "Enum": true
@@ -9967,6 +10061,7 @@
         "engineering:optics:theory of color": true,
         "engineering:optics:water-filled spheres": true,
         "geography:cartography:basic": true,
+        "geography:cartography:distance scale": true,
         "geography:cartography:economic": true,
         "geography:cartography:geological": true,
         "geography:form:atlas": true,
@@ -15124,6 +15219,7 @@
         "counting_house": true,
         "dungeon": true,
         "guildhall": true,
+        "hospital": true,
         "inn tavern": true,
         "inn_tavern": true,
         "keep": true,
@@ -16012,9 +16108,19 @@
         "base": "hf abducted",
         "plus": ""
       },
+      "HfAskedAboutArtifact": {
+        "name": "HfAskedAboutArtifact",
+        "base": "hf asked about artifact",
+        "plus": ""
+      },
       "HfAttackedSite": {
         "name": "HfAttackedSite",
         "base": "hf attacked site",
+        "plus": ""
+      },
+      "HfCarouse": {
+        "name": "HfCarouse",
+        "base": "hf carouse",
         "plus": ""
       },
       "HfConfronted": {
@@ -16631,6 +16737,11 @@
         "name": "Guildhall",
         "base": "guildhall",
         "plus": "guildhall"
+      },
+      "Hospital": {
+        "name": "Hospital",
+        "base": "hospital",
+        "plus": ""
       },
       "InnTavern": {
         "name": "InnTavern",

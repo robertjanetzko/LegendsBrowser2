@@ -124,22 +124,26 @@ func InitSameFields() {
 		"HistoricalEventArtifactCopied":      {},
 		"HistoricalEventArtifactCreated": {
 			"CreatorHfid": {
+				"EntityId":     true,
 				"HistFigureId": true,
 				"SiteId":       true,
 				"UnitId":       true,
 			},
 			"CreatorUnitId": {
+				"EntityId":     true,
 				"HistFigureId": true,
 				"SiteId":       true,
 				"UnitId":       true,
 			},
 			"Reason": {},
 			"SanctifyHf": {
+				"EntityId":     true,
 				"HistFigureId": true,
 				"SiteId":       true,
 				"UnitId":       true,
 			},
 			"Site": {
+				"EntityId":     true,
 				"HistFigureId": true,
 				"SiteId":       true,
 				"UnitId":       true,
@@ -406,7 +410,9 @@ func InitSameFields() {
 		"HistoricalEventFirstContact":             {},
 		"HistoricalEventGamble":                   {},
 		"HistoricalEventHfAbducted":               {},
+		"HistoricalEventHfAskedAboutArtifact":     {},
 		"HistoricalEventHfAttackedSite":           {},
+		"HistoricalEventHfCarouse":                {},
 		"HistoricalEventHfConfronted":             {},
 		"HistoricalEventHfConvicted":              {},
 		"HistoricalEventHfDestroyedSite":          {},
@@ -4149,6 +4155,7 @@ func (s HistoricalEventArtifactCreatedReason) MarshalJSON() ([]byte, error) {
 type HistoricalEventArtifactCreated struct {
 	ArtifactId   int                                         `json:"artifactId" legend:"both" related:""`   // artifact_id
 	Circumstance *HistoricalEventArtifactCreatedCircumstance `json:"circumstance" legend:"plus" related:""` // circumstance
+	EntityId     int                                         `json:"entityId" legend:"base" related:""`     // entity_id
 	HistFigureId int                                         `json:"histFigureId" legend:"base" related:""` // hist_figure_id
 	NameOnly     bool                                        `json:"nameOnly" legend:"base" related:""`     // name_only
 	Reason       HistoricalEventArtifactCreatedReason        `json:"reason" legend:"plus" related:""`       // reason
@@ -4160,6 +4167,7 @@ type HistoricalEventArtifactCreated struct {
 func NewHistoricalEventArtifactCreated() *HistoricalEventArtifactCreated {
 	return &HistoricalEventArtifactCreated{
 		ArtifactId:   -1,
+		EntityId:     -1,
 		HistFigureId: -1,
 		SanctifyHf:   -1,
 		SiteId:       -1,
@@ -4167,7 +4175,7 @@ func NewHistoricalEventArtifactCreated() *HistoricalEventArtifactCreated {
 	}
 }
 func (x *HistoricalEventArtifactCreated) Type() string                { return "artifact created" }
-func (x *HistoricalEventArtifactCreated) RelatedToEntity(id int) bool { return false }
+func (x *HistoricalEventArtifactCreated) RelatedToEntity(id int) bool { return x.EntityId == id }
 func (x *HistoricalEventArtifactCreated) RelatedToHf(id int) bool {
 	return x.HistFigureId == id || x.SanctifyHf == id
 }
@@ -4184,6 +4192,9 @@ func (x *HistoricalEventArtifactCreated) RelatedToMountain(id int) bool         
 func (x *HistoricalEventArtifactCreated) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventArtifactCreated) CheckFields() {
+	if x.SanctifyHf != x.EntityId {
+		sameFields["HistoricalEventArtifactCreated"]["SanctifyHf"]["EntityId"] = false
+	}
 	if x.SanctifyHf != x.HistFigureId {
 		sameFields["HistoricalEventArtifactCreated"]["SanctifyHf"]["HistFigureId"] = false
 	}
@@ -4201,6 +4212,9 @@ func (x *HistoricalEventArtifactCreated) MarshalJSON() ([]byte, error) {
 		d["artifactId"] = x.ArtifactId
 	}
 	d["circumstance"] = x.Circumstance
+	if x.EntityId != -1 {
+		d["entityId"] = x.EntityId
+	}
 	if x.HistFigureId != -1 {
 		d["histFigureId"] = x.HistFigureId
 	}
@@ -9505,6 +9519,60 @@ func (x *HistoricalEventHfAbducted) MarshalJSON() ([]byte, error) {
 	return json.Marshal(d)
 }
 
+type HistoricalEventHfAskedAboutArtifact struct {
+	ArtifactId  int `json:"artifactId" legend:"base" related:""`  // artifact_id
+	HistFigId   int `json:"histFigId" legend:"base" related:""`   // hist_fig_id
+	SiteId      int `json:"siteId" legend:"base" related:""`      // site_id
+	StructureId int `json:"structureId" legend:"base" related:""` // structure_id
+}
+
+func NewHistoricalEventHfAskedAboutArtifact() *HistoricalEventHfAskedAboutArtifact {
+	return &HistoricalEventHfAskedAboutArtifact{
+		ArtifactId:  -1,
+		HistFigId:   -1,
+		SiteId:      -1,
+		StructureId: -1,
+	}
+}
+func (x *HistoricalEventHfAskedAboutArtifact) Type() string                { return "hf asked about artifact" }
+func (x *HistoricalEventHfAskedAboutArtifact) RelatedToEntity(id int) bool { return false }
+func (x *HistoricalEventHfAskedAboutArtifact) RelatedToHf(id int) bool     { return false }
+func (x *HistoricalEventHfAskedAboutArtifact) RelatedToArtifact(id int) bool {
+	return x.ArtifactId == id
+}
+func (x *HistoricalEventHfAskedAboutArtifact) RelatedToSite(id int) bool { return x.SiteId == id }
+func (x *HistoricalEventHfAskedAboutArtifact) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventHfAskedAboutArtifact) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventHfAskedAboutArtifact) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfAskedAboutArtifact) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfAskedAboutArtifact) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfAskedAboutArtifact) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfAskedAboutArtifact) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfAskedAboutArtifact) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfAskedAboutArtifact) RelatedToIdentity(id int) bool          { return false }
+
+func (x *HistoricalEventHfAskedAboutArtifact) CheckFields() {
+}
+
+func (x *HistoricalEventHfAskedAboutArtifact) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ArtifactId != -1 {
+		d["artifactId"] = x.ArtifactId
+	}
+	if x.HistFigId != -1 {
+		d["histFigId"] = x.HistFigId
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventHfAttackedSite struct {
 	AttackerHfid  int `json:"attackerHfid" legend:"base" related:""`  // attacker_hfid
 	DefenderCivId int `json:"defenderCivId" legend:"base" related:""` // defender_civ_id
@@ -9553,6 +9621,60 @@ func (x *HistoricalEventHfAttackedSite) MarshalJSON() ([]byte, error) {
 	}
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
+}
+
+type HistoricalEventHfCarouse struct {
+	FeatureLayerId int   `json:"featureLayerId" legend:"base" related:""` // feature_layer_id
+	GroupHfid      []int `json:"groupHfid" legend:"base" related:""`      // group_hfid
+	SiteId         int   `json:"siteId" legend:"base" related:""`         // site_id
+	StructureId    int   `json:"structureId" legend:"base" related:""`    // structure_id
+	SubregionId    int   `json:"subregionId" legend:"base" related:""`    // subregion_id
+}
+
+func NewHistoricalEventHfCarouse() *HistoricalEventHfCarouse {
+	return &HistoricalEventHfCarouse{
+		FeatureLayerId: -1,
+		SiteId:         -1,
+		StructureId:    -1,
+		SubregionId:    -1,
+	}
+}
+func (x *HistoricalEventHfCarouse) Type() string                  { return "hf carouse" }
+func (x *HistoricalEventHfCarouse) RelatedToEntity(id int) bool   { return false }
+func (x *HistoricalEventHfCarouse) RelatedToHf(id int) bool       { return containsInt(x.GroupHfid, id) }
+func (x *HistoricalEventHfCarouse) RelatedToArtifact(id int) bool { return false }
+func (x *HistoricalEventHfCarouse) RelatedToSite(id int) bool     { return x.SiteId == id }
+func (x *HistoricalEventHfCarouse) RelatedToStructure(siteId, id int) bool {
+	return x.RelatedToSite(siteId) && (x.StructureId == id)
+}
+func (x *HistoricalEventHfCarouse) RelatedToRegion(id int) bool            { return x.SubregionId == id }
+func (x *HistoricalEventHfCarouse) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventHfCarouse) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventHfCarouse) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventHfCarouse) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventHfCarouse) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventHfCarouse) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventHfCarouse) RelatedToIdentity(id int) bool          { return false }
+
+func (x *HistoricalEventHfCarouse) CheckFields() {
+}
+
+func (x *HistoricalEventHfCarouse) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.FeatureLayerId != -1 {
+		d["featureLayerId"] = x.FeatureLayerId
+	}
+	d["groupHfid"] = x.GroupHfid
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	if x.StructureId != -1 {
+		d["structureId"] = x.StructureId
+	}
+	if x.SubregionId != -1 {
+		d["subregionId"] = x.SubregionId
 	}
 	return json.Marshal(d)
 }
@@ -13731,6 +13853,7 @@ const (
 	HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringOpticsTheoryOfColor
 	HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringOpticsWaterFilledSpheres
 	HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyBasic
+	HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyDistanceScale
 	HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyEconomic
 	HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyGeological
 	HistoricalEventKnowledgeDiscoveredKnowledge_GeographyFormAtlas
@@ -14111,6 +14234,8 @@ func parseHistoricalEventKnowledgeDiscoveredKnowledge(s string) HistoricalEventK
 		return HistoricalEventKnowledgeDiscoveredKnowledge_EngineeringOpticsWaterFilledSpheres
 	case "geography:cartography:basic":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyBasic
+	case "geography:cartography:distance scale":
+		return HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyDistanceScale
 	case "geography:cartography:economic":
 		return HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyEconomic
 	case "geography:cartography:geological":
@@ -14683,6 +14808,8 @@ func (s HistoricalEventKnowledgeDiscoveredKnowledge) String() string {
 		return "engineering optics water filled spheres"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyBasic:
 		return "geography cartography basic"
+	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyDistanceScale:
+		return "geography cartography distance scale"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyEconomic:
 		return "geography cartography economic"
 	case HistoricalEventKnowledgeDiscoveredKnowledge_GeographyCartographyGeological:
@@ -21653,6 +21780,7 @@ const (
 	StructureType_CountingHouse
 	StructureType_Dungeon
 	StructureType_Guildhall
+	StructureType_Hospital
 	StructureType_InnTavern
 	StructureType_Keep
 	StructureType_Library
@@ -21674,6 +21802,8 @@ func parseStructureType(s string) StructureType {
 		return StructureType_Dungeon
 	case "guildhall":
 		return StructureType_Guildhall
+	case "hospital":
+		return StructureType_Hospital
 	case "inn tavern":
 		return StructureType_InnTavern
 	case "inn_tavern":
@@ -21710,6 +21840,8 @@ func (s StructureType) String() string {
 		return "dungeon"
 	case StructureType_Guildhall:
 		return "guildhall"
+	case StructureType_Hospital:
+		return "hospital"
 	case StructureType_InnTavern:
 		return "inn tavern"
 	case StructureType_Keep:
@@ -24795,8 +24927,12 @@ func parseHistoricalEvent(p *util.XMLParser) (*HistoricalEvent, error) {
 					obj.Details, err = parseHistoricalEventGamble(p)
 				case "hf abducted":
 					obj.Details, err = parseHistoricalEventHfAbducted(p)
+				case "hf asked about artifact":
+					obj.Details, err = parseHistoricalEventHfAskedAboutArtifact(p)
 				case "hf attacked site":
 					obj.Details, err = parseHistoricalEventHfAttackedSite(p)
+				case "hf carouse":
+					obj.Details, err = parseHistoricalEventHfCarouse(p)
 				case "hf confronted":
 					obj.Details, err = parseHistoricalEventHfConfronted(p)
 				case "hf convicted":
@@ -26043,6 +26179,12 @@ func parseHistoricalEventArtifactCreated(p *util.XMLParser) (*HistoricalEventArt
 					return nil, err
 				}
 				obj.ArtifactId = num(data)
+			case "entity_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.EntityId = num(data)
 			case "hist_figure_id":
 				data, err := p.Value()
 				if err != nil {
@@ -31822,6 +31964,76 @@ func parseHistoricalEventHfAbductedPlus(p *util.XMLParser, obj *HistoricalEventH
 		}
 	}
 }
+func parseHistoricalEventHfAskedAboutArtifact(p *util.XMLParser) (*HistoricalEventHfAskedAboutArtifact, error) {
+	var obj = NewHistoricalEventHfAskedAboutArtifact()
+
+	for {
+		t, n, err := p.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t {
+		case util.StartElement:
+			switch n {
+			case "artifact_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ArtifactId = num(data)
+			case "hist_fig_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.HistFigId = num(data)
+			case "site_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SiteId = num(data)
+			case "structure_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.StructureId = num(data)
+			default:
+				// fmt.Println("unknown field", n)
+				p.Skip()
+			}
+
+		case util.EndElement:
+			obj.CheckFields()
+			return obj, nil
+		}
+	}
+}
+func parseHistoricalEventHfAskedAboutArtifactPlus(p *util.XMLParser, obj *HistoricalEventHfAskedAboutArtifact) (*HistoricalEventHfAskedAboutArtifact, error) {
+	if obj == nil {
+		obj = NewHistoricalEventHfAskedAboutArtifact()
+	}
+
+	for {
+		t, n, err := p.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t {
+		case util.StartElement:
+			switch n {
+			default:
+				// fmt.Println("unknown field", n)
+				p.Skip()
+			}
+
+		case util.EndElement:
+			obj.CheckFields()
+			return obj, nil
+		}
+	}
+}
 func parseHistoricalEventHfAttackedSite(p *util.XMLParser) (*HistoricalEventHfAttackedSite, error) {
 	var obj = NewHistoricalEventHfAttackedSite()
 
@@ -31871,6 +32083,82 @@ func parseHistoricalEventHfAttackedSite(p *util.XMLParser) (*HistoricalEventHfAt
 func parseHistoricalEventHfAttackedSitePlus(p *util.XMLParser, obj *HistoricalEventHfAttackedSite) (*HistoricalEventHfAttackedSite, error) {
 	if obj == nil {
 		obj = NewHistoricalEventHfAttackedSite()
+	}
+
+	for {
+		t, n, err := p.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t {
+		case util.StartElement:
+			switch n {
+			default:
+				// fmt.Println("unknown field", n)
+				p.Skip()
+			}
+
+		case util.EndElement:
+			obj.CheckFields()
+			return obj, nil
+		}
+	}
+}
+func parseHistoricalEventHfCarouse(p *util.XMLParser) (*HistoricalEventHfCarouse, error) {
+	var obj = NewHistoricalEventHfCarouse()
+
+	for {
+		t, n, err := p.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t {
+		case util.StartElement:
+			switch n {
+			case "feature_layer_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.FeatureLayerId = num(data)
+			case "group_hfid":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.GroupHfid = append(obj.GroupHfid, num(data))
+			case "site_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SiteId = num(data)
+			case "structure_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.StructureId = num(data)
+			case "subregion_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SubregionId = num(data)
+			default:
+				// fmt.Println("unknown field", n)
+				p.Skip()
+			}
+
+		case util.EndElement:
+			obj.CheckFields()
+			return obj, nil
+		}
+	}
+}
+func parseHistoricalEventHfCarousePlus(p *util.XMLParser, obj *HistoricalEventHfCarouse) (*HistoricalEventHfCarouse, error) {
+	if obj == nil {
+		obj = NewHistoricalEventHfCarouse()
 	}
 
 	for {

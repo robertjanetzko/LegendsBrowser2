@@ -2217,3 +2217,11 @@ func (x *HistoricalEventWrittenContentComposed) Html(c *Context) string {
 func (x *HistoricalEventSabotage) Html(c *Context) string {
 	return c.hf(x.SaboteurHfid) + " sabotaged the activities of " + c.hfRelated(x.TargetHfid, x.SaboteurHfid) + c.site(x.SiteId, " at")
 }
+
+func (x *HistoricalEventHfAskedAboutArtifact) Html(c *Context) string {
+	return c.hf(x.HistFigId) + " asked about " + c.artifact(x.ArtifactId) + c.siteStructure(x.SiteId, x.StructureId, " in")
+}
+
+func (x *HistoricalEventHfCarouse) Html(c *Context) string {
+	return c.hfList(x.GroupHfid) + " caroused " + c.siteStructure(x.SiteId, x.StructureId, " in")
+}

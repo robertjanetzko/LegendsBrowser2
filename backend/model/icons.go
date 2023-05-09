@@ -72,6 +72,8 @@ func (x *Structure) Icon() string {
 		return "fa-solid fa-dungeon"
 	case StructureType_Guildhall:
 		return "fa-solid fa-wrench"
+	case StructureType_Hospital:
+		return "fa-solid fa-hospital"
 	case StructureType_InnTavern:
 		return "fa-solid fa-utensils"
 	case StructureType_Keep:
