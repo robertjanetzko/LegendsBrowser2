@@ -42,7 +42,7 @@ func (w *DfWorld) EventsOfType(t string) any {
 func (w *DfWorld) EventsMatching(f func(HistoricalEventDetails) bool) []*HistoricalEvent {
 	var list []*HistoricalEvent
 	for _, e := range w.HistoricalEvents {
-		if f(e.Details) {
+		if e.Details != nil && f(e.Details) {
 			list = append(list, e)
 		}
 	}

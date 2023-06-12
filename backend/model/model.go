@@ -408,6 +408,7 @@ func InitSameFields() {
 		"HistoricalEventFailedIntrigueCorruption": {},
 		"HistoricalEventFieldBattle":              {},
 		"HistoricalEventFirstContact":             {},
+		"HistoricalEventFirstContactFailed":       {},
 		"HistoricalEventGamble":                   {},
 		"HistoricalEventHfAbducted":               {},
 		"HistoricalEventHfAskedAboutArtifact":     {},
@@ -555,6 +556,11 @@ func InitSameFields() {
 				"TeacherHfid": true,
 			},
 			"Teacher": {
+				"ArtifactId":  true,
+				"StudentHfid": true,
+				"TeacherHfid": true,
+			},
+			"Unk1": {
 				"ArtifactId":  true,
 				"StudentHfid": true,
 				"TeacherHfid": true,
@@ -4130,12 +4136,21 @@ type HistoricalEventArtifactCreatedReason int
 const (
 	HistoricalEventArtifactCreatedReason_Unknown HistoricalEventArtifactCreatedReason = iota
 	HistoricalEventArtifactCreatedReason_SanctifyHf
+	HistoricalEventArtifactCreatedReason_Unknown3550
+	HistoricalEventArtifactCreatedReason_Unknown631
+	HistoricalEventArtifactCreatedReason_Unknown633
 )
 
 func parseHistoricalEventArtifactCreatedReason(s string) HistoricalEventArtifactCreatedReason {
 	switch s {
 	case "sanctify_hf":
 		return HistoricalEventArtifactCreatedReason_SanctifyHf
+	case "unknown 3550":
+		return HistoricalEventArtifactCreatedReason_Unknown3550
+	case "unknown 631":
+		return HistoricalEventArtifactCreatedReason_Unknown631
+	case "unknown 633":
+		return HistoricalEventArtifactCreatedReason_Unknown633
 	}
 	return HistoricalEventArtifactCreatedReason_Unknown
 }
@@ -4144,6 +4159,12 @@ func (s HistoricalEventArtifactCreatedReason) String() string {
 	switch s {
 	case HistoricalEventArtifactCreatedReason_SanctifyHf:
 		return "sanctify hf"
+	case HistoricalEventArtifactCreatedReason_Unknown3550:
+		return "unknown 3550"
+	case HistoricalEventArtifactCreatedReason_Unknown631:
+		return "unknown 631"
+	case HistoricalEventArtifactCreatedReason_Unknown633:
+		return "unknown 633"
 	}
 	return "unknown"
 }
@@ -4238,31 +4259,41 @@ type HistoricalEventArtifactCreatedCircumstanceType int
 
 const (
 	HistoricalEventArtifactCreatedCircumstanceType_Unknown HistoricalEventArtifactCreatedCircumstanceType = iota
+	HistoricalEventArtifactCreatedCircumstanceType_Conflict
 	HistoricalEventArtifactCreatedCircumstanceType_Defeated
 	HistoricalEventArtifactCreatedCircumstanceType_Favoritepossession
 	HistoricalEventArtifactCreatedCircumstanceType_Preservebody
+	HistoricalEventArtifactCreatedCircumstanceType_Trauma
 )
 
 func parseHistoricalEventArtifactCreatedCircumstanceType(s string) HistoricalEventArtifactCreatedCircumstanceType {
 	switch s {
+	case "conflict":
+		return HistoricalEventArtifactCreatedCircumstanceType_Conflict
 	case "defeated":
 		return HistoricalEventArtifactCreatedCircumstanceType_Defeated
 	case "favoritepossession":
 		return HistoricalEventArtifactCreatedCircumstanceType_Favoritepossession
 	case "preservebody":
 		return HistoricalEventArtifactCreatedCircumstanceType_Preservebody
+	case "trauma":
+		return HistoricalEventArtifactCreatedCircumstanceType_Trauma
 	}
 	return HistoricalEventArtifactCreatedCircumstanceType_Unknown
 }
 
 func (s HistoricalEventArtifactCreatedCircumstanceType) String() string {
 	switch s {
+	case HistoricalEventArtifactCreatedCircumstanceType_Conflict:
+		return "conflict"
 	case HistoricalEventArtifactCreatedCircumstanceType_Defeated:
 		return "defeated"
 	case HistoricalEventArtifactCreatedCircumstanceType_Favoritepossession:
 		return "favoritepossession"
 	case HistoricalEventArtifactCreatedCircumstanceType_Preservebody:
 		return "preservebody"
+	case HistoricalEventArtifactCreatedCircumstanceType_Trauma:
+		return "trauma"
 	}
 	return "unknown"
 }
@@ -5736,7 +5767,10 @@ const (
 	HistoricalEventChangeHfStateState_Unknown HistoricalEventChangeHfStateState = iota
 	HistoricalEventChangeHfStateState_Refugee
 	HistoricalEventChangeHfStateState_Settled
+	HistoricalEventChangeHfStateState_Settler
 	HistoricalEventChangeHfStateState_Visiting
+	HistoricalEventChangeHfStateState_Visitor
+	HistoricalEventChangeHfStateState_Wanderer
 	HistoricalEventChangeHfStateState_Wandering
 )
 
@@ -5746,8 +5780,14 @@ func parseHistoricalEventChangeHfStateState(s string) HistoricalEventChangeHfSta
 		return HistoricalEventChangeHfStateState_Refugee
 	case "settled":
 		return HistoricalEventChangeHfStateState_Settled
+	case "settler":
+		return HistoricalEventChangeHfStateState_Settler
 	case "visiting":
 		return HistoricalEventChangeHfStateState_Visiting
+	case "visitor":
+		return HistoricalEventChangeHfStateState_Visitor
+	case "wanderer":
+		return HistoricalEventChangeHfStateState_Wanderer
 	case "wandering":
 		return HistoricalEventChangeHfStateState_Wandering
 	}
@@ -5760,8 +5800,14 @@ func (s HistoricalEventChangeHfStateState) String() string {
 		return "refugee"
 	case HistoricalEventChangeHfStateState_Settled:
 		return "settled"
+	case HistoricalEventChangeHfStateState_Settler:
+		return "settler"
 	case HistoricalEventChangeHfStateState_Visiting:
 		return "visiting"
+	case HistoricalEventChangeHfStateState_Visitor:
+		return "visitor"
+	case HistoricalEventChangeHfStateState_Wanderer:
+		return "wanderer"
 	case HistoricalEventChangeHfStateState_Wandering:
 		return "wandering"
 	}
@@ -9405,6 +9451,53 @@ func (x *HistoricalEventFirstContact) MarshalJSON() ([]byte, error) {
 	return json.Marshal(d)
 }
 
+type HistoricalEventFirstContactFailed struct {
+	ContactorEnid int `json:"contactorEnid" legend:"base" related:""` // contactor_enid
+	RejectorEnid  int `json:"rejectorEnid" legend:"base" related:""`  // rejector_enid
+	SiteId        int `json:"siteId" legend:"base" related:""`        // site_id
+}
+
+func NewHistoricalEventFirstContactFailed() *HistoricalEventFirstContactFailed {
+	return &HistoricalEventFirstContactFailed{
+		ContactorEnid: -1,
+		RejectorEnid:  -1,
+		SiteId:        -1,
+	}
+}
+func (x *HistoricalEventFirstContactFailed) Type() string { return "first contact failed" }
+func (x *HistoricalEventFirstContactFailed) RelatedToEntity(id int) bool {
+	return x.ContactorEnid == id || x.RejectorEnid == id
+}
+func (x *HistoricalEventFirstContactFailed) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventFirstContactFailed) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventFirstContactFailed) RelatedToSite(id int) bool              { return x.SiteId == id }
+func (x *HistoricalEventFirstContactFailed) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventFirstContactFailed) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventFirstContactFailed) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventFirstContactFailed) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventFirstContactFailed) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventFirstContactFailed) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventFirstContactFailed) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventFirstContactFailed) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventFirstContactFailed) RelatedToIdentity(id int) bool          { return false }
+
+func (x *HistoricalEventFirstContactFailed) CheckFields() {
+}
+
+func (x *HistoricalEventFirstContactFailed) MarshalJSON() ([]byte, error) {
+	d := make(map[string]any)
+	if x.ContactorEnid != -1 {
+		d["contactorEnid"] = x.ContactorEnid
+	}
+	if x.RejectorEnid != -1 {
+		d["rejectorEnid"] = x.RejectorEnid
+	}
+	if x.SiteId != -1 {
+		d["siteId"] = x.SiteId
+	}
+	return json.Marshal(d)
+}
+
 type HistoricalEventGamble struct {
 	GamblerHfid int `json:"gamblerHfid" legend:"base" related:""` // gambler_hfid
 	NewAccount  int `json:"newAccount" legend:"base" related:""`  // new_account
@@ -11312,6 +11405,7 @@ type HistoricalEventHfLearnsSecret struct {
 	SecretText  HistoricalEventHfLearnsSecretSecretText `json:"secretText" legend:"plus" related:""`  // secret_text
 	StudentHfid int                                     `json:"studentHfid" legend:"base" related:""` // student_hfid
 	TeacherHfid int                                     `json:"teacherHfid" legend:"base" related:""` // teacher_hfid
+	Unk1        int                                     `json:"unk1" legend:"plus" related:""`        // unk_1
 }
 
 func NewHistoricalEventHfLearnsSecret() *HistoricalEventHfLearnsSecret {
@@ -11319,6 +11413,7 @@ func NewHistoricalEventHfLearnsSecret() *HistoricalEventHfLearnsSecret {
 		ArtifactId:  -1,
 		StudentHfid: -1,
 		TeacherHfid: -1,
+		Unk1:        -1,
 	}
 }
 func (x *HistoricalEventHfLearnsSecret) Type() string                { return "hf learns secret" }
@@ -11339,6 +11434,15 @@ func (x *HistoricalEventHfLearnsSecret) RelatedToMountain(id int) bool          
 func (x *HistoricalEventHfLearnsSecret) RelatedToIdentity(id int) bool          { return false }
 
 func (x *HistoricalEventHfLearnsSecret) CheckFields() {
+	if x.Unk1 != x.ArtifactId {
+		sameFields["HistoricalEventHfLearnsSecret"]["Unk1"]["ArtifactId"] = false
+	}
+	if x.Unk1 != x.StudentHfid {
+		sameFields["HistoricalEventHfLearnsSecret"]["Unk1"]["StudentHfid"] = false
+	}
+	if x.Unk1 != x.TeacherHfid {
+		sameFields["HistoricalEventHfLearnsSecret"]["Unk1"]["TeacherHfid"] = false
+	}
 }
 
 func (x *HistoricalEventHfLearnsSecret) MarshalJSON() ([]byte, error) {
@@ -11355,6 +11459,9 @@ func (x *HistoricalEventHfLearnsSecret) MarshalJSON() ([]byte, error) {
 	}
 	if x.TeacherHfid != -1 {
 		d["teacherHfid"] = x.TeacherHfid
+	}
+	if x.Unk1 != -1 {
+		d["unk1"] = x.Unk1
 	}
 	return json.Marshal(d)
 }
@@ -16674,8 +16781,10 @@ func (x *HistoricalEventMasterpieceLost) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventMerchant struct {
+	AllDead        bool `json:"allDead" legend:"base" related:""`        // all_dead
 	DepotEntityId  int  `json:"depotEntityId" legend:"base" related:""`  // depot_entity_id
 	Hardship       bool `json:"hardship" legend:"base" related:""`       // hardship
+	IsTribute      bool `json:"isTribute" legend:"base" related:""`      // is_tribute
 	LostValue      bool `json:"lostValue" legend:"base" related:""`      // lost_value
 	SiteId         int  `json:"siteId" legend:"base" related:""`         // site_id
 	TraderEntityId int  `json:"traderEntityId" legend:"base" related:""` // trader_entity_id
@@ -16710,10 +16819,12 @@ func (x *HistoricalEventMerchant) CheckFields() {
 
 func (x *HistoricalEventMerchant) MarshalJSON() ([]byte, error) {
 	d := make(map[string]any)
+	d["allDead"] = x.AllDead
 	if x.DepotEntityId != -1 {
 		d["depotEntityId"] = x.DepotEntityId
 	}
 	d["hardship"] = x.Hardship
+	d["isTribute"] = x.IsTribute
 	d["lostValue"] = x.LostValue
 	if x.SiteId != -1 {
 		d["siteId"] = x.SiteId
@@ -24923,6 +25034,8 @@ func parseHistoricalEvent(p *util.XMLParser) (*HistoricalEvent, error) {
 					obj.Details, err = parseHistoricalEventFieldBattle(p)
 				case "first contact":
 					obj.Details, err = parseHistoricalEventFirstContact(p)
+				case "first contact failed":
+					obj.Details, err = parseHistoricalEventFirstContactFailed(p)
 				case "gamble":
 					obj.Details, err = parseHistoricalEventGamble(p)
 				case "hf abducted":
@@ -31812,6 +31925,70 @@ func parseHistoricalEventFirstContactPlus(p *util.XMLParser, obj *HistoricalEven
 		}
 	}
 }
+func parseHistoricalEventFirstContactFailed(p *util.XMLParser) (*HistoricalEventFirstContactFailed, error) {
+	var obj = NewHistoricalEventFirstContactFailed()
+
+	for {
+		t, n, err := p.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t {
+		case util.StartElement:
+			switch n {
+			case "contactor_enid":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.ContactorEnid = num(data)
+			case "rejector_enid":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.RejectorEnid = num(data)
+			case "site_id":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.SiteId = num(data)
+			default:
+				// fmt.Println("unknown field", n)
+				p.Skip()
+			}
+
+		case util.EndElement:
+			obj.CheckFields()
+			return obj, nil
+		}
+	}
+}
+func parseHistoricalEventFirstContactFailedPlus(p *util.XMLParser, obj *HistoricalEventFirstContactFailed) (*HistoricalEventFirstContactFailed, error) {
+	if obj == nil {
+		obj = NewHistoricalEventFirstContactFailed()
+	}
+
+	for {
+		t, n, err := p.Token()
+		if err != nil {
+			return nil, err
+		}
+		switch t {
+		case util.StartElement:
+			switch n {
+			default:
+				// fmt.Println("unknown field", n)
+				p.Skip()
+			}
+
+		case util.EndElement:
+			obj.CheckFields()
+			return obj, nil
+		}
+	}
+}
 func parseHistoricalEventGamble(p *util.XMLParser) (*HistoricalEventGamble, error) {
 	var obj = NewHistoricalEventGamble()
 
@@ -33393,6 +33570,12 @@ func parseHistoricalEventHfLearnsSecretPlus(p *util.XMLParser, obj *HistoricalEv
 					return nil, err
 				}
 				obj.TeacherHfid = num(data)
+			case "unk_1":
+				data, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.Unk1 = num(data)
 			default:
 				// fmt.Println("unknown field", n)
 				p.Skip()
@@ -36225,6 +36408,12 @@ func parseHistoricalEventMerchant(p *util.XMLParser) (*HistoricalEventMerchant, 
 		switch t {
 		case util.StartElement:
 			switch n {
+			case "all_dead":
+				_, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.AllDead = true
 			case "depot_entity_id":
 				data, err := p.Value()
 				if err != nil {
@@ -36237,6 +36426,12 @@ func parseHistoricalEventMerchant(p *util.XMLParser) (*HistoricalEventMerchant, 
 					return nil, err
 				}
 				obj.Hardship = true
+			case "is_tribute":
+				_, err := p.Value()
+				if err != nil {
+					return nil, err
+				}
+				obj.IsTribute = true
 			case "lost_value":
 				_, err := p.Value()
 				if err != nil {

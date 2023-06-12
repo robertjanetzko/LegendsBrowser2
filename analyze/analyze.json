@@ -11,6 +11,7 @@
         "The Enchanted Planets": true,
         "The Infinite Plane": true,
         "The Legendary Plane": true,
+        "The Realm of Dawns": true,
         "The Realm of Visions": true,
         "The Realms of Legend": true,
         "The Universes of Myth": true,
@@ -4062,9 +4063,11 @@
       "Base": false,
       "Plus": true,
       "Values": {
+        "conflict": true,
         "defeated": true,
         "favoritepossession": true,
-        "preservebody": true
+        "preservebody": true,
+        "trauma": true
       },
       "Enum": true
     },
@@ -4120,7 +4123,10 @@
       "Base": false,
       "Plus": true,
       "Values": {
-        "sanctify_hf": true
+        "sanctify_hf": true,
+        "unknown 3550": true,
+        "unknown 631": true,
+        "unknown 633": true
       },
       "Enum": true
     },
@@ -5302,7 +5308,10 @@
       "Values": {
         "refugee": true,
         "settled": true,
+        "settler": true,
         "visiting": true,
+        "visitor": true,
+        "wanderer": true,
         "wandering": true
       },
       "Enum": true
@@ -7018,6 +7027,33 @@
       "Values": {},
       "Enum": true
     },
+    "df_world|historical_events|historical_event+FirstContactFailed|contactor_enid": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+FirstContactFailed|rejector_enid": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+FirstContactFailed|site_id": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
     "df_world|historical_events|historical_event+FirstContact|contacted_enid": {
       "IsString": false,
       "NoBool": true,
@@ -8364,6 +8400,15 @@
       "Multiple": false,
       "Base": true,
       "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+HfLearnsSecret|unk_1": {
+      "IsString": false,
+      "NoBool": true,
+      "Multiple": false,
+      "Base": false,
+      "Plus": true,
       "Values": {},
       "Enum": true
     },
@@ -11041,6 +11086,15 @@
       "Values": {},
       "Enum": true
     },
+    "df_world|historical_events|historical_event+Merchant|all_dead": {
+      "IsString": true,
+      "NoBool": false,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
     "df_world|historical_events|historical_event+Merchant|depot_entity_id": {
       "IsString": false,
       "NoBool": true,
@@ -11060,6 +11114,15 @@
       "Enum": true
     },
     "df_world|historical_events|historical_event+Merchant|hardship": {
+      "IsString": true,
+      "NoBool": false,
+      "Multiple": false,
+      "Base": true,
+      "Plus": false,
+      "Values": {},
+      "Enum": true
+    },
+    "df_world|historical_events|historical_event+Merchant|is_tribute": {
       "IsString": true,
       "NoBool": false,
       "Multiple": false,
@@ -14770,6 +14833,7 @@
         "Omon En": true,
         "Orid Xem": true,
         "Ospazosmlo": true,
+        "Ushul Kodor": true,
         "rsil": true
       },
       "Enum": true
@@ -16098,6 +16162,11 @@
         "base": "first contact",
         "plus": ""
       },
+      "FirstContactFailed": {
+        "name": "FirstContactFailed",
+        "base": "first contact failed",
+        "plus": ""
+      },
       "Gamble": {
         "name": "Gamble",
         "base": "gamble",
@@ -16741,7 +16810,7 @@
       "Hospital": {
         "name": "Hospital",
         "base": "hospital",
-        "plus": ""
+        "plus": "hospital"
       },
       "InnTavern": {
         "name": "InnTavern",

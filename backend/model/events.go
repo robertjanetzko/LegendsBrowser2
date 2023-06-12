@@ -222,6 +222,10 @@ func (x *HistoricalEventArtifactCreated) Html(c *Context) string {
 			e = " as the item was a favorite possession"
 		case HistoricalEventArtifactCreatedCircumstanceType_Preservebody:
 			e = " by preserving part of the body"
+		case HistoricalEventArtifactCreatedCircumstanceType_Conflict:
+			e = " after conflict" /// TODO
+		case HistoricalEventArtifactCreatedCircumstanceType_Trauma:
+			e = " after trauma" /// TODO
 		}
 	}
 	switch x.Reason {
@@ -825,6 +829,10 @@ func (x *HistoricalEventFieldBattle) Html(c *Context) string {
 
 func (x *HistoricalEventFirstContact) Html(c *Context) string {
 	return c.entity(x.ContactorEnid) + " made contact with " + c.entity(x.ContactedEnid) + c.site(x.SiteId, " at")
+}
+
+func (x *HistoricalEventFirstContactFailed) Html(c *Context) string {
+	return c.entity(x.ContactorEnid) + " failed to contact " + c.site(x.SiteId, " at") /// TODO
 }
 
 func (x *HistoricalEventGamble) Html(c *Context) string {
