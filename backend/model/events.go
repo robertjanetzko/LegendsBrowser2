@@ -142,7 +142,7 @@ func (x *HistoricalEventAgreementConcluded) Html(c *Context) string { // TODO wo
 }
 
 func (x *HistoricalEventAgreementFormed) Html(c *Context) string { // TODO no info
-	return "UNKNWON HistoricalEventAgreementFormed"
+	return "UNKNOWN HistoricalEventAgreementFormed"
 }
 
 func (x *HistoricalEventAgreementMade) Html(c *Context) string {
@@ -537,7 +537,7 @@ func (x *HistoricalEventChangeHfState) Html(c *Context) string {
 	case HistoricalEventChangeHfStateMood_Secretive:
 		return c.hf(x.Hfid) + " withdrew from society " + c.site(x.SiteId, "in") + r
 	}
-	return "UNKNWON HistoricalEventChangeHfState"
+	return "UNKNOWN HistoricalEventChangeHfState"
 }
 
 func (x *HistoricalEventChangedCreatureType) Html(c *Context) string {
