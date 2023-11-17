@@ -4281,6 +4281,7 @@
       "Base": true,
       "Plus": false,
       "Values": {
+        "as a symbol of everlasting peace": true,
         "part of trade negotiation": true
       },
       "Enum": true
@@ -12296,7 +12297,8 @@
       "Values": {
         "Autumn": true,
         "Spring": true,
-        "Summer": true
+        "Summer": true,
+        "Winter": true
       },
       "Enum": true
     },

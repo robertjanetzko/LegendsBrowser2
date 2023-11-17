@@ -4431,11 +4431,14 @@ type HistoricalEventArtifactGivenReason int
 
 const (
 	HistoricalEventArtifactGivenReason_Unknown HistoricalEventArtifactGivenReason = iota
+	HistoricalEventArtifactGivenReason_AsASymbolOfEverlastingPeace
 	HistoricalEventArtifactGivenReason_PartOfTradeNegotiation
 )
 
 func parseHistoricalEventArtifactGivenReason(s string) HistoricalEventArtifactGivenReason {
 	switch s {
+	case "as a symbol of everlasting peace":
+		return HistoricalEventArtifactGivenReason_AsASymbolOfEverlastingPeace
 	case "part of trade negotiation":
 		return HistoricalEventArtifactGivenReason_PartOfTradeNegotiation
 	}
@@ -4444,6 +4447,8 @@ func parseHistoricalEventArtifactGivenReason(s string) HistoricalEventArtifactGi
 
 func (s HistoricalEventArtifactGivenReason) String() string {
 	switch s {
+	case HistoricalEventArtifactGivenReason_AsASymbolOfEverlastingPeace:
+		return "as a symbol of everlasting peace"
 	case HistoricalEventArtifactGivenReason_PartOfTradeNegotiation:
 		return "part of trade negotiation"
 	}
@@ -18617,6 +18622,7 @@ const (
 	HistoricalEventSiteTributeForcedSeason_Autumn
 	HistoricalEventSiteTributeForcedSeason_Spring
 	HistoricalEventSiteTributeForcedSeason_Summer
+	HistoricalEventSiteTributeForcedSeason_Winter
 )
 
 func parseHistoricalEventSiteTributeForcedSeason(s string) HistoricalEventSiteTributeForcedSeason {
@@ -18627,6 +18633,8 @@ func parseHistoricalEventSiteTributeForcedSeason(s string) HistoricalEventSiteTr
 		return HistoricalEventSiteTributeForcedSeason_Spring
 	case "Summer":
 		return HistoricalEventSiteTributeForcedSeason_Summer
+	case "Winter":
+		return HistoricalEventSiteTributeForcedSeason_Winter
 	}
 	return HistoricalEventSiteTributeForcedSeason_Unknown
 }
@@ -18639,6 +18647,8 @@ func (s HistoricalEventSiteTributeForcedSeason) String() string {
 		return "spring"
 	case HistoricalEventSiteTributeForcedSeason_Summer:
 		return "summer"
+	case HistoricalEventSiteTributeForcedSeason_Winter:
+		return "winter"
 	}
 	return "unknown"
 }
@@ -25187,7 +25197,6 @@ func parseHistoricalEvent(p *util.XMLParser) (*HistoricalEvent, error) {
 				case "written content composed":
 					obj.Details, err = parseHistoricalEventWrittenContentComposed(p)
 				default:
-
 					obj.Details = NewHistoricalEventUnknown(string(data))
 					p.Skip()
 				}
@@ -25332,6 +25341,7 @@ func parseHistoricalEventPlus(p *util.XMLParser, obj *HistoricalEvent) (*Histori
 				case "war_peace_rejected":
 					obj.Details, err = parseHistoricalEventPeaceRejectedPlus(p, obj.Details.(*HistoricalEventPeaceRejected))
 				default:
+					obj.Details = NewHistoricalEventUnknown(string(data))
 					p.Skip()
 				}
 				if err != nil {
