@@ -234,6 +234,7 @@ func parse{{ $obj.Name }}{{ if $plus }}Plus{{ end }}(p *util.XMLParser{{ if $plu
 							{{- end }}
 						{{- end }}
 						default:
+							obj.Details = NewHistoricalEventUnknown(string(data))
 							p.Skip()
 						}
 						if err != nil {

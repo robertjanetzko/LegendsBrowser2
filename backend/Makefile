@@ -8,7 +8,7 @@ buildMacOs:
 	GOOS=darwin GOARCH=amd64 go build -o ../bin/legendsbrowser-mac
 	GOOS=darwin GOARCH=arm64 go build -o ../bin/legendsbrowser-mac-m1
 
-buildMacOsApp:
+buildMacOsApp: buildMacOs
 	mkdir -p /tmp/build/macos
 	cp -r macos/LegendsBrowser.app /tmp/build/macos/
 	GOOS=darwin GOARCH=amd64 go build -o /tmp/build/macos/LegendsBrowser.app/Contents/MacOS/LegendsBrowser

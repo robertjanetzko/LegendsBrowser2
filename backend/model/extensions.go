@@ -1,6 +1,7 @@
 package model
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"sort"
@@ -288,4 +289,35 @@ func (r *Reference) Html(c *Context) template.HTML {
 
 func (r *River) Id() int {
 	return r.Id_
+}
+
+type HistoricalEventUnknown struct {
+	EventType string
+}
+
+func NewHistoricalEventUnknown(eventType string) *HistoricalEventUnknown {
+	return &HistoricalEventUnknown{
+		EventType: eventType,
+	}
+}
+
+func (x *HistoricalEventUnknown) Type() string                           { return x.EventType }
+func (x *HistoricalEventUnknown) RelatedToEntity(id int) bool            { return false }
+func (x *HistoricalEventUnknown) RelatedToHf(id int) bool                { return false }
+func (x *HistoricalEventUnknown) RelatedToArtifact(id int) bool          { return false }
+func (x *HistoricalEventUnknown) RelatedToSite(id int) bool              { return false }
+func (x *HistoricalEventUnknown) RelatedToStructure(siteId, id int) bool { return false }
+func (x *HistoricalEventUnknown) RelatedToRegion(id int) bool            { return false }
+func (x *HistoricalEventUnknown) RelatedToWorldConstruction(id int) bool { return false }
+func (x *HistoricalEventUnknown) RelatedToWrittenContent(id int) bool    { return false }
+func (x *HistoricalEventUnknown) RelatedToDanceForm(id int) bool         { return false }
+func (x *HistoricalEventUnknown) RelatedToMusicalForm(id int) bool       { return false }
+func (x *HistoricalEventUnknown) RelatedToPoeticForm(id int) bool        { return false }
+func (x *HistoricalEventUnknown) RelatedToMountain(id int) bool          { return false }
+func (x *HistoricalEventUnknown) RelatedToIdentity(id int) bool          { return false }
+func (x *HistoricalEventUnknown) CheckFields()                           {}
+func (x *HistoricalEventUnknown) Html(c *Context) string                 { return x.EventType }
+
+func (x *HistoricalEventUnknown) MarshalJSON() ([]byte, error) {
+	return json.Marshal(make(map[string]any))
 }

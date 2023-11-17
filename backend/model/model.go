@@ -25187,6 +25187,8 @@ func parseHistoricalEvent(p *util.XMLParser) (*HistoricalEvent, error) {
 				case "written content composed":
 					obj.Details, err = parseHistoricalEventWrittenContentComposed(p)
 				default:
+
+					obj.Details = NewHistoricalEventUnknown(string(data))
 					p.Skip()
 				}
 				if err != nil {
