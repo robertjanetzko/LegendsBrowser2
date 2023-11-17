@@ -18,11 +18,17 @@ builds:
       - amd64
 archives:
   - format: zip
-    name_template: "legendsbrowser-{{ .Version }}-{{ .Os }}"
-    replacements:
-      darwin: macos
-      linux: linux
-      windows: win
+    name_template: >-
+      legendsbrowser-
+      {{- .Version }}-
+      {{- if eq .Os "darwin" }}macos
+      {{- else if eq .Os "windows" }}win
+      {{- else }}{{ .Os }}{{ end }}
+    # name_template: "legendsbrowser-{{ .Version }}-{{ .Os }}"
+    # replacements:
+    #   darwin: macos
+    #   linux: linux
+    #   windows: win
 changelog:
   sort: asc
   filters:
