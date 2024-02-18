@@ -496,7 +496,7 @@ func (x *HistoricalEventChangeHfState) Html(c *Context) string {
 	switch x.State {
 	case HistoricalEventChangeHfStateState_Refugee:
 		return c.hf(x.Hfid) + " fled " + c.location(x.SiteId, "to", x.SubregionId, "into")
-	case HistoricalEventChangeHfStateState_Settled:
+	case HistoricalEventChangeHfStateState_Settled, HistoricalEventChangeHfStateState_Settler:
 		switch x.Reason {
 		case HistoricalEventChangeHfStateReason_BeWithMaster, HistoricalEventChangeHfStateReason_Scholarship:
 			return c.hf(x.Hfid) + " moved to study " + c.site(x.SiteId, "in") + r
@@ -507,9 +507,9 @@ func (x *HistoricalEventChangeHfState) Html(c *Context) string {
 		default:
 			return c.hf(x.Hfid) + " settled " + c.location(x.SiteId, "in", x.SubregionId, "in")
 		}
-	case HistoricalEventChangeHfStateState_Visiting:
+	case HistoricalEventChangeHfStateState_Visiting, HistoricalEventChangeHfStateState_Visitor:
 		return c.hf(x.Hfid) + " visited " + c.site(x.SiteId, "in") + r
-	case HistoricalEventChangeHfStateState_Wandering:
+	case HistoricalEventChangeHfStateState_Wandering, HistoricalEventChangeHfStateState_Wanderer:
 		if x.SubregionId != -1 {
 			return c.hf(x.Hfid) + " began wandering " + c.region(x.SubregionId)
 		} else {

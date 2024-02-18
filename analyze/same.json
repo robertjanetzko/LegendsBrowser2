@@ -24,7 +24,6 @@
   },
   "HistoricalEventAssumeIdentity": {
     "IdentityHistfigId": "TricksterHfid",
-    "IdentityNemesisId": "TricksterHfid",
     "Target": "TargetEnid",
     "Trickster": "TricksterHfid"
   },

@@ -4135,36 +4135,136 @@ type HistoricalEventArtifactCreatedReason int
 
 const (
 	HistoricalEventArtifactCreatedReason_Unknown HistoricalEventArtifactCreatedReason = iota
+	HistoricalEventArtifactCreatedReason_HireOnAsScholar
+	HistoricalEventArtifactCreatedReason_Relax
 	HistoricalEventArtifactCreatedReason_SanctifyHf
+	HistoricalEventArtifactCreatedReason_Unknown1369
+	HistoricalEventArtifactCreatedReason_Unknown1745
+	HistoricalEventArtifactCreatedReason_Unknown1757
+	HistoricalEventArtifactCreatedReason_Unknown176Two
+	HistoricalEventArtifactCreatedReason_Unknown1776
+	HistoricalEventArtifactCreatedReason_Unknown1803
+	HistoricalEventArtifactCreatedReason_Unknown1817
+	HistoricalEventArtifactCreatedReason_Unknown1835
+	HistoricalEventArtifactCreatedReason_Unknown1837
+	HistoricalEventArtifactCreatedReason_Unknown1839
+	HistoricalEventArtifactCreatedReason_Unknown1TwoTwo83
+	HistoricalEventArtifactCreatedReason_Unknown310Two5
 	HistoricalEventArtifactCreatedReason_Unknown3550
 	HistoricalEventArtifactCreatedReason_Unknown631
 	HistoricalEventArtifactCreatedReason_Unknown633
+	HistoricalEventArtifactCreatedReason_Unknown9835
+	HistoricalEventArtifactCreatedReason_UnknownTwo084
+	HistoricalEventArtifactCreatedReason_UnknownTwo1758
+	HistoricalEventArtifactCreatedReason_UnknownTwo317Two
+	HistoricalEventArtifactCreatedReason_UnknownTwo6478
+	HistoricalEventArtifactCreatedReason_UnknownTwoTwo010
 )
 
 func parseHistoricalEventArtifactCreatedReason(s string) HistoricalEventArtifactCreatedReason {
 	switch s {
+	case "hire_on_as_scholar":
+		return HistoricalEventArtifactCreatedReason_HireOnAsScholar
+	case "relax":
+		return HistoricalEventArtifactCreatedReason_Relax
 	case "sanctify_hf":
 		return HistoricalEventArtifactCreatedReason_SanctifyHf
+	case "unknown 12283":
+		return HistoricalEventArtifactCreatedReason_Unknown1TwoTwo83
+	case "unknown 1369":
+		return HistoricalEventArtifactCreatedReason_Unknown1369
+	case "unknown 1745":
+		return HistoricalEventArtifactCreatedReason_Unknown1745
+	case "unknown 1757":
+		return HistoricalEventArtifactCreatedReason_Unknown1757
+	case "unknown 1762":
+		return HistoricalEventArtifactCreatedReason_Unknown176Two
+	case "unknown 1776":
+		return HistoricalEventArtifactCreatedReason_Unknown1776
+	case "unknown 1803":
+		return HistoricalEventArtifactCreatedReason_Unknown1803
+	case "unknown 1817":
+		return HistoricalEventArtifactCreatedReason_Unknown1817
+	case "unknown 1835":
+		return HistoricalEventArtifactCreatedReason_Unknown1835
+	case "unknown 1837":
+		return HistoricalEventArtifactCreatedReason_Unknown1837
+	case "unknown 1839":
+		return HistoricalEventArtifactCreatedReason_Unknown1839
+	case "unknown 2084":
+		return HistoricalEventArtifactCreatedReason_UnknownTwo084
+	case "unknown 21758":
+		return HistoricalEventArtifactCreatedReason_UnknownTwo1758
+	case "unknown 22010":
+		return HistoricalEventArtifactCreatedReason_UnknownTwoTwo010
+	case "unknown 23172":
+		return HistoricalEventArtifactCreatedReason_UnknownTwo317Two
+	case "unknown 26478":
+		return HistoricalEventArtifactCreatedReason_UnknownTwo6478
+	case "unknown 31025":
+		return HistoricalEventArtifactCreatedReason_Unknown310Two5
 	case "unknown 3550":
 		return HistoricalEventArtifactCreatedReason_Unknown3550
 	case "unknown 631":
 		return HistoricalEventArtifactCreatedReason_Unknown631
 	case "unknown 633":
 		return HistoricalEventArtifactCreatedReason_Unknown633
+	case "unknown 9835":
+		return HistoricalEventArtifactCreatedReason_Unknown9835
 	}
 	return HistoricalEventArtifactCreatedReason_Unknown
 }
 
 func (s HistoricalEventArtifactCreatedReason) String() string {
 	switch s {
+	case HistoricalEventArtifactCreatedReason_HireOnAsScholar:
+		return "hire on as scholar"
+	case HistoricalEventArtifactCreatedReason_Relax:
+		return "relax"
 	case HistoricalEventArtifactCreatedReason_SanctifyHf:
 		return "sanctify hf"
+	case HistoricalEventArtifactCreatedReason_Unknown1369:
+		return "unknown 1369"
+	case HistoricalEventArtifactCreatedReason_Unknown1745:
+		return "unknown 1745"
+	case HistoricalEventArtifactCreatedReason_Unknown1757:
+		return "unknown 1757"
+	case HistoricalEventArtifactCreatedReason_Unknown176Two:
+		return "unknown 176 two"
+	case HistoricalEventArtifactCreatedReason_Unknown1776:
+		return "unknown 1776"
+	case HistoricalEventArtifactCreatedReason_Unknown1803:
+		return "unknown 1803"
+	case HistoricalEventArtifactCreatedReason_Unknown1817:
+		return "unknown 1817"
+	case HistoricalEventArtifactCreatedReason_Unknown1835:
+		return "unknown 1835"
+	case HistoricalEventArtifactCreatedReason_Unknown1837:
+		return "unknown 1837"
+	case HistoricalEventArtifactCreatedReason_Unknown1839:
+		return "unknown 1839"
+	case HistoricalEventArtifactCreatedReason_Unknown1TwoTwo83:
+		return "unknown 1 two two 83"
+	case HistoricalEventArtifactCreatedReason_Unknown310Two5:
+		return "unknown 310 two 5"
 	case HistoricalEventArtifactCreatedReason_Unknown3550:
 		return "unknown 3550"
 	case HistoricalEventArtifactCreatedReason_Unknown631:
 		return "unknown 631"
 	case HistoricalEventArtifactCreatedReason_Unknown633:
 		return "unknown 633"
+	case HistoricalEventArtifactCreatedReason_Unknown9835:
+		return "unknown 9835"
+	case HistoricalEventArtifactCreatedReason_UnknownTwo084:
+		return "unknown two 084"
+	case HistoricalEventArtifactCreatedReason_UnknownTwo1758:
+		return "unknown two 1758"
+	case HistoricalEventArtifactCreatedReason_UnknownTwo317Two:
+		return "unknown two 317 two"
+	case HistoricalEventArtifactCreatedReason_UnknownTwo6478:
+		return "unknown two 6478"
+	case HistoricalEventArtifactCreatedReason_UnknownTwoTwo010:
+		return "unknown two two 010"
 	}
 	return "unknown"
 }
@@ -4891,19 +4991,21 @@ func (x *HistoricalEventArtifactTransformed) MarshalJSON() ([]byte, error) {
 }
 
 type HistoricalEventAssumeIdentity struct {
-	IdentityCaste string `json:"identityCaste" legend:"plus" related:""` // identity_caste
-	IdentityId    int    `json:"identityId" legend:"base" related:""`    // identity_id
-	IdentityName  string `json:"identityName" legend:"plus" related:""`  // identity_name
-	IdentityRace  string `json:"identityRace" legend:"plus" related:""`  // identity_race
-	TargetEnid    int    `json:"targetEnid" legend:"base" related:""`    // target_enid
-	TricksterHfid int    `json:"tricksterHfid" legend:"base" related:""` // trickster_hfid
+	IdentityCaste     string `json:"identityCaste" legend:"plus" related:""`     // identity_caste
+	IdentityId        int    `json:"identityId" legend:"base" related:""`        // identity_id
+	IdentityName      string `json:"identityName" legend:"plus" related:""`      // identity_name
+	IdentityNemesisId int    `json:"identityNemesisId" legend:"plus" related:""` // identity_nemesis_id
+	IdentityRace      string `json:"identityRace" legend:"plus" related:""`      // identity_race
+	TargetEnid        int    `json:"targetEnid" legend:"base" related:""`        // target_enid
+	TricksterHfid     int    `json:"tricksterHfid" legend:"base" related:""`     // trickster_hfid
 }
 
 func NewHistoricalEventAssumeIdentity() *HistoricalEventAssumeIdentity {
 	return &HistoricalEventAssumeIdentity{
-		IdentityId:    -1,
-		TargetEnid:    -1,
-		TricksterHfid: -1,
+		IdentityId:        -1,
+		IdentityNemesisId: -1,
+		TargetEnid:        -1,
+		TricksterHfid:     -1,
 	}
 }
 func (x *HistoricalEventAssumeIdentity) Type() string                           { return "assume identity" }
@@ -4919,9 +5021,20 @@ func (x *HistoricalEventAssumeIdentity) RelatedToDanceForm(id int) bool         
 func (x *HistoricalEventAssumeIdentity) RelatedToMusicalForm(id int) bool       { return false }
 func (x *HistoricalEventAssumeIdentity) RelatedToPoeticForm(id int) bool        { return false }
 func (x *HistoricalEventAssumeIdentity) RelatedToMountain(id int) bool          { return false }
-func (x *HistoricalEventAssumeIdentity) RelatedToIdentity(id int) bool          { return x.IdentityId == id }
+func (x *HistoricalEventAssumeIdentity) RelatedToIdentity(id int) bool {
+	return x.IdentityId == id || x.IdentityNemesisId == id
+}
 
 func (x *HistoricalEventAssumeIdentity) CheckFields() {
+	if x.IdentityNemesisId != x.IdentityId {
+		sameFields["HistoricalEventAssumeIdentity"]["IdentityNemesisId"]["IdentityId"] = false
+	}
+	if x.IdentityNemesisId != x.TargetEnid {
+		sameFields["HistoricalEventAssumeIdentity"]["IdentityNemesisId"]["TargetEnid"] = false
+	}
+	if x.IdentityNemesisId != x.TricksterHfid {
+		sameFields["HistoricalEventAssumeIdentity"]["IdentityNemesisId"]["TricksterHfid"] = false
+	}
 }
 
 func (x *HistoricalEventAssumeIdentity) MarshalJSON() ([]byte, error) {
@@ -4931,6 +5044,9 @@ func (x *HistoricalEventAssumeIdentity) MarshalJSON() ([]byte, error) {
 		d["identityId"] = x.IdentityId
 	}
 	d["identityName"] = x.IdentityName
+	if x.IdentityNemesisId != -1 {
+		d["identityNemesisId"] = x.IdentityNemesisId
+	}
 	d["identityRace"] = x.IdentityRace
 	if x.TargetEnid != -1 {
 		d["targetEnid"] = x.TargetEnid
@@ -21222,10 +21338,13 @@ const (
 	ScheduleItemSubtype_GreatAxe
 	ScheduleItemSubtype_Halberd
 	ScheduleItemSubtype_Hive
+	ScheduleItemSubtype_ItuxBody
 	ScheduleItemSubtype_LongSword
 	ScheduleItemSubtype_Mace
 	ScheduleItemSubtype_Maul
 	ScheduleItemSubtype_Morningstar
+	ScheduleItemSubtype_MukarBody
+	ScheduleItemSubtype_NestBox
 	ScheduleItemSubtype_Pedestal
 	ScheduleItemSubtype_Pike
 	ScheduleItemSubtype_Quire
@@ -21258,6 +21377,8 @@ func parseScheduleItemSubtype(s string) ScheduleItemSubtype {
 		return ScheduleItemSubtype_Halberd
 	case "hive":
 		return ScheduleItemSubtype_Hive
+	case "itux body":
+		return ScheduleItemSubtype_ItuxBody
 	case "long sword":
 		return ScheduleItemSubtype_LongSword
 	case "mace":
@@ -21266,6 +21387,10 @@ func parseScheduleItemSubtype(s string) ScheduleItemSubtype {
 		return ScheduleItemSubtype_Maul
 	case "morningstar":
 		return ScheduleItemSubtype_Morningstar
+	case "mukar body":
+		return ScheduleItemSubtype_MukarBody
+	case "nest box":
+		return ScheduleItemSubtype_NestBox
 	case "pedestal":
 		return ScheduleItemSubtype_Pedestal
 	case "pike":
@@ -21310,6 +21435,8 @@ func (s ScheduleItemSubtype) String() string {
 		return "halberd"
 	case ScheduleItemSubtype_Hive:
 		return "hive"
+	case ScheduleItemSubtype_ItuxBody:
+		return "itux body"
 	case ScheduleItemSubtype_LongSword:
 		return "long sword"
 	case ScheduleItemSubtype_Mace:
@@ -21318,6 +21445,10 @@ func (s ScheduleItemSubtype) String() string {
 		return "maul"
 	case ScheduleItemSubtype_Morningstar:
 		return "morningstar"
+	case ScheduleItemSubtype_MukarBody:
+		return "mukar body"
+	case ScheduleItemSubtype_NestBox:
+		return "nest box"
 	case ScheduleItemSubtype_Pedestal:
 		return "pedestal"
 	case ScheduleItemSubtype_Pike:
@@ -27186,7 +27317,7 @@ func parseHistoricalEventAssumeIdentityPlus(p *util.XMLParser, obj *HistoricalEv
 				if err != nil {
 					return nil, err
 				}
-				obj.TricksterHfid = num(data)
+				obj.IdentityNemesisId = num(data)
 			case "identity_race":
 				data, err := p.Value()
 				if err != nil {

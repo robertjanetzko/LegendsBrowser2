@@ -15,7 +15,8 @@
         "The Realm of Visions": true,
         "The Realms of Legend": true,
         "The Universes of Myth": true,
-        "The Windy Dimension": true
+        "The Windy Dimension": true,
+        "The World of Visions": true
       },
       "Enum": true
     },
@@ -1845,10 +1846,13 @@
         "great axe": true,
         "halberd": true,
         "hive": true,
+        "itux body": true,
         "long sword": true,
         "mace": true,
         "maul": true,
         "morningstar": true,
+        "mukar body": true,
+        "nest box": true,
         "pedestal": true,
         "pike": true,
         "quire": true,
@@ -2105,6 +2109,7 @@
       "Base": true,
       "Plus": false,
       "Values": {
+        "Age of Dwarves": true,
         "Age of Heroes": true,
         "Age of Legends": true,
         "Age of Myth": true,
@@ -4123,10 +4128,30 @@
       "Base": false,
       "Plus": true,
       "Values": {
+        "hire_on_as_scholar": true,
+        "relax": true,
         "sanctify_hf": true,
+        "unknown 12283": true,
+        "unknown 1369": true,
+        "unknown 1745": true,
+        "unknown 1757": true,
+        "unknown 1762": true,
+        "unknown 1776": true,
+        "unknown 1803": true,
+        "unknown 1817": true,
+        "unknown 1835": true,
+        "unknown 1837": true,
+        "unknown 1839": true,
+        "unknown 2084": true,
+        "unknown 21758": true,
+        "unknown 22010": true,
+        "unknown 23172": true,
+        "unknown 26478": true,
+        "unknown 31025": true,
         "unknown 3550": true,
         "unknown 631": true,
-        "unknown 633": true
+        "unknown 633": true,
+        "unknown 9835": true
       },
       "Enum": true
     },
@@ -14835,6 +14860,7 @@
         "Omon En": true,
         "Orid Xem": true,
         "Ospazosmlo": true,
+        "Teyo Asada": true,
         "Ushul Kodor": true,
         "rsil": true
       },
