@@ -38,7 +38,7 @@ func (h searchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			results = searchMap(term, site.Structures, results, fmt.Sprintf("/site/%d/structure", site.Id_))
 		}
 		results = searchMap(term, world.Regions, results, "/region")
-		results = searchMap(term, world.Artifacts, results, "/artifavt")
+		results = searchMap(term, world.Artifacts, results, "/artifact")
 		results = searchMap(term, world.WorldConstructions, results, "/worldconstruction")
 		results = searchMap(term, world.DanceForms, results, "/danceform")
 		results = searchMap(term, world.MusicalForms, results, "/musicalform")

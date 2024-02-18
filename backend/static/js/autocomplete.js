@@ -123,6 +123,11 @@ class Autocomplete {
                 let dataLabel = e.target.getAttribute('data-label');
                 let dataValue = e.target.getAttribute('data-value');
 
+                if (!dataValue) {
+                    dataLabel = e.target.parentElement.getAttribute('data-label');
+                    dataValue = e.target.parentElement.getAttribute('data-value');
+                }
+
                 this.field.value = dataLabel;
 
                 if (this.options.onSelectItem) {
