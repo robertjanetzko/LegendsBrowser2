@@ -39,10 +39,12 @@
     {{- range $f := .List }}{{- if isLegendsXml $f }}
     <tr>
         <td>
-            <a class="loadable" href="./load?p={{ (printf `%s/%s` $.Current $f.Name) }}"><i class="bi bi-filetype-xml"></i> {{$f.Name}}</a>
+            <a class="loadable" href="./load?p={{ (printf `%s/%s` $.Current $f.Name) }}"><i class="bi bi-filetype-xml"></i> {{$f.Name}} {{-
+                if isLegendsXmlWithPlus $.Current $f }} <i class="bi bi-plus-square-fill" title="Legends-Plus file available"></i>{{- end
+                }}</a>
         </td>
-        <td>{{ bytes $f.Size }}</td>
-        <td>{{ $f.ModTime.Format "02 Jan 06 15:04" }}</td>
+        <td>{{ bytes $f.Info.Size }}</td>
+        <td>{{ $f.Info.ModTime.Format "02 Jan 06 15:04" }}</td>
     </tr>
     {{- end }}{{- end }}
 

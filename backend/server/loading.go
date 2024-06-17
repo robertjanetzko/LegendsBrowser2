@@ -2,8 +2,6 @@ package server
 
 import (
 	"encoding/json"
-	"io/fs"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -85,7 +83,7 @@ func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			h.server.context.config.LastPath = p.Current
 			h.server.context.config.Save()
 
-			p.List, err = ioutil.ReadDir(p.Current)
+			p.List, err = os.ReadDir(p.Current)
 			if err != nil {
 				httpError(w, err)
 				return
@@ -115,8 +113,14 @@ func (h loadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, h.server.context.config.SubUri+"/load?p=%2f", http.StatusSeeOther)
 }
 
-func isLegendsXml(f fs.FileInfo) bool {
+func isLegendsXml(f os.DirEntry) bool {
 	return strings.HasSuffix(f.Name(), "-legends.xml")
+}
+
+func isLegendsXmlWithPlus(path string, f os.DirEntry) bool {
+	plusName := strings.ReplaceAll(f.Name(), "-legends.xml", "-legends_plus.xml")
+	_, err := os.Stat(filepath.Join(path, plusName))
+	return err == nil
 }
 
 func loadWorld(server *DfServer, file string) {
@@ -128,7 +132,7 @@ func loadWorld(server *DfServer, file string) {
 
 type paths struct {
 	Current    string
-	List       []fs.FileInfo
+	List       []os.DirEntry
 	Partitions []string
 }
 

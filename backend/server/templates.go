@@ -91,12 +91,13 @@ func (srv *DfServer) LoadTemplates() {
 			}
 			return template.HTML("")
 		},
-		"description":  func(d string) template.HTML { return model.LinkDescription(srv.context.world, d) },
-		"season":       model.Season,
-		"time":         model.Time,
-		"url":          url.PathEscape,
-		"query":        url.QueryEscape,
-		"isLegendsXml": isLegendsXml,
+		"description":          func(d string) template.HTML { return model.LinkDescription(srv.context.world, d) },
+		"season":               model.Season,
+		"time":                 model.Time,
+		"url":                  url.PathEscape,
+		"query":                url.QueryEscape,
+		"isLegendsXml":         isLegendsXml,
+		"isLegendsXmlWithPlus": isLegendsXmlWithPlus,
 		"html": func(value any) template.HTML {
 			return template.HTML(fmt.Sprint(value))
 		},
