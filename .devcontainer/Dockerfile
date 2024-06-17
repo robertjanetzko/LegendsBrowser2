@@ -1,4 +1,4 @@
-ARG VARIANT="1.21-bullseye"
+ARG VARIANT="1.22-bookworm"
 FROM mcr.microsoft.com/devcontainers/go:1-${VARIANT}
 
 USER vscode

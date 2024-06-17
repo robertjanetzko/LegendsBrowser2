@@ -1,6 +1,6 @@
 module github.com/robertjanetzko/LegendsBrowser2/analyze
 
-go 1.18
+go 1.22
 
 require github.com/iancoleman/strcase v0.2.0
 
