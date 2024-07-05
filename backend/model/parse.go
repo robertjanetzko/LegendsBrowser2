@@ -220,10 +220,10 @@ func parseMapPlus[T Identifiable](p *util.XMLParser, dest *map[int]T, creator fu
 				log.Fatal(err)
 			}
 			x, err := creator(p, (*dest)[id])
-			x.setId(id)
 			if err != nil {
 				return
 			}
+			x.setId(id)
 			(*dest)[id] = x
 
 		case util.EndElement:
