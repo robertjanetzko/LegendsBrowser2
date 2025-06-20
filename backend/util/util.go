@@ -137,3 +137,30 @@ func Strip(html template.HTML) string {
 func String(html template.HTML) string {
 	return string(html)
 }
+
+/*
+	ArtFormShortDesc
+
+	Gets a shorter description for the popovers by modifying the description data.
+
+	Note there is no way yet to highlight the
+  	author, as that info is not tracked by the XML, and would need a more
+  	intensive patch to the backend (keeping a map of art form -> author in 
+  	world context). Probably won't implement this for popovers unless I
+  	get really really bored, as it's a massive pain for minimal gain.
+*/
+func ArtFormShortDesc(name string, desc string) string {
+	if len(strings.TrimSpace(desc)) == 0 {
+		return ""
+	}
+
+	// find where the title (plus "is") ends
+	i := len(name) + 3
+
+	j := strings.Index(desc, ".")
+	if j == -1 {
+		return desc	// no period found; text is one sentence
+	}
+
+	return strings.TrimSpace(desc[i:j])
+}

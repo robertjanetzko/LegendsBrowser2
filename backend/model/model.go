@@ -1517,6 +1517,7 @@ func NewDanceForm() *DanceForm {
 func (x *DanceForm) Id() int      { return x.Id_ }
 func (x *DanceForm) setId(id int) { x.Id_ = id }
 func (x *DanceForm) Name() string { return x.Name_ }
+func (x *DanceForm) ShortDesc() string { return util.ArtFormShortDesc(x.Name_, x.Description) }
 
 func (x *DanceForm) CheckFields() {
 }
@@ -20627,6 +20628,7 @@ func NewMusicalForm() *MusicalForm {
 func (x *MusicalForm) Id() int      { return x.Id_ }
 func (x *MusicalForm) setId(id int) { x.Id_ = id }
 func (x *MusicalForm) Name() string { return x.Name_ }
+func (x *MusicalForm) ShortDesc() string { return util.ArtFormShortDesc(x.Name_, x.Description) }
 
 func (x *MusicalForm) CheckFields() {
 }
@@ -20757,6 +20759,7 @@ func NewPoeticForm() *PoeticForm {
 func (x *PoeticForm) Id() int      { return x.Id_ }
 func (x *PoeticForm) setId(id int) { x.Id_ = id }
 func (x *PoeticForm) Name() string { return x.Name_ }
+func (x *PoeticForm) ShortDesc() string { return util.ArtFormShortDesc(x.Name_, x.Description) }
 
 func (x *PoeticForm) CheckFields() {
 }

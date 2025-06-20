@@ -111,12 +111,15 @@ func StartServer(config *Config, world *model.DfWorld, static embed.FS) error {
 	})
 
 	srv.RegisterWorldResourcePage("/danceform/{id}", "artform.html", func(id int) any { return srv.context.world.DanceForms[id] })
+	srv.RegisterWorldResourcePage("/popover/danceform/{id}", "popoverDanceForm.html", func(id int) any { return srv.context.world.DanceForms[id] })
 	srv.RegisterWorldResourcePage("/musicalform/{id}", "artform.html", func(id int) any { return srv.context.world.MusicalForms[id] })
+	srv.RegisterWorldResourcePage("/popover/musicalform/{id}", "popoverMusicalForm.html", func(id int) any { return srv.context.world.MusicalForms[id] })
 	srv.RegisterWorldResourcePage("/poeticform/{id}", "artform.html", func(id int) any { return srv.context.world.PoeticForms[id] })
+	srv.RegisterWorldResourcePage("/popover/poeticform/{id}", "popoverPoeticForm.html", func(id int) any { return srv.context.world.PoeticForms[id] })
 
 	srv.RegisterWorldPage("/writtencontents", "writtencontents.html", func(p Parms) any { return groupByType(srv.context.world.WrittenContents) })
 	srv.RegisterWorldResourcePage("/writtencontent/{id}", "writtencontent.html", func(id int) any { return srv.context.world.WrittenContents[id] })
-	srv.RegisterWorldResourcePage("/popover/writtencontent/{id}", "popoverWrittencontent.html", func(id int) any { return srv.context.world.WrittenContents[id] })
+	srv.RegisterWorldResourcePage("/popover/writtencontent/{id}", "popoverWrittenContent.html", func(id int) any { return srv.context.world.WrittenContents[id] })
 
 	srv.RegisterWorldPage("/hfs", "hfs.html", srv.searchHf)
 	srv.RegisterWorldResourcePage("/hf/{id}", "hf.html", func(id int) any { return srv.context.world.HistoricalFigures[id] })
